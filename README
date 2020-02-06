@@ -1,0 +1,33 @@
+The aim of this bespoke infrastructure is to provide a uniform way of  automatically
+deploying websites or applications in a provider independent way (providers have to be
+supported by the infrastructure of course) and also provide a basic set of services 
+such as scaling and so on.
+
+These scripts facilitate the webserver layer. In basic terms, it has some preconfigured
+functionality, such as a webserver and some caching mechanisms and so on. The configuration
+of the webserver itself is defined in the scripts and so if you want or need a different
+webserver configuration, you can simply modify said scripts. I am not an expert in webserver
+configuration, so the default configurations may be a bit rough and ready but you are free
+to alter and enhance them if you choose to. 
+
+Granted it can take some time to build the machines from scratch, but it doesn't take as long
+as it does if you had to build your servers from scratch. The nice thing is that the security
+of the system is implicit and so you always get the same level of security each time your deploy
+without any possibility of oversights. 
+
+In a normal deployment it is expected that there will be 2 or more webservers provisioned (assuming
+you are not in development mode) and these webservers are loadbalanced using the round robin 
+mechanism of the DNS service provider. When in full production, it is expected that each webserver
+will use an ssh tunnel to connect with a DBaaS database. I don't think any of the providers that
+I have chosen so far actually have DBaaS as part of their offerings but if they do in the future
+and the database is on the same private network as your webservers, then you can dispense with the
+ssh tunnel and use the direct hostname to connect with it. 
+
+You will find scripts that monitor the usage of the machines and you can review the output of these
+scripts to check that your machines are not being overloaded in which case you would need to 
+provision more of them on the autoscaler. 
+
+At this time, testing is the nightmare as there is only so much one developer can do, so it needs
+all the different combinations and configurations tested out and in time it should become rock solid.
+The scripts are designed to be easily extensible and modifiable and whilst some of it looks a little
+spidery, that's what the web is supposed to be, isn't it spidery?, that's why it's a web?

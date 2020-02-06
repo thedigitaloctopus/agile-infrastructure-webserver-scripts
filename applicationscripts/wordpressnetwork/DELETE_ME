@@ -1,0 +1,15 @@
+The Default password for every user of this application is: 1Hd74&*dj^73£ YOU MUST CHANGE THIS FOR ALL USERS LISTED BELOW
+USERNAME              EMAIL
+bloggingmanager       bloggingmanager@nuocial.org.uk	
+GDPR Manager          gdprmanager@nuocial.org.uk	
+imagesmanager         imagesmanager@nuocial.org.uk
+newslettermanager     newslettermanager@nuocial.org.uk	
+shopmanager           shopmanager@nuocial.org.uk	
+testuser              testuser@nuocial.org.uk				
+testuser2             testuser2@nuocial.org.uk	
+usermanager           usermanager@nuocial.org.uk	
+videomanager          videomanager@nuocial.org.uk	
+webmaster             webmaster@nuocial.org.uk
+
+YOU WILL NEED TO SETUP THESE EMAIL ADDRESSES FOR YOUR ADMIN TEAM (zoho mail or Gsuite)
+ALSO, FOR EACH OF THESE ACCOUNTS, YOU WILL HAVE TO SETUP 2 FACTOR AUTHENTICATION AND SWITCH THE OPTION TO FORCE 2FA WITHIN THE 2FA PLUGIN
