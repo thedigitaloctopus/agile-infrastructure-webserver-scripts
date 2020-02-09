@@ -111,9 +111,14 @@ then
     /bin/cp /tmp/backup/index.php.backup /tmp/backup/index.php
 fi
 
-${HOME}/providerscripts/git/DeleteRepository.sh "${APPLICATION_REPOSITORY_USERNAME}" "${APPLICATION_REPOSITORY_PASSWORD}" "${WEBSITE_SUBDOMAIN}-${WEBSITE_NAME}" "${period}" "${BUILD_IDENTIFIER}" "${APPLICATION_REPOSITORY_PROVIDER}"
-${HOME}/providerscripts/git/CreateRepository.sh "${APPLICATION_REPOSITORY_USERNAME}" "${APPLICATION_REPOSITORY_PASSWORD}" "${WEBSITE_SUBDOMAIN}-${WEBSITE_NAME}" "${period}" "${BUILD_IDENTIFIER}" "${APPLICATION_REPOSITORY_PROVIDER}"
-/bin/systemd-inhibit --why="Persisting sourcecode to git repo" ${HOME}/providerscripts/git/GitPushSourcecode.sh "." "Automated Backup" "${APPLICATION_REPOSITORY_PROVIDER}" "${WEBSITE_SUBDOMAIN}-${WEBSITE_NAME}-webroot-sourcecode-${period}-${BUILD_IDENTIFIER}"
+if ( [ "${period}" = "hourly" ] && [ -f ${HOME}/.ssh/DISABLEHOURLY:1 ] )
+then
+    /bin/echo "${0} `/bin/date`: Skipping hourly backup to repository because hourly backups are disabled to save on data transfer costs" >> ${HOME}/logs/MonitoringLog.dat
+else
+    ${HOME}/providerscripts/git/DeleteRepository.sh "${APPLICATION_REPOSITORY_USERNAME}" "${APPLICATION_REPOSITORY_PASSWORD}" "${WEBSITE_SUBDOMAIN}-${WEBSITE_NAME}" "${period}" "${BUILD_IDENTIFIER}" "${APPLICATION_REPOSITORY_PROVIDER}"
+    ${HOME}/providerscripts/git/CreateRepository.sh "${APPLICATION_REPOSITORY_USERNAME}" "${APPLICATION_REPOSITORY_PASSWORD}" "${WEBSITE_SUBDOMAIN}-${WEBSITE_NAME}" "${period}" "${BUILD_IDENTIFIER}" "${APPLICATION_REPOSITORY_PROVIDER}"
+    /bin/systemd-inhibit --why="Persisting sourcecode to git repo" ${HOME}/providerscripts/git/GitPushSourcecode.sh "." "Automated Backup" "${APPLICATION_REPOSITORY_PROVIDER}" "${WEBSITE_SUBDOMAIN}-${WEBSITE_NAME}-webroot-sourcecode-${period}-${BUILD_IDENTIFIER}"
+fi
 
 if ( [ -f ${HOME}/.ssh/SUPERSAFEWEBROOT:1 ] )
 then
