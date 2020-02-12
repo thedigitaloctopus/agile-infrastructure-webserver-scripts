@@ -35,11 +35,6 @@
 /bin/echo "*/1 * * * * /bin/sleep 630 && export HOME="${HOMEDIR}" && ${HOME}/providerscripts/utilities/CPUAggregate.sh 30" >> /var/spool/cron/crontabs/root
 /bin/echo "*/1 * * * * /bin/sleep 630 && export HOME="${HOMEDIR}" && ${HOME}/providerscripts/utilities/CPUAggregate.sh 60" >> /var/spool/cron/crontabs/root
 /bin/echo "*/1 * * * * export HOME="${HOMEDIR}" && /bin/sleep 30 && ${HOME}/providerscripts/utilities/UpdateIP.sh" >> /var/spool/cron/crontabs/root
-
-#You can use one of NFS or SSHFS, one or the other, but not both
-/bin/echo "*/1 * * * * export HOME="${HOMEDIR}" && ${HOME}/providerscripts/application/mountscripts/MountAssetsByApplicationNFS.sh" >> /var/spool/cron/crontabs/root
-#/bin/echo "*/1 * * * * export HOME="${HOMEDIR}" && ${HOME}/providerscripts/application/mountscripts/MountAssetsByApplicationSSHFS.sh" >> /var/spool/cron/crontabs/root
-
 /bin/echo "*/1 * * * * export HOME="${HOMEDIR}" && ${HOME}/security/MonitorForNewSSLCertificate.sh" >> /var/spool/cron/crontabs/root
 #Clean up any stale locks from the cron process
 /bin/echo "*/1 * * * * export HOME="${HOMEDIR}" && /usr/bin/find ${HOME}/runtime -name *lock* -type f -mmin +35 -delete" >> /var/spool/cron/crontabs/root
