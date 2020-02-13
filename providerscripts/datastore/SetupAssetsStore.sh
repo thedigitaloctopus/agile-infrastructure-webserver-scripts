@@ -94,11 +94,28 @@ then
         asset_directory="`/bin/echo ${applicationassetdirs} | /usr/bin/cut -d " " -f ${loop}`"
         if ( [ "`/bin/mount | /bin/grep "/var/www/html/${asset_directory}"`" = "" ] )
         then
-            /usr/bin/s3cmd mb s3://${assetbucket}
-            /usr/bin/s3cmd --preserve sync /var/www/html/${asset_directory}/* s3://${assetbucket}
-            /usr/bin/chmod 777 /var/www/html/${asset_directory}
-            /usr/bin/chown www-data.www-data /var/www/html/${asset_directory}
-            /usr/bin/s3fs -o umask=0022 -o uid="${s3fs_uid}" -o gid="${s3fs_gid}" -o allow_other -o nonempty -o use_cache=${HOME}/datastore_cache -ourl=https://${endpoint} ${assetbucket} /var/www/html/${asset_directory}
+            if ( [ -f ${HOME}/.ssh/ENABLEEFS:1 ] )
+            then
+                aws_region="`/bin/cat ${HOME}/.aws/config | /bin/grep region | /usr/bin/awk '{print $NF}'`"
+                /bin/mkdir ~/.aws 2>/dev/null
+                /bin/cp ${HOME}/.aws/* ~/.aws 2>/dev/null
+
+                /usr/bin/aws efs describe-file-systems | /usr/bin/jq '.FileSystems[] | .CreationToken + " " + .FileSystemId' | /bin/sed 's/\"//g' | while read identifier
+                do
+                    if ( [ "`/bin/echo ${identifier} | /bin/grep ${assetbucket}`" != "" ] )
+                    then
+                        id="`/bin/echo ${identifier} | /usr/bin/awk '{print $NF}'`"
+                        efsmounttarget="`/usr/bin/aws efs describe-mount-targets --file-system-id ${id} | /usr/bin/jq '.MountTargets[].IpAddress' | /bin/sed 's/"//g'`"
+                        /bin/mount -t nfs -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport ${efsmounttarget}:/   /var/www/html/${asset_directory}
+                    fi
+                done
+            else
+                /usr/bin/s3cmd mb s3://${assetbucket}
+                /usr/bin/s3cmd --preserve sync /var/www/html/${asset_directory}/* s3://${assetbucket}
+                /usr/bin/chmod 777 /var/www/html/${asset_directory}
+                /usr/bin/chown www-data.www-data /var/www/html/${asset_directory}
+                /usr/bin/s3fs -o umask=0022 -o uid="${s3fs_uid}" -o gid="${s3fs_gid}" -o allow_other -o nonempty -o use_cache=${HOME}/datastore_cache -ourl=https://${endpoint} ${assetbucket} /var/www/html/${asset_directory}
+            fi
         fi
         loop="`/usr/bin/expr ${loop} + 1`"
     done
