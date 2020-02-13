@@ -106,7 +106,18 @@ then
                     then
                         id="`/bin/echo ${identifier} | /usr/bin/awk '{print $NF}'`"
                         efsmounttarget="`/usr/bin/aws efs describe-mount-targets --file-system-id ${id} | /usr/bin/jq '.MountTargets[].IpAddress' | /bin/sed 's/"//g'`"
+                        if ( [ -f ${HOME}/.ssh/BUILDARCHIVECHOICE:baseline ] )
+                        then
+                            /bin/mkdir /tmp/${asset_directory}
+                            /bin/mv /var/www/html/${asset_directory}/* /tmp/${asset_directory}
+                        fi
+                        
                         /bin/mount -t nfs -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport ${efsmounttarget}:/   /var/www/html/${asset_directory}
+                        
+                        if ( [ -f ${HOME}/.ssh/BUILDARCHIVECHOICE:baseline ] )
+                        then  
+                            /bin/mv /tmp/${asset_directory}/* /var/www/html/${asset_directory}
+                        fi
                     fi
                 done
             else
