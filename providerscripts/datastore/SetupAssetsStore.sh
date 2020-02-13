@@ -34,7 +34,7 @@ cleanup()
     exit
 }
 
-directories_to_mount="`/bin/ls ${HOME}/.ssh/DIRECTORIESTOMOUNT:*`"
+directories_to_mount="`/bin/ls ${HOME}/.ssh/DIRECTORIESTOMOUNT:* | /bin/sed 's/:config//g'`"
 directories=""
 for directory in ${directories_to_mount}
 do
@@ -108,7 +108,7 @@ then
                         efsmounttarget="`/usr/bin/aws efs describe-mount-targets --file-system-id ${id} | /usr/bin/jq '.MountTargets[].IpAddress' | /bin/sed 's/"//g'`"
                         if ( [ -f ${HOME}/.ssh/BUILDARCHIVECHOICE:baseline ] )
                         then
-                            /bin/mkdir /tmp/${asset_directory}
+                            /bin/mkdir -p /tmp/${asset_directory}
                             /bin/mv /var/www/html/${asset_directory}/* /tmp/${asset_directory}
                         fi
                         
