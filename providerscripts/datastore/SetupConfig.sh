@@ -62,7 +62,7 @@ if ( [ "${DATASTORE_PROVIDER}" = "amazonS3" ] )
 then
     export AWSACCESSKEYID=`/bin/cat ~/.s3cfg | /bin/grep 'access_key' | /usr/bin/awk '{print $NF}'`
     export AWSSECRETACCESSKEY=`/bin/cat ~/.s3cfg | /bin/grep 'secret_key' | /usr/bin/awk '{print $NF}'`
-    /usr/bin/s3cmd mb s3://${configbucket}
+   
     if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] )
     then
        if ( [ -f ${HOME}/.ssh/ENABLEEFS:1 ] )
@@ -83,6 +83,7 @@ then
                  fi
             done
         else
+            /usr/bin/s3cmd mb s3://${configbucket}
             /bin/rm -r ${HOME}/config_cache/* 2>/dev/null
             /usr/bin/s3fs -o nonempty -o use_cache=${HOME}/config_cache -ourl=https://${endpoint} ${configbucket} ${HOME}/config
         fi 
