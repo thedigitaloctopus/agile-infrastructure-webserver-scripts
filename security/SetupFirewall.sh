@@ -46,20 +46,26 @@ fi
 
 if ( [ -f ${HOME}/.ssh/PRODUCTION:1 ] )
 then
-    autoscalerip="`/bin/ls ${HOME}/config/autoscalerip`"
-    publicautoscalerip="`/bin/ls ${HOME}/config/autoscalerpublicip`"
-
-    if ( [ "`/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw status | /bin/grep ${autoscalerip} | /bin/grep ALLOW`" = "" ] )
-    then
-        /bin/sleep 5
-        /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from ${autoscalerip}
-    fi
-
-    if ( [ "`/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw status | /bin/grep ${publicautoscalerip} | /bin/grep ALLOW`" = "" ] )
-    then
-        /bin/sleep 5
-        /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from ${publicautoscalerip}
-    fi
+   # autoscalerip="`/bin/ls ${HOME}/config/autoscalerip`"
+   # publicautoscalerip="`/bin/ls ${HOME}/config/autoscalerpublicip`"
+    
+    for autoscalerip in `/bin/ls ${HOME}/config/autoscalerip`
+    do
+        if ( [ "`/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw status | /bin/grep ${autoscalerip} | /bin/grep ALLOW`" = "" ] )
+        then
+           /bin/sleep 5
+           /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from ${autoscalerip}
+        fi
+    done
+    
+    for publicautoscalerip in `/bin/ls ${HOME}/config/autoscalerip`
+    do
+        if ( [ "`/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw status | /bin/grep ${publicautoscalerip} | /bin/grep ALLOW`" = "" ] )
+        then
+            /bin/sleep 5
+            /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from ${publicautoscalerip}
+        fi
+    done
 fi
 
 
