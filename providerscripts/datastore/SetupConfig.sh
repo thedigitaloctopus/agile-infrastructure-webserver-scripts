@@ -69,7 +69,8 @@ then
        then
            aws_region="`/bin/cat ${HOME}/.aws/config | /bin/grep region | /usr/bin/awk '{print $NF}'`"
            /bin/mkdir ~/.aws 2>/dev/null
-           /bin/cp ${HOME}/.aws/* ~/.aws 2>/dev/null
+           /bin/cp ${HOME}/.aws/* /root/.aws 2>/dev/null
+           /bin/chmod 500 /root/.aws/*
 
            /usr/bin/aws efs describe-file-systems | /usr/bin/jq '.FileSystems[] | .CreationToken + " " + .FileSystemId' | /bin/sed 's/\"//g' | while read identifier
            do
