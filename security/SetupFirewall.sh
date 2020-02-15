@@ -58,7 +58,7 @@ then
         fi
     done
     
-    for publicautoscalerip in `/bin/ls ${HOME}/config/autoscalerip`
+    for publicautoscalerip in `/bin/ls ${HOME}/config/autoscalerpublicip`
     do
         if ( [ "`/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw status | /bin/grep ${publicautoscalerip} | /bin/grep ALLOW`" = "" ] )
         then
