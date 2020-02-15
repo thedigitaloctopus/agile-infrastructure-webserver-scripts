@@ -32,9 +32,7 @@ assetsdirectories="`/bin/ls ${HOME}/.ssh/DIRECTORIESTOMOUNT:* | /usr/bin/awk -F'
 
 for assetsdirectory in ${assetsdirectories}
 do
-    /usr/bin/file /var/www/html/${assetsdirectory} | /bin/grep -v "No such" | /bin/grep "directory" > /dev/null
-
-    if ( [ "$?" != "0" ] )
+    if ( [ "`/usr/bin/file /var/www/html/${assetsdirectory} | /bin/grep -v "No such" | /bin/grep "directory" > /dev/null`" ] || [ "`/bin/mount | /bin/grep "/var/www/html/${assetsdirectory}"`" = "" ] )
     then
         mounted="0"
     fi
