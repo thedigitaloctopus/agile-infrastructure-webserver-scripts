@@ -69,8 +69,11 @@ then
        then
            aws_region="`/bin/cat ${HOME}/.aws/config | /bin/grep region | /usr/bin/awk '{print $NF}'`"
            /bin/mkdir ~/.aws 2>/dev/null
-           /bin/cp ${HOME}/.aws/* /root/.aws 2>/dev/null
-           /bin/chmod 500 /root/.aws/*
+           /bin/cp ${HOME}/.aws/* ~/.aws 2>/dev/null
+           /bin/chmod 500 ~/.aws/*
+           
+           export AWSACCESSKEYID=`/bin/cat ~/.aws/credentials | /bin/grep 'access_key' | /usr/bin/awk '{print $NF}'`
+           export AWSSECRETACCESSKEY=`/bin/cat ~/.aws/credentials | /bin/grep 'secret_key' | /usr/bin/awk '{print $NF}'`
 
            /usr/bin/aws efs describe-file-systems | /usr/bin/jq '.FileSystems[] | .CreationToken + " " + .FileSystemId' | /bin/sed 's/\"//g' | while read identifier
            do
