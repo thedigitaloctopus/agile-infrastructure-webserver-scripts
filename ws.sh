@@ -199,6 +199,9 @@ else
     exit
 fi
 
+#Install the tools for our particular cloudhost provider
+. ${HOME}/providerscripts/cloudhost/InstallCloudhostTools.sh
+
 cd ${HOME}
 
 /bin/echo "${0} `/bin/date`: Installing GIT" >> ${HOME}/logs/WEBSERVER_BUILD.log
