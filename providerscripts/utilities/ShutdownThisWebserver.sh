@@ -37,6 +37,7 @@ if ( [ "$1" = "backup" ] )
 then
     BUILD_IDENTIFIER="`/bin/ls ${HOME}/.ssh/BUILDIDENTIFIER:* | /usr/bin/awk -F':' '{print $NF}'`"
     ${HOME}/providerscripts/git/Backup.sh "HOURLY" ${BUILD_IDENTIFIER} > /dev/null 2>&1
+    ${HOME}/providerscripts/datastore/BackupEFSToDatastore.sh
 fi
 
 ip="`${HOME}/providerscripts/utilities/GetIP.sh`"
