@@ -58,3 +58,5 @@ then
 fi
 
 ${HOME}/providerscripts/email/SendEmail.sh "${period} A Webserver with IP: `${HOME}/providerscripts/utilities/GetIP.sh` has been shutdown" "Webserver has been shut down"
+
+/sbin/shutdown -h now
