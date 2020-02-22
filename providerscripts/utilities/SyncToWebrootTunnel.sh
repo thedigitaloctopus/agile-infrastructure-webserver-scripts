@@ -37,12 +37,12 @@ then
     exit
 fi
 
-if test `/usr/bin/find ${HOME}/runtime/ENABLEDTOSYNC -mmin -15`
+if test `/usr/bin/find ${HOME}/runtime/ENABLEDTOSYNC -mmin -17`
 then
     exit
 fi
 
-if test `/usr/bin/find ${HOME}/runtime/NEWLYBUILT -mmin -15`
+if test `/usr/bin/find ${HOME}/runtime/NEWLYBUILT -mmin -17`
 then
     exit
 fi
@@ -51,13 +51,13 @@ directoriestomiss="`/bin/ls ${HOME}/.ssh/DIRECTORIESTOMOUNT:* | /bin/sed 's/.*DI
 
 if ( [ "${directoriestomiss}" = "" ] )
 then
-    CMD="`/usr/bin/find /var/www/html/ -cmin -10 -mmin -10 -type f`"
+    CMD="`/usr/bin/find /var/www/html/ -cmin -9 -mmin -9 -type f`"
 else
     if ( [ -f ${HOME}/.ssh/PERSISTASSETSTOCLOUD:0 ] )
     then
-        CMD="/usr/bin/find /var/www/html/ -type f -mmin -10 -cmin -10"
+        CMD="/usr/bin/find /var/www/html/ -type f -mmin -9 -cmin -9"
     else
-        CMD="/usr/bin/find /var/www/html/ -type f -mmin -10 -cmin -10 -not -path "
+        CMD="/usr/bin/find /var/www/html/ -type f -mmin -9 -cmin -9 -not -path "
 
         for directorytomiss in ${directoriestomiss}
         do
