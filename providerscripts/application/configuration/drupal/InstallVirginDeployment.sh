@@ -22,18 +22,12 @@
 
 version="`/bin/echo ${APPLICATION} | /usr/bin/awk -F':' '{print $NF}'`"
 cd /var/www/html
-#/usr/bin/wget https://ftp.drupal.org/files/projects/drupal-${version}.tar.gz
-/usr/bin/wget https://ftp.drupal.org/files/projects/social-8.x-8.0-core.tar.gz
-/bin/tar xvfx social-${version}.tar.gz
-/bin/rm social-${version}.tar.gz
-/bin/mv social-${version}/* .
-/bin/mv social-${version}/.* .
-/bin/rmdir social-${version}
-#/bin/tar xvfx drupal-${version}.tar.gz
-#/bin/rm drupal-${version}.tar.gz
-#/bin/mv drupal-${version}/* .
-#/bin/mv drupal-${version}/.* .
-#/bin/rmdir drupal-${version}
+/usr/bin/wget https://ftp.drupal.org/files/projects/drupal-${version}.tar.gz
+/bin/tar xvfx drupal-${version}.tar.gz
+/bin/rm drupal-${version}.tar.gz
+/bin/mv drupal-${version}/* .
+/bin/mv drupal-${version}/.* .
+/bin/rmdir drupal-${version}
 /bin/rm -r .git
 /bin/chown -R www-data.www-data /var/www/html/*
 cd /home/${SERVER_USER}
