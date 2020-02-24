@@ -29,11 +29,11 @@
 /bin/echo "*/1 * * * * export HOME="${HOMEDIR}" && ${HOME}/providerscripts/application/configuration/InstallConfigurationByApplication.sh" >> /var/spool/cron/crontabs/root
 /bin/echo "*/1 * * * * export HOME="${HOMEDIR}" && ${HOME}/providerscripts/application/configuration/VerifyConfigurationByApplication.sh" >> /var/spool/cron/crontabs/root
 /bin/echo "*/1 * * * * export HOME="${HOMEDIR}" && ${HOME}/providerscripts/utilities/AcknowledgeBuildCompletion.sh" >> /var/spool/cron/crontabs/root
-/bin/echo "*/1 * * * * /bin/sleep 630 && export HOME="${HOMEDIR}" && ${HOME}/providerscripts/utilities/CPUAggregate.sh 5" >> /var/spool/cron/crontabs/root
-/bin/echo "*/1 * * * * /bin/sleep 630 && export HOME="${HOMEDIR}" && ${HOME}/providerscripts/utilities/CPUAggregate.sh 10" >> /var/spool/cron/crontabs/root
-/bin/echo "*/1 * * * * /bin/sleep 630 && export HOME="${HOMEDIR}" && ${HOME}/providerscripts/utilities/CPUAggregate.sh 15" >> /var/spool/cron/crontabs/root
-/bin/echo "*/1 * * * * /bin/sleep 630 && export HOME="${HOMEDIR}" && ${HOME}/providerscripts/utilities/CPUAggregate.sh 30" >> /var/spool/cron/crontabs/root
-/bin/echo "*/1 * * * * /bin/sleep 630 && export HOME="${HOMEDIR}" && ${HOME}/providerscripts/utilities/CPUAggregate.sh 60" >> /var/spool/cron/crontabs/root
+#/bin/echo "*/1 * * * * /bin/sleep 630 && export HOME="${HOMEDIR}" && ${HOME}/providerscripts/utilities/CPUAggregate.sh 5" >> /var/spool/cron/crontabs/root
+#/bin/echo "*/1 * * * * /bin/sleep 630 && export HOME="${HOMEDIR}" && ${HOME}/providerscripts/utilities/CPUAggregate.sh 10" >> /var/spool/cron/crontabs/root
+#/bin/echo "*/1 * * * * /bin/sleep 630 && export HOME="${HOMEDIR}" && ${HOME}/providerscripts/utilities/CPUAggregate.sh 15" >> /var/spool/cron/crontabs/root
+#/bin/echo "*/1 * * * * /bin/sleep 630 && export HOME="${HOMEDIR}" && ${HOME}/providerscripts/utilities/CPUAggregate.sh 30" >> /var/spool/cron/crontabs/root
+#/bin/echo "*/1 * * * * /bin/sleep 630 && export HOME="${HOMEDIR}" && ${HOME}/providerscripts/utilities/CPUAggregate.sh 60" >> /var/spool/cron/crontabs/root
 /bin/echo "*/1 * * * * export HOME="${HOMEDIR}" && /bin/sleep 30 && ${HOME}/providerscripts/utilities/UpdateIP.sh" >> /var/spool/cron/crontabs/root
 /bin/echo "*/1 * * * * export HOME="${HOMEDIR}" && ${HOME}/security/MonitorForNewSSLCertificate.sh" >> /var/spool/cron/crontabs/root
 #Clean up any stale locks from the cron process
