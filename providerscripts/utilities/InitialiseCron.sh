@@ -56,10 +56,9 @@ fi
 /bin/echo "*/5 * * * * export HOME="${HOMEDIR}" && ${HOME}/security/MonitorFirewall.sh" >> /var/spool/cron/crontabs/root
 /bin/echo "*/5 * * * * export HOME="${HOMEDIR}" &&  /bin/sleep 20 && ${HOME}/cron/SyncToWebrootTunnelFromCron.sh && /bin/sleep 60 && ${HOME}/cron/SyncFromWebrootTunnelFromCron.sh" >> /var/spool/cron/crontabs/root
 
-/bin/echo "*/10 * * * * export HOME="${HOMEDIR}" && ${HOME}/providerscripts/utilities/EnforcePermissions.sh" >> /var/spool/cron/crontabs/root
-
 #These scripts run at set times these will make a backup of our webroot to git and also to our datastore if super safe
 
+/bin/echo "30 5 * * * export HOME="${HOMEDIR}" && ${HOME}/providerscripts/utilities/EnforcePermissions.sh" >> /var/spool/cron/crontabs/root
 /bin/echo "15 1 * * * export HOME="${HOMEDIR}" && ${HOME}/providerscripts/datastore/BackupEFSToDatastore.sh" >> /var/spool/cron/crontabs/root
 /bin/echo "2 * * * * export HOME="${HOMEDIR}" && ${HOME}/cron/BackupFromCron.sh 'HOURLY' ${BUILD_IDENTIFIER}" >> /var/spool/cron/crontabs/root
 /bin/echo "8 2 * * * export HOME="${HOMEDIR}" && ${HOME}/cron/BackupFromCron.sh 'DAILY' ${BUILD_IDENTIFIER}" >> /var/spool/cron/crontabs/root
