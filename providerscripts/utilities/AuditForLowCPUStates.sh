@@ -24,13 +24,13 @@
 CPU="`/usr/bin/mpstat | /usr/bin/awk '{print $NF}' | grep -v idle | grep -v CPU | /bin/sed '/^$/d' | /bin/sed 's/\...//'`"
 IP="`${HOME}/providerscripts/utilities/GetIP.sh`"
 
-if ( [ ! -d ${HOME}/config/lowcpuaudit/database/${IP} ] )
+if ( [ ! -d ${HOME}/config/lowcpuaudit/webserver/${IP} ] )
 then
-    /bin/mkdir -p ${HOME}/config/lowcpuaudit/database/${IP}
+    /bin/mkdir -p ${HOME}/config/lowcpuaudit/webserver/${IP}
 fi
 
 if ( [ "${CPU}" -lt "10" ] )
 then
-    /bin/echo "LOW CPU state detected `/bin/date` VALUE: ${CPU}% remaining" >> ${HOME}/config/lowcpuaudit/${IP}/lowcpuaudittrail.dat
+    /bin/echo "LOW CPU state detected `/bin/date` VALUE: ${CPU}% remaining" >> ${HOME}/config/lowcpuaudit/webserver/${IP}/lowcpuaudittrail.dat
     ${HOME}/providerscripts/email/SendEmail.sh "LOW CPU STATE DETECTED" "LOW CPU state detected `/bin/date` VALUE: ${CPU}% remaining on machine with ip address: `${HOME}/providerscripts/utilities/GetPublicIP.sh`"
 fi
