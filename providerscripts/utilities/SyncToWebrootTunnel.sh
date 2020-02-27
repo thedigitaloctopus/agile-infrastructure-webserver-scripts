@@ -22,6 +22,17 @@ set -x
 
 ip="`/bin/ls ${HOME}/.ssh/MYPUBLICIP:* | /usr/bin/awk -F':' '{print $NF}'`"
 
+if test `/usr/bin/find ${HOME}/runtime/NEWLYBUILT -mmin -20`
+then
+    exit
+fi
+
+
+if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] )
+then
+    exit
+fi
+
 if ( [ ! -f ${HOME}/config/INSTALLEDSUCCESSFULLY ] )
 then
     exit
@@ -32,17 +43,7 @@ else
     fi
 fi
 
-if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] )
-then
-    exit
-fi
-
 if test `/usr/bin/find ${HOME}/runtime/ENABLEDTOSYNC -mmin -17`
-then
-    exit
-fi
-
-if test `/usr/bin/find ${HOME}/runtime/NEWLYBUILT -mmin -17`
 then
     exit
 fi
