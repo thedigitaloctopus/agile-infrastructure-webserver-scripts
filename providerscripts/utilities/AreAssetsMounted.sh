@@ -28,6 +28,12 @@ then
     mounted="0"
 fi
 
+if ( [ -f ${HOME}/.ssh/PERSISTASSETSTOCLOUD:0 ] && [ "${mounted}" = "1" ] )
+then
+    /bin/echo "MOUNTED"
+    exit
+fi
+
 assetsdirectories="`/bin/ls ${HOME}/.ssh/DIRECTORIESTOMOUNT:* | /usr/bin/awk -F':' '{ $1=""; print}' | /bin/sed 's/\./\//g' | /usr/bin/tr '\n' ' ' | /bin/sed 's/  / /g' | /bin/sed 's/config//g'`"
 
 for assetsdirectory in ${assetsdirectories}
