@@ -145,15 +145,15 @@ then
     fi
 fi
 
-if ( [ "$1" = "reboot" ] || [ -f ${HOME}/.ssh/AUTOSCALED ] )
-then
-    /bin/rm ${HOME}/config/*
+#if ( [ "$1" = "reboot" ] || [ -f ${HOME}/.ssh/AUTOSCALED ] )
+#then
+#    /bin/rm ${HOME}/config/*
  #   /bin/touch ${HOME}/config/INSTALLEDSUCCESSFULLY
-else
+#else
     # /bin/rm -r ${HOME}/config/*
-      :
+#      :
   #  /bin/touch ${HOME}/config/INSTALLEDSUCCESSFULLY
-fi
+#fi
 
 /bin/touch ${HOME}/config/DONT_MESS_WITH_THESE_FILES-SYSTEM_BREAK
 
