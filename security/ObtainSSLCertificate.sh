@@ -130,5 +130,5 @@ then
     fi
 elif ( [ "`/bin/ls ${HOME}/.ssh/SSLGENERATIONMETHOD:* | /usr/bin/awk -F':' '{print $NF}'`" = "MANUAL" ] )
 then
-:
+    ${HOME}/providerscripts/email/SendEmail.sh "NEW SSL CERTIFICATE REQUIRED ON WEBSERVER(S)" "Your SSL issuance method is set to manual, you need to replace your SSL certificate(s) on your webserver(s) as they are about to expire"
 fi
