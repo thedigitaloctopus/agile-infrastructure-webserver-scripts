@@ -128,4 +128,7 @@ then
         ${HOME}/providerscripts/webserver/ReloadWebserver.sh
 
     fi
+elif ( [ "`/bin/ls ${HOME}/.ssh/SSLGENERATIONMETHOD:* | /usr/bin/awk -F':' '{print $NF}'`" = "MANUAL" ] )
+then
+:
 fi
