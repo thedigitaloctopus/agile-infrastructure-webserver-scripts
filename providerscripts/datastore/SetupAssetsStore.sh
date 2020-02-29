@@ -118,6 +118,8 @@ then
                         
                         /bin/mount -t nfs -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport ${efsmounttarget}:/   /var/www/html/${asset_directory}
                         
+                        /bin/chown www-data.www-data /var/www/html/${asset_directory}
+                        
                         if ( [ -f ${HOME}/.ssh/BUILDARCHIVECHOICE:baseline ] )
                         then  
                             /bin/mv /tmp/${asset_directory}/* /var/www/html/${asset_directory}
