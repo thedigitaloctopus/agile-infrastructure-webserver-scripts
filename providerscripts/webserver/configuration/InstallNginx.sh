@@ -154,8 +154,7 @@ server
     add_header X-Frame-Options SAMEORIGIN;
     add_header X-Content-Type-Options nosniff;
     add_header X-XSS-Protection \"1; mode=block\";
-    add_header Content-Security-Policy \"default-src 'default-src https: 'unsafe-eval' 'unsafe-inline';\";
-
+    
     server_name ${website_url};
     root /var/www/html;
     index index.php index.html index.htm index.pl index.py;
