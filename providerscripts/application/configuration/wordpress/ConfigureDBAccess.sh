@@ -173,6 +173,7 @@ then
     /bin/echo "/* SALTEDALREADY */" >> /tmp/fullfile
     /bin/echo "define('WP_CACHE', true);" >>/tmp/fullfile
     /bin/echo "define( 'DISALLOW_FILE_EDIT', true );" >> /tmp/fullfile
+    /bin/echo "define( 'WPCACHEHOME', '/var/www/html/wp-content/plugins/wp-super-cache/' );" >> /tmp/fullfile     
     /bin/cat /tmp/secondhalf >> /tmp/fullfile
     /bin/rm /tmp/firsthalf /tmp/secondhalf
     /bin/mv /tmp/fullfile ${HOME}/runtime/wordpress_config.php
