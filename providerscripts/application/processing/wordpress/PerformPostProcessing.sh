@@ -24,7 +24,7 @@
 #######################################################################################
 #set -x
 
-if ( [ -f /var/www/html/wp-content/cache ] )
-then
-    /bin/rm -r /var/www/html/wp-content/cache/*
-fi
+#if ( [ -f /var/www/html/wp-content/cache ] )
+#then
+#    /bin/rm -r /var/www/html/wp-content/cache/*
+#fi
