@@ -110,7 +110,8 @@ then
                     then
                         id="`/bin/echo ${identifier} | /usr/bin/awk '{print $NF}'`"
                         efsmounttarget="`/usr/bin/aws efs describe-mount-targets --file-system-id ${id} | /usr/bin/jq '.MountTargets[].IpAddress' | /bin/sed 's/"//g'`"
-                        if ( [ -f ${HOME}/.ssh/BUILDARCHIVECHOICE:baseline ] )
+                        
+                        if ( [ -f ${HOME}/.ssh/BUILDARCHIVECHOICE:baseline ] || [ -f ${HOME}/.ssh/BUILDARCHIVECHOICE:virgin ] )
                         then
                             /bin/mkdir -p /tmp/${asset_directory}
                             /bin/mv /var/www/html/${asset_directory}/* /tmp/${asset_directory}
@@ -120,7 +121,7 @@ then
                         
                         /bin/chown www-data.www-data /var/www/html/${asset_directory}
                         
-                        if ( [ -f ${HOME}/.ssh/BUILDARCHIVECHOICE:baseline ] )
+                        if ( [ -f ${HOME}/.ssh/BUILDARCHIVECHOICE:baseline ] || [ -f ${HOME}/.ssh/BUILDARCHIVECHOICE:virgin ] )
                         then  
                             /bin/mv /tmp/${asset_directory}/* /var/www/html/${asset_directory}
                         fi
@@ -129,8 +130,8 @@ then
             else
                 /usr/bin/s3cmd mb s3://${assetbucket}
                 /usr/bin/s3cmd --preserve sync /var/www/html/${asset_directory}/* s3://${assetbucket}
-                /usr/bin/chmod 777 /var/www/html/${asset_directory}
-                /usr/bin/chown www-data.www-data /var/www/html/${asset_directory}
+                /bin/chmod 777 /var/www/html/${asset_directory}
+                /bin/chown www-data.www-data /var/www/html/${asset_directory}
                 /usr/bin/s3fs -o umask=0022 -o uid="${s3fs_uid}" -o gid="${s3fs_gid}" -o allow_other -o nonempty -o use_cache=${HOME}/datastore_cache -ourl=https://${endpoint} ${assetbucket} /var/www/html/${asset_directory}
             fi
         fi
@@ -157,8 +158,8 @@ then
         then
             /usr/bin/s3cmd mb s3://${assetbucket}
             /usr/bin/s3cmd --preserve sync /var/www/html/${asset_directory}/* s3://${assetbucket}
-            /usr/bin/chmod 777 /var/www/html/${asset_directory}
-            /usr/bin/chown www-data.www-data /var/www/html/${asset_directory}
+            /bin/chmod 777 /var/www/html/${asset_directory}
+            /bin/chown www-data.www-data /var/www/html/${asset_directory}
             /usr/bin/s3fs -o umask=0022 -o uid="${s3fs_uid}" -o gid="${s3fs_gid}" -o allow_other -o nonempty -o use_cache=${HOME}/datastore_cache -ourl=https://${endpoint} ${assetbucket} /var/www/html/${asset_directory}
         fi
         loop="`/usr/bin/expr ${loop} + 1`"
@@ -184,8 +185,8 @@ then
         then
             /usr/bin/s3cmd mb s3://${assetbucket}
             /usr/bin/s3cmd --preserve sync /var/www/html/${asset_directory}/* s3://${assetbucket}
-            /usr/bin/chmod 777 /var/www/html/${asset_directory}
-            /usr/bin/chown www-data.www-data /var/www/html/${asset_directory}
+            /bin/chmod 777 /var/www/html/${asset_directory}
+            /bin/chown www-data.www-data /var/www/html/${asset_directory}
             /usr/bin/s3fs -o umask=0022 -o uid="${s3fs_uid}" -o gid="${s3fs_gid}" -o allow_other -o nonempty -o use_cache=${HOME}/datastore_cache -ourl=https://${endpoint} ${assetbucket} /var/www/html/${asset_directory}
         fi
         loop="`/usr/bin/expr ${loop} + 1`"
@@ -211,8 +212,8 @@ then
         then
             /usr/bin/s3cmd mb s3://${assetbucket}
             /usr/bin/s3cmd --preserve sync /var/www/html/${asset_directory}/* s3://${assetbucket}
-            /usr/bin/chmod 777 /var/www/html/${asset_directory}
-            /usr/bin/chown www-data.www-data /var/www/html/${asset_directory}
+            /bin/chmod 777 /var/www/html/${asset_directory}
+            /bin/chown www-data.www-data /var/www/html/${asset_directory}
             /usr/bin/s3fs -o umask=0022 -o uid="${s3fs_uid}" -o gid="${s3fs_gid}" -o allow_other -o nonempty -o use_cache=${HOME}/datastore_cache -ourl=https://${endpoint} ${assetbucket} /var/www/html/${asset_directory}
         fi
         loop="`/usr/bin/expr ${loop} + 1`"
@@ -238,8 +239,8 @@ then
         then
             /usr/bin/s3cmd mb s3://${assetbucket}
             /usr/bin/s3cmd --preserve sync /var/www/html/${asset_directory}/* s3://${assetbucket}
-            /usr/bin/chmod 777 /var/www/html/${asset_directory}
-            /usr/bin/chown www-data.www-data /var/www/html/${asset_directory}
+            /bin/chmod 777 /var/www/html/${asset_directory}
+            /bin/chown www-data.www-data /var/www/html/${asset_directory}
             /usr/bin/s3fs -o umask=0022 -o uid="${s3fs_uid}" -o gid="${s3fs_gid}" -o allow_other -o nonempty -o use_cache=${HOME}/datastore_cache -ourl=https://${endpoint} ${assetbucket} /var/www/html/${asset_directory}
         fi
         loop="`/usr/bin/expr ${loop} + 1`"
