@@ -87,7 +87,8 @@ then
     /usr/bin/mysql -A -u "${username}" -p"${password}" "${database}" --host="${host}" --port="${DB_PORT}" < /tmp/joomla.sql
     /usr/bin/mysql -A -u "${username}" -p"${password}" "${database}" --host="${host}" --port="${DB_PORT}" -e "INSERT INTO ${PREFIX}_users (id,name,username,email,password,params) values (42,'webmaster','webmaster','testxyz@test123.com','16d7a4fca7442dda3ad93c9a726597e4',1);"
     /usr/bin/mysql -A -u "${username}" -p"${password}" "${database}" --host="${host}" --port="${DB_PORT}" -e "INSERT INTO ${PREFIX}_user_usergroup_map values (42,8);"
-    command="${SUDO} /bin/rm /tmp/joomla.sql" && eval ${command}
+    /usr/bin/mysql -A -u "${username}" -p"${password}" "${database}" --host="${host}" --port="${DB_PORT}" -e "UPDATE ${PREFIX}_extensions set enabled=1 where name='plg_system_cache';"
+   command="${SUDO} /bin/rm /tmp/joomla.sql" && eval ${command}
 fi
 
 #We want to check if the database is accessible
