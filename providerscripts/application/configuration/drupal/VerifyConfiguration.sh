@@ -75,9 +75,10 @@ if ( [ -f /var/www/html/sites/default/settings.php ] &&
 [ "`/bin/cat /var/www/html/sites/default/settings.php | /bin/grep ${host}`" != "" ] )
 then
     /bin/touch ${HOME}/runtime/CONFIG_VERIFIED
-    /usr/bin/rsync -au /var/www/html/sites/default/settings.php ${HOME}/config/drupal_settings.php
-    /usr/bin/rsync -au /var/www/html/sites/default/settings.php ${HOME}/runtime/drupal_settings.php
+    /usr/bin/rsync -ac /var/www/html/sites/default/settings.php ${HOME}/config/drupal_settings.php
+    /usr/bin/rsync -ac /var/www/html/sites/default/settings.php ${HOME}/runtime/drupal_settings.php
 else
+    /bin/rm ${HOME}/runtime/CONFIG_VERIFIED
     /bin/cp /var/www/html/sites/default/settings.php.default ${HOME}/config/drupal_settings.php
     /bin/cp /var/www/html/sites/default/settings.php.default ${HOME}/runtime/drupal_settings.php
 fi
