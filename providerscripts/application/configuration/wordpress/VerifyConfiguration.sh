@@ -76,9 +76,10 @@ if ( [ -f /var/www/wp-config.php ] &&
 [ "`/bin/cat /var/www/wp-config.php | /bin/grep ${host}`" != "" ] )
 then
     /bin/touch ${HOME}/runtime/CONFIG_VERIFIED
-    /usr/bin/rsync -au /var/www/wp-config.php ${HOME}/config/wordpress_config.php
-    /usr/bin/rsync -au /var/www/wp-config.php ${HOME}/runtime/wordpress_config.php
+    /usr/bin/rsync -ac /var/www/wp-config.php ${HOME}/config/wordpress_config.php
+    /usr/bin/rsync -ac /var/www/wp-config.php ${HOME}/runtime/wordpress_config.php
 else
+    /bin/rm ${HOME}/runtime/CONFIG_VERIFIED
     /bin/cp /var/www/html/wp-config-sample.php ${HOME}/config/wordpress_config.php
     /bin/cp /var/www/html/wp-config-sample.php ${HOME}/runtime/wordpress_config.php
 fi
