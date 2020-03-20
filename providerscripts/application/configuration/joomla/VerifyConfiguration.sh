@@ -75,9 +75,10 @@ if ( [ -f /var/www/html/configuration.php ] &&
 [ "`/bin/cat /var/www/html/configuration.php | /bin/grep ${host}`" != "" ] )
 then
     /bin/touch ${HOME}/runtime/CONFIG_VERIFIED
-    /usr/bin/rsync -au /var/www/html/configuration.php ${HOME}/config/joomla_configuration.php
-    /usr/bin/rsync -au /var/www/html/configuration.php ${HOME}/runtime/joomla_configuration.php
+    /usr/bin/rsync -ac /var/www/html/configuration.php ${HOME}/config/joomla_configuration.php
+    /usr/bin/rsync -ac /var/www/html/configuration.php ${HOME}/runtime/joomla_configuration.php
 else
+    /bin/rm ${HOME}/runtime/CONFIG_VERIFIED
     /bin/cp /var/www/html/configuration.php.default ${HOME}/config/joomla_configuration.php
     /bin/cp /var/www/html/configuration.php.default ${HOME}/runtime/joomla_configuration.php
 fi
