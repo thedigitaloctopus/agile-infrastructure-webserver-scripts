@@ -15,14 +15,8 @@
 #######################################################################################################
 #######################################################################################################
 
-/usr/bin/find . -type f -exec sed -i -e "s/${WEBSITE_URL}/applicationdomain.tld/g" -e "s/${ROOT_DOMAIN}/applicationrootdomain.tld" -e "s/${WEBSITE_DISPLAY_NAME}/The GreatApplication/g" -e "s/${WEBSITE_DISPLAY_NAME_UPPER}/THE GREATAPPLICATION/g" -e "s/${WEBSITE_DISPLAY_NAME}/GreatApplication/g" -e "s/${WEBSITE_DISPLAY_NAME_UPPER}/GREATAPPLICATION/g" -e "s/${WEBSITE_DISPLAY_NAME_LOWER}/greatapplication/g" -e "s/${WEBSITE_DISPLAY_NAME_FIRST}/Greatapplication/g" {} \;
-#/usr/bin/find . -type f -exec sed -i "s/${ROOT_DOMAIN}/applicationrootdomain.tld/g" {} \;
-#/usr/bin/find . -type f -exec sed -i "s/${WEBSITE_DISPLAY_NAME}/The GreatApplication/g" {} \;
-#/usr/bin/find . -type f -exec sed -i "s/${WEBSITE_DISPLAY_NAME_UPPER}/THE GREATAPPLICATION/g" {} \;
-#/usr/bin/find . -type f -exec sed -i "s/${WEBSITE_DISPLAY_NAME}/GreatApplication/g" {} \;
-#/usr/bin/find . -type f -exec sed -i "s/${WEBSITE_DISPLAY_NAME_UPPER}/GREATAPPLICATION/g" {} \;
-#/usr/bin/find . -type f -exec sed -i "s/${WEBSITE_DISPLAY_NAME_LOWER}/greatapplication/g" {} \;
-#/usr/bin/find . -type f -exec sed -i "s/${WEBSITE_DISPLAY_NAME_FIRST}/Greatapplication/g" {} \;
+/usr/bin/find . -type f -exec sed -i -e "s/${WEBSITE_URL}/applicationdomain.tld/g" -e "s/${ROOT_DOMAIN}/applicationrootdomain.tld/g" -e "s/${WEBSITE_DISPLAY_NAME}/The GreatApplication/g" -e "s/${WEBSITE_DISPLAY_NAME_UPPER}/THE GREATAPPLICATION/g" -e "s/${WEBSITE_DISPLAY_NAME}/GreatApplication/g" -e "s/${WEBSITE_DISPLAY_NAME_UPPER}/GREATAPPLICATION/g" -e "s/${WEBSITE_DISPLAY_NAME_LOWER}/greatapplication/g" -e "s/${WEBSITE_DISPLAY_NAME_FIRST}/Greatapplication/g" {} \;
+
 
 
 
