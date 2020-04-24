@@ -27,11 +27,11 @@ fi
 
 if ( [ "${BUILDOS}" = "ubuntu" ] )
 then
-    /usr/bin/apt-get -qq -y -f install python-pip
+    /usr/bin/apt-get -qq -y -f install python3-pip
 fi
 
 if ( [ "${BUILDOS}" = "debian" ] )
 then
-    /usr/bin/apt-get -qq -y -f install python-pip
+    /usr/bin/apt-get -qq -y -f install python3-pip
 fi
 
