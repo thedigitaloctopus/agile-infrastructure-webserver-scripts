@@ -52,13 +52,13 @@ directoriestomiss="`/bin/ls ${HOME}/.ssh/DIRECTORIESTOMOUNT:* | /bin/sed 's/.*DI
 
 if ( [ "${directoriestomiss}" = "" ] )
 then
-    CMD="`/usr/bin/find /var/www/html/ -cmin -9 -mmin -9 -type f`"
+    CMD="`/usr/bin/find /var/www/html/ -cmin -35 -mmin -35 -type f`"
 else
     if ( [ -f ${HOME}/.ssh/PERSISTASSETSTOCLOUD:0 ] )
     then
-        CMD="/usr/bin/find /var/www/html/ -type f -mmin -9 -cmin -9"
+        CMD="/usr/bin/find /var/www/html/ -type f -mmin -35 -cmin -35"
     else
-        CMD="/usr/bin/find /var/www/html/ -type f -mmin -9 -cmin -9 -not -path "
+        CMD="/usr/bin/find /var/www/html/ -type f -mmin -35 -cmin -35 -not -path "
 
         for directorytomiss in ${directoriestomiss}
         do
