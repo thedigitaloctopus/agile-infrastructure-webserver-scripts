@@ -63,6 +63,7 @@ fi
 /bin/echo "8 3 * * 7 export HOME="${HOMEDIR}" && ${HOME}/cron/BackupFromCron.sh 'WEEKLY' ${BUILD_IDENTIFIER}" >> /var/spool/cron/crontabs/root
 /bin/echo "8 4 1 * * export HOME="${HOMEDIR}" && ${HOME}/cron/BackupFromCron.sh 'MONTHLY' ${BUILD_IDENTIFIER}" >> /var/spool/cron/crontabs/root
 /bin/echo "8 5 1 Jan,Mar,May,Jul,Sep,Nov * export HOME="${HOMEDIR}" && ${HOME}/cron/BackupFromCron.sh 'BIMONTHLY' ${BUILD_IDENTIFIER}" >> /var/spool/cron/crontabs/root
+/bin/echo "30 3 * * * export HOME="${HOMEDIR}" && /bin/rm ${HOME}/config/webrootsynctunnel/webrootsync*.tar" >> /var/spool/cron/crontabs/root
 
 /bin/echo "30 02 * * * export HOME="${HOMEDIR}" && ${HOME}/providerscripts/utilities/RegulateSyncProcessReset.sh" >> /var/spool/cron/crontabs/root
 
