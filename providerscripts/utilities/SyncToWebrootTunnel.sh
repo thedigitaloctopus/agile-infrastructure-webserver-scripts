@@ -43,7 +43,7 @@ else
     fi
 fi
 
-if test `/usr/bin/find ${HOME}/runtime/ENABLEDTOSYNC -mmin -17`
+if test `/usr/bin/find ${HOME}/runtime/ENABLEDTOSYNC -mmin -10`
 then
     exit
 fi
