@@ -107,3 +107,5 @@ if ( [ "`/usr/bin/cmp --silent ${HOME}/webrootsync/webrootsync.${ip}.tar ${HOME}
 then
     /bin/cp ${HOME}/webrootsync/webrootsync.${ip}.tar ${HOME}/config/webrootsynctunnel
 fi
+
+${HOME}/applicationscripts/CleanApplicationTunnel.sh
