@@ -25,7 +25,12 @@ APPLICATION="`/bin/ls ${HOME}/.ssh/APPLICATION:* | /usr/bin/awk -F':' '{print $N
 
 if ( [ "${APPLICATION}" = "joomla" ] )
 then
-    :
+    archives="`/bin/ls ${HOME}/config/webrootsynctunnel/webroot*`"
+    for archive in ${archives}
+    do
+        /bin/tar -vf ${archive} --wildcards --delete cache*
+        /bin/tar -vf ${archive} --wildcards --delete session*
+    done
 elif ( [ "${APPLICATION}" = "wordpress" ] )
 then
     archives="`/bin/ls ${HOME}/config/webrootsynctunnel/webroot*`"
