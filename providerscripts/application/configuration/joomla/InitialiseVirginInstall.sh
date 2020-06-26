@@ -136,7 +136,12 @@ fi
 #database tables. This prefix will be used for the lifetime of the application
 if ( [ -f ${HOME}/.ssh/DATABASEDBaaSINSTALLATIONTYPE:Maria ] || [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:Maria ] )
 then
+    #joomla 3 -
     /bin/sed -i "s/#__/${prefix}_/g" /var/www/html/installation/sql/mysql/joomla.sql
+    #joomla 4 +
+    /bin/sed -i "s/#__/${prefix}_/g" /var/www/html/installation/sql/mysql/base.sql
+    /bin/sed -i "s/#__/${prefix}_/g" /var/www/html/installation/sql/mysql/extensions.sql
+    /bin/sed -i "s/#__/${prefix}_/g" /var/www/html/installation/sql/mysql/supports.sql
 fi
 
 #A default joomla download has a sample configuration.php file in its installation directory. What we can do is copy
