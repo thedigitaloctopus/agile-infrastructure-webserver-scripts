@@ -74,6 +74,7 @@ username="`command="${SUDO} /bin/sed '3q;d' ${HOME}/config/credentials/shit" && 
 password="`command="${SUDO} /bin/sed '2q;d' ${HOME}/config/credentials/shit" && eval ${command}`"
 database="`command="${SUDO} /bin/sed '1q;d' ${HOME}/config/credentials/shit" && eval ${command}`"
 
+
 #The default credentials for the joomla database are webmaster and password test1234 - these MUST be changed after installation
 
 #So, by now, we know that we have a database to access and so we can perform some configuration steps to set it up as we need it
@@ -82,13 +83,30 @@ database="`command="${SUDO} /bin/sed '1q;d' ${HOME}/config/credentials/shit" && 
 if ( ( [ -f ${HOME}/.ssh/DATABASEDBaaSINSTALLATIONTYPE:MySQL ] || [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:MySQL ] ) ||
      ( [ -f ${HOME}/.ssh/DATABASEDBaaSINSTALLATIONTYPE:Maria ] || [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:Maria ] ) )
 then
-    command="${SUDO} /bin/cp /var/www/html/installation/sql/mysql/joomla.sql /tmp/joomla.sql" && eval ${command}
-    command="${SUDO} /bin/sed -i \"s/#__/${PREFIX}_/g\" /tmp/joomla.sql" && eval ${command}
-    /usr/bin/mysql -A -u "${username}" -p"${password}" "${database}" --host="${host}" --port="${DB_PORT}" < /tmp/joomla.sql
+    if ( [ -f /var/www/html/installation/sql/mysql/joomla.sql ] )
+    then
+        command="${SUDO} /bin/cp /var/www/html/installation/sql/mysql/joomla.sql /tmp/joomla.sql" && eval ${command}
+        command="${SUDO} /bin/sed -i \"s/#__/${PREFIX}_/g\" /tmp/joomla.sql" && eval ${command}
+    else
+        command="${SUDO} /bin/cp /var/www/html/installation/sql/mysql/base.sql /tmp/base.sql" && eval ${command}
+        command="${SUDO} /bin/cp /var/www/html/installation/sql/mysql/extensions.sql /tmp/extensions.sql" && eval ${command}
+        command="${SUDO} /bin/cp /var/www/html/installation/sql/mysql/supports.sql /tmp/supports.sql" && eval ${command}
+        command="${SUDO} /bin/sed -i \"s/#__/${PREFIX}_/g\" /tmp/base.sql" && eval ${command}
+        command="${SUDO} /bin/sed -i \"s/#__/${PREFIX}_/g\" /tmp/extensions.sql" && eval ${command}
+        command="${SUDO} /bin/sed -i \"s/#__/${PREFIX}_/g\" /tmp/supports.sql" && eval ${command}
+    fi
+    if ( [ -f /tmp/joomla.sql ] )
+    then
+        /usr/bin/mysql -A -u "${username}" -p"${password}" "${database}" --host="${host}" --port="${DB_PORT}" < /tmp/joomla.sql
+    else
+        /usr/bin/mysql -A -u "${username}" -p"${password}" "${database}" --host="${host}" --port="${DB_PORT}" < /tmp/base.sql
+        /usr/bin/mysql -A -u "${username}" -p"${password}" "${database}" --host="${host}" --port="${DB_PORT}" < /tmp/extensions.sql
+        /usr/bin/mysql -A -u "${username}" -p"${password}" "${database}" --host="${host}" --port="${DB_PORT}" < /tmp/supports.sql
+    fi
     /usr/bin/mysql -A -u "${username}" -p"${password}" "${database}" --host="${host}" --port="${DB_PORT}" -e "INSERT INTO ${PREFIX}_users (id,name,username,email,password,params) values (42,'webmaster','webmaster','testxyz@test123.com','16d7a4fca7442dda3ad93c9a726597e4',1);"
     /usr/bin/mysql -A -u "${username}" -p"${password}" "${database}" --host="${host}" --port="${DB_PORT}" -e "INSERT INTO ${PREFIX}_user_usergroup_map values (42,8);"
     /usr/bin/mysql -A -u "${username}" -p"${password}" "${database}" --host="${host}" --port="${DB_PORT}" -e "UPDATE ${PREFIX}_extensions set enabled=1 where name='plg_system_cache';"
-   command="${SUDO} /bin/rm /tmp/joomla.sql" && eval ${command}
+    command="${SUDO} /bin/rm /tmp/joomla.sql /tmp/base.sql /tmp/extensions.sql /tmp/supports.sql" && eval ${command}
 fi
 
 #We want to check if the database is accessible
