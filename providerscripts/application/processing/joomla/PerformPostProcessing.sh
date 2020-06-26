@@ -103,7 +103,7 @@ then
         /usr/bin/mysql -A -u "${username}" -p"${password}" "${database}" --host="${host}" --port="${DB_PORT}" < /tmp/extensions.sql
         /usr/bin/mysql -A -u "${username}" -p"${password}" "${database}" --host="${host}" --port="${DB_PORT}" < /tmp/supports.sql
     fi
-    /usr/bin/mysql -A -u "${username}" -p"${password}" "${database}" --host="${host}" --port="${DB_PORT}" -e "INSERT INTO ${PREFIX}_users (id,name,username,email,password,params) values (42,'webmaster','webmaster','testxyz@test123.com','16d7a4fca7442dda3ad93c9a726597e4',1);"
+    /usr/bin/mysql -A -u "${username}" -p"${password}" "${database}" --host="${host}" --port="${DB_PORT}" -e "INSERT INTO ${PREFIX}_users (id,name,username,email,password,registerdate,params) values (42,'webmaster','webmaster','testxyz@test123.com','16d7a4fca7442dda3ad93c9a726597e4','2020-04-20',1);"
     /usr/bin/mysql -A -u "${username}" -p"${password}" "${database}" --host="${host}" --port="${DB_PORT}" -e "INSERT INTO ${PREFIX}_user_usergroup_map values (42,8);"
     /usr/bin/mysql -A -u "${username}" -p"${password}" "${database}" --host="${host}" --port="${DB_PORT}" -e "UPDATE ${PREFIX}_extensions set enabled=1 where name='plg_system_cache';"
     command="${SUDO} /bin/rm /tmp/joomla.sql /tmp/base.sql /tmp/extensions.sql /tmp/supports.sql" && eval ${command}
