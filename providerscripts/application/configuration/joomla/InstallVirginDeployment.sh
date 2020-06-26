@@ -35,7 +35,7 @@ then
     /bin/echo "1"
 elif ( [ "`/bin/echo ${version} | /bin/grep beta`" != "" ] )
 then
-    /usr/bin/wget https://github.com/joomla/joomla-cms/releases/download/${version}/Joomla_${version}-Beta-Full_Package.zip
+    /usr/bin/wget https://github.com/joomla/joomla-cms/releases/download/4.0.0-beta/Joomla_${version}-Beta-Full_Package.zip
 	/usr/bin/unzip Joomla_${version}-Beta-Full_Package.zip
     /bin/rm Joomla_${version}-Beta-Full_Package.zip
     /bin/mv /var/www/html/htaccess.txt /var/www/html/.htaccess
