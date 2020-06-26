@@ -288,6 +288,8 @@ ${HOME}/providerscripts/application/processing/DetermineApplicationType.sh > /de
 #This call is necessary as it primes the networking interface for some providers.
 ${HOME}/providerscripts/utilities/GetIP.sh
 
+${HOME}/providerscripts/utilities/Upgrade.sh
+
 #Final checks
 /bin/echo "${0} `/bin/date`: Rebooting post install....." >> ${HOME}/logs/WEBSERVER_BUILD.log
 
