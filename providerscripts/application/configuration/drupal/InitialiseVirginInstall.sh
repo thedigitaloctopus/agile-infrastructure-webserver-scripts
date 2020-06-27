@@ -196,6 +196,7 @@ if ( [ -f ${HOME}/config/drupal_settings.php ] &&
 [ "`/bin/cat ${HOME}/config/drupal_settings.php | /bin/grep ${host}`" != "" ] )
 then
     /bin/mkdir -p /var/www/html/sites/default/files/pictures
+    /bin/chown -R www-data.www-data /var/www/html/sites/default
     #We are ready to set up services and switch off twig caching
     if ( [ -f /var/www/html/sites/default/default.services.yml ] )
     then
