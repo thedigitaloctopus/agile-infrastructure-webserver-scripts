@@ -161,11 +161,15 @@ fi
 salt="`< /dev/urandom tr -dc a-z | head -c${1:-16};echo;`"
 /bin/sed -i "/^\$settings\['hash_salt'\]/c\$settings['hash_salt'] = '${salt}';" ${HOME}/runtime/drupal_settings.php
 
-/bin/echo "\$settings['trusted_host_patterns'] = [ '.*' ];" >> ${HOME}/runtime/drupal_settings.php
 
-/bin/echo "\$config_directories = array(
-CONFIG_SYNC_DIRECTORY => '/var/www/html/sites/default/files',
-);" >> ${HOME}/runtime/drupal_settings.php
+if ( [ "`/bin/cat ${HOME}/runtime/drupal_settings.php | /bin/grep 'CONFIG_SYNC_DIRECTORY'`" = "" ] )
+then
+    /bin/echo "\$settings['trusted_host_patterns'] = [ '.*' ];" >> ${HOME}/runtime/drupal_settings.php
+
+    /bin/echo "\$config_directories = array(
+    CONFIG_SYNC_DIRECTORY => '/var/www/html/sites/default',
+    );" >> ${HOME}/runtime/drupal_settings.php
+fi
 
 /bin/cp ${HOME}/runtime/drupal_settings.php ${HOME}/config/drupal_settings.php
 #/bin/cp ${HOME}/runtime/drupal_settings.php /var/www/html/sites/default/drupal_settings.php
