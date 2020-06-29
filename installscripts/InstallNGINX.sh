@@ -29,6 +29,7 @@ BUILDOSVERSION="`/bin/ls ${HOME}/.ssh/BUILDOSVERSION:* | /usr/bin/awk -F':' '{pr
 
 if ( [ "${BUILDOS}" = "ubuntu" ] )
 then
+    /usr/bin/systemctl disable --now apache2
     /usr/bin/curl http://nginx.org/keys/nginx_signing.key | /usr/bin/apt-key add -
     /usr/bin/apt-get -qq -y update
     /usr/bin/apt-get -qq install nginx
