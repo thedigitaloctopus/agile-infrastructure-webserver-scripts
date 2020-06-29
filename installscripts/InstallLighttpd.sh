@@ -27,6 +27,7 @@ fi
 
 if ( [ "${BUILDOS}" = "ubuntu" ] )
 then
+    /usr/bin/systemctl disable --now apache2
     /usr/bin/apt-get -y -qq install lighttpd
 fi
 
