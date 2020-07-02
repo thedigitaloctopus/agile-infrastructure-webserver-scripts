@@ -91,7 +91,7 @@ then
             done
         else
             /usr/bin/s3cmd mb s3://${configbucket}
-            /bin/rm -r ${HOME}/config_cache/* 2>/dev/null
+            /bin/rm -r ${HOME}/config_cache/* ${HOME}/config_cache/.* 2>/dev/null
             /usr/bin/s3fs -o nonempty -o use_cache=${HOME}/config_cache -ourl=https://${endpoint} ${configbucket} ${HOME}/config
         fi 
     fi
@@ -104,7 +104,7 @@ then
     /usr/bin/s3cmd mb s3://${configbucket}
     if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] )
     then
-        /bin/rm -r ${HOME}/config_cache/* 2>/dev/null
+        /bin/rm -r ${HOME}/config_cache/* ${HOME}/config_cache/.* 2>/dev/null
         /usr/bin/s3fs -o nonempty -o use_cache=${HOME}/config_cache -ourl=https://${endpoint} ${configbucket} ${HOME}/config
     fi
 fi
@@ -116,7 +116,7 @@ then
     /usr/bin/s3cmd mb s3://${configbucket}
     if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] )
     then
-        /bin/rm -r ${HOME}/config_cache/* 2>/dev/null
+        /bin/rm -r ${HOME}/config_cache/* ${HOME}/config_cache/.* 2>/dev/null
         /usr/bin/s3fs -o nonempty -o use_cache=${HOME}/config_cache -ourl=https://${endpoint} ${configbucket} ${HOME}/config
     fi
 fi
@@ -128,7 +128,7 @@ then
     /usr/bin/s3cmd mb s3://${configbucket}
     if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] )
     then
-        /bin/rm -r ${HOME}/config_cache/* 2>/dev/null
+        /bin/rm -r ${HOME}/config_cache/* ${HOME}/config_cache/.* 2>/dev/null
         /usr/bin/s3fs -o nonempty -o use_cache=${HOME}/config_cache -ourl=https://${endpoint} ${configbucket} ${HOME}/config
     fi
 fi
@@ -140,7 +140,7 @@ then
     /usr/bin/s3cmd mb s3://${configbucket}
     if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] )
     then
-        /bin/rm -r ${HOME}/config_cache/* 2>/dev/null
+        /bin/rm -r ${HOME}/config_cache/* ${HOME}/config_cache/.* 2>/dev/null
         /usr/bin/s3fs -o nonempty -o use_cache=${HOME}/config_cache -ourl=https://${endpoint} ${configbucket} ${HOME}/config
     fi
 fi
