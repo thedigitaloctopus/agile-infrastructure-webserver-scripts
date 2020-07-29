@@ -22,7 +22,7 @@
 
 SERVER_USER="`/bin/ls /home | /bin/grep "X*X"`"
 
-datastoreprovider="${1}"
+datastore_provider="${1}"
 if ( [ "${datastore_provider}" = "amazonS3" ] || [ "${datastore_provider}" = "digitalocean" ] || [ "${datastore_provider}" = "exoscale" ] ||  [ "${datastore_provider}" = "linode" ] || [ "${datastore_provider}" = "vultr" ]  )
 then
     if ( [ ! -f /usr/bin/s3cmd ] )
