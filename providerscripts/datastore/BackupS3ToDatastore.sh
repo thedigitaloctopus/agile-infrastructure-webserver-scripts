@@ -20,6 +20,11 @@
 ####################################################################################
 set -x
 
+if ( [ -f ${HOME}/.ssh/ENABLEEFS:0 ] )
+then
+    exit
+fi
+
 directories_to_mount="`/bin/ls ${HOME}/.ssh/DIRECTORIESTOMOUNT:* | /bin/sed 's/:config//g'`"
 directories=""
 for directory in ${directories_to_mount}
