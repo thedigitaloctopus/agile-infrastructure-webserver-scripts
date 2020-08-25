@@ -57,7 +57,8 @@ fi
 #These scripts run at set times these will make a backup of our webroot to git and also to our datastore if super safe
 
 /bin/echo "30 5 * * * export HOME="${HOMEDIR}" && ${HOME}/providerscripts/utilities/EnforcePermissions.sh" >> /var/spool/cron/crontabs/root
-#/bin/echo "15 1 * * * export HOME="${HOMEDIR}" && ${HOME}/providerscripts/datastore/BackupEFSToDatastore.sh" >> /var/spool/cron/crontabs/root
+/bin/echo "15 1 * * * export HOME="${HOMEDIR}" && ${HOME}/providerscripts/datastore/BackupEFSToDatastore.sh" >> /var/spool/cron/crontabs/root
+/bin/echo "15 1 * * * export HOME="${HOMEDIR}" && ${HOME}/providerscripts/datastore/BackupS3ToDatastore.sh" >> /var/spool/cron/crontabs/root
 /bin/echo "2 * * * * export HOME="${HOMEDIR}" && ${HOME}/cron/BackupFromCron.sh 'HOURLY' ${BUILD_IDENTIFIER}" >> /var/spool/cron/crontabs/root
 /bin/echo "8 2 * * * export HOME="${HOMEDIR}" && ${HOME}/cron/BackupFromCron.sh 'DAILY' ${BUILD_IDENTIFIER}" >> /var/spool/cron/crontabs/root
 /bin/echo "8 3 * * 7 export HOME="${HOMEDIR}" && ${HOME}/cron/BackupFromCron.sh 'WEEKLY' ${BUILD_IDENTIFIER}" >> /var/spool/cron/crontabs/root
