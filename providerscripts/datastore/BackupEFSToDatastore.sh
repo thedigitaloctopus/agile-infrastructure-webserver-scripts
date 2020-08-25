@@ -1,7 +1,6 @@
 #!/bin/sh
 ####################################################################################
-# Description: This script mounts a bucket from a cloud based datastore and uses it
-# as a shared config directory to pass configuration settings around between machines
+# Description: This script replicates the EFS filesystems to s3 buckets
 # Author: Peter Winter
 # Date :  9/4/2016
 ###################################################################################
