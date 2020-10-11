@@ -38,7 +38,7 @@ then
         /usr/bin/add-apt-repository -y ppa:ondrej/php
         /usr/bin/apt -qq -y update
         #removed php-mcrypt php7.2
-        /usr/bin/apt-get -qq -y install php${phpversion}-fpm php${phpversion}-cli php${phpversion}-common php${phpversion}-dev  php${phpversion}-json php${phpversion}-opcache php${phpversion}-mysql php${phpversion}-phpdbg php${phpversion}-mbstring php${phpversion}-gd php${phpversion}-imap php${phpversion}-ldap php${phpversion}-pgsql php${phpversion}-pspell php${phpversion}-tidy php${phpversion}-intl php${phpversion}-gd php${phpversion}-curl php${phpversion}-zip php${phpversion}-xml php-mysql php${phpversion}-memcache php${phpversion}-redis
+        /usr/bin/apt-get -qq -y install php${phpversion}-fpm php${phpversion}-cli php${phpversion}-common php${phpversion}-dev  php${phpversion}-imagick php${phpversion}-json php${phpversion}-opcache php${phpversion}-mysql php${phpversion}-phpdbg php${phpversion}-mbstring php${phpversion}-gd php${phpversion}-imap php${phpversion}-ldap php${phpversion}-pgsql php${phpversion}-pspell php${phpversion}-tidy php${phpversion}-intl php${phpversion}-gd php${phpversion}-curl php${phpversion}-zip php${phpversion}-xml php-mysql php${phpversion}-memcache php${phpversion}-redis
         #If php did not install at the version we chose for example, if you chose to install php7.4 on ubuntu 19.04 it will not install
         #This is  potential configuration oversight if someone doesn't realise what versions of php are supported by a particular OS
         #So, in this case, check if php has been installed at our desired version and if it isn't do the best that we can
@@ -46,7 +46,7 @@ then
 
         if ( [ "${installedphpversion}" != "${phpversion}" ] )
         then
-            /usr/bin/apt-get -qq -y install php-fpm php-cli php-common php-dev  php-json php-opcache php-mysql php-phpdbg php-mbstring php-gd php-imap php-ldap php-pgsql php-pspell php-tidy php-intl php-gd php-curl php-zip php-xml php-mysql php-memcache php-redis
+            /usr/bin/apt-get -qq -y install php-fpm php-cli php-common php-dev php-imagick php-json php-opcache php-mysql php-phpdbg php-mbstring php-gd php-imap php-ldap php-pgsql php-pspell php-tidy php-intl php-gd php-curl php-zip php-xml php-mysql php-memcache php-redis
             installedphpversion="`/usr/bin/php -v | /bin/grep "^PHP" | /usr/bin/awk '{print $2}' | /usr/bin/awk -F'.' '{print $1,$2}' | /bin/sed 's/ /\./g'`"
             /bin/rm ${HOME}/.ssh/PHP_VERSION*
             /bin/touch ${HOME}/.ssh/PHP_VERSION:${installedphpversion}
@@ -55,7 +55,7 @@ then
     then
         /usr/bin/apt -qq -y update
         /usr/bin/apt -qq -y install php${phpversion}
-        /usr/bin/apt-get -qq -y install php${phpversion}-fpm php${phpversion}-cli php${phpversion}-common php${phpversion}-dev  php${phpversion}-json php${phpversion}-opcache php${phpversion}-mysql php${phpversion}-phpdbg php${phpversion}-mbstring php${phpversion}-gd php${phpversion}-imap php${phpversion}-ldap php${phpversion}-pgsql php${phpversion}-pspell php${phpversion}-tidy php${phpversion}-intl php${phpversion}-gd php${phpversion}-curl php${phpversion}-zip php${phpversion}-xml php-mysql php${phpversion}-memcache php${phpversion}-redis
+        /usr/bin/apt-get -qq -y install php${phpversion}-fpm php${phpversion}-cli php${phpversion}-common php${phpversion}-dev php${phpversion}-imagick php${phpversion}-json php${phpversion}-opcache php${phpversion}-mysql php${phpversion}-phpdbg php${phpversion}-mbstring php${phpversion}-gd php${phpversion}-imap php${phpversion}-ldap php${phpversion}-pgsql php${phpversion}-pspell php${phpversion}-tidy php${phpversion}-intl php${phpversion}-gd php${phpversion}-curl php${phpversion}-zip php${phpversion}-xml php-mysql php${phpversion}-memcache php${phpversion}-redis
     fi
 fi
 
@@ -68,7 +68,7 @@ then
 
     /usr/bin/apt -qq -y update
 
-    /usr/bin/apt-get -qq -y install php${phpversion}-fpm php${phpversion}-cli php${phpversion}-common php${phpversion}-dev  php${phpversion}-json php${phpversion}-opcache php${phpversion}-mysql php${phpversion}-phpdbg php${phpversion}-mbstring php${phpversion}-gd php${phpversion}-imap php${phpversion}-ldap php${phpversion}-pgsql php${phpversion}-pspell php${phpversion}-tidy php${phpversion}-intl php${phpversion}-gd php${phpversion}-curl php${phpversion}-zip php${phpversion}-xml php-mysql php${phpversion}-memcache php${phpversion}-redis
+    /usr/bin/apt-get -qq -y install php${phpversion}-fpm php${phpversion}-cli php${phpversion}-common php${phpversion}-dev php${phpversion}-imagick php${phpversion}-json php${phpversion}-opcache php${phpversion}-mysql php${phpversion}-phpdbg php${phpversion}-mbstring php${phpversion}-gd php${phpversion}-imap php${phpversion}-ldap php${phpversion}-pgsql php${phpversion}-pspell php${phpversion}-tidy php${phpversion}-intl php${phpversion}-gd php${phpversion}-curl php${phpversion}-zip php${phpversion}-xml php-mysql php${phpversion}-memcache php${phpversion}-redis
 
 
     #If php did not install at the version we chose for example, if you chose to install php7.4 on ubuntu 19.04 it will not install
@@ -78,7 +78,7 @@ then
 
     if ( [ "${installedphpversion}" != "${phpversion}" ] )
     then
-        /usr/bin/apt-get -qq -y install php-fpm php-cli php-common php-dev  php-json php-opcache php-mysql php-phpdbg php-mbstring php-gd php-imap php-ldap php-pgsql php-pspell php-tidy php-intl php-gd php-curl php-zip php-xml php-mysql php-memcache php-redis
+        /usr/bin/apt-get -qq -y install php-fpm php-cli php-common php-dev php-imagick php-json php-opcache php-mysql php-phpdbg php-mbstring php-gd php-imap php-ldap php-pgsql php-pspell php-tidy php-intl php-gd php-curl php-zip php-xml php-mysql php-memcache php-redis
         installedphpversion="`/usr/bin/php -v | /bin/grep "^PHP" | /usr/bin/awk '{print $2}' | /usr/bin/awk -F'.' '{print $1,$2}' | /bin/sed 's/ /\./g'`"
         /bin/rm ${HOME}/.ssh/PHP_VERSION*
         /bin/touch ${HOME}/.ssh/PHP_VERSION:${installedphpversion}
