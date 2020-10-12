@@ -53,3 +53,4 @@ then
 
     fi
 fi
+/bin/rm -rf /var/www/html/.git
