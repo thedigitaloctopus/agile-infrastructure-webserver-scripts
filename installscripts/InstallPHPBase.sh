@@ -33,7 +33,7 @@ fi
 
 if ( [ "${BUILDOS}" = "ubuntu" ] )
 then
-    if ( [ "${BUILDOSVERSION}" = "19.04" ] )
+    if ( [ "${BUILDOSVERSION}" = "18.04" ] )
     then
         /usr/bin/add-apt-repository -y ppa:ondrej/php
         /usr/bin/apt -qq -y update
