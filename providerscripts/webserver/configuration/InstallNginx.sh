@@ -151,12 +151,13 @@ server
     
 if ( ( [ "${BUILDOS}" = "ubuntu" ] && [ "${BUILDOS_VERSION}" = "18.04" ] ) || ( [ "${BUILDOS}" = "debian" ] && [ "${BUILDOS_VERSION}" = "9" ] ) )
 then
-    /bin/echo "     ssl_protocols TLSv1 TLSv1.1 TLSv1.2;" >> /etc/nginx/sites-available/${website_name}
+    /bin/echo "    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;" >> /etc/nginx/sites-available/${website_name}
 else
-    /bin/echo "     ssl_protocols TLSv1 TLSv1.1 TLSv1.2 TLSv1.3;" >> /etc/nginx/sites-available/${website_name}
+    /bin/echo "    ssl_protocols TLSv1 TLSv1.1 TLSv1.2 TLSv1.3;" >> /etc/nginx/sites-available/${website_name}
 fi
 
-/bin/echo"    ssl_ciphers EECDH+CHACHA20:EECDH+AES128:RSA+AES128:EECDH+AES256:RSA+AES256:EECDH+3DES:RSA+3DES:!MD5;
+/bin/echo "    
+    ssl_ciphers EECDH+CHACHA20:EECDH+AES128:RSA+AES128:EECDH+AES256:RSA+AES256:EECDH+3DES:RSA+3DES:!MD5;
     ssl_stapling on;
     ssl_trusted_certificate ${HOME}/ssl/live/${website_url}/fullchain.pem;
     server_tokens off;
