@@ -22,6 +22,8 @@
 #set -x
 
 BUILDOS="`/bin/ls ${HOME}/.ssh/BUILDOS:* | /usr/bin/awk -F':' '{print $NF}'`"
+BUILDOS_VERSION="`/bin/ls ${HOME}/.ssh/BUILDOSVERSION:* | /usr/bin/awk -F':' '{print $NF}'`"
+
 APPLICATION_LANGUAGE="`/bin/ls ${HOME}/.ssh/APPLICATIONLANGUAGE:* | /usr/bin/awk -F':' '{print $NF}'`"
 
 ${HOME}/installscripts/InstallNGINX.sh ${BUILDOS}
@@ -145,9 +147,16 @@ server
     ssl_certificate_key ${HOME}/ssl/live/${website_url}/privkey.pem;
     ssl_session_cache shared:SSL:50m;
     ssl_session_timeout 5m;
-    ssl_prefer_server_ciphers on;
-    ssl_protocols TLSv1 TLSv1.1 TLSv1.2 TLSv1.3;
-    ssl_ciphers EECDH+CHACHA20:EECDH+AES128:RSA+AES128:EECDH+AES256:RSA+AES256:EECDH+3DES:RSA+3DES:!MD5;
+    ssl_prefer_server_ciphers on; " > /etc/nginx/sites-available/${website_name}
+    
+if ( ( [ "${BUILDOS}" = "ubuntu" ] && [ "${BUILDOS_VERSION}" = "19.04" ] ) || ( [ "${BUILDOS}" = "debian" ] && [ "${BUILDOS_VERSION}" = "9" ] ) )
+then
+    /bin/echo "ssl_protocols TLSv1 TLSv1.1 TLSv1.2;" >> /etc/nginx/sites-available/${website_name}
+else
+    /bin/echo "ssl_protocols TLSv1 TLSv1.1 TLSv1.2 TLSv1.3;" >> /etc/nginx/sites-available/${website_name}
+fi
+
+/bin/echo"    ssl_ciphers EECDH+CHACHA20:EECDH+AES128:RSA+AES128:EECDH+AES256:RSA+AES256:EECDH+3DES:RSA+3DES:!MD5;
     ssl_stapling on;
     ssl_trusted_certificate ${HOME}/ssl/live/${website_url}/fullchain.pem;
     server_tokens off;
@@ -194,7 +203,7 @@ server
         add_header Cache-Control \"public\";
         access_log  off;
         log_not_found off;
-}" > /etc/nginx/sites-available/${website_name}
+}" >> /etc/nginx/sites-available/${website_name}
 
 /bin/echo "
    location / {
