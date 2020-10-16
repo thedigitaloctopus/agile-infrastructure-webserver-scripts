@@ -105,10 +105,10 @@ then
     name="`/bin/ls ${HOME}/.ssh/DBaaSUSERNAME:* | /usr/bin/awk -F':' '{print $NF}'`"
 fi
 
-#if ( [ "`/bin/cat /var/www/html/index.php | /bin/grep session_save_path`" = "" ] )
-#then
-#    /bin/sed -i '1 s/^.*$/<?php \nsession_save_path \(\"\/var\/www\/html\/wp-content\/uploads\/\"\);/' /var/www/html/index.php
-#fi
+if ( [ "`/bin/cat /var/www/html/index.php | /bin/grep session_save_path`" = "" ] )
+then
+    /bin/sed -i '1 s/^.*$/<?php \nsession_save_path \(\"\/var\/www\/html\/wp-content\/uploads\/\"\);/' /var/www/html/index.php
+fi
 
 if ( [ ! -f ${HOME}/config/wordpress_config.php ] )
 then
