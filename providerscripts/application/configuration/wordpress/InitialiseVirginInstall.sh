@@ -72,6 +72,20 @@ then
     /bin/rm ${HOME}/runtime/VIRGINCONFIGSET
 fi
 
+if ( [ ! -f /var/www/html/.htaccess ] )
+then
+    /bin/cp ${HOME}/providerscripts/application/configuration/wordpress-htaccess.txt /var/www/html/.htaccess
+    /bin/chown www-data.www-data /var/www/html/.htaccess
+    /bin/chmod 440 /var/www/html/.htaccess
+fi
+
+if ( [ ! -f /var/www/html/.user.ini ] )
+then
+    /bin/cp ${HOME}/providerscripts/application/configuration/wordpress.user.ini /var/www/html/.user.ini
+    /bin/chown www-data.www-data /var/www/html/.user.ini
+    /bin/chmod 440 /var/www/html/.user.ini
+fi
+
 if ( [ -f ${HOME}/config/wordpress_config.php ] &&
     [ "${username}" != "" ] && [ "${password}" != "" ] && [ "${database}" != "" ] && [ "${host}" != "" ] &&
     [ "`/bin/cat ${HOME}/config/wordpress_config.php | /bin/grep ${username}`" != "" ] &&
