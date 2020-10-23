@@ -51,7 +51,7 @@ then
     /bin/chmod 440 /var/www/html/.htaccess
 fi
 
-if ( [ ! -f /var/www/html/.user.ini ] )
+if ( [ ! -f /var/www/html/.user.ini ] && [ -f /var/www/html/wordfence-waf.php ] )
 then
     /bin/cp ${HOME}/providerscripts/application/configuration/wordpress.user.ini /var/www/html/.user.ini
     /bin/chown www-data.www-data /var/www/html/.user.ini
