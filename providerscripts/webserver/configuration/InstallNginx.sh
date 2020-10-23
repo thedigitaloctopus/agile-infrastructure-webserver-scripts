@@ -190,6 +190,14 @@ fi
     location ~* /(images|cache|media|logs|tmp)/.*\.(php|pl|py|jsp|asp|sh|cgi)\$ {
         return 403;
     }
+    
+    location ~ ^/\.user\.ini {
+        deny all;
+    }
+
+    location ~ ^/wordpress/\.user\.ini {
+        deny all;
+    }
 
     # Deny all attempts to access hidden files such as .htaccess, .htpasswd, .DS_Store (Mac).
     location ~ /\. {
