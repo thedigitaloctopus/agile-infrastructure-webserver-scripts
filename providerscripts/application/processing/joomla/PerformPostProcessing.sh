@@ -83,19 +83,16 @@ database="`command="${SUDO} /bin/sed '1q;d' ${HOME}/config/credentials/shit" && 
 if ( ( [ -f ${HOME}/.ssh/DATABASEDBaaSINSTALLATIONTYPE:MySQL ] || [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:MySQL ] ) ||
      ( [ -f ${HOME}/.ssh/DATABASEDBaaSINSTALLATIONTYPE:Maria ] || [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:Maria ] ) )
 then
+    installationstatus=""
     if ( [ -d /var/www/html/installation ] )
     then 
         if ( [ -f /var/www/html/installation/sql/mysql/joomla.sql ] )
         then
-            /bin/echo "I have found the installation sql for a joomla 3 installation is this correct?"
-            /bin/echo "Press the <enter> key to continue"
-            read x
+            installationstatus="1"
             command="${SUDO} /bin/cp /var/www/html/installation/sql/mysql/joomla.sql /tmp/joomla.sql" && eval ${command}
             command="${SUDO} /bin/sed -i \"s/#__/${PREFIX}_/g\" /tmp/joomla.sql" && eval ${command}
         else
-            /bin/echo "I have found the installation sql for a joomla 4 installation, is this correct?"
-            /bin/echo "Press the <enter> key to continue"
-            read x
+            installationstatus="2"
             command="${SUDO} /bin/cp /var/www/html/installation/sql/mysql/base.sql /tmp/base.sql" && eval ${command}
             command="${SUDO} /bin/cp /var/www/html/installation/sql/mysql/extensions.sql /tmp/extensions.sql" && eval ${command}
             command="${SUDO} /bin/cp /var/www/html/installation/sql/mysql/supports.sql /tmp/supports.sql" && eval ${command}
@@ -104,9 +101,7 @@ then
             command="${SUDO} /bin/sed -i \"s/#__/${PREFIX}_/g\" /tmp/supports.sql" && eval ${command}
         fi
     else 
-        /bin/echo "I haven't found the installation directory, can't install joomla"
-        /bin/echo "Press the <enter> key to continue"
-        exit
+        installationstatus="3"
     fi
     if ( [ -f /tmp/joomla.sql ] )
     then
@@ -122,11 +117,27 @@ then
     command="${SUDO} /bin/rm /tmp/joomla.sql /tmp/base.sql /tmp/extensions.sql /tmp/supports.sql 2>/dev/null" && eval ${command}
 fi
 
-#We want to check if the database is accessible
-/bin/echo "The default credentials for your brand new joomla site are set to: Admin name: webmaster  Admin password: test1234"
-/bin/echo "Clearly, it is essential to change these to stop your site being compromised and they are just set as such to bootstrap your site building"
-/bin/echo "Press <enter> to acknowledge"
-read x
+if ( [ "${installationstatus}" = "3" ] )
+then
+     /bin/echo "NO INSTALLATION DIRECTORY FOUND FOR JOOMLA. CANNOT INSTALL..."
+     /bin/echo "Press <enter> to acknowledge"
+     read x
+ elif ( [ "${installationstatus}" = "2" ] )
+ then
+      /bin/echo "Found installation material for joomla 4 - attempted to install joomla 4"
+  elif ( [ "${installationstatus}" = "1" ] )
+  then
+      /bin/echo "Found installation material for joomla 3 - attempted to install joomla 3"
+  fi
+
+
+if ( [ "${installationstatus}" = "2" ] || [ "${installationstatus}" = "1" ] )
+then
+    /bin/echo "The default credentials for your brand new joomla site are set to: Admin name: webmaster  Admin password: test1234"
+    /bin/echo "Clearly, it is essential to change these to stop your site being compromised and they are just set as such to bootstrap your site building"
+    /bin/echo "Press <enter> to acknowledge"
+    read x
+fi
 
 #OK, if we get to here, we no longer need our default installation directory. It has served us well, so, we can nuke it
 command="${SUDO} /bin/rm -r /var/www/html/installation" && eval ${command}
