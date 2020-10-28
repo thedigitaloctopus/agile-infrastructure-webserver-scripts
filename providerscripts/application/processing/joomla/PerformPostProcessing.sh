@@ -83,23 +83,30 @@ database="`command="${SUDO} /bin/sed '1q;d' ${HOME}/config/credentials/shit" && 
 if ( ( [ -f ${HOME}/.ssh/DATABASEDBaaSINSTALLATIONTYPE:MySQL ] || [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:MySQL ] ) ||
      ( [ -f ${HOME}/.ssh/DATABASEDBaaSINSTALLATIONTYPE:Maria ] || [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:Maria ] ) )
 then
-    if ( [ -f /var/www/html/installation/sql/mysql/joomla.sql ] )
-    then
-        /bin/echo "I have found the installation sql for a joomla 3 installation is this correct?"
+    if ( [ -d /var/www/html/installation ] )
+    then 
+        if ( [ -f /var/www/html/installation/sql/mysql/joomla.sql ] )
+        then
+            /bin/echo "I have found the installation sql for a joomla 3 installation is this correct?"
+            /bin/echo "Press the <enter> key to continue"
+            read x
+            command="${SUDO} /bin/cp /var/www/html/installation/sql/mysql/joomla.sql /tmp/joomla.sql" && eval ${command}
+            command="${SUDO} /bin/sed -i \"s/#__/${PREFIX}_/g\" /tmp/joomla.sql" && eval ${command}
+        else
+            /bin/echo "I have found the installation sql for a joomla 4 installation, is this correct?"
+            /bin/echo "Press the <enter> key to continue"
+            read x
+            command="${SUDO} /bin/cp /var/www/html/installation/sql/mysql/base.sql /tmp/base.sql" && eval ${command}
+            command="${SUDO} /bin/cp /var/www/html/installation/sql/mysql/extensions.sql /tmp/extensions.sql" && eval ${command}
+            command="${SUDO} /bin/cp /var/www/html/installation/sql/mysql/supports.sql /tmp/supports.sql" && eval ${command}
+            command="${SUDO} /bin/sed -i \"s/#__/${PREFIX}_/g\" /tmp/base.sql" && eval ${command}
+            command="${SUDO} /bin/sed -i \"s/#__/${PREFIX}_/g\" /tmp/extensions.sql" && eval ${command}
+            command="${SUDO} /bin/sed -i \"s/#__/${PREFIX}_/g\" /tmp/supports.sql" && eval ${command}
+        fi
+    else 
+        /bin/echo "I haven't found the installation directory, can't install joomla"
         /bin/echo "Press the <enter> key to continue"
-        read x
-        command="${SUDO} /bin/cp /var/www/html/installation/sql/mysql/joomla.sql /tmp/joomla.sql" && eval ${command}
-        command="${SUDO} /bin/sed -i \"s/#__/${PREFIX}_/g\" /tmp/joomla.sql" && eval ${command}
-    else
-        /bin/echo "I have found the installation sql for a joomla 4 installation, is this correct?
-        /bin/echo "Press the <enter> key to continue"
-        read x
-        command="${SUDO} /bin/cp /var/www/html/installation/sql/mysql/base.sql /tmp/base.sql" && eval ${command}
-        command="${SUDO} /bin/cp /var/www/html/installation/sql/mysql/extensions.sql /tmp/extensions.sql" && eval ${command}
-        command="${SUDO} /bin/cp /var/www/html/installation/sql/mysql/supports.sql /tmp/supports.sql" && eval ${command}
-        command="${SUDO} /bin/sed -i \"s/#__/${PREFIX}_/g\" /tmp/base.sql" && eval ${command}
-        command="${SUDO} /bin/sed -i \"s/#__/${PREFIX}_/g\" /tmp/extensions.sql" && eval ${command}
-        command="${SUDO} /bin/sed -i \"s/#__/${PREFIX}_/g\" /tmp/supports.sql" && eval ${command}
+        exit
     fi
     if ( [ -f /tmp/joomla.sql ] )
     then
