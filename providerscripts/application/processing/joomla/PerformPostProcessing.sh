@@ -38,8 +38,22 @@ fi
 SERVER_USER="`/bin/ls ${HOME}/.ssh/SERVERUSER:* | /usr/bin/awk -F':' '{print $NF}'`"
 SERVER_USER_PASSWORD="`/bin/ls ${HOME}/.ssh/SERVERUSERPASSWORD:* | /usr/bin/awk -F':' '{print $NF}'`"
 DB_PORT="`/bin/ls ${HOME}/.ssh/DB_PORT:* | /usr/bin/awk -F':' '{print $NF}'`"
-PREFIX="`/bin/ls ${HOME}/.ssh/DBPREFIX:* | /usr/bin/awk -F':' '{print $NF}'`"
+PREFIX="`/bin/ls ${HOME}/.ssh/DBPREFIX:* | /usr/bin/awk -F':' '{print $NF}' 2>/dev/null`"
 SUDO="/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E"
+
+
+#Set a prefix for our database tables. Make sure we only ever set one in the case where the script runs more than once
+#and exits for some reason.
+if ( [ "${PREFIX}" = "" ] && [ ! -f /var/www/html/dpb.dat ] )
+then
+    PREFIX="`< /dev/urandom tr -dc a-z | head -c${1:-6};echo;`"
+    /bin/touch ${HOME}/.ssh/DBPREFIX:${PREFIX}
+    /bin/chown www-data.www-data ${HOME}/.ssh/DBPREFIX:*
+    /bin/chmod 755 ${HOME}/.ssh/DBPREFIX:*
+    /bin/echo "${PREFIX}" > /var/www/html/dpb.dat
+else
+    PREFIX="`/bin/cat /var/www/html/dpb.dat`"
+fi
 
 credentials_available=""
 database_available=""
