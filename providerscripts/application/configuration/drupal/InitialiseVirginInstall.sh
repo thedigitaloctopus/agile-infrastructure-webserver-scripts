@@ -93,6 +93,8 @@ if ( [ "`/bin/ls ${HOME}/.ssh/DBPREFIX:* 2>/dev/null`" = "" ] && [ ! -f /var/www
 then
     prefix="`< /dev/urandom tr -dc a-z | head -c${1:-6};echo;`"
     /bin/touch ${HOME}/.ssh/DBPREFIX:${prefix}
+    /bin/chown www-data.www-data ${HOME}/.ssh/DBPREFIX:*
+    /bin/chmod 755 ${HOME}/.ssh/DBPREFIX:*
     /bin/echo "${prefix}" > /var/www/html/dpb.dat
 else
     prefix="`/bin/cat /var/www/html/dpb.dat`"
