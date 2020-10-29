@@ -52,7 +52,7 @@ then
     /bin/chmod 755 ${HOME}/.ssh/DBPREFIX:*
     /bin/echo "${PREFIX}" > /var/www/html/dpb.dat
 else
-    PREFIX="`/bin/cat /var/www/html/dpb.dat`"
+    PREFIX="`command="${SUDO} /bin/cat /var/www/html/dpb.dat" && eval ${command}`"
 fi
 
 credentials_available=""
