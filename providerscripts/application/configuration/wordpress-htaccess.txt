@@ -6,13 +6,4 @@ RewriteRule ^index\.php$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . /index.php [L]
-# Wordfence WAF
-</IfModule>
-<IfModule mod_php5.c>
-php_value auto_prepend_file '/var/www/html/wordfence-waf.php'
-</IfModule>
-<IfModule mod_php7.c>
-php_value auto_prepend_file '/var/www/html/wordfence-waf.php'
-</IfModule>
-# END Wordfence WAF
 # END WordPress
