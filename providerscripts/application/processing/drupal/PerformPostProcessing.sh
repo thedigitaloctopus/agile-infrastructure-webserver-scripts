@@ -41,10 +41,20 @@ if ( [ "${DB_HOST}" = "" ] )
 then 
     DB_HOST="`command="${SUDO} /bin/ls ${HOME}/config/databaseip" && eval ${command}`" 
 fi
-
 #prefix="`/bin/cat /var/www/html/dpb.dat`"
 
-prefix="`command="${SUDO} /bin/cat /var/www/html/dpb.dat" && eval ${command}`"
+
+
+if ( [ "${prefix}" = "" ] && [ ! -f /var/www/html/dpb.dat ] )
+then
+    prefix="`< /dev/urandom tr -dc a-z | head -c${1:-6};echo;`"
+    /bin/touch ${HOME}/.ssh/DBPREFIX:${prefix}
+    /bin/chown www-data.www-data ${HOME}/.ssh/DBPREFIX:*
+    /bin/chmod 755 ${HOME}/.ssh/DBPREFIX:*
+    /bin/echo "${prefix}" > /var/www/html/dpb.dat
+else
+    prefix="`command="${SUDO} /bin/cat /var/www/html/dpb.dat" && eval ${command}`"
+fi
 
 if ( [ -f ${HOME}/.ssh/DATABASEDBaaSINSTALLATIONTYPE:Postgres ] || [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:Postgres ] )
 then
