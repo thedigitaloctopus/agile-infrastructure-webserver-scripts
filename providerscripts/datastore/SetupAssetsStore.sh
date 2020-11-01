@@ -115,6 +115,8 @@ then
                         then
                             /bin/mkdir -p /tmp/${asset_directory}
                             /bin/mv /var/www/html/${asset_directory}/* /tmp/${asset_directory}
+                        else
+                            /bin/mkdir -p /var/www/html/${asset_directory}
                         fi
                         
                         /bin/mount -t nfs -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport ${efsmounttarget}:/   /var/www/html/${asset_directory}
@@ -157,7 +159,8 @@ then
         if ( [ "`/bin/mount | /bin/grep "/var/www/html/${asset_directory}"`" = "" ] )
         then
             /usr/bin/s3cmd mb s3://${assetbucket}
-            /usr/bin/s3cmd --preserve sync /var/www/html/${asset_directory}/* s3://${assetbucket}
+            /usr/bin/s3cmd --preserve sync /var/www/html/${asset_directory}/* s3://${assetbucket}                       
+            /bin/mkdir -p /var/www/html/${asset_directory}
             /bin/chmod 777 /var/www/html/${asset_directory}
             /bin/chown www-data.www-data /var/www/html/${asset_directory}
             /usr/bin/s3fs -o umask=0022 -o uid="${s3fs_uid}" -o gid="${s3fs_gid}" -o allow_other,nonempty,kernel_cache,use_path_request_style,sigv2 -o use_cache=${HOME}/datastore_cache -ourl=https://${endpoint} ${assetbucket} /var/www/html/${asset_directory}
@@ -185,6 +188,7 @@ then
         then
             /usr/bin/s3cmd mb s3://${assetbucket}
             /usr/bin/s3cmd --preserve sync /var/www/html/${asset_directory}/* s3://${assetbucket}
+            /bin/mkdir -p /var/www/html/${asset_directory}
             /bin/chmod 777 /var/www/html/${asset_directory}
             /bin/chown www-data.www-data /var/www/html/${asset_directory}
             /usr/bin/s3fs -o umask=0022 -o uid="${s3fs_uid}" -o gid="${s3fs_gid}" -o allow_other,nonempty,kernel_cache,use_path_request_style,sigv2 -o use_cache=${HOME}/datastore_cache -ourl=https://${endpoint} ${assetbucket} /var/www/html/${asset_directory}
@@ -212,6 +216,7 @@ then
         then
             /usr/bin/s3cmd mb s3://${assetbucket}
             /usr/bin/s3cmd --preserve sync /var/www/html/${asset_directory}/* s3://${assetbucket}
+            /bin/mkdir -p /var/www/html/${asset_directory}
             /bin/chmod 777 /var/www/html/${asset_directory}
             /bin/chown www-data.www-data /var/www/html/${asset_directory}
             /usr/bin/s3fs -o umask=0022 -o uid="${s3fs_uid}" -o gid="${s3fs_gid}" -o allow_other,nonempty,kernel_cache,use_path_request_style,sigv2 -o use_cache=${HOME}/datastore_cache -ourl=https://${endpoint} ${assetbucket} /var/www/html/${asset_directory}
@@ -239,6 +244,7 @@ then
         then
             /usr/bin/s3cmd mb s3://${assetbucket}
             /usr/bin/s3cmd --preserve sync /var/www/html/${asset_directory}/* s3://${assetbucket}
+            /bin/mkdir -p /var/www/html/${asset_directory}
             /bin/chmod 777 /var/www/html/${asset_directory}
             /bin/chown www-data.www-data /var/www/html/${asset_directory}
             /usr/bin/s3fs -o umask=0022 -o uid="${s3fs_uid}" -o gid="${s3fs_gid}" -o allow_other,nonempty,kernel_cache,use_path_request_style,sigv2 -o use_cache=${HOME}/datastore_cache -ourl=https://${endpoint} ${assetbucket} /var/www/html/${asset_directory}
