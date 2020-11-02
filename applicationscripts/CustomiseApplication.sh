@@ -27,4 +27,10 @@
 
 if ( [ "${APPLICATION_IDENTIFIER}" = "1" ] )
 then
+    :
+fi
+
+if ( [ "${APPLICATION_IDENTIFIER}" = "2" ] )
+then
+    :
 fi
