@@ -27,11 +27,4 @@
 
 if ( [ "${APPLICATION_IDENTIFIER}" = "1" ] )
 then
-    HOMEDIR="/home/`/bin/ls /root/.ssh/HOMEDIRFORROOT:* | /usr/bin/awk -F':' '{print $NF}'`"
-    export HOME="${HOMEDIR}"
-
-    /bin/echo "*/3 * * * * export HOME="${HOMEDIR}" && ${HOME}/applicationscripts/socialnetwork/UpdateGeolocation.sh" >> /var/spool/cron/crontabs/root
-    /bin/echo "*/3 * * * * export HOME="${HOMEDIR}" && ${HOME}/applicationscripts/socialnetwork/ProcessStatusUpdates.sh" >> /var/spool/cron/crontabs/root
-    /bin/echo "*/1 * * * * export HOME="${HOMEDIR}" && ${HOME}/applicationscripts/socialnetwork/CreateImagesFolders.sh" >> /var/spool/cron/crontabs/root
-    /bin/echo "*/1 * * * * export HOME="${HOMEDIR}" && ${HOME}/applicationscripts/socialnetwork/CustomisedInitialisation.sh" >> /var/spool/cron/crontabs/root
 fi
