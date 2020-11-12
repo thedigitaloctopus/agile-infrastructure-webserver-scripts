@@ -26,6 +26,6 @@ then
 fi
 if ( [ -f ${HOME}/.ssh/APPLICATIONIDENTIFIER:2 ] )
 then
-    . ${HOME}/applicationscripts/wordpressnetwork/RemoveApplicationBranding.sh
+    . ${HOME}/applicationscripts/nuocialboss-wordpress/RemoveApplicationBranding.sh
 fi
 
