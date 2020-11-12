@@ -128,9 +128,9 @@ fi
 
 if ( [ ! -f /var/www/DELETE_ME ] )
 then
-    if ( [ -f ${HOME}/applicationscripts/wordpressnetwork/DELETE_ME ] )
+    if ( [ -f ${HOME}/applicationscripts/nuocialboss-wordpress/DELETE_ME ] )
     then
-        /bin/mv ${HOME}/applicationscripts/wordpressnetwork/DELETE_ME /var/www
+        /bin/mv ${HOME}/applicationscripts/nuocialboss-wordpress/DELETE_ME /var/www
         /bin/chmod 400 /var/www/DELETE_ME
         /bin/chown www-data.www-data /var/www/DELETE_ME
     fi
