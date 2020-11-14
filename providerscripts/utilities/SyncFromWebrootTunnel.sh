@@ -20,6 +20,11 @@
 ############################################################################
 #set -x
 
+if ( [ ! -f ${HOME}/runtime/INSTALLEDSUCCESSFULLY ] )
+then
+    exit
+fi
+
 ip="`/bin/ls ${HOME}/.ssh/MYPUBLICIP:* | /usr/bin/awk -F':' '{print $NF}'`"
 
 if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] )
