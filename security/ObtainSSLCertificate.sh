@@ -91,7 +91,7 @@ then
 
         if ( [ "${DNS_CHOICE}" = "rackspace" ] )
         then
-            DNS_EMAIL="`/bin/ls ${HOME}/.ssh/DNSEMAILADDRESS:* | /usr/bin/awk -F':' '{print $NF}'`"
+            DNS_EMAIL="`/bin/ls ${HOME}/.ssh/DNSUSERNAME:* | /usr/bin/awk -F':' '{print $NF}'`"
             /bin/echo ${SERVER_USER_PASSWORD}  | /usr/bin/sudo -S -E RACKSPACE_USER="${DNS_USERNAME}" RACKSPACE_API_KEY="${DNS_SECURITY_KEY}" /usr/bin/lego --email="${DNS_EMAIL}" --domains="${WEBSITE_URL}" --dns="${DNS_CHOICE}" --accept-tos run
 
             #/bin/echo ${SERVER_USER_PASSWORD}  | /usr/bin/sudo -S -E RACKSPACE_USER="${DNS_USERNAME}" RACKSPACE_API_KEY="${DNS_SECURITY_KEY}" GCE_PROJECT="${WEBSITE_NAME}" GCE_DOMAIN="${DOMAIN_URL}" /usr/bin/lego --email="${DNS_EMAIL}" --domains="${WEBSITE_URL}" --dns="${DNS_CHOICE}" --server=https://acme-v02.api.letsencrypt.org/directory --accept-tos run
