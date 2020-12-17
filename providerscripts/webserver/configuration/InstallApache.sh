@@ -81,6 +81,7 @@ ${HOME}/installscripts/InstallApache.sh ${BUILDOS}
 /bin/sed -i 's/LoadModule/#LoadModule/g' /etc/apache2/mods-available/include.load
 /bin/sed -i 's/LoadModule/#LoadModule/g' /etc/apache2/mods-available/info.load
 /bin/sed -i 's/LoadModule/#LoadModule/g' /etc/apache2/mods-available/userdir.load
+/bin/sed -i '/SetHandler/c\ SetHandler "proxy:fcgi://localhost:9000"' /etc/apache2/conf-available/php${phpversion}-fpm.conf
 /bin/rm /etc/apache2/sites-enabled/*def*
 /bin/rm /etc/apache2/sites-available/*def*
 
