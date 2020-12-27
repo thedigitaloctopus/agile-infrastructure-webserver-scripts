@@ -98,20 +98,20 @@ then
     /bin/echo "Please enter the master password for your database (for rackspace please refer to helperscripts/EnableRootForRackspaceCloudDatabase.sh)"
     read root_password
 
-    /usr/bin/mysql -A -u ${master_username} -p${master_password} ${database} --host="${host}" --port="${DB_PORT}" -e "SET GLOBAL innodb_file_per_table=ON;"
-    /usr/bin/mysql -A -u ${master_username} -p${master_password} ${database} --host="${host}" --port="${DB_PORT}" -e "SET GLOBAL binlog_format = 'MIXED';"
+ #   /usr/bin/mysql -A -u ${master_username} -p${master_password} ${database} --host="${host}" --port="${DB_PORT}" -e "SET GLOBAL innodb_file_per_table=ON;"
+ #   /usr/bin/mysql -A -u ${master_username} -p${master_password} ${database} --host="${host}" --port="${DB_PORT}" -e "SET GLOBAL binlog_format = 'MIXED';"
 
 
-    if ( [ "$?" != "0" ] )
-    then
-        /usr/bin/mysql -A -u ${username} -p${password} ${database} --host="${host}" --port="${DB_PORT}" -e "SET GLOBAL innodb_file_per_table=ON;"
+#    if ( [ "$?" != "0" ] )
+#    then
+#        /usr/bin/mysql -A -u ${username} -p${password} ${database} --host="${host}" --port="${DB_PORT}" -e "SET GLOBAL innodb_file_per_table=ON;"
   #      /usr/bin/mysql -A -u ${username} -p${password} ${database} --host="${host}" --port="${DB_PORT}" -e "SET GLOBAL binlog_format = 'MIXED';"
-    fi
-elif ( [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:Maria ] ||  [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:MySQL ] )
-then
-    /usr/bin/mysql -A -u ${username} -p${password} ${database} --host="${host}" --port="${DB_PORT}" -e "SET GLOBAL innodb_file_per_table=ON;"
+#    fi
+#elif ( [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:Maria ] ||  [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:MySQL ] )
+#then
+   # /usr/bin/mysql -A -u ${username} -p${password} ${database} --host="${host}" --port="${DB_PORT}" -e "SET GLOBAL innodb_file_per_table=ON;"
 #    /usr/bin/mysql -A -u ${username} -p${password} ${database} --host="${host}" --port="${DB_PORT}" -e "SET GLOBAL binlog_format = 'MIXED';"
-fi
+#fi
 
 if ( [ "${BUILD_ARCHIVE_CHOICE}" = "virgin" ] )
 then
