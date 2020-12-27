@@ -105,12 +105,12 @@ then
     if ( [ "$?" != "0" ] )
     then
         /usr/bin/mysql -A -u ${username} -p${password} ${database} --host="${host}" --port="${DB_PORT}" -e "SET GLOBAL innodb_file_per_table=ON;"
-        /usr/bin/mysql -A -u ${username} -p${password} ${database} --host="${host}" --port="${DB_PORT}" -e "SET GLOBAL binlog_format = 'MIXED';"
+  #      /usr/bin/mysql -A -u ${username} -p${password} ${database} --host="${host}" --port="${DB_PORT}" -e "SET GLOBAL binlog_format = 'MIXED';"
     fi
 elif ( [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:Maria ] ||  [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:MySQL ] )
 then
     /usr/bin/mysql -A -u ${username} -p${password} ${database} --host="${host}" --port="${DB_PORT}" -e "SET GLOBAL innodb_file_per_table=ON;"
-    /usr/bin/mysql -A -u ${username} -p${password} ${database} --host="${host}" --port="${DB_PORT}" -e "SET GLOBAL binlog_format = 'MIXED';"
+#    /usr/bin/mysql -A -u ${username} -p${password} ${database} --host="${host}" --port="${DB_PORT}" -e "SET GLOBAL binlog_format = 'MIXED';"
 fi
 
 if ( [ "${BUILD_ARCHIVE_CHOICE}" = "virgin" ] )
