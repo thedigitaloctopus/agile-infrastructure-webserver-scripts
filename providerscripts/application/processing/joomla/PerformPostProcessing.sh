@@ -113,6 +113,9 @@ then
             command="${SUDO} /bin/sed -i \"s/#__/${PREFIX}_/g\" /tmp/base.sql" && eval ${command}
             command="${SUDO} /bin/sed -i \"s/#__/${PREFIX}_/g\" /tmp/extensions.sql" && eval ${command}
             command="${SUDO} /bin/sed -i \"s/#__/${PREFIX}_/g\" /tmp/supports.sql" && eval ${command}
+            command="${SUDO} /bin/sed -i \"s/utf8mb4/utf8/g\" /tmp/base.sql" && eval ${command}
+            command="${SUDO} /bin/sed -i \"s/utf8mb4/utf8/g\" /tmp/extensions.sql" && eval ${command}
+            command="${SUDO} /bin/sed -i \"s/utf8mb4/utf8/g\" /tmp/supports.sql" && eval ${command}
         fi
     else 
         installationstatus="3"
