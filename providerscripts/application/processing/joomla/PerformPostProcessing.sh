@@ -105,6 +105,7 @@ then
             installationstatus="1"
             command="${SUDO} /bin/cp /var/www/html/installation/sql/mysql/joomla.sql /tmp/joomla.sql" && eval ${command}
             command="${SUDO} /bin/sed -i \"s/#__/${PREFIX}_/g\" /tmp/joomla.sql" && eval ${command}
+            command="${SUDO} /bin/sed -i '1s/^/SET SESSION sql_require_primary_key=0;\n/' /tmp/joomla.sql" && eval ${command}
         else
             installationstatus="2"
             command="${SUDO} /bin/cp /var/www/html/installation/sql/mysql/base.sql /tmp/base.sql" && eval ${command}
@@ -113,17 +114,20 @@ then
             command="${SUDO} /bin/sed -i \"s/#__/${PREFIX}_/g\" /tmp/base.sql" && eval ${command}
             command="${SUDO} /bin/sed -i \"s/#__/${PREFIX}_/g\" /tmp/extensions.sql" && eval ${command}
             command="${SUDO} /bin/sed -i \"s/#__/${PREFIX}_/g\" /tmp/supports.sql" && eval ${command}
+            command="${SUDO} /bin/sed -i '1s/^/SET SESSION sql_require_primary_key=0;\n/' /tmp/base.sql" && eval ${command}
+            command="${SUDO} /bin/sed -i '1s/^/SET SESSION sql_require_primary_key=0;\n/' /tmp/extensions.sql" && eval ${command}
+            command="${SUDO} /bin/sed -i '1s/^/SET SESSION sql_require_primary_key=0;\n/' /tmp/supports.sql" && eval ${command}
         fi
     else 
         installationstatus="3"
     fi
     if ( [ -f /tmp/joomla.sql ] )
     then
-        /usr/bin/mysql -A -u "${username}" -p"${password}" "${database}" --host="${host}" --port="${DB_PORT}" < /tmp/joomla.sql
+        /usr/bin/mysql -f -A -u "${username}" -p"${password}" "${database}" --host="${host}" --port="${DB_PORT}" < /tmp/joomla.sql
     else
-        /usr/bin/mysql -A -u "${username}" -p"${password}" "${database}" --host="${host}" --port="${DB_PORT}" < /tmp/base.sql
-        /usr/bin/mysql -A -u "${username}" -p"${password}" "${database}" --host="${host}" --port="${DB_PORT}" < /tmp/extensions.sql
-        /usr/bin/mysql -A -u "${username}" -p"${password}" "${database}" --host="${host}" --port="${DB_PORT}" < /tmp/supports.sql
+        /usr/bin/mysql -f -A -u "${username}" -p"${password}" "${database}" --host="${host}" --port="${DB_PORT}" < /tmp/base.sql
+        /usr/bin/mysql -f -A -u "${username}" -p"${password}" "${database}" --host="${host}" --port="${DB_PORT}" < /tmp/extensions.sql
+        /usr/bin/mysql -f -A -u "${username}" -p"${password}" "${database}" --host="${host}" --port="${DB_PORT}" < /tmp/supports.sql
     fi
     /usr/bin/mysql -A -u "${username}" -p"${password}" "${database}" --host="${host}" --port="${DB_PORT}" -e "INSERT INTO ${PREFIX}_users (id,name,username,email,password,registerdate,params,requirereset) values (42,'webmaster','webmaster','testxyz@test123.com','16d7a4fca7442dda3ad93c9a726597e4','2020-04-20',1,1);"
     /usr/bin/mysql -A -u "${username}" -p"${password}" "${database}" --host="${host}" --port="${DB_PORT}" -e "INSERT INTO ${PREFIX}_user_usergroup_map values (42,8);"
