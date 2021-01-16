@@ -20,6 +20,12 @@
 #################################################################################
 #set -x
 
+if ( [ "`/bin/ls ${HOME}/.ssh/APPLICATIONBASELINESOURCECODEREPOSITORY:JOOMLA:4*`" != "" ] )
+then
+    /usr/bin/rsync -au /var/www/html/configuration.php ${HOME}/config/joomla_configuration.php
+    /usr/bin/rsync -au /var/www/html/configuration.php ${HOME}/runtime/joomla_configuration.php
+fi
+
 # You can manually update the configuration file for your application under ${HOME}/config/wordpress_config.php
 # and create an empty file ${HOME}/config/GLOBAL_CONFIG_UPDATE which will indicate that these changes will need 
 #to be pushed to each webserver. In this way, you can update all your webserver configurations
