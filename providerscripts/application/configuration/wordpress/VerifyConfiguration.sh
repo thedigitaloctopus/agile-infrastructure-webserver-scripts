@@ -23,7 +23,7 @@
 
 /usr/bin/wget --timeout=10 --tries=3 --spider --no-check-certificate https://localhost/index.php
 
-if ( [ "$?" != "0" ] )
+if ( [ "$?" != "0" ] || [ "`/usr/bin/diff /var/www/wp-config.php ${HOME}/config/wordpress_config.php`" != "" ]  )
 then
     /bin/rm ${HOME}/runtime/CONFIG_VERIFIED
 fi
