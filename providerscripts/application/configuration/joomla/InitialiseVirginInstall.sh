@@ -28,12 +28,6 @@
 ##########################################################################################
 #set -x
 
-if ( [ "`/bin/ls ${HOME}/.ssh/APPLICATIONBASELINESOURCECODEREPOSITORY:JOOMLA:4*`" != "" ] || [ -f ${HOME}/runtime/VIRGINCONFIGSET ] )
-then
-   /bin/touch ${HOME}/runtime/VIRGINCONFIGSET
-   exit
-fi
-
 #So, the scenarios are for where our database resides is as follows:
 # 1) It is a DBaaS and it has been secured with an SSH tunnel. In this case, our hostname will be our local ip address
 # 2) It is a DBaaS and it hasn't been secured with an SSH tunnel. In this case our hostname is the name of the database
