@@ -28,8 +28,9 @@
 ##########################################################################################
 #set -x
 
-if ( [ "`/bin/ls ${HOME}/.ssh/APPLICATIONBASELINESOURCECODEREPOSITORY:JOOMLA:4*`" != "" ] )
+if ( [ "`/bin/ls ${HOME}/.ssh/APPLICATIONBASELINESOURCECODEREPOSITORY:JOOMLA:4*`" != "" ] || [ -f ${HOME}/runtime/VIRGINCONFIGSET ] )
 then
+   /bin/touch ${HOME}/runtime/VIRGINCONFIGSET
    exit
 fi
 
