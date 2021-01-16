@@ -28,7 +28,10 @@
 ##########################################################################################
 #set -x
 
-exit
+if ( [ "`/bin/ls ${HOME}/.ssh/APPLICATIONBASELINESOURCECODEREPOSITORY:JOOMLA:4*`" != "" ] )
+then
+   exit
+fi
 
 #So, the scenarios are for where our database resides is as follows:
 # 1) It is a DBaaS and it has been secured with an SSH tunnel. In this case, our hostname will be our local ip address
