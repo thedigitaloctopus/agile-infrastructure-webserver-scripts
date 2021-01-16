@@ -63,7 +63,7 @@ then
         /usr/bin/apt -qq -y update
         /usr/bin/apt -qq -y install php${phpversion}
   #      /usr/bin/apt-get -qq -y install php${phpversion}-fpm php${phpversion}-cli php${phpversion}-common php${phpversion}-dev php${phpversion}-imagick php${phpversion}-json php${phpversion}-opcache php${phpversion}-mysqli php${phpversion}-phpdbg php${phpversion}-mbstring php${phpversion}-gd php${phpversion}-imap php${phpversion}-ldap php${phpversion}-pgsql php${phpversion}-pspell php${phpversion}-tidy php${phpversion}-intl php${phpversion}-gd php${phpversion}-curl php${phpversion}-zip php${phpversion}-xml php-mysql php${phpversion}-memcache php${phpversion}-redis
-        /usr/bin/apt-get -qq -y install php${phpversion}-fpm php${phpversion}-cli php${phpversion}-common php${phpversion}-dev php${phpversion}-opcache php${phpversion}-mysqli php${phpversion}-phpdbg php${phpversion}-mbstring php${phpversion}-gd php${phpversion}-imap php${phpversion}-ldap php${phpversion}-pgsql php${phpversion}-pspell php${phpversion}-tidy php${phpversion}-intl php${phpversion}-gd php${phpversion}-curl php${phpversion}-zip php${phpversion}-xml
+        /usr/bin/apt-get -qq -y install php${phpversion}-fpm php${phpversion}-cli php${phpversion}-gmp php${phpversion}-common php${phpversion}-dev php${phpversion}-opcache php${phpversion}-mysqli php${phpversion}-phpdbg php${phpversion}-mbstring php${phpversion}-gd php${phpversion}-imap php${phpversion}-ldap php${phpversion}-pgsql php${phpversion}-pspell php${phpversion}-tidy php${phpversion}-intl php${phpversion}-gd php${phpversion}-curl php${phpversion}-zip php${phpversion}-xml
     fi
 fi
 
@@ -78,7 +78,7 @@ then
 
     #/usr/bin/apt-get -qq -y install php${phpversion}-fpm php${phpversion}-cli php${phpversion}-common php${phpversion}-dev php${phpversion}-imagick php${phpversion}-json php${phpversion}-opcache php${phpversion}-mysqli php${phpversion}-phpdbg php${phpversion}-mbstring php${phpversion}-gd php${phpversion}-imap php${phpversion}-ldap php${phpversion}-pgsql php${phpversion}-pspell php${phpversion}-tidy php${phpversion}-intl php${phpversion}-gd php${phpversion}-curl php${phpversion}-zip php${phpversion}-xml php-mysql php${phpversion}-memcache php${phpversion}-redis
     
-    /usr/bin/apt-get -qq -y install php${phpversion}-fpm php${phpversion}-cli php${phpversion}-common php${phpversion}-dev php${phpversion}-opcache php${phpversion}-mysqli php${phpversion}-phpdbg php${phpversion}-mbstring php${phpversion}-gd php${phpversion}-imap php${phpversion}-ldap php${phpversion}-pgsql php${phpversion}-pspell php${phpversion}-tidy php${phpversion}-intl php${phpversion}-gd php${phpversion}-curl php${phpversion}-zip php${phpversion}-xml
+    /usr/bin/apt-get -qq -y install php${phpversion}-fpm php${phpversion}-cli php${phpversion}-gmp php${phpversion}-common php${phpversion}-dev php${phpversion}-opcache php${phpversion}-mysqli php${phpversion}-phpdbg php${phpversion}-mbstring php${phpversion}-gd php${phpversion}-imap php${phpversion}-ldap php${phpversion}-pgsql php${phpversion}-pspell php${phpversion}-tidy php${phpversion}-intl php${phpversion}-gd php${phpversion}-curl php${phpversion}-zip php${phpversion}-xml
 
 
     #If php did not install at the version we chose for example, if you chose to install php7.4 on ubuntu 19.04 it will not install
