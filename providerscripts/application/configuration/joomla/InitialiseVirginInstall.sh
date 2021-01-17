@@ -215,7 +215,7 @@ secret="`< /dev/urandom tr -dc a-z | head -c${1:-16};echo;`"
 /bin/echo "${0} `/bin/date`: Updating the force ssl" >> ${HOME}/logs/MonitoringLog.dat
 /bin/sed -i "/\$tmp_path /c\        public \$tmp_path = \'/var/www/html/tmp\';" ${HOME}/runtime/joomla_configuration.php
 /bin/sed -i "/\$log_path /c\        public \$log_path = \'/var/www/html/logs\';" ${HOME}/runtime/joomla_configuration.php
-/bin/sed -i "/\$shared_session /c\        public \$shared_session = \'1\';" ${HOME}/runtime/joomla_configuration.php
+/bin/sed -i "/\$shared_session /c\        public \$shared_session = \'0\';" ${HOME}/runtime/joomla_configuration.php
 
 if ( [ -f ${HOME}/.ssh/INMEMORYCACHING:memcache ] )
 then
