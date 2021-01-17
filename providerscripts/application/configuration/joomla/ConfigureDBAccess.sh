@@ -160,7 +160,7 @@ dbipandport="${host}:${DB_PORT}"
 /bin/echo "${0} `/bin/date`: Updating the gzip" >> ${HOME}/logs/MonitoringLog.dat
 /bin/sed -i "/\$force_ssl /c\        public \$force_ssl = \'2\';" ${HOME}/runtime/joomla_configuration.php
 /bin/echo "${0} `/bin/date`: Updating the force ssl" >> ${HOME}/logs/MonitoringLog.dat
-/bin/sed -i "/\$shared_session /c\        public \$shared_session = \'1\';" ${HOME}/runtime/joomla_configuration.php
+/bin/sed -i "/\$shared_session /c\        public \$shared_session = \'0\';" ${HOME}/runtime/joomla_configuration.php
 /bin/echo "${0} `/bin/date`: Updating shared session" >> ${HOME}/logs/MonitoringLog.dat
 
 dbprefix="`/bin/cat /var/www/html/dpb.dat`"
