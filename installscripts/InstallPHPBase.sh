@@ -36,7 +36,7 @@ then
     if ( [ "${BUILDOSVERSION}" = "18.04" ] )
     then
         /usr/bin/add-apt-repository -y ppa:ondrej/php
-        /usr/bin/apt -qq -y update
+        ${HOME}/installscripts/Update.sh ${BUILDOS}
         #removed php-mcrypt php7.2
         # /usr/bin/apt-get -qq -y install php${phpversion}-fpm php${phpversion}-cli php${phpversion}-common php${phpversion}-dev  php${phpversion}-imagick php${phpversion}-json php${phpversion}-opcache php${phpversion}-mysqli php${phpversion}-phpdbg php${phpversion}-mbstring php${phpversion}-gd php${phpversion}-imap php${phpversion}-ldap php${phpversion}-pgsql php${phpversion}-pspell php${phpversion}-tidy php${phpversion}-intl php${phpversion}-gd php${phpversion}-curl php${phpversion}-zip php${phpversion}-xml php-mysql php${phpversion}-memcache php${phpversion}-redis
         
@@ -61,7 +61,7 @@ then
     elif ( [ "${BUILDOSVERSION}" = "20.04" ] )
     then
         /usr/bin/add-apt-repository -y ppa:ondrej/php
-        /usr/bin/apt -qq -y update
+        ${HOME}/installscripts/Update.sh ${BUILDOS}
         /usr/bin/apt -qq -y install php${phpversion}
   #      /usr/bin/apt-get -qq -y install php${phpversion}-fpm php${phpversion}-cli php${phpversion}-common php${phpversion}-dev php${phpversion}-imagick php${phpversion}-json php${phpversion}-opcache php${phpversion}-mysqli php${phpversion}-phpdbg php${phpversion}-mbstring php${phpversion}-gd php${phpversion}-imap php${phpversion}-ldap php${phpversion}-pgsql php${phpversion}-pspell php${phpversion}-tidy php${phpversion}-intl php${phpversion}-gd php${phpversion}-curl php${phpversion}-zip php${phpversion}-xml php-mysql php${phpversion}-memcache php${phpversion}-redis
         /usr/bin/apt-get -qq -y install php${phpversion}-fpm php${phpversion}-cli php${phpversion}-gmp php${phpversion}-common php${phpversion}-dev php${phpversion}-opcache php${phpversion}-mysqli php${phpversion}-phpdbg php${phpversion}-mbstring php${phpversion}-gd php${phpversion}-imap php${phpversion}-ldap php${phpversion}-pgsql php${phpversion}-pspell php${phpversion}-tidy php${phpversion}-intl php${phpversion}-gd php${phpversion}-curl php${phpversion}-zip php${phpversion}-xml
@@ -75,7 +75,7 @@ then
     /usr/bin/wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
     /bin/sh -c 'echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list'
 
-    /usr/bin/apt -qq -y update
+    ${HOME}/installscripts/Update.sh ${BUILDOS}
 
     #/usr/bin/apt-get -qq -y install php${phpversion}-fpm php${phpversion}-cli php${phpversion}-common php${phpversion}-dev php${phpversion}-imagick php${phpversion}-json php${phpversion}-opcache php${phpversion}-mysqli php${phpversion}-phpdbg php${phpversion}-mbstring php${phpversion}-gd php${phpversion}-imap php${phpversion}-ldap php${phpversion}-pgsql php${phpversion}-pspell php${phpversion}-tidy php${phpversion}-intl php${phpversion}-gd php${phpversion}-curl php${phpversion}-zip php${phpversion}-xml php-mysql php${phpversion}-memcache php${phpversion}-redis
     
