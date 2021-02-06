@@ -31,7 +31,7 @@ if ( [ "${BUILDOS}" = "ubuntu" ] )
 then
     /usr/bin/systemctl disable --now apache2
     /usr/bin/curl http://nginx.org/keys/nginx_signing.key | /usr/bin/apt-key add -
-    /usr/bin/apt-get -qq -y update
+    ${HOME}/installscripts/Update.sh ${BUILDOS}
     /usr/bin/apt-get -qq install nginx
     /bin/systemctl unmask nginx.service
 fi
@@ -44,7 +44,7 @@ then
         deb-src http://packages.dotdeb.org stretch all" >> /etc/apt/sources.list
     fi
     /usr/bin/curl http://nginx.org/keys/nginx_signing.key | /usr/bin/apt-key add -
-    /usr/bin/apt-get -qq -y update
+    ${HOME}/installscripts/Update.sh ${BUILDOS}
     /usr/bin/apt-get -qq install nginx
     /bin/systemctl unmask nginx.service
 fi
