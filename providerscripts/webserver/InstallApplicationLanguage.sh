@@ -63,16 +63,22 @@ elif ( [ "${BUILDOS}" = "debian" ] )
     then
         /bin/sed -i "s/^pm =.*/pm = ${php_mode}/" ${www_conf}
         /bin/sed -i "s/^pm=.*/pm = ${php_mode}/" ${www_conf}
+    else 
+        /bin/sed -i "s/^pm =.*/pm = ondemand/" ${www_conf}
+        /bin/sed -i "s/^pm=.*/pm = ondemand/" ${www_conf}
     fi
 
     if ( [ "${php_max_children}" != "" ] )
     then
         /bin/sed -i "s/^pm\.max_children.*/pm\.max_children = ${php_max_children}/" ${www_conf}
+    else
+        /bin/sed -i "s/^pm\.max_children.*/pm\.max_children = 80/" ${www_conf}   
+        /bin/sed -i "s/^pm\.max_requests.*/pm\.max_requests = 200/" ${www_conf} 
     fi
 
     if ( [ "${php_start_servers}" != "" ] )
     then
-        /bin/sed -i "s/^pm\.start_servers.*/pm\.start_servers = ${php_start_servers}/" ${www_conf}
+        /bin/sed -i "s/^pm\.start_servers.*/pm\.start_servers = ${php_start_servers}/" ${www_conf}        
     fi
 
     if ( [ "${php_min_spare_servers}" != "" ] )
@@ -88,6 +94,8 @@ elif ( [ "${BUILDOS}" = "debian" ] )
     if ( [ "${php_process_idle_timeout}" != "" ] )
     then
         /bin/sed -i "s/^pm\.process_idle_timeout.*/pm\.process_idle_timeout = ${php_process_idle_timeout}/" ${www_conf}
+    else
+        /bin/sed -i "s/^pm\.process_idle_timeout.*/pm\.process_idle_timeout = 10s/" ${www_conf}
     fi
 
     #Fiddle with the php config
