@@ -52,12 +52,20 @@ then
         /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from 103.31.4.0/22 to any port 80
     fi
 
-    if ( [ "`/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw status | /bin/grep '104.16.0.0/12' | /bin/grep ALLOW`" = "" ] )
+    if ( [ "`/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw status | /bin/grep '104.16.0.0/13' | /bin/grep ALLOW`" = "" ] )
     then
         /bin/sleep 5
-        /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from 104.16.0.0/12 to any port 443
+        /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from 104.16.0.0/13 to any port 443
         /bin/sleep 5
-        /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from 104.16.0.0/12 to any port 80
+        /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from 104.16.0.0/13 to any port 80
+    fi
+    
+    if ( [ "`/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw status | /bin/grep '104.24.0.0/14' | /bin/grep ALLOW`" = "" ] )
+    then
+        /bin/sleep 5
+        /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from 104.24.0.0/14 to any port 443
+        /bin/sleep 5
+        /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from 104.24.0.0/14 to any port 80
     fi
 
     if ( [ "`/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw status | /bin/grep '108.162.192.0/18' | /bin/grep ALLOW`" = "" ] )
