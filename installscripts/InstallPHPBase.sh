@@ -39,7 +39,7 @@ then
         ${HOME}/installscripts/Update.sh ${BUILDOS}
 
         #removed php-mcrypt php7.2        
-        /usr/bin/apt-get -qq -y install php${phpversion}-fpm php${phpversion}-cli php${phpversion}-gmp php${phpversion}-common php${phpversion}-dev php${phpversion}-opcache php${phpversion}-mysqli php${phpversion}-phpdbg php${phpversion}-mbstring php${phpversion}-gd php${phpversion}-imap php${phpversion}-ldap php${phpversion}-pgsql php${phpversion}-pspell php${phpversion}-tidy php${phpversion}-intl php${phpversion}-gd php${phpversion}-curl php${phpversion}-zip php${phpversion}-xml openssl php-imagick php-json php-ssh2 php${phpversion}-sqlite3
+      #  /usr/bin/apt-get -qq -y install php${phpversion}-fpm php${phpversion}-cli php${phpversion}-gmp php${phpversion}-common php${phpversion}-dev php${phpversion}-opcache php${phpversion}-mysqli php${phpversion}-phpdbg php${phpversion}-mbstring php${phpversion}-gd php${phpversion}-imap php${phpversion}-ldap php${phpversion}-pgsql php${phpversion}-pspell php${phpversion}-tidy php${phpversion}-intl php${phpversion}-gd php${phpversion}-curl php${phpversion}-zip php${phpversion}-xml openssl php-imagick php-json php-ssh2 php${phpversion}-sqlite3
 
         #If php did not install at the version we chose for example, if you chose to install php7.4 on ubuntu 19.04 it will not install
         #This is  potential configuration oversight if someone doesn't realise what versions of php are supported by a particular OS
@@ -69,7 +69,7 @@ then
             #/usr/bin/apt-get -qq -y install php-fpm php-cli php-common php-dev php-opcache php-mysqli php-phpdbg php-mbstring php-gd php-imap php-ldap php-pgsql php-pspell php-tidy php-intl php-gd php-curl php-zip php-xml
         fi
         
-        /usr/bin/apt-get -qq -y install php${phpversion}-fpm php${phpversion}-cli php${phpversion}-gmp php${phpversion}-common php${phpversion}-dev php${phpversion}-opcache php${phpversion}-mysqli php${phpversion}-phpdbg php${phpversion}-mbstring php${phpversion}-gd php${phpversion}-imap php${phpversion}-ldap php${phpversion}-pgsql php${phpversion}-pspell php${phpversion}-tidy php${phpversion}-intl php${phpversion}-gd php${phpversion}-curl php${phpversion}-zip php${phpversion}-xml openssl php-imagick php-json php-ssh2 php${phpversion}-sqlite3
+        /usr/bin/apt-get -qq -y install php${phpversion}-fpm php${phpversion}-cli php${phpversion}-gmp php${phpversion}-common php${phpversion}-dev php${phpversion}-opcache php${phpversion}-mysqli php${phpversion}-phpdbg php${phpversion}-mbstring php${phpversion}-gd php${phpversion}-imap php${phpversion}-ldap php${phpversion}-pgsql php${phpversion}-pspell php${phpversion}-tidy php${phpversion}-intl php${phpversion}-gd php${phpversion}-curl php${phpversion}-zip php${phpversion}-xml php${phpversion}-imagick php${phpversion}-json php${phpversion}-ssh2 php${phpversion}-sqlite3
       
     fi
 fi
@@ -103,7 +103,7 @@ then
     #   /bin/rm -r /etc/php/${installedphpversion}
     #   /usr/bin/apt-get -qq -y install php-fpm php-cli php-common php-dev php-opcache php-mysqli php-phpdbg php-mbstring php-gd php-imap php-ldap php-pgsql php-pspell php-tidy php-intl php-gd php-curl php-zip php-xml
     #else
-    /usr/bin/apt-get -qq -y install php${phpversion}-fpm php${phpversion}-cli php${phpversion}-gmp php${phpversion}-common php${phpversion}-dev php${phpversion}-opcache php${phpversion}-mysqli php${phpversion}-phpdbg php${phpversion}-mbstring php${phpversion}-gd php${phpversion}-imap php${phpversion}-ldap php${phpversion}-pgsql php${phpversion}-pspell php${phpversion}-tidy php${phpversion}-intl php${phpversion}-gd php${phpversion}-curl php${phpversion}-zip php${phpversion}-xml openssl php-imagick php-json php-ssh2 php${phpversion}-sqlite3
+    /usr/bin/apt-get -qq -y install php${phpversion}-fpm php${phpversion}-cli php${phpversion}-gmp php${phpversion}-common php${phpversion}-dev php${phpversion}-opcache php${phpversion}-mysqli php${phpversion}-phpdbg php${phpversion}-mbstring php${phpversion}-gd php${phpversion}-imap php${phpversion}-ldap php${phpversion}-pgsql php${phpversion}-pspell php${phpversion}-tidy php${phpversion}-intl php${phpversion}-gd php${phpversion}-curl php${phpversion}-zip php${phpversion}-xml php${phpversion}-imagick php${phpversion}-json php${phpversion}-ssh2 php${phpversion}-sqlite3
     #fi
 fi
 
