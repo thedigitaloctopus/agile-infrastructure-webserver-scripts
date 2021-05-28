@@ -55,9 +55,9 @@ then
             /usr/bin/apt-get -qq -y install php-fpm php-cli php-common php-dev php-json php-opcache php-mysqli php-phpdbg php-mbstring php-gd php-imap php-ldap php-pgsql php-pspell php-tidy php-intl php-gd php-curl php-zip php-xml
          
             
-            installedphpversion="`/usr/bin/php -v | /bin/grep "^PHP" | /usr/bin/awk '{print $2}' | /usr/bin/awk -F'.' '{print $1,$2}' | /bin/sed 's/ /\./g'`"
-            /bin/rm ${HOME}/.ssh/PHP_VERSION*
-            /bin/touch ${HOME}/.ssh/PHP_VERSION:${installedphpversion}
+           # installedphpversion="`/usr/bin/php -v | /bin/grep "^PHP" | /usr/bin/awk '{print $2}' | /usr/bin/awk -F'.' '{print $1,$2}' | /bin/sed 's/ /\./g'`"
+           # /bin/rm ${HOME}/.ssh/PHP_VERSION*
+           # /bin/touch ${HOME}/.ssh/PHP_VERSION:${installedphpversion}
         fi
     elif ( [ "${BUILDOSVERSION}" = "20.04" ] )
     then
@@ -93,9 +93,9 @@ then
     then
        # /usr/bin/apt-get -qq -y install php-fpm php-cli php-common php-dev php-imagick php-json php-opcache php-mysqli php-phpdbg php-mbstring php-gd php-imap php-ldap php-pgsql php-pspell php-tidy php-intl php-gd php-curl php-zip php-xml php-mysql php-memcache php-redis
         /usr/bin/apt-get -qq -y install php-fpm php-cli php-common php-dev php-opcache php-mysqli php-phpdbg php-mbstring php-gd php-imap php-ldap php-pgsql php-pspell php-tidy php-intl php-gd php-curl php-zip php-xml
-        installedphpversion="`/usr/bin/php -v | /bin/grep "^PHP" | /usr/bin/awk '{print $2}' | /usr/bin/awk -F'.' '{print $1,$2}' | /bin/sed 's/ /\./g'`"
-        /bin/rm ${HOME}/.ssh/PHP_VERSION*
-        /bin/touch ${HOME}/.ssh/PHP_VERSION:${installedphpversion}
+       # installedphpversion="`/usr/bin/php -v | /bin/grep "^PHP" | /usr/bin/awk '{print $2}' | /usr/bin/awk -F'.' '{print $1,$2}' | /bin/sed 's/ /\./g'`"
+       # /bin/rm ${HOME}/.ssh/PHP_VERSION*
+       # /bin/touch ${HOME}/.ssh/PHP_VERSION:${installedphpversion}
     fi
 fi
 
