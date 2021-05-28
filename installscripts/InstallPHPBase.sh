@@ -37,6 +37,8 @@ then
     then
         /usr/bin/add-apt-repository -y ppa:ondrej/php
         ${HOME}/installscripts/Update.sh ${BUILDOS}
+        
+        /bin/rm -r /etc/php/8.0
         #removed php-mcrypt php7.2
         # /usr/bin/apt-get -qq -y install php${phpversion}-fpm php${phpversion}-cli php${phpversion}-common php${phpversion}-dev  php${phpversion}-imagick php${phpversion}-json php${phpversion}-opcache php${phpversion}-mysqli php${phpversion}-phpdbg php${phpversion}-mbstring php${phpversion}-gd php${phpversion}-imap php${phpversion}-ldap php${phpversion}-pgsql php${phpversion}-pspell php${phpversion}-tidy php${phpversion}-intl php${phpversion}-gd php${phpversion}-curl php${phpversion}-zip php${phpversion}-xml php-mysql php${phpversion}-memcache php${phpversion}-redis
         
