@@ -70,7 +70,11 @@ then
        #/usr/bin/apt-get -qq -y install php${phpversion}-fpm php${phpversion}-cli php${phpversion}-gmp php${phpversion}-common php${phpversion}-dev php${phpversion}-opcache php${phpversion}-mysqli php${phpversion}-phpdbg php${phpversion}-mbstring php${phpversion}-gd php${phpversion}-imap php${phpversion}-ldap php${phpversion}-pgsql php${phpversion}-pspell php${phpversion}-tidy php${phpversion}-intl php${phpversion}-gd php${phpversion}-curl php${phpversion}-zip php${phpversion}-xml php${phpversion}-imagick php-json php${phpversion}-ssh2 php${phpversion}-sqlite3
       
        /usr/bin/apt-get -qq -y install php${phpversion}-fpm php${phpversion}-cli php${phpversion}-gmp php${phpversion}-dev php${phpversion}-mysqli php${phpversion}-phpdbg php${phpversion}-mbstring php${phpversion}-gd php${phpversion}-imap php${phpversion}-ldap php${phpversion}-pgsql php${phpversion}-pspell php${phpversion}-tidy php${phpversion}-intl php${phpversion}-gd php${phpversion}-curl php${phpversion}-zip php${phpversion}-xml php${phpversion}-imagick php${phpversion}-ssh2 php${phpversion}-sqlite3
-    fi
+    
+       if ( [ "`/bin/echo ${PHP_VERSION} | /bin/grep '7\.'`" != "" ] )
+       then
+           /usr/bin/apt-get -qq -y install php${phpversion}-json
+       fi
 fi
 
 if ( [ "${BUILDOS}" = "debian" ] )
@@ -104,6 +108,10 @@ then
     #/usr/bin/apt-get -qq -y install php${phpversion}-fpm php${phpversion}-cli php${phpversion}-gmp php${phpversion}-common php${phpversion}-dev php${phpversion}-opcache php${phpversion}-mysqli php${phpversion}-phpdbg php${phpversion}-mbstring php${phpversion}-gd php${phpversion}-imap php${phpversion}-ldap php${phpversion}-pgsql php${phpversion}-pspell php${phpversion}-tidy php${phpversion}-intl php${phpversion}-gd php${phpversion}-curl php${phpversion}-zip php${phpversion}-xml php${phpversion}-imagick php-json php${phpversion}-ssh2 php${phpversion}-sqlite3
     /usr/bin/apt-get -qq -y install php${phpversion}-fpm php${phpversion}-cli php${phpversion}-gmp php${phpversion}-dev php${phpversion}-mysqli php${phpversion}-phpdbg php${phpversion}-mbstring php${phpversion}-gd php${phpversion}-imap php${phpversion}-ldap php${phpversion}-pgsql php${phpversion}-pspell php${phpversion}-tidy php${phpversion}-intl php${phpversion}-gd php${phpversion}-curl php${phpversion}-zip php${phpversion}-xml php${phpversion}-imagick php${phpversion}-ssh2 php${phpversion}-sqlite3
 
+    if ( [ "`/bin/echo ${PHP_VERSION} | /bin/grep '7\.'`" != "" ] )
+    then
+        /usr/bin/apt-get -qq -y install php${phpversion}-json
+    fi
    #fi
 fi
 
