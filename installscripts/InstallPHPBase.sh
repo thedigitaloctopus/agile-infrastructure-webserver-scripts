@@ -75,6 +75,7 @@ then
        then
            /usr/bin/apt-get -qq -y install php${phpversion}-json
        fi
+   fi
 fi
 
 if ( [ "${BUILDOS}" = "debian" ] )
