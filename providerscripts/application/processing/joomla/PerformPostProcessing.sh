@@ -158,6 +158,6 @@ fi
 
 #OK, if we get to here, we no longer need our default installation directory. It has served us well, so, we can nuke it
 #command="${SUDO} /bin/rm -r /var/www/html/installation" && eval ${command}
-#command="${SUDO} /bin/mv /var/www/html/installation /tmp" && eval ${command}
+command="${SUDO} /bin/mv /var/www/html/installation /tmp" && eval ${command}
 
 
