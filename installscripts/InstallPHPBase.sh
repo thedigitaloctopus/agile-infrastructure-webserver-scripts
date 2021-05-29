@@ -48,10 +48,9 @@ then
 
         if ( [ "${installedphpversion}" != "${phpversion}" ] )
         then
-            /usr/bin/apt-get -qq -y purge php${installedphpversion}
+            /usr/bin/apt-get -qq -y purge php*
             /usr/bin/apt-get -qq -y autoclean
             /usr/bin/apt-get -qq -y autoremove
-            /bin/rm -r /etc/php/${installedphpversion}
         fi
         /usr/bin/apt-get -qq -y install php-fpm php-cli php-common php-dev php-json php-opcache php-mysqli php-phpdbg php-mbstring php-gd php-imap php-ldap php-pgsql php-pspell php-tidy php-intl php-gd php-curl php-zip php-xml
     elif ( [ "${BUILDOSVERSION}" = "20.04" ] )
@@ -65,7 +64,6 @@ then
             /usr/bin/apt-get -qq -y purge php*
             /usr/bin/apt-get -qq -y autoclean
             /usr/bin/apt-get -qq -y autoremove
-            /bin/rm -r /etc/php/${installedphpversion}
             #/usr/bin/apt-get -qq -y install php-fpm php-cli php-common php-dev php-opcache php-mysqli php-phpdbg php-mbstring php-gd php-imap php-ldap php-pgsql php-pspell php-tidy php-intl php-gd php-curl php-zip php-xml
         fi
         
@@ -95,7 +93,6 @@ then
         /usr/bin/apt-get -qq -y purge php*
         /usr/bin/apt-get -qq -y autoclean
         /usr/bin/apt-get -qq -y autoremove
-        /bin/rm -r /etc/php/${installedphpversion}
         #/usr/bin/apt-get -qq -y install php-fpm php-cli php-common php-dev php-opcache php-mysqli php-phpdbg php-mbstring php-gd php-imap php-ldap php-pgsql php-pspell php-tidy php-intl php-gd php-curl php-zip php-xml
     fi
 
