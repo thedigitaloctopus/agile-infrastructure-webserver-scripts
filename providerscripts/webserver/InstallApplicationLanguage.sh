@@ -101,7 +101,7 @@ elif ( [ "${BUILDOS}" = "debian" ] )
     #Fiddle with the php config
     /bin/sed -i "/upload_max_filesize/c\ upload_max_filesize = 40M" ${php_ini}
     /bin/sed -i "/post_max_size/c\ post_max_size = 40M" ${php_ini}
-    /bin/sed -i "/zlib.output_compression/c\ zlib.output_compression = On" ${php_ini}
+    /bin/sed -i "/zlib.output_compression /c\ zlib.output_compression = On" ${php_ini}
     /bin/sed -i "/cgi.fix_pathinfo/c\ cgi.fix_pathinfo=0" ${php_ini}
     /bin/sed -i "/upload_tmp_dir/c\ upload_tmp_dir = /var/www/html/tmp" ${php_ini}
     /bin/sed -i "/output_buffering/c\ output_buffering = Off" ${php_ini}
