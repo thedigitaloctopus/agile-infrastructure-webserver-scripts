@@ -1,3 +1,5 @@
+buildtype="${1}"
+
 /usr/bin/apt install -qq -y software-properties-common
 /usr/bin/apt install -qq -y build-essential 
 /usr/bin/apt install -qq -y curl
@@ -33,9 +35,9 @@ cd nginx*
             --error-log-path=/var/log/nginx/error.log \
             --pid-path=/var/run/nginx.pid \
             --lock-path=/var/run/nginx.lock \
-            --user=nginx \
-            --group=nginx \
-            --build=Ubuntu \
+            --user=www-data \
+            --group=www-data \
+            --build=${buildtype} \
             --builddir=nginx-${nginx_latest_version} \
             --with-select_module \
             --with-poll_module \
