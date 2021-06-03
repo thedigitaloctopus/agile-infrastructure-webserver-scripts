@@ -49,6 +49,8 @@ default         0;
 worker_processes auto;
 worker_rlimit_nofile 100000;
 pid /var/run/nginx.pid;
+include /etc/nginx/modules-enabled/*.conf;
+
 
 events {
             use epoll;
