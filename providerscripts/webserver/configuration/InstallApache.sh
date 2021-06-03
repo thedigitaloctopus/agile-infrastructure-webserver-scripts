@@ -56,6 +56,7 @@ ${HOME}/installscripts/InstallApache.sh ${BUILDOS}
             ExpiresByType image/png \"access plus 8 days\"
             ExpiresByType text/js \"access plus 8 days\"
             ExpiresByType text/javascript \"access plus 8 days\"
+            ExpiresByType text/css \"access plus 8 days\"
 </IfModule>" > /etc/apache2/sites-available/${WEBSITE_NAME}
 
 /bin/echo "
