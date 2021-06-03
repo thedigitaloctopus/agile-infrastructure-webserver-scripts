@@ -1,5 +1,6 @@
 /usr/bin/apt install -qq -y software-properties-common
 /usr/bin/apt install -qq -y build-essential 
+/usr/bin/apt install -qq -y curl
 
 nginx_latest_version="`/usr/bin/curl 'http://nginx.org/download/' |   /bin/egrep -o 'nginx-[0-9]+\.[0-9]+\.[0-9]+' | /bin/sed 's/nginx-//g' |  /usr/bin/sort --version-sort | /usr/bin/uniq | /usr/bin/tail -1`"
 
