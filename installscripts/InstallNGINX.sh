@@ -32,17 +32,17 @@ then
     ##############################################################
     #If you want to build nginx from source, uncomment these lines
     ##############################################################
-    ${HOME}/installscripts/Update.sh ${BUILDOS}
-    ${HOME}/installscripts/nginx/BuildNginxFromSource.sh Ubuntu
+   # ${HOME}/installscripts/Update.sh ${BUILDOS}
+   # ${HOME}/installscripts/nginx/BuildNginxFromSource.sh Ubuntu
     
     #####################################################################
     #if you want to build nginx from repos, uncomment these lines instead
     #####################################################################
-    #/usr/bin/systemctl disable --now apache2
-    #/usr/bin/curl http://nginx.org/keys/nginx_signing.key | /usr/bin/apt-key add -
-    #${HOME}/installscripts/Update.sh ${BUILDOS}
-    #/usr/bin/apt-get -qq install nginx
-    #/bin/systemctl unmask nginx.service
+    /usr/bin/systemctl disable --now apache2
+    /usr/bin/curl http://nginx.org/keys/nginx_signing.key | /usr/bin/apt-key add -
+    ${HOME}/installscripts/Update.sh ${BUILDOS}
+    /usr/bin/apt-get -qq install nginx
+    /bin/systemctl unmask nginx.service
 fi
 
 if ( [ "${BUILDOS}" = "debian" ] )
@@ -55,15 +55,15 @@ then
     ########################################################
     #If you want to build from source, uncomment these lines
     ########################################################
-    ${HOME}/installscripts/Update.sh ${BUILDOS}
-    ${HOME}/installscripts/nginx/BuildNginxFromSource.sh Debian
+    #${HOME}/installscripts/Update.sh ${BUILDOS}
+    #${HOME}/installscripts/nginx/BuildNginxFromSource.sh Debian
     
     ###############################################################
     #If you want to build from repos, uncomment these lines instead
     ###############################################################
-    # /usr/bin/curl http://nginx.org/keys/nginx_signing.key | /usr/bin/apt-key add -
-    # ${HOME}/installscripts/Update.sh ${BUILDOS}
-    # /usr/bin/apt-get -qq install nginx
-    # /bin/systemctl unmask nginx.service
+     /usr/bin/curl http://nginx.org/keys/nginx_signing.key | /usr/bin/apt-key add -
+     ${HOME}/installscripts/Update.sh ${BUILDOS}
+     /usr/bin/apt-get -qq install nginx
+     /bin/systemctl unmask nginx.service
 fi
 
