@@ -9,6 +9,8 @@ zlib_latest_version="`/usr/bin/curl 'https://www.zlib.net' | /bin/egrep -o 'zlib
 
 openssl_latest_version="`/usr/bin/wget -q -O - https://www.openssl.org/source | grep openssl-1. | /bin/sed 's/.*openssl-//g' | /bin/sed 's/.tar.*//g'`"
 
+perl_version="`/usr/bin/perl -v | /bin/egrep -o 'v[0-9]+\.[0-9]+\.[0-9]+' | /bin/sed 's/v//g'`"
+
 /usr/bin/wget https://nginx.org/download/nginx-${nginx_latest_version}.tar.gz && /bin/tar zxvf nginx-${nginx_latest_version}.tar.gz
 /usr/bin/wget https://ftp.pcre.org/pub/pcre/pcre-${pcre_latest_version}.tar.gz && /bin/tar zxvf pcre-${pcre_latest_version}.tar.gz
 /usr/bin/wget https://www.zlib.net/zlib-${zlib_latest_version}.tar.gz && /bin/tar zxvf zlib-${zlib_latest_version}.tar.gz
@@ -58,7 +60,7 @@ cd nginx*
             --with-http_slice_module \
             --with-http_stub_status_module \
             --with-http_perl_module=dynamic \
-            --with-perl_modules_path=/usr/share/perl/5.26.1 \
+            --with-perl_modules_path=/usr/share/perl/${perl_version} \
             --with-perl=/usr/bin/perl \
             --http-log-path=/var/log/nginx/access.log \
             --http-client-body-temp-path=/var/cache/nginx/client_temp \
@@ -119,6 +121,8 @@ WantedBy=multi-user.target" > /etc/systemd/system/nginx.service
 /bin/mkdir /etc/nginx/snippets
 /bin/mkdir /etc/nginx/sites-available
 /bin/mkdir /etc/nginx/sites-enabled
+/bin/mkdir /etc/nginx/modules-available
+/bin/mkdir /etc/nginx/modules-enabled
 
 /bin/chmod 640 /var/log/nginx/*
 /bin/chown www-data www-data /var/log/nginx/access.log /var/log/nginx/error.log
