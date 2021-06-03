@@ -33,7 +33,7 @@ cd nginx*
             --user=nginx \
             --group=nginx \
             --build=Ubuntu \
-            --builddir=nginx-1.19.0 \
+            --builddir=nginx-${nginx_latest_version} \
             --with-select_module \
             --with-poll_module \
             --with-threads \
