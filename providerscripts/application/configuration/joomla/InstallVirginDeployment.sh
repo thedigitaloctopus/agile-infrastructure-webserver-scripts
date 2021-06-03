@@ -42,7 +42,7 @@ then
     /bin/chown -R www-data.www-data /var/www/html/*
     cd /home/${SERVER_USER}
     /bin/echo "1"
-elif ( [ "`/bin/echo ${version} | /bin/grep release_candidate`" != "" ] )
+elif ( [ "`/bin/echo ${version} | /bin/grep rc`" != "" ] )
 then
     /usr/bin/wget https://github.com/joomla/joomla-cms/releases/download/${version}/Joomla_${version}-Release_Candidate-Full_Package.zip
     /usr/bin/unzip Joomla_${version}-Release_Candidate-Full_Package.zip
