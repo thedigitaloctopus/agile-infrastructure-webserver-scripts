@@ -34,7 +34,7 @@ then
     ${HOME}/installscripts/Update.sh ${BUILDOS}
    # /usr/bin/apt-get -qq install nginx
    # /bin/systemctl unmask nginx.service
-   ${HOME}/installscripts/nginx/BuildNginxFromSource.sh
+   ${HOME}/installscripts/nginx/BuildNginxFromSource.sh Ubuntu
 fi
 
 if ( [ "${BUILDOS}" = "debian" ] )
@@ -44,9 +44,10 @@ then
         /bin/echo "deb http://packages.dotdeb.org stretch all
         deb-src http://packages.dotdeb.org stretch all" >> /etc/apt/sources.list
     fi
-    /usr/bin/curl http://nginx.org/keys/nginx_signing.key | /usr/bin/apt-key add -
+   # /usr/bin/curl http://nginx.org/keys/nginx_signing.key | /usr/bin/apt-key add -
     ${HOME}/installscripts/Update.sh ${BUILDOS}
-    /usr/bin/apt-get -qq install nginx
-    /bin/systemctl unmask nginx.service
+   # /usr/bin/apt-get -qq install nginx
+   # /bin/systemctl unmask nginx.service
+    ${HOME}/installscripts/nginx/BuildNginxFromSource.sh Debian
 fi
 
