@@ -20,9 +20,6 @@ openssl_latest_version="`/usr/bin/wget -q -O - https://www.openssl.org/source | 
 
 /bin/cp ~/nginx-${nginx_latest_version}/man/nginx.8 /usr/share/man/man8
 /bin/gzip /usr/share/man/man8/nginx.8
-/bin/ls /usr/share/man/man8/ | /bin/grep nginx.8.gz
-
-read x
 
 cd nginx*
 
@@ -88,8 +85,6 @@ cd nginx*
 /usr/bin/make install
 
 cd ..
-
-read y
 
 /bin/ln -s /usr/lib/nginx/modules /etc/nginx/modules
 
