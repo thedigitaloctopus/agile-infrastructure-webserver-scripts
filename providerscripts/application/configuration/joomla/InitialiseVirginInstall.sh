@@ -281,4 +281,7 @@ else
     /bin/cp ${HOME}/runtime/joomla_configuration.php ${HOME}/config/joomla_configuration.php
 fi
 
-/usr/bin/php /var/www/html/cli/garbagecron.php
+if ( [ -f /var/www/html/cli/garbagecron.php ] )
+then
+    /usr/bin/php /var/www/html/cli/garbagecron.php
+fi
