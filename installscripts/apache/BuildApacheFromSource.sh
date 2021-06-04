@@ -23,7 +23,7 @@ sudo make install
 
 cd ../httpd-${apache_latest_version}
 
-./configure --prefix=/usr/local/apache2 --enable-mods-shared=all --with-included-apr --with-pcre=/usr/local/pcre
+./configure --prefix=/usr/local/apache2 --enable-mods-shared=all --with-pcre=/usr/local/pcre
 make
 make install
 
