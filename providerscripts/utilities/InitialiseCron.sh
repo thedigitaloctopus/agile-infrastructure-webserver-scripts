@@ -73,7 +73,7 @@ fi
 
 /bin/echo "@daily export HOME="${HOMEDIR}" && ${HOME}/providerscripts/utilities/PerformSoftwareUpdate.sh" >> /var/spool/cron/crontabs/root
 
-/bin/echo "@reboot export HOME="${HOMEDIR}" && ${HOME}/providerscripts/application/email/ActivateSMTPByApplication.sh \"${WEBSITE_DISPLAY_NAME}\"" >> /var/spool/cron/crontabs/root
+#/bin/echo "@reboot export HOME="${HOMEDIR}" && ${HOME}/providerscripts/application/email/ActivateSMTPByApplication.sh \"${WEBSITE_DISPLAY_NAME}\"" >> /var/spool/cron/crontabs/root
 /bin/echo "@reboot export HOME="${HOMEDIR}" && ${HOME}/providerscripts/webserver/RestartWebserver.sh" >> /var/spool/cron/crontabs/root
 /bin/echo "@reboot export HOME="${HOMEDIR}" && ${HOME}/providerscripts/application/configuration/InstallConfigurationByApplication.sh" >> /var/spool/cron/crontabs/root
 /bin/echo "@reboot export HOME="${HOMEDIR}" && ${HOME}/providerscripts/utilities/CleanupAtReboot.sh" >> /var/spool/cron/crontabs/root
