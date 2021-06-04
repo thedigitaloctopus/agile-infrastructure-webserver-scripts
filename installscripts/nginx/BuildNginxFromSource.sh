@@ -1,8 +1,36 @@
+#!/bin/sh
+######################################################################################################
+# Description: This script will install the nginx webserver from source
+# The advantages of installing from source is that you can use the latest available version of the software
+# the apt repositories tend to be quite some way behind the newest releases.
+# Also, you have more control over what modules are used. You can add and remove modules as you need to 
+# by changing the configuration parameters
+# The disadvantage is that the build process will take longer to complete
+# Author: Peter Winter
+# Date: 04/06/2021
+#######################################################################################################
+# License Agreement:
+# This file is part of The Agile Deployment Toolkit.
+# The Agile Deployment Toolkit is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+# The Agile Deployment Toolkit is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# You should have received a copy of the GNU General Public License
+# along with The Agile Deployment Toolkit.  If not, see <http://www.gnu.org/licenses/>.
+#######################################################################################################
+#######################################################################################################
 buildtype="${1}"
 
+#Instll the tools needed for complilation
 /usr/bin/apt install -qq -y software-properties-common
 /usr/bin/apt install -qq -y build-essential 
 /usr/bin/apt install -qq -y curl
+
+#Get the latest version numbers of the software that we need
 
 nginx_latest_version="`/usr/bin/curl 'http://nginx.org/download/' |   /bin/egrep -o 'nginx-[0-9]+\.[0-9]+\.[0-9]+' | /bin/sed 's/nginx-//g' |  /usr/bin/sort --version-sort | /usr/bin/uniq | /usr/bin/tail -1`"
 
@@ -14,6 +42,8 @@ openssl_latest_version="`/usr/bin/wget -q -O - https://www.openssl.org/source | 
 
 perl_version="`/usr/bin/perl -v | /bin/egrep -o 'v[0-9]+\.[0-9]+\.[0-9]+' | /bin/sed 's/v//g'`"
 
+#Download the latest versions of the software we will be using
+
 /usr/bin/wget https://nginx.org/download/nginx-${nginx_latest_version}.tar.gz && /bin/tar zxvf nginx-${nginx_latest_version}.tar.gz
 /usr/bin/wget https://ftp.pcre.org/pub/pcre/pcre-${pcre_latest_version}.tar.gz && /bin/tar zxvf pcre-${pcre_latest_version}.tar.gz
 /usr/bin/wget https://www.zlib.net/zlib-${zlib_latest_version}.tar.gz && /bin/tar zxvf zlib-${zlib_latest_version}.tar.gz
@@ -21,12 +51,17 @@ perl_version="`/usr/bin/perl -v | /bin/egrep -o 'v[0-9]+\.[0-9]+\.[0-9]+' | /bin
 
 /bin/rm *.tar.gz*
 
+#Install additional libraries that we are building with
+
 /usr/bin/apt install -qq -y perl libperl-dev libgd3 libgd-dev libgeoip1 libgeoip-dev geoip-bin libxml2 libxml2-dev libxslt1.1 libxslt1-dev
 
+#Setup the manual page
 /bin/cp ~/nginx-${nginx_latest_version}/man/nginx.8 /usr/share/man/man8
 /bin/gzip /usr/share/man/man8/nginx.8
 
 cd nginx*
+
+#Perform the build. You can add and remove modules from here as suits your build requirements
 
 ./configure --prefix=/etc/nginx \
             --sbin-path=/usr/sbin/nginx \
@@ -93,11 +128,13 @@ cd ..
 
 /bin/ln -s /usr/lib/nginx/modules /etc/nginx/modules
 
-/usr/sbin/adduser --system --home /nonexistent --shell /bin/false --no-create-home --disabled-login --disabled-password --gecos "nginx user" --group nginx
+/usr/sbin/adduser --system --shell /bin/false --no-create-home --disabled-login --disabled-password --gecos "nginx user" --group nginx
 
 /bin/mkdir -p /var/cache/nginx/client_temp /var/cache/nginx/fastcgi_temp /var/cache/nginx/prox:wy_temp /var/cache/nginx/scgi_temp /var/cache/nginx/uwsgi_temp
 /bin/chmod 700 /var/cache/nginx/*
 /bin/chown www-data:www-data /var/cache/nginx/*
+
+#Setup the script which will start nginx
 
 /bin/echo "[Unit]
 Description=nginx - high performance web server
@@ -117,7 +154,8 @@ ExecStop=/bin/kill -s TERM $MAINPID
 WantedBy=multi-user.target" > /etc/systemd/system/nginx.service
 
 /usr/bin/systemctl enable nginx.service
-/usr/bin/systemctl start nginx.service
+
+#Make sure all the necessary directories exist
 
 /bin/rm /etc/nginx/*.default
 /bin/mkdir /etc/nginx/conf.d
@@ -126,6 +164,8 @@ WantedBy=multi-user.target" > /etc/systemd/system/nginx.service
 /bin/mkdir /etc/nginx/sites-enabled
 /bin/mkdir /etc/nginx/modules-available
 /bin/mkdir /etc/nginx/modules-enabled
+
+#Setup logging
 
 /bin/chmod 640 /var/log/nginx/*
 /bin/chown www-data www-data /var/log/nginx/access.log /var/log/nginx/error.log
@@ -145,6 +185,8 @@ WantedBy=multi-user.target" > /etc/systemd/system/nginx.service
             fi
     endscript
 }" > /etc/logrotate.d/nginx
+
+#Setup some config files in snippets
 
 /bin/mkdir /etc/nginx/snippets
 
@@ -169,4 +211,11 @@ include fastcgi.conf;" > /etc/nginx/snippets/fastcgi-php.conf
 ssl_certificate /etc/ssl/certs/ssl-cert-snakeoil.pem;
 ssl_certificate_key /etc/ssl/private/ssl-cert-snakeoil.key;" > /etc/nginx/snippets/snakeoil.conf
 
+#Cleanup
+
 /bin/rm -rf nginx-* openssl-* pcre* zlib-*
+
+#Start NGINX
+
+/usr/bin/systemctl start nginx.service
+
