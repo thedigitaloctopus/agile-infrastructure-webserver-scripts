@@ -1,7 +1,7 @@
 /usr/bin/apt install -qq -y software-properties-common
 /usr/bin/apt install -qq -y build-essential 
 /usr/bin/apt install -qq -y curl
-/usr/bin/apt -qq -y install libapr1-dev libaprutil1-dev libprce3-dev
+/usr/bin/apt install -qq -y libapr1-dev libaprutil1-dev libprce3-dev  
 
 apache_latest_version="`/usr/bin/wget -q -O - https://httpd.apache.org/download.cgi | /bin/grep latest | /bin/egrep -o '[0-9]+\.[0-9]+\.[0-9]+' | /usr/bin/uniq`"
 
