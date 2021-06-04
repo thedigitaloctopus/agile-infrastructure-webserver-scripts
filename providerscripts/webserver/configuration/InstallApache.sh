@@ -101,5 +101,6 @@ fi
 /usr/sbin/a2enmod proxy
 /usr/sbin/a2enmod proxy_http
 /usr/sbin/a2enmod remoteip
+/usr/sbin/a2enconf remoteip
 
 ${HOME}/providerscripts/email/SendEmail.sh "THE APACHE WEBSERVER HAS BEEN INSTALLED" "Apache webserver is installed and primed"
