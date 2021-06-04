@@ -58,8 +58,14 @@ events {
             multi_accept on;
         }
 
-        http {
+        http { " > /etc/nginx/nginx.conf
+        
+if ( [ -f ${HOME}/.ssh/DNSCHOICE:cloudflare ] )
+then
+     /bin/echo "include /etc/nginx/cloudflare;" >> /etc/nginx/nginx.conf
+fi
 
+/bin/echo "
                 ##
                 # Basic Settings
                 ##
@@ -124,7 +130,7 @@ events {
 
                 include /etc/nginx/conf.d/*.conf;
                 include /etc/nginx/sites-enabled/*;
-}" > /etc/nginx/nginx.conf
+}" >> /etc/nginx/nginx.conf
 
 /bin/mkdir /etc/nginx/sites-available 2>/dev/null
 
