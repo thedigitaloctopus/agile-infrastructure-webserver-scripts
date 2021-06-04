@@ -98,7 +98,7 @@ then
     exit
 fi
 
-if ( [ "`/usr/bin/diff ${HOME}/config/joomla_configuration.php ${HOME}/runtime/joomla_configuration.php`" = "" ] )
-then
-    /bin/touch ${HOME}/config/EMAILINITIALISED
-fi
+#if ( [ "`/usr/bin/diff ${HOME}/config/joomla_configuration.php ${HOME}/runtime/joomla_configuration.php`" = "" ] )
+#then
+#    /bin/touch ${HOME}/config/EMAILINITIALISED
+#fi
