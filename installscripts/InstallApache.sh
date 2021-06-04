@@ -32,6 +32,8 @@ then
     #############################################################
     #If you want to install from source, uncomment these lines:
     #############################################################
+    /usr/bin/apt -qq -y purge apache2 apache2-utils apache2.2-bin apache2-common
+    /usr/bin/apt -qq -y autoremove
     ${HOME}/installscripts/apache/BuildApacheFromSource.sh
     
     ###############################################################
@@ -53,6 +55,8 @@ then
     #############################################################
     #If you want to install from source, uncomment these lines:
     #############################################################
+    /usr/bin/apt -qq -y purge apache2 apache2-utils apache2.2-bin apache2-common
+    /usr/bin/apt -qq -y autoremove
     ${HOME}/installscripts/apache/BuildApacheFromSource.sh
     
     ###############################################################
