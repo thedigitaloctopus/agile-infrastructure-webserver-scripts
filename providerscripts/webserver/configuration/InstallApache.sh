@@ -27,6 +27,21 @@ WEBSITE_NAME="`/bin/ls ${HOME}/.ssh/WEBSITEDISPLAYNAME:* | /usr/bin/awk -F':' '{
 
 ${HOME}/installscripts/InstallApache.sh ${BUILDOS}
 
+if ( [ ! -d /etc/apache2/mods-available ] )
+then
+    /bin/mkdir /etc/apache2/mods-available
+fi
+
+if ( [ ! -d /etc/apache2/conf-available ] )
+then
+    /bin/mkdir /etc/apache2/conf-available
+fi
+
+if ( [ ! -d /etc/apache2/sites-available ] )
+then
+    /bin/mkdir /etc/apache2/sites-available
+fi
+
 /bin/echo "
 <VirtualHost _default_:443>
         ServerAdmin webmaster@${website_url}
