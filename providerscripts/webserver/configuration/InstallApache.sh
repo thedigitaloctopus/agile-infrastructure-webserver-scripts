@@ -93,7 +93,7 @@ then
     /usr/sbin/a2enconf php${phpversion}-fpm
 fi
 
-${HOME}/providerscripts/dns/TrustCloudflareProxyApache.sh
+${HOME}/providerscripts/dns/TrustRemoteProxy.sh
 
 /usr/sbin/a2enmod ssl
 /usr/sbin/a2enmod rewrite
