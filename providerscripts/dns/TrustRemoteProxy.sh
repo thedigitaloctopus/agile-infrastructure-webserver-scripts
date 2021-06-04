@@ -32,7 +32,7 @@ then
         /bin/ echo "" >> $CLOUDFLARE_FILE_PATH;
     
         /bin/echo "" >> $CLOUDFLARE_FILE_PATH;
-        /bin/echo "RemoteIPHeader CF-Connecting-IP;" >> $CLOUDFLARE_FILE_PATH;
+        /bin/echo "RemoteIPHeader CF-Connecting-IP" >> $CLOUDFLARE_FILE_PATH;
 
         /bin/echo "# - IPv4" >> $CLOUDFLARE_FILE_PATH;
         for i in `curl https://www.cloudflare.com/ips-v4`; do
