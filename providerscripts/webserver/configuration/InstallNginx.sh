@@ -232,4 +232,6 @@ fi
         try_files \$uri \$uri/ /index.php?q=\$uri&\$args;
 } " >> /etc/nginx/sites-available/${website_name}
 
+${HOME}/providerscripts/dns/TrustRemoteProxy.sh
+
 ${HOME}/providerscripts/email/SendEmail.sh "THE NGINX WEBSERVER HAS BEEN INSTALLED" "Nginx webserver is installed and primed"
