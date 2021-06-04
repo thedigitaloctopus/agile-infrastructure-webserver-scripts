@@ -164,7 +164,7 @@ dbipandport="${host}:${DB_PORT}"
 /bin/echo "${0} `/bin/date`: Updating shared session" >> ${HOME}/logs/MonitoringLog.dat
 
 WEBSITE_DISPLAY_NAME="`/bin/ls ${HOME}/.ssh/WEBSITEDISPLAYNAME:* | /usr/bin/awk -F':' '{print $NF}'`"
-${HOME}/providerscripts/application/email/ActivateSMTPByApplication.sh \"${WEBSITE_DISPLAY_NAME}\"" 
+${HOME}/providerscripts/application/email/ActivateSMTPByApplication.sh "${WEBSITE_DISPLAY_NAME}" 
 
 dbprefix="`/bin/cat /var/www/html/dpb.dat`"
 if ( [ "${dbprefix}" != "" ] && [ ! -f ${HOME}/config/UPDATEDPREFIX ] )
