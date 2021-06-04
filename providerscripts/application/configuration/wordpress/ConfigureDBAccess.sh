@@ -172,7 +172,7 @@ fi
 /bin/echo "${0} `/bin/date`: Updating the database name" >> ${HOME}/logs/MonitoringLog.dat
 
 WEBSITE_DISPLAY_NAME="`/bin/ls ${HOME}/.ssh/WEBSITEDISPLAYNAME:* | /usr/bin/awk -F':' '{print $NF}'`"
-${HOME}/providerscripts/application/email/ActivateSMTPByApplication.sh \"${WEBSITE_DISPLAY_NAME}\"" 
+${HOME}/providerscripts/application/email/ActivateSMTPByApplication.sh "${WEBSITE_DISPLAY_NAME}" 
 
 #Sort the salts and switch the cache on
 if ( [ "`/bin/cat ${HOME}/runtime/wordpress_config.php | /bin/grep SALTEDALREADY`" = "" ] )
