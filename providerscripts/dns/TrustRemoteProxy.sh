@@ -2,7 +2,7 @@
 
 if ( [ -f ${HOME}/.ssh/DNSCHOICE:cloudflare ] )
 then
-    if ( [ -f .ssh/WEBSERVERCHOICE:NGINX ] )
+    if ( [ -f ${HOME}/.ssh/WEBSERVERCHOICE:NGINX ] )
     then
         CLOUDFLARE_FILE_PATH=/etc/nginx/cloudflare
 
@@ -26,7 +26,7 @@ then
 
     fi
     
-    if ( [ -f .ssh/WEBSERVERCHOICE:APACHE ] )
+    if ( [ -f ${HOME}/.ssh/WEBSERVERCHOICE:APACHE ] )
     then
         CLOUDFLARE_FILE_PATH=/etc/apache2/conf-available/remoteip.conf
 
