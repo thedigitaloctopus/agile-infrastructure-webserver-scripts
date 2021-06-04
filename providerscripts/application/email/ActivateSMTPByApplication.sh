@@ -20,10 +20,10 @@
 ######################################################################################
 #set -x
 
-if ( [  ${HOME}/config/EMAILINITIALISED ] )
-then
-    exit
-fi
+#if ( [  ${HOME}/config/EMAILINITIALISED ] )
+#then
+#    exit
+#fi
 
 for applicationdir in `/bin/ls -d ${HOME}/providerscripts/application/email/*/`
 do
