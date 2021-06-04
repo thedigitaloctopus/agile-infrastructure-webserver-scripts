@@ -29,47 +29,27 @@ phpversion="`/bin/ls ${HOME}/.ssh/PHP_VERSION:* | /usr/bin/awk -F':' '{print $NF
 
 if ( [ "${BUILDOS}" = "ubuntu" ] )
 then
-    #############################################################
-    #If you want to install from source, uncomment these lines:
-    #############################################################
-    /usr/bin/apt -qq -y purge apache2 apache2-utils apache2.2-bin apache2-common
-    /usr/bin/apt -qq -y autoremove
-    ${HOME}/installscripts/apache/BuildApacheFromSource.sh
-    
-    ###############################################################
-    #If you want to build from repos, uncomment these lines instead
-    ###############################################################
-   # /usr/bin/apt-get -qq -y install apache2
-   # if ( [ -f ${HOME}/.ssh/APPLICATIONLANGUAGE:PHP ] )
-   # then
-   #     /usr/bin/apt-get -qq -y install libapache2-mod-php${phpversion}
-   # fi
+    /usr/bin/apt-get -qq -y install apache2
+    if ( [ -f ${HOME}/.ssh/APPLICATIONLANGUAGE:PHP ] )
+    then
+        /usr/bin/apt-get -qq -y install libapache2-mod-php${phpversion}
+    fi
     ####/usr/bin/apt-get -qq -y install libapache2-modsecurity
     ####/usr/bin/apt-get -qq -y install modsecurity-crs
-   # /usr/bin/apt -qq -y install libapache2-mod-fcgid
+    /usr/bin/apt -qq -y install libapache2-mod-fcgid
 
 fi
 
 if ( [ "${BUILDOS}" = "debian" ] )
 then
-    #############################################################
-    #If you want to install from source, uncomment these lines:
-    #############################################################
-    /usr/bin/apt -qq -y purge apache2 apache2-utils apache2.2-bin apache2-common
-    /usr/bin/apt -qq -y autoremove
-    ${HOME}/installscripts/apache/BuildApacheFromSource.sh
-    
-    ###############################################################
-    #If you want to build from repos, uncomment these lines instead
-    ###############################################################
-   # /usr/bin/apt-get -qq -y install apache2
-   # if ( [ -f ${HOME}/.ssh/APPLICATIONLANGUAGE:PHP ] )
-   # then
-   #     /usr/bin/apt-get -qq -y install libapache2-mod-php${phpversion}
-   # fi
+    /usr/bin/apt-get -qq -y install apache2
+    if ( [ -f ${HOME}/.ssh/APPLICATIONLANGUAGE:PHP ] )
+    then
+        /usr/bin/apt-get -qq -y install libapache2-mod-php${phpversion}
+    fi
     ####/usr/bin/apt-get -qq -y install libapache2-modsecurity
     ####/usr/bin/apt-get -qq -y install modsecurity-crs
-   # /usr/bin/apt -qq -y install libapache2-mod-fcgid
+    /usr/bin/apt -qq -y install libapache2-mod-fcgid
 
 fi
 
