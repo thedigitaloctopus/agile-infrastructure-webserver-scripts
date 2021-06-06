@@ -3,13 +3,24 @@ set -x
 if ( [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:Maria ] || [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:MySQL ] )
 then
     prefix="`/bin/cat /var/www/html/dpb.dat`"
+    
+   cache_tables="` ${HOME}/providerscripts/utilities/ConnectToRemoteMYSQLDB.sh " select table_schema as database_name, table_name from information_schema.tables where table_type = 'BASE TABLE' and table_name like '%cache%' order by table_schema, table_name;" | /bin/grep -v 'database_' | /bin/grep -v 'table_' | /usr/bin/awk '{print $NF}'`"
 
-    ${HOME}/providerscripts/utilities/ConnectToRemoteMYSQLDB.sh "TRUNCATE ${prefix}_cache_bootstrap;TRUNCATE ${prefix}_cache_config; TRUNCATE ${prefix}_cache_container;TRUNCATE ${prefix}_cache_data;TRUNCATE ${prefix}_cache_default;TRUNCATE ${prefix}_cache_discovery;TRUNCATE ${prefix}_cache_dynamic_page_cache;TRUNCATE ${prefix}_cache_entity;TRUNCATE ${prefix}_cache_menu; TRUNCATE ${prefix}_cache_page;TRUNCATE ${prefix}_cache_render;TRUNCATE ${prefix}_cachetags;"
+   success="yes"
 
-    if ( [ "$?" = "0" ] )
-    then
+   for cache_table in ${cache_tables}
+   do
+       ${HOME}/providerscripts/utilities/ConnectToRemoteMYSQLDB.sh "TRUNCATE ${cache_table};"
+       if ( [ "$?" != "0" ] )
+       then
+           success="no"
+       fi
+   done
+
+   if ( [ "${success}" = "yes" ] )
+   then
        /bin/echo "TRUNCATED"
-    else
-        /bin/echo "NOT TRUNCATED"
-    fi
+   else
+       /bin/echo "NOT TRUNCATED"
+   fi
 fi
