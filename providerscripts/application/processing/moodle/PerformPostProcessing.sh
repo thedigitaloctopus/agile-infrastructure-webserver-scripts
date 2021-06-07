@@ -98,20 +98,20 @@ then
     /bin/echo "Please enter the master password for your database (for rackspace please refer to helperscripts/EnableRootForRackspaceCloudDatabase.sh)"
     read root_password
 
- #   /usr/bin/mysql -A -u ${master_username} -p${master_password} ${database} --host="${host}" --port="${DB_PORT}" -e "SET GLOBAL innodb_file_per_table=ON;"
- #   /usr/bin/mysql -A -u ${master_username} -p${master_password} ${database} --host="${host}" --port="${DB_PORT}" -e "SET GLOBAL binlog_format = 'MIXED';"
+    /usr/bin/mysql -A -u ${master_username} -p${master_password} ${database} --host="${host}" --port="${DB_PORT}" -e "SET GLOBAL innodb_file_per_table=ON;"
+    /usr/bin/mysql -A -u ${master_username} -p${master_password} ${database} --host="${host}" --port="${DB_PORT}" -e "SET GLOBAL binlog_format = 'MIXED';"
 
 
-#    if ( [ "$?" != "0" ] )
-#    then
-#        /usr/bin/mysql -A -u ${username} -p${password} ${database} --host="${host}" --port="${DB_PORT}" -e "SET GLOBAL innodb_file_per_table=ON;"
-  #      /usr/bin/mysql -A -u ${username} -p${password} ${database} --host="${host}" --port="${DB_PORT}" -e "SET GLOBAL binlog_format = 'MIXED';"
-#    fi
-#elif ( [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:Maria ] ||  [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:MySQL ] )
-#then
-   # /usr/bin/mysql -A -u ${username} -p${password} ${database} --host="${host}" --port="${DB_PORT}" -e "SET GLOBAL innodb_file_per_table=ON;"
-#    /usr/bin/mysql -A -u ${username} -p${password} ${database} --host="${host}" --port="${DB_PORT}" -e "SET GLOBAL binlog_format = 'MIXED';"
-#fi
+    if ( [ "$?" != "0" ] )
+    then
+        /usr/bin/mysql -A -u ${username} -p${password} ${database} --host="${host}" --port="${DB_PORT}" -e "SET GLOBAL innodb_file_per_table=ON;"
+        /usr/bin/mysql -A -u ${username} -p${password} ${database} --host="${host}" --port="${DB_PORT}" -e "SET GLOBAL binlog_format = 'MIXED';"
+    fi
+elif ( [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:Maria ] ||  [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:MySQL ] )
+then
+    /usr/bin/mysql -A -u ${username} -p${password} ${database} --host="${host}" --port="${DB_PORT}" -e "SET GLOBAL innodb_file_per_table=ON;"
+    /usr/bin/mysql -A -u ${username} -p${password} ${database} --host="${host}" --port="${DB_PORT}" -e "SET GLOBAL binlog_format = 'MIXED';"
+fi
 
 if ( [ "${BUILD_ARCHIVE_CHOICE}" = "virgin" ] )
 then
@@ -142,8 +142,7 @@ fi
 
 if ( [ ! -f /home/${SERVER_USER}/.ssh/BUILDARCHIVECHOICE:virgin ] && [ ! -f /home/${SERVER_USER}/.ssh/BUILDARCHIVECHOICE:baseline ] )
 then
-if ( ( [ -f ${HOME}/.ssh/DATABASEDBaaSINSTALLATIONTYPE:MySQL ] || [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:MySQL ] ) || ( [ -f ${HOME}/.ssh/DATABASEDBaaSINSTALLATIONTYPE:Maria ] || [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:Maria ] ) )
-then
+    if ( ( [ -f ${HOME}/.ssh/DATABASEDBaaSINSTALLATIONTYPE:MySQL ] || [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:MySQL ] ) || ( [ -f ${HOME}/.ssh/DATABASEDBaaSINSTALLATIONTYPE:Maria ] || [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:Maria ] ) )
     then
         if ( [ "`/usr/bin/mysql -A -u ${username} -p${password} ${database} --host="${host}" --port="${DB_PORT}" -e "show tables;" | /bin/grep 'zzzz' | /usr/bin/wc -l`" != "1" ] )
         then
