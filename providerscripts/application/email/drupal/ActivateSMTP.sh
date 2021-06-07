@@ -25,6 +25,11 @@ username="`/bin/ls ${HOME}/.ssh/EMAILUSERNAME:* | /usr/bin/awk -F':' '{print $NF
 password="`/bin/ls ${HOME}/.ssh/EMAILPASSWORD:* | /usr/bin/awk -F':' '{print $NF}'`"
 emailprovider="`/bin/ls ${HOME}/.ssh/EMAILPROVIDER:* | /usr/bin/awk -F':' '{print $NF}'`"
 
+/bin/echo "##################################################################"
+/bin/echo "These are your SMTP credentials settings for your drupal install"
+/bin/echo "Please refer to: https://www.socketlabs.com/blog/drupal-smtp/"
+/bin/echo "##################################################################"
+
 /bin/echo "FROM ADDRESS: ${fromaddress}" > /var/www/drupalsmtp
 /bin/echo "USERNAME: ${username}" >> /var/www/drupalsmtp
 /bin/echo "PASSWORD: ${password}" >> /var/www/drupalsmtp
