@@ -47,6 +47,7 @@ elif ( [ "${BUILDOS}" = "debian" ] )
 
     php_version="`/usr/bin/php -v | /bin/grep "^PHP" | /usr/bin/awk '{print $2}' | /usr/bin/awk -F'.' '{print $1,$2}' | /bin/sed 's/ /\./g'`"
     php_ini="/etc/php/${php_version}/fpm/php.ini"
+    php_cli_ini="/etc/php/${php_version}/cli/php.ini"
     www_conf="/etc/php/${php_version}/fpm/pool.d/www.conf"
 
     /bin/sed -i "s/^;env/env/g" ${www_conf}
@@ -98,7 +99,7 @@ elif ( [ "${BUILDOS}" = "debian" ] )
         /bin/sed -i "s/^pm\.process_idle_timeout.*/pm\.process_idle_timeout = 10s/" ${www_conf}
     fi
 
-    #Fiddle with the php config
+    #Fiddle with the php config for fpm 
     /bin/sed -i "/upload_max_filesize/c\ upload_max_filesize = 40M" ${php_ini}
     /bin/sed -i "/post_max_size/c\ post_max_size = 40M" ${php_ini}
     /bin/sed -i "/zlib.output_compression /c\ zlib.output_compression = On" ${php_ini}
@@ -110,6 +111,19 @@ elif ( [ "${BUILDOS}" = "debian" ] )
     /bin/sed -i "/max_execution_time/c\ max_execution_time = 300" ${php_ini}
     /bin/sed -i "/max_input_time/c\ max_input_time = 300" ${php_ini}
     /bin/sed -i "/default_socket_timeout/c\ default_socket_timeout = 300" ${php_ini}
+    
+    #Fiddle with the php config for cli 
+    /bin/sed -i "/upload_max_filesize/c\ upload_max_filesize = 40M" ${php_cli_ini}
+    /bin/sed -i "/post_max_size/c\ post_max_size = 40M" ${php_cli_ini}
+    /bin/sed -i "/zlib.output_compression /c\ zlib.output_compression = On" ${php_cli_ini}
+    /bin/sed -i "/cgi.fix_pathinfo/c\ cgi.fix_pathinfo=0" ${php_cli_ini}
+    /bin/sed -i "/upload_tmp_dir/c\ upload_tmp_dir = /var/www/html/tmp" ${php_cli_ini}
+    /bin/sed -i "/output_buffering/c\ output_buffering = Off" ${php_cli_ini}
+    /bin/sed -i "/realpath_cache_size/c\ realpath_cache_size = 10000k" ${php_cli_ini}
+    /bin/sed -i "/max_input_vars/c\ max_input_vars = 5000" ${php_cli_ini}
+    /bin/sed -i "/max_execution_time/c\ max_execution_time = 300" ${php_cli_ini}
+    /bin/sed -i "/max_input_time/c\ max_input_time = 300" ${php_cli_ini}
+    /bin/sed -i "/default_socket_timeout/c\ default_socket_timeout = 300" ${php_cli_ini}
 
     PHP_SERVICE="`/usr/sbin/service --status-all | /bin/grep php | /usr/bin/awk '{print $NF}'`"
 
