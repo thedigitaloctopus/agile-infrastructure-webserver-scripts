@@ -107,6 +107,8 @@ elif ( [ "${BUILDOS}" = "debian" ] )
     /bin/sed -i "/output_buffering/c\ output_buffering = Off" ${php_ini}
     /bin/sed -i "/realpath_cache_size/c\ realpath_cache_size = 10000k" ${php_ini}
     /bin/sed -i "/max_input_vars/c\ max_input_vars = 5000" ${php_ini}
+    /bin/sed -i "/max_execution_time/c\ max_execution_time = 300" ${php_ini}
+
 
     PHP_SERVICE="`/usr/sbin/service --status-all | /bin/grep php | /usr/bin/awk '{print $NF}'`"
 
