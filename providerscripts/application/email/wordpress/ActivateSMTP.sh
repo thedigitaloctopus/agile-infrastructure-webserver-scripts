@@ -20,6 +20,11 @@
 
 #Your SMTP credentials are stored in /var/www/wordpresssmtp
 
+/bin/echo "##################################################################"
+/bin/echo "These are your SMTP credentials settings for your wordpress install"
+/bin/echo "Please refer to: https://wordpress.org/plugins/wp-mail-smtp/"
+/bin/echo "##################################################################"
+
 fromaddress="`/bin/ls ${HOME}/.ssh/FROMADDRESS:* | /usr/bin/awk -F':' '{print $NF}'`"
 username="`/bin/ls ${HOME}/.ssh/EMAILUSERNAME:* | /usr/bin/awk -F':' '{print $NF}'`"
 password="`/bin/ls ${HOME}/.ssh/EMAILPASSWORD:* | /usr/bin/awk -F':' '{print $NF}'`"
