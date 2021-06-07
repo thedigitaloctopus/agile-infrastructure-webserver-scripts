@@ -26,6 +26,11 @@ username="`/bin/ls ${HOME}/.ssh/EMAILUSERNAME:* | /usr/bin/awk -F':' '{print $NF
 password="`/bin/ls ${HOME}/.ssh/EMAILPASSWORD:* | /usr/bin/awk -F':' '{print $NF}'`"
 emailprovider="`/bin/ls ${HOME}/.ssh/EMAILPROVIDER:* | /usr/bin/awk -F':' '{print $NF}'`"
 
+/bin/echo "##################################################################"
+/bin/echo "These are your SMTP credentials settings for your moodle install"
+/bin/echo "Please refer to: https://docs.moodle.org/311/en/Mail_configuration"
+/bin/echo "##################################################################"
+
 /bin/echo "FROM ADDRESS: ${fromaddress}" > /var/www/moodlesmtp
 /bin/echo "USERNAME: ${username}" >> /var/www/moodlesmtp
 /bin/echo "PASSWORD: ${password}" >> /var/www/moodlesmtp
