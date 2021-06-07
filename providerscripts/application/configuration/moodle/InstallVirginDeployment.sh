@@ -24,7 +24,7 @@ version="`/bin/echo ${APPLICATION} | /usr/bin/awk -F':' '{print $NF}'`"
 cd /var/www/html
 /usr/bin/git clone git://git.moodle.org/moodle.git
 cd moodle
-branch=`/usr/bin/git branch -r | /bin/grep STABLE | /usr/bin/tail -n 1 | /bin/sed 's/.*\///'`
+branch=`/usr/bin/git branch -r | /bin/grep STABLE | /usr/bin/sort --version-sort | | /bin/grep -v master | /usr/bin/tail -n 1 | /bin/sed 's/.*\///'`
 cd ..
 /bin/rm -r moodle
 /usr/bin/git clone -b ${branch} git://git.moodle.org/moodle.git
