@@ -114,15 +114,15 @@ fi
         # Gzip Settings
         ##
 
-                gzip on;
-                gzip_disable "msie6";
-                gzip_vary on;
-                gzip_comp_level  9;
-                gzip_min_length  256;
-                gzip_proxied     expired no-cache no-store private auth;
-                gzip_buffers 16 8k;
-                gzip_http_version 1.1;
-                gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
+         #       gzip on;
+         #       gzip_disable "msie6";
+         #       gzip_vary on;
+         #       gzip_comp_level  9;
+         #       gzip_min_length  256;
+         #       gzip_proxied     expired no-cache no-store private auth;
+         #       gzip_buffers 16 8k;
+         #       gzip_http_version 1.1;
+         #       gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
 
                 ##
                 # Virtual Host Configs
