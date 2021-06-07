@@ -126,8 +126,11 @@ then
         /bin/echo "Ignore any db connection warnings, they will pass after things have warmed up. Until then, working on your database, please be patient......"
         /bin/echo "#############################################################################################################################################"
         /bin/sleep 30
+        /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /bin/sed -i "s/^\$username.*/\$username=\"admin\"/" /var/www/html/moodle/admin/cli/reset_password.php
+        /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /bin/sed -i "s/^\$password.*/\$password=\"123QQwe!!\"/" /var/www/html/moodle/admin/cli/reset_password.php
         /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/bin/php /var/www/html/moodle/admin/cli/install_database.php --lang=en --adminuser="admin" --adminpass="test1234" --agree-license
     done
+    /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/bin/php /var/www/html/moodle/admin/cli/build_theme_css.php --themes=boost,classic --direction=ltr
 fi
 
 if ( ( [ -f ${HOME}/.ssh/DATABASEDBaaSINSTALLATIONTYPE:Maria ] || [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:Maria ] || [ -f ${HOME}/.ssh/DATABASEDBaaSINSTALLATIONTYPE:MySQL ] || [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:MySQL ] ) && [ "${BUILD_ARCHIVE_CHOICE}" = "virgin" ] )
