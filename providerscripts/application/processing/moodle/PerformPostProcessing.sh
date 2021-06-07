@@ -142,8 +142,7 @@ fi
 
 if ( [ ! -f /home/${SERVER_USER}/.ssh/BUILDARCHIVECHOICE:virgin ] && [ ! -f /home/${SERVER_USER}/.ssh/BUILDARCHIVECHOICE:baseline ] )
 then
-if ( ( [ -f ${HOME}/.ssh/DATABASEDBaaSINSTALLATIONTYPE:MySQL ] || [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:MySQL ] ) ||
-     ( [ -f ${HOME}/.ssh/DATABASEDBaaSINSTALLATIONTYPE:Maria ] || [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:Maria ] ) )
+if ( ( [ -f ${HOME}/.ssh/DATABASEDBaaSINSTALLATIONTYPE:MySQL ] || [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:MySQL ] ) || ( [ -f ${HOME}/.ssh/DATABASEDBaaSINSTALLATIONTYPE:Maria ] || [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:Maria ] ) )
 then
     then
         if ( [ "`/usr/bin/mysql -A -u ${username} -p${password} ${database} --host="${host}" --port="${DB_PORT}" -e "show tables;" | /bin/grep 'zzzz' | /usr/bin/wc -l`" != "1" ] )
