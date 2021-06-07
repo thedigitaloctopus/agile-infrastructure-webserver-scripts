@@ -81,7 +81,7 @@ fi
 echo \"hello, you need to surf to ${WEBSITEURL}/moodle \"
 ?>" > /var/www/html/index.php'
 
-if ( ( [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:DBaaS-secured ] || [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:DBaaS ] ) && ( [ -f ${HOME}/.ssh/DATABASEDBaaSINSTALLATIONTYPE:Maria ] ||  [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:MySQL ] ) )
+if ( ( [ -f ${HOME}/.ssh/DATABASEDBaaSINSTALLATIONTYPE:DBaaS-secured ] || [ -f ${HOME}/.ssh/DATABASEDBaaSINSTALLATIONTYPE:DBaaS ] ) && ( [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:Maria ] ||  [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:MySQL ] ) )
 then
 
     /bin/echo "This will vary by provider. Moodle requires that the database is set up in a specific way. This requires extra privileges"
@@ -107,17 +107,17 @@ then
         /usr/bin/mysql -A -u ${username} -p${password} ${database} --host="${host}" --port="${DB_PORT}" -e "SET GLOBAL innodb_file_per_table=ON;"
         /usr/bin/mysql -A -u ${username} -p${password} ${database} --host="${host}" --port="${DB_PORT}" -e "SET GLOBAL binlog_format = 'MIXED';"
     fi
-elif ( [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:Maria ] ||  [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:MySQL ] )
-then
-    /usr/bin/mysql -A -u ${username} -p${password} ${database} --host="${host}" --port="${DB_PORT}" -e "SET GLOBAL innodb_file_per_table=ON;"
-    /usr/bin/mysql -A -u ${username} -p${password} ${database} --host="${host}" --port="${DB_PORT}" -e "SET GLOBAL binlog_format = 'MIXED';"
+#elif ( [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:Maria ] ||  [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:MySQL ] )
+#then
+#    /usr/bin/mysql -A -u ${username} -p${password} ${database} --host="${host}" --port="${DB_PORT}" -e "SET GLOBAL innodb_file_per_table=ON;"
+#    /usr/bin/mysql -A -u ${username} -p${password} ${database} --host="${host}" --port="${DB_PORT}" -e "SET GLOBAL binlog_format = 'MIXED';"
 fi
 
 if ( [ "${BUILD_ARCHIVE_CHOICE}" = "virgin" ] )
 then
     #Set a default admin password for a moodle install. Should be changed by the new administrator.
-    /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /bin/sed -i "s/^\$username.*/\$username=\"admin\"/" /var/www/html/moodle/admin/cli/reset_password.php
-    /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /bin/sed -i "s/^\$password.*/\$password=\"123QQwe!!\"/" /var/www/html/moodle/admin/cli/reset_password.php
+  #  /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /bin/sed -i "s/^\$username.*/\$username=\"admin\"/" /var/www/html/moodle/admin/cli/reset_password.php
+  #  /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /bin/sed -i "s/^\$password.*/\$password=\"123QQwe!!\"/" /var/www/html/moodle/admin/cli/reset_password.php
     /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/bin/php /var/www/html/moodle/admin/cli/install_database.php --lang=en --adminuser="admin" --adminpass="test1234" --agree-license
     #We have to keep trying until our moodle config file is setup with the database credentials. This will fail until it is which takes a few minutes.
     while ( [ "$?" != "0" ] )
@@ -126,8 +126,8 @@ then
         /bin/echo "Ignore any db connection warnings, they will pass after things have warmed up. Until then, working on your database, please be patient......"
         /bin/echo "#############################################################################################################################################"
         /bin/sleep 30
-        /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /bin/sed -i "s/^\$username.*/\$username=\"admin\"/" /var/www/html/moodle/admin/cli/reset_password.php
-        /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /bin/sed -i "s/^\$password.*/\$password=\"123QQwe!!\"/" /var/www/html/moodle/admin/cli/reset_password.php
+    #    /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /bin/sed -i "s/^\$username.*/\$username=\"admin\"/" /var/www/html/moodle/admin/cli/reset_password.php
+    #    /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /bin/sed -i "s/^\$password.*/\$password=\"123QQwe!!\"/" /var/www/html/moodle/admin/cli/reset_password.php
         /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/bin/php /var/www/html/moodle/admin/cli/install_database.php --lang=en --adminuser="admin" --adminpass="test1234" --agree-license
     done
     /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/bin/php /var/www/html/moodle/admin/cli/build_theme_css.php --themes=boost,classic --direction=ltr
