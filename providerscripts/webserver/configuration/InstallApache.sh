@@ -84,6 +84,12 @@ fi
                 Options -Includes -ExecCGI -Indexes
                 Options FollowSymLinks MultiViews
                 AllowOverride All
+               
+               
+               # AuthType Basic
+               # AuthName "Private Property"
+               # AuthUserFile /etc/apache2/.htpasswd
+               # Require valid-user
             #    Require all granted
         </Directory>
 </VirtualHost>" >> /etc/apache2/sites-available/${WEBSITE_NAME}
