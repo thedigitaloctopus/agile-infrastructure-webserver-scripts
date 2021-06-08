@@ -84,12 +84,19 @@ fi
                 Options -Includes -ExecCGI -Indexes
                 Options FollowSymLinks MultiViews
                 AllowOverride All
-               
+                
+                ################################################################################################
+                #Uncomment these two lines to require basic authentication before accessing your application.
+                #This is a strong security measure, but, it means your authorised users will have to input
+                #Their credentials twice. If you are using cloudflare, for example, you might want to use their
+                #system to do the same thing, but, if you are not on cloudflare, you might want to consider this.
+                #################################################################################################
                
                # AuthType Basic
                # AuthName "Private Property"
                # AuthUserFile /etc/apache2/.htpasswd
                # Require valid-user
+               
             #    Require all granted
         </Directory>
 </VirtualHost>" >> /etc/apache2/sites-available/${WEBSITE_NAME}
