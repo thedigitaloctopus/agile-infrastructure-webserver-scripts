@@ -5,6 +5,7 @@ SERVER_USER_PASSWORD="`/bin/ls ${HOME}/.ssh/SERVERUSERPASSWORD:* | /usr/bin/awk 
 SUDO="/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E"
 
 sql_command="$1"
+raw="$2"
 
 DB_N="`command="${SUDO} /bin/sed '1q;d' ${HOME}/config/credentials/shit" && eval ${command}`"
 DB_P="`command="${SUDO} /bin/sed '2q;d' ${HOME}/config/credentials/shit" && eval ${command}`"
@@ -13,9 +14,20 @@ DB_U="`command="${SUDO} /bin/sed '3q;d' ${HOME}/config/credentials/shit" && eval
 HOST="`/bin/ls ${HOME}/config/databaseip`"
 PORT="`/bin/ls ${HOME}/.ssh/DB_PORT:* | /usr/bin/awk -F':' '{print $NF}'`"
 
-if ( [ "${sql_command}" != "" ] )
+if ( [ "${raw}" != "raw" ] )
 then
-    /usr/bin/mysql -u ${DB_U} -p${DB_P} ${DB_N} --host="${HOST}" --port="${PORT}" -e "${sql_command}"
+    if ( [ "${sql_command}" != "" ]  )
+    then
+        /usr/bin/mysql -u ${DB_U} -p${DB_P} ${DB_N} --host="${HOST}" --port="${PORT}" -e "${sql_command}"
+    else
+        /usr/bin/mysql -u ${DB_U} -p${DB_P} ${DB_N} --host="${HOST}" --port="${PORT}"
+    fi
 else
-    /usr/bin/mysql -u ${DB_U} -p${DB_P} ${DB_N} --host="${HOST}" --port="${PORT}"
+    if ( [ "${sql_command}" != "" ]  )
+    then
+        /usr/bin/mysql -N -r -s -u ${DB_U} -p${DB_P} ${DB_N} --host="${HOST}" --port="${PORT}" -e "${sql_command}"
+    else
+        /usr/bin/mysql -N -r -s -u ${DB_U} -p${DB_P} ${DB_N} --host="${HOST}" --port="${PORT}"
+    fi
 fi
+
