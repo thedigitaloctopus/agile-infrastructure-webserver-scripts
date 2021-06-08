@@ -11,7 +11,7 @@ credentials="${credentials} user1 password1"
 usernames="`/bin/echo ${credentials} | /bin/tr ' ' '\n' | /bin/sed 'n; d'`"
 passwords="`/bin/echo ${credentials} | /bin/tr ' ' '\n' | /bin/sed '1d; n; d'`"
 
-credentials="`/bin/echo ${credentials} | /bin/sed 's/\./\\./g' | /bin/sed 's/\[/\\[/g' | /bin/sed 's/\*/\\*/g' | /bin/sed 's;/;\\/;g' | /bin/sed 's/\$/\\\$/g' | /bin/sed 's/(/\\(/g' | /bin/sed 's/)/\\)/g'`"
+credentials="`/bin/echo '${credentials}' | /bin/sed 's/\./\\./g' | /bin/sed 's/\[/\\[/g' | /bin/sed 's/\*/\\*/g' | /bin/sed 's;/;\\/;g' | /bin/sed 's/\$/\\\$/g' | /bin/sed 's/(/\\(/g' | /bin/sed 's/)/\\)/g'`"
 
 echo $credentials
 
