@@ -28,13 +28,13 @@
 ##########################################################################################
 #set -x
 
-if ( [ -f ${HOME}/.ssh/WEBSERVER:NGINX ] )
+if ( [ -f ${HOME}/.ssh/WEBSERVERCHOICE:NGINX ] )
 then
     if ( [ ! -f /etc/nginx/.htpasswd ] )
     then
        /bin/touch /etc/nginx/.htpasswd
     fi
-elif ( [ -f ${HOME}/.ssh/WEBSERVER:APACHE ] )
+elif ( [ -f ${HOME}/.ssh/WEBSERVERCHOICE:APACHE ] )
 then
     if ( [ ! -f /etc/apache2/.htpasswd ] )
     then
@@ -53,14 +53,14 @@ do
     password="`/bin/echo "${passwords}" | /usr/bin/cut -d " " -f ${count}`"
     matchablepassword="`/bin/echo ${password} | /bin/sed 's/$/\$/g'`"
     
-    if ( [ -f ${HOME}/.ssh/WEBSERVER:NGINX ] )
+    if ( [ -f ${HOME}/.ssh/WEBSERVERCHOICE:NGINX ] )
     then
         if ( [ "`/bin/cat /tmp/credentials | /bin/grep "${username}"`" = "" ] || [ "`/bin/cat /tmp/credentials | /bin/grep ${matchablepassword}`" = "" ] )
         then
             /bin/sed -i "/${username}/d" /etc/nginx/.htpasswd
             /bin/echo "${username}:${password}" >> /etc/nginx/.htpasswd
         fi
-    elif ( [ -f ${HOME}/.ssh/WEBSERVER:APACHE ] )
+    elif ( [ -f ${HOME}/.ssh/WEBSERVERCHOICE:APACHE ] )
     then
         if ( [ "`/bin/cat /tmp/credentials | /bin/grep "${username}"`" = "" ] || [ "`/bin/cat /tmp/credentials | /bin/grep ${matchablepassword}`" = "" ] )
         then
