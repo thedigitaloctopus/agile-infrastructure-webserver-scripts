@@ -43,7 +43,7 @@ then
        
    done
 
-   if ( [ "${success}" = "yes" ] )
+   if ( [ "${success}" = "yes" ] && [ "`${HOME}/providerscripts/utilities/ConnectToRemoteMYSQLDB.sh "select count(*) from ${prefix}_cache_data;" raw 2>/dev/null`" = "0" ] )
    then
        /bin/echo "TRUNCATED"
    else
