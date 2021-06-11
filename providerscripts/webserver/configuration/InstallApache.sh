@@ -53,6 +53,7 @@ fi
         Options -Includes
         Options -ExecCGI
         Options -FollowSymLinks
+        LimitRequestFieldSize 16380
         ExpiresActive On
         SSLEngine on
         SSLCertificateFile ${HOME}/ssl/live/${website_url}/fullchain.pem
