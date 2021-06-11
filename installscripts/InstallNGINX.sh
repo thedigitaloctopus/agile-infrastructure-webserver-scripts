@@ -57,14 +57,14 @@ then
     ###############################################################
     #If you want to build from repos, uncomment these lines instead
     ###############################################################
-     if ( [ "${BUILDOSVERSION}" = "9" ] )
-     then
-        /bin/echo "deb http://packages.dotdeb.org stretch all
-        deb-src http://packages.dotdeb.org stretch all" >> /etc/apt/sources.list
-     fi
-     /usr/bin/curl http://nginx.org/keys/nginx_signing.key | /usr/bin/apt-key add -
-     ${HOME}/installscripts/Update.sh ${BUILDOS}
-     /usr/bin/apt-get -qq install nginx
-     /bin/systemctl unmask nginx.service
+   #  if ( [ "${BUILDOSVERSION}" = "9" ] )
+   #  then
+   #     /bin/echo "deb http://packages.dotdeb.org stretch all
+   #     deb-src http://packages.dotdeb.org stretch all" >> /etc/apt/sources.list
+   #  fi
+   #  /usr/bin/curl http://nginx.org/keys/nginx_signing.key | /usr/bin/apt-key add -
+   #  ${HOME}/installscripts/Update.sh ${BUILDOS}
+   #  /usr/bin/apt-get -qq install nginx
+   #  /bin/systemctl unmask nginx.service
 fi
 
