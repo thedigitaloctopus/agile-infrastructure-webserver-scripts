@@ -56,34 +56,34 @@ else
     prefix="`command="${SUDO} /bin/cat /var/www/html/dpb.dat" && eval ${command}`"
 fi
 
-if ( [ -f ${HOME}/.ssh/DATABASEDBaaSINSTALLATIONTYPE:Postgres ] || [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:Postgres ] )
-then
-    export PGPASSWORD="${DB_P}"
-    /usr/bin/psql -U ${DB_U} -h ${DB_HOST} -p ${DB_PORT} ${DB_N} -c "truncate ${prefix}_cache_bootstrap"
-    /usr/bin/psql -U ${DB_U} -h ${DB_HOST} -p ${DB_PORT} ${DB_N} -c "truncate ${prefix}_cache_config"
-    /usr/bin/psql -U ${DB_U} -h ${DB_HOST} -p ${DB_PORT} ${DB_N} -c "truncate ${prefix}_cache_container" 
-    /usr/bin/psql -U ${DB_U} -h ${DB_HOST} -p ${DB_PORT} ${DB_N} -c "truncate ${prefix}_cache_data"
-    /usr/bin/psql -U ${DB_U} -h ${DB_HOST} -p ${DB_PORT} ${DB_N} -c "truncate ${prefix}_cache_default"
-    /usr/bin/psql -U ${DB_U} -h ${DB_HOST} -p ${DB_PORT} ${DB_N} -c "truncate ${prefix}_cache_discovery" 
-    /usr/bin/psql -U ${DB_U} -h ${DB_HOST} -p ${DB_PORT} ${DB_N} -c "truncate ${prefix}_cache_dynamic_page_cache"
-    /usr/bin/psql -U ${DB_U} -h ${DB_HOST} -p ${DB_PORT} ${DB_N} -c "truncate ${prefix}_cache_entity"
-    /usr/bin/psql -U ${DB_U} -h ${DB_HOST} -p ${DB_PORT} ${DB_N} -c "truncate ${prefix}_cache_menu"
-    /usr/bin/psql -U ${DB_U} -h ${DB_HOST} -p ${DB_PORT} ${DB_N} -c "truncate ${prefix}_cache_page" 
-    /usr/bin/psql -U ${DB_U} -h ${DB_HOST} -p ${DB_PORT} ${DB_N} -c "truncate ${prefix}_cache_render"
-fi
+#if ( [ -f ${HOME}/.ssh/DATABASEDBaaSINSTALLATIONTYPE:Postgres ] || [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:Postgres ] )
+#then
+#    export PGPASSWORD="${DB_P}"
+ #   /usr/bin/psql -U ${DB_U} -h ${DB_HOST} -p ${DB_PORT} ${DB_N} -c "truncate ${prefix}_cache_bootstrap"
+ #   /usr/bin/psql -U ${DB_U} -h ${DB_HOST} -p ${DB_PORT} ${DB_N} -c "truncate ${prefix}_cache_config"
+ #   /usr/bin/psql -U ${DB_U} -h ${DB_HOST} -p ${DB_PORT} ${DB_N} -c "truncate ${prefix}_cache_container" 
+ #   /usr/bin/psql -U ${DB_U} -h ${DB_HOST} -p ${DB_PORT} ${DB_N} -c "truncate ${prefix}_cache_data"
+  #  /usr/bin/psql -U ${DB_U} -h ${DB_HOST} -p ${DB_PORT} ${DB_N} -c "truncate ${prefix}_cache_default"
+ #   /usr/bin/psql -U ${DB_U} -h ${DB_HOST} -p ${DB_PORT} ${DB_N} -c "truncate ${prefix}_cache_discovery" 
+ #   /usr/bin/psql -U ${DB_U} -h ${DB_HOST} -p ${DB_PORT} ${DB_N} -c "truncate ${prefix}_cache_dynamic_page_cache"
+ #   /usr/bin/psql -U ${DB_U} -h ${DB_HOST} -p ${DB_PORT} ${DB_N} -c "truncate ${prefix}_cache_entity"
+  #  /usr/bin/psql -U ${DB_U} -h ${DB_HOST} -p ${DB_PORT} ${DB_N} -c "truncate ${prefix}_cache_menu"
+  #  /usr/bin/psql -U ${DB_U} -h ${DB_HOST} -p ${DB_PORT} ${DB_N} -c "truncate ${prefix}_cache_page" 
+ #   /usr/bin/psql -U ${DB_U} -h ${DB_HOST} -p ${DB_PORT} ${DB_N} -c "truncate ${prefix}_cache_render"
+#fi
 
-if ( ( [ -f ${HOME}/.ssh/DATABASEDBaaSINSTALLATIONTYPE:MySQL ] || [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:MySQL ] ) ||
-     ( [ -f ${HOME}/.ssh/DATABASEDBaaSINSTALLATIONTYPE:Maria ] || [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:Maria ] ) )
-then
-    /usr/bin/mysql -u ${DB_U} -p${DB_P} --port ${DB_PORT} --host=${DB_HOST} ${DB_N} -e "DELETE from ${prefix}_cache_bootstrap"
-    /usr/bin/mysql -u ${DB_U} -p${DB_P} --port ${DB_PORT} --host=${DB_HOST} ${DB_N} -e "DELETE from ${prefix}_cache_config"
-    /usr/bin/mysql -u ${DB_U} -p${DB_P} --port ${DB_PORT} --host=${DB_HOST} ${DB_N} -e "DELETE from ${prefix}_cache_container" 
-    /usr/bin/mysql -u ${DB_U} -p${DB_P} --port ${DB_PORT} --host=${DB_HOST} ${DB_N} -e "DELETE from ${prefix}_cache_data"
-    /usr/bin/mysql -u ${DB_U} -p${DB_P} --port ${DB_PORT} --host=${DB_HOST} ${DB_N} -e "DELETE from ${prefix}_cache_default"
-    /usr/bin/mysql -u ${DB_U} -p${DB_P} --port ${DB_PORT} --host=${DB_HOST} ${DB_N} -e "DELETE from ${prefix}_cache_discovery" 
-    /usr/bin/mysql -u ${DB_U} -p${DB_P} --port ${DB_PORT} --host=${DB_HOST} ${DB_N} -e "DELETE from ${prefix}_cache_dynamic_page_cache"
-    /usr/bin/mysql -u ${DB_U} -p${DB_P} --port ${DB_PORT} --host=${DB_HOST} ${DB_N} -e "DELETE from ${prefix}_cache_entity"
-    /usr/bin/mysql -u ${DB_U} -p${DB_P} --port ${DB_PORT} --host=${DB_HOST} ${DB_N} -e "DELETE from ${prefix}_cache_menu"
-    /usr/bin/mysql -u ${DB_U} -p${DB_P} --port ${DB_PORT} --host=${DB_HOST} ${DB_N} -e "DELETE from ${prefix}_cache_page" 
-    /usr/bin/mysql -u ${DB_U} -p${DB_P} --port ${DB_PORT} --host=${DB_HOST} ${DB_N} -e "DELETE from ${prefix}_cache_render"
-fi
+#if ( ( [ -f ${HOME}/.ssh/DATABASEDBaaSINSTALLATIONTYPE:MySQL ] || [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:MySQL ] ) ||
+  #   ( [ -f ${HOME}/.ssh/DATABASEDBaaSINSTALLATIONTYPE:Maria ] || [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:Maria ] ) )
+#then
+ #   /usr/bin/mysql -u ${DB_U} -p${DB_P} --port ${DB_PORT} --host=${DB_HOST} ${DB_N} -e "DELETE from ${prefix}_cache_bootstrap"
+ #   /usr/bin/mysql -u ${DB_U} -p${DB_P} --port ${DB_PORT} --host=${DB_HOST} ${DB_N} -e "DELETE from ${prefix}_cache_config"
+ #   /usr/bin/mysql -u ${DB_U} -p${DB_P} --port ${DB_PORT} --host=${DB_HOST} ${DB_N} -e "DELETE from ${prefix}_cache_container" 
+ #   /usr/bin/mysql -u ${DB_U} -p${DB_P} --port ${DB_PORT} --host=${DB_HOST} ${DB_N} -e "DELETE from ${prefix}_cache_data"
+ #   /usr/bin/mysql -u ${DB_U} -p${DB_P} --port ${DB_PORT} --host=${DB_HOST} ${DB_N} -e "DELETE from ${prefix}_cache_default"
+  #  /usr/bin/mysql -u ${DB_U} -p${DB_P} --port ${DB_PORT} --host=${DB_HOST} ${DB_N} -e "DELETE from ${prefix}_cache_discovery" 
+  #  /usr/bin/mysql -u ${DB_U} -p${DB_P} --port ${DB_PORT} --host=${DB_HOST} ${DB_N} -e "DELETE from ${prefix}_cache_dynamic_page_cache"
+ #   /usr/bin/mysql -u ${DB_U} -p${DB_P} --port ${DB_PORT} --host=${DB_HOST} ${DB_N} -e "DELETE from ${prefix}_cache_entity"
+ #   /usr/bin/mysql -u ${DB_U} -p${DB_P} --port ${DB_PORT} --host=${DB_HOST} ${DB_N} -e "DELETE from ${prefix}_cache_menu"
+  #  /usr/bin/mysql -u ${DB_U} -p${DB_P} --port ${DB_PORT} --host=${DB_HOST} ${DB_N} -e "DELETE from ${prefix}_cache_page" 
+ #   /usr/bin/mysql -u ${DB_U} -p${DB_P} --port ${DB_PORT} --host=${DB_HOST} ${DB_N} -e "DELETE from ${prefix}_cache_render"
+#fi
