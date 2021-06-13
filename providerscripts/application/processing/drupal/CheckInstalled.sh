@@ -38,7 +38,7 @@ if ( [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:Postgres ] )
 then
    prefix="`/bin/cat /var/www/html/dpb.dat`"
 
-   if ( [ "`${HOME}/providerscripts/utilities/ConnectToRemotePostgresDB.sh "select count(*) from ${prefix}_users;" raw 2>/dev/null | /bin/sed 's/ //g'`" = "0" ] )
+   if ( [ "`${HOME}/providerscripts/utilities/ConnectToRemotePostgresDB.sh "select count(*) from ${prefix}_users;" raw 2>/dev/null | /bin/sed 's/ //g'`" != "0" ] )
    then
        /bin/echo "INSTALLED"
    else
