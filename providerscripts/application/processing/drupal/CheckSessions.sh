@@ -15,8 +15,10 @@ fi
 if ( [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:Postgres ] )
 then
    prefix="`/bin/cat /var/www/html/dpb.dat`"
+   
+   session="`${HOME}/providerscripts/utilities/ConnectToRemotePostgresDB.sh "select count(*) from ${prefix}_sessions;" raw 2>/dev/null | /bin/sed 's/ //g'`"
 
-   if ( [ "`${HOME}/providerscripts/utilities/ConnectToRemotePostgresDB.sh "select count(*) from ${prefix}_sessions;" raw 2>/dev/null | /bin/sed 's/ //g'`" != "0" ] )
+   if ( [ "${session}" != "0" ] && [ "${session}" != "" ] )
    then
        /bin/echo "SESSION"
    else
