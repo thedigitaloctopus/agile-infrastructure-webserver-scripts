@@ -50,3 +50,30 @@ then
        /bin/echo "NOT TRUNCATED"
    fi
 fi
+
+if ( [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:Postgres ] )
+then
+    prefix="`/bin/cat /var/www/html/dpb.dat`"
+
+   cache_tables="` ${HOME}/providerscripts/utilities/ConnectToRemotePostgresDB.sh "select table_schema, table_name from information_schema.tables where table_name like '%cache%' and table_schema not in ('information_schema', 'pg_catalog') and table_type = 'BASE TABLE' order by table_name, table_schema;" | sed -n '/cache/s/.*\b\(.*cache\w*\).*/\1/p'`"
+
+   success="yes"
+
+   for cache_table in ${cache_tables}
+   do
+       ${HOME}/providerscripts/utilities/ConnectToRemotePostgresDB.sh "TRUNCATE ${cache_table};"
+       
+       if ( [ "$?" != "0" ] )
+       then
+           success="no"
+       fi
+   done
+
+   if ( [ "${success}" = "yes" ] && [ "`${HOME}/providerscripts/utilities/ConnectToRemotePostgresDB.sh "select count(*) from ${prefix}_cache_data;" raw 2>/dev/null | /bin/sed 's/ //g'`" = "0" ] )
+   then
+       /bin/echo "TRUNCATED"
+   else
+       /bin/echo "NOT TRUNCATED"
+   fi
+
+fi
