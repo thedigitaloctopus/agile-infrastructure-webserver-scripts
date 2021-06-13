@@ -25,8 +25,10 @@
 if ( [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:Maria ] || [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:MySQL ] )
 then
     prefix="`/bin/cat /var/www/html/dpb.dat`"
+    
+    installed="`${HOME}/providerscripts/utilities/ConnectToRemoteMYSQLDB.sh "SELECT * from ${prefix}_users" | /usr/bin/wc -l`"
 
-    if ( [ "`${HOME}/providerscripts/utilities/ConnectToRemoteMYSQLDB.sh "SELECT * from ${prefix}_users" | /usr/bin/wc -l`" != "0" ] )
+    if ( [ "${installed}" != "0" ] && [ "${installed}" != "" ] )
     then
         /bin/echo "INSTALLED"
     else
@@ -37,8 +39,10 @@ fi
 if ( [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:Postgres ] )
 then
    prefix="`/bin/cat /var/www/html/dpb.dat`"
+   
+   installed="`${HOME}/providerscripts/utilities/ConnectToRemotePostgresDB.sh "select count(*) from ${prefix}_users;"`"
 
-   if ( [ "`${HOME}/providerscripts/utilities/ConnectToRemotePostgresDB.sh "select count(*) from ${prefix}_users;" raw 2>/dev/null | /bin/sed 's/ //g'`" != "0" ] )
+   if ( [ "${installed}" != "0" ] && [ "${installed}" != "" ] )
    then
        /bin/echo "INSTALLED"
    else
