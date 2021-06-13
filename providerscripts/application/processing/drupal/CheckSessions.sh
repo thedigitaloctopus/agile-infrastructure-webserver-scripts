@@ -3,8 +3,10 @@ set -x
 if ( [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:Maria ] || [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:MySQL ] )
 then
     prefix="`/bin/cat /var/www/html/dpb.dat`"
-
-    if ( [ "`${HOME}/providerscripts/utilities/ConnectToRemoteMYSQLDB.sh "SELECT count(*) from ${prefix}_sessions" | /usr/bin/wc -l`" != "0" ] )
+    
+    session="`${HOME}/providerscripts/utilities/ConnectToRemoteMYSQLDB.sh "SELECT count(*) from ${prefix}_sessions" | /usr/bin/wc -l`"
+    
+    if ( [ "${session}" != "0" ] && [ "${session}" != "" ] )
     then
         /bin/echo "SESSION"
     else
