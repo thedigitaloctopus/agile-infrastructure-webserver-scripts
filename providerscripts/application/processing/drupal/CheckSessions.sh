@@ -20,15 +20,15 @@
 # along with The Agile Deployment Toolkit.  If not, see <http://www.gnu.org/licenses/>.
 #######################################################################################
 #######################################################################################
-set -x
+#set -x
 
 if ( [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:Maria ] || [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:MySQL ] )
 then
     prefix="`/bin/cat /var/www/html/dpb.dat`"
     
-    session="`${HOME}/providerscripts/utilities/ConnectToRemoteMYSQLDB.sh "SELECT count(*) from ${prefix}_sessions" | /usr/bin/wc -l`"
+    session="`${HOME}/providerscripts/utilities/ConnectToRemoteMYSQLDB.sh "SELECT * from ${prefix}_sessions" | /usr/bin/wc -l`"
     
-    if ( [ "${session}" != "0" ] && [ "${session}" != "" ] )
+    if ( [ "${session}" != "0" ] )
     then
         /bin/echo "SESSION"
     else
@@ -40,7 +40,7 @@ if ( [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:Postgres ] )
 then
    prefix="`/bin/cat /var/www/html/dpb.dat`"
    
-   session="`${HOME}/providerscripts/utilities/ConnectToRemotePostgresDB.sh "select count(*) from ${prefix}_sessions;" raw 2>/dev/null | /bin/sed 's/ //g'`"
+   session="`${HOME}/providerscripts/utilities/ConnectToRemotePostgresDB.sh "select * from ${prefix}_sessions;" raw 2>/dev/null | /bin/sed 's/ //g' | /usr/bin/wc -l`"
 
    if ( [ "${session}" != "0" ] && [ "${session}" != "" ] )
    then
