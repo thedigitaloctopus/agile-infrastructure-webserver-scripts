@@ -163,9 +163,9 @@ then
         installationstatus="3"
     fi
 
-    ${HOME}/providerscripts/utilities/ConnectToRemotePostgresDB.sh < /tmp/base.sql
-    ${HOME}/providerscripts/utilities/ConnectToRemotePostgresDB.sh < /tmp/extensions.sql
-    ${HOME}/providerscripts/utilities/ConnectToRemotePostgresDB.sh < /tmp/supports.sql
+    command="${SUDO} ${HOME}/providerscripts/utilities/ConnectToRemotePostgresDB.sh < /tmp/base.sql" && eval ${command}
+    command="${SUDO} ${HOME}/providerscripts/utilities/ConnectToRemotePostgresDB.sh < /tmp/extensions.sql" && eval ${command}
+    command="${SUDO} ${HOME}/providerscripts/utilities/ConnectToRemotePostgresDB.sh < /tmp/supports.sql" && eval ${command}
 
     sqlcommand="INSERT INTO ${PREFIX}_users"
     sqlcommand="${sqlcommand}"'(id,"\""name"\"","\""username"\"","\""email"\"","\""password"\"","\""registerDate"\"","\""params"\"","\""requireReset"\"") values (42,'\''webmaster'\'','\''webmaster'\'','\''testxyz@test123i4.com'\'','\''16d7a4fca7442dda3ad93c9a726597e4'\'','\''1980-01-01'\'',1,1);'
