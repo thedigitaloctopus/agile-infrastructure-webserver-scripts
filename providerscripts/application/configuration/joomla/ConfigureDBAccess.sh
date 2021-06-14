@@ -136,10 +136,12 @@ dbipandport="${host}:${DB_PORT}"
 
 if (  [ -f ${HOME}/.ssh/DATABASEDBaaSINSTALLATIONTYPE:Postgres ] || [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:Postgres ] ) 
 then
+    /bin/sed -i "/\$dbtype /c\        public \$dbtype = \'pgsql\';" ${HOME}/runtime/joomla_configuration.php
     /bin/sed -i "/\$host /c\        public \$host = \'${host}\';" ${HOME}/runtime/joomla_configuration.php
     /bin/sed -i "/\$host /a        public \$port = \'${DB_PORT}\';" ${HOME}/runtime/joomla_configuration.php
 else
-    /bin/sed -i "/\$host = /c\   public \$host = \'${dbipandport}\';" ${HOME}/runtime/joomla_configuration.php
+    /bin/sed -i "/\$dbtype /c\        public \$dbtype = \'mysqli\';" ${HOME}/runtime/joomla_configuration.php
+    /bin/sed -i "/\$host /c\        public \$host = \'${host}:${DB_PORT}\';" ${HOME}/runtime/joomla_configuration.php
 fi
 
 #/bin/sed -i "/\$host = /c\   public \$host = \'${dbipandport}\';" ${HOME}/runtime/joomla_configuration.php
