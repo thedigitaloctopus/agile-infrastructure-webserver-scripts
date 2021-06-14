@@ -1,4 +1,24 @@
-set -x
+#!/bin/sh
+######################################################################################
+# Author: Peter Winter
+# Date :  07/06/2021
+# Description: You can use this script to reset your application password. This will reset
+# the database password in your mysql or postgresql database
+#####################################################################################
+# License Agreement:
+# This file is part of The Agile Deployment Toolkit.
+# The Agile Deployment Toolkit is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+# The Agile Deployment Toolkit is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# You should have received a copy of the GNU General Public License
+# along with The Agile Deployment Toolkit.  If not, see <http://www.gnu.org/licenses/>.
+#######################################################################################
+#######################################################################################
 
 /bin/echo "This script will change the database password for your application"
 /bin/echo "Please enter the old password"
@@ -16,9 +36,33 @@ read new_password
 
 if ( [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:MySQL ] || [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:Maria ] )
 then
-    #At the moment, mariadb and mysql have different ways of setting passwords
-    ${HOME}/providerscripts/utilities/ConnectToRemoteMYSQLDB.sh "set password=\"${new_password};\"" 2>/dev/null
-    ${HOME}/providerscripts/utilities/ConnectToRemoteMYSQLDB.sh "set password=PASSWORD(\"${new_password}\");" 2>/dev/null
+    ${HOME}/providerscripts/utilities/ConnectToRemoteMYSQLDB.sh "set password=\"${new_password};\""
+fi
+
+if ( [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:Postgres ] )
+then
+    DB_N="`/bin/sed '1q;d' ${HOME}/config/credentials/shit`"
+    ${HOME}/providerscripts/utilities/ConnectToRemotePostgresDB.sh "ALTER USER ${DB_N} WITH PASSWORD \"${new_password}\"";
+fi
+
+if ( [ -f ${HOME}/.ssh/APPLICATION:joomla ] )
+then
+    /bin/sed -i "s/${old_password}/${new_password}/g" ${HOME}/config/credentials/shit
+    /bin/sed -i "s/${old_password}/${new_password}/g" ${HOME}/config/joomla_configuration.php
+    /bin/sed -i "s/${old_password}/${new_password}/g" ${HOME}/runtime/joomla_configuration.php
+    /bin/sed -i "s/${old_password}/${new_password}/g" ${HOME}/shit
+    /bin/sed -i "s/${old_password}/${new_password}/g" /var/www/html/configuration.php
+    ${HOME}/providerscripts/utilities/ConnectDBServer.sh "/bin/sed -i \"s/${old_password}/${new_password}/g\" ${HOME}/credentials/shit"
+fi
+
+if ( [ -f ${HOME}/.ssh/APPLICATION:wordpress ] )
+then
+    /bin/sed -i "s/${old_password}/${new_password}/g" ${HOME}/config/credentials/shit
+    /bin/sed -i "s/${old_password}/${new_password}/g" ${HOME}/config/wordpress_config.php
+    /bin/sed -i "s/${old_password}/${new_password}/g" ${HOME}/runtime/wordpress_config.php
+    /bin/sed -i "s/${old_password}/${new_password}/g" ${HOME}/shit
+    /bin/sed -i "s/${old_password}/${new_password}/g" /var/www/wp-config.php
+    ${HOME}/providerscripts/utilities/ConnectDBServer.sh "/bin/sed -i \"s/${old_password}/${new_password}/g\" ${HOME}/credentials/shit"
 fi
 
 if ( [ -f ${HOME}/.ssh/APPLICATION:drupal ] )
@@ -27,6 +71,14 @@ then
     /bin/sed -i "s/${old_password}/${new_password}/g" ${HOME}/config/drupal_settings.php
     /bin/sed -i "s/${old_password}/${new_password}/g" ${HOME}/runtime/drupal_settings.php
     /bin/sed -i "s/${old_password}/${new_password}/g" ${HOME}/shit
-    /bin/sed -i "s/${old_password}/${new_password}/g" /var/www/html/sites/default/settings.php
+    /bin/sed -i "s/${old_password}/${new_password}/g" ${HOME}/sites/default/settings.php
+    ${HOME}/providerscripts/utilities/ConnectDBServer.sh "/bin/sed -i \"s/${old_password}/${new_password}/g\" ${HOME}/credentials/shit"
+fi
+
+if ( [ -f ${HOME}/.ssh/APPLICATION:moodle ] )
+then
+    /bin/sed -i "s/${old_password}/${new_password}/g" ${HOME}/config/credentials/shit
+    /bin/sed -i "s/${old_password}/${new_password}/g" ${HOME}/shit
+    /bin/sed -i "s/${old_password}/${new_password}/g" /var/www/html/moodle/config.php
     ${HOME}/providerscripts/utilities/ConnectDBServer.sh "/bin/sed -i \"s/${old_password}/${new_password}/g\" ${HOME}/credentials/shit"
 fi
