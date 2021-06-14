@@ -34,7 +34,12 @@ DB_N="`command="${SUDO} /bin/sed '1q;d' ${HOME}/config/credentials/shit" && eval
 DB_P="`command="${SUDO} /bin/sed '2q;d' ${HOME}/config/credentials/shit" && eval ${command}`"
 DB_U="`command="${SUDO} /bin/sed '3q;d' ${HOME}/config/credentials/shit" && eval ${command}`"
 
-HOST="`/bin/ls ${HOME}/config/databaseip`"
+if ( [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:DBaaS ] )
+then
+    HOST="`/bin/ls ${HOME}/.ssh/DBaaSHOSTNAME:* | /usr/bin/awk -F':' '{print $NF}'`"
+else
+    HOST="`/bin/ls ${HOME}/config/databaseip`"
+fi
 PORT="`/bin/ls ${HOME}/.ssh/DB_PORT:* | /usr/bin/awk -F':' '{print $NF}'`"
 
 export PGPASSWORD=${DB_P}
@@ -43,7 +48,7 @@ if ( [ "${raw}" != "raw" ] )
 then
     if ( [ "${sql_command}" != "" ]  )
     then
-        /usr/bin/psql -t -U ${DB_U} -h ${HOST} -p ${PORT} ${DB_N} -c "${sql_command}"
+        /usr/bin/psql -U ${DB_U} -h ${HOST} -p ${PORT} ${DB_N} -c "${sql_command}"
     else
         /usr/bin/psql -U ${DB_U} -h ${HOST} -p ${PORT} ${DB_N}
     fi
