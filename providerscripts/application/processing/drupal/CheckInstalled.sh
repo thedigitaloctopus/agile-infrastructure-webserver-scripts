@@ -28,7 +28,7 @@ then
     
     installed="`${HOME}/providerscripts/utilities/ConnectToRemoteMYSQLDB.sh "SELECT * from ${prefix}_users" | /usr/bin/wc -l`"
 
-    if ( [ "${installed}" != "0" ] && [ "${installed}" != "" ] )
+    if ( [ "${installed}" != "0" ] )
     then
         /bin/echo "INSTALLED"
     else
@@ -40,9 +40,9 @@ if ( [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:Postgres ] )
 then
    prefix="`/bin/cat /var/www/html/dpb.dat`"
    
-   installed="`${HOME}/providerscripts/utilities/ConnectToRemotePostgresDB.sh "select count(*) from ${prefix}_users;"`"
+   installed="`${HOME}/providerscripts/utilities/ConnectToRemotePostgresDB.sh "select * from ${prefix}_users;" | /usr/bin/wc -l`"
 
-   if ( [ "${installed}" != "0" ] && [ "${installed}" != "" ] )
+   if ( [ "${installed}" != "0" ]  )
    then
        /bin/echo "INSTALLED"
    else
