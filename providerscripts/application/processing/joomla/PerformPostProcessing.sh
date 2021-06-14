@@ -135,6 +135,47 @@ then
    # command="${SUDO} /bin/rm /tmp/joomla.sql /tmp/base.sql /tmp/extensions.sql /tmp/supports.sql 2>/dev/null" && eval ${command}
 fi
 
+
+if (  [ -f ${HOME}/.ssh/DATABASEDBaaSINSTALLATIONTYPE:Postgres ] || [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:Postgres ] ) 
+then
+    installationstatus=""
+    if ( [ -d /var/www/html/installation ] )
+    then 
+        if ( [ -f /var/www/html/installation/sql/postgresql/joomla.sql ] )
+        then
+            installationstatus="1"
+            command="${SUDO} /bin/cp /var/www/html/installation/sql/postgresql/joomla.sql /tmp/joomla.sql" && eval ${command}
+            command="${SUDO} /bin/sed -i \"s/#__/${PREFIX}_/g\" /tmp/joomla.sql" && eval ${command}
+#            command="${SUDO} /bin/sed -i '1s/^/SET SESSION sql_require_primary_key=0;\n/' /tmp/joomla.sql" && eval ${command}
+        else
+            installationstatus="2"
+#            command="${SUDO} /bin/sed -i '1s/^/SET SESSION sql_require_primary_key=0;\n/' /var/www/html/installation/sql/mysql/base.sql" && eval ${command}
+#            command="${SUDO} /bin/sed -i '1s/^/SET SESSION sql_require_primary_key=0;\n/' /var/www/html/installation/sql/mysql/extensions.sql" && eval ${command}
+#            command="${SUDO} /bin/sed -i '1s/^/SET SESSION sql_require_primary_key=0;\n/' /var/www/html/installation/sql/mysql/supports.sql" && eval ${command}
+            command="${SUDO} /bin/cp /var/www/html/installation/sql/postgresql/base.sql /tmp/base.sql" && eval ${command}
+            command="${SUDO} /bin/cp /var/www/html/installation/sql/postgresql/extensions.sql /tmp/extensions.sql" && eval ${command}
+            command="${SUDO} /bin/cp /var/www/html/installation/sql/postgresql/supports.sql /tmp/supports.sql" && eval ${command}
+            command="${SUDO} /bin/sed -i \"s/#__/${PREFIX}_/g\" /tmp/base.sql" && eval ${command}
+            command="${SUDO} /bin/sed -i \"s/#__/${PREFIX}_/g\" /tmp/extensions.sql" && eval ${command}
+            command="${SUDO} /bin/sed -i \"s/#__/${PREFIX}_/g\" /tmp/supports.sql" && eval ${command}
+        fi
+    else 
+        installationstatus="3"
+    fi
+    if ( [ -f /tmp/joomla.sql ] )
+    then
+        /usr/bin/mysql -f -A -u "${username}" -p"${password}" "${database}" --host="${host}" --port="${DB_PORT}" < /tmp/joomla.sql
+    else
+        ${HOME}/providerscripts/utilities/ConnectToRemotePostgresDB.sh < /tmp/base.sql
+        ${HOME}/providerscripts/utilities/ConnectToRemotePostgresDB.sh < /tmp/extensions.sql
+        ${HOME}/providerscripts/utilities/ConnectToRemotePostgresDB.sh < /tmp/supports.sql
+    fi
+  
+   # /usr/bin/mysql -A -u "${username}" -p"${password}" "${database}" --host="${host}" --port="${DB_PORT}" -e "INSERT INTO ${PREFIX}_users (id,name,username,email,password,registerdate,params,requirereset) values (42,'webmaster','webmaster','testxyz@test123.com','16d7a4fca7442dda3ad93c9a726597e4','2020-04-20',1,1);"
+  #  /usr/bin/mysql -A -u "${username}" -p"${password}" "${database}" --host="${host}" --port="${DB_PORT}" -e "INSERT INTO ${PREFIX}_user_usergroup_map values (42,8);"
+   # command="${SUDO} /bin/rm /tmp/joomla.sql /tmp/base.sql /tmp/extensions.sql /tmp/supports.sql 2>/dev/null" && eval ${command}
+fi
+
 if ( [ "${installationstatus}" = "3" ] )
 then
      /bin/echo "NO INSTALLATION DIRECTORY FOUND FOR JOOMLA. CANNOT INSTALL..."
