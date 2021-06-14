@@ -34,6 +34,13 @@ done
 /bin/echo "Now please enter your new password, it should begin and end with a lower case 'p' letter"
 read new_password
 
+while ( [ "`/bin/echo ${new_password} | grep "^p" | grep "p$"`" = "" ] )
+do
+    /bin/echo "Your password needs to begin and end with a small letter p"
+    /bin/echo "Please re-enter your password"
+    read new_password
+done
+
 if ( [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:MySQL ] || [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:Maria ] )
 then
     ${HOME}/providerscripts/utilities/ConnectToRemoteMYSQLDB.sh "set password=\"${new_password};\""
