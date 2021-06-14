@@ -22,8 +22,8 @@
 
 SERVER_USER="`/bin/ls ${HOME}/.ssh/SERVERUSER:* | /usr/bin/awk -F':' '{print $NF}'`"
 SSH_PORT="`/bin/ls ${HOME}/.ssh/SSH_PORT:* | /usr/bin/awk -F':' '{print $NF}'`"
+ALGORITHM="`/bin/ls ${HOME}/.ssh/ALGORITHM:* | /usr/bin/awk -F':' '{print $NF}'`"
+HOST="`/bin/ls ${HOME}/config/databaseip`"
 
 /bin/echo "${0} `/bin/date`: Checking if the database is up" >> ${HOME}/logs/MonitoringLog.dat
-dbip="`/bin/ls ${HOME}/config/databaseip`"
-/usr/bin/ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no ${SERVER_USER}@${dbip} -p ${SSH_PORT} '${HOME}/providerscripts/utilities/IsDatabaseUp.sh'
-
+/usr/bin/ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} -i ${HOME}/.ssh/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY ${SERVER_USER}@${HOST} '${HOME}/providerscripts/utilities/IsDatabaseUp.sh'
