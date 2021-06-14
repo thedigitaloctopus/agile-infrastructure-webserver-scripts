@@ -24,7 +24,7 @@ if ( [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:Maria ] || [ -f ${HOME}/.ssh/DAT
 then
     prefix="`/bin/cat /var/www/html/dpb.dat`"
     
-    user="`${HOME}/providerscripts/utilities/ConnectToRemoteMYSQLDB.sh "SELECT * from ${prefix}_users" | /usr/bin/wc -l`"
+    user="`${HOME}/providerscripts/utilities/ConnectToRemoteMYSQLDB.sh "SELECT * from ${prefix}_users_field_data" | /usr/bin/wc -l`"
     
     if ( [ "${user}" = "2" ] && [ "${user}" != "" ] )
     then
@@ -38,7 +38,7 @@ if ( [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:Postgres ] )
 then
    prefix="`/bin/cat /var/www/html/dpb.dat`"
    
-   user="`${HOME}/providerscripts/utilities/ConnectToRemotePostgresDB.sh "select * from ${prefix}_users;" raw 2>/dev/null | /bin/sed 's/ //g' | /usr/bin/wc -l`"
+   user="`${HOME}/providerscripts/utilities/ConnectToRemotePostgresDB.sh "select * from ${prefix}_users_field_data;" raw 2>/dev/null | /bin/sed 's/ //g' | /usr/bin/wc -l`"
 
    if ( [ "${user}" = "2" ] && [ "${user}" != "" ] )
    then
