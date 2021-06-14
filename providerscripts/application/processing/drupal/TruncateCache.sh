@@ -34,7 +34,7 @@ then
 
    for cache_table in ${cache_tables}
    do
-       ${HOME}/providerscripts/utilities/ConnectToRemoteMYSQLDB.sh "TRUNCATE ${cache_table};" 2>/dev/null
+       ${HOME}/providerscripts/utilities/ConnectToRemoteMYSQLDB.sh "TRUNCATE ${cache_table};" > /dev/null 2>&1
        
        if ( [ "$?" != "0" ] )
        then
@@ -61,7 +61,7 @@ then
 
    for cache_table in ${cache_tables}
    do
-       ${HOME}/providerscripts/utilities/ConnectToRemotePostgresDB.sh "TRUNCATE ${cache_table};" 2>/dev/null
+       ${HOME}/providerscripts/utilities/ConnectToRemotePostgresDB.sh "TRUNCATE ${cache_table};" > /dev/null 2>&1
        
        if ( [ "$?" != "0" ] )
        then
