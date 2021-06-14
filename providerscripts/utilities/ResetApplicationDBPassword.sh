@@ -16,7 +16,9 @@ read new_password
 
 if ( [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:MySQL ] || [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:Maria ] )
 then
-    ${HOME}/providerscripts/utilities/ConnectToRemoteMYSQLDB.sh "set password=\"${new_password};\""
+    #At the moment, mariadb and mysql have different ways of setting passwords
+    ${HOME}/providerscripts/utilities/ConnectToRemoteMYSQLDB.sh "set password=\"${new_password};\"" 2>/dev/null
+    ${HOME}/providerscripts/utilities/ConnectToRemoteMYSQLDB.sh "set password=PASSWORD(\"${new_password}\");" 2>/dev/null
 fi
 
 if ( [ -f ${HOME}/.ssh/APPLICATION:drupal ] )
