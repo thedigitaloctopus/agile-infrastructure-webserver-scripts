@@ -28,9 +28,9 @@ then
     
     if ( [ "${user}" = "2" ] && [ "${user}" != "" ] )
     then
-        /bin/echo "USER"
+        /bin/echo "USER ADDED"
     else
-       /bin/echo "NO USER"
+       /bin/echo "NO USER ADDED"
     fi
 fi
 
@@ -42,8 +42,8 @@ then
 
    if ( [ "${user}" = "2" ] && [ "${user}" != "" ] )
    then
-       /bin/echo "USER"
+       /bin/echo "USER ADDED"
    else
-       /bin/echo "NO USER"
+       /bin/echo "NO USER ADDED"
    fi
 fi
