@@ -25,6 +25,6 @@ then
     /bin/sed -i "s/${old_password}/${new_password}/g" ${HOME}/config/drupal_settings.php
     /bin/sed -i "s/${old_password}/${new_password}/g" ${HOME}/runtime/drupal_settings.php
     /bin/sed -i "s/${old_password}/${new_password}/g" ${HOME}/shit
-    /bin/sed -i "s/${old_password}/${new_password}/g" ${HOME}/sites/default/settings.php
+    /bin/sed -i "s/${old_password}/${new_password}/g" /var/www/html/sites/default/settings.php
     ${HOME}/providerscripts/utilities/ConnectDBServer.sh "/bin/sed -i \"s/${old_password}/${new_password}/g\"" ${HOME}/credentials/shit
 fi
