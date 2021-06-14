@@ -35,7 +35,7 @@ then
         CLOUDFLARE_FILE_PATH=/etc/nginx/cloudflare
 
         /bin/echo "#Cloudflare" > $CLOUDFLARE_FILE_PATH;
-        /bin/ echo "" >> $CLOUDFLARE_FILE_PATH;
+        /bin/echo "" >> $CLOUDFLARE_FILE_PATH;
         
         /bin/echo "" >> $CLOUDFLARE_FILE_PATH;
         /bin/echo "real_ip_header CF-Connecting-IP;" >> $CLOUDFLARE_FILE_PATH;
@@ -59,7 +59,7 @@ then
         CLOUDFLARE_FILE_PATH=/etc/apache2/conf-available/remoteip.conf
 
         /bin/echo "#Cloudflare" > $CLOUDFLARE_FILE_PATH;
-        /bin/ echo "" >> $CLOUDFLARE_FILE_PATH;
+        /bin/echo "" >> $CLOUDFLARE_FILE_PATH;
     
         /bin/echo "" >> $CLOUDFLARE_FILE_PATH;
         /bin/echo "RemoteIPHeader CF-Connecting-IP" >> $CLOUDFLARE_FILE_PATH;
