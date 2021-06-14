@@ -39,7 +39,7 @@ if ( [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:Postgres ] )
 then
    prefix="`/bin/cat /var/www/html/dpb.dat`"
    
-   user="`${HOME}/providerscripts/utilities/ConnectToRemotePostgresDB.sh "select * from ${prefix}_users_field_data;" "raw" | /bin/grep -v "ace" | /bin/sed 's/ //g' | /bin/sed '/^$/d' | /usr/bin/wc -l`"
+   user="`${HOME}/providerscripts/utilities/ConnectToRemotePostgresDB.sh "select * from ${prefix}_users_field_data;" "raw" | /bin/grep -v "placeholder-for" | /bin/sed 's/ //g' | /bin/sed '/^$/d' | /usr/bin/wc -l`"
 
    if ( [ "${user}" = "2" ] && [ "${user}" != "" ] )
    then
