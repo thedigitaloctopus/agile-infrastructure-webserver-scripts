@@ -25,8 +25,8 @@ if ( [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:Maria ] || [ -f ${HOME}/.ssh/DAT
 then
     prefix="`/bin/cat /var/www/html/dpb.dat`"
     
-    user="`${HOME}/providerscripts/utilities/ConnectToRemoteMYSQLDB.sh "SELECT * from ${prefix}_users" | /bin/sed 's/ //g' | /bin/sed '/^$/d' | /usr/bin/wc -l`"
-    
+    user="`${HOME}/providerscripts/utilities/ConnectToRemoteMYSQLDB.sh "select * from ${prefix}_users_field_data;" "raw" | /bin/grep -v "placeholder-for" | /bin/sed 's/ //g' | /bin/sed '/^$/d' | /usr/bin/wc -l`"
+   
     if ( [ "${user}" = "2" ] && [ "${user}" != "" ] )
     then
         /bin/echo "USER ADDED"
