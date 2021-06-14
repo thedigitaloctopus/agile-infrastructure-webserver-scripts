@@ -2,9 +2,7 @@
 ######################################################################################
 # Author: Peter Winter
 # Date :  07/07/2016
-# Description: This is a simple way of checking that drupal has initialised a session correctly. 
-# The way I check is just to check if any sessions have been added to the _sessions table. 
-# If sessions exist, then, we can assume that sessions are being created correctly. 
+# Description: This is a simple way of checking that drupal has created a user during install 
 #####################################################################################
 # License Agreement:
 # This file is part of The Agile Deployment Toolkit.
@@ -26,13 +24,13 @@ if ( [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:Maria ] || [ -f ${HOME}/.ssh/DAT
 then
     prefix="`/bin/cat /var/www/html/dpb.dat`"
     
-    session="`${HOME}/providerscripts/utilities/ConnectToRemoteMYSQLDB.sh "SELECT * from ${prefix}_sessions" | /usr/bin/wc -l`"
+    user="`${HOME}/providerscripts/utilities/ConnectToRemoteMYSQLDB.sh "SELECT * from ${prefix}_users" | /usr/bin/wc -l`"
     
-    if ( [ "${session}" != "0" ] )
+    if ( [ "${user}" = "2" ] && [ "${user}" != "" ] )
     then
-        /bin/echo "SESSION"
+        /bin/echo "USER"
     else
-       /bin/echo "NOT SESSION"
+       /bin/echo "NO USER"
     fi
 fi
 
@@ -40,12 +38,12 @@ if ( [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:Postgres ] )
 then
    prefix="`/bin/cat /var/www/html/dpb.dat`"
    
-   session="`${HOME}/providerscripts/utilities/ConnectToRemotePostgresDB.sh "select * from ${prefix}_sessions;" raw 2>/dev/null | /bin/sed 's/ //g' | /usr/bin/wc -l`"
+   user="`${HOME}/providerscripts/utilities/ConnectToRemotePostgresDB.sh "select * from ${prefix}_users;" raw 2>/dev/null | /bin/sed 's/ //g' | /usr/bin/wc -l`"
 
-   if ( [ "${session}" != "0" ] && [ "${session}" != "" ] )
+   if ( [ "${user}" = "2" ] && [ "${user}" != "" ] )
    then
-       /bin/echo "SESSION"
+       /bin/echo "USER"
    else
-       /bin/echo "NOT SESSION"
+       /bin/echo "NO USER"
    fi
 fi
