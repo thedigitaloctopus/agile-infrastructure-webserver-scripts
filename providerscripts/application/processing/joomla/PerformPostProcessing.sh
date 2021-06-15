@@ -166,6 +166,13 @@ then
     command="${SUDO} ${HOME}/providerscripts/utilities/ConnectToRemotePostgresDB.sh < /tmp/base.sql" && eval ${command}
     command="${SUDO} ${HOME}/providerscripts/utilities/ConnectToRemotePostgresDB.sh < /tmp/extensions.sql" && eval ${command}
     command="${SUDO} ${HOME}/providerscripts/utilities/ConnectToRemotePostgresDB.sh < /tmp/supports.sql" && eval ${command}
+    
+   # SERVER_USER="`/bin/ls ${HOME}/.ssh/SERVERUSER:* | /usr/bin/awk -F':' '{print $NF}'`"
+   # BUILD_IDENTIFIER="`/bin/ls ${HOME}/.ssh/BUILDIDENTIFIER:* | /usr/bin/awk -F':' '{print $NF}'`"
+   # username="${BUILD_IDENTIFIER}-webmaster"
+   # password="`/bin/echo ${SERVER_USER} | /usr/bin/openssl enc -base64`"
+   # sqlcommand="INSERT INTO ${PREFIX}_users"
+   # sqlcommand="${sqlcommand}"'(id,"\""name"\"","\""username"\"","\""email"\"","\""password"\"","\""registerDate"\"","\""params"\"","\""requireReset"\"") values (42,'\'''"${username}"''\'','\''webmaster'\'','\''testxyz@test123i4.com'\'','\'''"${password}"''\'','\''1980-01-01'\'',1,1);'
 
     sqlcommand="INSERT INTO ${PREFIX}_users"
     sqlcommand="${sqlcommand}"'(id,"\""name"\"","\""username"\"","\""email"\"","\""password"\"","\""registerDate"\"","\""params"\"","\""requireReset"\"") values (42,'\''webmaster'\'','\''webmaster'\'','\''testxyz@test123i4.com'\'','\''16d7a4fca7442dda3ad93c9a726597e4'\'','\''1980-01-01'\'',1,1);'
