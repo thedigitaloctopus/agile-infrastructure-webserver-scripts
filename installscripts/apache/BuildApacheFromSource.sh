@@ -88,5 +88,8 @@ WantedBy=multi-user.target" > /etc/systemd/system/rc-local.service
 /bin/mkdir /etc/apache2/mods-enabled
 /bin/mkdir /etc/apache2/conf-enabled
 
+/bin/mkdir /var/log/apache2
+/bin/chown www-data.www-data /var/log/apache2
+
 /usr/bin/systemctl enable rc-local.service
 /usr/bin/systemctl start rc-local.service
