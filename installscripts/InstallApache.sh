@@ -29,32 +29,32 @@ phpversion="`/bin/ls ${HOME}/.ssh/PHP_VERSION:* | /usr/bin/awk -F':' '{print $NF
 
 if ( [ "${BUILDOS}" = "ubuntu" ] )
 then
- #   ${HOME}/installscripts/Update.sh ${BUILDOS}
- #   ${HOME}/installscripts/apache/BuildApacheFromSource.sh 
+    ${HOME}/installscripts/Update.sh ${BUILDOS}
+    ${HOME}/installscripts/apache/BuildApacheFromSource.sh 
     
-    /usr/bin/apt-get -qq -y install apache2
-    if ( [ -f ${HOME}/.ssh/APPLICATIONLANGUAGE:PHP ] )
-    then
-        /usr/bin/apt-get -qq -y install libapache2-mod-php${phpversion}
-    fi
-    ####/usr/bin/apt-get -qq -y install libapache2-modsecurity
-    ####/usr/bin/apt-get -qq -y install modsecurity-crs
-    /usr/bin/apt -qq -y install libapache2-mod-fcgid
+ #   /usr/bin/apt-get -qq -y install apache2
+ #   if ( [ -f ${HOME}/.ssh/APPLICATIONLANGUAGE:PHP ] )
+ #   then
+ #       /usr/bin/apt-get -qq -y install libapache2-mod-php${phpversion}
+ #   fi
+ #   ####/usr/bin/apt-get -qq -y install libapache2-modsecurity
+ #   ####/usr/bin/apt-get -qq -y install modsecurity-crs
+ #   /usr/bin/apt -qq -y install libapache2-mod-fcgid
 
 fi
 
 if ( [ "${BUILDOS}" = "debian" ] )
 then
-   # ${HOME}/installscripts/Update.sh ${BUILDOS}
-   # ${HOME}/installscripts/apache/BuildApacheFromSource.sh
+    ${HOME}/installscripts/Update.sh ${BUILDOS}
+    ${HOME}/installscripts/apache/BuildApacheFromSource.sh
     
-    /usr/bin/apt-get -qq -y install apache2
-    if ( [ -f ${HOME}/.ssh/APPLICATIONLANGUAGE:PHP ] )
-    then
-        /usr/bin/apt-get -qq -y install libapache2-mod-php${phpversion}
-    fi
-    ####/usr/bin/apt-get -qq -y install libapache2-modsecurity
-    ####/usr/bin/apt-get -qq -y install modsecurity-crs
-    /usr/bin/apt -qq -y install libapache2-mod-fcgid
+  #  /usr/bin/apt-get -qq -y install apache2
+  #  if ( [ -f ${HOME}/.ssh/APPLICATIONLANGUAGE:PHP ] )
+  #  then
+  #      /usr/bin/apt-get -qq -y install libapache2-mod-php${phpversion}
+  #  fi
+  #  ####/usr/bin/apt-get -qq -y install libapache2-modsecurity
+  #  ####/usr/bin/apt-get -qq -y install modsecurity-crs
+  #  /usr/bin/apt -qq -y install libapache2-mod-fcgid
 fi
 
