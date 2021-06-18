@@ -58,7 +58,7 @@ make install
 /bin/echo "#!/bin/bash
 /bin/mkdir /var/run/apache2
 /bin/chown www-data.www-data /var/run/apache2
-/usr/local/apache2/bin/apache2ctl -k start
+/usr/local/apache2/bin/apachectl -k start
 exit 0" > /etc/rc.local
 
 /bin/chmod +x /etc/rc.local
@@ -85,7 +85,7 @@ WantedBy=multi-user.target" > /etc/systemd/system/rc-local.service
 /bin/cp ${HOME}/installscripts/apache/ports.conf.sample /etc/apache2/ports.conf
 
 /bin/mkdir /etc/apache2/sites-enabled
-/bin/mkdir /etc/apache2/modules-enabled
+/bin/mkdir /etc/apache2/mods-enabled
 /bin/mkdir /etc/apache2/conf-enabled
 
 /usr/bin/systemctl enable rc-local.service
