@@ -49,6 +49,23 @@ cd httpd-*
 
 ./configure --prefix=/usr/local/apache2 --with-pcre=/usr/local/pcre --enable-mods-shared="reallyall" --enable-mpms-shared="all"
 
+--enable-layout=Debian --enable-so \
+                  --with-program-name=apache2  \
+          --with-ldap=yes --with-ldap-include=/usr/include \
+          --with-ldap-lib=/usr/lib \
+          --with-suexec-caller=www-data \
+          --with-suexec-bin=/usr/lib/apache2/suexec \
+          --with-suexec-docroot=/var/www/html \
+          --with-suexec-userdir=public_html \
+          --with-suexec-logfile=/var/log/apache2/suexec.log \
+          --with-suexec-uidmin=100 \
+          --enable-suexec=shared \
+          --enable-log-config=static --enable-logio=static \
+          --with-apr=/usr/bin/apr-1-config \
+          --with-apr-util=/usr/bin/apu-1-config \
+          --with-pcre=yes \
+          --enable-pie
+
 make
 
 make install
