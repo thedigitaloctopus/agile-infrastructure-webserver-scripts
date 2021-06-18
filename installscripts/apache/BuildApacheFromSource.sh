@@ -89,6 +89,7 @@ WantedBy=multi-user.target" > /etc/systemd/system/rc-local.service
 /bin/mkdir /var/log/apache2
 /bin/chown www-data.www-data /var/log/apache2
 
+/bin/mv /etc/apache2/conf/httpd.conf /etc/apache2/conf/httpd.conf.orig
 /bin/ln -s /etc/apache2/conf/httpd.conf /etc/apache2/apache2.conf
 /bin/ln -s /etc/apache2/conf/magic /etc/apache2/magic
 /bin/ln -s /etc/apache2/conf/envvars /etc/apache2/envvars
