@@ -30,7 +30,7 @@ phpversion="`/bin/ls ${HOME}/.ssh/PHP_VERSION:* | /usr/bin/awk -F':' '{print $NF
 if ( [ "${BUILDOS}" = "ubuntu" ] )
 then
     ${HOME}/installscripts/Update.sh ${BUILDOS}
-    ${HOME}/installscripts/nginx/BuildApacheFromSource.sh 
+    ${HOME}/installscripts/apache/BuildApacheFromSource.sh 
     
    # /usr/bin/apt-get -qq -y install apache2
    # if ( [ -f ${HOME}/.ssh/APPLICATIONLANGUAGE:PHP ] )
@@ -46,7 +46,7 @@ fi
 if ( [ "${BUILDOS}" = "debian" ] )
 then
     ${HOME}/installscripts/Update.sh ${BUILDOS}
-    ${HOME}/installscripts/nginx/BuildApacheFromSource.sh
+    ${HOME}/installscripts/apache/BuildApacheFromSource.sh
     
     #/usr/bin/apt-get -qq -y install apache2
     #if ( [ -f ${HOME}/.ssh/APPLICATIONLANGUAGE:PHP ] )
