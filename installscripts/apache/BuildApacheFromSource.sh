@@ -77,5 +77,14 @@ GuessMainPID=no
 [Install]
 WantedBy=multi-user.target" > /etc/systemd/system/rc-local.service
 
+/bin/cp ${HOME}/installscripts/apache/apache2.conf.sample /etc/apache2/apache2.conf
+/bin/cp ${HOME}/installscripts/apache/envvars.sample /etc/apache2/envvars
+/bin/cp ${HOME}/installscripts/apache/magic.sample /etc/apache2/magic
+/bin/cp ${HOME}/installscripts/apache/ports.conf.sample /etc/apache2/ports.conf
+
+/bin/mkdir /etc/apache2/sites-enabled
+/bin/mkdir /etc/apache2/modules-enabled
+/bin/mkdir /etc/apache2/conf-enabled
+
 /usr/bin/systemctl enable rc-local.service
 /usr/bin/systemctl start rc-local.service
