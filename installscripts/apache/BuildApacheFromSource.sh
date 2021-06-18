@@ -48,7 +48,7 @@ cd httpd-*
 
 #./configure --enable-ssl --enable-so --with-mpm=event --with-included-apr --prefix=/usr/local/apache2 --with-pcre=/usr/local/pcre --enable-mods-shared="reallyall" --enable-mpms-shared="all"
 #./configure --enable-ssl --enable-so --with-mpm=event --with-included-apr --enable-proxy --enable-ssl --enable-rewrite --with-mpm=worker --prefix=/usr/local/apache2 --with-pcre=/usr/local/pcre --enable-mpms-shared="all" --enable-mods-shared="all ssl cache proxy http2 authn_alias mem_cache file_cache charset_lite dav_lock disk_cache"
-./configure --prefix=/etc/apache2 --with-pcre=/usr/local/pcre --with-apxs2=/usr/bin/apxs --enable-http2 --enable-ssl --enable-so --enable-mpms-shared='event' --with-included-apr --enable-rewrite --enable-mods-static="reallyall" --enable-mods-shared="reallyall"
+./configure --prefix=/etc/apache2 --with-pcre=/usr/local/pcre --with-apxs2=/usr/bin/apxs --enable-http2 --enable-ssl --enable-so --enable-mpms-shared='prefork' --with-included-apr --enable-rewrite --enable-mods-static="reallyall" --enable-mods-shared="reallyall"
 
 /usr/bin/make
 
@@ -89,6 +89,12 @@ WantedBy=multi-user.target" > /etc/systemd/system/rc-local.service
 
 /bin/mkdir /var/log/apache2
 /bin/chown www-data.www-data /var/log/apache2
+
+/bin/ls -s /etc/apache2/conf/httpd.conf /etc/apache2/apache2.conf
+/bin/ls -s /etc/apache2/conf/magic /etc/apache2/magic
+/bin/ls -s /etc/apache2/conf/envvars /etc/apache2/envvars
+/bin/ls -s /etc/apache2/conf/ports.conf /etc/apache2/ports.conf
+
 
 /usr/bin/systemctl enable rc-local.service
 /usr/bin/systemctl start rc-local.service
