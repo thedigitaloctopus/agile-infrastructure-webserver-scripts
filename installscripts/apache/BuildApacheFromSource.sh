@@ -1,7 +1,6 @@
 set -x
 
-/usr/bin/apt -qq -y  install libnghttp2-dev libssl-dev libpcre3  build-essential autoconf libtool libexpat-dev openssl
-
+/usr/bin/apt -qq -y  install libnghttp2-dev libssl-dev libpcre3  build-essential autoconf libtool libexpat-dev openssl apache2-dev
 cd /usr/local/src
 
 pcre_latest_version="`/usr/bin/curl 'https://ftp.pcre.org/pub/pcre/' | /bin/egrep -o 'pcre-[0-9]+\.[0-9]+' | /bin/sed 's/pcre-//g' | /usr/bin/sort --version-sort | /usr/bin/uniq | /usr/bin/tail -1`"
@@ -49,7 +48,7 @@ cd httpd-*
 
 #./configure --enable-ssl --enable-so --with-mpm=event --with-included-apr --prefix=/usr/local/apache2 --with-pcre=/usr/local/pcre --enable-mods-shared="reallyall" --enable-mpms-shared="all"
 #./configure --enable-ssl --enable-so --with-mpm=event --with-included-apr --enable-proxy --enable-ssl --enable-rewrite --with-mpm=worker --prefix=/usr/local/apache2 --with-pcre=/usr/local/pcre --enable-mpms-shared="all" --enable-mods-shared="all ssl cache proxy http2 authn_alias mem_cache file_cache charset_lite dav_lock disk_cache"
-./configure --enable-ssl --enable-http2 --enable-so --enable-mpms-shared='prefork event' --with-included-apr --enable-rewrite --prefix=/usr/local/apache2 --with-pcre=/usr/local/pcre --enable-mpms-shared="reallyall" --enable-mods-static="reallyall" --enable-mods-shared="reallyall"
+./configure --enable-ssl --with-apxs2=/usr/bin/apxs --enable-http2 --enable-so --enable-mpms-shared='prefork event' --with-included-apr --enable-rewrite --prefix=/usr/local/apache2 --with-pcre=/usr/local/pcre --enable-mpms-shared="reallyall" --enable-mods-static="reallyall" --enable-mods-shared="reallyall"
 
 make
 
