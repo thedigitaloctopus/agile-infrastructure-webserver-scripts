@@ -91,8 +91,11 @@ WantedBy=multi-user.target" > /etc/systemd/system/rc-local.service
 
 /bin/mv /etc/apache2/conf/httpd.conf /etc/apache2/conf/httpd.conf.orig
 /bin/ln -s /etc/apache2/conf/httpd.conf /etc/apache2/apache2.conf
+/bin/mv /etc/apache2/conf/magic.conf /etc/apache2/conf/magic.orig
 /bin/ln -s /etc/apache2/conf/magic /etc/apache2/magic
+/bin/mv /etc/apache2/conf/envvars /etc/apache2/conf/envvars.orig
 /bin/ln -s /etc/apache2/conf/envvars /etc/apache2/envvars
+/bin/mv /etc/apache2/conf/ports.conf /etc/apache2/conf/ports.conf.orig
 /bin/ln -s /etc/apache2/conf/ports.conf /etc/apache2/ports.conf
 
 
