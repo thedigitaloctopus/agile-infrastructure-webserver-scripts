@@ -89,10 +89,10 @@ WantedBy=multi-user.target" > /etc/systemd/system/rc-local.service
 /bin/mkdir /var/log/apache2
 /bin/chown www-data.www-data /var/log/apache2
 
-/bin/ls -s /etc/apache2/conf/httpd.conf /etc/apache2/apache2.conf
-/bin/ls -s /etc/apache2/conf/magic /etc/apache2/magic
-/bin/ls -s /etc/apache2/conf/envvars /etc/apache2/envvars
-/bin/ls -s /etc/apache2/conf/ports.conf /etc/apache2/ports.conf
+/bin/ln -s /etc/apache2/conf/httpd.conf /etc/apache2/apache2.conf
+/bin/ln -s /etc/apache2/conf/magic /etc/apache2/magic
+/bin/ln -s /etc/apache2/conf/envvars /etc/apache2/envvars
+/bin/ln -s /etc/apache2/conf/ports.conf /etc/apache2/ports.conf
 
 
 /usr/bin/systemctl enable rc-local.service
