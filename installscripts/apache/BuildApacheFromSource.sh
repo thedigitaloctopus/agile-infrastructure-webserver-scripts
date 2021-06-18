@@ -48,7 +48,7 @@ cd httpd-*
 
 #./configure --enable-ssl --enable-so --with-mpm=event --with-included-apr --prefix=/usr/local/apache2 --with-pcre=/usr/local/pcre --enable-mods-shared="reallyall" --enable-mpms-shared="all"
 #./configure --enable-ssl --enable-so --with-mpm=event --with-included-apr --enable-proxy --enable-ssl --enable-rewrite --with-mpm=worker --prefix=/usr/local/apache2 --with-pcre=/usr/local/pcre --enable-mpms-shared="all" --enable-mods-shared="all ssl cache proxy http2 authn_alias mem_cache file_cache charset_lite dav_lock disk_cache"
-./configure --enable-ssl --with-apxs2=/usr/bin/apxs --enable-http2 --enable-so --enable-mpms-shared='prefork event' --with-included-apr --enable-rewrite --prefix=/usr/local/apache2 --with-pcre=/usr/local/pcre --enable-mods-static="reallyall" --enable-mods-shared="reallyall"
+./configure prefix=/usr/local/apache2 --with-pcre=/usr/local/pcre --with-apxs2=/usr/bin/apxs --enable-http2 --enable-ssl --enable-so --enable-mpms-shared='prefork event' --with-included-apr --enable-rewrite -- --enable-mods-static="reallyall" --enable-mods-shared="reallyall"
 
 make
 
