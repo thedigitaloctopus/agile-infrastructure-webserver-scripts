@@ -48,7 +48,7 @@ cd httpd-*
 
 #./configure --enable-ssl --enable-so --with-mpm=event --with-included-apr --prefix=/usr/local/apache2 --with-pcre=/usr/local/pcre --enable-mods-shared="reallyall" --enable-mpms-shared="all"
 #./configure --enable-ssl --enable-so --with-mpm=event --with-included-apr --enable-proxy --enable-ssl --enable-rewrite --with-mpm=worker --prefix=/usr/local/apache2 --with-pcre=/usr/local/pcre --enable-mpms-shared="all" --enable-mods-shared="all ssl cache proxy http2 authn_alias mem_cache file_cache charset_lite dav_lock disk_cache"
-./configure prefix=/usr/local/apache2 --with-pcre=/usr/local/pcre --with-apxs2=/usr/bin/apxs --enable-http2 --enable-ssl --enable-so --enable-mpms-shared='event' --with-included-apr --enable-rewrite --enable-mods-static="reallyall" --enable-mods-shared="reallyall"
+./configure prefix=/etc/apache2 --with-pcre=/usr/local/pcre --with-apxs2=/usr/bin/apxs --enable-http2 --enable-ssl --enable-so --enable-mpms-shared='event' --with-included-apr --enable-rewrite --enable-mods-static="reallyall" --enable-mods-shared="reallyall"
 
 /usr/bin/make
 
@@ -57,7 +57,7 @@ cd httpd-*
 /bin/echo "#!/bin/bash
 /bin/mkdir /var/run/apache2
 /bin/chown www-data.www-data /var/run/apache2
-/usr/local/apache2/bin/apachectl -k start
+/etc/apache2/bin/apachectl -k start
 exit 0" > /etc/rc.local
 
 /bin/chmod +x /etc/rc.local
