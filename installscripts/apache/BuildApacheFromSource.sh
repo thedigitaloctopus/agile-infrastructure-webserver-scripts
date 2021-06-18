@@ -57,7 +57,7 @@ cd httpd-*
 /bin/echo "#!/bin/bash
 /bin/mkdir /var/run/apache2
 /bin/chown www-data.www-data /var/run/apache2
-/etc/apache2/bin/apachectl -k start
+. /etc/apache2/conf/envvars && /etc/apache2/bin/apachectl -k start
 exit 0" > /etc/rc.local
 
 /bin/chmod +x /etc/rc.local
