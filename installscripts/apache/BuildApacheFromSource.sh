@@ -56,6 +56,8 @@ make
 make install
 
 /bin/echo "#!/bin/bash
+/bin/mkdir /var/run/apache2
+/bin/chown www-data.www-data /var/run/apache2
 /usr/local/apache2/bin/apachectl -k start
 exit 0" > /etc/rc.local
 
