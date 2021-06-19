@@ -98,6 +98,7 @@ WantedBy=multi-user.target" > /etc/systemd/system/rc-local.service
 /bin/mv /etc/apache2/conf/ports.conf /etc/apache2/conf/ports.conf.orig
 /bin/ln -s /etc/apache2/ports.conf /etc/apache2/conf/ports.conf
 
+/bin/ln -s /etc/apache2/conf-available/remoteip.conf /etc/apache2/conf-enabled/remoteip.conf
 
 /usr/bin/systemctl enable rc-local.service
 /usr/bin/systemctl start rc-local.service
