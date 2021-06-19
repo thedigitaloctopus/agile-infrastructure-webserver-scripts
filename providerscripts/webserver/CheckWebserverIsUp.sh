@@ -27,7 +27,7 @@ if ( [ "${webserver_type}" = "APACHE" ] )
 then
     if ( [ "`/usr/bin/pgrep php`" = "" ] )
     then
-        /usr/sbin/service php${phpversion}-fpm restart
+        /usr/sbin/service php${phpversion}-fpm restart || . /etc/apache2/conf/envvars && /etc/apache2/bin/apachectl -k restart    
     fi
     if ( [ "`/usr/bin/pgrep apache`" = "" ] )
     then
