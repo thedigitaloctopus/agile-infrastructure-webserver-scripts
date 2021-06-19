@@ -28,7 +28,7 @@ then
 fi
 if ( [ "${WEBSERVERCHOICE}" = "APACHE" ] )
 then
-    /usr/sbin/service apache2 reload
+    /usr/sbin/service apache2 reload || . /etc/apache2/conf/envvars && /etc/apache2/bin/apachectl -k reload
 fi
 if ( [ "${WEBSERVERCHOICE}" = "LIGHTTPD" ] )
 then
