@@ -31,7 +31,7 @@ fi
 if ( [ "${WEBSERVERCHOICE}" = "APACHE" ] )
 then
     /usr/sbin/service php${phpversion}-fpm restart
-    /usr/sbin/service apache2 restart
+    /usr/sbin/service apache2 restart || . /etc/apache2/conf/envvars && /etc/apache2/bin/apachectl -k restart
 fi
 if ( [ "${WEBSERVERCHOICE}" = "LIGHTTPD" ] )
 then
