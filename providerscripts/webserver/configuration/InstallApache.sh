@@ -59,7 +59,7 @@ fi
         SSLCertificateFile ${HOME}/ssl/live/${website_url}/fullchain.pem
         SSLCertificateKeyFile ${HOME}/ssl/live/${website_url}/privkey.pem
         
-        ProxyPassMatch ^/(.*\.php)$ fcgi://127.0.0.1:9000/var/www/html/$1
+        ProxyPassMatch ^/(.*\.php)$ fcgi://127.0.0.1:9000/var/www/html/\$1
 
         <FilesMatch \"\.(cgi|shtml|phtml|php)\$\">
                         SSLOptions +StdEnvVars
@@ -102,7 +102,7 @@ fi
                # AuthUserFile /etc/apache2/.htpasswd
                # Require valid-user
                
-            #    Require all granted
+                Require all granted
         </Directory>
 </VirtualHost>" >> /etc/apache2/sites-available/${WEBSITE_NAME}
 
