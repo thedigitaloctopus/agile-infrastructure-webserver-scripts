@@ -10,8 +10,8 @@ pcre_latest_version="`/usr/bin/curl 'https://ftp.pcre.org/pub/pcre/' | /bin/egre
 cd /usr/local/src/pcre*
 
 ./configure --prefix=/usr/local/pcre 
-make
-make install
+/usr/bin/make
+/usr/bin/make install
 
 cd /usr/local/src
 
@@ -20,8 +20,8 @@ cd /usr/local/src
 cd /usr/local/src/libexpat/expat
 
 ./configure --prefix=/usr/local/expat
-make 
-make install
+/usr/bin/make 
+/usr/bin/make install
 
 cd /usr/local/src
 
