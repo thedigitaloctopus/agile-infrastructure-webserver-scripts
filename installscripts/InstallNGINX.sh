@@ -25,7 +25,7 @@ then
     BUILDOS="${1}"
 fi
 
-BUILDOSVERSION"`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDOSVERSION'`"
+BUILDOSVERSION="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDOSVERSION'`"
 
 if ( [ "${BUILDOS}" = "ubuntu" ] )
 then
