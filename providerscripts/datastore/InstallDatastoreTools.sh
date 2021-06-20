@@ -22,7 +22,7 @@
 
 BUILDOS="`/bin/ls ${HOME}/.ssh/BUILDOS:* | /usr/bin/awk -F':' '{print $NF}'`"
 
-if ( [ -f ${HOME}/.ssh/DATASTORECHOICE:amazonS3 ]  || [ -f ${HOME}/.ssh/DATASTORECHOICE:digitalocean ] || [ -f ${HOME}/.ssh/DATASTORECHOICE:exoscale ] || [ -f ${HOME}/.ssh/DATASTORECHOICE:linode ] ||[ -f ${HOME}/.ssh/DATASTORECHOICE:vultr ] )
+if ( [ -f ${HOME}/.ssh/DATASTORECHOICE:amazonS3 ]  || [ -f ${HOME}/.ssh/DATASTORECHOICE:digitalocean ] || [ -f ${HOME}/.ssh/DATASTORECHOICE:exoscale ] || [ -f ${HOME}/.ssh/DATASTORECHOICE:linode ] || [ -f ${HOME}/.ssh/DATASTORECHOICE:vultr ] )
 then
 
     if ( [ -f /usr/bin/python ] )
