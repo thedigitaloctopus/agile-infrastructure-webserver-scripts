@@ -21,7 +21,7 @@
 ####################################################################################
 #set -x
 
-WEBSITE_URL="`/bin/ls ${HOME}/.ssh/WEBSITEURL:* | /usr/bin/awk -F':' '{print $NF}'`"
+WEBSITE_URL="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEURL'`"
 
 if ( [ -f ${HOME}/.ssh/PERSISTASSETSTOCLOUD:0 ] && [ ! -f ${HOME}/runtime/S3BUCKETSET ] )
 then
