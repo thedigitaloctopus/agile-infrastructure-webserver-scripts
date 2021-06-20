@@ -30,11 +30,10 @@
 ###############################################################################################################################
 if ( [ "$1" = "" ]  || [ "$2" = "" ] )
 then
-    /bin/echo "Usage: ./ws.sh <build archive> <server user>" >> ${HOME}/logs/WEBSERVER_BUILD.log
+    /bin/echo "Usage: ./ws.sh <build archive> <server user>"
     exit
 fi
 BUILD_ARCHIVE_CHOICE="$1"
-/bin/touch ${HOME}/.ssh/BUILDARCHIVECHOICE:${BUILD_ARCHIVE_CHOICE}
 SERVER_USER="$2"
 
 #HOMEDIRFORROOT="`/bin/echo ${HOME} | /bin/sed 's/\///g' | /bin/sed 's/home//g'`"
