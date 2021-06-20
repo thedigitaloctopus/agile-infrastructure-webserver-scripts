@@ -25,7 +25,7 @@ then
     BUILDOS="${1}"
 fi
 
-phpversion="`/bin/ls ${HOME}/.ssh/PHP_VERSION:* | /usr/bin/awk -F':' '{print $NF}'`"
+phpversion"`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'PHP_VERSION'`"
 
 if ( [ "${BUILDOS}" = "ubuntu" ] )
 then
