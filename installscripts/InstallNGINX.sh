@@ -25,7 +25,7 @@ then
     BUILDOS="${1}"
 fi
 
-BUILDOSVERSION="`/bin/ls ${HOME}/.ssh/BUILDOSVERSION:* | /usr/bin/awk -F':' '{print $NF}'`"
+BUILDOSVERSION"`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDOSVERSION'`"
 
 if ( [ "${BUILDOS}" = "ubuntu" ] )
 then
