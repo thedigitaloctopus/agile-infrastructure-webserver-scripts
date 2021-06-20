@@ -170,8 +170,6 @@ then
     /bin/chmod 700 ${HOME}/.cache
 fi
 
-/bin/chmod -R 755 ${HOME}/cron ${HOME}/installscripts ${HOME}/providerscripts ${HOME}/security
-
 /bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
 /bin/echo "${0} `/bin/date`: Setting the hostname" >> ${HOME}/logs/WEBSERVER_BUILD.log
 /bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
