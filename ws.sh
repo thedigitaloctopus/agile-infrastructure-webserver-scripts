@@ -64,10 +64,6 @@ fi
 BUILD_ARCHIVE_CHOICE="$1"
 SERVER_USER="$2"
 
-/bin/echo "111111111" >> ${HOME}/logs/WEBSERVER_BUILD.log
-export HOMEDIR="`/bin/cat /home/homedir.dat`"
-/bin/echo "2222222" >> ${HOME}/logs/WEBSERVER_BUILD.log
-
 /bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
 /bin/echo "${0} `/bin/date`: Building a new webserver" >> ${HOME}/logs/WEBSERVER_BUILD.log
 /bin/echo "${0} `/bin/date`: Setting up the build parameters" >> ${HOME}/logs/WEBSERVER_BUILD.log
@@ -75,15 +71,11 @@ export HOMEDIR="`/bin/cat /home/homedir.dat`"
 
 #Load the environment into memory for convenience
 
-/bin/echo "ID:`/usr/bin/id`" >> ${HOME}/logs/WEBSERVER_BUILD.log
-
 ${HOME}/providerscripts/utilities/StoreConfigValue.sh "BUILDARCHIVECHOICE" "${BUILD_ARCHIVE_CHOICE}"
 CLOUDHOST="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'CLOUDHOST'`"
 BUILD_IDENTIFIER="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDIDENTIFIER'`"
 ALGORITHM="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'ALGORITHM'`"
 WEBSITE_URL="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEURL'`"
-
-echo "111" >> ${HOME}/logs/WEBSERVER_BUILD.log
 
 WEBSITE_NAME="`/bin/echo ${WEBSITE_URL} | /usr/bin/awk -F'.' '{print $2}'`"
 ROOT_DOMAIN="`/bin/echo ${WEBSITE_URL} | /usr/bin/awk -F'.' '{$1=""}1' | /bin/sed 's/^ //g' | /bin/sed 's/ /./g'`"
@@ -91,9 +83,6 @@ WEBSITE_DISPLAY_NAME="`/bin/ls ${HOME}/.ssh/WEBSITEDISPLAYNAME:* | /usr/bin/awk 
 WEBSITE_DISPLAY_NAME_UPPER="`/bin/echo ${WEBSITE_DISPLAY_NAME} | /usr/bin/tr '[:lower:]' '[:upper:]'`"
 WEBSITE_DISPLAY_NAME_LOWER="`/bin/echo ${WEBSITE_DISPLAY_NAME} | /usr/bin/tr '[:upper:]' '[:lower:]'`"
 BASELINE_SOURCECODE_REPOSITORY="`/bin/ls ${HOME}/.ssh/APPLICATIONBASELINESOURCECODEREPOSITORY:*  | /usr/bin/cut -d':' -f 2-`"
-
-
-echo "222" >> ${HOME}/logs/WEBSERVER_BUILD.log
 
 DATASTORE_PROVIDER="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DATASTORECHOICE'`"
 WEBSERVER_CHOICE="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSERVERCHOICE'`"
@@ -107,8 +96,6 @@ APPLICATION_REPOSITORY_USERNAME="`${HOME}/providerscripts/utilities/ExtractConfi
 APPLICATION_REPOSITORY_PASSWORD="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'APPLICATIONREPOSITORYPASSWORD'`"
 APPLICATION_IDENTIFIER="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'APPLICATIONIDENTIFIER'`"
 
-echo "333" >> ${HOME}/logs/WEBSERVER_BUILD.log
-
 /bin/touch ${HOME}/.ssh/BUILDIDENTIFIER:${BUILD_IDENTIFIER}
 
 GIT_USER="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'GITUSER' | /bin/sed 's/#/ /g'`"
@@ -119,9 +106,6 @@ SERVER_TIMEZONE_CITY="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh '
 BUILDOS="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDOS'`"
 SSH_PORT="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SSH_PORT'`"
 
-echo "444" >> ${HOME}/logs/WEBSERVER_BUILD.log
-
-exit
 
 #/bin/touch ${HOME}/.ssh/BUILDARCHIVECHOICE:${BUILD_ARCHIVE_CHOICE}
 #${HOME}/providerscripts/utilities/StoreConfigValue.sh "BUILDARCHIVECHOICE" "${BUILD_ARCHIVE_CHOICE}"
