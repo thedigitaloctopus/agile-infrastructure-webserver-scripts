@@ -23,9 +23,9 @@ then
     exit
 fi
 
-BUILDOSVERSION="`/bin/ls ${HOME}/.ssh/BUILDOSVERSION:* | /usr/bin/awk -F':' '{print $NF}'`"
+BUILDOSVERSION"`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDOSVERSION'`"
+phpversion"`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'PHP_VERSION'`"
 
-phpversion="`/bin/ls ${HOME}/.ssh/PHP_VERSION:* | /usr/bin/awk -F':' '{print $NF}'`"
 if ( [ "${1}" != "" ] )
 then
     BUILDOS="${1}"
