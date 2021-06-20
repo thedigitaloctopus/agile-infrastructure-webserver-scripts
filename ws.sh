@@ -37,11 +37,15 @@ BUILD_ARCHIVE_CHOICE="$1"
 /bin/touch ${HOME}/.ssh/BUILDARCHIVECHOICE:${BUILD_ARCHIVE_CHOICE}
 SERVER_USER="$2"
 
-HOMEDIRFORROOT="`/bin/echo ${HOME} | /bin/sed 's/\///g' | /bin/sed 's/home//g'`"
-HOMEDIRFORROOT="`/bin/ls /home | /bin/grep '^X'`"
-/usr/bin/touch /root/.ssh/HOMEDIRFORROOT:${HOMEDIRFORROOT}
-HOMEDIR="/home/`/bin/ls /root/.ssh/HOMEDIRFORROOT:* | /usr/bin/awk -F':' '{print $NF}'`"
-export HOME="${HOMEDIR}"
+#HOMEDIRFORROOT="`/bin/echo ${HOME} | /bin/sed 's/\///g' | /bin/sed 's/home//g'`"
+#HOMEDIRFORROOT="`/bin/ls /home | /bin/grep '^X'`"
+#/usr/bin/touch /root/.ssh/HOMEDIRFORROOT:${HOMEDIRFORROOT}
+#HOMEDIR="/home/`/bin/ls /root/.ssh/HOMEDIRFORROOT:* | /usr/bin/awk -F':' '{print $NF}'`"
+#export HOME="${HOMEDIR}"
+
+USER_HOME="`/usr/bin/awk -F: '{ print $1}' /etc/passwd | /bin/grep "X*X"`"
+export HOME="/home/${USER_HOME}"
+export HOMEDIR=${HOME}
 
 #Setup operational directories if needed
 if ( [ ! -d ${HOME}/logs ] )
