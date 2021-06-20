@@ -56,7 +56,7 @@ exec 2>>${HOME}/logs/${ERR_FILE}
 
 /bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
 /bin/echo "${0} `/bin/date`: Building a new webserver" >> ${HOME}/logs/WEBSERVER_BUILD.log
-/bin/echo "${0} `/bin/date`: Setting up the repository credentials" >> ${HOME}/logs/WEBSERVER_BUILD.log
+/bin/echo "${0} `/bin/date`: Setting up the build parameters" >> ${HOME}/logs/WEBSERVER_BUILD.log
 /bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
 
 #Load the environment into memory for convenience
