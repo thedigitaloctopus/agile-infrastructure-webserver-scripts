@@ -58,7 +58,7 @@ then
     exit
 fi
 
-BUILD_ARCHIVE_CHOICE="$1" >> 
+BUILD_ARCHIVE_CHOICE="$1"
 SERVER_USER="$2"
 
 /bin/echo "111111111" >> ${HOME}/logs/WEBSERVER_BUILD.log
