@@ -22,7 +22,7 @@
 ####################################################################################
 #set -x
 
-DNS_CHOICE="`/bin/ls ${HOME}/.ssh/DNSCHOICE:* | /usr/bin/awk -F':' '{print $NF}'`"
+DNS_CHOICE="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DNSCHOICE'`"
 
 if ( [ "${DNS_CHOICE}" = "cloudflare" ] )
 then
