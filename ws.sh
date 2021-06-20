@@ -22,20 +22,6 @@
 #If there is a problem with building a webserver, you can uncomment the set -x command and debug output will be
 #presented on the screen as your webserver is built
 
-#Check parameters
-###############################################################################################################################
-#Remeber if you make any changes to the parameters to this script, it is called in two places, on the Build Client during the
-#build process and also on the autoscaler from the BuildWebserver script.
-#Both places will need updating to reflect the changes that you make to the parameters
-###############################################################################################################################
-if ( [ "$1" = "" ]  || [ "$2" = "" ] )
-then
-    /bin/echo "Usage: ./ws.sh <build archive> <server user>"
-    exit
-fi
-BUILD_ARCHIVE_CHOICE="$1"
-SERVER_USER="$2"
-
 #HOMEDIRFORROOT="`/bin/echo ${HOME} | /bin/sed 's/\///g' | /bin/sed 's/home//g'`"
 #HOMEDIRFORROOT="`/bin/ls /home | /bin/grep '^X'`"
 #/usr/bin/touch /root/.ssh/HOMEDIRFORROOT:${HOMEDIRFORROOT}
@@ -56,6 +42,21 @@ OUT_FILE="webserver-build-out-`/bin/date | /bin/sed 's/ //g'`"
 exec 1>>${HOME}/logs/${OUT_FILE}
 ERR_FILE="webserver-build-err-`/bin/date | /bin/sed 's/ //g'`"
 exec 2>>${HOME}/logs/${ERR_FILE}
+
+#Check parameters
+###############################################################################################################################
+#Remeber if you make any changes to the parameters to this script, it is called in two places, on the Build Client during the
+#build process and also on the autoscaler from the BuildWebserver script.
+#Both places will need updating to reflect the changes that you make to the parameters
+###############################################################################################################################
+if ( [ "$1" = "" ]  || [ "$2" = "" ] )
+then
+    /bin/echo "${0} Usage: ./ws.sh <build archive> <server user>" >> ${HOME}/logs/WEBSERVER_BUILD.log
+    exit
+fi
+
+BUILD_ARCHIVE_CHOICE="$1"
+SERVER_USER="$2"
 
 /bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
 /bin/echo "${0} `/bin/date`: Building a new webserver" >> ${HOME}/logs/WEBSERVER_BUILD.log
