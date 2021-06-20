@@ -76,13 +76,6 @@ BUILD_IDENTIFIER="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUIL
 ALGORITHM="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'ALGORITHM'`"
 WEBSITE_URL="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEURL'`"
 
-WEBSITE_NAME="`/bin/echo ${WEBSITE_URL} | /usr/bin/awk -F'.' '{print $2}'`"
-ROOT_DOMAIN="`/bin/echo ${WEBSITE_URL} | /usr/bin/awk -F'.' '{$1=""}1' | /bin/sed 's/^ //g' | /bin/sed 's/ /./g'`"
-WEBSITE_DISPLAY_NAME="`/bin/ls ${HOME}/.ssh/WEBSITEDISPLAYNAME:* | /usr/bin/awk -F':' '{print $NF}' | /bin/sed 's/_/ /g'`"
-WEBSITE_DISPLAY_NAME_UPPER="`/bin/echo ${WEBSITE_DISPLAY_NAME} | /usr/bin/tr '[:lower:]' '[:upper:]'`"
-WEBSITE_DISPLAY_NAME_LOWER="`/bin/echo ${WEBSITE_DISPLAY_NAME} | /usr/bin/tr '[:upper:]' '[:lower:]'`"
-BASELINE_SOURCECODE_REPOSITORY="`/bin/ls ${HOME}/.ssh/APPLICATIONBASELINESOURCECODEREPOSITORY:*  | /usr/bin/cut -d':' -f 2-`"
-
 DATASTORE_PROVIDER="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DATASTORECHOICE'`"
 WEBSERVER_CHOICE="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSERVERCHOICE'`"
 INFRASTRUCTURE_REPOSITORY_PROVIDER="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'INFRASTRUCTUREREPOSITORYPROVIDER'`"
@@ -95,7 +88,6 @@ APPLICATION_REPOSITORY_USERNAME="`${HOME}/providerscripts/utilities/ExtractConfi
 APPLICATION_REPOSITORY_PASSWORD="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'APPLICATIONREPOSITORYPASSWORD'`"
 APPLICATION_IDENTIFIER="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'APPLICATIONIDENTIFIER'`"
 
-GIT_USER="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'GITUSER' | /bin/sed 's/#/ /g'`"
 GIT_EMAIL_ADDRESS="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'GITEMAILADDRESS'`"
 APPLICATION_LANGUAGE="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'APPLICATIONLANGUAGE'`"
 SERVER_TIMEZONE_CONTINENT="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SERVERTIMEZONECONTINENT'`"
@@ -103,12 +95,43 @@ SERVER_TIMEZONE_CITY="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh '
 BUILDOS="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDOS'`"
 SSH_PORT="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SSH_PORT'`"
 
-WEBSITE_NAME="`/bin/grep 'WEBSITE_NAME' ${HOME}/.ssh/webserver | /usr/bin/awk -F'.' '{print $2}'`"
+#Non standard environment setup process
+GIT_USER="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'GITUSER' | /bin/sed 's/#/ /g'`"
+WEBSITE_NAME="`/bin/grep 'WEBSITE_NAME' ${HOME}/.ssh/webserver_configuration_settings.dat | /usr/bin/awk -F'.' '{print $2}'`"
 ROOT_DOMAIN="`/bin/echo ${WEBSITE_URL} | /usr/bin/awk -F'.' '{$1=""}1' | /bin/sed 's/^ //g' | /bin/sed 's/ /./g'`"
 WEBSITE_DISPLAY_NAME="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEDISPLAYNAME' | /bin/sed 's/_/ /g'`"
 WEBSITE_DISPLAY_NAME_UPPER="`/bin/echo ${WEBSITE_DISPLAY_NAME} | /usr/bin/tr '[:lower:]' '[:upper:]'`"
 WEBSITE_DISPLAY_NAME_LOWER="`/bin/echo ${WEBSITE_DISPLAY_NAME} | /usr/bin/tr '[:upper:]' '[:lower:]'`"
-BASELINE_SOURCECODE_REPOSITORY="`/bin/grep 'APPLICATIONBASELINESOURCECODEREPOSITORY' ${HOME}/.ssh/webserver | /usr/bin/cut -d':' -f 2-`"
+BASELINE_SOURCECODE_REPOSITORY="`/bin/grep 'APPLICATIONBASELINESOURCECODEREPOSITORY' ${HOME}/.ssh/webserver_configuration_settings.dat | /usr/bin/cut -d':' -f 2-`"
+
+echo $CLOUDHOST > /tmp/file
+echo $BUILD_IDENTIFIER >> /tmp/file
+echo $ALGORITHM >> /tmp/file
+echo $WEBSITE_URL >> /tmp/file
+echo $DATASTORE_PROVIDER >> /tmp/file
+echo $WEBSERVER_CHOICE >> /tmp/file
+echo $INFRASTRUCTURE_REPOSITORY_PROVIDER >> /tmp/file
+echo $INFRASTRUCTURE_REPOSITORY_USERNAME >> /tmp/file
+echo $INFRASTRUCTURE_REPOSITORY_PASSWORD >> /tmp/file
+echo $INFRASTRUCTURE_REPOSITORY_OWNER >> /tmp/file
+echo $APPLICATION_REPOSITORY_PROVIDER >> /tmp/file
+echo $APPLICATION_REPOSITORY_OWNER >> /tmp/file
+echo $APPLICATION_REPOSITORY_USERNAME >> /tmp/file
+echo $APPLICATION_REPOSITORY_PASSWORD >> /tmp/file
+echo $APPLICATION_IDENTIFIER >> /tmp/file
+echo $GIT_EMAIL_ADDRESS >> /tmp/file
+echo $APPLICATION_LANGUAGE >> /tmp/file
+echo $SERVER_TIMEZONE_CONTINENT >> /tmp/file
+echo $SERVER_TIMEZONE_CITY >> /tmp/file
+echo $BUILDOS >> /tmp/file
+echo $SSH_PORT >> /tmp/file
+echo $GIT_USER >> /tmp/file
+echo $WEBSITE_NAME >> /tmp/file
+echo $ROOT_DOMAIN >> /tmp/file
+echo $WEBSITE_DISPLAY_NAME >> /tmp/file
+echo $WEBSITE_DISPLAY_NAME_UPPER >> /tmp/file
+echo $WEBSITE_DISPLAY_NAME_LOWER >> /tmp/file
+echo $ASELINE_SOURCECODE_REPOSITORY >> /tmp/file
 
 #Set up more operational directories
 if ( [ ! -d ${HOME}/.ssh ] )
