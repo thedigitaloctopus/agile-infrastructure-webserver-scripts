@@ -54,8 +54,10 @@ exec 1>>${HOME}/logs/${OUT_FILE}
 ERR_FILE="webserver-build-err-`/bin/date | /bin/sed 's/ //g'`"
 exec 2>>${HOME}/logs/${ERR_FILE}
 
+/bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
 /bin/echo "${0} `/bin/date`: Building a new webserver" >> ${HOME}/logs/WEBSERVER_BUILD.log
 /bin/echo "${0} `/bin/date`: Setting up the repository credentials" >> ${HOME}/logs/WEBSERVER_BUILD.log
+/bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
 
 #Load the environment into memory for convenience
 /bin/touch ${HOME}/.ssh/BUILDARCHIVECHOICE:${BUILD_ARCHIVE_CHOICE}
@@ -129,7 +131,9 @@ fi
 
 /bin/chmod -R 755 ${HOME}/cron ${HOME}/installscripts ${HOME}/providerscripts ${HOME}/security
 
+/bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
 /bin/echo "${0} `/bin/date`: Setting the hostname" >> ${HOME}/logs/WEBSERVER_BUILD.log
+/bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
 #Set the hostname of the machine
 /bin/echo "${WEBSITE_NAME}WS" > /etc/hostname
 /bin/hostname -F /etc/hostname
@@ -155,7 +159,9 @@ fi
 /bin/echo "vm.panic_on_oom=1
 kernel.panic=10" >> /etc/sysctl.conf
 
+/bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
 /bin/echo "${0} `/bin/date`: Updating the software from the repositories" >> ${HOME}/logs/WEBSERVER_BUILD.log
+/bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
 /bin/rm /var/lib/dpkg/lock
 /bin/rm /var/cache/apt/archives/lock
 
@@ -183,7 +189,9 @@ fi
 
 ${HOME}/providerscripts/utilities/InstallMonitoringGear.sh
 
+/bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
 /bin/echo "${0}: Setting timezone" >> ${HOME}/logs/MonitoringLog.dat
+/bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
 #Set the time on the machine
 /usr/bin/timedatectl set-timezone ${SERVER_TIMEZONE_CONTINENT}/${SERVER_TIMEZONE_CITY}
 /bin/touch ${HOME}/.ssh/SERVERTIMEZONECONTINENT:${SERVER_TIMEZONE_CONTINENT}
@@ -199,6 +207,10 @@ else
     exit
 fi
 
+/bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
+/bin/echo "${0} Installing cloudhost tools" >> ${HOME}/logs/WEBSERVER_BUILD.log
+/bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
+
 #Install the tools for our particular cloudhost provider
 . ${HOME}/providerscripts/cloudhost/InstallCloudhostTools.sh
 
@@ -209,19 +221,39 @@ cd ${HOME}
 /usr/bin/git init
 /usr/bin/git config --global user.name "${GIT_USER}"
 /usr/bin/git config --global user.email ${GIT_EMAIL_ADDRESS}
-/bin/echo "${0} `/bin/date`: Pulling scripts from repository" >> ${HOME}/logs/WEBSERVER_BUILD.log
+
+/bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
+/bin/echo "${0} `/bin/date`: Pulling scripts from infrastructure repository with credentials parameters:" >> ${HOME}/logs/WEBSERVER_BUILD.log
+/bin/echo "${0} Provider: ${INFRASTRUCTURE_REPOSITORY_PROVIDER} " >> ${HOME}/logs/WEBSERVER_BUILD.log
+/bin/echo "${0} Provider: ${INFRASTRUCTURE_REPOSITORY_USERNAME} " >> ${HOME}/logs/WEBSERVER_BUILD.log
+/bin/echo "${0} Provider: ${INFRASTRUCTURE_REPOSITORY_OWNER} " >> ${HOME}/logs/WEBSERVER_BUILD.log
+/bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
+
 ${HOME}/bootstrap/GitPull.sh ${INFRASTRUCTURE_REPOSITORY_PROVIDER} ${INFRASTRUCTURE_REPOSITORY_USERNAME} ${INFRASTRUCTURE_REPOSITORY_PASSWORD} ${INFRASTRUCTURE_REPOSITORY_OWNER} agile-infrastructure-webserver-scripts > /dev/null 2>&1
 
 /usr/bin/find ${HOME} -type d -print0 | xargs -0 chmod 0755 # for directories
 /usr/bin/find ${HOME} -type f -print0 | xargs -0 chmod 0755 # for files
 
+/bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
+/bin/echo "${0} Installing Datastore tools" >> ${HOME}/logs/WEBSERVER_BUILD.log
+/bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
 . ${HOME}/providerscripts/datastore/InstallDatastoreTools.sh
 
 # Install the language engine for whatever language your application is written in
+/bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
+/bin/echo "${0} Installing Application Language: ${APPLICATION_LANGUAGE}" >> ${HOME}/logs/WEBSERVER_BUILD.log
+/bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
 ${HOME}/providerscripts/webserver/InstallApplicationLanguage.sh "${APPLICATION_LANGUAGE}"
 
+/bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
+/bin/echo "${0} Installing Webserver: ${WEBSERVER_CHOICE} for ${WEBSITE_NAME} at: ${WEBSITE_URL}" >> ${HOME}/logs/WEBSERVER_BUILD.log
+/bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
 /bin/echo "`${HOME}/providerscripts/utilities/GetIP.sh` ${WEBSITE_NAME}WS" >> /etc/hosts
 ${HOME}/providerscripts/webserver/InstallWebserver.sh "${WEBSERVER_CHOICE}" "${WEBSITE_NAME}" "${WEBSITE_URL}"
+
+/bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
+/bin/echo "${0} Modifying sshd settings and restarting sshd" >> ${HOME}/logs/WEBSERVER_BUILD.log
+/bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
 
 cd ${HOME}
 #Set the port for ssh to use
@@ -244,6 +276,10 @@ fi
 SERVER_USER_PASSWORD="`/bin/ls /home/${SERVER_USER}/.ssh/SERVERUSERPASSWORD:* | /usr/bin/awk -F':' '{print $NF}'`"
 
 #Install the application
+/bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
+/bin/echo "${0} Initialising the git version control system" >> ${HOME}/logs/WEBSERVER_BUILD.log
+/bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
+
 if ( [ ! -d /var/www/html ] )
 then
     /bin/mkdir -p /var/www/html > /dev/null 2>&1
@@ -253,45 +289,54 @@ cd /var/www/html
 /bin/rm -r /var/www/html/.git > /dev/null 2>&1
 /usr/bin/git init
 
+/bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
+/bin/echo "${0} Installing the custom application" >> ${HOME}/logs/WEBSERVER_BUILD.log
+/bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
+
+
 . ${HOME}/applicationscripts/InstallApplication.sh
 
-#Apply any application specific customisations
+/bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
+/bin/echo "${0} Applying application specific customisations" >> ${HOME}/logs/WEBSERVER_BUILD.log
+/bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
 . ${HOME}/applicationscripts/ApplyApplicationBranding.sh
 . ${HOME}/applicationscripts/CustomiseApplication.sh
-
-
 ${HOME}/providerscripts/application/customise/AdjustApplicationInstallationByApplication.sh
 
-#Apply permissions and ownership to our webroot
+
+/bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
+/bin/echo "${0} Adjusting webroot permissions and ownerships" >> ${HOME}/logs/WEBSERVER_BUILD.log
+/bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
 /bin/chown -R www-data.www-data /var/www/* > /dev/null 2>&1
 /usr/bin/find /var/www -type d -exec chmod 755 {} \;
 /usr/bin/find /var/www -type f -exec chmod 644 {} \;
 
 cd ${HOME}
 
-#Find out what type of application we are installing, joomla, wordpress etc
+/bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
+/bin/echo "${0} Find out what type of application we are installing, for example, Joomla, Wordpress, Drupal or Moodle" >> ${HOME}/logs/WEBSERVER_BUILD.log
+/bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
 ${HOME}/providerscripts/application/processing/DetermineApplicationType.sh > /dev/null 2>&1
-#Install a database client so we can access the database we are using from the command line easily - used by some scripts
+
+/bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
+/bin/echo "${0} Install Database client for accessing the database from the command line easily" >> ${HOME}/logs/WEBSERVER_BUILD.log
+/bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
 . ${HOME}/providerscripts/utilities/InstallDatabaseClient.sh
 
-#if ( [ ! -f ${HOME}/.ssh/AUTOSCALED ] && [ -f ${HOME}/.ssh/BUILDARCHIVECHOICE:baseline ] )
-#then
-#    . ${HOME}/providerscripts/utilities/PersistAssetsToDatastore.sh
-#fi
 
 #Set our status as a new build
 /bin/touch ${HOME}/runtime/NEWLYBUILT
 
-#Initialise the crontab
+/bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
+/bin/echo "${0} Initialise the crontab" >> ${HOME}/logs/WEBSERVER_BUILD.log
+/bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
+
 . ${HOME}/providerscripts/utilities/InitialiseCron.sh
 
-#This call is necessary as it primes the networking interface for some providers.
+/bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
+/bin/echo "${0} Getting IP address:his call is necessary as it primes the networking interface for some providers." >> ${HOME}/logs/WEBSERVER_BUILD.log
+/bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
 ${HOME}/providerscripts/utilities/GetIP.sh
-
-#${HOME}/installscripts/Upgrade.sh ${BUILDOS}
-
-#Final checks
-/bin/echo "${0} `/bin/date`: Rebooting post install....." >> ${HOME}/logs/WEBSERVER_BUILD.log
 
 #Finally shutdown or reboot, this reinitialises everything making sure the webserver is ready for use
 /bin/rm -r ${HOME}/bootstrap
@@ -306,14 +351,23 @@ ${HOME}/providerscripts/utilities/GetIP.sh
 /bin/chown -R ${SERVER_USER}.${SERVER_USER} ${HOME}
 #Switch logging off on the firewall
 /usr/sbin/ufw logging off
-#The firewall is down until the initial configuration steps are completed. We set our restrictive rules as soon as possible
-#and pull our knickers up fully after 10 minutes with a call from cron
+
+/bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
+/bin/echo "${0} Switching on firewall now that we have got everything installed" >> ${HOME}/logs/WEBSERVER_BUILD.log
+/bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
 /usr/sbin/ufw default allow incoming
 /usr/sbin/ufw default allow outgoing
 /usr/sbin/ufw --force enable
+
+/bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
+/bin/echo "${0} Sending notification email that a webserver has been built" >> ${HOME}/logs/WEBSERVER_BUILD.log
+/bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
 
 ${HOME}/providerscripts/email/SendEmail.sh "A WEBSERVER HAS BEEN SUCCESSFULLY BUILT" "A Webserver has been successfully built and primed as is rebooting ready for use"
 
 /bin/touch ${HOME}/runtime/DONT_MESS_WITH_THESE_FILES-SYSTEM_BREAK
 
+/bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
+/bin/echo "${0} `/bin/date`: Rebooting post install....." >> ${HOME}/logs/WEBSERVER_BUILD.log
+/bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
 /sbin/shutdown -r now
