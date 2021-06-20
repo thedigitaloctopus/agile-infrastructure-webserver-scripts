@@ -104,34 +104,34 @@ WEBSITE_DISPLAY_NAME_UPPER="`/bin/echo ${WEBSITE_DISPLAY_NAME} | /usr/bin/tr '[:
 WEBSITE_DISPLAY_NAME_LOWER="`/bin/echo ${WEBSITE_DISPLAY_NAME} | /usr/bin/tr '[:upper:]' '[:lower:]'`"
 BASELINE_SOURCECODE_REPOSITORY="`/bin/grep 'APPLICATIONBASELINESOURCECODEREPOSITORY' ${HOME}/.ssh/webserver_configuration_settings.dat | /usr/bin/cut -d':' -f 2-`"
 
-echo $CLOUDHOST > /tmp/file
-echo $BUILD_IDENTIFIER >> /tmp/file
-echo $ALGORITHM >> /tmp/file
-echo $WEBSITE_URL >> /tmp/file
-echo $DATASTORE_PROVIDER >> /tmp/file
-echo $WEBSERVER_CHOICE >> /tmp/file
-echo $INFRASTRUCTURE_REPOSITORY_PROVIDER >> /tmp/file
-echo $INFRASTRUCTURE_REPOSITORY_USERNAME >> /tmp/file
-echo $INFRASTRUCTURE_REPOSITORY_PASSWORD >> /tmp/file
-echo $INFRASTRUCTURE_REPOSITORY_OWNER >> /tmp/file
-echo $APPLICATION_REPOSITORY_PROVIDER >> /tmp/file
-echo $APPLICATION_REPOSITORY_OWNER >> /tmp/file
-echo $APPLICATION_REPOSITORY_USERNAME >> /tmp/file
-echo $APPLICATION_REPOSITORY_PASSWORD >> /tmp/file
-echo $APPLICATION_IDENTIFIER >> /tmp/file
-echo $GIT_EMAIL_ADDRESS >> /tmp/file
-echo $APPLICATION_LANGUAGE >> /tmp/file
-echo $SERVER_TIMEZONE_CONTINENT >> /tmp/file
-echo $SERVER_TIMEZONE_CITY >> /tmp/file
-echo $BUILDOS >> /tmp/file
-echo $SSH_PORT >> /tmp/file
-echo $GIT_USER >> /tmp/file
-echo $WEBSITE_NAME >> /tmp/file
-echo $ROOT_DOMAIN >> /tmp/file
-echo $WEBSITE_DISPLAY_NAME >> /tmp/file
-echo $WEBSITE_DISPLAY_NAME_UPPER >> /tmp/file
-echo $WEBSITE_DISPLAY_NAME_LOWER >> /tmp/file
-echo $ASELINE_SOURCECODE_REPOSITORY >> /tmp/file
+/bin/echo "CLOUDHOST:${CLOUDHOST}" > ${HOME}/logs/InitialBuildEnvironment.log
+/bin/echo "BUILD_IDENTIFIER:${BUILD_IDENTIFIER}" >> ${HOME}/logs/InitialBuildEnvironment.log
+/bin/echo "ALGORITHM:${ALGORITHM}" >> ${HOME}/logs/InitialBuildEnvironment.log
+/bin/echo "WEBSITE_URL:${WEBSITE_URL}" >> ${HOME}/logs/InitialBuildEnvironment.log
+/bin/echo "DATASTORE_PROVIDER:${DATASTORE_PROVIDER}" >> ${HOME}/logs/InitialBuildEnvironment.log
+/bin/echo "WEBSERVER_CHOICE:${WEBSERVER_CHOICE}" >> ${HOME}/logs/InitialBuildEnvironment.log
+/bin/echo "INFRASTRUCTURE_REPOSITORY_PROVIDER:${INFRASTRUCTURE_REPOSITORY_PROVIDER}" >> ${HOME}/logs/InitialBuildEnvironment.log
+/bin/echo "INFRASTRUCTURE_REPOSITORY_USERNAME:${INFRASTRUCTURE_REPOSITORY_USERNAME}" >> ${HOME}/logs/InitialBuildEnvironment.log
+/bin/echo "INFRASTRUCTURE_REPOSITORY_PASSWORD:${INFRASTRUCTURE_REPOSITORY_PASSWORD}" >> ${HOME}/logs/InitialBuildEnvironment.log
+/bin/echo "INFRASTRUCTURE_REPOSITORY_OWNER:${INFRASTRUCTURE_REPOSITORY_OWNER}" >> ${HOME}/logs/InitialBuildEnvironment.log
+/bin/echo "APPLICATION_REPOSITORY_PROVIDER:${APPLICATION_REPOSITORY_PROVIDER}" >> ${HOME}/logs/InitialBuildEnvironment.log
+/bin/echo "APPLICATION_REPOSITORY_OWNER:${APPLICATION_REPOSITORY_OWNER}" >> ${HOME}/logs/InitialBuildEnvironment.log
+/bin/echo "APPLICATION_REPOSITORY_USERNAME:${APPLICATION_REPOSITORY_USERNAME}" >> ${HOME}/logs/InitialBuildEnvironment.log
+/bin/echo "APPLICATION_REPOSITORY_PASSWORD:${APPLICATION_REPOSITORY_PASSWORD}" >> ${HOME}/logs/InitialBuildEnvironment.log
+/bin/echo "APPLICATION_IDENTIFIER:${APPLICATION_IDENTIFIER}" >> ${HOME}/logs/InitialBuildEnvironment.log
+/bin/echo "GIT_EMAIL_ADDRESS:${GIT_EMAIL_ADDRESS}" >> ${HOME}/logs/InitialBuildEnvironment.log
+/bin/echo "APPLICATION_LANGUAGE:${APPLICATION_LANGUAGE}" >> ${HOME}/logs/InitialBuildEnvironment.log
+/bin/echo "SERVER_TIMEZONE_CONTINENT:${SERVER_TIMEZONE_CONTINENT}" >> ${HOME}/logs/InitialBuildEnvironment.log
+/bin/echo "SERVER_TIMEZONE_CITY:${SERVER_TIMEZONE_CITY}" >> ${HOME}/logs/InitialBuildEnvironment.log
+/bin/echo "BUILDOS:${BUILDOS}" >> ${HOME}/logs/InitialBuildEnvironment.log
+/bin/echo "SSH_PORT:${SSH_PORT}" >> ${HOME}/logs/InitialBuildEnvironment.log
+/bin/echo "GIT_USER:${GIT_USER}" >> ${HOME}/logs/InitialBuildEnvironment.log
+/bin/echo "WEBSITE_NAME:${WEBSITE_NAME}" >> ${HOME}/logs/InitialBuildEnvironment.log
+/bin/echo "ROOT_DOMAIN:${ROOT_DOMAIN}" >> ${HOME}/logs/InitialBuildEnvironment.log
+/bin/echo "WEBSITE_DISPLAY_NAME:${WEBSITE_DISPLAY_NAME}" >> ${HOME}/logs/InitialBuildEnvironment.log
+/bin/echo "WEBSITE_DISPLAY_NAME_UPPER:${WEBSITE_DISPLAY_NAME_UPPER}" >> ${HOME}/logs/InitialBuildEnvironment.log
+/bin/echo "WEBSITE_DISPLAY_NAME_LOWER:${WEBSITE_DISPLAY_NAME_LOWER}" >> ${HOME}/logs/InitialBuildEnvironment.log
+/bin/echo "BASELINE_SOURCECODE_REPOSITORY:${BASELINE_SOURCECODE_REPOSITORY}" >> ${HOME}/logs/InitialBuildEnvironment.log
 
 #Set up more operational directories
 if ( [ ! -d ${HOME}/.ssh ] )
