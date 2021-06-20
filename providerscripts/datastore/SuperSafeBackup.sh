@@ -106,7 +106,7 @@ fi
 
 cd ${HOME}/supersafebackup
 date="`/bin/date | /bin/sed 's/ //g' | /bin/sed 's/://g'`"
-BUCKET_NAME="`/bin/ls ${HOME}/.ssh/WEBSITEURL:* | /usr/bin/awk -F':' '{print $NF}'${date} | /bin/sed 's/\./-/g'`"
+BUCKET_NAME="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEURL'${date} | /bin/sed 's/\./-/g'`"
 
 if ( [ "${datastoreprovider}" = "amazons3" ] || [ "${datastoreprovider}" = "digitalocean" ]  || [ "${datastore_provider}" = "exoscale" ] || [ "${datastore_provider}" = "vultr" ] )
 then
