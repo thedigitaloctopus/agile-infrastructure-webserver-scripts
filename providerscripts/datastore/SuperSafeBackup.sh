@@ -35,7 +35,7 @@ then
     exit
 fi
 datastoreprovider="$2"
-BUILDOS="`/bin/ls ${HOME}/.ssh/BUILDOS:* | /usr/bin/awk -F':' '{print $NF}'`"
+BUILDOS="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDOS'`"
 
 if ( [ "${datastoreprovider}" = "" ] )
 then
