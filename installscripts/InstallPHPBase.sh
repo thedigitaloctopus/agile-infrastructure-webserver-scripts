@@ -23,8 +23,8 @@ then
     exit
 fi
 
-BUILDOSVERSION"`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDOSVERSION'`"
-phpversion"`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'PHP_VERSION'`"
+BUILDOSVERSION="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDOSVERSION'`"
+phpversion="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'PHP_VERSION'`"
 
 if ( [ "${1}" != "" ] )
 then
