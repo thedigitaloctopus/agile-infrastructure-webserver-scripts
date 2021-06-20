@@ -33,6 +33,8 @@ export HOME="/home/${USER_HOME}"
 export HOMEDIR=${HOME}
 /bin/echo "${HOMEDIR}" > /home/homedir.dat
 
+
+
 #Setup operational directories if needed
 if ( [ ! -d ${HOME}/logs ] )
 then
@@ -56,8 +58,12 @@ then
     exit
 fi
 
-BUILD_ARCHIVE_CHOICE="$1"
+BUILD_ARCHIVE_CHOICE="$1" >> 
 SERVER_USER="$2"
+
+/bin/echo "111111111" >> ${HOME}/logs/WEBSERVER_BUILD.log
+export HOMEDIR="`/bin/cat /home/homedir.dat`"
+/bin/echo "2222222" >> ${HOME}/logs/WEBSERVER_BUILD.log
 
 /bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
 /bin/echo "${0} `/bin/date`: Building a new webserver" >> ${HOME}/logs/WEBSERVER_BUILD.log
