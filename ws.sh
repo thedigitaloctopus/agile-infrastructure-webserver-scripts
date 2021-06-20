@@ -35,7 +35,7 @@ export HOMEDIR=${HOME}
 
 #First thing is to tighten up permissions in case there's any wronguns. 
 
-/bin/chmod -R 755 ${HOME}/autoscaler ${HOME}/cron ${HOME}/installscripts ${HOME}/providerscripts ${HOME}/security
+/bin/chmod -R 750 ${HOME}/autoscaler ${HOME}/cron ${HOME}/installscripts ${HOME}/providerscripts ${HOME}/security
 
 #Setup operational directories if needed
 if ( [ ! -d ${HOME}/logs ] )
@@ -109,9 +109,6 @@ WEBSITE_DISPLAY_NAME="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh '
 WEBSITE_DISPLAY_NAME_UPPER="`/bin/echo ${WEBSITE_DISPLAY_NAME} | /usr/bin/tr '[:lower:]' '[:upper:]'`"
 WEBSITE_DISPLAY_NAME_LOWER="`/bin/echo ${WEBSITE_DISPLAY_NAME} | /usr/bin/tr '[:upper:]' '[:lower:]'`"
 BASELINE_SOURCECODE_REPOSITORY="`/bin/grep 'APPLICATIONBASELINESOURCECODEREPOSITORY' ${HOME}/.ssh/webserver | /usr/bin/cut -d':' -f 2-`"
-
-
-/usr/bin/printenv >> ${HOME}/logs/WEBSERVER_BUILD.log
 
 #Set up more operational directories
 if ( [ ! -d ${HOME}/.ssh ] )
