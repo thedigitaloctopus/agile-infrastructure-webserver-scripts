@@ -40,17 +40,18 @@ then
     DB_N="`/bin/sed '1q;d' ${HOME}/config/credentials/shit`"
     DB_P="`/bin/sed '2q;d' ${HOME}/config/credentials/shit`"
     DB_U="`/bin/sed '3q;d' ${HOME}/config/credentials/shit`"
-    DB_PORT="`/bin/ls ${HOME}/.ssh/DB_PORT:* | /usr/bin/awk -F':' '{print $NF}'`"
+    DB_PORT="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DB_PORT'`"
+
     DB_HOST="`/bin/ls ${HOME}/config/databaseip`"
 
-    if ( [ "`/bin/ls ${HOME}/.ssh/DBaaSREMOTESSHPROXYIP:* | /usr/bin/awk -F':' '{print $NF}'`" != "" ] )
+    if ( [ "`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBaaSREMOTESSHPROXYIP'`" != "" ] )
     then
-        DB_HOST="`/bin/ls ${HOME}/.ssh/DBaaSREMOTESSHPROXYIP:* | /usr/bin/awk -F':' '{print $NF}'`"
+        DB_HOST="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBaaSREMOTESSHPROXYIP'`"
     fi
 
-    if ( [ "`/bin/ls ${HOME}/.ssh/DBaaSHOSTNAME:* | /usr/bin/awk -F':' '{print $NF}'`" != "" ] )
+    if ( [ "`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBaaSHOSTNAME'`" != "" ] )
     then
-        DB_HOST="`/bin/ls ${HOME}/.ssh/DBaaSHOSTNAME:* | /usr/bin/awk -F':' '{print $NF}'`"
+        DB_HOST="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBaaSHOSTNAME'`"
     fi
 
 fi
