@@ -30,7 +30,7 @@
 #set -x
 
 #If we are not a virgin, exit
-if ( [ ! -f ${HOME}/.ssh/BUILDARCHIVECHOICE:virgin ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOICE:virgin" = "0" ] ) 
 then
     exit
 fi
@@ -69,7 +69,7 @@ do
     /bin/sleep 10
 done
 
-if ( [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:DBaaS-secured ] && [ -f  ${HOME}/runtime/SSHTUNNELCONFIGURED ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:DBaaS-secured`" = "1" ] && [ -f  ${HOME}/runtime/SSHTUNNELCONFIGURED ] )
 then
     while ( [ ! -f ${HOME}/runtime/SSHTUNNELCONFIGURED ] )
     do
@@ -79,7 +79,7 @@ then
         read response
     done
     host="127.0.0.1"
-elif ( [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:DBaaS ] )
+elif ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:DBaaS`" = "1" ] )
 then
     host="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBaaSHOSTNAME'`"
 else
@@ -96,8 +96,7 @@ database="`command="${SUDO} /bin/sed '1q;d' ${HOME}/config/credentials/shit" && 
 #So, by now, we know that we have a database to access and so we can perform some configuration steps to set it up as we need it
 #The default database sql database is installed so that the joomla installation is completed. We also set a username and password
 #for the admin account as well as a user group. Right on.
-if ( ( [ -f ${HOME}/.ssh/DATABASEDBaaSINSTALLATIONTYPE:MySQL ] || [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:MySQL ] ) ||
-     ( [ -f ${HOME}/.ssh/DATABASEDBaaSINSTALLATIONTYPE:Maria ] || [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:Maria ] ) )
+if ( ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEDBaaSINSTALLATIONTYPE:MySQL`" = "1" ] || [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:MySQL`" = "1" ]  ) || ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEDBaaSINSTALLATIONTYPE:Maria`" = "1" ] || [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:Maria`" = "1" ] ) )
 then
     installationstatus=""
     if ( [ -d /var/www/html/installation ] )
@@ -138,7 +137,7 @@ then
 fi
 
 
-if (  [ -f ${HOME}/.ssh/DATABASEDBaaSINSTALLATIONTYPE:Postgres ] || [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:Postgres ] ) 
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEDBaaSINSTALLATIONTYPE:Postgres" = "1" ] || [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:Postgres" = "1" ] )
 then
     installationstatus=""
     if ( [ -d /var/www/html/installation ] )
