@@ -65,8 +65,9 @@ fi
 name="`/bin/sed '3q;d' ${HOME}/config/credentials/shit`"
 database="`/bin/sed '1q;d' ${HOME}/config/credentials/shit`"
 password="`/bin/sed '2q;d' ${HOME}/config/credentials/shit`"
-websiteurl="`/bin/ls ${HOME}/.ssh/WEBSITEURL:* | /usr/bin/awk -F':' '{print $NF}'`"
-DB_PORT="`/bin/ls ${HOME}/.ssh/DB_PORT:* | /usr/bin/awk -F':' '{print $NF}'`"
+websiteurl="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEURL'`"
+DB_PORT="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DB_PORT'`"
+
 
 if ( [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:DBaaS-secured ] )
 then
