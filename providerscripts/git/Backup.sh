@@ -55,7 +55,10 @@ cd /tmp/backup
 
 if ( [ -f ${HOME}/.ssh/PERSISTASSETSTOCLOUD:1 ] )
 then
-    dirstoomit="`/bin/ls ${HOME}/.ssh/DIRECTORIESTOMOUNT:* | /usr/bin/awk -F':' '{$1=""; print $0}' | /bin/sed 's/\./\//g' | /usr/bin/tr '\n' ' ' | /bin/sed 's/  / /g'`"
+    #dirstoomit="`/bin/ls ${HOME}/.ssh/DIRECTORIESTOMOUNT:* | /usr/bin/awk -F':' '{$1=""; print $0}' | /bin/sed 's/\./\//g' | /usr/bin/tr '\n' ' ' | /bin/sed 's/  / /g'`"
+    
+    dirstoomit="`${HOME}/providerscripts/utilities/ExtractConfigValues.sh 'DIRECTORIESTOMOUNT' 'stripped' | /bin/sed 's/\./\//g' | /usr/bin/tr '\n' ' ' | /bin/sed 's/  / /g'`"
+    
     command="/usr/bin/rsync -av --exclude='"
     for dir in ${dirstoomit}
     do
