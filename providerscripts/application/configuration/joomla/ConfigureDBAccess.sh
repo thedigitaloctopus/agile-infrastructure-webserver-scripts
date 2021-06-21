@@ -29,7 +29,7 @@ then
     host="127.0.0.1"
 elif ( [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:DBaaS ] )
 then
-    host="`/bin/ls ${HOME}/.ssh/DBaaSHOSTNAME:* | /usr/bin/awk -F':' '{print $NF}'`"
+    host="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBaaSHOSTNAME'`"
 else
     host="${dbip}"
 fi
@@ -97,9 +97,9 @@ fi
 
 if ( [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:DBaaS ] || [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:DBaaS-secured ] )
 then
-    database="`/bin/ls ${HOME}/.ssh/DBaaSDBNAME:* | /usr/bin/awk -F':' '{print $NF}'`"
-    password="`/bin/ls ${HOME}/.ssh/DBaaSPASSWORD:* | /usr/bin/awk -F':' '{print $NF}'`"
-    name="`/bin/ls ${HOME}/.ssh/DBaaSUSERNAME:* | /usr/bin/awk -F':' '{print $NF}'`"
+    database="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBaaSDBNAME'`"
+    password="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBaaSPASSWORD'`"
+    name="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBaaSUSERNAME'`"
 fi
 
 if ( [ ! -f ${HOME}/config/joomla_configuration.php ] )
@@ -129,7 +129,8 @@ fi
 /bin/touch ${HOME}/.ssh/CONFIGFILE:joomla_configuration.php
 
 #Set the credentials that we need
-DB_PORT="`/bin/ls ${HOME}/.ssh/DB_PORT:* | /usr/bin/awk -F':' '{print $NF}'`"
+DB_PORT="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DB_PORT'`"
+
 #currenthoststring="`/bin/cat ${HOME}/config/joomla_configuration.php | /bin/grep '\$host'`"
 #currentip="`/bin/echo ${currenthoststring} | /bin/grep -o "'.*'" | /bin/sed "s/'//g" | /bin/sed "s/:${DB_PORT}//g"`"
 dbipandport="${host}:${DB_PORT}"
@@ -173,7 +174,7 @@ fi
 /bin/sed -i "/\$shared_session /c\        public \$shared_session = \'0\';" ${HOME}/runtime/joomla_configuration.php
 /bin/echo "${0} `/bin/date`: Updating shared session" >> ${HOME}/logs/MonitoringLog.dat
 
-WEBSITE_DISPLAY_NAME="`/bin/ls ${HOME}/.ssh/WEBSITEDISPLAYNAME:* | /usr/bin/awk -F':' '{print $NF}'`"
+WEBSITE_DISPLAY_NAME="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEDISPLAYNAME'`"
 ${HOME}/providerscripts/application/email/ActivateSMTPByApplication.sh "${WEBSITE_DISPLAY_NAME}" 
 
 dbprefix="`/bin/cat /var/www/html/dpb.dat`"
