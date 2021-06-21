@@ -35,7 +35,7 @@ then
     fi
 fi
 
-if ( [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:Postgres ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:Postgres`" = "1" ] )
 then
    prefix="`/bin/cat /var/www/html/dpb.dat`"
    
