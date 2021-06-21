@@ -65,7 +65,7 @@ then
     . ${HOME}/providerscripts/application/monitoring/drupal/CheckServerAlive.sh
 fi
 
-if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOICE:virgin`" = "1" ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOICE:virgin`" = "0" ] )
 then
     ${HOME}/providerscripts/utilities/CheckServerAlive.sh
 else
