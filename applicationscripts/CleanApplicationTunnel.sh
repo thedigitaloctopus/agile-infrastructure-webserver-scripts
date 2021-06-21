@@ -21,7 +21,7 @@
 #######################################################################################################
 #set -x
 
-APPLICATION="`/bin/ls ${HOME}/.ssh/APPLICATION:* | /usr/bin/awk -F':' '{print $NF}'`"
+APPLICATION="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'APPLICATION'`"
 
 if ( [ "${APPLICATION}" = "joomla" ] )
 then
