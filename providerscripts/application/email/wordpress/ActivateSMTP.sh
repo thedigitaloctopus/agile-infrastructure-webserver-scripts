@@ -24,11 +24,11 @@
 /bin/echo "These are your SMTP credentials settings for your wordpress install"
 /bin/echo "Please refer to: https://wordpress.org/plugins/wp-mail-smtp/"
 /bin/echo "##################################################################"
+fromaddress="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'FROMADDRESS'`"
+username="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'EMAILUSERNAME'`"
+password="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'EMAILPASSWORD'`"
+emailprovider="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'EMAILPROVIDER'`"
 
-fromaddress="`/bin/ls ${HOME}/.ssh/FROMADDRESS:* | /usr/bin/awk -F':' '{print $NF}'`"
-username="`/bin/ls ${HOME}/.ssh/EMAILUSERNAME:* | /usr/bin/awk -F':' '{print $NF}'`"
-password="`/bin/ls ${HOME}/.ssh/EMAILPASSWORD:* | /usr/bin/awk -F':' '{print $NF}'`"
-emailprovider="`/bin/ls ${HOME}/.ssh/EMAILPROVIDER:* | /usr/bin/awk -F':' '{print $NF}'`"
 
 /bin/echo "FROM ADDRESS: ${fromaddress}" > /var/www/wordpresssmtp
 /bin/echo "USERNAME: ${username}" >> /var/www/wordpresssmtp
