@@ -24,9 +24,9 @@ APPLICATION_LANGUAGE="$1"
 
 if ( [ "${APPLICATION_LANGUAGE}" = "PHP" ] )
 then
-    BUILDOS="`/bin/ls ${HOME}/.ssh/BUILDOS:* | /usr/bin/awk -F':' '{print $NF}'`"
-    BUILDOSVERSION="`/bin/ls ${HOME}/.ssh/BUILDOSVERSION:* | /usr/bin/awk -F':' '{print $NF}'`"
-
+    BUILDOS="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDOS'`"
+    BUILDOSVERSION="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDOSVERSION'`"
+    
     if ( [ "${BUILDOS}" = "ubuntu" ] )
     then
         ${HOME}/installscripts/InstallPHPBase.sh ${BUILDOS}
@@ -53,12 +53,13 @@ elif ( [ "${BUILDOS}" = "debian" ] )
     /bin/sed -i "s/^;env/env/g" ${www_conf}
     /bin/sed -i "s/^listen =.*/listen = 127.0.0.1:9000/g" ${www_conf}
 
-    php_mode="`/bin/ls ${HOME}/.ssh/PHPMODE:* | /usr/bin/awk -F':' '{print $NF}'`"
-    php_max_children="`/bin/ls ${HOME}/.ssh/PHPMAXCHILDREN:* | /usr/bin/awk -F':' '{print $NF}'`"
-    php_start_servers="`/bin/ls ${HOME}/.ssh/PHPSTARTSERVERS:* | /usr/bin/awk -F':' '{print $NF}'`"
-    php_min_spare_servers="`/bin/ls ${HOME}/.ssh/PHPMINSPARESERVERS:* | /usr/bin/awk -F':' '{print $NF}'`"
-    php_max_spare_servers="`/bin/ls ${HOME}/.ssh/PHPMAXSPARESERVERS:* | /usr/bin/awk -F':' '{print $NF}'`"
-    php_process_idle_timeout="`/bin/ls ${HOME}/.ssh/PHPPROCESSIDLETIMEOUT:* | /usr/bin/awk -F':' '{print $NF}'`"
+    php_mode="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'PHPMODE'`"
+    php_max_children="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'PHPMAXCHILDREN'`"
+    php_start_servers="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'PHPSTARTSERVERS'`"
+    php_min_spare_servers="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'PHPMINSPARESERVERS'`"
+    php_max_spare_servers="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'PHPMAXSPARESERVERS'`"
+    php_process_idle_timeout="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'PHPPROCESSIDLETIMEOUT'`"
+
 
     if ( [ "${php_mode}" != "" ] )
     then
