@@ -44,7 +44,7 @@ then
     /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from ${BUILD_CLIENT_IP} to any port ${SSH_PORT}
 fi
 
-if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh PRODUCTION:1 `" = "1" ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh PRODUCTION:1`" = "1" ] )
 then
    # autoscalerip="`/bin/ls ${HOME}/config/autoscalerip`"
    # publicautoscalerip="`/bin/ls ${HOME}/config/autoscalerpublicip`"
