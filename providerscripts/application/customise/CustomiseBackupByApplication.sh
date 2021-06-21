@@ -35,7 +35,7 @@ done
 #the next time we deploy our application. That way, we have current DB credentials in our codebase
 #each time we do a fresh deploy and not the credentials from the previous deployment which would be no good.
 
-if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:None`" = "1" ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:None`" = "0" ] )
 then
     DB_N="`/bin/sed '1q;d' ${HOME}/config/credentials/shit`"
     DB_P="`/bin/sed '2q;d' ${HOME}/config/credentials/shit`"
