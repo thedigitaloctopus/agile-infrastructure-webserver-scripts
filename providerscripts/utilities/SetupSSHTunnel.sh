@@ -50,7 +50,6 @@ then
     DBaaS_REMOTE_SSH_PROXY_IP="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBaaSREMOTESSHPROXYIP'`"
 
 else
-    index="`/bin/ls ${HOME}/.ssh/DBaaSREMOTESSHPROXYIPINDEX:* | /usr/bin/awk -F':' '{print $NF}'`"
     index="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBaaSREMOTESSHPROXYIPINDEX'`"
    # ips="`/bin/ls ${HOME}/.ssh/DBaaSREMOTESSHPROXYIP:* | /bin/sed 's/[^:]*://' | /bin/sed 's/:/ /g'`"
     ips="`${HOME}/providerscripts/utilities/ExtractConfigValues.sh 'DBaaSREMOTESSHPROXYIP'`"
