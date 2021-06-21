@@ -137,7 +137,7 @@ then
 fi
 
 #Record which configuration file we are working on for use elsewhere as needed
-/bin/touch ${HOME}/.ssh/CONFIGFILE:wordpress_config.php
+#/bin/touch ${HOME}/.ssh/CONFIGFILE:wordpress_config.php
 
 if ( [ -f ${HOME}/config/wordpress_config.php ] &&
     [ -f ${HOME}/config/APPLICATION_DB_CONFIGURED ] &&
