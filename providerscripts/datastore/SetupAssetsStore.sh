@@ -104,7 +104,7 @@ then
         asset_directory="`/bin/echo ${applicationassetdirs} | /usr/bin/cut -d " " -f ${loop}`"
         if ( [ "`/bin/mount | /bin/grep "/var/www/html/${asset_directory}"`" = "" ] )
         then
-            if ( [ -f ${HOME}/.ssh/ENABLEEFS:1 ] )
+            if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh ENABLEEFS:1`" = "1" ] )
             then
                 aws_region="`/bin/cat ${HOME}/.aws/config | /bin/grep region | /usr/bin/awk '{print $NF}'`"
                 /bin/mkdir ~/.aws 2>/dev/null
@@ -120,8 +120,8 @@ then
                     then
                         id="`/bin/echo ${identifier} | /usr/bin/awk '{print $NF}'`"
                         efsmounttarget="`/usr/bin/aws efs describe-mount-targets --file-system-id ${id} | /usr/bin/jq '.MountTargets[].IpAddress' | /bin/sed 's/"//g'`"
-                        
-                        if ( [ -f ${HOME}/.ssh/BUILDARCHIVECHOICE:baseline ] || [ -f ${HOME}/.ssh/BUILDARCHIVECHOICE:virgin ] )
+                                                
+                        if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOICE:baseline`" = "1" ] || [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOICE:virgin`" = "1" ]  )
                         then
                             /bin/mkdir -p /tmp/${asset_directory}
                             /bin/mv /var/www/html/${asset_directory}/* /tmp/${asset_directory}
