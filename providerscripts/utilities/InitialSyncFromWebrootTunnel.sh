@@ -26,7 +26,7 @@ do
     /bin/sleep 10
 done
 
-ip="`/bin/ls ${HOME}/.ssh/MYPUBLICIP:* | /usr/bin/awk -F':' '{print $NF}'`"
+ip="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'MYPUBLICIP'`"
 
 if ( [ ! -d ${HOME}/webrootsync/incomingupdates ] )
 then
