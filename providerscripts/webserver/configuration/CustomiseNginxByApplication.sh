@@ -22,7 +22,6 @@
 #################################################################################
 #set -x
 
-if ( [ -f ${HOME}/.ssh/APPLICATION:moodle ] )
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:moodle`" = "1" ] )
 then
 
