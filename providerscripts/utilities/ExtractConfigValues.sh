@@ -4,7 +4,7 @@ export HOME="`/bin/cat /home/homedir.dat`"
 
 if ( [ "${1}" != "" ] && [ "${2}" = "stripped" ] )
 then
-    /bin/grep "${1}:" ${HOME}/.ssh/webserver_configuration_settings.dat | /usr/bin/awk -F':' '{$1=""; print $0}'
+    /bin/grep "${1}:" ${HOME}/.ssh/webserver_configuration_settings.dat | /usr/bin/awk -F':' '{$1=""; print $0}' | /bin/sed 's/^ //g' | /bin/sed 's/ $//g'
 elif ( [ "${1}" != "" ] && [ "${2}" != "stripped" ] )
 then 
     /bin/grep "${1}:" ${HOME}/.ssh/webserver_configuration_settings.dat
