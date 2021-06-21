@@ -106,8 +106,6 @@ WEBSITE_DISPLAY_NAME_UPPER="`/bin/echo ${WEBSITE_DISPLAY_NAME} | /usr/bin/tr '[:
 WEBSITE_DISPLAY_NAME_LOWER="`/bin/echo ${WEBSITE_DISPLAY_NAME} | /usr/bin/tr '[:upper:]' '[:lower:]'`"
 BASELINE_SOURCECODE_REPOSITORY="`/bin/grep 'APPLICATIONBASELINESOURCECODEREPOSITORY' ${HOME}/.ssh/webserver_configuration_settings.dat | /usr/bin/cut -d':' -f 2-`"
 
-/bin/touch ${HOME}/.ssh/BUILDARCHIVECHOICE:${BUILD_ARCHIVE_CHOICE}
-
 #Record what everything has actually been set to in case there is a problem...
 /bin/echo "CLOUDHOST:${CLOUDHOST}" > ${HOME}/logs/InitialBuildEnvironment.log
 /bin/echo "BUILD_IDENTIFIER:${BUILD_IDENTIFIER}" >> ${HOME}/logs/InitialBuildEnvironment.log
