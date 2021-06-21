@@ -38,7 +38,7 @@ then
     then
         if ( [ "${BUILDOSVERSION}" = "18.04" ] || [ "${BUILDOSVERSION}" = "20.04" ] )
 	then
-            ip="`/bin/ls ${HOME}/.ssh/MYIP:* | /usr/bin/awk -F':' '{print $NF}'`"
+	    ip="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'MYIP'`"
 	    /bin/sed -i "s/addresses.*/addresses: [${ip}\/16]/" /etc/netplan/10-ens7.yaml
             if ( [ -f /etc/netplan/10-ens3.yaml ] )
             then
