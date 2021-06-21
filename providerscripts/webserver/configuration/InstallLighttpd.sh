@@ -21,8 +21,8 @@
 ####################################################################################
 #set -x
 
-BUILDOS="`/bin/ls ${HOME}/.ssh/BUILDOS:* | /usr/bin/awk -F':' '{print $NF}'`"
-phpversion="`/bin/ls ${HOME}/.ssh/PHP_VERSION:* | /usr/bin/awk -F':' '{print $NF}'`"
+BUILDOS="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDOS'`"
+phpversion="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'PHP_VERSION'`"
 
 ${HOME}/installscripts/InstallLighttpd.sh ${BUILDOS}
 #${HOME}/installscripts/InstallPHPCGI.sh ${BUILDOS}
