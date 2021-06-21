@@ -59,7 +59,7 @@ events {
 
         http { " > /etc/nginx/nginx.conf
         
-if ( [ -f ${HOME}/.ssh/DNSCHOICE:cloudflare ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DNSCHOICE:cloudflare`" = "1" ] )
 then
      /bin/echo "include /etc/nginx/cloudflare;" >> /etc/nginx/nginx.conf
 fi
