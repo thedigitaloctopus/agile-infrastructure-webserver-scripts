@@ -25,14 +25,14 @@
 # 2) It is a DBaaS and it hasn't been secured with an SSH tunnel. In this case our hostname is the name of the database
 # 3) We are running our own local database, and a local ip address is the address of the database
 # Each deployment will have it's own reason for chosing it's own type of DB solution.
-if ( [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:DBaaS-secured ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:DBaaS-secured`" = "1" ] )
 then
     if ( [ ! -f  ${HOME}/runtime/SSHTUNNELCONFIGURED ] )
     then
         exit
     fi
     host="127.0.0.1"
-elif ( [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:DBaaS ] )
+elif ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:DBaaS`" = "1" ] )
 then
     host="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBaaSHOSTNAME'`"
 else
@@ -121,7 +121,7 @@ fi
 #Note, please check crontab and you will find that there this script is called every minute which is what I mean
 #by aggressive.
 
-if ( [ ! -f ${HOME}/.ssh/BUILDARCHIVECHOICE:virgin ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOICE:virgin`" = "1" ] )
 then
     exit
 fi
