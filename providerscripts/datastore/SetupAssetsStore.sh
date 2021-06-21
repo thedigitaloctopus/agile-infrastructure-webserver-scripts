@@ -133,7 +133,7 @@ then
                         
                         /bin/chown www-data.www-data /var/www/html/${asset_directory}
                         
-                        if ( [ -f ${HOME}/.ssh/BUILDARCHIVECHOICE:baseline ] || [ -f ${HOME}/.ssh/BUILDARCHIVECHOICE:virgin ] )
+                        if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOICE:baseline`" = "1" ] || [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOICE:virgin`" = "1" ]  )
                         then  
                             /bin/mv /tmp/${asset_directory}/* /var/www/html/${asset_directory}
                         fi
