@@ -22,7 +22,7 @@
 #set -x
 
 APPLICATION="${1}"
-SERVER_USER="`/bin/ls ${HOME}/.ssh/SERVERUSER:* | /usr/bin/awk -F':' '{print $NF}'`"
+SERVER_USER="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SERVERUSER'`"
 
 INSTALLED="0"
 
