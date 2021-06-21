@@ -21,10 +21,9 @@
 ##################################################################################
 #set -x
 
-BUILDOS="`/bin/ls ${HOME}/.ssh/BUILDOS:* | /usr/bin/awk -F':' '{print $NF}'`"
-BUILDOS_VERSION="`/bin/ls ${HOME}/.ssh/BUILDOSVERSION:* | /usr/bin/awk -F':' '{print $NF}'`"
-
-APPLICATION_LANGUAGE="`/bin/ls ${HOME}/.ssh/APPLICATIONLANGUAGE:* | /usr/bin/awk -F':' '{print $NF}'`"
+BUILDOS="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDOS'`"
+BUILDOS_VERSION="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDOSVERSION'`"
+APPLICATION_LANGUAGE="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'APPLICATIONLANGUAGE'`"
 
 ${HOME}/installscripts/InstallNGINX.sh ${BUILDOS}
 
