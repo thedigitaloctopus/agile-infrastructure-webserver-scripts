@@ -22,5 +22,6 @@
 #set -x
 if ( [ -d /var/www/html/moodle/admin ] && [ -d /var/www/html/moodle/portfolio ] &&  [ -d /var/www/html/moodle/repository ] )
 then
-    /bin/touch ${HOME}/.ssh/APPLICATION:moodle
+    #/bin/touch ${HOME}/.ssh/APPLICATION:moodle
+    ${HOME}/providerscripts/utilities/StoreConfigValue.sh "APPLICATION" "moodle"
 fi
