@@ -22,7 +22,7 @@
 ####################################################################################
 #set -x
 
-WEBSITE_NAME="`/bin/ls ${HOME}/.ssh/WEBSITEDISPLAYNAME:* | /usr/bin/awk -F':' '{print $NF}'`"
+WEBSITE_NAME="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEDISPLAYNAME'`"
 
 if ( [ -f ${HOME}/.ssh/APPLICATION:drupal ] )
 then
