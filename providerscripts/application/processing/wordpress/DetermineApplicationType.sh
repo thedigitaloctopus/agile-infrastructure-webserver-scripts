@@ -23,5 +23,6 @@
 
 if ( [ -f /var/www/html/wp-login.php ] )
 then
-    /bin/touch ${HOME}/.ssh/APPLICATION:wordpress
+   # /bin/touch ${HOME}/.ssh/APPLICATION:wordpress
+    ${HOME}/providerscripts/utilities/StoreConfigValue.sh "APPLICATION" "wordpress"
 fi
