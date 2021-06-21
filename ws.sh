@@ -236,8 +236,8 @@ ${HOME}/providerscripts/utilities/InstallMonitoringGear.sh
 /bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
 #Set the time on the machine
 /usr/bin/timedatectl set-timezone ${SERVER_TIMEZONE_CONTINENT}/${SERVER_TIMEZONE_CITY}
-/bin/touch ${HOME}/.ssh/SERVERTIMEZONECONTINENT:${SERVER_TIMEZONE_CONTINENT}
-/bin/touch ${HOME}/.ssh/SERVERTIMEZONECITY:${SERVER_TIMEZONE_CITY}
+${HOME}/providerscripts/utilities/StoreConfigValue.sh "SERVERTIMEZONECONTINENT" "${SERVER_TIMEZONE_CONTINENT}"
+${HOME}/providerscripts/utilities/StoreConfigValue.sh "SERVERTIMEZONECITY" "${SERVER_TIMEZONE_CITY}"
 export TZ=":${SERVER_TIMEZONE_CONTINENT}/${SERVER_TIMEZONE_CITY}"
 
 #Do rudimentary checks that the software has been installed correctly
