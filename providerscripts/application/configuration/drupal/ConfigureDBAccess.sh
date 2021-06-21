@@ -186,7 +186,7 @@ then
 
     /usr/bin/perl -i -pe 'BEGIN{undef $/;} s/^\$databases.\;/\$databases = [];/smg' ${HOME}/runtime/drupal_settings.php
 
-    if ( [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:Postgres ] || [ -f ${HOME}/.ssh/DATABASEDBaaSINSTALLATIONTYPE:Postgres ] )
+    if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:Postgres`" = "1" ] || [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEDBaaSINSTALLATIONTYPE:Postgres`" = "1" ] )
     then
         # /bin/sed -i "/^\$databases.*;/c  \$databases['default']['default'] = array ( \\n 'database' => '${database}', \\n 'username' => '${username}', \\n 'password' => '${password}', \\n 'host' => '${host}', \\n 'port' => '${DB_PORT}', \\n 'driver' => 'pgsql', \\n 'prefix' => '${prefix}_', \\n 'collation' => 'utf8mb4_general_ci', \\n );" ${HOME}/runtime/drupal_settings.php
         credentialstring="\$databases ['default']['default'] =array (\n 'database' => '${database}', \n 'username' => '${name}', \n 'password' => '${password}', \n 'host' => '${host}', \n 'port' => '${DB_PORT}', \n 'driver' => 'pgsql', \n 'prefix' => '${prefix}_', \n 'collation' => 'utf8mb4_general_ci',\n);"
