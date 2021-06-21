@@ -28,7 +28,7 @@
 for applicationdir in `/bin/ls -d ${HOME}/providerscripts/application/email/*/`
 do
     applicationname="`/bin/echo ${applicationdir} | /bin/sed 's/\/$//' | /usr/bin/awk -F'/' '{print $NF}'`"
-    if ( [ -f ${HOME}/.ssh/APPLICATION:${applicationname} ] )
+    if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:${applicationname}`" = "1" ] )
     then
         ${applicationdir}ActivateSMTP.sh ${1}
     fi
