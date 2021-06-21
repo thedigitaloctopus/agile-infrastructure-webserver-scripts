@@ -4,7 +4,7 @@ export HOME="`/bin/cat /home/homedir.dat`"
 
 if ( [ "`/bin/grep "${1}:" ${HOME}/.ssh/webserver_configuration_settings.dat | /usr/bin/awk -F':' '{print $NF}'`" = "${2}" ] )
 then
-    /bin/echo "0"
+    /bin/echo "1"
 else
-    /bin/echo "1" 
+    /bin/echo "0" 
 fi
