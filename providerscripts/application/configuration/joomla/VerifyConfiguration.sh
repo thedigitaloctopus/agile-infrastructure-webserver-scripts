@@ -44,14 +44,14 @@ fi
 #Sleep first so as not to initiate a race condition with the other configuration scripts
 /bin/sleep 40
 
-if ( [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:DBaaS-secured ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:DBaaS-secured`" = "1" ] )
 then
     if ( [ ! -f  ${HOME}/runtime/SSHTUNNELCONFIGURED ] )
     then
         exit
     fi
     host="127.0.0.1"
-elif ( [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:DBaaS ] )
+elif ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:DBaaS`" = "1" ] )
 then
     host="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBaaSHOSTNAME'`"
 else
