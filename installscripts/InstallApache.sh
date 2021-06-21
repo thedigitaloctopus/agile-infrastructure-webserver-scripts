@@ -33,7 +33,7 @@ then
     ${HOME}/installscripts/apache/BuildApacheFromSource.sh 
     
  #   /usr/bin/apt-get -qq -y install apache2
- #   if ( [ -f ${HOME}/.ssh/APPLICATIONLANGUAGE:PHP ] )
+ #   if ( [  "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATIONLANGUAGE:PHP`" ] )
  #   then
  #       /usr/bin/apt-get -qq -y install libapache2-mod-php${phpversion}
  #   fi
@@ -49,7 +49,7 @@ then
     ${HOME}/installscripts/apache/BuildApacheFromSource.sh
     
   #  /usr/bin/apt-get -qq -y install apache2
-  #  if ( [ -f ${HOME}/.ssh/APPLICATIONLANGUAGE:PHP ] )
+  #  if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATIONLANGUAGE:PHP`" ] )
   #  then
   #      /usr/bin/apt-get -qq -y install libapache2-mod-php${phpversion}
   #  fi
