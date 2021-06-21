@@ -20,7 +20,7 @@
 ###########################################################################################
 #set -x
 
-WEBSITE_URL="`/bin/ls ${HOME}/.ssh/WEBSITEURL:* | /usr/bin/awk -F':' '{print $NF}'`"
+WEBSITE_URL="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEURL'`"
 
 ######CHANGE THIS TOKEN AS YOU DESIRE TO BE SOMETHING YOU CAN DETECT IN YOUR WEBPAGE##########
 TOKEN="MY TOKEN"
