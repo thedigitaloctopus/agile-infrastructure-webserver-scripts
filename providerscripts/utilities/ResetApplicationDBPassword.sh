@@ -41,18 +41,18 @@ do
     read new_password
 done
 
-if ( [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:MySQL ] || [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:Maria ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:MySQL`" = "1" ] || [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:Maria`" = "1" ] )
 then
     ${HOME}/providerscripts/utilities/ConnectToRemoteMYSQLDB.sh "set password=\"${new_password};\""
 fi
 
-if ( [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:Postgres ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:Postgres`" = "1" ] )
 then
     DB_N="`/bin/sed '1q;d' ${HOME}/config/credentials/shit`"
     ${HOME}/providerscripts/utilities/ConnectToRemotePostgresDB.sh "ALTER USER ${DB_N} WITH PASSWORD \"${new_password}\"";
 fi
 
-if ( [ -f ${HOME}/.ssh/APPLICATION:joomla ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:joomla`" = "1" ] )
 then
     /bin/sed -i "s/${old_password}/${new_password}/g" ${HOME}/config/credentials/shit
     /bin/sed -i "s/${old_password}/${new_password}/g" ${HOME}/config/joomla_configuration.php
@@ -62,7 +62,7 @@ then
     ${HOME}/providerscripts/utilities/ConnectDBServer.sh "/bin/sed -i \"s/${old_password}/${new_password}/g\" ${HOME}/credentials/shit"
 fi
 
-if ( [ -f ${HOME}/.ssh/APPLICATION:wordpress ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:wordpress`" = "1" ] )
 then
     /bin/sed -i "s/${old_password}/${new_password}/g" ${HOME}/config/credentials/shit
     /bin/sed -i "s/${old_password}/${new_password}/g" ${HOME}/config/wordpress_config.php
@@ -72,7 +72,7 @@ then
     ${HOME}/providerscripts/utilities/ConnectDBServer.sh "/bin/sed -i \"s/${old_password}/${new_password}/g\" ${HOME}/credentials/shit"
 fi
 
-if ( [ -f ${HOME}/.ssh/APPLICATION:drupal ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:drupal`" = "1" ] )
 then
     /bin/sed -i "s/${old_password}/${new_password}/g" ${HOME}/config/credentials/shit
     /bin/sed -i "s/${old_password}/${new_password}/g" ${HOME}/config/drupal_settings.php
@@ -82,7 +82,7 @@ then
     ${HOME}/providerscripts/utilities/ConnectDBServer.sh "/bin/sed -i \"s/${old_password}/${new_password}/g\" ${HOME}/credentials/shit"
 fi
 
-if ( [ -f ${HOME}/.ssh/APPLICATION:moodle ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:moodle`" = "1" ] )
 then
     /bin/sed -i "s/${old_password}/${new_password}/g" ${HOME}/config/credentials/shit
     /bin/sed -i "s/${old_password}/${new_password}/g" ${HOME}/shit
