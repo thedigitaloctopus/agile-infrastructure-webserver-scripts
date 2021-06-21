@@ -42,13 +42,13 @@ then
 
 fi
 
-if ( [ -f ${HOME}/.ssh/APPLICATION:joomla ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:joomla`" = "1" ] )
 then
     /bin/cp ${HOME}/providerscripts/application/configuration/joomla-htaccess.txt /var/www/html/.htaccess
     /bin/chown www-data.www-data /var/www/html/.htaccess
 fi
 
-if ( [ -f ${HOME}/.ssh/APPLICATION:wordpress ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:wordpress`" = "1" ] )
 then
     /bin/cp ${HOME}/providerscripts/application/configuration/wordpress-htaccess.txt /var/www/html/.htaccess
     /bin/chown www-data.www-data /var/www/html/.htaccess
