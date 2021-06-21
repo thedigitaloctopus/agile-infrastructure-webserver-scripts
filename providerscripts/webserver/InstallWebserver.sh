@@ -24,8 +24,7 @@
 webserver_type="${1}"
 website_name="${2}"
 website_url="${3}"
-SERVER_USER="`/bin/ls ${HOME}/.ssh/SERVERUSER:* | /usr/bin/awk -F':' '{print $NF}'`"
-
+SERVER_USER="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SERVERUSER'`"
 
 if ( [ "${webserver_type}" = "NGINX" ] )
 then
