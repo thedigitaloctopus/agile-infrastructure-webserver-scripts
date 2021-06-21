@@ -29,7 +29,7 @@ CMD="/bin/tar cPvfz /tmp/applicationsourcecode.tar.gz ${directory}/* "
 
 for mounteddirectory in ${mounteddirectories}
 do
-    if ( [ ! -f ${HOME}/.ssh/BUILDARCHIVECHOICE:virgin ] && [ ! -f ${HOME}/.ssh/BUILDARCHIVECHOICE:baseline ] )
+    if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOICE:virgin`" = "0" ] && [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOICE:baseline`" = "0" ] )
     then
         CMD=${CMD}"--exclude=\"${directory}/${mounteddirectory}\" "
     fi
