@@ -23,6 +23,7 @@
 #set -x
 
 if ( [ -f ${HOME}/.ssh/APPLICATION:moodle ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:moodle`" = "1" ] )
 then
 
     /bin/echo "
@@ -46,7 +47,7 @@ then
     "  >> /etc/nginx/sites-available/${website_name}
 fi
 
-if ( [ -f ${HOME}/.ssh/APPLICATION:drupal ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:drupal`" = "1" ] )
 then
     /bin/echo "    location ~ '\.php$|^/update.php' {
         fastcgi_split_path_info ^(.+?\.php)(|/.*)$;
@@ -63,7 +64,7 @@ then
     "  >> /etc/nginx/sites-available/${website_name}
 fi
 
-if ( [ -f ${HOME}/.ssh/APPLICATION:wordpress ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:wordpress`" = "1" ] )
 then
     /bin/echo "location /wp-content/uploads/bp-attachments/ {
     rewrite ^.*uploads/bp-attachments/([0-9]+)/(.*) /?p=\$1&bp-attachment=\$2 permanent;
@@ -73,7 +74,7 @@ then
 }" >> /etc/nginx/sites-available/${website_name}
 fi
 
-if ( [ -f ${HOME}/.ssh/APPLICATION:joomla ] || [ -f ${HOME}/.ssh/APPLICATION:wordpress ] || [ -f ${HOME}/.ssh/APPLICATION:drupal ] || [ -f ${HOME}/.ssh/APPLICATION: ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:joomla`" = "1" ] || [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:wordpress`" = "1" ] || [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:drupal`" = "1" ] || [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:moodle`" = "1" ] )
 then
     /bin/echo "
     location ~ \.php\$ {
