@@ -100,7 +100,8 @@ then
 
         if ( [ "${DNS_CHOICE}" = "rackspace" ] )
         then
-            DNS_EMAIL="`/bin/ls ${HOME}/.ssh/DNSUSERNAME:* | /usr/bin/awk -F':' '{print $NF}'`"
+            DNS_EMAIL="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DNSUSERNAME'`"
+
             if ( [ "${PRODUCTION}" = "1" ] && [ "${DEVELOPMENT}" = "0" ] )
             then
                 /bin/echo ${SERVER_USER_PASSWORD}  | /usr/bin/sudo -S -E RACKSPACE_USER="${DNS_USERNAME}" RACKSPACE_API_KEY="${DNS_SECURITY_KEY}" /usr/bin/lego --email="${DNS_EMAIL}" --domains="${WEBSITE_URL}" --dns="${DNS_CHOICE}" --accept-tos run
