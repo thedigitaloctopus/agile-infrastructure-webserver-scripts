@@ -20,7 +20,7 @@
 ########################################################################################
 set -x
 
-ip="`/bin/ls ${HOME}/.ssh/MYPUBLICIP:* | /usr/bin/awk -F':' '{print $NF}'`"
+ip="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'MYPUBLICIP'`"
 
 if test `/usr/bin/find ${HOME}/runtime/NEWLYBUILT -mmin -20`
 then
