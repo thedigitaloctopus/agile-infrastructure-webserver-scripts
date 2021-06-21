@@ -20,7 +20,7 @@
 #####################################################################################
 #set -x
 
-if ( [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:DBaaS-secured ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:DBaaS-secured`" = "1" ] )
 then
     if ( [ ! -f  ${HOME}/runtime/SSHTUNNELCONFIGURED ] )
     then
