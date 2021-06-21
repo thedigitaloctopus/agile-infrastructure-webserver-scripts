@@ -22,7 +22,7 @@
 #################################################################################
 #set -x
 
-if ( [ -f ${HOME}/.ssh/APPLICATION:joomla ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:joomla`" = "1" ] )
 then
     /bin/echo "
 url.rewrite-final = (
@@ -36,7 +36,7 @@ url.rewrite-final = (
     ) " >>  /etc/lighttpd/lighttpd.conf
 fi
 
-if ( [ -f ${HOME}/.ssh/APPLICATION:wordpress ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:wordpress`" = "1" ] )
 then
     /bin/echo "url.rewrite-once = (
 \"^/(wp-.+).*/?\" => \"\$0\",
@@ -45,7 +45,7 @@ then
     " >> /etc/lighttpd/lighttpd.conf
 fi
 
-if ( [ -f ${HOME}/.ssh/APPLICATION:drupal ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:drupal`" = "1" ] )
 then
     /bin/echo "
 url.rewrite-final = (
