@@ -23,5 +23,6 @@
 
 if ( [ -d /var/www/html/administrator ] && [ -d /var/www/html/modules ] &&  [ -d /var/www/html/plugins ] )
 then
-    /bin/touch ${HOME}/.ssh/APPLICATION:joomla
+    #/bin/touch ${HOME}/.ssh/APPLICATION:joomla
+    ${HOME}/providerscripts/utilities/StoreConfigValue.sh "APPLICATION" "joomla"
 fi
