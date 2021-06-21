@@ -121,7 +121,7 @@ fi
 #Note, please check crontab and you will find that there this script is called every minute which is what I mean
 #by aggressive.
 
-if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOICE:virgin`" = "1" ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOICE:virgin`" = "0" ] )
 then
     exit
 fi
