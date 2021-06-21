@@ -18,7 +18,7 @@
 # along with The Agile Deployment Toolkit.  If not, see <http://www.gnu.org/licenses/>.
 #######################################################################################################
 #######################################################################################################
-if ( [ ! -f ${HOME}/.ssh/APPLICATIONLANGUAGE:PHP ] )
+if ( [ ! "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATIONLANGUAGE:PHP`" ] )
 then
     exit
 fi
