@@ -72,7 +72,8 @@ fi
 for applicationdir in `/bin/ls -d ${HOME}/providerscripts/application/configuration/*/`
 do
     applicationname="`/bin/echo ${applicationdir} | /bin/sed 's/\/$//' | /usr/bin/awk -F'/' '{print $NF}'`"
-    if ( [ -f ${HOME}/.ssh/APPLICATION:${applicationname} ] )
+    
+    if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:${applicationname}`" = "1" ] )
     then
         . ${applicationdir}VerifyConfiguration.sh
     fi
