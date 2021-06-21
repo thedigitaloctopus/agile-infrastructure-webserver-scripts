@@ -54,7 +54,7 @@ if ( [ "${directoriestomiss}" = "" ] )
 then
     CMD="`/usr/bin/find /var/www/html/ -cmin -20 -mmin -20 -type f`"
 else
-    if ( [ -f ${HOME}/.ssh/PERSISTASSETSTOCLOUD:0 ] )
+    if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh PERSISTASSETSTOCLOUD:0`" = "1" ] )
     then
         CMD="/usr/bin/find /var/www/html/ -type f -mmin -20 -cmin -20"
     else
