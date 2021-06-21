@@ -20,7 +20,7 @@
 #######################################################################################
 #set -x
 
-WEBSERVERCHOICE="`/bin/ls ${HOME}/.ssh/WEBSERVERCHOICE:* | /usr/bin/awk -F':' '{print $NF}'`"
+WEBSERVERCHOICE="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSERVERCHOICE'`"
 
 if ( [ "${WEBSERVERCHOICE}" = "NGINX" ] )
 then
