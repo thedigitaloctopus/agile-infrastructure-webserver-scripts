@@ -22,15 +22,15 @@
 
 directories="`/bin/ls /var/www/html/sites/default/files | /bin/grep "^20"`"
 
-for directory in ${directories}
-do
-   mounted_directories="`/bin/ls ${HOME}/.ssh/DIRECTORIESTOMOUNT:*`"
-   if ( [ "`/bin/echo ${mounted_directories} | /bin/grep ${directory}`" = "" ] )
-   then
-       #/bin/touch ${HOME}/.ssh/DIRECTORIESTOMOUNT:sites.default.files.${directory}
-        ${HOME}/providerscripts/utilities/StoreConfigValue.sh "DIRECTORIESTOMOUNT" "sites.default.files.${directory}" "append"
-   fi
-done
+#for directory in ${directories}
+#do
+#   mounted_directories="`/bin/ls ${HOME}/.ssh/DIRECTORIESTOMOUNT:*`"
+#   if ( [ "`/bin/echo ${mounted_directories} | /bin/grep ${directory}`" = "" ] )
+#   then
+#       #/bin/touch ${HOME}/.ssh/DIRECTORIESTOMOUNT:sites.default.files.${directory}
+#        ${HOME}/providerscripts/utilities/StoreConfigValue.sh "DIRECTORIESTOMOUNT" "sites.default.files.${directory}" "append"
+#   fi
+#done
 
 WEBSITE_URL="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEURL'`"
 assetbucket="`/bin/echo ${WEBSITE_URL} | /usr/bin/awk -F'.' '{ for(i = 1; i <= NF; i++) { print $i; } }' | /usr/bin/cut -c1-3 | /usr/bin/tr '\n' ' ' | /bin/sed 's/ //g'`"
@@ -43,7 +43,8 @@ do
             if ( [ "${buckettomount}" != "" ] )
 	    then
                 directory="`/bin/echo ${buckettomount} | /bin/sed 's/.*sites-default-files-//g' | /bin/grep -v s3:`"
-                /bin/touch ${HOME}/.ssh/DIRECTORIESTOMOUNT:sites.default.files.${directory}
+                #/bin/touch ${HOME}/.ssh/DIRECTORIESTOMOUNT:sites.default.files.${directory}
+		${HOME}/providerscripts/utilities/StoreConfigValue.sh "DIRECTORIESTOMOUNT" "sites.default.files.${directory}" "append"
                 directory="`/bin/echo ${buckettomount} | /bin/sed 's/.*sites-default-files-/sites\/default\/files\//g'`"
                 /bin/mkdir -p /var/www/html/${directory}
 	    fi
