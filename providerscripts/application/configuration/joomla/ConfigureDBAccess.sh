@@ -78,7 +78,7 @@ then
     /bin/rm ${HOME}/runtime/APPLICATION_DB_CONFIGURED
 fi
 
-if ( [ -f ${HOME}/.ssh/BUILDARCHIVECHOICE:virgin ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOICE:virgin`" = "1" ] )
 then
     exit
 fi
@@ -185,7 +185,7 @@ then
     /bin/touch ${HOME}/config/UPDATEDPREFIX:${dbprefix}
 fi
 
-if ( [ -f ${HOME}/.ssh/INMEMORYCACHING:memcache ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh INMEMORYCACHING:memcache`" = "1" ] )
 then
     /bin/sed -i "/\$cache_handler /c\        public \$cache_handler = \'memcache\';" ${HOME}/runtime/joomla_configuration.php
     cache_host="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'INMEMORYCACHINGHOST'`"
@@ -194,7 +194,7 @@ then
     /bin/sed -i "/\$memcache_server_port /c\        public \$memcache_server_port = \'${cache_port}\';" ${HOME}/runtime/joomla_configuration.php
 fi
 
-if ( [ -f ${HOME}/.ssh/INMEMORYCACHING:redis ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh INMEMORYCACHING:redis`" = "1" ] )
 then
     /bin/sed -i "/\$cache_handler /c\        public \$cache_handler = \'redis\';" ${HOME}/runtime/joomla_configuration.php
     cache_host="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'INMEMORYCACHINGHOST'`"
