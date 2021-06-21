@@ -171,7 +171,7 @@ else
 fi
 
 #Record which configuration file we are working on for use elsewhere
-/bin/touch ${HOME}/.ssh/CONFIGFILE:drupal_settings.php
+#/bin/touch ${HOME}/.ssh/CONFIGFILE:drupal_settings.php
 
 if ( [ -f ${HOME}/runtime/drupal_settings.php ] && [ "`/bin/cat ${HOME}/runtime/drupal_settings.php | /bin/grep "'${name}'"`" = "" ] || [ "`/bin/cat ${HOME}/runtime/drupal_settings.php | /bin/grep "'${password}'"`" = "" ] || [ "`/bin/cat ${HOME}/runtime/drupal_settings.php | /bin/grep "'${database}'"`" = "" ] || [ "`/bin/cat ${HOME}/runtime/drupal_settings.php | /bin/grep "'${name}'"`" = "" ] )
 then
