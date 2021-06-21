@@ -30,7 +30,7 @@
 #set -x
 
 #If we are not a virgin, exit
-if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOICE:virgin" = "0" ] ) 
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOICE:virgin`" = "0" ] ) 
 then
     exit
 fi
