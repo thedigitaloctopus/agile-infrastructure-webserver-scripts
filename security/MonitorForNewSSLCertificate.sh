@@ -28,11 +28,11 @@
 ###################################################################################
 #set -x
 
-if ( [ "`/bin/ls ${HOME}/.ssh/SSLGENERATIONMETHOD:* | /usr/bin/awk -F':' '{print $NF}'`" = "AUTOMATIC" ] )
+if ( [ "`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SSLGENERATIONMETHOD'`" = "AUTOMATIC" ] )
 then
-    if ( [ "`/bin/ls ${HOME}/.ssh/SSLGENERATIONSERVICE:* | /usr/bin/awk -F':' '{print $NF}'`" = "LETSENCRYPT" ] )
+    if ( [ "`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SSLGENERATIONSERVICE'`" = "LETSENCRYPT" ] )
     then
-        WEBSITE_URL="`/bin/ls ${HOME}/.ssh/WEBSITEURL:* | /usr/bin/awk -F':' '{print $NF}'`"
+        WEBSITE_URL="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEURL'`"
 
         if ( [ -f ${HOME}/config/ssl/fullchain.pem ] && [ -f ${HOME}/config/ssl/privkey.pem ] && [ -f ${HOME}/config/ssl/${WEBSITE_URL}.json ] && [ -f ${HOME}/config/SSLUPDATED ] )
         then
