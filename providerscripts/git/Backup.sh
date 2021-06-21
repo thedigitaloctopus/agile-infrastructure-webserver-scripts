@@ -53,7 +53,7 @@ fi
 cd /tmp/backup
 #/bin/rm -r ${HOME}/.git
 
-if ( [ -f ${HOME}/.ssh/PERSISTASSETSTOCLOUD:1 ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh PERSISTASSETSTOCLOUD:1`" = "1" ] )
 then
     #dirstoomit="`/bin/ls ${HOME}/.ssh/DIRECTORIESTOMOUNT:* | /usr/bin/awk -F':' '{$1=""; print $0}' | /bin/sed 's/\./\//g' | /usr/bin/tr '\n' ' ' | /bin/sed 's/  / /g'`"
     
@@ -115,7 +115,7 @@ then
     /bin/cp /tmp/backup/index.php.backup /tmp/backup/index.php
 fi
 
-if ( [ "${period}" = "hourly" ] && [ -f ${HOME}/.ssh/DISABLEHOURLY:1 ] )
+if ( [ "${period}" = "hourly" ] && [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DISABLEHOURLY:1`" = "1" ] )
 then
     /bin/echo "${0} `/bin/date`: Skipping hourly backup to repository because hourly backups are disabled to save on data transfer costs" >> ${HOME}/logs/MonitoringLog.dat
 else
@@ -125,7 +125,7 @@ else
     /bin/systemd-inhibit --why="Persisting sourcecode to git repo" ${HOME}/providerscripts/git/GitPushSourcecode.sh "." "Automated Backup" "${APPLICATION_REPOSITORY_PROVIDER}" "${WEBSITE_SUBDOMAIN}-${WEBSITE_NAME}-webroot-sourcecode-${period}-${BUILD_IDENTIFIER}"
 fi
 
-if ( [ -f ${HOME}/.ssh/SUPERSAFEWEBROOT:1 ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh SUPERSAFEWEBROOT:1`" = "1" ] )
 then
    # /bin/rm -r /tmp/backup/.git
     ${HOME}/providerscripts/datastore/MountDatastore.sh "${DATASTORE_CHOICE}" "`/bin/echo ${WEBSITE_URL} | /bin/sed 's/\./-/g'`-${period}"
