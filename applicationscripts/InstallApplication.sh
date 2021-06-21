@@ -40,7 +40,7 @@ then
     ${HOME}/providerscripts/git/GitPull.sh ${APPLICATION_REPOSITORY_PROVIDER} ${APPLICATION_REPOSITORY_USERNAME} ${APPLICATION_REPOSITORY_PASSWORD} ${APPLICATION_REPOSITORY_OWNER} ${APPLICATION_REPOSITORY_NAME}
 
     #If we can't get our sourcecode from the repo try the datastore
-    if ( [ -f ${HOME}/.ssh/SUPERSAFEWEBROOT:1 ] && [ "`/bin/ls -l /var/www/html | /usr/bin/wc -l`" -lt "10" ] )
+    if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh SUPERSAFEWEBROOT:1`" ]  && [ "`/bin/ls -l /var/www/html | /usr/bin/wc -l`" -lt "10" ] )
     then
         cd ${HOME}
         ${HOME}/providerscripts/datastore/GetFromDatastore.sh "${DATASTORE_PROVIDER}" "`/bin/echo ${WEBSITE_URL} | /bin/sed 's/\./-/g'`-${BUILD_ARCHIVE_CHOICE}/applicationsourcecode.tar.gz"
