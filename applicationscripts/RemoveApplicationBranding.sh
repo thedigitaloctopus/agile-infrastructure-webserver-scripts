@@ -20,11 +20,11 @@
 #######################################################################################################
 #set -x
 
-if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATIONIDENTIFIER:1`" ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATIONIDENTIFIER:1`" = "1" ] )
 then
     . ${HOME}/applicationscripts/demo-joomla/RemoveApplicationBranding.sh
 fi
-if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATIONIDENTIFIER:2`" ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATIONIDENTIFIER:2`" = "1" ] )
 then
     . ${HOME}/applicationscripts/nuocialboss-wordpress/RemoveApplicationBranding.sh
 fi
