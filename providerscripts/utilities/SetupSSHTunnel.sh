@@ -37,13 +37,15 @@ DEFAULT_DBaaS_OS_USER="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 
 BUILDOS="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDOS'`"
 
 
-if ( [ "`/bin/ls ${HOME}/.ssh/DBaaSREMOTESSHPROXYIPINDEX:*`" = "" ] )
+#if ( [ "`/bin/ls ${HOME}/.ssh/DBaaSREMOTESSHPROXYIPINDEX:*`" = "" ] )
+if ( [ "`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBaaSREMOTESSHPROXYIPINDEX' 'stripped'`" = "" ] )
 then
-    /bin/touch ${HOME}/.ssh/DBaaSREMOTESSHPROXYIPINDEX:1
+    #/bin/touch ${HOME}/.ssh/DBaaSREMOTESSHPROXYIPINDEX:1
+    ${HOME}/providerscripts/utilities/StoreConfigValue.sh "DBaaSREMOTESSHPROXYIPINDEX" "1"
 fi
 
 #noips="`/bin/ls ${HOME}/.ssh/DBaaSREMOTESSHPROXYIP:* | /bin/sed 's/\(.\)/\1\n/g'|  /usr/bin/sort | /usr/bin/uniq -c | /bin/grep ':' | /bin/sed 's/ //g' | /bin/sed 's/://g'`"
-noips="`${HOME}/providerscripts/utilities/ExtractConfigValues.sh 'DBaaSREMOTESSHPROXYIP' | /usr/bin/wc -w`"
+noips="`${HOME}/providerscripts/utilities/ExtractConfigValues.sh 'DBaaSREMOTESSHPROXYIP' 'stripped' | /usr/bin/wc -w`"
 
 if ( [ "${noips}" -eq "1" ] )
 then
