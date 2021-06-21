@@ -24,7 +24,7 @@
 
 WEBSITE_NAME="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEDISPLAYNAME'`"
 
-if ( [ -f ${HOME}/.ssh/APPLICATION:drupal ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:drupal`" = "1" ] )
 then
     /bin/sed -i 's/<\/VirtualHost>//g' /etc/apache2/sites-available/${WEBSITE_NAME}
     /bin/echo "<Directory /var/www/html>
