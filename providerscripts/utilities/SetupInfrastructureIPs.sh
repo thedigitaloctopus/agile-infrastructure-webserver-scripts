@@ -19,7 +19,8 @@
 #######################################################################################################
 #######################################################################################################
 #set -x
-export BUILD_CLIENT_IP="`/bin/ls ${HOME}/.ssh | /bin/grep BUILDCLIENTIP | /usr/bin/awk -F':' '{print $NF}'`"
+export BUILD_CLIENT_IP="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDCLIENTIP'`"
+
 
 
 
