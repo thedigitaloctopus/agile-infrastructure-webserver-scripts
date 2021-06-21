@@ -25,7 +25,7 @@ lockfile=${HOME}/config/initialisevirginapplicationlock.file
 if ( [ ! -f ${lockfile} ] )
 then
     /usr/bin/touch ${lockfile}
-    if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOICE:virgin`" ] )
+    if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOICE:virgin`" = "1" ] )
     then
         ${HOME}/providerscripts/application/configuration/InitialiseVirginInstallByApplication.sh
     fi
