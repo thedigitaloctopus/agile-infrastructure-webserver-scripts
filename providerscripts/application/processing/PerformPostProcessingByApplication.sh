@@ -36,7 +36,7 @@ then
     exit
 fi
 
-if ( [ ! -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:None ] )
+if ( [ "`/home/${SERVER_USER}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:None`" = "0" ] )
 then
     while ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] )
     do
