@@ -28,9 +28,9 @@
 ####################################################################################
 #set -x
 
-if ( [ -f ${HOME}/.ssh/DNSCHOICE:cloudflare ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DNSCHOICE:cloudflare`" = "1" ] )
 then
-    if ( [ -f ${HOME}/.ssh/WEBSERVERCHOICE:NGINX ] )
+    if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh WEBSERVERCHOICE:NGINX`" = "1" ] )
     then
         CLOUDFLARE_FILE_PATH=/etc/nginx/cloudflare
 
@@ -54,7 +54,7 @@ then
 
     fi
     
-    if ( [ -f ${HOME}/.ssh/WEBSERVERCHOICE:APACHE ] )
+    if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh WEBSERVERCHOICE:APACHE`" = "1" ] )
     then
         CLOUDFLARE_FILE_PATH=/etc/apache2/conf-available/remoteip.conf
 
