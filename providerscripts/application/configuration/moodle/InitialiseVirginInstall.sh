@@ -78,7 +78,7 @@ then
     host="127.0.0.1"
 elif ( [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:DBaaS ] )
 then
-    host="`/bin/ls ${HOME}/.ssh/DBaaSHOSTNAME:* | /usr/bin/awk -F':' '{print $NF}'`"
+    host="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBaaSHOSTNAME'`"
 else
     if ( [ "`/bin/ls ${HOME}/config/databaseip/`" = "" ] )
     then
@@ -143,7 +143,9 @@ if ( [ "`/bin/cat /var/www/html/moodle/config.php | /bin/grep "dbport" | /bin/gr
 then
     /bin/sed -i "/dbport/c\     \'dbport\' => \"${DB_PORT}\"," /var/www/html/moodle/config.php
 fi
-websiteurl="`/bin/ls ${HOME}/.ssh/WEBSITEURL:* | /usr/bin/awk -F':' '{print $NF}'`"
+
+websiteurl="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEURL'`"
+
 if ( [ "`/bin/cat /var/www/html/moodle/config.php | /bin/grep "wwwroot" | /bin/grep "${websiteurl}"`" = "" ] )
 then
     /bin/sed -i "/\$CFG->wwwroot/c\     \$CFG->wwwroot    = \"https://${websiteurl}/moodle\";" /var/www/html/moodle/config.php
@@ -154,7 +156,7 @@ then
     /bin/sed -i "/\$CFG->dataroot/c\    \$CFG->dataroot    = '/var/www/html/moodledata';" /var/www/html/moodle/config.php
 fi
 
-WEBSITE_DISPLAY_NAME="`/bin/ls ${HOME}/.ssh/WEBSITEDISPLAYNAME:* | /usr/bin/awk -F':' '{print $NF}'`"
+WEBSITE_DISPLAY_NAME="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEDISPLAYNAME'`"
 ${HOME}/providerscripts/application/email/ActivateSMTPByApplication.sh "${WEBSITE_DISPLAY_NAME}" 
 
 if ( [ ! -d /var/www/html/tmp ] )
