@@ -20,9 +20,9 @@
 # along with The Agile Deployment Toolkit.  If not, see <http://www.gnu.org/licenses/>.
 ############################################################################
 ############################################################################
-set -x
+#set -x
 
-if ( [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:None ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:None`" = "1" ] )
 then
     /bin/echo "ALIVE"
     exit
@@ -37,35 +37,35 @@ then
     exit
 fi
 
-if ( [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:DBaaS-secured ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:DBaaS-secured`" = "1" ] )
 then
     if ( [ ! -f  ${HOME}/runtime/SSHTUNNELCONFIGURED ] )
     then
         exit
     fi
     SERVER_NAME="127.0.0.1"
-elif ( [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:DBaaS ] )
+elif ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:DBaaS`" = "1" ] )
 then
     SERVER_NAME="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBaaSHOSTNAME'`"
 else
     SERVER_NAME="`/bin/ls ${HOME}/config/databaseip | /usr/bin/head -1`"
 fi
 
-if ( [ -f ${HOME}/.ssh/APPLICATION:joomla ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:joomla`" = "1" ] )
 then
     . ${HOME}/providerscripts/application/monitoring/joomla/CheckServerAlive.sh
-elif ( [ -f ${HOME}/.ssh/APPLICATION:wordpress ] )
+elif ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:wordpress`" = "1" ] )
 then
     . ${HOME}/providerscripts/application/monitoring/wordpress/CheckServerAlive.sh
-elif ( [ -f ${HOME}/.ssh/APPLICATION:moodle ] )
+elif ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:moodle`" = "1" ] )
 then
     . ${HOME}/providerscripts/application/monitoring/moodle/CheckServerAlive.sh
-elif ( [ -f ${HOME}/.ssh/APPLICATION:drupal ] )
+elif ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:drupal`" = "1" ] )
 then
     . ${HOME}/providerscripts/application/monitoring/drupal/CheckServerAlive.sh
 fi
 
-if ( [ ! -f ${HOME}/.ssh/BUILDARCHIVECHOICE:virgin ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOICE:virgin`" = "1" ] )
 then
     ${HOME}/providerscripts/utilities/CheckServerAlive.sh
 else
