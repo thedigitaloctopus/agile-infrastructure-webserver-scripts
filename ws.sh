@@ -34,8 +34,7 @@ export HOMEDIR=${HOME}
 /bin/echo "${HOMEDIR}" > /home/homedir.dat
 
 #First thing is to tighten up permissions in case there's any wronguns. 
-
-#/bin/chmod -R 750 ${HOME}/autoscaler ${HOME}/cron ${HOME}/installscripts ${HOME}/providerscripts ${HOME}/security
+/bin/chmod -R 750 ${HOME}/autoscaler ${HOME}/cron ${HOME}/installscripts ${HOME}/providerscripts ${HOME}/security
 
 #Setup operational directories if needed
 if ( [ ! -d ${HOME}/logs ] )
@@ -271,10 +270,10 @@ cd ${HOME}
 /bin/echo "${0} Provider: ${INFRASTRUCTURE_REPOSITORY_OWNER} " >> ${HOME}/logs/WEBSERVER_BUILD.log
 /bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
 
-${HOME}/bootstrap/GitPull.sh ${INFRASTRUCTURE_REPOSITORY_PROVIDER} ${INFRASTRUCTURE_REPOSITORY_USERNAME} ${INFRASTRUCTURE_REPOSITORY_PASSWORD} ${INFRASTRUCTURE_REPOSITORY_OWNER} agile-infrastructure-webserver-scripts > /dev/null 2>&1
+#${HOME}/bootstrap/GitPull.sh ${INFRASTRUCTURE_REPOSITORY_PROVIDER} ${INFRASTRUCTURE_REPOSITORY_USERNAME} ${INFRASTRUCTURE_REPOSITORY_PASSWORD} ${INFRASTRUCTURE_REPOSITORY_OWNER} agile-infrastructure-webserver-scripts > /dev/null 2>&1
 
-/usr/bin/find ${HOME} -type d -print0 | xargs -0 chmod 0755 # for directories
-/usr/bin/find ${HOME} -type f -print0 | xargs -0 chmod 0755 # for files
+#/usr/bin/find ${HOME} -type d -print0 | xargs -0 chmod 0755 # for directories
+#/usr/bin/find ${HOME} -type f -print0 | xargs -0 chmod 0755 # for files
 
 /bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
 /bin/echo "${0} Installing Datastore tools" >> ${HOME}/logs/WEBSERVER_BUILD.log
@@ -335,7 +334,6 @@ cd /var/www/html
 /bin/echo "${0} Installing the custom application" >> ${HOME}/logs/WEBSERVER_BUILD.log
 /bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
 
-
 . ${HOME}/applicationscripts/InstallApplication.sh
 
 /bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
@@ -344,7 +342,6 @@ cd /var/www/html
 . ${HOME}/applicationscripts/ApplyApplicationBranding.sh
 . ${HOME}/applicationscripts/CustomiseApplication.sh
 ${HOME}/providerscripts/application/customise/AdjustApplicationInstallationByApplication.sh
-
 
 /bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
 /bin/echo "${0} Adjusting webroot permissions and ownerships" >> ${HOME}/logs/WEBSERVER_BUILD.log
@@ -364,7 +361,6 @@ ${HOME}/providerscripts/application/processing/DetermineApplicationType.sh > /de
 /bin/echo "${0} Install Database client for accessing the database from the command line easily" >> ${HOME}/logs/WEBSERVER_BUILD.log
 /bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
 . ${HOME}/providerscripts/utilities/InstallDatabaseClient.sh
-
 
 #Set our status as a new build
 /bin/touch ${HOME}/runtime/NEWLYBUILT
