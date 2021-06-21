@@ -2,7 +2,9 @@
 
 export HOME="`/bin/cat /home/homedir.dat`"
 
-if ( [ "`/bin/grep "${1}" ${HOME}/.ssh/webserver_configuration_settings.dat`" = "${2}" ] )
+key_value="`/bin/grep "${1}" ${HOME}/.ssh/webserver_configuration_settings.dat`"
+
+if ( [ "${key_value}" != "" ] )
 then
     /bin/echo "1"
 else
