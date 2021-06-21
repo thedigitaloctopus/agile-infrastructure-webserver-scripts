@@ -46,7 +46,7 @@ then
     SERVER_NAME="127.0.0.1"
 elif ( [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:DBaaS ] )
 then
-    SERVER_NAME="`/bin/ls ${HOME}/.ssh/DBaaSHOSTNAME:* | /usr/bin/awk -F':' '{print $NF}'`"
+    SERVER_NAME="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBaaSHOSTNAME'`"
 else
     SERVER_NAME="`/bin/ls ${HOME}/config/databaseip | /usr/bin/head -1`"
 fi
