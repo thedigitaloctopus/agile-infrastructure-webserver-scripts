@@ -27,7 +27,8 @@ if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh PERSISTASSETSTOCL
 then
     domainspecifier="`/bin/echo ${WEBSITE_URL} | /usr/bin/awk -F'.' '{ for(i = 1; i <= NF; i++) { print $i; } }' | /usr/bin/cut -c1-3 | /usr/bin/tr '\n' '-' | /bin/sed 's/-//g'`"
     /usr/bin/s3cmd mb s3://${domainspecifier}
-    /bin/touch ${HOME}/.ssh/ASSETSBUCKET:${domainspecifier}
+   # /bin/touch ${HOME}/.ssh/ASSETSBUCKET:${domainspecifier}
+    ${HOME}/providerscripts/utilities/StoreConfigValue.sh "ASSETSBUCKET" "${domainspecifier}"
     /bin/touch ${HOME}/runtime/S3BUCKETSET
     exit
 else
