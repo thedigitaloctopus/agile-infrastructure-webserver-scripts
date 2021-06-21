@@ -50,7 +50,7 @@
 #######################################################################################################
 #set -x
 
-SERVER_USER="`/bin/ls ${HOME}/.ssh/SERVERUSER:* | /usr/bin/awk -F':' '{print $NF}'`"
+SERVER_USER="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SERVERUSER'`"
 
 if ( [ "$1" != "" ] )
 then
