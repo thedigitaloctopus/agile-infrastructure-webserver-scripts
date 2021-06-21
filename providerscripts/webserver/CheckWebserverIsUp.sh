@@ -21,7 +21,8 @@
 #set -x
 
 webserver_type="${1}"
-phpversion="`/bin/ls ${HOME}/.ssh/PHP_VERSION:* | /usr/bin/awk -F':' '{print $NF}'`"
+phpversion="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'PHP_VERSION'`"
+
 
 if ( [ "${webserver_type}" = "APACHE" ] )
 then
