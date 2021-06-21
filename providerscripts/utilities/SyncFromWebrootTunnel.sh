@@ -25,7 +25,7 @@ then
     exit
 fi
 
-ip="`/bin/ls ${HOME}/.ssh/MYPUBLICIP:* | /usr/bin/awk -F':' '{print $NF}'`"
+ip="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'MYPUBLICIP'`"
 
 if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] )
 then
