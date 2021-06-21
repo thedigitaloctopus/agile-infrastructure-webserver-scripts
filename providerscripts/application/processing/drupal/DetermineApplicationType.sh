@@ -23,5 +23,6 @@
 
 if ( [ -d /var/www/html/core ] && [ -d /var/www/html/modules ] && [ -d /var/www/html/profiles ] && [ -d /var/www/html/sites ] && [ -d /var/www/html/themes ] )
 then
-    /bin/touch ${HOME}/.ssh/APPLICATION:drupal
+   # /bin/touch ${HOME}/.ssh/APPLICATION:drupal
+    ${HOME}/providerscripts/utilities/StoreConfigValue.sh "APPLICATION" "drupal"
 fi
