@@ -42,7 +42,9 @@ then
     /bin/touch ${HOME}/.ssh/DBaaSREMOTESSHPROXYIPINDEX:1
 fi
 
-noips="`/bin/ls ${HOME}/.ssh/DBaaSREMOTESSHPROXYIP:* | /bin/sed 's/\(.\)/\1\n/g'|  /usr/bin/sort | /usr/bin/uniq -c | /bin/grep ':' | /bin/sed 's/ //g' | /bin/sed 's/://g'`"
+#noips="`/bin/ls ${HOME}/.ssh/DBaaSREMOTESSHPROXYIP:* | /bin/sed 's/\(.\)/\1\n/g'|  /usr/bin/sort | /usr/bin/uniq -c | /bin/grep ':' | /bin/sed 's/ //g' | /bin/sed 's/://g'`"
+noips="`${HOME}/providerscripts/utilities/ExtractConfigValues.sh 'DBaaSREMOTESSHPROXYIP' | /usr/bin/wc -w`"
+
 if ( [ "${noips}" -eq "1" ] )
 then
     DBaaS_REMOTE_SSH_PROXY_IP="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBaaSREMOTESSHPROXYIP'`"
@@ -50,7 +52,8 @@ then
 else
     index="`/bin/ls ${HOME}/.ssh/DBaaSREMOTESSHPROXYIPINDEX:* | /usr/bin/awk -F':' '{print $NF}'`"
     index="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBaaSREMOTESSHPROXYIPINDEX'`"
-    ips="`/bin/ls ${HOME}/.ssh/DBaaSREMOTESSHPROXYIP:* | /bin/sed 's/[^:]*://' | /bin/sed 's/:/ /g'`"
+   # ips="`/bin/ls ${HOME}/.ssh/DBaaSREMOTESSHPROXYIP:* | /bin/sed 's/[^:]*://' | /bin/sed 's/:/ /g'`"
+    ips="`${HOME}/providerscripts/utilities/ExtractConfigValues.sh 'DBaaSREMOTESSHPROXYIP'`"
     DBaaS_REMOTE_SSH_PROXY_IP="`/bin/echo ${ips} | /usr/bin/cut -d' ' -f${index}`"
 fi
 
