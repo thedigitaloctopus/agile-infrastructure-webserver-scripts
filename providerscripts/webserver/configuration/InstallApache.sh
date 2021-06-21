@@ -121,7 +121,7 @@ fi
 
 /usr/sbin/a2enmod proxy_fcgi
 
-if ( [ -f ${HOME}/.ssh/APPLICATIONLANGUAGE:PHP ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATIONLANGUAGE:PHP`" = "1" ] )
 then
     /usr/sbin/a2enconf php${phpversion}-fpm
 fi
