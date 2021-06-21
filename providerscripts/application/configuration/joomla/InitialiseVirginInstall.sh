@@ -33,14 +33,14 @@
 # 2) It is a DBaaS and it hasn't been secured with an SSH tunnel. In this case our hostname is the name of the database
 # 3) We are running our own local database, and a local ip address is the address of the database
 # Each deployment will have its own reason for chosing its own type of DB solution.
-if ( [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:DBaaS-secured ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:DBaaS-secured`" = "1" ] )
 then
     if ( [ ! -f  ${HOME}/runtime/SSHTUNNELCONFIGURED ] )
     then
         exit
     fi
     host="127.0.0.1"
-elif ( [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:DBaaS ] )
+elif ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:DBaaS`" = "1" ] )
 then
     host="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBaaSHOSTNAME'`"
 else
@@ -121,7 +121,7 @@ fi
 #Note, please check crontab and you will find that there this script is called every minute which is what I mean
 #by aggressive.
 
-if ( [ ! -f ${HOME}/.ssh/BUILDARCHIVECHOICE:virgin ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOICE:virgin`" = "0" ] )
 then
     exit
 fi
@@ -135,7 +135,7 @@ fi
 
 #If we get to here, then we have all we need. This is a new or virgin application, so, we set the prefix for the
 #database tables. This prefix will be used for the lifetime of the application
-if ( [ -f ${HOME}/.ssh/DATABASEDBaaSINSTALLATIONTYPE:Maria ] || [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:Maria ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEDBaaSINSTALLATIONTYPE:Maria`" = "1" ] || [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:Maria`" = "1" ] )
 then
     #joomla 3 -
     /bin/sed -i "s/#__/${prefix}_/g" /var/www/html/installation/sql/mysql/joomla.sql
@@ -145,7 +145,7 @@ then
     /bin/sed -i "s/#__/${prefix}_/g" /var/www/html/installation/sql/mysql/supports.sql
 fi
 
-if (  [ -f ${HOME}/.ssh/DATABASEDBaaSINSTALLATIONTYPE:Postgres ] || [ -f ${HOME}/.ssh/DATABASEINSTALLATIONTYPE:Postgres ] ) 
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEDBaaSINSTALLATIONTYPE:Postgres`" = "1" ] || [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:Postgres`" = "1" ] )
 then
     #joomla 3 -
     /bin/sed -i "s/#__/${prefix}_/g" /var/www/html/installation/sql/postgresql/joomla.sql
@@ -241,7 +241,7 @@ secret="`< /dev/urandom tr -dc a-z | head -c${1:-16};echo;`"
 WEBSITE_DISPLAY_NAME="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEDISPLAYNAME'`"
 ${HOME}/providerscripts/application/email/ActivateSMTPByApplication.sh "${WEBSITE_DISPLAY_NAME}" 
 
-if ( [ -f ${HOME}/.ssh/INMEMORYCACHING:memcache ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh INMEMORYCACHING:memcache`" = "1" ] )
 then
     /bin/sed -i "/\$cache_handler /c\        public \$cache_handler = \'memcache\';" ${HOME}/runtime/joomla_configuration.php
     cache_host="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'INMEMORYCACHINGHOST'`"
@@ -250,7 +250,7 @@ then
     /bin/sed -i "/\$memcache_server_port /c\        public \$memcache_server_port = \'${cache_port}\';" ${HOME}/runtime/joomla_configuration.php
 fi
 
-if ( [ -f ${HOME}/.ssh/INMEMORYCACHING:redis ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh INMEMORYCACHING:redis`" = "1" ] )
 then
     /bin/sed -i "/\$cache_handler /c\        public \$cache_handler = \'redis\';" ${HOME}/runtime/joomla_configuration.php
     cache_host="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'INMEMORYCACHINGHOST'`"
