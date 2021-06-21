@@ -25,13 +25,13 @@ SERVER_USER="${1}"
 for applicationdir in `/bin/ls -d /home/${SERVER_USER}/providerscripts/application/processing/*/`
 do
     applicationname="`/bin/echo ${applicationdir} | /bin/sed 's/\/$//' | /usr/bin/awk -F'/' '{print $NF}'`"
-    if ( [ -f /home/${SERVER_USER}/.ssh/APPLICATION:${applicationname} ] )
+    if ( [ "`/home/${SERVER_USER}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:${applicationname}`" = "1" ] )
     then
         . ${applicationdir}PerformPostProcessing.sh
     fi
 done
 
-if ( [ -f ${HOME}/.ssh/BUILDARCHIVECHOICE:virgin ] )
+if ( [ "`/home/${SERVER_USER}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOICE:virgin`" = "1" ] )
 then
     exit
 fi
