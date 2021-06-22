@@ -60,8 +60,10 @@ eval "${CMD}"
 eval "${CMD1}"
 eval "${CMD2}"
 
-/bin/chmod 444 /var/www/html/.htaccess
+/bin/chmod 400 /var/www/html/.htaccess
 /bin/chmod -R 700 ${HOME}/.ssh/*
+/bin/chmod 400 ${HOME}/.ssh/Super.sh
+
 
 /usr/bin/find /var/www/html -type f -name "*.pl" -exec chmod 755 {} \;
 /usr/bin/find /var/www/html -type f -name "*.cgi" -exec chmod 755 {} \;
