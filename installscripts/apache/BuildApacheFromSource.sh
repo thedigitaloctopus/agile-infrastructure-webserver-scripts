@@ -48,7 +48,12 @@ cd httpd-*
 
 #./configure --enable-ssl --enable-so --with-mpm=event --with-included-apr --prefix=/usr/local/apache2 --with-pcre=/usr/local/pcre --enable-mods-shared="reallyall" --enable-mpms-shared="all"
 #./configure --enable-ssl --enable-so --with-mpm=event --with-included-apr --enable-proxy --enable-ssl --enable-rewrite --with-mpm=worker --prefix=/usr/local/apache2 --with-pcre=/usr/local/pcre --enable-mpms-shared="all" --enable-mods-shared="all ssl cache proxy http2 authn_alias mem_cache file_cache charset_lite dav_lock disk_cache"
-./configure --prefix=/etc/apache2 --with-pcre=/usr/local/pcre --with-apxs2=/usr/bin/apxs --with-mpm=prefork --enable-http2 --enable-ssl --enable-so --with-included-apr --enable-rewrite --enable-mods-static="reallyall" --enable-mods-shared="reallyall"
+#./configure --prefix=/etc/apache2 --with-pcre=/usr/local/pcre --with-apxs2=/usr/bin/apxs --with-mpm=prefork --enable-http2 --enable-ssl --enable-so --with-included-apr --enable-rewrite --enable-mods-static="reallyall" --enable-mods-shared="reallyall"
+/bin/mkdir /usr/local/apache2
+/bin/mkdir /etc/apache2
+
+./configure --prefix=/usr/local/apache2 --sysconfdir=/etc/apache2 --with-pcre=/usr/local/pcre --with-apxs2=/usr/bin/apxs --with-mpm=prefork --enable-http2 --enable-ssl --enable-so --with-included-apr --enable-rewrite --enable-mods-static="reallyall" --enable-mods-shared="reallyall"
+
 /usr/bin/make
 
 /usr/bin/make install
