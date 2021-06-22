@@ -55,6 +55,13 @@ then
     /bin/cp /var/www/html/moodle/config.php.default /var/www/html/moodle/config.php
 fi
 
+if ( [ ! -f /var/www/html/.htaccess ] )
+then
+    /bin/cp ${HOME}/providerscripts/application/configuration/moodle-htaccess.txt /var/www/html/.htaccess
+    /bin/chown www-data.www-data /var/www/html/.htaccess
+    /bin/chmod 440 /var/www/html/.htaccess
+fi
+
 if ( [ ! -d /var/www/html/moodledata ] )
 then
     /bin/mkdir -p /var/www/html/moodledata/filedir
