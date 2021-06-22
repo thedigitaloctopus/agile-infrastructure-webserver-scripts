@@ -115,5 +115,12 @@ WantedBy=multi-user.target" > /etc/systemd/system/rc-local.service
 
 /bin/ln -s /etc/apache2/conf-available/remoteip.conf /etc/apache2/conf-enabled/remoteip.conf
 
+APPLICATION_LANGUAGE="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'APPLICATIONLANGUAGE'`"
+
+if ( [ "${APPLICATION_LANGUAGE}" = "PHP" ] )
+then
+    /bin/echo "ProxyPassMatch ^/(.*\.php)$ fcgi://127.0.0.1:9000/var/www/html/\$1" >> /etc/apache2/httpd.conf
+fi
+    
 /usr/bin/systemctl enable rc-local.service
 /usr/bin/systemctl start rc-local.service
