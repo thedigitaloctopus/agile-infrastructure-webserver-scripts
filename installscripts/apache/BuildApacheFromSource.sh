@@ -121,7 +121,8 @@ WantedBy=multi-user.target" > /etc/systemd/system/rc-local.service
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATIONLANGUAGE:PHP`" = "1" ] )
 then
-    /bin/echo "ProxyPassMatch ^/(.*\.php)$ fcgi://127.0.0.1:9000/var/www/html/\$1" >> /etc/apache2/httpd.conf
+   /bin/echo "ProxyPassMatch ^/(.*\.php(/.*)?)$ fcgi://127.0.0.1:9000/var/www/html/\$1" >> /etc/apache2/httpd.conf
+   # /bin/echo "ProxyPassMatch ^/(.*\.php)$ fcgi://127.0.0.1:9000/var/www/html/\$1" >> /etc/apache2/httpd.conf
 fi
     
 /usr/bin/systemctl enable rc-local.service
