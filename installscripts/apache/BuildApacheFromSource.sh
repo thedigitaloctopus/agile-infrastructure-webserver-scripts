@@ -66,11 +66,16 @@ cd httpd-*
 /bin/echo "#!/bin/bash
 /bin/mkdir /var/run/apache2
 /bin/chown www-data.www-data /var/run/apache2
-while ( [ "`/usr/bin/ps -ef | /bin/grep apache2 | /bin/grep -v grep | /usr/bin/wc -l`" = "0" ] )
+
+apaches=\"\`/usr/bin/ps -ef | /bin/grep apache2 | /bin/grep -v grep | /usr/bin/wc -l\`\"
+
+while ( [ \"\${apaches}\" = \"0\" ] )
 do
     . /etc/apache2/conf/envvars && /usr/local/apache2/bin/apachectl -k start
-    /bin/sleep 5
+    apaches=\"\`/usr/bin/ps -ef | /bin/grep apache2 | /bin/grep -v grep | /usr/bin/wc -l\`\"
+    /bin/sleep 10
 done
+
 exit 0" > /etc/rc.local
 
 /bin/chmod +x /etc/rc.local
