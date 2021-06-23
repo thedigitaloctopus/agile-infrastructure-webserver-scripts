@@ -177,7 +177,7 @@ then
    # sqlcommand="${sqlcommand}"'(id,"\""name"\"","\""username"\"","\""email"\"","\""password"\"","\""registerDate"\"","\""params"\"","\""requireReset"\"") values (42,'\'''"${username}"''\'','\''webmaster'\'','\''testxyz@test123i4.com'\'','\'''"${password}"''\'','\''1980-01-01'\'',1,1);'
 
     username="${BUILD_IDENTIFIER}-webmaster"
-    password="`/bin/echo "${SERVER_USER}" | /usr/bin/openssl md5 | /usr/bin/awk '{print $NF}'`" 
+    password="`/bin/echo -n "${SERVER_USER}" | /usr/bin/md5sum | /usr/bin/awk '{print $1}'`"  
     sqlcommand="INSERT INTO ${PREFIX}_users"
     sqlcommand="${sqlcommand}"'(id,"\""name"\"","\""username"\"","\""email"\"","\""password"\"","\""registerDate"\"","\""params"\"","\""requireReset"\"") values (42,'\''${username}'\'','\''${username}'\'','\''testxyz@test123i4.com'\'','\''${password}'\'','\''1980-01-01'\'',1,1);'
     command="${SUDO} ${HOME}/providerscripts/utilities/ConnectToRemotePostgresDB.sh \"${sqlcommand}\"" && eval ${command}
