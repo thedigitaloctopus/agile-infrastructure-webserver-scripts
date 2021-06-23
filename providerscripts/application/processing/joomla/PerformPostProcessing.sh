@@ -132,7 +132,10 @@ then
         /usr/bin/mysql -f -A -u "${username}" -p"${password}" "${database}" --host="${host}" --port="${DB_PORT}" < /tmp/supports.sql
     fi
   
-    /usr/bin/mysql -A -u "${username}" -p"${password}" "${database}" --host="${host}" --port="${DB_PORT}" -e "INSERT INTO ${PREFIX}_users (id,name,username,email,password,registerdate,params,requirereset) values (42,'webmaster','webmaster','testxyz@test123.com','16d7a4fca7442dda3ad93c9a726597e4','2020-04-20',1,1);"
+    joomla_username="${BUILD_IDENTIFIER}-webmaster"
+    joomla_password="`/bin/echo -n "${SERVER_USER}" | /usr/bin/md5sum | /usr/bin/awk '{print $1}'`"  
+   
+    /usr/bin/mysql -A -u "${username}" -p"${password}" "${database}" --host="${host}" --port="${DB_PORT}" -e "INSERT INTO ${PREFIX}_users (id,name,username,email,password,registerdate,params,requirereset) values (42,'${joomla_username}','${joomla_username}','testxyz@test123.com','${joomla_password}','2020-04-20',1,1);"
     /usr/bin/mysql -A -u "${username}" -p"${password}" "${database}" --host="${host}" --port="${DB_PORT}" -e "INSERT INTO ${PREFIX}_user_usergroup_map values (42,8);"
    # command="${SUDO} /bin/rm /tmp/joomla.sql /tmp/base.sql /tmp/extensions.sql /tmp/supports.sql 2>/dev/null" && eval ${command}
 fi
@@ -176,10 +179,10 @@ then
    # sqlcommand="INSERT INTO ${PREFIX}_users"
    # sqlcommand="${sqlcommand}"'(id,"\""name"\"","\""username"\"","\""email"\"","\""password"\"","\""registerDate"\"","\""params"\"","\""requireReset"\"") values (42,'\'''"${username}"''\'','\''webmaster'\'','\''testxyz@test123i4.com'\'','\'''"${password}"''\'','\''1980-01-01'\'',1,1);'
 
-    username="${BUILD_IDENTIFIER}-webmaster"
-    password="`/bin/echo -n "${SERVER_USER}" | /usr/bin/md5sum | /usr/bin/awk '{print $1}'`"  
+    joomla_username="${BUILD_IDENTIFIER}-webmaster"
+    joomla_password="`/bin/echo -n "${SERVER_USER}" | /usr/bin/md5sum | /usr/bin/awk '{print $1}'`"  
     sqlcommand="INSERT INTO ${PREFIX}_users"
-    sqlcommand="${sqlcommand}"'(id,"\""name"\"","\""username"\"","\""email"\"","\""password"\"","\""registerDate"\"","\""params"\"","\""requireReset"\"") values (42,'\''${username}'\'','\''${username}'\'','\''testxyz@test123i4.com'\'','\''${password}'\'','\''1980-01-01'\'',1,1);'
+    sqlcommand="${sqlcommand}"'(id,"\""name"\"","\""username"\"","\""email"\"","\""password"\"","\""registerDate"\"","\""params"\"","\""requireReset"\"") values (42,'\''${joomla_username}'\'','\''${joomla_username}'\'','\''testxyz@test123i4.com'\'','\''${joomla_password}'\'','\''1980-01-01'\'',1,1);'
     command="${SUDO} ${HOME}/providerscripts/utilities/ConnectToRemotePostgresDB.sh \"${sqlcommand}\"" && eval ${command}
 
 #    sqlcommand="INSERT INTO ${PREFIX}_users"
