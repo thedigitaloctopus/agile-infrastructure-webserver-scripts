@@ -34,7 +34,7 @@ export HOMEDIR=${HOME}
 /bin/echo "${HOMEDIR}" > /home/homedir.dat
 
 #First thing is to tighten up permissions in case there's any wronguns. 
-/bin/chmod -R 750 ${HOME}/autoscaler ${HOME}/cron ${HOME}/installscripts ${HOME}/providerscripts ${HOME}/security
+/bin/chmod -R 750 ${HOME}/cron ${HOME}/installscripts ${HOME}/providerscripts ${HOME}/security
 
 #Setup operational directories if needed
 if ( [ ! -d ${HOME}/logs ] )
