@@ -116,10 +116,12 @@ fi
 
 if ( [ "${BUILD_ARCHIVE_CHOICE}" = "virgin" ] )
 then
+    moodle_username="${BUILD_IDENTIFIER}-webmaster"
+    moodle_password="${SERVER_USER}"
     #Set a default admin password for a moodle install. Should be changed by the new administrator.
   #  /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /bin/sed -i "s/^\$username.*/\$username=\"admin\"/" /var/www/html/moodle/admin/cli/reset_password.php
   #  /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /bin/sed -i "s/^\$password.*/\$password=\"123QQwe!!\"/" /var/www/html/moodle/admin/cli/reset_password.php
-    /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/bin/php /var/www/html/moodle/admin/cli/install_database.php --lang=en --adminuser="admin" --adminpass="test1234" --agree-license
+    /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/bin/php /var/www/html/moodle/admin/cli/install_database.php --lang=en --adminuser="${moodle_username}" --adminpass="${moodle_password}" --agree-license
     #We have to keep trying until our moodle config file is setup with the database credentials. This will fail until it is which takes a few minutes.
     while ( [ "$?" != "0" ] )
     do
@@ -128,9 +130,7 @@ then
         /bin/echo "#############################################################################################################################################"
         /bin/sleep 30
     #    /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /bin/sed -i "s/^\$username.*/\$username=\"admin\"/" /var/www/html/moodle/admin/cli/reset_password.php
-    #    /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /bin/sed -i "s/^\$password.*/\$password=\"123QQwe!!\"/" /var/www/html/moodle/admin/cli/reset_password.php
-        moodle_username="${BUILD_IDENTIFIER}-webmaster"
-        moodle_password="`/bin/echo -n "${SERVER_USER}" | /usr/bin/md5sum | /usr/bin/awk '{print $1}'`"  
+    #    /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /bin/sed -i "s/^\$password.*/\$password=\"123QQwe!!\"/" /var/www/html/moodle/admin/cli/reset_password.php  
         /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/bin/php /var/www/html/moodle/admin/cli/install_database.php --lang=en --adminuser="${moodle_username}" --adminpass="${moodle_password}" --agree-license
     done
     /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/bin/php /var/www/html/moodle/admin/cli/build_theme_css.php --themes=boost,classic --direction=ltr
