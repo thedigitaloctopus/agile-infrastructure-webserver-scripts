@@ -175,9 +175,14 @@ then
    # sqlcommand="INSERT INTO ${PREFIX}_users"
    # sqlcommand="${sqlcommand}"'(id,"\""name"\"","\""username"\"","\""email"\"","\""password"\"","\""registerDate"\"","\""params"\"","\""requireReset"\"") values (42,'\'''"${username}"''\'','\''webmaster'\'','\''testxyz@test123i4.com'\'','\'''"${password}"''\'','\''1980-01-01'\'',1,1);'
 
+    username="${BUILD_IDENTIFIER}-webmaster"
+    password="`/bin/echo "${SERVER_USER}" | /usr/bin/openssl enc -base64`" 
     sqlcommand="INSERT INTO ${PREFIX}_users"
-    sqlcommand="${sqlcommand}"'(id,"\""name"\"","\""username"\"","\""email"\"","\""password"\"","\""registerDate"\"","\""params"\"","\""requireReset"\"") values (42,'\''webmaster'\'','\''webmaster'\'','\''testxyz@test123i4.com'\'','\''16d7a4fca7442dda3ad93c9a726597e4'\'','\''1980-01-01'\'',1,1);'
-    command="${SUDO} ${HOME}/providerscripts/utilities/ConnectToRemotePostgresDB.sh \"${sqlcommand}\"" && eval ${command}
+    sqlcommand="${sqlcommand}"'(id,"\""name"\"","\""username"\"","\""email"\"","\""password"\"","\""registerDate"\"","\""params"\"","\""requireReset"\"") values (42,'\''${username}'\'','\''${username}'\'','\''testxyz@test123i4.com'\'','\''${password}'\'','\''1980-01-01'\'',1,1);'
+
+#    sqlcommand="INSERT INTO ${PREFIX}_users"
+#    sqlcommand="${sqlcommand}"'(id,"\""name"\"","\""username"\"","\""email"\"","\""password"\"","\""registerDate"\"","\""params"\"","\""requireReset"\"") values (42,'\''webmaster'\'','\''webmaster'\'','\''testxyz@test123i4.com'\'','\''16d7a4fca7442dda3ad93c9a726597e4'\'','\''1980-01-01'\'',1,1);'
+#    command="${SUDO} ${HOME}/providerscripts/utilities/ConnectToRemotePostgresDB.sh \"${sqlcommand}\"" && eval ${command}
 
     sqlcommand="INSERT INTO ${PREFIX}_user_usergroup_map values (42,8);"
     command="${SUDO} ${HOME}/providerscripts/utilities/ConnectToRemotePostgresDB.sh \"${sqlcommand}\"" && eval ${command}
