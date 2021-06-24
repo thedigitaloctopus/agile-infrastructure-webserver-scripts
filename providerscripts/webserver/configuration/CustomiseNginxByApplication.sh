@@ -22,10 +22,15 @@
 #################################################################################
 #set -x
 
+WEBSITE_URL="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEURL'`"
+
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:moodle`" = "1" ] )
 then
 
     /bin/echo "
+        location = / {
+    return 301 http://${WEBSITE_URL}/moodle
+}
     rewrite ^(.*\.php)(/)(.*)\$ \$1?file=/\$3 last;
 
     location ~ [^/]\.php(/|\$) {
@@ -42,7 +47,7 @@ then
         fastcgi_keep_conn on;
         fastcgi_param PATH_INFO \$fastcgi_path_info;
         fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
-    }
+    }    
     "  >> /etc/nginx/sites-available/${website_name}
 fi
 
