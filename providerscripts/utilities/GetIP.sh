@@ -24,9 +24,10 @@ ${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'MYIP'
 BUILDOS="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDOS'`"
 BUILDOSVERSION="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDOSVERSION'`"
 
-if ( [ -f ${HOME}/EXOSCALE ] )
+if ( [ -f ${HOME}/EXOSCALE ] && [ ! -f ${HOME}/runtime/PRIVATEIPAVAILABLE ] )
 then
     /usr/sbin/dhclient
+    /bin/touch ${HOME}/runtime/PRIVATEIPAVAILABLE
 fi
 
 if ( [ -f ${HOME}/VULTR ] && [ ! -f ${HOME}/runtime/NETCONFIGURED ] )
