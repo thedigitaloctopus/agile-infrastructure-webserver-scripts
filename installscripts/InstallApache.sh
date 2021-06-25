@@ -35,7 +35,7 @@ then
         ${HOME}/installscripts/Update.sh ${BUILDOS}
         ${HOME}/installscripts/apache/BuildApacheFromSource.sh 
         /bin/touch /etc/apache2/BUILT_FROM_SOURCE
-    elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:repo'`" = "1" ] ||  )
+    elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:repo'`" = "1" ] )
     then
         /usr/bin/apt-get -qq -y install apache2
         if ( [  "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATIONLANGUAGE:PHP`" = "1" ] )
@@ -57,7 +57,7 @@ then
         ${HOME}/installscripts/Update.sh ${BUILDOS}
         ${HOME}/installscripts/apache/BuildApacheFromSource.sh
         /bin/touch /etc/apache2/BUILT_FROM_SOURCE
-    elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:repo'`" = "1" ] ||  )
+    elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:repo'`" = "1" ] )
     then
         /usr/bin/apt-get -qq -y install apache2
         if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATIONLANGUAGE:PHP`" = "1" ] )
