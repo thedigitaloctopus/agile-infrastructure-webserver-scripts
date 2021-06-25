@@ -29,32 +29,39 @@ phpversion="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'PHP_VERSIO
 
 if ( [ "${BUILDOS}" = "ubuntu" ] )
 then
-  #  ${HOME}/installscripts/Update.sh ${BUILDOS}
-  #  ${HOME}/installscripts/apache/BuildApacheFromSource.sh 
-    
-    /usr/bin/apt-get -qq -y install apache2
-    if ( [  "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATIONLANGUAGE:PHP`" = "1" ] )
-    then
-        /usr/bin/apt-get -qq -y install libapache2-mod-php${phpversion}
-    fi
-    ####/usr/bin/apt-get -qq -y install libapache2-modsecurity
-    ####/usr/bin/apt-get -qq -y install modsecurity-crs
-    /usr/bin/apt -qq -y install libapache2-mod-fcgid
 
+    if ( [ "`${HOME}/utilities/CheckBuildStyle.sh 'NGINX:source'`" = "1" ] )
+    then
+        ${HOME}/installscripts/Update.sh ${BUILDOS}
+        ${HOME}/installscripts/apache/BuildApacheFromSource.sh 
+    elif ( [ "`${HOME}/utilities/CheckBuildStyle.sh 'NGINX:repo'`" = "1" ] ||  )
+        /usr/bin/apt-get -qq -y install apache2
+        if ( [  "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATIONLANGUAGE:PHP`" = "1" ] )
+        then
+            /usr/bin/apt-get -qq -y install libapache2-mod-php${phpversion}
+        fi
+        ####/usr/bin/apt-get -qq -y install libapache2-modsecurity
+        ####/usr/bin/apt-get -qq -y install modsecurity-crs
+        /usr/bin/apt -qq -y install libapache2-mod-fcgid
+    fi
 fi
 
 if ( [ "${BUILDOS}" = "debian" ] )
 then
-  #  ${HOME}/installscripts/Update.sh ${BUILDOS}
-  #  ${HOME}/installscripts/apache/BuildApacheFromSource.sh
-    
-    /usr/bin/apt-get -qq -y install apache2
-    if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATIONLANGUAGE:PHP`" = "1" ] )
+
+    if ( [ "`${HOME}/utilities/CheckBuildStyle.sh 'NGINX:source'`" = "1" ] )
     then
-        /usr/bin/apt-get -qq -y install libapache2-mod-php${phpversion}
+        ${HOME}/installscripts/Update.sh ${BUILDOS}
+        ${HOME}/installscripts/apache/BuildApacheFromSource.sh
+    elif ( [ "`${HOME}/utilities/CheckBuildStyle.sh 'NGINX:repo'`" = "1" ] ||  )
+        /usr/bin/apt-get -qq -y install apache2
+        if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATIONLANGUAGE:PHP`" = "1" ] )
+        then
+            /usr/bin/apt-get -qq -y install libapache2-mod-php${phpversion}
+        fi
+        ####/usr/bin/apt-get -qq -y install libapache2-modsecurity
+        ####/usr/bin/apt-get -qq -y install modsecurity-crs
+        /usr/bin/apt -qq -y install libapache2-mod-fcgid
     fi
-    ####/usr/bin/apt-get -qq -y install libapache2-modsecurity
-    ####/usr/bin/apt-get -qq -y install modsecurity-crs
-    /usr/bin/apt -qq -y install libapache2-mod-fcgid
 fi
 
