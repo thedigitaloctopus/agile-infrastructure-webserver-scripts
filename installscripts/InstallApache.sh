@@ -30,11 +30,11 @@ phpversion="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'PHP_VERSIO
 if ( [ "${BUILDOS}" = "ubuntu" ] )
 then
 
-    if ( [ "`${HOME}/utilities/CheckBuildStyle.sh 'APACHE:source'`" = "1" ] )
+    if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:source'`" = "1" ] )
     then
         ${HOME}/installscripts/Update.sh ${BUILDOS}
         ${HOME}/installscripts/apache/BuildApacheFromSource.sh 
-    elif ( [ "`${HOME}/utilities/CheckBuildStyle.sh 'APACHE:repo'`" = "1" ] ||  )
+    elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:repo'`" = "1" ] ||  )
         /usr/bin/apt-get -qq -y install apache2
         if ( [  "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATIONLANGUAGE:PHP`" = "1" ] )
         then
@@ -49,11 +49,11 @@ fi
 if ( [ "${BUILDOS}" = "debian" ] )
 then
 
-    if ( [ "`${HOME}/utilities/CheckBuildStyle.sh 'APACHE:source'`" = "1" ] )
+    if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:source'`" = "1" ] )
     then
         ${HOME}/installscripts/Update.sh ${BUILDOS}
         ${HOME}/installscripts/apache/BuildApacheFromSource.sh
-    elif ( [ "`${HOME}/utilities/CheckBuildStyle.sh 'APACHE:repo'`" = "1" ] ||  )
+    elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:repo'`" = "1" ] ||  )
         /usr/bin/apt-get -qq -y install apache2
         if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATIONLANGUAGE:PHP`" = "1" ] )
         then
