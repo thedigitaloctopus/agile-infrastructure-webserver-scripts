@@ -34,6 +34,7 @@ then
     then
          ${HOME}/installscripts/Update.sh ${BUILDOS}
          ${HOME}/installscripts/nginx/BuildNginxFromSource.sh Ubuntu
+         /bin/touch /etc/nginx/BUILT_FROM_SOURCE
     elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'NGINX:repo'`" = "1" ] )
     then
         /usr/bin/systemctl disable --now apache2
@@ -41,6 +42,7 @@ then
         ${HOME}/installscripts/Update.sh ${BUILDOS}
         /usr/bin/apt-get -qq install nginx
         /bin/systemctl unmask nginx.service
+        /bin/touch /etc/nginx/BUILT_FROM_REPO
     fi
 fi
 
@@ -51,6 +53,7 @@ then
     then
         ${HOME}/installscripts/Update.sh ${BUILDOS}
         ${HOME}/installscripts/nginx/BuildNginxFromSource.sh Debian
+        /bin/touch /etc/nginx/BUILT_FROM_SOURCE
     elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'NGINX:repo'`" = "1" ] )
     then    
         if ( [ "${BUILDOSVERSION}" = "9" ] )
@@ -62,6 +65,7 @@ then
         ${HOME}/installscripts/Update.sh ${BUILDOS}
         /usr/bin/apt-get -qq install nginx
         /bin/systemctl unmask nginx.service
+        /bin/touch /etc/nginx/BUILT_FROM_REPO
     fi
 fi
 
