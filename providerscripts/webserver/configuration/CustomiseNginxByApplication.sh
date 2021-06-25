@@ -28,9 +28,10 @@ if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:moodl
 then
 
     /bin/echo "
-        location = / {
-    return 301 http://${WEBSITE_URL}/moodle
-}
+    location = / {
+        rewrite ^ https://${WEBSITE_URL}/moodle redirect;
+    }    
+
     rewrite ^(.*\.php)(/)(.*)\$ \$1?file=/\$3 last;
 
     location ~ [^/]\.php(/|\$) {
