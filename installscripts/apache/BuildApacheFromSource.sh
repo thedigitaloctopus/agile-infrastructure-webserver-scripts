@@ -67,6 +67,10 @@ cd httpd-*
 /bin/mkdir /var/run/apache2
 /bin/chown www-data.www-data /var/run/apache2
 
+. /etc/apache2/conf/envvars && /usr/local/apache2/bin/apachectl -k start
+
+/bin/sleep 10
+
 apaches=\"\`/usr/bin/ps -ef | /bin/grep apache2 | /bin/grep -v grep | /usr/bin/wc -l\`\"
 
 while ( [ \"\${apaches}\" = \"0\" ] )
