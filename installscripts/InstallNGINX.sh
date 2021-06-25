@@ -30,11 +30,11 @@ BUILDOSVERSION="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDO
 if ( [ "${BUILDOS}" = "ubuntu" ] )
 then
 
-    if ( [ "`${HOME}/utilities/CheckBuildStyle.sh 'NGINX:source'`" = "1" ] )
+    if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'NGINX:source'`" = "1" ] )
     then
          ${HOME}/installscripts/Update.sh ${BUILDOS}
          ${HOME}/installscripts/nginx/BuildNginxFromSource.sh Ubuntu
-    elif ( [ "`${HOME}/utilities/CheckBuildStyle.sh 'NGINX:repo'`" = "1" ] )
+    elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'NGINX:repo'`" = "1" ] )
     then
         /usr/bin/systemctl disable --now apache2
         /usr/bin/curl http://nginx.org/keys/nginx_signing.key | /usr/bin/apt-key add -
@@ -47,11 +47,11 @@ fi
 if ( [ "${BUILDOS}" = "debian" ] )
 then
 
-    if ( [ "`${HOME}/utilities/CheckBuildStyle.sh 'NGINX:source'`" = "1" ] )
+    if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'NGINX:source'`" = "1" ] )
     then
         ${HOME}/installscripts/Update.sh ${BUILDOS}
         ${HOME}/installscripts/nginx/BuildNginxFromSource.sh Debian
-    elif ( [ "`${HOME}/utilities/CheckBuildStyle.sh 'NGINX:repo'`" = "1" ] )
+    elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'NGINX:repo'`" = "1" ] )
     then    
         if ( [ "${BUILDOSVERSION}" = "9" ] )
         then
