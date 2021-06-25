@@ -34,6 +34,7 @@ then
     then
         ${HOME}/installscripts/Update.sh ${BUILDOS}
         ${HOME}/installscripts/apache/BuildApacheFromSource.sh 
+        /bin/touch /etc/apache2/BUILT_FROM_SOURCE
     elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:repo'`" = "1" ] ||  )
         /usr/bin/apt-get -qq -y install apache2
         if ( [  "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATIONLANGUAGE:PHP`" = "1" ] )
@@ -42,7 +43,8 @@ then
         fi
         ####/usr/bin/apt-get -qq -y install libapache2-modsecurity
         ####/usr/bin/apt-get -qq -y install modsecurity-crs
-        /usr/bin/apt -qq -y install libapache2-mod-fcgid
+        /usr/bin/apt -qq -y install libapache2-mod-fcgid        
+        /bin/touch /etc/apache2/BUILT_FROM_REPO
     fi
 fi
 
@@ -53,6 +55,7 @@ then
     then
         ${HOME}/installscripts/Update.sh ${BUILDOS}
         ${HOME}/installscripts/apache/BuildApacheFromSource.sh
+        /bin/touch /etc/apache2/BUILT_FROM_SOURCE
     elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:repo'`" = "1" ] ||  )
         /usr/bin/apt-get -qq -y install apache2
         if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATIONLANGUAGE:PHP`" = "1" ] )
@@ -62,6 +65,7 @@ then
         ####/usr/bin/apt-get -qq -y install libapache2-modsecurity
         ####/usr/bin/apt-get -qq -y install modsecurity-crs
         /usr/bin/apt -qq -y install libapache2-mod-fcgid
+        /bin/touch /etc/apache2/BUILT_FROM_REPO
     fi
 fi
 
