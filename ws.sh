@@ -104,7 +104,7 @@ WEBSITE_DISPLAY_NAME="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh '
 WEBSITE_DISPLAY_NAME_UPPER="`/bin/echo ${WEBSITE_DISPLAY_NAME} | /usr/bin/tr '[:lower:]' '[:upper:]'`"
 WEBSITE_DISPLAY_NAME_LOWER="`/bin/echo ${WEBSITE_DISPLAY_NAME} | /usr/bin/tr '[:upper:]' '[:lower:]'`"
 #BASELINE_SOURCECODE_REPOSITORY="`/bin/grep 'APPLICATIONBASELINESOURCECODEREPOSITORY' ${HOME}/.ssh/webserver_configuration_settings.dat | /usr/bin/cut -d':' -f 2-`"
-APPLICATION_BASELINE_SOURCECODE_REPOSITORY="`${HOME}/providerscripts/utilities/ExtractConfigValues.sh 'APPLICATIONBASELINESOURCECODEREPOSITORY'`"
+APPLICATION_BASELINE_SOURCECODE_REPOSITORY="`${HOME}/providerscripts/utilities/ExtractConfigValues.sh 'APPLICATIONBASELINESOURCECODEREPOSITORY' 'stripped'`"
 
 
 
@@ -136,7 +136,7 @@ APPLICATION_BASELINE_SOURCECODE_REPOSITORY="`${HOME}/providerscripts/utilities/E
 /bin/echo "WEBSITE_DISPLAY_NAME:${WEBSITE_DISPLAY_NAME}" >> ${HOME}/logs/InitialBuildEnvironment.log
 /bin/echo "WEBSITE_DISPLAY_NAME_UPPER:${WEBSITE_DISPLAY_NAME_UPPER}" >> ${HOME}/logs/InitialBuildEnvironment.log
 /bin/echo "WEBSITE_DISPLAY_NAME_LOWER:${WEBSITE_DISPLAY_NAME_LOWER}" >> ${HOME}/logs/InitialBuildEnvironment.log
-/bin/echo "BASELINE_SOURCECODE_REPOSITORY:${BASELINE_SOURCECODE_REPOSITORY}" >> ${HOME}/logs/InitialBuildEnvironment.log
+/bin/echo "APPLICATION_BASELINE_SOURCECODE_REPOSITORY:${APPLICATION_BASELINE_SOURCECODE_REPOSITORY}" >> ${HOME}/logs/InitialBuildEnvironment.log
 
 #Set up more operational directories
 if ( [ ! -d ${HOME}/.ssh ] )
