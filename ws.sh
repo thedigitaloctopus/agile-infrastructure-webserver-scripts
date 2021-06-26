@@ -201,16 +201,6 @@ fi
 /bin/echo "vm.panic_on_oom=1
 kernel.panic=10" >> /etc/sysctl.conf
 
-#Double down on preventing logins as root. We already tried, but, make absolutely sure because we can't guarantee format of /etc/ssh/sshd_config
-
-if ( [ "`/bin/grep '^#PermitRootLogin' /etc/ssh/sshd_config`" != "" ] || [ "`/bin/grep '^PermitRootLogin' /etc/ssh/sshd_config`" != "" ] )
-then
-    /bin/sed -i "s/^PermitRootLogin.*/PermitRootLogin no/g" /etc/ssh/sshd_config
-    /bin/sed -i "s/^#PermitRootLogin.*/PermitRootLogin no/g" /etc/ssh/sshd_config
-else
-    /bin/echo "PermitRootLogin no" >> /etc/ssh/sshd_config
-fi
-
 /bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
 /bin/echo "${0} `/bin/date`: Updating the software from the repositories" >> ${HOME}/logs/WEBSERVER_BUILD.log
 /bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
@@ -306,16 +296,53 @@ ${HOME}/providerscripts/webserver/InstallApplicationLanguage.sh "${APPLICATION_L
 /bin/echo "`${HOME}/providerscripts/utilities/GetIP.sh` ${WEBSITE_NAME}WS" >> /etc/hosts
 ${HOME}/providerscripts/webserver/InstallWebserver.sh "${WEBSERVER_CHOICE}" "${WEBSITE_NAME}" "${WEBSITE_URL}"
 
+cd ${HOME}
+
+
 /bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
-/bin/echo "${0} Modifying sshd settings and restarting sshd" >> ${HOME}/logs/WEBSERVER_BUILD.log
+/bin/echo "${0} `/bin/date`: Configuring our SSH settings" >> ${HOME}/logs/WEBSERVER_BUILD.log
 /bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
 
-cd ${HOME}
-#Set the port for ssh to use
-/bin/sed -i "s/22/${SSH_PORT}/g" /etc/ssh/sshd_config
-/bin/sed -i 's/^#Port/Port/' /etc/ssh/sshd_config
-/bin/sed -i 's/PermitRootLogin yes/PermitRootLogin no/g' /etc/ssh/sshd_config
-/bin/sed -i 's/.*PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config
+#Set the ssh port we want to use
+#/bin/sed -i "s/22/${SSH_PORT}/g" /etc/ssh/sshd_config
+#/bin/sed -i 's/^#Port/Port/' /etc/ssh/sshd_config
+
+/bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
+/bin/echo "${0} `/bin/date`: Disabling password authentication" >> ${HOME}/logs/WEBSERVER_BUILD.log
+/bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
+
+/bin/sed -i 's/^PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config
+/bin/sed -i 's/^#PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config
+
+/bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
+/bin/echo "${0} `/bin/date`: Changing to our preferred SSH port" >> ${HOME}/logs/WEBSERVER_BUILD.log
+/bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
+
+if ( [ "`/bin/grep '^#Port' /etc/ssh/sshd_config`" != "" ] || [ "`/bin/grep '^Port' /etc/ssh/sshd_config`" != "" ] )
+then
+    /bin/sed -i "s/^Port.*/Port ${SSH_PORT}/g" /etc/ssh/sshd_config
+    /bin/sed -i "s/^#Port.*/Port ${SSH_PORT}/g" /etc/ssh/sshd_config
+else
+    /bin/echo "PermitRootLogin no" >> /etc/ssh/sshd_config
+fi
+
+/bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
+/bin/echo "${0} `/bin/date`: Preventing root logins" >> ${HOME}/logs/WEBSERVER_BUILD.log
+/bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
+
+#Double down on preventing logins as root. We already tried, but, make absolutely sure because we can't guarantee format of /etc/ssh/sshd_config
+
+if ( [ "`/bin/grep '^#PermitRootLogin' /etc/ssh/sshd_config`" != "" ] || [ "`/bin/grep '^PermitRootLogin' /etc/ssh/sshd_config`" != "" ] )
+then
+    /bin/sed -i "s/^PermitRootLogin.*/PermitRootLogin no/g" /etc/ssh/sshd_config
+    /bin/sed -i "s/^#PermitRootLogin.*/PermitRootLogin no/g" /etc/ssh/sshd_config
+else
+    /bin/echo "PermitRootLogin no" >> /etc/ssh/sshd_config
+fi
+
+/bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
+/bin/echo "${0} `/bin/date`: Ensuring SSH connections are long lasting" >> ${HOME}/logs/WEBSERVER_BUILD.log
+/bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
 
 #Make sure that client connections to sshd are long lasting
 if ( [ "`/bin/cat /etc/ssh/sshd_config | /bin/grep 'ClientAliveInterval 200' 2>/dev/null`" = "" ] )
@@ -325,10 +352,23 @@ ClientAliveInterval 200
     ClientAliveCountMax 10" >> /etc/ssh/sshd_config
 fi
 
+#Set the port for ssh to use
+#/bin/sed -i "s/22/${SSH_PORT}/g" /etc/ssh/sshd_config
+#/bin/sed -i 's/^#Port/Port/' /etc/ssh/sshd_config
+#/bin/sed -i 's/PermitRootLogin yes/PermitRootLogin no/g' /etc/ssh/sshd_config
+#/bin/sed -i 's/.*PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config
+
+#Make sure that client connections to sshd are long lasting
+#if ( [ "`/bin/cat /etc/ssh/sshd_config | /bin/grep 'ClientAliveInterval 200' 2>/dev/null`" = "" ] )
+#then
+#    /bin/echo "
+#ClientAliveInterval 200
+#    ClientAliveCountMax 10" >> /etc/ssh/sshd_config
+#fi
+
 /usr/sbin/service sshd restart
 
 /bin/sed -i 's/#user_allow_other/user_allow_other/g' /etc/fuse.conf
-#SERVER_USER_PASSWORD="`/bin/ls /home/${SERVER_USER}/.ssh/SERVERUSERPASSWORD:* | /usr/bin/awk -F':' '{print $NF}'`"
 
 #Install the application
 /bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
