@@ -20,19 +20,7 @@
 ###################################################################################
 #set -x
 
-#So, the scenarios are for where our database resides is as follows:
-# 1) It is a DBaaS and it has been secured with an SSH tunnel. In this case, our hostname will be our local ip address
-# 2) It is a DBaaS and it hasn't been secured with an SSH tunnel. In this case our hostname is the name of the database
-# 3) We are running our own local database, and a local ip address is the address of the database
-# Each deployment will have it's own reason for chosing it's own type of DB solution.
-if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:DBaaS-secured`" = "1" ] )
-then
-    if ( [ ! -f  ${HOME}/runtime/SSHTUNNELCONFIGURED ] )
-    then
-        exit
-    fi
-    host="127.0.0.1"
-elif ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:DBaaS`" = "1" ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:DBaaS`" = "1" ] )
 then
     host="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBaaSHOSTNAME'`"
 else
