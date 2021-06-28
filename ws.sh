@@ -111,7 +111,7 @@ APPLICATION_BASELINE_SOURCECODE_REPOSITORY="`${HOME}/providerscripts/utilities/E
 /bin/echo "BUILD_IDENTIFIER:${BUILD_IDENTIFIER}" >> ${HOME}/logs/InitialBuildEnvironment.log
 /bin/echo "ALGORITHM:${ALGORITHM}" >> ${HOME}/logs/InitialBuildEnvironment.log
 /bin/echo "WEBSITE_URL:${WEBSITE_URL}" >> ${HOME}/logs/InitialBuildEnvironment.log
-/bin/echo "DATASTORE_CHOICE:${DATASTORE_PROVIDER}" >> ${HOME}/logs/InitialBuildEnvironment.log
+/bin/echo "DATASTORE_CHOICE:${DATASTORE_CHOICE}" >> ${HOME}/logs/InitialBuildEnvironment.log
 /bin/echo "WEBSERVER_CHOICE:${WEBSERVER_CHOICE}" >> ${HOME}/logs/InitialBuildEnvironment.log
 /bin/echo "INFRASTRUCTURE_REPOSITORY_PROVIDER:${INFRASTRUCTURE_REPOSITORY_PROVIDER}" >> ${HOME}/logs/InitialBuildEnvironment.log
 /bin/echo "INFRASTRUCTURE_REPOSITORY_USERNAME:${INFRASTRUCTURE_REPOSITORY_USERNAME}" >> ${HOME}/logs/InitialBuildEnvironment.log
