@@ -44,11 +44,6 @@ then
 
     DB_HOST="`/bin/ls ${HOME}/config/databaseip`"
 
-    if ( [ "`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBaaSREMOTESSHPROXYIP'`" != "" ] )
-    then
-        DB_HOST="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBaaSREMOTESSHPROXYIP'`"
-    fi
-
     if ( [ "`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBaaSHOSTNAME'`" != "" ] )
     then
         DB_HOST="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBaaSHOSTNAME'`"
