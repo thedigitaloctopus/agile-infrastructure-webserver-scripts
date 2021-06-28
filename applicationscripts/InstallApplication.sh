@@ -43,7 +43,7 @@ then
     if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh SUPERSAFEWEBROOT:1`" ]  && [ "`/bin/ls -l /var/www/html | /usr/bin/wc -l`" -lt "10" ] )
     then
         cd ${HOME}
-        ${HOME}/providerscripts/datastore/GetFromDatastore.sh "${DATASTORE_PROVIDER}" "`/bin/echo ${WEBSITE_URL} | /bin/sed 's/\./-/g'`-${BUILD_ARCHIVE_CHOICE}/applicationsourcecode.tar.gz"
+        ${HOME}/providerscripts/datastore/GetFromDatastore.sh "${DATASTORE_CHOICE}" "`/bin/echo ${WEBSITE_URL} | /bin/sed 's/\./-/g'`-${BUILD_ARCHIVE_CHOICE}/applicationsourcecode.tar.gz"
         /bin/tar xvfz ${HOME}/applicationsourcecode.tar.gz
         /bin/mv ${HOME}/tmp/backup/* /var/www/html
         /bin/rm -rf ${HOME}/tmp
