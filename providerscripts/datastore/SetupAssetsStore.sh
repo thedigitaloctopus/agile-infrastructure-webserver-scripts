@@ -82,14 +82,14 @@ s3fs_gid="`/usr/bin/id -g www-data`"
 s3fs_uid="`/usr/bin/id -u www-data`"
 
 BUILDOS="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDOS'`"
-DATASTORE_PROVIDER="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DATASTORECHOICE'`"
+DATASTORE_CHOICE="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DATASTORECHOICE'`"
 
 for assetbucket in ${applicationassetbuckets}
 do
     assetbuckets="${assetbuckets} `/bin/echo ${WEBSITE_URL} | /usr/bin/awk -F'.' '{ for(i = 1; i <= NF; i++) { print $i; } }' | /usr/bin/cut -c1-3 | /usr/bin/tr '\n' '-' | /bin/sed 's/-//g'`-${assetbucket}"
 done
 
-if ( [ "${DATASTORE_PROVIDER}" = "amazonS3" ] )
+if ( [ "${DATASTORE_CHOICE}" = "amazonS3" ] )
 then
     export AWSACCESSKEYID=`/bin/cat ~/.s3cfg | /bin/grep 'access_key' | /usr/bin/awk '{print $NF}'`
     export AWSSECRETACCESSKEY=`/bin/cat ~/.s3cfg | /bin/grep 'secret_key' | /usr/bin/awk '{print $NF}'`
@@ -153,7 +153,7 @@ then
     /bin/rm ${HOME}/runtime/SYNCINGASSETSTODATASTORE
 fi
 
-if ( [ "${DATASTORE_PROVIDER}" = "digitalocean" ] )
+if ( [ "${DATASTORE_CHOICE}" = "digitalocean" ] )
 then
     export AWSACCESSKEYID=`/bin/cat ~/.s3cfg | /bin/grep '^access_key' | /usr/bin/awk '{print $NF}'`
     export AWSSECRETACCESSKEY=`/bin/cat ~/.s3cfg | /bin/grep 'secret_key' | /usr/bin/awk '{print $NF}'`
@@ -181,7 +181,7 @@ then
     /bin/rm ${HOME}/runtime/SYNCINGASSETSTODATASTORE
 fi
 
-if ( [ "${DATASTORE_PROVIDER}" = "exoscale" ] )
+if ( [ "${DATASTORE_CHOICE}" = "exoscale" ] )
 then
     export AWSACCESSKEYID=`/bin/cat ~/.s3cfg | /bin/grep '^access_key' | /usr/bin/awk '{print $NF}'`
     export AWSSECRETACCESSKEY=`/bin/cat ~/.s3cfg | /bin/grep 'secret_key' | /usr/bin/awk '{print $NF}'`
@@ -209,7 +209,7 @@ then
     /bin/rm ${HOME}/runtime/SYNCINGASSETSTODATASTORE
 fi
 
-if ( [ "${DATASTORE_PROVIDER}" = "linode" ] )
+if ( [ "${DATASTORE_CHOICE}" = "linode" ] )
 then
     export AWSACCESSKEYID=`/bin/cat ~/.s3cfg | /bin/grep '^access_key' | /usr/bin/awk '{print $NF}'`
     export AWSSECRETACCESSKEY=`/bin/cat ~/.s3cfg | /bin/grep 'secret_key' | /usr/bin/awk '{print $NF}'`
@@ -237,7 +237,7 @@ then
     /bin/rm ${HOME}/runtime/SYNCINGASSETSTODATASTORE
 fi
 
-if ( [ "${DATASTORE_PROVIDER}" = "vultr" ] )
+if ( [ "${DATASTORE_CHOICE}" = "vultr" ] )
 then
     export AWSACCESSKEYID=`/bin/cat ~/.s3cfg | /bin/grep '^access_key' | /usr/bin/awk '{print $NF}'`
     export AWSSECRETACCESSKEY=`/bin/cat ~/.s3cfg | /bin/grep 'secret_key' | /usr/bin/awk '{print $NF}'`
