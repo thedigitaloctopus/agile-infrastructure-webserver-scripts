@@ -38,7 +38,7 @@ APPLICATION_REPOSITORY_USERNAME="${2}"
 APPLICATION_REPOSITORY_PASSWORD="${3}"
 APPLICATION_REPOSITORY_OWNER="${4}"
 BUILD_ARCHIVE_CHOICE="${5}"
-DATASTORE_PROVIDER="${6}"
+DATASTORE_CHOICE="${6}"
 BUILD_IDENTIFIER="${7}"
 WEBSITE_NAME="${8}"
 
@@ -62,7 +62,7 @@ ${HOME}/providerscripts/git/GitPull.sh ${APPLICATION_REPOSITORY_PROVIDER} ${APPL
 if ( [ "`/bin/ls -l /var/www/html | /usr/bin/wc -l`" -lt "10" ] )
 then
     cd ${HOME}
-    ${HOME}/providerscripts/datastore/GetFromDatastore.sh "${DATASTORE_PROVIDER}" "`/bin/echo ${WEBSITE_URL} | /bin/sed 's/\./-/g'`-${BUILD_ARCHIVE_CHOICE}/applicationsourcecode.tar.gz"
+    ${HOME}/providerscripts/datastore/GetFromDatastore.sh "${DATASTORE_CHOICE}" "`/bin/echo ${WEBSITE_URL} | /bin/sed 's/\./-/g'`-${BUILD_ARCHIVE_CHOICE}/applicationsourcecode.tar.gz"
     /bin/tar xvfz ${HOME}/applicationsourcecode.tar.gz
     /bin/mv ${HOME}/tmp/backup/* /var/www/html
     /bin/rm -rf ${HOME}/tmp
