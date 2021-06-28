@@ -63,11 +63,6 @@ then
     #DB_PORT="`/bin/echo ${DB_PORT} | /usr/bin/awk -F':' '{print $NF}'`"
     DB_HOST="`command="${SUDO} /bin/ls ${HOME}/config/databaseip" && eval ${command}`"
 
-    if ( [ "`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBaaSREMOTESSHPROXYIP'`" != "" ] )
-    then
-        DB_HOST="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBaaSREMOTESSHPROXYIP'`"
-    fi
-
     if ( [ "`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBaaSHOSTNAME'`" != "" ] )
     then
         DB_HOST="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBaaSHOSTNAME'`"
