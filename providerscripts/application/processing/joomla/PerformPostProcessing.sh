@@ -70,17 +70,7 @@ do
     /bin/sleep 10
 done
 
-if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:DBaaS-secured`" = "1" ] && [ -f  ${HOME}/runtime/SSHTUNNELCONFIGURED ] )
-then
-    while ( [ ! -f ${HOME}/runtime/SSHTUNNELCONFIGURED ] )
-    do
-        /bin/echo "Your SSH tunnel doesn't seem to be set up. Woops. Won't be getting far without that. Please take action to make sure that"
-        /bin/echo "Your SSH tunnel is set up on your webserver, the appropriate script is ${HOME}/providerscripts/utilities/SetupSSHTunnel.sh"
-        /bin/echo "Once this is done, press enter and we'll get on with it"
-        read response
-    done
-    host="127.0.0.1"
-elif ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:DBaaS`" = "1" ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:DBaaS`" = "1" ] )
 then
     host="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBaaSHOSTNAME'`"
 else
