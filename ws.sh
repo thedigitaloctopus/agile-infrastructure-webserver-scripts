@@ -447,9 +447,9 @@ ${HOME}/providerscripts/utilities/GetIP.sh
 /bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
 /bin/echo "${0} Switching on firewall now that we have got everything installed" >> ${HOME}/logs/WEBSERVER_BUILD.log
 /bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
-/usr/sbin/ufw default allow incoming
-/usr/sbin/ufw default allow outgoing
-/usr/sbin/ufw --force enable
+#/usr/sbin/ufw default allow incoming
+#/usr/sbin/ufw default allow outgoing
+#/usr/sbin/ufw --force enable
 
 /bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
 /bin/echo "${0} Sending notification email that a webserver has been built" >> ${HOME}/logs/WEBSERVER_BUILD.log
