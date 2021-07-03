@@ -25,6 +25,11 @@ cd /usr/local/src/libexpat/expat
 
 cd /usr/local/src
 
+
+################
+#THIS IS NOT WORKING
+##################
+
 apache_download_link="`/usr/bin/curl http://httpd.apache.org/download.cgi | /bin/grep "Source" | /bin/grep "tar.gz" | /bin/sed 's/.*https/https/g' | /bin/sed 's/".*//g'`"
 
 /usr/bin/wget -O- ${apache_download_link} | /bin/tar -zxf -
@@ -55,6 +60,12 @@ cd httpd-*
 /bin/mkdir /etc/apache2/mods-available
 /bin/mkdir /etc/apache2/conf-available
 /bin/mkdir /etc/apache2/sites-available
+
+###################################################################
+#git clone https://github.com/apache/httpd.git
+#./buildconf --with-apr=../apr-1.7.0 --with-apr-util=../apr-util-1.6
+
+#####################################
 
 
 ./configure --prefix=/usr/local/apache2 --sysconfdir=/etc/apache2 --with-pcre=/usr/local/pcre --with-apxs2=/usr/bin/apxs --with-mpm=prefork --enable-http2 --enable-ssl --enable-so --with-included-apr --enable-rewrite --enable-mods-static="reallyall" --enable-mods-shared="reallyall"
