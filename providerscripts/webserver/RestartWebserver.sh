@@ -21,20 +21,20 @@
 #set -x
 
 WEBSERVERCHOICE="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSERVERCHOICE'`"
-phpversion="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'PHPVERSION'`"
+PHP_VERSION="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'PHPVERSION'`"
 
 if ( [ "${WEBSERVERCHOICE}" = "NGINX" ] )
 then
-    /usr/sbin/service php${phpversion}-fpm restart
+    /usr/sbin/service php${PHP_VERSION}-fpm restart
     /usr/sbin/service nginx restart
 fi
 if ( [ "${WEBSERVERCHOICE}" = "APACHE" ] )
 then
-    /usr/sbin/service php${phpversion}-fpm restart
+    /usr/sbin/service php${PHP_VERSION}-fpm restart
     /usr/sbin/service apache2 restart || . /etc/apache2/conf/envvars && /etc/apache2/bin/apachectl -k restart
 fi
 if ( [ "${WEBSERVERCHOICE}" = "LIGHTTPD" ] )
 then
-    /usr/sbin/service php${phpversion}-fpm restart
+    /usr/sbin/service php${PHP_VERSION}-fpm restart
     /usr/sbin/service lighttpd restart
 fi
