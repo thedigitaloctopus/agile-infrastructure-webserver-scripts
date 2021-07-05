@@ -41,7 +41,7 @@ else
     HOST="`/bin/ls ${HOME}/config/databaseip`"
 fi
 
-PORT="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DB_PORT'`"
+DB_PORT="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBPORT'`"
 
 export PGPASSWORD=${DB_P}
 
@@ -49,15 +49,15 @@ if ( [ "${raw}" != "raw" ] )
 then
     if ( [ "${sql_command}" != "" ]  )
     then
-        /usr/bin/psql -U ${DB_U} -h ${HOST} -p ${PORT} ${DB_N} -c "${sql_command}"
+        /usr/bin/psql -U ${DB_U} -h ${HOST} -p ${DB_PORT} ${DB_N} -c "${sql_command}"
     else
-        /usr/bin/psql -U ${DB_U} -h ${HOST} -p ${PORT} ${DB_N}
+        /usr/bin/psql -U ${DB_U} -h ${HOST} -p ${DB_PORT} ${DB_N}
     fi
 else
     if ( [ "${sql_command}" != "" ]  )
     then
-        /usr/bin/psql -t -U ${DB_U} -h ${HOST} -p ${PORT} ${DB_N} -c "${sql_command}"
+        /usr/bin/psql -t -U ${DB_U} -h ${HOST} -p ${DB_PORT} ${DB_N} -c "${sql_command}"
     else
-        /usr/bin/psql -U ${DB_U} -h ${HOST} -p ${PORT} ${DB_N} 
+        /usr/bin/psql -U ${DB_U} -h ${HOST} -p ${DB_PORT} ${DB_N} 
     fi
 fi
