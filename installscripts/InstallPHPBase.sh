@@ -73,7 +73,7 @@ fi
 if ( [ "${BUILDOS}" = "debian" ] )
 then
     #removed php-mcrypt
-    /usr/bin/apt -qq -y install apt-transport-https lsb-release ca-certificates
+    /usr/bin/apt-get -qq -y install apt-transport-https lsb-release ca-certificates
     /usr/bin/wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
     /bin/sh -c 'echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list'
 
