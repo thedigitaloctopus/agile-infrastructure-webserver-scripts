@@ -44,7 +44,7 @@ then
         fi
         ####/usr/bin/apt-get -qq -y install libapache2-modsecurity
         ####/usr/bin/apt-get -qq -y install modsecurity-crs
-        /usr/bin/apt -qq -y install libapache2-mod-fcgid        
+        /usr/bin/apt-get -qq -y install libapache2-mod-fcgid        
         /bin/touch /etc/apache2/BUILT_FROM_REPO
     fi
 fi
@@ -66,7 +66,7 @@ then
         fi
         ####/usr/bin/apt-get -qq -y install libapache2-modsecurity
         ####/usr/bin/apt-get -qq -y install modsecurity-crs
-        /usr/bin/apt -qq -y install libapache2-mod-fcgid
+        /usr/bin/apt-get -qq -y install libapache2-mod-fcgid
         /bin/touch /etc/apache2/BUILT_FROM_REPO
     fi
 fi
