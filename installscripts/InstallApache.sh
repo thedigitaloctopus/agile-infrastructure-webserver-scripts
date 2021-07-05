@@ -25,7 +25,7 @@ then
     BUILDOS="${1}"
 fi
 
-phpversion="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'PHPVERSION'`"
+PHP_VERSION="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'PHPVERSION'`"
 
 if ( [ "${BUILDOS}" = "ubuntu" ] )
 then
@@ -40,7 +40,7 @@ then
         /usr/bin/apt-get -qq -y install apache2
         if ( [  "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATIONLANGUAGE:PHP`" = "1" ] )
         then
-            /usr/bin/apt-get -qq -y install libapache2-mod-php${phpversion}
+            /usr/bin/apt-get -qq -y install libapache2-mod-php${PHP_VERSION}
         fi
         ####/usr/bin/apt-get -qq -y install libapache2-modsecurity
         ####/usr/bin/apt-get -qq -y install modsecurity-crs
@@ -62,7 +62,7 @@ then
         /usr/bin/apt-get -qq -y install apache2
         if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATIONLANGUAGE:PHP`" = "1" ] )
         then
-            /usr/bin/apt-get -qq -y install libapache2-mod-php${phpversion}
+            /usr/bin/apt-get -qq -y install libapache2-mod-php${PHP_VERSION}
         fi
         ####/usr/bin/apt-get -qq -y install libapache2-modsecurity
         ####/usr/bin/apt-get -qq -y install modsecurity-crs
