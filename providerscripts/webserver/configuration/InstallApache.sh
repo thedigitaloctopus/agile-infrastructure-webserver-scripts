@@ -22,7 +22,7 @@
 #set -x
 
 BUILDOS="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDOS'`"
-phpversion="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'PHP_VERSION'`"
+phpversion="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'PHPVERSION'`"
 WEBSITE_NAME="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEDISPLAYNAME'`"
 
 ${HOME}/installscripts/InstallApache.sh ${BUILDOS}
