@@ -15,9 +15,9 @@
 ######################################################################################
 ######################################################################################
 
-if (    [ "`/bin/cat ${HOME}/config/joomla_configuration.php | /bin/grep ${DB_N}`" = "" ] ||
-    [ "`/bin/cat ${HOME}/config/joomla_configuration.php | /bin/grep ${DB_P}`" = "" ] ||
-[ "`/bin/cat ${HOME}/config/joomla_configuration.php | /bin/grep ${DB_U}`" = "" ] )
+if ( [ "`/bin/grep ${DB_N} ${HOME}/config/joomla_configuration.php`" = "" ] ||
+     [ "`/bin/grep ${DB_P} ${HOME}/config/joomla_configuration.php`" = "" ] ||
+     [ "`/bin/grep ${DB_U} ${HOME}/config/joomla_configuration.php`" = "" ] )
 then
     exit
 fi
