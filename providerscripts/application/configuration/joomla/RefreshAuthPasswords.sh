@@ -54,14 +54,14 @@ do
     
     if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh WEBSERVERCHOICE:NGINX`" = "1" ] )
     then
-        if ( [ "`/bin/cat /tmp/credentials | /bin/grep "${username}"`" = "" ] || [ "`/bin/cat /tmp/credentials | /bin/grep ${matchablepassword}`" = "" ] )
+        if ( [ "`/bin/grep "${username}" /tmp/credentials`" = "" ] || [ "`/bin/grep ${matchablepassword} /tmp/credentials`" = "" ] )
         then
             /bin/sed -i "/${username}/d" /etc/nginx/.htpasswd
             /bin/echo "${username}:${password}" >> /etc/nginx/.htpasswd
         fi
     elif ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh WEBSERVERCHOICE:APACHE`" = "1" ] )
     then
-        if ( [ "`/bin/cat /tmp/credentials | /bin/grep "${username}"`" = "" ] || [ "`/bin/cat /tmp/credentials | /bin/grep ${matchablepassword}`" = "" ] )
+        if ( [ "`/bin/grep "${username}" /tmp/credentials`" = "" ] || [ "`/bin/grep ${matchablepassword} /tmp/credentials`" = "" ] )
         then
             /bin/sed -i "/${username}/d" /etc/apache2/.htpasswd
             /bin/echo "${username}:${password}" >> /etc/apache2/.htpasswd
