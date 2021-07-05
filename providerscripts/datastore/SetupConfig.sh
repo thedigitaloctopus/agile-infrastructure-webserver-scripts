@@ -57,24 +57,24 @@ WEBSITE_URL="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEUR
 
 configbucket="`/bin/echo ${WEBSITE_URL} | /usr/bin/awk -F'.' '{ for(i = 1; i <= NF; i++) { print $i; } }' | /usr/bin/cut -c1-3 | /usr/bin/tr '\n' '-' | /bin/sed 's/-//g'`"
 configbucket="${configbucket}-config"
-endpoint="`/bin/cat ~/.s3cfg | /bin/grep host_base | /usr/bin/awk '{print $NF}'`"
+endpoint="`/bin/grep host_base ~/.s3cfg | /usr/bin/awk '{print $NF}'`"
 
 if ( [ "${DATASTORE_CHOICE}" = "amazonS3" ] )
 then
-    export AWSACCESSKEYID=`/bin/cat ~/.s3cfg | /bin/grep '^access_key' | /usr/bin/awk '{print $NF}'`
-    export AWSSECRETACCESSKEY=`/bin/cat ~/.s3cfg | /bin/grep 'secret_key' | /usr/bin/awk '{print $NF}'`
+    export AWSACCESSKEYID=`/bin/grep '^access_key' ~/.s3cfg | /usr/bin/awk '{print $NF}'`
+    export AWSSECRETACCESSKEY=`/bin/grep 'secret_key' ~/.s3cfg | /usr/bin/awk '{print $NF}'`
    
     if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] )
     then
        if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh ENABLEEFS:1`" = "1" ] )
        then
-           aws_region="`/bin/cat ${HOME}/.aws/config | /bin/grep region | /usr/bin/awk '{print $NF}'`"
+           aws_region="`/bin/grep region ${HOME}/.aws/config | /usr/bin/awk '{print $NF}'`"
            /bin/mkdir ~/.aws 2>/dev/null
            /bin/cp ${HOME}/.aws/* ~/.aws 2>/dev/null
            /bin/chmod 500 ~/.aws/*
            
-           export AWSACCESSKEYID=`/bin/cat ~/.aws/credentials | /bin/grep '^access_key' | /usr/bin/awk '{print $NF}'`
-           export AWSSECRETACCESSKEY=`/bin/cat ~/.aws/credentials | /bin/grep 'secret_key' | /usr/bin/awk '{print $NF}'`
+           export AWSACCESSKEYID=`/bin/grep '^access_key' ~/.aws/credentials | /usr/bin/awk '{print $NF}'`
+           export AWSSECRETACCESSKEY=`/bin/grep 'secret_key' ~/.aws/credentials | /usr/bin/awk '{print $NF}'`
            
            if ( [ ! -d ${HOME}/config ] )
            then
@@ -100,8 +100,8 @@ fi
 
 if ( [ "${DATASTORE_CHOICE}" = "digitalocean" ] )
 then
-    export AWSACCESSKEYID=`/bin/cat ~/.s3cfg | /bin/grep '^access_key' | /usr/bin/awk '{print $NF}'`
-    export AWSSECRETACCESSKEY=`/bin/cat ~/.s3cfg | /bin/grep 'secret_key' | /usr/bin/awk '{print $NF}'`
+    export AWSACCESSKEYID=`/bin/grep '^access_key' ~/.s3cfg | /usr/bin/awk '{print $NF}'`
+    export AWSSECRETACCESSKEY=`/bin/grep 'secret_key' ~/.s3cfg | /usr/bin/awk '{print $NF}'`
     /usr/bin/s3cmd mb s3://${configbucket}
     if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] )
     then
@@ -112,8 +112,8 @@ fi
 
 if ( [ "${DATASTORE_CHOICE}" = "exoscale" ] )
 then
-    export AWSACCESSKEYID=`/bin/cat ~/.s3cfg | /bin/grep '^access_key' | /usr/bin/awk '{print $NF}'`
-    export AWSSECRETACCESSKEY=`/bin/cat ~/.s3cfg | /bin/grep 'secret_key' | /usr/bin/awk '{print $NF}'`
+    export AWSACCESSKEYID=`/bin/grep '^access_key' ~/.s3cfg | /usr/bin/awk '{print $NF}'`
+    export AWSSECRETACCESSKEY=`/bin/grep 'secret_key' ~/.s3cfg | /usr/bin/awk '{print $NF}'`
     /usr/bin/s3cmd mb s3://${configbucket}
     if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] )
     then
@@ -124,8 +124,8 @@ fi
 
 if ( [ "${DATASTORE_CHOICE}" = "linode" ] )
 then
-    export AWSACCESSKEYID=`/bin/cat ~/.s3cfg | /bin/grep '^access_key' | /usr/bin/awk '{print $NF}'`
-    export AWSSECRETACCESSKEY=`/bin/cat ~/.s3cfg | /bin/grep 'secret_key' | /usr/bin/awk '{print $NF}'`
+    export AWSACCESSKEYID=`/bin/grep '^access_key' ~/.s3cfg | /usr/bin/awk '{print $NF}'`
+    export AWSSECRETACCESSKEY=`/bin/grep 'secret_key' ~/.s3cfg | /usr/bin/awk '{print $NF}'`
     /usr/bin/s3cmd mb s3://${configbucket}
     if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] )
     then
@@ -136,8 +136,8 @@ fi
 
 if ( [ "${DATASTORE_CHOICE}" = "vultr" ] )
 then
-    export AWSACCESSKEYID=`/bin/cat ~/.s3cfg | /bin/grep '^access_key' | /usr/bin/awk '{print $NF}'`
-    export AWSSECRETACCESSKEY=`/bin/cat ~/.s3cfg | /bin/grep 'secret_key' | /usr/bin/awk '{print $NF}'`
+    export AWSACCESSKEYID=`/bin/grep '^access_key' ~/.s3cfg | /usr/bin/awk '{print $NF}'`
+    export AWSSECRETACCESSKEY=`/bin/grep 'secret_key' ~/.s3cfg | /usr/bin/awk '{print $NF}'`
     /usr/bin/s3cmd mb s3://${configbucket}
     if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] )
     then
