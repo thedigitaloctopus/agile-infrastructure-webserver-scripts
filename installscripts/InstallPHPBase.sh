@@ -24,7 +24,7 @@ then
 fi
 
 BUILDOSVERSION="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDOSVERSION'`"
-phpversion="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'PHPVERSION'`"
+PHP_VERSION="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'PHPVERSION'`"
 
 if ( [ "${1}" != "" ] )
 then
@@ -38,15 +38,9 @@ then
         /usr/bin/add-apt-repository -y ppa:ondrej/php
         ${HOME}/installscripts/Update.sh ${BUILDOS}
 
-        #removed php-mcrypt php7.2        
-      #  /usr/bin/apt-get -qq -y install php${phpversion}-fpm php${phpversion}-cli php${phpversion}-gmp php${phpversion}-common php${phpversion}-dev php${phpversion}-opcache php${phpversion}-mysqli php${phpversion}-phpdbg php${phpversion}-mbstring php${phpversion}-gd php${phpversion}-imap php${phpversion}-ldap php${phpversion}-pgsql php${phpversion}-pspell php${phpversion}-tidy php${phpversion}-intl php${phpversion}-gd php${phpversion}-curl php${phpversion}-zip php${phpversion}-xml openssl php-imagick php-json php-ssh2 php${phpversion}-sqlite3
+        installed_php_version="`/usr/bin/php -v | /bin/grep "^PHP" | /usr/bin/awk '{print $2}' | /usr/bin/awk -F'.' '{print $1,$2}' | /bin/sed 's/ /\./g'`"
 
-        #If php did not install at the version we chose for example, if you chose to install php7.4 on ubuntu 19.04 it will not install
-        #This is  potential configuration oversight if someone doesn't realise what versions of php are supported by a particular OS
-        #So, in this case, check if php has been installed at our desired version and if it isn't do the best that we can
-        installedphpversion="`/usr/bin/php -v | /bin/grep "^PHP" | /usr/bin/awk '{print $2}' | /usr/bin/awk -F'.' '{print $1,$2}' | /bin/sed 's/ /\./g'`"
-
-        if ( [ "${installedphpversion}" != "${phpversion}" ] )
+        if ( [ "${installed_php_version}" != "${PHP_VERSION}" ] )
         then
             /usr/bin/apt-get -qq -y purge php*
             /usr/bin/apt-get -qq -y autoclean
@@ -58,22 +52,20 @@ then
         /usr/bin/add-apt-repository -y ppa:ondrej/php
         ${HOME}/installscripts/Update.sh ${BUILDOS}
         
-        installedphpversion="`/usr/bin/php -v | /bin/grep "^PHP" | /usr/bin/awk '{print $2}' | /usr/bin/awk -F'.' '{print $1,$2}' | /bin/sed 's/ /\./g'`"
-        if ( [ "${installedphpversion}" != "${phpversion}" ] )
+        installed_php_version="`/usr/bin/php -v | /bin/grep "^PHP" | /usr/bin/awk '{print $2}' | /usr/bin/awk -F'.' '{print $1,$2}' | /bin/sed 's/ /\./g'`"
+        if ( [ "${installed_php_version}" != "${PHP_VERSION}" ] )
         then
             /usr/bin/apt-get -qq -y purge php*
             /usr/bin/apt-get -qq -y autoclean
             /usr/bin/apt-get -qq -y autoremove
             #/usr/bin/apt-get -qq -y install php-fpm php-cli php-common php-dev php-opcache php-mysqli php-phpdbg php-mbstring php-gd php-imap php-ldap php-pgsql php-pspell php-tidy php-intl php-gd php-curl php-zip php-xml
         fi
-        
-       #/usr/bin/apt-get -qq -y install php${phpversion}-fpm php${phpversion}-cli php${phpversion}-gmp php${phpversion}-common php${phpversion}-dev php${phpversion}-opcache php${phpversion}-mysqli php${phpversion}-phpdbg php${phpversion}-mbstring php${phpversion}-gd php${phpversion}-imap php${phpversion}-ldap php${phpversion}-pgsql php${phpversion}-pspell php${phpversion}-tidy php${phpversion}-intl php${phpversion}-gd php${phpversion}-curl php${phpversion}-zip php${phpversion}-xml php${phpversion}-imagick php-json php${phpversion}-ssh2 php${phpversion}-sqlite3
-      
-       /usr/bin/apt-get -qq -y install php${phpversion}-fpm php${phpversion}-cli php${phpversion}-gmp  php${phpversion}-xmlrpc php${phpversion}-soap php${phpversion}-dev php${phpversion}-mysqli php${phpversion}-phpdbg php${phpversion}-mbstring php${phpversion}-gd php${phpversion}-imap php${phpversion}-ldap php${phpversion}-pgsql php${phpversion}-pspell php${phpversion}-tidy php${phpversion}-intl php${phpversion}-gd php${phpversion}-curl php${phpversion}-zip php${phpversion}-xml php${phpversion}-imagick php${phpversion}-ssh2 php${phpversion}-sqlite3
+          
+       /usr/bin/apt-get -qq -y install php${PHP_VERSION}-fpm php${PHP_VERSION}-cli php${PHP_VERSION}-gmp  php${PHP_VERSION}-xmlrpc php${PHP_VERSION}-soap php${PHP_VERSION}-dev php${PHP_VERSION}-mysqli php${PHP_VERSION}-phpdbg php${PHP_VERSION}-mbstring php${PHP_VERSION}-gd php${PHP_VERSION}-imap php${PHP_VERSION}-ldap php${PHP_VERSION}-pgsql php${PHP_VERSION}-pspell php${PHP_VERSION}-tidy php${PHP_VERSION}-intl php${PHP_VERSION}-gd php${PHP_VERSION}-curl php${PHP_VERSION}-zip php${PHP_VERSION}-xml php${PHP_VERSION}-imagick php${PHP_VERSION}-ssh2 php${PHP_VERSION}-sqlite3
     
        if ( [ "`/bin/echo ${PHP_VERSION} | /bin/grep '7\.'`" != "" ] )
        then
-           /usr/bin/apt-get -qq -y install php${phpversion}-json
+           /usr/bin/apt-get -qq -y install php${PHP_VERSION}-json
        fi
    fi
 fi
@@ -87,13 +79,9 @@ then
 
     ${HOME}/installscripts/Update.sh ${BUILDOS}    
 
-    #If php did not install at the version we chose for example, if you chose to install php7.4 on ubuntu 19.04 it will not install
-    #This is  potential configuration oversight if someone doesn't realise what versions of php are supported by a particular OS
-    #So, in this case, check if php has been installed at our desired version and if it isn't do the best that we can
-    installedphpversion="`/usr/bin/php -v | /bin/grep "^PHP" | /usr/bin/awk '{print $2}' | /usr/bin/awk -F'.' '{print $1,$2}' | /bin/sed 's/ /\./g'`"
-    
-    
-    if ( [ "${installedphpversion}" != "${phpversion}" ] )
+    installed_php_version="`/usr/bin/php -v | /bin/grep "^PHP" | /usr/bin/awk '{print $2}' | /usr/bin/awk -F'.' '{print $1,$2}' | /bin/sed 's/ /\./g'`"
+      
+    if ( [ "${installed_php_version}" != "${PHP_VERSION}" ] )
     then
         /usr/bin/apt-get -qq -y purge php*
         /usr/bin/apt-get -qq -y autoclean
@@ -101,19 +89,11 @@ then
         #/usr/bin/apt-get -qq -y install php-fpm php-cli php-common php-dev php-opcache php-mysqli php-phpdbg php-mbstring php-gd php-imap php-ldap php-pgsql php-pspell php-tidy php-intl php-gd php-curl php-zip php-xml
     fi
 
-    #if ( [ "${installedphpversion}" != "${phpversion}" ] )
-    #then
-    #   /bin/rm -r /etc/php/${installedphpversion}
-    #   /usr/bin/apt-get -qq -y install php-fpm php-cli php-common php-dev php-opcache php-mysqli php-phpdbg php-mbstring php-gd php-imap php-ldap php-pgsql php-pspell php-tidy php-intl php-gd php-curl php-zip php-xml
-    #else
-    #/usr/bin/apt-get -qq -y install php${phpversion}-fpm php${phpversion}-cli php${phpversion}-gmp php${phpversion}-common php${phpversion}-dev php${phpversion}-opcache php${phpversion}-mysqli php${phpversion}-phpdbg php${phpversion}-mbstring php${phpversion}-gd php${phpversion}-imap php${phpversion}-ldap php${phpversion}-pgsql php${phpversion}-pspell php${phpversion}-tidy php${phpversion}-intl php${phpversion}-gd php${phpversion}-curl php${phpversion}-zip php${phpversion}-xml php${phpversion}-imagick php-json php${phpversion}-ssh2 php${phpversion}-sqlite3
-    /usr/bin/apt-get -qq -y install php${phpversion}-fpm php${phpversion}-cli php${phpversion}-gmp php${phpversion}-xmlrpc php${phpversion}-soap php${phpversion}-dev php${phpversion}-mysqli php${phpversion}-phpdbg php${phpversion}-mbstring php${phpversion}-gd php${phpversion}-imap php${phpversion}-ldap php${phpversion}-pgsql php${phpversion}-pspell php${phpversion}-tidy php${phpversion}-intl php${phpversion}-gd php${phpversion}-curl php${phpversion}-zip php${phpversion}-xml php${phpversion}-imagick php${phpversion}-ssh2 php${phpversion}-sqlite3
+    /usr/bin/apt-get -qq -y install php${PHP_VERSION}-fpm php${PHP_VERSION}-cli php${PHP_VERSION}-gmp php${PHP_VERSION}-xmlrpc php${PHP_VERSION}-soap php${PHP_VERSION}-dev php${PHP_VERSION}-mysqli php${PHP_VERSION}-phpdbg php${PHP_VERSION}-mbstring php${PHP_VERSION}-gd php${PHP_VERSION}-imap php${PHP_VERSION}-ldap php${PHP_VERSION}-pgsql php${PHP_VERSION}-pspell php${PHP_VERSION}-tidy php${PHP_VERSION}-intl php${PHP_VERSION}-gd php${PHP_VERSION}-curl php${PHP_VERSION}-zip php${PHP_VERSION}-xml php${PHP_VERSION}-imagick php${PHP_VERSION}-ssh2 php${PHP_VERSION}-sqlite3
 
     if ( [ "`/bin/echo ${PHP_VERSION} | /bin/grep '7\.'`" != "" ] )
     then
-        /usr/bin/apt-get -qq -y install php${phpversion}-json
+        /usr/bin/apt-get -qq -y install php${PHP_VERSION}-json
     fi
    #fi
 fi
-
-
