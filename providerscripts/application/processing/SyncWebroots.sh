@@ -46,5 +46,5 @@ else
     eval ${CMD} > ${HOME}/runtime/webroottotunnelmanifest.current
     /usr/bin/diff ${HOME}/runtime/webroottotunnelmanifest.previous ${HOME}/runtime/webroottotunnelmanifest.current > ${HOME}/runtime/webroottotunnelmanifest.diff
     /bin/mv ${HOME}/runtime/webroottotunnelmanifest.current ${HOME}/runtime/webroottotunnelmanifest.previous
-    /bin/cat ${HOME}/runtime/webroottotunnelmanifest.diff | /bin/grep '^> ' | /bin/sed 's/> //g' > ${HOME}/runtime/webroottotunnelmanifest.diff.clean
+    /bin/grep '^> ' ${HOME}/runtime/webroottotunnelmanifest.diff | /bin/sed 's/> //g' > ${HOME}/runtime/webroottotunnelmanifest.diff.clean
 fi
