@@ -53,10 +53,10 @@ database="`/bin/sed '1q;d' ${HOME}/config/credentials/shit`"
 
 if ( [ -f /var/www/html/moodle/config.php ] &&
     [ "${username}" != "" ] && [ "${password}" != "" ] && [ "${database}" != "" ] && [ "${host}" != "" ] &&
-    [ "`/bin/cat /var/www/html/moodle/config.php | /bin/grep ${username}`" != "" ] &&
-    [ "`/bin/cat /var/www/html/moodle/config.php | /bin/grep ${password}`" != "" ] &&
-    [ "`/bin/cat /var/www/html/moodle/config.php | /bin/grep ${database}`" != "" ] &&
-[ "`/bin/cat /var/www/html/moodle/config.php | /bin/grep ${host}`" != "" ] )
+    [ "`/bin/grep ${username} /var/www/html/moodle/config.php`" != "" ] &&
+    [ "`/bin/grep ${password} /var/www/html/moodle/config.php`" != "" ] &&
+    [ "`/bin/grep ${database} /var/www/html/moodle/config.php`" != "" ] &&
+    [ "`/bin/grep ${host} /var/www/html/moodle/config.php`" != "" ] )
 then
     /bin/touch ${HOME}/runtime/CONFIG_VERIFIED
 else
