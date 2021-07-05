@@ -116,7 +116,7 @@ fi
 /bin/sed -i 's/LoadModule/#LoadModule/g' /etc/apache2/mods-available/info.load
 /bin/sed -i 's/LoadModule/#LoadModule/g' /etc/apache2/mods-available/userdir.load
 #/bin/sed -i '/SetHandler/c\ SetHandler "proxy:fcgi://localhost:9000"' /etc/apache2/conf-available/php${PHP_VERSION}-fpm.conf
-/bin/sed -i '0,/SetHandler.*/s//SetHandler "proxy:fcgi:\/\/localhost:9000"/g' /etc/apache2/conf-available/php${phpversion}-fpm.conf
+/bin/sed -i '0,/SetHandler.*/s//SetHandler "proxy:fcgi:\/\/localhost:9000"/g' /etc/apache2/conf-available/php${PHP_VERSION}-fpm.conf
 /bin/rm /etc/apache2/sites-available/*def*
 
 /usr/sbin/a2enmod proxy_fcgi
