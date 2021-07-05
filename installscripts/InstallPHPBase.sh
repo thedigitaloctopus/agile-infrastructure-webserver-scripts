@@ -24,7 +24,7 @@ then
 fi
 
 BUILDOSVERSION="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDOSVERSION'`"
-phpversion="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'PHP_VERSION'`"
+phpversion="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'PHPVERSION'`"
 
 if ( [ "${1}" != "" ] )
 then
