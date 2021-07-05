@@ -21,7 +21,7 @@
 #set -x
 
 webserver_type="${1}"
-phpversion="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'PHP_VERSION'`"
+phpversion="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'PHPVERSION'`"
 
 
 if ( [ "${webserver_type}" = "APACHE" ] )
