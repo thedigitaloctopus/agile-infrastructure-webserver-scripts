@@ -81,7 +81,7 @@ else
 fi
 
 #Get the port that the database is running on
-DB_PORT="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DB_PORT'`"
+DB_PORT="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBPORT'`"
 
 
 #Set a prefix for our database tables. Make sure we only ever set one in the case where the script runs more than once
