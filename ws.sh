@@ -345,11 +345,11 @@ fi
 /bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
 
 #Make sure that client connections to sshd are long lasting
-if ( [ "`/bin/cat /etc/ssh/sshd_config | /bin/grep 'ClientAliveInterval 200' 2>/dev/null`" = "" ] )
+if ( [ "`/bin/grep 'ClientAliveInterval 200' /etc/ssh/sshd_config 2>/dev/null`" = "" ] )
 then
     /bin/echo "
 ClientAliveInterval 200
-    ClientAliveCountMax 10" >> /etc/ssh/sshd_config
+ClientAliveCountMax 10" >> /etc/ssh/sshd_config
 fi
 
 #Set the port for ssh to use
@@ -359,7 +359,7 @@ fi
 #/bin/sed -i 's/.*PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config
 
 #Make sure that client connections to sshd are long lasting
-#if ( [ "`/bin/cat /etc/ssh/sshd_config | /bin/grep 'ClientAliveInterval 200' 2>/dev/null`" = "" ] )
+#if ( [ "`/bin/grep 'ClientAliveInterval 200' /etc/ssh/sshd_config 2>/dev/null`" = "" ] )
 #then
 #    /bin/echo "
 #ClientAliveInterval 200
