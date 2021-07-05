@@ -30,10 +30,10 @@ password="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'EMAILPASSWOR
 emailprovider="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'EMAILPROVIDER'`"
 
 
-if ( [ "${password}" = "" ] )
-then
-    password="`/bin/cat ${HOME}/.ssh/SYSTEMEMAILPASSWORD`"
-fi
+#if ( [ "${password}" = "" ] )
+#then
+#    password="`/bin/cat ${HOME}/.ssh/SYSTEMEMAILPASSWORD`"
+#fi
 
 while ( [ ! -f ${HOME}/config/APPLICATION_CONFIGURATION_PREPARED ] )
 do
