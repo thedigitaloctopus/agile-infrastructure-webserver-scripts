@@ -41,22 +41,22 @@ else
     HOST="`/bin/ls ${HOME}/config/databaseip`"
 fi
 
-PORT="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DB_PORT'`"
+DB_PORT="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBPORT'`"
 
 if ( [ "${raw}" != "raw" ] )
 then
     if ( [ "${sql_command}" != "" ]  )
     then
-        /usr/bin/mysql -u ${DB_U} -p${DB_P} ${DB_N} --host="${HOST}" --port="${PORT}" -e "${sql_command}"
+        /usr/bin/mysql -u ${DB_U} -p${DB_P} ${DB_N} --host="${HOST}" --port="${DB_PORT}" -e "${sql_command}"
     else
-        /usr/bin/mysql -u ${DB_U} -p${DB_P} ${DB_N} --host="${HOST}" --port="${PORT}"
+        /usr/bin/mysql -u ${DB_U} -p${DB_P} ${DB_N} --host="${HOST}" --port="${DB_PORT}"
     fi
 else
     if ( [ "${sql_command}" != "" ]  )
     then
-        /usr/bin/mysql -N -r -s -u ${DB_U} -p${DB_P} ${DB_N} --host="${HOST}" --port="${PORT}" -e "${sql_command}"
+        /usr/bin/mysql -N -r -s -u ${DB_U} -p${DB_P} ${DB_N} --host="${HOST}" --port="${DB_PORT}" -e "${sql_command}"
     else
-        /usr/bin/mysql -N -r -s -u ${DB_U} -p${DB_P} ${DB_N} --host="${HOST}" --port="${PORT}"
+        /usr/bin/mysql -N -r -s -u ${DB_U} -p${DB_P} ${DB_N} --host="${HOST}" --port="${DB_PORT}"
     fi
 fi
 
