@@ -25,7 +25,7 @@
 
 read old_password
 
-while ( [ "`/bin/cat ${HOME}/config/credentials/shit | /bin/grep ${old_password}`" = "" ] )
+while ( [ "`/bin/grep ${old_password} ${HOME}/config/credentials/shit`" = "" ] )
 do
     /bin/echo "That is not the old password, please enter it again"
     read old_password
