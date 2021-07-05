@@ -20,7 +20,7 @@
 #Location: Settings > Site administration > Plugins > Message outputs > Email
 
 #Your SMTP credentials are stored in /var/www/moodlesmtp
-fromaddress="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'FROMADDRESS'`"
+fromaddress="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SYSTEMFROMEMAILADDRESS'`"
 username="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'EMAILUSERNAME'`"
 password="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'EMAILPASSWORD'`"
 emailprovider="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'EMAILPROVIDER'`"
