@@ -50,10 +50,10 @@ fi
 
 if ( [ -f /var/www/html/configuration.php ] &&
     [ "${username}" != "" ] && [ "${password}" != "" ] && [ "${database}" != "" ] && [ "${host}" != "" ] &&
-    [ "`/bin/cat /var/www/html/configuration.php | /bin/grep ${username}`" != "" ] &&
-    [ "`/bin/cat /var/www/html/configuration.php | /bin/grep ${password}`" != "" ] &&
-    [ "`/bin/cat /var/www/html/configuration.php | /bin/grep ${database}`" != "" ] &&
-    [ "`/bin/cat /var/www/html/configuration.php | /bin/grep ${host}`" != "" ] )
+    [ "`/bin/grep ${username} /var/www/html/configuration.php`" != "" ] &&
+    [ "`/bin/grep ${password} /var/www/html/configuration.php`" != "" ] &&
+    [ "`/bin/grep ${database} /var/www/html/configuration.php`" != "" ] &&
+    [ "`/bin/grep ${host} /var/www/html/configuration.php`" != "" ] )
 then
     exit
 fi
@@ -70,10 +70,10 @@ fi
 
 if ( [ -f ${HOME}/config/joomla_configuration.php ] &&
     [ "${username}" != "" ] && [ "${password}" != "" ] && [ "${database}" != "" ] && [ "${host}" != "" ] &&
-    [ "`/bin/cat ${HOME}/config/joomla_configuration.php | /bin/grep ${username}`" != "" ] &&
-    [ "`/bin/cat ${HOME}/config/joomla_configuration.php | /bin/grep ${password}`" != "" ] &&
-    [ "`/bin/cat ${HOME}/config/joomla_configuration.php | /bin/grep ${database}`" != "" ] &&
-[ "`/bin/cat ${HOME}/config/joomla_configuration.php | /bin/grep ${host}`" != "" ] )
+    [ "`/bin/grep ${username} ${HOME}/config/joomla_configuration.php`" != "" ] &&
+    [ "`/bin/grep ${password} ${HOME}/config/joomla_configuration.php`" != "" ] &&
+    [ "`/bin/grep ${database} ${HOME}/config/joomla_configuration.php`" != "" ] &&
+    [ "`/bin/grep ${host} ${HOME}/config/joomla_configuration.php`" != "" ] )
 then
     :
 else
@@ -185,10 +185,10 @@ fi
 
 if ( [ -f ${HOME}/config/joomla_configuration.php ] &&
     [ "${username}" != "" ] && [ "${password}" != "" ] && [ "${database}" != "" ] && [ "${host}" != "" ] &&
-    [ "`/bin/cat ${HOME}/config/joomla_configuration.php | /bin/grep ${username}`" != "" ] &&
-    [ "`/bin/cat ${HOME}/config/joomla_configuration.php | /bin/grep ${password}`" != "" ] &&
-    [ "`/bin/cat ${HOME}/config/joomla_configuration.php | /bin/grep ${database}`" != "" ] &&
-[ "`/bin/cat ${HOME}/config/joomla_configuration.php | /bin/grep ${host}`" != "" ] )
+    [ "`/bin/grep ${username} ${HOME}/config/joomla_configuration.php`" != "" ] &&
+    [ "`/bin/grep ${password} ${HOME}/config/joomla_configuration.php`" != "" ] &&
+    [ "`/bin/grep ${database} ${HOME}/config/joomla_configuration.php`" != "" ] &&
+    [ "`/bin/grep ${host} ${HOME}/config/joomla_configuration.php`" != "" ] )
 then
     /bin/touch ${HOME}/runtime/VIRGINCONFIGSET
     exit
@@ -250,10 +250,10 @@ fi
 
 if ( [ -f ${HOME}/config/joomla_configuration.php ] &&
     ( [ "${username}" != "" ] && [ "${password}" != "" ] && [ "${database}" != "" ] && [ "${host}" != "" ] ) &&
-    ( [ "`/bin/cat ${HOME}/config/joomla_configuration.php | /bin/grep ${username}`" = "" ] ||
-        [ "`/bin/cat ${HOME}/config/joomla_configuration.php | /bin/grep ${password}`" = "" ] ||
-        [ "`/bin/cat ${HOME}/config/joomla_configuration.php | /bin/grep ${database}`" = "" ] ||
-[ "`/bin/cat ${HOME}/config/joomla_configuration.php | /bin/grep ${host}`" = "" ] ) )
+    ( [ "`/bin/grep ${username} ${HOME}/config/joomla_configuration.php`" = "" ] ||
+      [ "`/bin/grep ${password} ${HOME}/config/joomla_configuration.php`" = "" ] ||
+      [ "`/bin/grep ${database} ${HOME}/config/joomla_configuration.php`" = "" ] ||
+      [ "`/bin/grep ${host} ${HOME}/config/joomla_configuration.php`" = "" ] ) )
 then
     if ( [ -f /var/www/html/configuration.php ] &&
     [ "`/usr/bin/diff ${HOME}/config/joomla_configuration.php ${HOME}/runtime/joomla_configuration.php`" != "" ] )
@@ -280,10 +280,10 @@ fi
 
 if ( [ -f ${HOME}/config/joomla_configuration.php ] &&
     [ "${username}" != "" ] && [ "${password}" != "" ] && [ "${database}" != "" ] && [ "${host}" != "" ] &&
-    [ "`/bin/cat ${HOME}/config/joomla_configuration.php | /bin/grep ${username}`" != "" ] &&
-    [ "`/bin/cat ${HOME}/config/joomla_configuration.php | /bin/grep ${password}`" != "" ] &&
-    [ "`/bin/cat ${HOME}/config/joomla_configuration.php | /bin/grep ${database}`" != "" ] &&
-[ "`/bin/cat ${HOME}/config/joomla_configuration.php | /bin/grep ${host}`" != "" ] )
+    [ "`/bin/grep ${username} ${HOME}/config/joomla_configuration.php`" != "" ] &&
+    [ "`/bin/grep ${password} ${HOME}/config/joomla_configuration.php`" != "" ] &&
+    [ "`/bin/grep ${database} ${HOME}/config/joomla_configuration.php`" != "" ] &&
+    [ "`/bin/grep ${host} ${HOME}/config/joomla_configuration.php`" != "" ] )
 then
     /bin/touch ${HOME}/runtime/VIRGINCONFIGSET
 else
