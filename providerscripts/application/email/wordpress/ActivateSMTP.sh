@@ -24,7 +24,7 @@
 /bin/echo "These are your SMTP credentials settings for your wordpress install"
 /bin/echo "Please refer to: https://wordpress.org/plugins/wp-mail-smtp/"
 /bin/echo "##################################################################"
-fromaddress="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'FROMADDRESS'`"
+fromaddress="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SYSTEMFROMEMAILADDRESS'`"
 username="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'EMAILUSERNAME'`"
 password="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'EMAILPASSWORD'`"
 emailprovider="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'EMAILPROVIDER'`"
