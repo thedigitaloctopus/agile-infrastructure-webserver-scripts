@@ -40,7 +40,7 @@ then
     DB_N="`/bin/sed '1q;d' ${HOME}/config/credentials/shit`"
     DB_P="`/bin/sed '2q;d' ${HOME}/config/credentials/shit`"
     DB_U="`/bin/sed '3q;d' ${HOME}/config/credentials/shit`"
-    DB_PORT="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DB_PORT'`"
+    DB_PORT="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBPORT'`"
 
     DB_HOST="`/bin/ls ${HOME}/config/databaseip`"
 
