@@ -21,7 +21,7 @@
 #set -x
 
 WEBSERVERCHOICE="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSERVERCHOICE'`"
-phpversion="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'PHP_VERSION'`"
+phpversion="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'PHPVERSION'`"
 
 if ( [ "${WEBSERVERCHOICE}" = "NGINX" ] )
 then
