@@ -22,7 +22,7 @@
 #set -x
 
 BUILDOS="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDOS'`"
-phpversion="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'PHPVERSION'`"
+PHP_VERSION="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'PHPVERSION'`"
 WEBSITE_NAME="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEDISPLAYNAME'`"
 
 ${HOME}/installscripts/InstallApache.sh ${BUILDOS}
@@ -115,7 +115,7 @@ fi
 /bin/sed -i 's/LoadModule/#LoadModule/g' /etc/apache2/mods-available/include.load
 /bin/sed -i 's/LoadModule/#LoadModule/g' /etc/apache2/mods-available/info.load
 /bin/sed -i 's/LoadModule/#LoadModule/g' /etc/apache2/mods-available/userdir.load
-#/bin/sed -i '/SetHandler/c\ SetHandler "proxy:fcgi://localhost:9000"' /etc/apache2/conf-available/php${phpversion}-fpm.conf
+#/bin/sed -i '/SetHandler/c\ SetHandler "proxy:fcgi://localhost:9000"' /etc/apache2/conf-available/php${PHP_VERSION}-fpm.conf
 /bin/sed -i '0,/SetHandler.*/s//SetHandler "proxy:fcgi:\/\/localhost:9000"/g' /etc/apache2/conf-available/php${phpversion}-fpm.conf
 /bin/rm /etc/apache2/sites-available/*def*
 
@@ -123,7 +123,7 @@ fi
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATIONLANGUAGE:PHP`" = "1" ] )
 then
-    /usr/sbin/a2enconf php${phpversion}-fpm
+    /usr/sbin/a2enconf php${PHP_VERSION}-fpm
 fi
 
 ${HOME}/providerscripts/dns/TrustRemoteProxy.sh
