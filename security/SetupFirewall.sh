@@ -34,7 +34,7 @@ fi
 . ${HOME}/providerscripts/utilities/SetupInfrastructureIPs.sh
 
 SERVER_USER_PASSWORD="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SERVERUSERPASSWORD'`"
-SSH_PORT="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SSH_PORT'`"
+SSH_PORT="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SSHPORT'`"
 
 # Allow the building client to connect to the webserver
 /bin/sleep 5
