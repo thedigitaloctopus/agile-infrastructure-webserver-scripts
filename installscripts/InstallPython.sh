@@ -27,7 +27,7 @@ fi
 if ( [ "${BUILDOS}" = "ubuntu" ] )
 then
     /usr/bin/apt-get install python3.8
-    /usr/bin/apt -qq -y install libfcgi fcgiwrap spawn-fcgi
+    /usr/bin/apt-get -qq -y install libfcgi fcgiwrap spawn-fcgi
     /usr/bin/ln /usr/bin/python3 /usr/bin/python
 fi
 
@@ -41,6 +41,6 @@ then
     ./configure --with-ensurepip=install
     make
     make install
-    /usr/bin/apt -qq -y install libfcgi fcgiwrap spawn-fcgi
+    /usr/bin/apt-get -qq -y install libfcgi fcgiwrap spawn-fcgi
     /usr/bin/ln /usr/bin/python3 /usr/bin/python
 fi
