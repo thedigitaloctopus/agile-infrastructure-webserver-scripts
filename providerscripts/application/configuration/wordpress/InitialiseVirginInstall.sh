@@ -126,7 +126,7 @@ then
     /bin/cp ${HOME}/runtime/wordpress_config.php ${HOME}/config/wordpress_config.php
 fi
 
-DB_PORT="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DB_PORT'`"
+DB_PORT="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBPORT'`"
 
 if ( [ -f /var/www/html/wp-config-sample.php ] )
 then
