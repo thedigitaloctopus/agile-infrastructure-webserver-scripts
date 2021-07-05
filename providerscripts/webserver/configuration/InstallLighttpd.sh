@@ -22,7 +22,7 @@
 #set -x
 
 BUILDOS="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDOS'`"
-phpversion="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'PHP_VERSION'`"
+phpversion="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'PHPVERSION'`"
 
 ${HOME}/installscripts/InstallLighttpd.sh ${BUILDOS}
 #${HOME}/installscripts/InstallPHPCGI.sh ${BUILDOS}
