@@ -29,10 +29,10 @@ fi
 
 if ( [ -f /var/www/html/configuration.php ] &&
     [ "${name}" != "" ] && [ "${password}" != "" ] && [ "${database}" != "" ] && [ "${host}" != "" ] &&
-    [ "`/bin/cat /var/www/html/configuration.php | /bin/grep ${name}`" != "" ] &&
-    [ "`/bin/cat /var/www/html/configuration.php | /bin/grep ${password}`" != "" ] &&
-    [ "`/bin/cat /var/www/html/configuration.php | /bin/grep ${database}`" != "" ] &&
-    [ "`/bin/cat /var/www/html/configuration.php | /bin/grep ${host}`" != "" ] )
+    [ "`/bin/grep ${name} /var/www/html/configuration.php`" != "" ] &&
+    [ "`/bin/grep ${password} /var/www/html/configuration.php`" != "" ] &&
+    [ "`/bin/grep ${database} /var/www/html/configuration.php`" != "" ] &&
+    [ "`/bin/grep ${host} /var/www/html/configuration.php`" != "" ] )
 then
     exit
 fi
@@ -56,10 +56,10 @@ fi
 
 if ( [ -f ${HOME}/config/joomla_configuration.php ] &&
     [ "${name}" != "" ] && [ "${password}" != "" ] && [ "${database}" != "" ] && [ "${host}" != "" ] &&
-    [ "`/bin/cat ${HOME}/config/joomla_configuration.php | /bin/grep ${name}`" != "" ] &&
-    [ "`/bin/cat ${HOME}/config/joomla_configuration.php | /bin/grep ${password}`" != "" ] &&
-    [ "`/bin/cat ${HOME}/config/joomla_configuration.php | /bin/grep ${database}`" != "" ] &&
-[ "`/bin/cat ${HOME}/config/joomla_configuration.php | /bin/grep ${host}`" != "" ] )
+    [ "`/bin/grep ${name} ${HOME}/config/joomla_configuration.php`" != "" ] &&
+    [ "`/bin/grep ${password} ${HOME}/config/joomla_configuration.php`" != "" ] &&
+    [ "`/bin/grep ${database} ${HOME}/config/joomla_configuration.php`" != "" ] &&
+    [ "`/bin/grep ${host} ${HOME}/config/joomla_configuration.php`" != "" ] )
 then
     :
 else
@@ -103,10 +103,10 @@ fi
 if ( [ -f ${HOME}/config/joomla_configuration.php ] &&
     [ -f ${HOME}/config/APPLICATION_DB_CONFIGURED ] &&
     [ "${name}" != "" ] && [ "${password}" != "" ] && [ "${database}" != "" ] && [ "${host}" != "" ] &&
-    [ "`/bin/cat ${HOME}/config/joomla_configuration.php | /bin/grep ${name}`" != "" ] &&
-    [ "`/bin/cat ${HOME}/config/joomla_configuration.php | /bin/grep ${password}`" != "" ] &&
-    [ "`/bin/cat ${HOME}/config/joomla_configuration.php | /bin/grep ${database}`" != "" ] &&
-[ "`/bin/cat ${HOME}/config/joomla_configuration.php | /bin/grep ${host}`" != "" ] )
+    [ "`/bin/grep ${name} ${HOME}/config/joomla_configuration.php`" != "" ] &&
+    [ "`/bin/grep ${password} ${HOME}/config/joomla_configuration.php`" != "" ] &&
+    [ "`/bin/grep ${database} ${HOME}/config/joomla_configuration.php`" != "" ] &&
+    [ "`/bin/grep ${host} ${HOME}/config/joomla_configuration.php`" != "" ] )
 then
     /bin/touch ${HOME}/config/APPLICATION_DB_CONFIGURED
     exit
@@ -124,7 +124,7 @@ fi
 #Set the credentials that we need
 DB_PORT="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DB_PORT'`"
 
-#currenthoststring="`/bin/cat ${HOME}/config/joomla_configuration.php | /bin/grep '\$host'`"
+#currenthoststring="`/bin/grep '\$host' ${HOME}/config/joomla_configuration.php`"
 #currentip="`/bin/echo ${currenthoststring} | /bin/grep -o "'.*'" | /bin/sed "s/'//g" | /bin/sed "s/:${DB_PORT}//g"`"
 dbipandport="${host}:${DB_PORT}"
 
@@ -253,10 +253,10 @@ fi
 
 if ( [ -f ${HOME}/config/joomla_configuration.php ] &&
     [ "${name}" != "" ] && [ "${password}" != "" ] && [ "${database}" != "" ] && [ "${host}" != "" ] &&
-    [ "`/bin/cat ${HOME}/config/joomla_configuration.php | /bin/grep ${name}`" != "" ] &&
-    [ "`/bin/cat ${HOME}/config/joomla_configuration.php | /bin/grep ${password}`" != "" ] &&
-    [ "`/bin/cat ${HOME}/config/joomla_configuration.php | /bin/grep ${database}`" != "" ] &&
-[ "`/bin/cat ${HOME}/config/joomla_configuration.php | /bin/grep ${host}`" != "" ] )
+    [ "`/bin/grep ${name} ${HOME}/config/joomla_configuration.php`" != "" ] &&
+    [ "`/bin/grep ${password} ${HOME}/config/joomla_configuration.php`" != "" ] &&
+    [ "`/bin/grep ${database} ${HOME}/config/joomla_configuration.php`" != "" ] &&
+    [ "`/bin/grep ${host} ${HOME}/config/joomla_configuration.php`" != "" ] )
 then
     /bin/touch ${HOME}/config/APPLICATION_DB_CONFIGURED
 else
