@@ -42,10 +42,10 @@ fi
 
 if ( [ -f /var/www/wp-config.php ] &&
     [ "${username}" != "" ] && [ "${password}" != "" ] && [ "${database}" != "" ] && [ "${host}" != "" ] &&
-    [ "`/bin/cat /var/www/wp-config.php | /bin/grep ${username}`" != "" ] &&
-    [ "`/bin/cat /var/www/wp-config.php | /bin/grep ${password}`" != "" ] &&
-    [ "`/bin/cat /var/www/wp-config.php | /bin/grep ${database}`" != "" ] &&
-    [ "`/bin/cat /var/www/wp-config.php | /bin/grep ${host}`" != "" ] )
+    [ "`/bin/grep ${username} /var/www/wp-config.php`" != "" ] &&
+    [ "`/bin/grep ${password} /var/www/wp-config.php`" != "" ] &&
+    [ "`/bin/grep ${database} /var/www/wp-config.php`" != "" ] &&
+    [ "`/bin/grep ${host} /var/www/wp-config.php`" != "" ] )
 then
     exit
 fi
@@ -81,10 +81,10 @@ fi
 
 if ( [ -f ${HOME}/config/wordpress_config.php ] &&
     [ "${username}" != "" ] && [ "${password}" != "" ] && [ "${database}" != "" ] && [ "${host}" != "" ] &&
-    [ "`/bin/cat ${HOME}/config/wordpress_config.php | /bin/grep ${username}`" != "" ] &&
-    [ "`/bin/cat ${HOME}/config/wordpress_config.php | /bin/grep ${password}`" != "" ] &&
-    [ "`/bin/cat ${HOME}/config/wordpress_config.php | /bin/grep ${database}`" != "" ] &&
-[ "`/bin/cat ${HOME}/config/wordpress_config.php | /bin/grep ${host}`" != "" ] )
+    [ "`/bin/grep ${username} ${HOME}/config/wordpress_config.php`" != "" ] &&
+    [ "`/bin/grep ${password} ${HOME}/config/wordpress_config.php`" != "" ] &&
+    [ "`/bin/grep ${database} ${HOME}/config/wordpress_config.php`" != "" ] &&
+    [ "`/bin/grep ${host} ${HOME}/config/wordpress_config.php`" != "" ] )
 then
     :
 else
@@ -145,10 +145,10 @@ fi
 
 if ( [ -f ${HOME}/config/wordpress_config.php ] &&
     [ "${username}" != "" ] && [ "${password}" != "" ] && [ "${database}" != "" ] && [ "${host}" != "" ] &&
-    [ "`/bin/cat ${HOME}/config/wordpress_config.php | /bin/grep ${username}`" != "" ] &&
-    [ "`/bin/cat ${HOME}/config/wordpress_config.php | /bin/grep ${password}`" != "" ] &&
-    [ "`/bin/cat ${HOME}/config/wordpress_config.php | /bin/grep ${database}`" != "" ] &&
-[ "`/bin/cat ${HOME}/config/wordpress_config.php | /bin/grep ${host}`" != "" ] )
+    [ "`/bin/grep ${username} ${HOME}/config/wordpress_config.php`" != "" ] &&
+    [ "`/bin/grep ${password} ${HOME}/config/wordpress_config.php`" != "" ] &&
+    [ "`/bin/grep ${database} ${HOME}/config/wordpress_config.php`" != "" ] &&
+    [ "`/bin/grep ${host} ${HOME}/config/wordpress_config.php`" != "" ] )
 then
     /bin/touch ${HOME}/runtime/VIRGINCONFIGSET
     exit
@@ -162,7 +162,7 @@ fi
 WEBSITE_DISPLAY_NAME="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEDISPLAYNAME'`"
 ${HOME}/providerscripts/application/email/ActivateSMTPByApplication.sh "${WEBSITE_DISPLAY_NAME}" 
 
-if ( [ "`/bin/cat ${HOME}/runtime/wordpress_config.php | /bin/grep SALTEDALREADY`" = "" ] )
+if ( [ "`/bin/grep SALTEDALREADY ${HOME}/runtime/wordpress_config.php`" = "" ] )
 then
     /bin/sed -i "/'AUTH_KEY'/i XXYYZZ" ${HOME}/runtime/wordpress_config.php
     /bin/sed -i '/AUTH_KEY/,+7d' ${HOME}/runtime/wordpress_config.php
@@ -203,10 +203,10 @@ fi
 
 if ( [ -f ${HOME}/config/wordpress_config.php ] &&
     ( [ "${username}" != "" ] && [ "${password}" != "" ] && [ "${database}" != "" ] && [ "${host}" != "" ] ) &&
-    ( [ "`/bin/cat ${HOME}/config/wordpress_config.php | /bin/grep ${username}`" = "" ] ||
-        [ "`/bin/cat ${HOME}/config/wordpress_config.php | /bin/grep ${password}`" = "" ] ||
-        [ "`/bin/cat ${HOME}/config/wordpress_config.php | /bin/grep ${database}`" = "" ] ||
-[ "`/bin/cat ${HOME}/config/wordpress_config.php | /bin/grep ${host}`" = "" ] ) )
+    ( [ "`/bin/grep ${username} ${HOME}/config/wordpress_config.php`" = "" ] ||
+      [ "`/bin/grep ${password} ${HOME}/config/wordpress_config.php`" = "" ] ||
+      [ "`/bin/grep ${database} ${HOME}/config/wordpress_config.php`" = "" ] ||
+      [ "`/bin/grep ${host} ${HOME}/config/wordpress_config.php`" = "" ] ) )
 then
     if ( [ -f /var/www/wp-config.php ] &&
     [ "`/usr/bin/diff ${HOME}/config/wordpress_config.php ${HOME}/runtime/wordpress_config.php`" != "" ] )
@@ -236,10 +236,10 @@ fi
 
 if ( [ -f ${HOME}/config/wordpress_config.php ] &&
     [ "${username}" != "" ] && [ "${password}" != "" ] && [ "${database}" != "" ] && [ "${host}" != "" ] &&
-    [ "`/bin/cat ${HOME}/config/wordpress_config.php | /bin/grep ${username}`" != "" ] &&
-    [ "`/bin/cat ${HOME}/config/wordpress_config.php | /bin/grep ${password}`" != "" ] &&
-    [ "`/bin/cat ${HOME}/config/wordpress_config.php | /bin/grep ${database}`" != "" ] &&
-[ "`/bin/cat ${HOME}/config/wordpress_config.php | /bin/grep ${host}`" != "" ] )
+    [ "`/bin/grep ${username} ${HOME}/config/wordpress_config.php`" != "" ] &&
+    [ "`/bin/grep ${password} ${HOME}/config/wordpress_config.php`" != "" ] &&
+    [ "`/bin/grep ${database} ${HOME}/config/wordpress_config.php`" != "" ] &&
+    [ "`/bin/grep ${host} ${HOME}/config/wordpress_config.php`" != "" ] )
 then
     /bin/touch ${HOME}/runtime/VIRGINCONFIGSET
 else
