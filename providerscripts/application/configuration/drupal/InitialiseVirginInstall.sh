@@ -42,10 +42,10 @@ fi
 
 if ( [ -f /var/www/html/sites/default/settings.php ] &&
     [ "${username}" != "" ] && [ "${password}" != "" ] && [ "${database}" != "" ] && [ "${host}" != "" ] &&
-    [ "`/bin/cat /var/www/html/sites/default/settings.php | /bin/grep ${username}`" != "" ] &&
-    [ "`/bin/cat /var/www/html/sites/default/settings.php | /bin/grep ${password}`" != "" ] &&
-    [ "`/bin/cat /var/www/html/sites/default/settings.php | /bin/grep ${database}`" != "" ] &&
-    [ "`/bin/cat /var/www/html/sites/default/settings.php | /bin/grep ${host}`" != "" ] )
+    [ "`/bin/grep ${username} /var/www/html/sites/default/settings.php`" != "" ] &&
+    [ "`/bin/grep ${password} /var/www/html/sites/default/settings.php`" != "" ] &&
+    [ "`/bin/grep ${database} /var/www/html/sites/default/settings.php`" != "" ] &&
+    [ "`/bin/grep ${host} /var/www/html/sites/default/settings.php`" != "" ] )
 then
     exit
 fi
@@ -62,10 +62,10 @@ fi
 
 if ( [ -f ${HOME}/config/drupal_settings.php ] &&
     [ "${username}" != "" ] && [ "${password}" != "" ] && [ "${database}" != "" ] && [ "${host}" != "" ] &&
-    [ "`/bin/cat ${HOME}/config/drupal_settings.php | /bin/grep ${username}`" != "" ] &&
-    [ "`/bin/cat ${HOME}/config/drupal_settings.php | /bin/grep ${password}`" != "" ] &&
-    [ "`/bin/cat ${HOME}/config/drupal_settings.php | /bin/grep ${database}`" != "" ] &&
-[ "`/bin/cat ${HOME}/config/drupal_settings.php | /bin/grep ${host}`" != "" ] )
+    [ "`/bin/grep ${username} ${HOME}/config/drupal_settings.php`" != "" ] &&
+    [ "`/bin/grep ${password} ${HOME}/config/drupal_settings.php`" != "" ] &&
+    [ "`/bin/grep ${database} ${HOME}/config/drupal_settings.php`" != "" ] &&
+    [ "`/bin/grep ${host} ${HOME}/config/drupal_settings.php`" != "" ] )
 then
     :
 else
@@ -129,10 +129,10 @@ fi
 
 if ( [ -f ${HOME}/config/drupal_settings.php ] &&
     [ "${username}" != "" ] && [ "${password}" != "" ] && [ "${database}" != "" ] && [ "${host}" != "" ] &&
-    [ "`/bin/cat ${HOME}/config/drupal_settings.php | /bin/grep ${username}`" != "" ] &&
-    [ "`/bin/cat ${HOME}/config/drupal_settings.php | /bin/grep ${password}`" != "" ] &&
-    [ "`/bin/cat ${HOME}/config/drupal_settings.php | /bin/grep ${database}`" != "" ] &&
-[ "`/bin/cat ${HOME}/config/drupal_settings.php | /bin/grep ${host}`" != "" ] )
+    [ "`/bin/grep ${username} ${HOME}/config/drupal_settings.php`" != "" ] &&
+    [ "`/bin/grep ${password} ${HOME}/config/drupal_settings.php`" != "" ] &&
+    [ "`/bin/grep ${database} ${HOME}/config/drupal_settings.php`" != "" ] &&
+    [ "`/bin/grep ${host} ${HOME}/config/drupal_settings.php`" != "" ] )
 then
     /bin/touch ${HOME}/runtime/VIRGINCONFIGSET
     exit
@@ -158,7 +158,7 @@ salt="`< /dev/urandom tr -dc a-z | head -c${1:-16};echo;`"
 
 
 ###DEPRECATED
-#if ( [ "`/bin/cat ${HOME}/runtime/drupal_settings.php | /bin/grep 'CONFIG_SYNC_DIRECTORY'`" = "" ] )
+#if ( [ "`/bin/grep 'CONFIG_SYNC_DIRECTORY' ${HOME}/runtime/drupal_settings.php`" = "" ] )
 #then
 #    /bin/echo "\$settings['trusted_host_patterns'] = [ '.*' ];" >> ${HOME}/runtime/drupal_settings.php
 #
@@ -167,7 +167,7 @@ salt="`< /dev/urandom tr -dc a-z | head -c${1:-16};echo;`"
 #    );" >> ${HOME}/runtime/drupal_settings.php
 #fi
 
-if ( [ "`/bin/cat ${HOME}/runtime/drupal_settings.php | /bin/grep 'ADDED BY CONFIG PROCESS'`" = "" ] )
+if ( [ "`/bin/grep 'ADDED BY CONFIG PROCESS' ${HOME}/runtime/drupal_settings.php`" = "" ] )
 then
     /bin/echo "#====ADDED BY CONFIG PROCESS=====" >> ${HOME}/runtime/drupal_settings.php
     /bin/echo "\$settings['trusted_host_patterns'] = [ '.*' ];" >> ${HOME}/runtime/drupal_settings.php
@@ -200,10 +200,10 @@ fi
 
 if ( [ -f ${HOME}/config/drupal_settings.php ] &&
     [ "${username}" != "" ] && [ "${password}" != "" ] && [ "${database}" != "" ] && [ "${host}" != "" ] &&
-    [ "`/bin/cat ${HOME}/config/drupal_settings.php | /bin/grep ${username}`" != "" ] &&
-    [ "`/bin/cat ${HOME}/config/drupal_settings.php | /bin/grep ${password}`" != "" ] &&
-    [ "`/bin/cat ${HOME}/config/drupal_settings.php | /bin/grep ${database}`" != "" ] &&
-[ "`/bin/cat ${HOME}/config/drupal_settings.php | /bin/grep ${host}`" != "" ] )
+    [ "`/bin/grep ${username} ${HOME}/config/drupal_settings.php`" != "" ] &&
+    [ "`/bin/grep ${password} ${HOME}/config/drupal_settings.php`" != "" ] &&
+    [ "`/bin/grep ${database} ${HOME}/config/drupal_settings.php`" != "" ] &&
+    [ "`/bin/grep ${host} ${HOME}/config/drupal_settings.php`" != "" ] )
 then
     /bin/mkdir -p /var/www/html/sites/default/files/pictures
     /bin/chown -R www-data.www-data /var/www/html/sites/default
