@@ -92,8 +92,8 @@ done
 
 if ( [ "${DATASTORE_CHOICE}" = "amazonS3" ] )
 then
-    export AWSACCESSKEYID=`/bin/cat ~/.s3cfg | /bin/grep 'access_key' | /usr/bin/awk '{print $NF}'`
-    export AWSSECRETACCESSKEY=`/bin/cat ~/.s3cfg | /bin/grep 'secret_key' | /usr/bin/awk '{print $NF}'`
+    export AWSACCESSKEYID=`/bin/grep 'access_key' ~/.s3cfg | /usr/bin/awk '{print $NF}'`
+    export AWSSECRETACCESSKEY=`/bin/grep 'secret_key' ~/.s3cfg | /usr/bin/awk '{print $NF}'`
     endpoint="`/bin/cat ~/.s3cfg | /bin/grep host_base | /usr/bin/awk '{print $NF}'`"
 
     #Depending on the application, sometimes it can take a while to initially sync the assets, so, we don't want to mount
@@ -108,13 +108,13 @@ then
         then
             if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh ENABLEEFS:1`" = "1" ] )
             then
-                aws_region="`/bin/cat ${HOME}/.aws/config | /bin/grep region | /usr/bin/awk '{print $NF}'`"
+                aws_region="`/bin/grep region ${HOME}/.aws/config | /usr/bin/awk '{print $NF}'`"
                 /bin/mkdir ~/.aws 2>/dev/null
                 /bin/cp ${HOME}/.aws/* ~/.aws 2>/dev/null
                 /bin/chmod 500 ~/.aws/*
            
-               export AWSACCESSKEYID=`/bin/cat ~/.aws/credentials | /bin/grep '^access_key' | /usr/bin/awk '{print $NF}'`
-               export AWSSECRETACCESSKEY=`/bin/cat ~/.aws/credentials | /bin/grep 'secret_key' | /usr/bin/awk '{print $NF}'`
+               export AWSACCESSKEYID=`/bin/grep '^access_key' ~/.aws/credentials | /usr/bin/awk '{print $NF}'`
+               export AWSSECRETACCESSKEY=`/bin/grep 'secret_key' ~/.aws/credentials | /usr/bin/awk '{print $NF}'`
 
                 /usr/bin/aws efs describe-file-systems | /usr/bin/jq '.FileSystems[] | .CreationToken + " " + .FileSystemId' | /bin/sed 's/\"//g' | while read identifier
                 do
@@ -156,9 +156,9 @@ fi
 
 if ( [ "${DATASTORE_CHOICE}" = "digitalocean" ] )
 then
-    export AWSACCESSKEYID=`/bin/cat ~/.s3cfg | /bin/grep '^access_key' | /usr/bin/awk '{print $NF}'`
-    export AWSSECRETACCESSKEY=`/bin/cat ~/.s3cfg | /bin/grep 'secret_key' | /usr/bin/awk '{print $NF}'`
-    endpoint="`/bin/cat ~/.s3cfg | /bin/grep host_base | /usr/bin/awk '{print $NF}'`"
+    export AWSACCESSKEYID=`/bin/grep '^access_key' ~/.s3cfg | /usr/bin/awk '{print $NF}'`
+    export AWSSECRETACCESSKEY=`/bin/grep 'secret_key' ~/.s3cfg | /usr/bin/awk '{print $NF}'`
+    endpoint="`/bin/grep host_base ~/.s3cfg | /usr/bin/awk '{print $NF}'`"
 
     #Depending on the application, sometimes it can take a while to initially sync the assets, so, we don't want to mount
     #whilst syncing is going on if we call it again from cron, mid-sync, then we will find this flag set and exit
@@ -184,9 +184,9 @@ fi
 
 if ( [ "${DATASTORE_CHOICE}" = "exoscale" ] )
 then
-    export AWSACCESSKEYID=`/bin/cat ~/.s3cfg | /bin/grep '^access_key' | /usr/bin/awk '{print $NF}'`
-    export AWSSECRETACCESSKEY=`/bin/cat ~/.s3cfg | /bin/grep 'secret_key' | /usr/bin/awk '{print $NF}'`
-    endpoint="`/bin/cat ~/.s3cfg | /bin/grep host_base | /usr/bin/awk '{print $NF}'`"
+    export AWSACCESSKEYID=`/bin/grep '^access_key' ~/.s3cfg | /usr/bin/awk '{print $NF}'`
+    export AWSSECRETACCESSKEY=`/bin/grep 'secret_key' ~/.s3cfg | /usr/bin/awk '{print $NF}'`
+    endpoint="`/bin/grep host_base ~/.s3cfg | /usr/bin/awk '{print $NF}'`"
 
     #Depending on the application, sometimes it can take a while to initially sync the assets, so, we don't want to mount
     #whilst syncing is going on if we call it again from cron, mid-sync, then we will find this flag set and exit
@@ -212,9 +212,9 @@ fi
 
 if ( [ "${DATASTORE_CHOICE}" = "linode" ] )
 then
-    export AWSACCESSKEYID=`/bin/cat ~/.s3cfg | /bin/grep '^access_key' | /usr/bin/awk '{print $NF}'`
-    export AWSSECRETACCESSKEY=`/bin/cat ~/.s3cfg | /bin/grep 'secret_key' | /usr/bin/awk '{print $NF}'`
-    endpoint="`/bin/cat ~/.s3cfg | /bin/grep host_base | /usr/bin/awk '{print $NF}'`"
+    export AWSACCESSKEYID=`/bin/grep '^access_key' ~/.s3cfg | /usr/bin/awk '{print $NF}'`
+    export AWSSECRETACCESSKEY=`/bin/grep 'secret_key' ~/.s3cfg | /usr/bin/awk '{print $NF}'`
+    endpoint="`/bin/grep host_base ~/.s3cfg | /usr/bin/awk '{print $NF}'`"
 
     #Depending on the application, sometimes it can take a while to initially sync the assets, so, we don't want to mount
     #whilst syncing is going on if we call it again from cron, mid-sync, then we will find this flag set and exit
@@ -240,9 +240,9 @@ fi
 
 if ( [ "${DATASTORE_CHOICE}" = "vultr" ] )
 then
-    export AWSACCESSKEYID=`/bin/cat ~/.s3cfg | /bin/grep '^access_key' | /usr/bin/awk '{print $NF}'`
-    export AWSSECRETACCESSKEY=`/bin/cat ~/.s3cfg | /bin/grep 'secret_key' | /usr/bin/awk '{print $NF}'`
-    endpoint="`/bin/cat ~/.s3cfg | /bin/grep host_base | /usr/bin/awk '{print $NF}'`"
+    export AWSACCESSKEYID=`/bin/grep '^access_key' ~/.s3cfg | /usr/bin/awk '{print $NF}'`
+    export AWSSECRETACCESSKEY=`/bin/grep 'secret_key' ~/.s3cfg | /usr/bin/awk '{print $NF}'`
+    endpoint="`/bin/grep host_base ~/.s3cfg | /usr/bin/awk '{print $NF}'`"
 
     #Depending on the application, sometimes it can take a while to initially sync the assets, so, we don't want to mount
     #whilst syncing is going on if we call it again from cron, mid-sync, then we will find this flag set and exit
