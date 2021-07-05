@@ -122,7 +122,7 @@ fi
 #/bin/touch ${HOME}/.ssh/CONFIGFILE:joomla_configuration.php
 
 #Set the credentials that we need
-DB_PORT="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DB_PORT'`"
+DB_PORT="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBPORT'`"
 
 #currenthoststring="`/bin/grep '\$host' ${HOME}/config/joomla_configuration.php`"
 #currentip="`/bin/echo ${currenthoststring} | /bin/grep -o "'.*'" | /bin/sed "s/'//g" | /bin/sed "s/:${DB_PORT}//g"`"
