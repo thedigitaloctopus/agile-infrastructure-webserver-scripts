@@ -34,7 +34,7 @@ done
 DB_U="`command="${SUDO} /bin/sed '3q;d' ${HOME}/config/credentials/shit" && eval ${command}`" DB_P="`command="${SUDO} /bin/sed '2q;d' 
 ${HOME}/config/credentials/shit" && eval ${command}`" DB_N="`command="${SUDO} /bin/sed '1q;d' ${HOME}/config/credentials/shit" && eval ${command}`" 
 #DB_PORT="`command="${SUDO} /bin/ls ${HOME}/.ssh/DB_PORT:*" && eval ${command}`" DB_PORT="`/bin/echo ${DB_PORT} | /usr/bin/awk -F':' '{print $NF}'`"
-DB_PORT="`command="${SUDO} ${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DB_PORT'" && eval ${command}`" 
+DB_PORT="`command="${SUDO} ${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBPORT'" && eval ${command}`" 
 DB_HOST="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBaaSHOSTNAME'`"
 
 
