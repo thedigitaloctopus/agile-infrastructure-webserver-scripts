@@ -122,19 +122,19 @@ then
     /bin/sed -i "/->dbtype /c\    \$CFG->dbtype    = \"pgsql\";" /var/www/html/moodle/config.php
 fi
 
-if ( [ "`/bin/cat /var/www/html/moodle/config.php | /bin/grep "${name}"`" = "" ] )
+if ( [ "`/bin/grep "${name}" /var/www/html/moodle/config.php`" = "" ] )
 then
     /bin/sed -i "/->dbuser /c\    \$CFG->dbuser    = \"${name}\";" /var/www/html/moodle/config.php
 fi
-if ( [ "`/bin/cat /var/www/html/moodle/config.php | /bin/grep "${database}"`" = "" ] )
+if ( [ "`/bin/grep "${database}" /var/www/html/moodle/config.php`" = "" ] )
 then
     /bin/sed -i "/->dbname /c\    \$CFG->dbname    = \"${database}\";" /var/www/html/moodle/config.php
 fi
-if ( [ "`/bin/cat /var/www/html/moodle/config.php | /bin/grep "${password}"`" = "" ] )
+if ( [ "`/bin/grep "${password}" /var/www/html/moodle/config.php`" = "" ] )
 then
     /bin/sed -i "/->dbpass /c\    \$CFG->dbpass    = \"${password}\";" /var/www/html/moodle/config.php
 fi
-if ( [ "${host}" = "127.0.0.1" ] || ( [ "`/bin/cat /var/www/html/moodle/config.php | /bin/grep "${host}"`" = "" ]  && [ "${host}" != "" ] ) )
+if ( [ "${host}" = "127.0.0.1" ] || ( [ "`/bin/grep "${host}" /var/www/html/moodle/config.php`" = "" ]  && [ "${host}" != "" ] ) )
 then
     /bin/sed -i "/->dbhost /c\    \$CFG->dbhost    = \"${host}\";" /var/www/html/moodle/config.php
 fi
@@ -174,10 +174,10 @@ fi
 
 
 if ( [ "${name}" != "" ] && [ "${database}" != "" ] && [ "${password}" != "" ] && [ "${host}" != "" ] &&
-    [ "`/bin/cat /var/www/html/moodle/config.php | /bin/grep "${name}"`" != "" ] &&
-    [ "`/bin/cat /var/www/html/moodle/config.php | /bin/grep "${database}"`" != "" ] &&
-    [ "`/bin/cat /var/www/html/moodle/config.php | /bin/grep "${password}"`" != "" ] &&
-    [ "`/bin/cat /var/www/html/moodle/config.php | /bin/grep "${host}"`" != "" ]  &&
+    [ "`/bin/grep "${name}" /var/www/html/moodle/config.php`" != "" ] &&
+    [ "`/bin/grep "${database}" /var/www/html/moodle/config.php`" != "" ] &&
+    [ "`/bin/grep "${password}" /var/www/html/moodle/config.php`" != "" ] &&
+    [ "`/bin/grep "${host}" /var/www/html/moodle/config.php`" != "" ]  &&
     [ "`/bin/cat /var/www/html/moodle/config.php | /bin/grep "dbport" | /bin/grep "${DB_PORT}"`" != "" ] &&
 [ "`/bin/cat /var/www/html/moodle/config.php | /bin/grep "wwwroot" | /bin/grep "${websiteurl}"`" != "" ] )
 then
