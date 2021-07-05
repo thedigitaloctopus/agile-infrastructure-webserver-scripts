@@ -73,7 +73,7 @@ name="`/bin/sed '3q;d' ${HOME}/config/credentials/shit`"
 database="`/bin/sed '1q;d' ${HOME}/config/credentials/shit`"
 password="`/bin/sed '2q;d' ${HOME}/config/credentials/shit`"
 websiteurl="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEURL'`"
-DB_PORT="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DB_PORT'`"
+DB_PORT="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBPORT'`"
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:DBaaS`" = "1" ] )
 then
