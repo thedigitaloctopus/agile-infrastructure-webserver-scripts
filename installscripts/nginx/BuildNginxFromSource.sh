@@ -26,9 +26,9 @@
 buildtype="${1}"
 
 #Instll the tools needed for complilation
-/usr/bin/apt install -qq -y software-properties-common
-/usr/bin/apt install -qq -y build-essential 
-/usr/bin/apt install -qq -y curl
+/usr/bin/apt-get install -qq -y software-properties-common
+/usr/bin/apt-get install -qq -y build-essential 
+/usr/bin/apt-get install -qq -y curl
 
 #Get the latest version numbers of the software that we need
 
@@ -53,7 +53,7 @@ perl_version="`/usr/bin/perl -v | /bin/egrep -o 'v[0-9]+\.[0-9]+\.[0-9]+' | /bin
 
 #Install additional libraries that we are building with
 
-/usr/bin/apt install -qq -y perl libperl-dev libgd3 libgd-dev libgeoip1 libgeoip-dev geoip-bin libxml2 libxml2-dev libxslt1.1 libxslt1-dev
+/usr/bin/apt-get install -qq -y perl libperl-dev libgd3 libgd-dev libgeoip1 libgeoip-dev geoip-bin libxml2 libxml2-dev libxslt1.1 libxslt1-dev
 
 #Setup the manual page
 /bin/cp ~/nginx-${nginx_latest_version}/man/nginx.8 /usr/share/man/man8
