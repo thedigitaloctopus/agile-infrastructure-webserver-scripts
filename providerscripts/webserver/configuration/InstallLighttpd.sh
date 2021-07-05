@@ -22,12 +22,12 @@
 #set -x
 
 BUILDOS="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDOS'`"
-phpversion="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'PHPVERSION'`"
+PHP_VERSION="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'PHPVERSION'`"
 
 ${HOME}/installscripts/InstallLighttpd.sh ${BUILDOS}
 #${HOME}/installscripts/InstallPHPCGI.sh ${BUILDOS}
 
-/bin/sed -i "/cgi.fix_pathinfo/c\ cgi.fix_pathinfo=1" /etc/php/${phpversion}/fpm/php.ini
+/bin/sed -i "/cgi.fix_pathinfo/c\ cgi.fix_pathinfo=1" /etc/php/${PHP_VERSION}/fpm/php.ini
 /bin/cp /etc/lighttpd/conf-available/15-fastcgi-php.conf /etc/lighttpd/conf-available/15-fastcgi-php.conf.bak
 
 /bin/echo "fastcgi.server += ( \".php\" =>
