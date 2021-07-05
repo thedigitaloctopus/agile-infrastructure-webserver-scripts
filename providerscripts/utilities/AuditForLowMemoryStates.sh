@@ -19,7 +19,8 @@
 #######################################################################################################
 #!/bin/sh
 
-MEMORY="`/bin/cat /proc/meminfo | grep MemFree | /usr/bin/awk '{print $2}'`"
+MEMORY="`/bin/grep MemFree /proc/meminfo | /usr/bin/awk '{print $2}'`"
+
 IP="`${HOME}/providerscripts/utilities/GetIP.sh`"
 
 if ( [ ! -d ${HOME}/config/lowmemoryaudit/webserver/${IP} ] )
