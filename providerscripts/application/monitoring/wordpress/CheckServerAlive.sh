@@ -15,9 +15,9 @@
 ##################################################################################
 ##################################################################################
 
-if (    [ "`/bin/cat ${HOME}/config/wordpress_config.php | /bin/grep ${DB_N}`" = "" ] ||
-    [ "`/bin/cat ${HOME}/config/wordpress_config.php | /bin/grep ${DB_P}`" = "" ] ||
-[ "`/bin/cat ${HOME}/config/wordpress_config.php | /bin/grep ${DB_U}`" = "" ] )
+if ( [ "`/bin/grep ${DB_N} ${HOME}/config/wordpress_config.php`" = "" ] ||
+     [ "`/bin/grep ${DB_P} ${HOME}/config/wordpress_config.php`" = "" ] ||
+     [ "`/bin/grep ${DB_U} ${HOME}/config/wordpress_config.php`" = "" ] )
 then
     exit
 fi
