@@ -63,10 +63,10 @@ database="`/bin/sed '1q;d' ${HOME}/config/credentials/shit`"
 
 if ( [ -f /var/www/wp-config.php ] &&
     [ "${username}" != "" ] && [ "${password}" != "" ] && [ "${database}" != "" ] && [ "${host}" != "" ] &&
-    [ "`/bin/cat /var/www/wp-config.php | /bin/grep ${username}`" != "" ] &&
-    [ "`/bin/cat /var/www/wp-config.php | /bin/grep ${password}`" != "" ] &&
-    [ "`/bin/cat /var/www/wp-config.php | /bin/grep ${database}`" != "" ] &&
-[ "`/bin/cat /var/www/wp-config.php | /bin/grep ${host}`" != "" ] )
+    [ "`/bin/grep ${username} /var/www/wp-config.php`" != "" ] &&
+    [ "`/bin/grep ${password} /var/www/wp-config.php`" != "" ] &&
+    [ "`/bin/grep ${database} /var/www/wp-config.php`" != "" ] &&
+    [ "`/bin/grep ${host} /var/www/wp-config.php`" != "" ] )
 then
     /bin/touch ${HOME}/runtime/CONFIG_VERIFIED
     /usr/bin/rsync -ac /var/www/wp-config.php ${HOME}/config/wordpress_config.php
