@@ -21,14 +21,14 @@
 #set -x
 
 webserver_type="${1}"
-phpversion="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'PHPVERSION'`"
+PHP_VERSION="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'PHPVERSION'`"
 
 
 if ( [ "${webserver_type}" = "APACHE" ] )
 then
     if ( [ "`/usr/bin/pgrep php`" = "" ] )
     then
-        /usr/sbin/service php${phpversion}-fpm restart || . /etc/apache2/conf/envvars && /etc/apache2/bin/apachectl -k restart    
+        /usr/sbin/service php${PHP_VERSION}-fpm restart || . /etc/apache2/conf/envvars && /etc/apache2/bin/apachectl -k restart    
     fi
     if ( [ "`/usr/bin/pgrep apache`" = "" ] )
     then
@@ -39,7 +39,7 @@ if ( [ "${webserver_type}" = "NGINX" ] )
 then
     if ( [ "`/usr/bin/pgrep php`" = "" ] )
     then
-        /usr/sbin/service php${phpversion}-fpm restart
+        /usr/sbin/service php${PHP_VERSION}-fpm restart
     fi
     if ( [ "`/usr/bin/pgrep nginx`" = "" ] )
     then
@@ -50,7 +50,7 @@ if ( [ "${webserver_type}" = "LIGHTTPD" ] )
 then
     if ( [ "`/usr/bin/pgrep php`" = "" ] )
     then
-        /usr/sbin/service php${phpversion}-fpm restart
+        /usr/sbin/service php${PHP_VERSION}-fpm restart
     fi
     if ( [ "`/usr/bin/pgrep lighttpd`" = "" ] )
     then
