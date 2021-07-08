@@ -104,4 +104,4 @@ SERVER_TIMEZONE_CITY="`export HOME="${HOMEDIR}" && ${SUDO} ${HOME}/providerscrip
 ####If a specific application needs additions to crontab, you can place them here:
 
 #restart cron
-/usr/bin/crontab /var/spool/cron/crontabs/${CRON_USER}
+#/usr/bin/crontab /var/spool/cron/crontabs/${CRON_USER}
