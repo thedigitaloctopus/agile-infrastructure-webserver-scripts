@@ -28,7 +28,9 @@ HOMEDIR="`/bin/cat /home/homedir.dat`"
 CRON_USER="X`/bin/cat /dev/urandom | /usr/bin/tr -dc 'a-zA-Z' | /usr/bin/fold -w 18 | /usr/bin/head -n 1`X-cronuser"
 /usr/sbin/adduser --disabled-password --force-badname --gecos \"\" ${CRON_USER} 
 /usr/bin/gpasswd -a ${CRON_USER} sudo
-/usr/sbin/usermod -s /usr/sbin/nologin ${CRON_USER}
+#/usr/sbin/usermod -s /usr/sbin/nologin ${CRON_USER}
+
+/usr/sbin/usermod -L ${CRON_USER}
 
 /bin/echo "${0} `/bin/date`: Installing cron" >> ${HOME}/logs/WEBSERVER_BUILD.log
 #These scripts run every minute
