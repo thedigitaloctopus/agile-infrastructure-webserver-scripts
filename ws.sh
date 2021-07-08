@@ -145,32 +145,32 @@ fi
 if ( [ ! -d ${HOME}/providerscripts ] )
 then
     /bin/mkdir ${HOME}/providerscripts
-    /bin/chmod 700 ${HOME}/providerscripts
+    /bin/chmod 755 ${HOME}/providerscripts
 fi
 
 if ( [ ! -d ${HOME}/applicationscripts ] )
 then
     /bin/mkdir ${HOME}/applicationscripts
-    /bin/chmod 700 ${HOME}/applicationscripts
+    /bin/chmod 755 ${HOME}/applicationscripts
 fi
 
 if ( [ ! -d ${HOME}/cpuaggregator ] )
 then
     /bin/mkdir ${HOME}/cpuaggregator
-    /bin/chmod 700 ${HOME}/cpuaggregator
+    /bin/chmod 755 ${HOME}/cpuaggregator
 fi
 
 if ( [ ! -d ${HOME}/runtime ] )
 then
     /bin/mkdir ${HOME}/runtime
-    /bin/chmod 700 ${HOME}/runtime
+    /bin/chmod 755 ${HOME}/runtime
 fi
 
 if ( [ ! -d ${HOME}/.cache ] )
 then
     /bin/mkdir ${HOME}/.cache
     /bin/chown ${SERVER_USER}.${SERVER_USER} ${HOME}/.cache
-    /bin/chmod 700 ${HOME}/.cache
+    /bin/chmod 755 ${HOME}/.cache
 fi
 
 /bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
@@ -274,7 +274,7 @@ cd ${HOME}
 ${HOME}/bootstrap/GitPull.sh ${INFRASTRUCTURE_REPOSITORY_PROVIDER} ${INFRASTRUCTURE_REPOSITORY_USERNAME} ${INFRASTRUCTURE_REPOSITORY_PASSWORD} ${INFRASTRUCTURE_REPOSITORY_OWNER} agile-infrastructure-webserver-scripts > /dev/null 2>&1
 
 /usr/bin/find ${HOME} -type d -print0 | xargs -0 chmod 0755 # for directories
-/usr/bin/find ${HOME} -type f -print0 | xargs -0 chmod 0755 # for files
+/usr/bin/find ${HOME} -type f -print0 | xargs -0 chmod 0500 # for files
 
 /bin/mv ${HOME}/providerscripts/utilities/Super.sh ${HOME}/.ssh
 /bin/chmod 400 ${HOME}/.ssh/Super.sh
