@@ -94,7 +94,7 @@ SERVER_TIMEZONE_CITY="`export HOME="${HOMEDIR}" && ${HOME}/providerscripts/utili
 ####If a specific application needs additions to crontab, you can place them here:
 
 #restart cron
-/usr/bin/crontab /var/spool/cron/crontabs/root
+/usr/bin/crontab -u root /var/spool/cron/crontabs/root
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:moodle`" = "1" ] )
 then
@@ -102,4 +102,4 @@ then
 fi
 
 #restart cron
-/usr/bin/crontab /var/spool/cron/crontabs/www-data
+/usr/bin/crontab -u www-data /var/spool/cron/crontabs/www-data
