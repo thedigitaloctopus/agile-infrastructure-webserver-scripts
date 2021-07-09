@@ -39,6 +39,7 @@ then
     HOST="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBaaSHOSTNAME'`"
 else
     HOST="`/bin/ls ${HOME}/config/databaseip`"
+    HOST2="`/bin/ls ${HOME}/config/databasepublicip`"
 fi
 
 DB_PORT="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBPORT'`"
@@ -48,15 +49,31 @@ then
     if ( [ "${sql_command}" != "" ]  )
     then
         /usr/bin/mysql -u ${DB_U} -p${DB_P} ${DB_N} --host="${HOST}" --port="${DB_PORT}" -e "${sql_command}"
+        if ( [ "$?" != "0" ] )
+        then
+            /usr/bin/mysql -u ${DB_U} -p${DB_P} ${DB_N} --host="${HOST2}" --port="${DB_PORT}" -e "${sql_command}"
+        fi
     else
         /usr/bin/mysql -u ${DB_U} -p${DB_P} ${DB_N} --host="${HOST}" --port="${DB_PORT}"
+        if ( [ "$?" != "0" ] )
+        then
+            /usr/bin/mysql -u ${DB_U} -p${DB_P} ${DB_N} --host="${HOST2}" --port="${DB_PORT}"
+        fi
     fi
 else
     if ( [ "${sql_command}" != "" ]  )
     then
         /usr/bin/mysql -N -r -s -u ${DB_U} -p${DB_P} ${DB_N} --host="${HOST}" --port="${DB_PORT}" -e "${sql_command}"
+        if ( [ "$?" != "0" ] )
+        then
+            /usr/bin/mysql -N -r -s -u ${DB_U} -p${DB_P} ${DB_N} --host="${HOST2}" --port="${DB_PORT}" -e "${sql_command}"
+        fi
     else
         /usr/bin/mysql -N -r -s -u ${DB_U} -p${DB_P} ${DB_N} --host="${HOST}" --port="${DB_PORT}"
+        if ( [ "$?" != "0" ] )
+        then
+            /usr/bin/mysql -N -r -s -u ${DB_U} -p${DB_P} ${DB_N} --host="${HOST2}" --port="${DB_PORT}"
+        fi
     fi
 fi
 
