@@ -44,6 +44,8 @@ done
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:MySQL`" = "1" ] || [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:Maria`" = "1" ] )
 then
     ${HOME}/providerscripts/utilities/ConnectToRemoteMYSQLDB.sh "set password=\"${new_password};\""
+    
+    providerscripts/database/singledb/mysql/ResetPassword.sh
 fi
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:Postgres`" = "1" ] )
