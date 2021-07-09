@@ -100,3 +100,6 @@ if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:moodl
 then
     /bin/echo "*/1 * * * * /usr/bin/php /var/www/html/moodle/admin/cli/cron.php" > /var/spool/cron/crontabs/www-data
 fi
+
+#restart cron
+/usr/bin/crontab /var/spool/cron/crontabs/www-data
