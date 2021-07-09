@@ -46,7 +46,7 @@ then
     DB_N="`/bin/sed '1q;d' ${HOME}/config/credentials/shit`"
     #${HOME}/providerscripts/utilities/ConnectToRemoteMYSQLDB.sh "set password=\"${new_password};\""
     
-    ${HOME}/providerscripts/utilities/ConnectDBServer.sh "${HOME}/providerscripts/database/singledb/mysql/ResetPassword.sh "${DB_N}" "${new_password}"
+    ${HOME}/providerscripts/utilities/ConnectDBServer.sh "${HOME}/providerscripts/database/singledb/mysql/ResetPassword.sh "${DB_N}" "${old_password}" "${new_password}"
 fi
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:Postgres`" = "1" ] )
