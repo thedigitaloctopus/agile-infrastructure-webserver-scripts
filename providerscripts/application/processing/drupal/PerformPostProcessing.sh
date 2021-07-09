@@ -36,6 +36,7 @@ ${HOME}/config/credentials/shit" && eval ${command}`" DB_N="`command="${SUDO} /b
 #DB_PORT="`command="${SUDO} /bin/ls ${HOME}/.ssh/DB_PORT:*" && eval ${command}`" DB_PORT="`/bin/echo ${DB_PORT} | /usr/bin/awk -F':' '{print $NF}'`"
 DB_PORT="`command="${SUDO} ${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBPORT'" && eval ${command}`" 
 DB_HOST="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBaaSHOSTNAME'`"
+prefix="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBPREFIX'`"
 
 
 if ( [ "${DB_HOST}" = "" ] ) 
@@ -46,8 +47,7 @@ fi
 
 
 
-#if ( [ "${prefix}" = "" ] && [ ! -f /var/www/html/dpb.dat ] )
-if ( [ ! -f /var/www/html/dpb.dat ] )
+if ( [ "${prefix}" = "" ] && [ ! -f /var/www/html/dpb.dat ] )
 then
     prefix="`< /dev/urandom tr -dc a-z | head -c${1:-6};echo;`"
     ${HOME}/providerscripts/utilities/StoreConfigValue.sh "DBPREFIX" "${prefix}"
