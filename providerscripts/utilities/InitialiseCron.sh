@@ -95,3 +95,8 @@ SERVER_TIMEZONE_CITY="`export HOME="${HOMEDIR}" && ${HOME}/providerscripts/utili
 
 #restart cron
 /usr/bin/crontab /var/spool/cron/crontabs/root
+
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:moodle`" = "1" ] )
+then
+    /bin/echo "*/1 * * * * /usr/bin/php /var/www/html/moodle/admin/cli/cron.php" > /var/spool/cron/crontabs/www-data
+fi
