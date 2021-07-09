@@ -39,6 +39,7 @@ then
     HOST="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBaaSHOSTNAME'`"
 else
     HOST="`/bin/ls ${HOME}/config/databaseip`"
+    HOST2="`/bin/ls ${HOME}/config/databasepublicip`"
 fi
 
 DB_PORT="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBPORT'`"
@@ -50,14 +51,30 @@ then
     if ( [ "${sql_command}" != "" ]  )
     then
         /usr/bin/psql -U ${DB_U} -h ${HOST} -p ${DB_PORT} ${DB_N} -c "${sql_command}"
+        if ( [ "$?" != "0" ] )
+        then
+            /usr/bin/psql -U ${DB_U} -h ${HOST2} -p ${DB_PORT} ${DB_N} -c "${sql_command}"
+        fi
     else
         /usr/bin/psql -U ${DB_U} -h ${HOST} -p ${DB_PORT} ${DB_N}
+        if ( [ "$?" != "0" ] )
+        then
+            /usr/bin/psql -U ${DB_U} -h ${HOST2} -p ${DB_PORT} ${DB_N}
+        fi
     fi
 else
     if ( [ "${sql_command}" != "" ]  )
     then
         /usr/bin/psql -t -U ${DB_U} -h ${HOST} -p ${DB_PORT} ${DB_N} -c "${sql_command}"
+        if ( [ "$?" != "0" ] )
+        then
+            /usr/bin/psql -t -U ${DB_U} -h ${HOST2} -p ${DB_PORT} ${DB_N} -c "${sql_command}"
+        fi
     else
         /usr/bin/psql -U ${DB_U} -h ${HOST} -p ${DB_PORT} ${DB_N} 
+        if ( [ "$?" != "0" ] )
+        then
+            /usr/bin/psql -U ${DB_U} -h ${HOST2} -p ${DB_PORT} ${DB_N} 
+        fi
     fi
 fi
