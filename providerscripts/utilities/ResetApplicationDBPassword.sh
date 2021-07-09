@@ -43,9 +43,10 @@ done
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:MySQL`" = "1" ] || [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:Maria`" = "1" ] )
 then
-    ${HOME}/providerscripts/utilities/ConnectToRemoteMYSQLDB.sh "set password=\"${new_password};\""
+    DB_N="`/bin/sed '1q;d' ${HOME}/config/credentials/shit`"
+    #${HOME}/providerscripts/utilities/ConnectToRemoteMYSQLDB.sh "set password=\"${new_password};\""
     
-    providerscripts/database/singledb/mysql/ResetPassword.sh
+    ${HOME}/providerscripts/utilities/ConnectDBServer.sh "${HOME}/providerscripts/database/singledb/mysql/ResetPassword.sh "${DB_N}" "${new_password}"
 fi
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:Postgres`" = "1" ] )
