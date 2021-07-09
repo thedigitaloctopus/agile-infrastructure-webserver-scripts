@@ -86,12 +86,14 @@ DB_PORT="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBPORT'`"
 
 #Set a prefix for our database tables. Make sure we only ever set one in the case where the script runs more than once
 #and exits for some reason.
-if ( [ "`/bin/ls ${HOME}/.ssh/DBPREFIX:* 2>/dev/null`" = "" ] && [ ! -f /var/www/html/dpb.dat ] )
+#if ( [ "`/bin/ls ${HOME}/.ssh/DBPREFIX:* 2>/dev/null`" = "" ] && [ ! -f /var/www/html/dpb.dat ] )
+if ( [ ! -f /var/www/html/dpb.dat ] )
 then
     prefix="`< /dev/urandom tr -dc a-z | head -c${1:-6};echo;`"
-    /bin/touch ${HOME}/.ssh/DBPREFIX:${prefix}
-    /bin/chown www-data.www-data ${HOME}/.ssh/DBPREFIX:*
-    /bin/chmod 755 ${HOME}/.ssh/DBPREFIX:*
+    ${HOME}/providerscripts/utilities/StoreConfigValue.sh "DBPREFIX" "${prefix}"
+ #   /bin/touch ${HOME}/.ssh/DBPREFIX:${prefix}
+ #   /bin/chown www-data.www-data ${HOME}/.ssh/DBPREFIX:*
+ #   /bin/chmod 755 ${HOME}/.ssh/DBPREFIX:*
     /bin/echo "${prefix}" > /var/www/html/dpb.dat
 else
     prefix="`/bin/cat /var/www/html/dpb.dat`"
