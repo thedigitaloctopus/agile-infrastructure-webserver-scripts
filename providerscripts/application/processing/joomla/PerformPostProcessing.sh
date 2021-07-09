@@ -38,8 +38,8 @@ fi
 SERVER_USER="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SERVERUSER'`"
 SERVER_USER_PASSWORD="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SERVERUSERPASSWORD'`"
 DB_PORT="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBPORT'`"
-#PREFIX="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBPREFIX' 2>/dev/null`"
-PREFIX="`/bin/ls ${HOME}/.ssh/DBPREFIX:* | /usr/bin/awk -F':' '{print $NF}' 2>/dev/null`"
+PREFIX="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBPREFIX' 2>/dev/null`"
+#PREFIX="`/bin/ls ${HOME}/.ssh/DBPREFIX:* | /usr/bin/awk -F':' '{print $NF}' 2>/dev/null`"
 BUILD_IDENTIFIER="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDIDENTIFIER'`"
 
 SUDO="/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E"
@@ -50,9 +50,10 @@ SUDO="/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E"
 if ( [ "${PREFIX}" = "" ] && [ ! -f /var/www/html/dpb.dat ] )
 then
     PREFIX="`< /dev/urandom tr -dc a-z | head -c${1:-6};echo;`"
-    /bin/touch ${HOME}/.ssh/DBPREFIX:${PREFIX}
-    /bin/chown www-data.www-data ${HOME}/.ssh/DBPREFIX:*
-    /bin/chmod 755 ${HOME}/.ssh/DBPREFIX:*
+    ${HOME}/providerscripts/utilities/StoreConfigValue.sh "DBPREFIX" "${PREFIX}"
+  #  /bin/touch ${HOME}/.ssh/DBPREFIX:${PREFIX}
+  #  /bin/chown www-data.www-data ${HOME}/.ssh/DBPREFIX:*
+  #  /bin/chmod 755 ${HOME}/.ssh/DBPREFIX:*
     /bin/echo "${PREFIX}" > /var/www/html/dpb.dat
 else
     PREFIX="`command="${SUDO} /bin/cat /var/www/html/dpb.dat" && eval ${command}`"
