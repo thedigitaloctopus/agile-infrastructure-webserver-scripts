@@ -43,7 +43,7 @@ then
 fi
 
 /bin/echo "
-TimeOut 600 
+TimeOut 45 
 LimitRequestFields 50 
 <VirtualHost _default_:443>
         ServerAdmin webmaster@${website_url}
@@ -90,6 +90,7 @@ LimitRequestFields 50
         <Directory /var/www/html>
                 DirectoryIndex index.html index.php
                 LimitRequestBody 512000
+                LimitXMLRequestBody 10485760
                 Options -Includes -ExecCGI -Indexes -FollowSymLinks
 
                 ################################################################################################
