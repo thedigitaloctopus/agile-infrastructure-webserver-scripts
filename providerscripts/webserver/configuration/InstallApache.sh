@@ -81,6 +81,12 @@ LimitRequestFields 50
 </IfModule>" > /etc/apache2/sites-available/${WEBSITE_NAME}
 
 /bin/echo "
+         <Directory />
+            Order Deny,Allow
+            Deny from all
+            Options None
+            AllowOverride None
+        </Directory>
         <Directory /var/www/html>
                 DirectoryIndex index.html index.php
                 LimitRequestBody 512000
