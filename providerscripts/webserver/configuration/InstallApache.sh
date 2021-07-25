@@ -50,6 +50,8 @@ fi
         DocumentRoot /var/www/html
         ErrorLog \${APACHE_LOG_DIR}/error.log
         CustomLog \${APACHE_LOG_DIR}/access.log combined
+        ServerSignature Off
+        ServerTokens Prod
         Options -Includes
         Options -ExecCGI
         Options -FollowSymLinks
@@ -78,17 +80,25 @@ fi
 </IfModule>" > /etc/apache2/sites-available/${WEBSITE_NAME}
 
 /bin/echo "
-        <Directory />
-              #    Require all granted
-                  Options None
-                  AllowOverride None
-        </Directory>
+      #  <Directory />
+      #        #    Require all granted
+      #            Options None
+      #            AllowOverride None
+      #  </Directory>
         <Directory /var/www/html>
                 DirectoryIndex index.html index.php
+                
+                LimitRequestBody 512000
 
                 Options -Includes -ExecCGI -Indexes
-                Options FollowSymLinks MultiViews
-                AllowOverride All
+                #Options FollowSymLinks MultiViews
+                Options -FollowSymLinks #added
+                
+                Options None  #added
+                Order deny,allow #added
+                Deny from all #added
+                
+                #AllowOverride All
                 
                 ################################################################################################
                 #Uncomment these two lines to require basic authentication before accessing your application.
@@ -103,6 +113,9 @@ fi
                # Require valid-user
                
                 Require all granted
+                
+                TimeOut 600 #Added
+                LimitRequestFields 50 #Added
         </Directory>
 </VirtualHost>" >> /etc/apache2/sites-available/${WEBSITE_NAME}
 
