@@ -47,7 +47,8 @@ ssl.pemfile = \"${HOME}/ssl/live/${website_url}/privkey.pem\"
 ssl.ca-file = \"${HOME}/ssl/live/${website_url}/fullchain.pem\"
 ssl.ec-curve = \"secp384r1\"
 ssl.honor-cipher-order = \"enable\"
-ssl.cipher-list = \"EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH\"
+ssl.cipher-list = \"EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH!aNULL:!eNULL:!EXPORT:!DES:!RC4:!3DES:!MD5:!PSK:!SSLv3\"
+ssl.disable-client-renegotiation = "enable"
 ssl.use-compression = \"disable\"
 setenv.add-response-header = (
 \"Strict-Transport-Security\" => \"max-age=63072000; includeSubdomains; preload\",
@@ -55,7 +56,7 @@ setenv.add-response-header = (
 \"X-Content-Type-Options\" => \"nosniff\"
 )
 ssl.use-sslv2 = \"disable\"
-ssl.use-sslv3 = \"enable\"
+ssl.use-sslv3 = \"disable\"
 server.name = \"${website_url}\"
 accesslog.filename = \"/var/log/lighttpd/access.log\"
 " >>  /etc/lighttpd/lighttpd.conf
