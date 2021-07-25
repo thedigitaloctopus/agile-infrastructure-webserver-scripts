@@ -160,7 +160,7 @@ if ( ( [ "${BUILDOS}" = "ubuntu" ] && [ "${BUILDOS_VERSION}" = "18.04" ] ) || ( 
 then
     /bin/echo "    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;" >> /etc/nginx/sites-available/${website_name}
 else
-    /bin/echo "    ssl_protocols TLSv1 TLSv1.1 TLSv1.2 TLSv1.3;" >> /etc/nginx/sites-available/${website_name}
+    /bin/echo "    ssl_protocols TLSv1.2 TLSv1.3;" >> /etc/nginx/sites-available/${website_name}
 fi
 
 /bin/echo "    
