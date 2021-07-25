@@ -43,6 +43,8 @@ then
 fi
 
 /bin/echo "
+TimeOut 600 
+LimitRequestFields 50 
 <VirtualHost _default_:443>
         ServerAdmin webmaster@${website_url}
         ServerName ${website_url}
@@ -51,7 +53,6 @@ fi
         ErrorLog \${APACHE_LOG_DIR}/error.log
         CustomLog \${APACHE_LOG_DIR}/access.log combined
         ServerSignature Off
-        ServerTokens Prod
         Options -Includes
         Options -ExecCGI
         Options -FollowSymLinks
@@ -80,26 +81,11 @@ fi
 </IfModule>" > /etc/apache2/sites-available/${WEBSITE_NAME}
 
 /bin/echo "
-      #  <Directory />
-      #        #    Require all granted
-      #            Options None
-      #            AllowOverride None
-      #  </Directory>
         <Directory /var/www/html>
                 DirectoryIndex index.html index.php
-                
                 LimitRequestBody 512000
+                Options -Includes -ExecCGI -Indexes -FollowSymLinks
 
-                Options -Includes -ExecCGI -Indexes
-                #Options FollowSymLinks MultiViews
-                Options -FollowSymLinks #added
-                
-                Options None  #added
-                Order deny,allow #added
-                Deny from all #added
-                
-                #AllowOverride All
-                
                 ################################################################################################
                 #Uncomment these two lines to require basic authentication before accessing your application.
                 #This is a strong security measure, but, it means your authorised users will have to input
@@ -113,9 +99,6 @@ fi
                # Require valid-user
                
                 Require all granted
-                
-                TimeOut 600 #Added
-                LimitRequestFields 50 #Added
         </Directory>
 </VirtualHost>" >> /etc/apache2/sites-available/${WEBSITE_NAME}
 
