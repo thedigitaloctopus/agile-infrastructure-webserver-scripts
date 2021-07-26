@@ -47,7 +47,7 @@ then
         /bin/cp /etc/modsecurity/modsecurity.conf-recommended /etc/modsecurity/modsecurity.conf
         /bin/sed -i 's/DetectionOnly/On/g' /etc/modsecurity/modsecurity.conf
         /usr/bin/git clone https://github.com/SpiderLabs/owasp-modsecurity-crs.git
-        /bin/mv ./owasp-modsecurity-crs/crs-setup.conf.example /etc/modsecurity/crs-setup.conf
+      #  /bin/mv ./owasp-modsecurity-crs/crs-setup.conf.example /etc/modsecurity/crs-setup.conf
         /bin/mv ./owasp-modsecurity-crs/rules/ /etc/modsecurity
         /bin/sed -i '/^<\/IfModule/i        Include \/etc\/modsecurity\/rules\/\*.conf' /etc/apache2/mods-enabled/security2.conf
 
@@ -76,7 +76,7 @@ then
         /bin/cp /etc/modsecurity/modsecurity.conf-recommended /etc/modsecurity/modsecurity.conf
         /bin/sed -i 's/DetectionOnly/On/g' /etc/modsecurity/modsecurity.conf
         /usr/bin/git clone https://github.com/SpiderLabs/owasp-modsecurity-crs.git
-        /bin/mv ./owasp-modsecurity-crs/crs-setup.conf.example /etc/modsecurity/crs-setup.conf
+   #     /bin/mv ./owasp-modsecurity-crs/crs-setup.conf.example /etc/modsecurity/crs-setup.conf
         /bin/mv ./owasp-modsecurity-crs/rules/ /etc/modsecurity
         /bin/sed -i '/^<\/IfModule/i        Include \/etc\/modsecurity\/rules\/\*.conf' /etc/apache2/mods-enabled/security2.conf
         
