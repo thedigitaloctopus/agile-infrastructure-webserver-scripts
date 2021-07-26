@@ -83,7 +83,7 @@ LimitRequestFields 50
 /bin/echo "
          <Directory />
             Order Deny,Allow
-            Deny from all
+            Require all denied
             Options None
             AllowOverride None
         </Directory>
@@ -92,7 +92,7 @@ LimitRequestFields 50
                 LimitRequestBody 512000
                 LimitXMLRequestBody 10485760
                 Options -Includes -ExecCGI -Indexes -FollowSymLinks
-
+                Require all granted
                 ################################################################################################
                 #Uncomment these two lines to require basic authentication before accessing your application.
                 #This is a strong security measure, but, it means your authorised users will have to input
@@ -104,8 +104,6 @@ LimitRequestFields 50
                # AuthName "Private Property"
                # AuthUserFile /etc/apache2/.htpasswd
                # Require valid-user
-               
-                Require all granted
         </Directory>
 </VirtualHost>" >> /etc/apache2/sites-available/${WEBSITE_NAME}
 
