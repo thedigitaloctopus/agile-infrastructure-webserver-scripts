@@ -42,8 +42,15 @@ then
         then
             /usr/bin/apt-get -qq -y install libapache2-mod-php${PHP_VERSION}
         fi
-        ####/usr/bin/apt-get -qq -y install libapache2-modsecurity
-        ####/usr/bin/apt-get -qq -y install modsecurity-crs
+
+        /usr/bin/apt-get -qq -y install libapache2-mod-security2
+        /bin/cp /etc/modsecurity/modsecurity.conf-recommended /etc/modsecurity/modsecurity.conf
+        /bin/sed -i 's/DetectionOnly/On/g' /etc/modsecurity/modsecurity.conf
+        /usr/bin/git clone https://github.com/SpiderLabs/owasp-modsecurity-crs.git
+        /bin/mv ./owasp-modsecurity-crs/crs-setup.conf.example /etc/modsecurity/crs-setup.conf
+        /bin/mv ./owasp-modsecurity-crs/rules/ /etc/modsecurity
+        /bin/sed -i '/^<\/IfModule/i        Include \/etc\/modsecurity\/rules\/\*.conf' /etc/apache2/mods-enabled/security2.conf
+
         /usr/bin/apt-get -qq -y install libapache2-mod-fcgid        
         /bin/touch /etc/apache2/BUILT_FROM_REPO
     fi
@@ -64,8 +71,15 @@ then
         then
             /usr/bin/apt-get -qq -y install libapache2-mod-php${PHP_VERSION}
         fi
-        ####/usr/bin/apt-get -qq -y install libapache2-modsecurity
-        ####/usr/bin/apt-get -qq -y install modsecurity-crs
+        
+        /usr/bin/apt-get -qq -y install libapache2-mod-security2
+        /bin/cp /etc/modsecurity/modsecurity.conf-recommended /etc/modsecurity/modsecurity.conf
+        /bin/sed -i 's/DetectionOnly/On/g' /etc/modsecurity/modsecurity.conf
+        /usr/bin/git clone https://github.com/SpiderLabs/owasp-modsecurity-crs.git
+        /bin/mv ./owasp-modsecurity-crs/crs-setup.conf.example /etc/modsecurity/crs-setup.conf
+        /bin/mv ./owasp-modsecurity-crs/rules/ /etc/modsecurity
+        /bin/sed -i '/^<\/IfModule/i        Include \/etc\/modsecurity\/rules\/\*.conf' /etc/apache2/mods-enabled/security2.conf
+        
         /usr/bin/apt-get -qq -y install libapache2-mod-fcgid
         /bin/touch /etc/apache2/BUILT_FROM_REPO
     fi
