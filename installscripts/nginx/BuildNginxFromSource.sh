@@ -162,7 +162,7 @@ cd ${dir}
 Include /etc/nginx/modsec/modsecurity.conf
 Include /etc/nginx/modsec/owasp-modsecurity-crs/crs-setup.conf
 Include /etc/nginx/modsec/owasp-modsecurity-crs/rules/*.conf" > /etc/nginx/modsec/main.conf
-/bin/sed 's/DetectionOnly/On/g' /etc/nginx/modsec/modsecurity.conf
+/bin/sed -i 's/DetectionOnly/On/g' /etc/nginx/modsec/modsecurity.conf
 
 cd ..
 
