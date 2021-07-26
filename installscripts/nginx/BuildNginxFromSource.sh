@@ -133,7 +133,7 @@ cd nginx*
             --with-zlib=../zlib-${zlib_latest_version} \
             --with-openssl=../openssl-${openssl_latest_version}\
             --with-openssl-opt=no-nextprotoneg \
-            --with-debug
+            --with-debug \
             --add-dynamic-module=../ModSecurity-nginx
             
 /usr/bin/make modules
