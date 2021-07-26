@@ -50,6 +50,7 @@ then
         /bin/mv ./owasp-modsecurity-crs/crs-setup.conf.example /etc/modsecurity/crs-setup.conf
         /bin/mv ./owasp-modsecurity-crs/rules/ /etc/modsecurity
         /bin/rm -r /etc/modsecurity/crs*
+        /bin/sed '/modsecurity-crs/d' /etc/apache2/mods-enabled/security2.conf
         /bin/sed -i '/^<\/IfModule/i        Include \/etc\/modsecurity\/rules\/\*.conf' /etc/apache2/mods-enabled/security2.conf
 
         /usr/bin/apt-get -qq -y install libapache2-mod-fcgid        
@@ -80,6 +81,7 @@ then
         /bin/mv ./owasp-modsecurity-crs/crs-setup.conf.example /etc/modsecurity/crs-setup.conf
         /bin/mv ./owasp-modsecurity-crs/rules/ /etc/modsecurity
         /bin/rm -r /etc/modsecurity/crs*
+        /bin/sed '/modsecurity-crs/d' /etc/apache2/mods-enabled/security2.conf
         /bin/sed -i '/^<\/IfModule/i        Include \/etc\/modsecurity\/rules\/\*.conf' /etc/apache2/mods-enabled/security2.conf
         
         /usr/bin/apt-get -qq -y install libapache2-mod-fcgid
