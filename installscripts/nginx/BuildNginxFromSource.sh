@@ -49,6 +49,21 @@ perl_version="`/usr/bin/perl -v | /bin/egrep -o 'v[0-9]+\.[0-9]+\.[0-9]+' | /bin
 /usr/bin/wget https://www.zlib.net/zlib-${zlib_latest_version}.tar.gz && /bin/tar zxvf zlib-${zlib_latest_version}.tar.gz
 /usr/bin/wget https://www.openssl.org/source/openssl-${openssl_latest_version}.tar.gz && tar xzvf openssl-${openssl_latest_version}.tar.gz
 
+#Prepare Modsecurity
+/usr/bin/git clone https://github.com/SpiderLabs/ModSecurity
+cd ModSecurity
+/usr/bin/git checkout v3/master
+/usr/bin/git submodule init
+/usr/bin/git submodule update
+/bin/sh build.sh
+./configure
+/usr/bin/make
+/usr/bin/make install
+cd ..
+/usr/bin/git clone https://github.com/SpiderLabs/ModSecurity-nginx
+
+
+
 /bin/rm *.tar.gz*
 
 #Install additional libraries that we are building with
@@ -120,7 +135,9 @@ cd nginx*
             --with-openssl=../openssl-${openssl_latest_version}\
             --with-openssl-opt=no-nextprotoneg \
             --with-debug
-
+            --add-dynamic-module=../ModSecurity-nginx
+            
+/usr/bin/make modules
 /usr/bin/make
 /usr/bin/make install
 
