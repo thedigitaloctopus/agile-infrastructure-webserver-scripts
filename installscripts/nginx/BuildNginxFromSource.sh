@@ -28,6 +28,10 @@ buildtype="${1}"
 #Instll the tools needed for complilation
 /usr/bin/apt-get install -qq -y software-properties-common libtool build-essential curl
 
+/usr/bin/add-apt-repository ppa:maxmind/ppa
+/usr/bin/apt-get update
+/usr/bin/apt install -qq -y libmaxminddb0 libmaxminddb-dev mmdb-bin
+
 #Get the latest version numbers of the software that we need
 
 nginx_latest_version="`/usr/bin/curl 'http://nginx.org/download/' |   /bin/egrep -o 'nginx-[0-9]+\.[0-9]+\.[0-9]+' | /bin/sed 's/nginx-//g' |  /usr/bin/sort --version-sort | /usr/bin/uniq | /usr/bin/tail -1`"
@@ -60,6 +64,7 @@ pushd .
 /usr/bin/make install
 cd ..
 /usr/bin/git clone https://github.com/SpiderLabs/ModSecurity-nginx
+/usr/bin/git clone https://github.com/leev/ngx_http_geoip2_module.git
 
 
 
@@ -134,14 +139,15 @@ cd nginx*
             --with-openssl=../openssl-${openssl_latest_version}\
             --with-openssl-opt=no-nextprotoneg \
             --with-debug \
-            --add-dynamic-module=../ModSecurity-nginx
+            --add-dynamic-module=../ModSecurity-nginx\
+            --add-dynamic-module=../ngx_http_geoip2_module
             
 /usr/bin/make modules
 /bin/cp objs/ngx_http_modsecurity_module.so /etc/nginx/modules
 /usr/bin/make
 /usr/bin/make install
 
-/bin/mkdir /etc/nginx/modsec
+/bin/mkdir -p /etc/nginx/modsec
 cd /etc/nginx/modsec
 /usr/bin/git clone https://github.com/SpiderLabs/owasp-modsecurity-crs.git
 /bin/mv /etc/nginx/modsec/owasp-modsecurity-crs/crs-setup.conf.example /etc/nginx/modsec/owasp-modsecurity-crs/crs-setup.conf
