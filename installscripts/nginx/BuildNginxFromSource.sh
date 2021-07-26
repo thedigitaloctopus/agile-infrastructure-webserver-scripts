@@ -28,9 +28,9 @@ buildtype="${1}"
 #Instll the tools needed for complilation
 /usr/bin/apt-get install -qq -y software-properties-common libtool build-essential curl
 
-/usr/bin/add-apt-repository -y ppa:maxmind/ppa
-/usr/bin/apt-get -qq -y update
-/usr/bin/apt install -qq -y libmaxminddb0 libmaxminddb-dev mmdb-bin
+#/usr/bin/add-apt-repository -y ppa:maxmind/ppa
+#/usr/bin/apt-get -qq -y update
+#/usr/bin/apt install -qq -y libmaxminddb0 libmaxminddb-dev mmdb-bin
 
 #Get the latest version numbers of the software that we need
 
@@ -65,12 +65,12 @@ dir=`/usr/bin/pwd`
 /usr/bin/git submodule init
 /usr/bin/git submodule update
 /bin/sh build.sh
-./configure --with-pcre=../pcre-${pcre_latest_version}
+./configure --with-pcre=../pcre-${pcre_latest_version} --with-maxmind=no
 /usr/bin/make
 /usr/bin/make install
 cd ..
 /usr/bin/git clone https://github.com/SpiderLabs/ModSecurity-nginx
-/usr/bin/git clone https://github.com/leev/ngx_http_geoip2_module.git
+#/usr/bin/git clone https://github.com/leev/ngx_http_geoip2_module.git
 
 /bin/rm *.tar.gz*
 
@@ -143,8 +143,8 @@ cd nginx*
             --with-openssl=../openssl-${openssl_latest_version}\
             --with-openssl-opt=no-nextprotoneg \
             --with-debug \
-            --add-dynamic-module=../ModSecurity-nginx\
-            --add-dynamic-module=../ngx_http_geoip2_module
+            --add-dynamic-module=../ModSecurity-nginx
+         #   --add-dynamic-module=../ngx_http_geoip2_module
             
 /usr/bin/make modules
 /bin/cp objs/ngx_http_modsecurity_module.so /etc/nginx/modules
