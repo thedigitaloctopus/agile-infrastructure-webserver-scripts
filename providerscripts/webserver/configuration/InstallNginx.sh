@@ -149,7 +149,10 @@ server
     }
 
     listen 443 ssl http2 default deferred;
-               #listen 443 ssl;
+    server_name ${website_url};
+    root /var/www/html;
+    index index.php index.html index.htm index.pl index.py;
+    
     ssl_certificate ${HOME}/ssl/live/${website_url}/fullchain.pem;
     ssl_certificate_key ${HOME}/ssl/live/${website_url}/privkey.pem;
     ssl_session_cache shared:SSL:50m;
@@ -166,6 +169,7 @@ fi
 if ( [ -d /etc/nginx/modsec/owasp-modsecurity-crs ] )
 then
     /bin/sed -i "/^pid/a load_module \"modules\/ngx_http_modsecurity_module.so\";" /etc/nginx/nginx.conf
+    /bin/sed -i '/server_name/a modsecurity on;\nmodsecurity_rules_file /etc/nginx/modsec/main.conf;' /etc/nginx/sites-available/${website_name}
 fi
 
 /bin/echo "    
@@ -176,10 +180,6 @@ fi
     add_header X-Frame-Options SAMEORIGIN;
     add_header X-Content-Type-Options nosniff;
     add_header X-XSS-Protection \"1; mode=block\";
-    
-    server_name ${website_url};
-    root /var/www/html;
-    index index.php index.html index.htm index.pl index.py;
 
     if (\$request_method !~ ^(GET|HEAD|POST)$) {
         return 444;
