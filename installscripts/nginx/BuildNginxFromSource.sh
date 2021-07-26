@@ -30,7 +30,7 @@ buildtype="${1}"
 
 /usr/bin/add-apt-repository -qq -y ppa:maxmind/ppa
 /usr/bin/apt-get -qq -y update
-/usr/bin/apt install -qq -y libmaxminddb0 libmaxminddb-dev mmdb-bin
+/usr/bin/apt install -qq -y libmaxminddb0 libmaxminddb-dev mmdb-bin libmodsecurity3
 
 #Get the latest version numbers of the software that we need
 
