@@ -29,7 +29,7 @@ buildtype="${1}"
 /usr/bin/apt-get install -qq -y software-properties-common libtool build-essential curl
 
 /usr/bin/add-apt-repository ppa:maxmind/ppa
-/usr/bin/apt-get update
+/usr/bin/apt-get -qq -y update
 /usr/bin/apt install -qq -y libmaxminddb0 libmaxminddb-dev mmdb-bin
 
 #Get the latest version numbers of the software that we need
