@@ -54,7 +54,7 @@ perl_version="`/usr/bin/perl -v | /bin/egrep -o 'v[0-9]+\.[0-9]+\.[0-9]+' | /bin
 #Prepare Modsecurity
 /usr/bin/git clone https://github.com/SpiderLabs/ModSecurity
 cd ModSecurity
-pushd .
+dir=`/usr/bin/pwd`
 /usr/bin/git checkout v3/master
 /usr/bin/git submodule init
 /usr/bin/git submodule update
@@ -151,7 +151,7 @@ cd nginx*
 cd /etc/nginx/modsec
 /usr/bin/git clone https://github.com/SpiderLabs/owasp-modsecurity-crs.git
 /bin/mv /etc/nginx/modsec/owasp-modsecurity-crs/crs-setup.conf.example /etc/nginx/modsec/owasp-modsecurity-crs/crs-setup.conf
-popd
+cd ${dir}
 /bin/cp modsecurity.conf-recommended /etc/nginx/modsec/modsecurity.conf
 
 /bin/echo "
