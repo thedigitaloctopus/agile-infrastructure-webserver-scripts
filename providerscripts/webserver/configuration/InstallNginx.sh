@@ -163,6 +163,11 @@ else
     /bin/echo "    ssl_protocols TLSv1.2 TLSv1.3;" >> /etc/nginx/sites-available/${website_name}
 fi
 
+if ( [ -d /etc/nginx/modsec/owasp-modsecurity-crs ] )
+then
+    /bin/sed -i '/^pid/a load_module modules\/ngx_http_modsecurity_module.so;' /etc/nginx/nginx.conf
+fi
+
 /bin/echo "    
     ssl_ciphers EECDH+CHACHA20:EECDH+AES128:RSA+AES128:EECDH+AES256:RSA+AES256:EECDH+3DES:RSA+3DES:!MD5;
     ssl_stapling on;
