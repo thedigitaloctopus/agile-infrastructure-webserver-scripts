@@ -28,7 +28,7 @@ buildtype="${1}"
 #Instll the tools needed for complilation
 /usr/bin/apt-get install -qq -y software-properties-common libtool build-essential curl
 
-/usr/bin/add-apt-repository ppa:maxmind/ppa
+/usr/bin/add-apt-repository -qq -y ppa:maxmind/ppa
 /usr/bin/apt-get -qq -y update
 /usr/bin/apt install -qq -y libmaxminddb0 libmaxminddb-dev mmdb-bin
 
