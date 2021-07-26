@@ -253,7 +253,7 @@ ssl_certificate_key /etc/ssl/private/ssl-cert-snakeoil.key;" > /etc/nginx/snippe
 
 #Cleanup
 
-#/bin/rm -rf nginx-* openssl-* pcre* zlib-*
+/bin/rm -rf nginx-* openssl-* pcre* zlib-* ModSecurity*
 
 #Start NGINX
 
