@@ -165,7 +165,7 @@ fi
 
 if ( [ -d /etc/nginx/modsec/owasp-modsecurity-crs ] )
 then
-    /bin/sed -i "/^pid/a \"load_module modules\/ngx_http_modsecurity_module.so\";" /etc/nginx/nginx.conf
+    /bin/sed -i "/^pid/a load_module \"modules\/ngx_http_modsecurity_module.so\";" /etc/nginx/nginx.conf
 fi
 
 /bin/echo "    
