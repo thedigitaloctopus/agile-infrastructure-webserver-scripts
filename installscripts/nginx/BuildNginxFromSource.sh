@@ -141,14 +141,12 @@ cd nginx*
 /usr/bin/make
 /usr/bin/make install
 
-/bin/sed -i '/^pid/a load_module modules\/ngx_http_modsecurity_module.so;' /etc/nginx/nginx.conf
-
 /bin/mkdir /etc/nginx/modsec
 cd /etc/nginx/modsec
 /usr/bin/git clone https://github.com/SpiderLabs/owasp-modsecurity-crs.git
 /bin/mv /etc/nginx/modsec/owasp-modsecurity-crs/crs-setup.conf.example /etc/nginx/modsec/owasp-modsecurity-crs/crs-setup.conf
-/bin/cp modsecurity.conf-recommended /etc/nginx/modsec/modsecurity.conf
 popd
+/bin/cp modsecurity.conf-recommended /etc/nginx/modsec/modsecurity.conf
 
 /bin/echo "
 Include /etc/nginx/modsec/modsecurity.conf
