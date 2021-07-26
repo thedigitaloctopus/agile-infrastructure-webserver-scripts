@@ -155,6 +155,7 @@ cd nginx*
 cd /etc/nginx/modsec
 /usr/bin/git clone https://github.com/SpiderLabs/owasp-modsecurity-crs.git
 /bin/mv /etc/nginx/modsec/owasp-modsecurity-crs/crs-setup.conf.example /etc/nginx/modsec/owasp-modsecurity-crs/crs-setup.conf
+/bin/cp unicode.mapping /etc/nginx/modsec
 cd ${dir}
 /bin/cp modsecurity.conf-recommended /etc/nginx/modsec/modsecurity.conf
 
