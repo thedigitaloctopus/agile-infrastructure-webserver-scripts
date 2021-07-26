@@ -58,6 +58,7 @@ LimitRequestFields 50
         Options -FollowSymLinks
         LimitRequestFieldSize 16380
         ExpiresActive On
+        Protocols h2 http/1.1
         SSLEngine on
         SSLCertificateFile ${HOME}/ssl/live/${website_url}/fullchain.pem
         SSLCertificateKeyFile ${HOME}/ssl/live/${website_url}/privkey.pem
@@ -132,7 +133,6 @@ ${HOME}/providerscripts/dns/TrustRemoteProxy.sh
 
 /usr/sbin/a2enmod ssl
 /usr/sbin/a2enmod rewrite
-#/usr/sbin/a2enmod mod-security
 /usr/sbin/a2enmod expires
 /usr/sbin/a2enmod headers
 /usr/sbin/a2enmod proxy
