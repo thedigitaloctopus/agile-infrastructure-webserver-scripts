@@ -26,9 +26,7 @@
 buildtype="${1}"
 
 #Instll the tools needed for complilation
-/usr/bin/apt-get install -qq -y software-properties-common
-/usr/bin/apt-get install -qq -y build-essential 
-/usr/bin/apt-get install -qq -y curl
+/usr/bin/apt-get install -qq -y software-properties-common libtool build-essential curl
 
 #Get the latest version numbers of the software that we need
 
