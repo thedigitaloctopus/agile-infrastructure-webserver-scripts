@@ -25,7 +25,6 @@ cd /usr/local/src/libexpat/expat
 
 cd /usr/local/src
 
-
 ################
 #THIS IS NOT WORKING
 ##################
@@ -144,6 +143,18 @@ then
    /bin/echo "ProxyPassMatch ^/(.*\.php(/.*)?)$ fcgi://127.0.0.1:9000/var/www/html/\$1" >> /etc/apache2/httpd.conf
    # /bin/echo "ProxyPassMatch ^/(.*\.php)$ fcgi://127.0.0.1:9000/var/www/html/\$1" >> /etc/apache2/httpd.conf
 fi
+
+#Install modsecurity
+
+apt-get install -qq -y libapache2-mod-security2
+cp /etc/modsecurity/modsecurity.conf-recommended /etc/modsecurity/modsecurity.conf
+/bin/sed -i 's/DetectionOnly/On/g' /etc/modsecurity/modsecurity.conf
+git clone https://github.com/SpiderLabs/owasp-modsecurity-crs.git
+cd owasp-modsecurity-crs
+mv crs-setup.conf.example /etc/modsecurity/crs-setup.conf
+mv rules/ /etc/modsecurity
+/bin/echo "IncludeOptional /etc/modsecurity/*.conf" >> /etc/apache2/mods-enabled/security2.conf
+/bin/echo "Include /etc/modsecurity/rules/*.conf" >> /etc/apache2/mods-enabled/security2.conf
     
 /usr/bin/systemctl enable rc-local.service
 /usr/bin/systemctl start rc-local.service
