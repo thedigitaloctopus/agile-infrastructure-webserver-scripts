@@ -78,7 +78,7 @@ cd httpd-*
 /bin/mv master master.tar.gz
 /usr/bin/tar xvfz master.tar.gz
 /bin/mkdir /etc/apache2/conf/crs
-/bin/cp -R SpiderLabs-owasp-modsecurity-crs-*/ /etc/apache2/conf/crs/
+/bin/cp -R SpiderLabs-owasp-modsecurity-crs-*/* /etc/apache2/conf/crs/
 dir="`/usr/bin/pwd`"
 cd /etc/apache2/conf/crs/
 /bin/mv modsecurity_crs_10_setup.conf.example modsecurity_crs_10_setup.conf
