@@ -146,13 +146,15 @@ fi
 
 #Install modsecurity
 
-apt-get install -qq -y libapache2-mod-security2
-cp /etc/modsecurity/modsecurity.conf-recommended /etc/modsecurity/modsecurity.conf
+/usr/bin/apt-get install -qq -y libapache2-mod-security2
+/bin/cp /etc/modsecurity/modsecurity.conf-recommended /etc/modsecurity/modsecurity.conf
 /bin/sed -i 's/DetectionOnly/On/g' /etc/modsecurity/modsecurity.conf
-git clone https://github.com/SpiderLabs/owasp-modsecurity-crs.git
+/usr/bin/git clone https://github.com/SpiderLabs/owasp-modsecurity-crs.git
 cd owasp-modsecurity-crs
-mv crs-setup.conf.example /etc/modsecurity/crs-setup.conf
-mv rules/ /etc/modsecurity
+/bin/mv crs-setup.conf.example /etc/modsecurity/crs-setup.conf
+/bin/mkdir /etc/modsecurity/rules
+cd rules 
+/bin/cp *.* /etc/modsecurity/rules
 /bin/echo "IncludeOptional /etc/modsecurity/*.conf" >> /etc/apache2/mods-enabled/security2.conf
 /bin/echo "Include /etc/modsecurity/rules/*.conf" >> /etc/apache2/mods-enabled/security2.conf
     
