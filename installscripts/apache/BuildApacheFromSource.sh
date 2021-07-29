@@ -73,6 +73,23 @@ cd httpd-*
 
 /usr/bin/make install
 
+###INSTALL MOD SECURITY
+/usr/bin/wget https://github.com/SpiderLabs/owasp-modsecurity-crs/tarball/master
+/bin/mv master master.tar.gz
+/usr/bin/tar xvfz master.tar.gz
+/bin/mkdir /etc/apache2/conf/crs
+/bin/cp -R SpiderLabs-owasp-modsecurity-crs-*/ /etc/apache2/conf/crs/
+dir="`/usr/bin/pwd`"
+cd /etc/apache2/conf/crs/
+/bin/mv modsecurity_crs_10_setup.conf.example modsecurity_crs_10_setup.conf
+/usr/bin/ln -s /etc/apache2/conf/crs/modsecurity_crs_10_setup.conf activated_rules/
+for f in `ls base_rules/` ; do ln -s /etc/apache2/conf/crs/base_rules/$f activated_rules/$f ; done
+for f in `ls optional_rules/` ; do ln -s /etc/apache2/conf/crs/optional_rules/$f activated_rules/$f ; done
+/bin/mkdir /etc/modsec
+cd ${dir}
+/bin/cp ModSecurity/modsecurity.conf-recommended /etc/modsec/modsecurity.conf
+/bin/cp ModSecurity/unicode.mapping /etc/modsec/
+
 /bin/echo "#!/bin/bash
 /bin/mkdir /var/run/apache2
 /bin/chown www-data.www-data /var/run/apache2
@@ -144,19 +161,6 @@ then
    # /bin/echo "ProxyPassMatch ^/(.*\.php)$ fcgi://127.0.0.1:9000/var/www/html/\$1" >> /etc/apache2/httpd.conf
 fi
 
-#Install modsecurity
-
-/usr/bin/apt-get install -qq -y libapache2-mod-security2
-/bin/cp /etc/modsecurity/modsecurity.conf-recommended /etc/modsecurity/modsecurity.conf
-/bin/sed -i 's/DetectionOnly/On/g' /etc/modsecurity/modsecurity.conf
-/usr/bin/git clone https://github.com/SpiderLabs/owasp-modsecurity-crs.git
-cd owasp-modsecurity-crs
-/bin/mv crs-setup.conf.example /etc/modsecurity/crs-setup.conf
-/bin/mkdir /etc/modsecurity/rules
-cd rules 
-/bin/cp *.* /etc/modsecurity/rules
-/bin/echo "IncludeOptional /etc/modsecurity/*.conf" >> /etc/apache2/mods-enabled/security2.conf
-/bin/echo "Include /etc/modsecurity/rules/*.conf" >> /etc/apache2/mods-enabled/security2.conf
     
 /usr/bin/systemctl enable rc-local.service
 /usr/bin/systemctl start rc-local.service
