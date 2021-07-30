@@ -3,9 +3,10 @@ apache_version="`/bin/echo ${apache_download_link} | /bin/sed 's/.*\///g' | sed 
 /usr/bin/wget -O- ${apache_download_link} | /bin/tar -zxf -
 
 cd /usr/local/src/${apache_vesion}/srclib/
-wget https://downloads.apache.org/apr/apr-1.7.0.tar.gz
-tar -xzf apr-1.7.0.tar.gz
-mv apr-1.7.0 apr
+apr_latest_version="`/usr/bin/curl http://apr.apache.org/download.cgi | /bin/grep "apr1" | /bin/sed 's/.*APR //g' | /usr/bin/awk '{print $1}'`"
+apr_download_link="https://mirrors.ukfast.co.uk/sites/ftp.apache.org/apr/apr-${apr_latest_version}.tar.gz"
+/usr/bin/wget -O- ${apr_download_link} | /bin/tar -zxf -
+mv apr-* apr
 
 
 wget https://downloads.apache.org/apr/apr-util-1.6.1.tar.gz
