@@ -54,21 +54,12 @@ apache_download_link="`/usr/bin/curl http://httpd.apache.org/download.cgi | /bin
 
 cd httpd-*
 
-#./configure --enable-ssl --enable-so --with-mpm=event --with-included-apr --prefix=/usr/local/apache2 --with-pcre=/usr/local/pcre --enable-mods-shared="reallyall" --enable-mpms-shared="all"
-#./configure --enable-ssl --enable-so --with-mpm=event --with-included-apr --enable-proxy --enable-ssl --enable-rewrite --with-mpm=worker --prefix=/usr/local/apache2 --with-pcre=/usr/local/pcre --enable-mpms-shared="all" --enable-mods-shared="all ssl cache proxy http2 authn_alias mem_cache file_cache charset_lite dav_lock disk_cache"
-#./configure --prefix=/etc/apache2 --with-pcre=/usr/local/pcre --with-apxs2=/usr/bin/apxs --with-mpm=prefork --enable-http2 --enable-ssl --enable-so --with-included-apr --enable-rewrite --enable-mods-static="reallyall" --enable-mods-shared="reallyall"
 /bin/mkdir /usr/local/apache2
 /bin/mkdir /etc/apache2
 /bin/mkdir /etc/apache2/conf
 /bin/mkdir /etc/apache2/mods-available
 /bin/mkdir /etc/apache2/conf-available
 /bin/mkdir /etc/apache2/sites-available
-
-###################################################################
-#git clone https://github.com/apache/httpd.git
-#./buildconf --with-apr=../apr-1.7.0 --with-apr-util=../apr-util-1.6
-
-#####################################
 
 
 ./configure --prefix=/usr/local/apache2 --sysconfdir=/etc/apache2 --with-pcre=/usr/local/pcre --with-apr=`/bin/ls -d /usr/local/src/apr-[0-9]*.[0.9]*` -with-apxs2=/usr/bin/apxs --with-mpm=prefork --enable-http2 --enable-ssl --enable-so --with-included-apr --enable-rewrite --enable-mods-static="reallyall" --enable-mods-shared="reallyall"
@@ -77,49 +68,51 @@ cd httpd-*
 
 /usr/bin/make install
 
-###INSTALL MOD SECURITY
-/usr/bin/git clone https://github.com/ssdeep-project/ssdeep
-cd ssdeep/
-./bootstrap
-./configure
-/usr/bin/make
-/usr/bin/make install
-cd ..
-/usr/bin/git clone https://github.com/SpiderLabs/ModSecurity 
-cd ModSecurity 
-/usr/bin/git checkout -b v3/master origin/v3/master 
-/usr/bin/git submodule init 
-/usr/bin/git submodule update 
-/bin/sh build.sh 
-./configure 
-/usr/bin/make
-/usr/bin/make install
-cd ..
-/bin/sh build.sh 
-./configure 
-/usr/bin/make
-/usr/bin/make install
-/usr/bin/git clone https://github.com/SpiderLabs/ModSecurity-apache
-cd ModSecurity-apache
-./autogen.sh
-./configure --with-libmodsecurity=/usr/local/modsecurity
-/usr/bin/make
-/usr/bin/make install
-cd ..
-/usr/bin/wget https://github.com/SpiderLabs/owasp-modsecurity-crs/tarball/master
-/bin/mv master master.tar.gz
-/bin/tar xvfz master.tar.gz
-/bin/cp -R SpiderLabs-owasp-modsecurity-crs-*/ /usr/local/apache2/conf/crs/
-cd /usr/local/apache2/conf/crs/
-/bin/mv modsecurity_crs_10_setup.conf.example modsecurity_crs_10_setup.conf
-/bin/ln -s /usr/local/apache2/conf/crs/modsecurity_crs_10_setup.conf activated_rules/
-for f in `ls base_rules/` ; do ln -s /usr/local/apache2/conf/crs/base_rules/$f activated_rules/$f ; done
-for f in `ls optional_rules/` ; do ln -s /usr/local/apache2/conf/crs/optional_rules/$f activated_rules/$f ; done
-/bin/mkdir /etc/modsecurity
-cd
-/bin/cp ModSecurity/modsecurity.conf-recommended /etc/modsecurity/modsecurity.conf
-/bin/cp ModSecurity/unicode.mapping /etc/modsecurity/
-/bin/sed -i "s/DetectionOnly/On/g" /etc/modsecurity/modsecurity.conf
+###INSTALL MOD SECURITY NEEDS WORK
+###################################################################
+#/usr/bin/git clone https://github.com/ssdeep-project/ssdeep
+#cd ssdeep/
+#./bootstrap
+#./configure
+#/usr/bin/make
+#/usr/bin/make install
+#cd ..
+#/usr/bin/git clone https://github.com/SpiderLabs/ModSecurity 
+#cd ModSecurity 
+#/usr/bin/git checkout -b v3/master origin/v3/master 
+#/usr/bin/git submodule init 
+#/usr/bin/git submodule update 
+#/bin/sh build.sh 
+#./configure 
+#/usr/bin/make
+#/usr/bin/make install
+#cd ..
+#/bin/sh build.sh 
+#./configure 
+#/usr/bin/make
+#/usr/bin/make install
+#/usr/bin/git clone https://github.com/SpiderLabs/ModSecurity-apache
+#cd ModSecurity-apache
+#./autogen.sh
+#./configure --with-libmodsecurity=/usr/local/modsecurity
+#/usr/bin/make
+#/usr/bin/make install
+#cd ..
+#/usr/bin/wget https://github.com/SpiderLabs/owasp-modsecurity-crs/tarball/master
+#/bin/mv master master.tar.gz
+#/bin/tar xvfz master.tar.gz
+#/bin/cp -R SpiderLabs-owasp-modsecurity-crs-*/ /usr/local/apache2/conf/crs/
+#cd /usr/local/apache2/conf/crs/
+#/bin/mv modsecurity_crs_10_setup.conf.example modsecurity_crs_10_setup.conf
+#/bin/ln -s /usr/local/apache2/conf/crs/modsecurity_crs_10_setup.conf activated_rules/
+#for f in `ls base_rules/` ; do ln -s /usr/local/apache2/conf/crs/base_rules/$f activated_rules/$f ; done
+#for f in `ls optional_rules/` ; do ln -s /usr/local/apache2/conf/crs/optional_rules/$f activated_rules/$f ; done
+#/bin/mkdir /etc/modsecurity
+#cd
+#/bin/cp ModSecurity/modsecurity.conf-recommended /etc/modsecurity/modsecurity.conf
+#/bin/cp ModSecurity/unicode.mapping /etc/modsecurity/
+#/bin/sed -i "s/DetectionOnly/On/g" /etc/modsecurity/modsecurity.conf
+####################################################################
 
 /bin/echo "#!/bin/bash
 /bin/mkdir /var/run/apache2
@@ -194,4 +187,4 @@ fi
 
     
 /usr/bin/systemctl enable rc-local.service
-/usr/bin/systemctl start rc-local.service &
+/usr/bin/systemctl start rc-local.service 
