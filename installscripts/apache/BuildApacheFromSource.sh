@@ -143,6 +143,8 @@ cd
 /bin/sed -i "s/DetectionOnly/On/g" /etc/modsecurity/modsecurity.conf
 ####################################################################
 
+/bin/cp /usr/local/apache2/conf/mime.types /etc/apache2/conf
+
 /bin/echo "#!/bin/bash
 /bin/mkdir /var/run/apache2
 /bin/chown www-data.www-data /var/run/apache2
