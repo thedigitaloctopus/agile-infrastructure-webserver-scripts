@@ -110,7 +110,9 @@ cd ${dir}
 /usr/bin/git clone https://github.com/SpiderLabs/ModSecurity 
 
 cd ModSecurity 
-/usr/bin/git checkout -b v3/master origin/v3/master 
+#/usr/bin/git checkout -b v3/master origin/v3/master 
+#Version 2 is the current recommendation for apache
+/usr/bin/git checkout -b v2/master origin/v2/master 
 /usr/bin/git submodule init 
 /usr/bin/git submodule update 
 /bin/sh build.sh 
