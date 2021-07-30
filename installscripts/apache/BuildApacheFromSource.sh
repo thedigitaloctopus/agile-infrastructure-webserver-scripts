@@ -104,6 +104,7 @@ cd ModSecurity-apache
 cd ..
 /usr/bin/wget https://github.com/SpiderLabs/owasp-modsecurity-crs/tarball/master
 /bin/mv master master.tar.gz
+/bin/tar xvfz master.tar.gz
 /bin/cp -R SpiderLabs-owasp-modsecurity-crs-*/ /usr/local/apache2/conf/crs/
 cd /usr/local/apache2/conf/crs/
 /bin/mv modsecurity_crs_10_setup.conf.example modsecurity_crs_10_setup.conf
