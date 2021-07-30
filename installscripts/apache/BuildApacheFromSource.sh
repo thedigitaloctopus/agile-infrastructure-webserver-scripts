@@ -8,10 +8,9 @@ apr_download_link="https://mirrors.ukfast.co.uk/sites/ftp.apache.org/apr/apr-${a
 /usr/bin/wget -O- ${apr_download_link} | /bin/tar -zxf -
 mv apr-* apr
 
-
-wget https://downloads.apache.org/apr/apr-util-1.6.1.tar.gz
-tar -xzf apr-util-1.6.1.tar.gz
-mv apr-util-1.6.1 apr-util
+apr_util_download_link="`/usr/bin/curl http://apr.apache.org/download.cgi | /bin/grep 'apr-util' | /bin/grep 'tar.gz\"' | /bin/sed 's/.*https/https/g' | /bin/sed 's/".*//g' | /bin/sed '/^$/d'`"
+/usr/bin/wget -O- ${apr_util_download_link} | /bin/tar -zxf -
+mv apr-util-* apr-util
 
 pcre_latest_version="`/usr/bin/curl 'https://ftp.pcre.org/pub/pcre/' | /bin/egrep -o 'pcre-[0-9]+\.[0-9]+' | /bin/sed 's/pcre-//g' | /usr/bin/sort --version-sort | /usr/bin/uniq | /usr/bin/tail -1`"
 
