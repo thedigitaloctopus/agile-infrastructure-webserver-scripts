@@ -74,6 +74,53 @@ cd httpd-*
 
 /usr/bin/make install
 
+###INSTALL MOD SECURITY NEEDS WORK
+###################################################################
+#/usr/bin/git clone https://github.com/ssdeep-project/ssdeep
+#cd ssdeep/
+#./bootstrap
+#./configure
+#/usr/bin/make
+#/usr/bin/make install
+#cd ..
+#/usr/bin/git clone https://github.com/SpiderLabs/ModSecurity 
+#cd ModSecurity 
+#/usr/bin/git checkout -b v3/master origin/v3/master 
+#/usr/bin/git submodule init 
+#/usr/bin/git submodule update 
+#/bin/sh build.sh 
+#./configure 
+#/usr/bin/make
+#/usr/bin/make install
+#cd ..
+#/bin/sh build.sh 
+#./configure 
+#/usr/bin/make
+#/usr/bin/make install
+#/usr/bin/git clone https://github.com/SpiderLabs/ModSecurity-apache
+#cd ModSecurity-apache
+#./autogen.sh
+#./configure --with-libmodsecurity=/usr/local/modsecurity
+#/usr/bin/make
+#/usr/bin/make install
+#cd ..
+#/usr/bin/wget https://github.com/SpiderLabs/owasp-modsecurity-crs/tarball/master
+#/bin/mv master master.tar.gz
+#/bin/tar xvfz master.tar.gz
+#/bin/cp -R SpiderLabs-owasp-modsecurity-crs-*/ /usr/local/apache2/conf/crs/
+#cd /usr/local/apache2/conf/crs/
+#/bin/mv modsecurity_crs_10_setup.conf.example modsecurity_crs_10_setup.conf
+#/bin/ln -s /usr/local/apache2/conf/crs/modsecurity_crs_10_setup.conf activated_rules/
+#for f in `ls base_rules/` ; do ln -s /usr/local/apache2/conf/crs/base_rules/$f activated_rules/$f ; done
+#for f in `ls optional_rules/` ; do ln -s /usr/local/apache2/conf/crs/optional_rules/$f activated_rules/$f ; done
+#/bin/mkdir /etc/modsecurity
+#cd
+#/bin/cp ModSecurity/modsecurity.conf-recommended /etc/modsecurity/modsecurity.conf
+#/bin/cp ModSecurity/unicode.mapping /etc/modsecurity/
+#/bin/sed -i "s/DetectionOnly/On/g" /etc/modsecurity/modsecurity.conf
+####################################################################
+
+
 /bin/echo "#!/bin/bash
 /bin/mkdir /var/run/apache2
 /bin/chown www-data.www-data /var/run/apache2
