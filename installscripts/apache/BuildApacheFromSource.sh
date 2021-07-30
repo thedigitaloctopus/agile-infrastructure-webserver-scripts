@@ -209,11 +209,11 @@ LoadModule proxy_http_module /usr/local/apache2/modules/mod_proxy_http.so
 LoadModule proxy_fcgi_module /usr/local/apache2/modules/mod_proxy_fcgi.so
 LoadModule headers_module /usr/local/apache2/modules/mod_headers.so
 LoadModule rewrite_module /usr/local/apache2/modules/mod_rewrite.so
-LoadModule mime_module /usr/local/apache2/modules/mod_mime.so" > /etc/apache2/conf/httpd.conf.$$
+LoadModule mime_module /usr/local/apache2/modules/mod_mime.so" > /etc/apache2/httpd.conf.$$
 
-/bin/cat /etc/apache2/conf/httpd.conf >> /etc/apache2/conf/httpd.conf.$$
+/bin/cat /etc/apache2/httpd.conf >> /etc/apache2/httpd.conf.$$
 
-/bin/mv /etc/apache2/conf/httpd.conf.$$ /etc/apache2/conf/httpd.conf
+/bin/mv /etc/apache2/httpd.conf.$$ /etc/apache2/httpd.conf
 
 #/bin/mv /etc/apache2/httpd.conf /etc/apache2/httpd.conf.orig
 #/bin/mv /etc/apache2/apache2.conf /etc/apache2/httpd.conf
