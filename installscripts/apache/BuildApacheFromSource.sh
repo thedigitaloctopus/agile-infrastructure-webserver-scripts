@@ -25,22 +25,26 @@ cd /usr/local/src/libexpat/expat
 
 cd /usr/local/src
 
-################
-#THIS IS NOT WORKING
-##################
-
-apache_download_link="`/usr/bin/curl http://httpd.apache.org/download.cgi | /bin/grep "Source" | /bin/grep "tar.gz" | /bin/sed 's/.*https/https/g' | /bin/sed 's/".*//g'`"
-
-/usr/bin/wget -O- ${apache_download_link} | /bin/tar -zxf -
-
 apr_latest_version="`/usr/bin/curl http://apr.apache.org/download.cgi | /bin/grep "apr1" | /bin/sed 's/.*APR //g' | /usr/bin/awk '{print $1}'`"
 apr_download_link="https://mirrors.ukfast.co.uk/sites/ftp.apache.org/apr/apr-${apr_latest_version}.tar.gz"
 
 /usr/bin/wget -O- ${apr_download_link} | /bin/tar -zxf -
 
-apr_util_download_link="`/usr/bin/curl http://apr.apache.org/download.cgi | /bin/grep 'apr-util' | /bin/grep 'tar.gz\"' | /bin/sed 's/.*https/https/g' | /bin/sed 's/".*//g' | /bin/sed '/^$/d'`"
+#apr_util_download_link="`/usr/bin/curl http://apr.apache.org/download.cgi | /bin/grep 'apr-util' | /bin/grep 'tar.gz\"' | /bin/sed 's/.*https/https/g' | /bin/sed 's/".*//g' | /bin/sed '/^$/d'`"
 
-/usr/bin/wget -O- ${apr_util_download_link} | /bin/tar -zxf -
+#/usr/bin/wget -O- ${apr_util_download_link} | /bin/tar -zxf -
+
+
+cd `/bin/ls -d /usr/local/src/apr-[0-9]*.[0.9]*`
+
+./configure --prefix=`/bin/ls -d /usr/local/src/apr-[0-9]*.[0.9]*`
+/usr/bin/make
+/usr/bin/make install
+
+apache_download_link="`/usr/bin/curl http://httpd.apache.org/download.cgi | /bin/grep "Source" | /bin/grep "tar.gz" | /bin/sed 's/.*https/https/g' | /bin/sed 's/".*//g'`"
+
+/usr/bin/wget -O- ${apache_download_link} | /bin/tar -zxf -
+
 
 /bin/mkdir /usr/local/src/`/bin/ls /usr/local/src/ | /bin/grep httpd`/srclib/apr-util
 /bin/mv /usr/local/src/apr-util-*/* `/bin/ls /usr/local/src/ | /bin/grep httpd`/srclib/apr-util
@@ -67,7 +71,7 @@ cd httpd-*
 #####################################
 
 
-./configure --prefix=/usr/local/apache2 --sysconfdir=/etc/apache2 --with-pcre=/usr/local/pcre --with-apxs2=/usr/bin/apxs --with-mpm=prefork --enable-http2 --enable-ssl --enable-so --with-included-apr --enable-rewrite --enable-mods-static="reallyall" --enable-mods-shared="reallyall"
+./configure --prefix=/usr/local/apache2 --sysconfdir=/etc/apache2 --with-pcre=/usr/local/pcre --with-apr=`/bin/ls -d /usr/local/src/apr-[0-9]*.[0.9]*` -with-apxs2=/usr/bin/apxs --with-mpm=prefork --enable-http2 --enable-ssl --enable-so --with-included-apr --enable-rewrite --enable-mods-static="reallyall" --enable-mods-shared="reallyall"
 
 /usr/bin/make
 
