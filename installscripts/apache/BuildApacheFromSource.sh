@@ -120,7 +120,7 @@ for f in `ls optional_rules/` ; do ln -s /usr/local/apache2/conf/crs/optional_ru
 cd
 /bin/cp modsecurity-*/modsecurity.conf-recommended /etc/modsecurity/modsecurity.conf
 /bin/cp modsecurity-*/unicode.mapping /etc/modsecurity/
-/bin/sed -i "s/DetectionOnly/On/g" /etc/modsec/modsecurity.conf
+/bin/sed -i "s/DetectionOnly/On/g" /etc/modsecurity/modsecurity.conf
 
 /bin/echo "#!/bin/bash
 /bin/mkdir /var/run/apache2
