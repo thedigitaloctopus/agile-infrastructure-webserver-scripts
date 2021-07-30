@@ -28,11 +28,15 @@ if ( [ "${webserver_type}" = "APACHE" ] )
 then
     if ( [ "`/usr/bin/pgrep php`" = "" ] )
     then
-        /usr/sbin/service php${PHP_VERSION}-fpm restart || . /etc/apache2/conf/envvars && /etc/apache2/bin/apachectl -k restart    
+        /usr/sbin/service php${PHP_VERSION}-fpm restart || . /etc/apache2/conf/envvars && /usr/local/apache2/bin/apachectl -k restart    
     fi
     if ( [ "`/usr/bin/pgrep apache`" = "" ] )
     then
         /usr/sbin/service apache2 restart
+        if ( [ "`/usr/bin/pgrep apache`" = "" ] )
+        then
+            . /etc/apache2/conf/envvars && /usr/local/apache2/bin/apachectl -k restart    
+        fi
     fi
 fi
 if ( [ "${webserver_type}" = "NGINX" ] )
