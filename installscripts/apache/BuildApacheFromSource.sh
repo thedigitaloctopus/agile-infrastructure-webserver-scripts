@@ -99,14 +99,16 @@ cd httpd-*
 
 ###INSTALL MOD SECURITY NEEDS WORK
 ###################################################################
+dir="`/usr/bin/pwd`"
 /usr/bin/git clone https://github.com/ssdeep-project/ssdeep
 cd ssdeep/
 ./bootstrap
 ./configure
 /usr/bin/make
 /usr/bin/make install
-cd ..
+cd ${dir}
 /usr/bin/git clone https://github.com/SpiderLabs/ModSecurity 
+
 cd ModSecurity 
 /usr/bin/git checkout -b v3/master origin/v3/master 
 /usr/bin/git submodule init 
@@ -115,7 +117,7 @@ cd ModSecurity
 ./configure --with-ssl=/usr/local/ssl
 /usr/bin/make
 /usr/bin/make install
-cd ..
+cd ${dir}
 /bin/sh build.sh 
 ./configure 
 /usr/bin/make
@@ -126,7 +128,7 @@ cd ModSecurity-apache
 ./configure --with-libmodsecurity=/usr/local/modsecurity --with-ssl=/usr/local/ssl
 /usr/bin/make
 /usr/bin/make install
-cd ..
+cd ${dir}
 /usr/bin/wget https://github.com/SpiderLabs/owasp-modsecurity-crs/tarball/master
 /bin/mv master master.tar.gz
 /bin/tar xvfz master.tar.gz
@@ -137,7 +139,7 @@ cd /usr/local/apache2/conf/crs/
 for f in `ls base_rules/` ; do ln -s /usr/local/apache2/conf/crs/base_rules/$f activated_rules/$f ; done
 for f in `ls optional_rules/` ; do ln -s /usr/local/apache2/conf/crs/optional_rules/$f activated_rules/$f ; done
 /bin/mkdir /etc/modsecurity
-cd
+cd ${dir}
 /bin/cp ModSecurity/modsecurity.conf-recommended /etc/modsecurity/modsecurity.conf
 /bin/cp ModSecurity/unicode.mapping /etc/modsecurity/
 /bin/sed -i "s/DetectionOnly/On/g" /etc/modsecurity/modsecurity.conf
