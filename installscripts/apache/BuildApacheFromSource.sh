@@ -211,7 +211,7 @@ LoadModule headers_module /usr/local/apache2/modules/mod_headers.so
 LoadModule rewrite_module /usr/local/apache2/modules/mod_rewrite.so
 LoadModule mime_module /usr/local/apache2/modules/mod_mime.so
 LoadModule unique_id_module /usr/local/apache2/modules/mod_unique_id.so
-LoadModule security3_module /usr/local/apache2/modules/mod_security.so" > /etc/apache2/httpd.conf.$$
+LoadModule security3_module /usr/local/apache2/modules/mod_security3.so" > /etc/apache2/httpd.conf.$$
 
 /bin/cat /etc/apache2/httpd.conf >> /etc/apache2/httpd.conf.$$
 
