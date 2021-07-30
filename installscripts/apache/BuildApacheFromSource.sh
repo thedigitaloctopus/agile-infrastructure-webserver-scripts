@@ -106,9 +106,9 @@ cd ModSecurity-apache
 /usr/bin/make
 /usr/bin/make install
 cd ..
-#/usr/bin/wget https://github.com/SpiderLabs/owasp-modsecurity-crs/tarball/master
-#/bin/mv master master.tar.gz
-#/bin/tar xvfz master.tar.gz
+/usr/bin/wget https://github.com/SpiderLabs/owasp-modsecurity-crs/tarball/master
+/bin/mv master master.tar.gz
+/bin/tar xvfz master.tar.gz
 /usr/bin/git clone https://github.com/SpiderLabs/owasp-modsecurity-crs.git
 /bin/cp -R owasp-modsecurity-crs/ /usr/local/apache2/conf/crs/
 cd /usr/local/apache2/conf/crs/
