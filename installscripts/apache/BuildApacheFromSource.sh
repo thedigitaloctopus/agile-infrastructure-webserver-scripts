@@ -125,7 +125,7 @@ cd ${dir}
 /usr/bin/git clone https://github.com/SpiderLabs/ModSecurity-apache
 cd ModSecurity-apache
 ./autogen.sh
-./configure --with-libmodsecurity=/usr/local/modsecurity --with-ssl=/usr/local/ssl
+./configure --with-libmodsecurity=/usr/local/modsecurity
 /usr/bin/make
 /usr/bin/make install
 cd ${dir}
