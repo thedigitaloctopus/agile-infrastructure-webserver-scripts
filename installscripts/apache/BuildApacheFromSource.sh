@@ -74,17 +74,6 @@ cd httpd-*
 /usr/bin/make install
 
 ###INSTALL MOD SECURITY
-/usr/bin/git clone https://github.com/SpiderLabs/ModSecurity
-cd ModSecurity
-/usr/bin/git checkout v3/master
-/usr/bin/git submodule init
-/usr/bin/git submodule update
-/bin/sh build.sh
-./configure 
-/usr/bin/make
-/usr/bin/make install
-cd ..
-
 /usr/bin/git clone https://github.com/ssdeep-project/ssdeep
 cd ssdeep/
 ./bootstrap
