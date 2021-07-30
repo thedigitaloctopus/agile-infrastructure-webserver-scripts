@@ -78,7 +78,7 @@ cd httpd-*
 #####################################
 
 
-./configure --prefix=/usr/local/apache2 --sysconfdir=/etc/apache2 --with-pcre=/usr/local/pcre --with-apxs2=/usr/bin/apxs with-ssl=/usr/local/ssl -with-mpm=prefork --enable-http2 --enable-ssl --enable-so --with-included-apr --enable-rewrite --enable-mods-static="reallyall" --enable-mods-shared="reallyall"
+./configure --prefix=/usr/local/apache2 --sysconfdir=/etc/apache2 --with-pcre=/usr/local/pcre --with-apxs2=/usr/bin/apxs --with-ssl=/usr/local/ssl -with-mpm=prefork --enable-http2 --enable-ssl --enable-so --with-included-apr --enable-rewrite --enable-mods-static="reallyall" --enable-mods-shared="reallyall"
 
 /usr/bin/make
 
