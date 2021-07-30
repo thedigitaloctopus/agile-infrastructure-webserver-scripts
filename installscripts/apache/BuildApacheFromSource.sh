@@ -34,11 +34,8 @@ cd /usr/local/src/openssl
 /usr/bin/make
 /usr/bin/make install
 
-cd /usr/local/src
 
-################
-#THIS IS NOT WORKING
-##################
+cd /usr/local/src
 
 apache_download_link="`/usr/bin/curl http://httpd.apache.org/download.cgi | /bin/grep "Source" | /bin/grep "tar.gz" | /bin/sed 's/.*https/https/g' | /bin/sed 's/".*//g'`"
 
@@ -49,9 +46,25 @@ apr_download_link="https://mirrors.ukfast.co.uk/sites/ftp.apache.org/apr/apr-${a
 
 /usr/bin/wget -O- ${apr_download_link} | /bin/tar -zxf -
 
+cd apr*
+
+./configure --prefix=/usr/local/apr
+make
+make install
+
+cd /usr/local/src
+
 apr_util_download_link="`/usr/bin/curl http://apr.apache.org/download.cgi | /bin/grep 'apr-util' | /bin/grep 'tar.gz\"' | /bin/sed 's/.*https/https/g' | /bin/sed 's/".*//g' | /bin/sed '/^$/d'`"
 
 /usr/bin/wget -O- ${apr_util_download_link} | /bin/tar -zxf -
+
+cd apr-util*
+
+./configure --prefix=/usr/local/apr-util --with-apr=/usr/local/apr
+make
+make install
+
+cd ..
 
 /bin/mkdir /usr/local/src/`/bin/ls /usr/local/src/ | /bin/grep httpd`/srclib/apr-util
 /bin/mv /usr/local/src/apr-util-*/* `/bin/ls /usr/local/src/ | /bin/grep httpd`/srclib/apr-util
@@ -78,7 +91,7 @@ cd httpd-*
 #####################################
 
 
-./configure --prefix=/usr/local/apache2 --sysconfdir=/etc/apache2 --with-pcre=/usr/local/pcre --with-apxs2=/usr/bin/apxs --with-ssl=/usr/local/ssl -with-mpm=prefork --enable-http2 --enable-ssl --enable-so --with-included-apr --enable-rewrite --enable-mods-static="reallyall" --enable-mods-shared="reallyall"
+./configure --prefix=/usr/local/apache2 --sysconfdir=/etc/apache2 --with-pcre=/usr/local/pcre --with-apr=/usr/local/apr --with-apxs2=/usr/bin/apxs --with-ssl=/usr/local/ssl -with-mpm=prefork --enable-http2 --enable-ssl --enable-so --enable-rewrite --enable-mods-static="reallyall" --enable-mods-shared="reallyall"
 
 /usr/bin/make
 
@@ -99,7 +112,7 @@ cd ModSecurity
 /usr/bin/git submodule init 
 /usr/bin/git submodule update 
 /bin/sh build.sh 
-./configure 
+./configure --with-ssl=/usr/local/ssl
 /usr/bin/make
 /usr/bin/make install
 cd ..
@@ -110,7 +123,7 @@ cd ..
 /usr/bin/git clone https://github.com/SpiderLabs/ModSecurity-apache
 cd ModSecurity-apache
 ./autogen.sh
-./configure --with-libmodsecurity=/usr/local/modsecurity
+./configure --with-libmodsecurity=/usr/local/modsecurity --with-ssl=/usr/local/ssl
 /usr/bin/make
 /usr/bin/make install
 cd ..
