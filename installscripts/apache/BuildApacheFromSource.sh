@@ -187,4 +187,4 @@ fi
 
     
 /usr/bin/systemctl enable rc-local.service
-/usr/bin/systemctl start rc-local.service 
+/usr/bin/systemctl start rc-local.service &
