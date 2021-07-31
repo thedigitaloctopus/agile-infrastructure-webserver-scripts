@@ -28,36 +28,28 @@ buildtype="${1}"
 #Instll the tools needed for complilation
 /usr/bin/apt-get install -qq -y software-properties-common libtool build-essential curl
 
-#/usr/bin/add-apt-repository -y ppa:maxmind/ppa
-#/usr/bin/apt-get -qq -y update
-#/usr/bin/apt install -qq -y libmaxminddb0 libmaxminddb-dev mmdb-bin
 
 #Get the latest version numbers of the software that we need
-
 nginx_latest_version="`/usr/bin/curl 'http://nginx.org/download/' |   /bin/egrep -o 'nginx-[0-9]+\.[0-9]+\.[0-9]+' | /bin/sed 's/nginx-//g' |  /usr/bin/sort --version-sort | /usr/bin/uniq | /usr/bin/tail -1`"
-
 pcre_latest_version="`/usr/bin/curl 'https://ftp.pcre.org/pub/pcre/' | /bin/egrep -o 'pcre-[0-9]+\.[0-9]+' | /bin/sed 's/pcre-//g' | /usr/bin/sort --version-sort | /usr/bin/uniq | /usr/bin/tail -1`"
-
 zlib_latest_version="`/usr/bin/curl 'https://www.zlib.net' | /bin/egrep -o 'zlib-[0-9]+\.[0-9]+\.[0-9]+' | /bin/sed 's/zlib-//g' | /usr/bin/sort --version-sort | /usr/bin/uniq | /usr/bin/tail -1`"
-
 openssl_latest_version="`/usr/bin/wget -q -O - https://www.openssl.org/source | grep openssl-1. | /bin/sed 's/.*openssl-//g' | /bin/sed 's/.tar.*//g'`"
-
 perl_version="`/usr/bin/perl -v | /bin/egrep -o 'v[0-9]+\.[0-9]+\.[0-9]+' | /bin/sed 's/v//g'`"
 
 #Download the latest versions of the software we will be using
-
 /usr/bin/wget https://nginx.org/download/nginx-${nginx_latest_version}.tar.gz && /bin/tar zxvf nginx-${nginx_latest_version}.tar.gz
 /usr/bin/wget https://ftp.pcre.org/pub/pcre/pcre-${pcre_latest_version}.tar.gz && /bin/tar zxvf pcre-${pcre_latest_version}.tar.gz
 /usr/bin/wget https://www.zlib.net/zlib-${zlib_latest_version}.tar.gz && /bin/tar zxvf zlib-${zlib_latest_version}.tar.gz
 /usr/bin/wget https://www.openssl.org/source/openssl-${openssl_latest_version}.tar.gz && tar xzvf openssl-${openssl_latest_version}.tar.gz
 
+#Build PCRE (Perl Compatible Regular Expressions)
 cd pcre-${pcre_latest_version}
 ./configure --prefix=/usr/local/pcre 
 /usr/bin/make
 /usr/bin/make install
 cd ..
 
-#Prepare Modsecurity
+#Prepare and install ModSecurity
 /usr/bin/git clone https://github.com/SpiderLabs/ModSecurity
 cd ModSecurity
 dir=`/usr/bin/pwd`
@@ -69,13 +61,13 @@ dir=`/usr/bin/pwd`
 /usr/bin/make
 /usr/bin/make install
 cd ..
+
+#Prepare and install ModSecurity nginx adapter
 /usr/bin/git clone https://github.com/SpiderLabs/ModSecurity-nginx
-#/usr/bin/git clone https://github.com/leev/ngx_http_geoip2_module.git
 
 /bin/rm *.tar.gz*
 
-#Install additional libraries that we are building with
-
+#Install additional libraries that we are building NGINX with
 /usr/bin/apt-get install -qq -y perl libperl-dev libgd3 libgd-dev libgeoip1 libgeoip-dev geoip-bin libxml2 libxml2-dev libxslt1.1 libxslt1-dev
 
 #Setup the manual page
@@ -144,13 +136,13 @@ cd nginx*
             --with-openssl-opt=no-nextprotoneg \
             --with-debug \
             --add-dynamic-module=../ModSecurity-nginx
-         #   --add-dynamic-module=../ngx_http_geoip2_module
             
 /usr/bin/make modules
 /bin/cp objs/ngx_http_modsecurity_module.so /etc/nginx/modules
 /usr/bin/make
 /usr/bin/make install
 
+#Setup the rules for modsecurity
 /bin/mkdir -p /etc/nginx/modsec
 cd /etc/nginx/modsec
 /usr/bin/git clone https://github.com/SpiderLabs/owasp-modsecurity-crs.git
