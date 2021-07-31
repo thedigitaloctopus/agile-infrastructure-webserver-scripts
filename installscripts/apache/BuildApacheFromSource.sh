@@ -150,6 +150,9 @@ cd ${dir}
 
 /bin/rm /etc/apache2/modsecurity.d/owasp-crs/rules/REQUEST-910-IP-REPUTATION.conf #Requires max mind
 
+WEBSITE_NAME="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEDISPLAYNAME'`"
+/bin/sed -i '/:443/a modsecurity on\nmodsecurity_rules_file /etc/apache2/modsecurity.d/modsec_rules.conf' /etc/apache2/sites-available/${WEBSITE_NAME}
+
 
 
 #/usr/bin/wget https://github.com/SpiderLabs/owasp-modsecurity-crs/tarball/master
