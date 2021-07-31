@@ -128,6 +128,27 @@ cd ModSecurity-apache
 /usr/bin/make
 /usr/bin/make install
 cd ${dir}
+
+
+/usr/bin/git clone https://github.com/SpiderLabs/ModSecurity 
+/bin/mkdir /etc/apache2/modsecurity.d 
+/bin/cp ./ModSecurity/modsecurity.conf-recommended /etc/apache2/modsecurity.d/modsecurity.conf 
+/bin/cp ./ModSecurity/modsec_rules.conf /etc/apache2/modsecurity.d/modsec_rules.conf
+/bin/cp ./ModSecurity/unicode.mapping /etc/apache2/modsecurity.d/ 
+/bin/sed -i 's/SecRuleEngine DetectionOnly/SecRuleEngine On/' /etc/apache2/modsecurity.d/modsecurity.conf
+/usr/bin/git clone https://github.com/SpiderLabs/owasp-modsecurity-crs.git /etc/apache2/modsecurity.d/owasp-crs 
+/bin/cp /etc/apache2/modsecurity.d/owasp-crs/crs-setup.conf.example /etc/apache2/modsecurity.d/owasp-crs/crs-setup.conf
+
+cat > modsec_rules.conf << 'EOL'
+Include "/etc/apache2/modsecurity.d/modsecurity.conf"
+Include "/etc/apache2/modsecurity.d/owasp-crs/crs-setup.conf"
+Include "/etc/apache2/modsecurity.d/owasp-crs/rules/*.conf"
+EOL
+
+/bin/rm /etc/apache2/modsecurity.d/owasp-crs/rules/REQUEST-910-IP-REPUTATION.conf #Requires max mind
+
+
+
 #/usr/bin/wget https://github.com/SpiderLabs/owasp-modsecurity-crs/tarball/master
 #/bin/mv master master.tar.gz
 #/bin/tar xvfz master.tar.gz
