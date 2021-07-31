@@ -108,11 +108,8 @@ cd ssdeep/
 /usr/bin/make install
 cd ${dir}
 /usr/bin/git clone https://github.com/SpiderLabs/ModSecurity 
-
 cd ModSecurity 
-#/usr/bin/git checkout -b v3/master origin/v3/master 
-#Version 2 is the current recommendation for apache
-/usr/bin/git checkout -b v2/master origin/v2/master 
+/usr/bin/git checkout -b v3/master origin/v3/master 
 /usr/bin/git submodule init 
 /usr/bin/git submodule update 
 /bin/sh build.sh 
@@ -131,20 +128,20 @@ cd ModSecurity-apache
 /usr/bin/make
 /usr/bin/make install
 cd ${dir}
-/usr/bin/wget https://github.com/SpiderLabs/owasp-modsecurity-crs/tarball/master
-/bin/mv master master.tar.gz
-/bin/tar xvfz master.tar.gz
-/bin/cp -R SpiderLabs-owasp-modsecurity-crs-*/ /usr/local/apache2/conf/crs/
-cd /usr/local/apache2/conf/crs/
-/bin/mv modsecurity_crs_10_setup.conf.example modsecurity_crs_10_setup.conf
-/bin/ln -s /usr/local/apache2/conf/crs/modsecurity_crs_10_setup.conf activated_rules/
-for f in `ls base_rules/` ; do ln -s /usr/local/apache2/conf/crs/base_rules/$f activated_rules/$f ; done
-for f in `ls optional_rules/` ; do ln -s /usr/local/apache2/conf/crs/optional_rules/$f activated_rules/$f ; done
-/bin/mkdir /etc/modsecurity
-cd ${dir}
-/bin/cp ModSecurity/modsecurity.conf-recommended /etc/modsecurity/modsecurity.conf
-/bin/cp ModSecurity/unicode.mapping /etc/modsecurity/
-/bin/sed -i "s/DetectionOnly/On/g" /etc/modsecurity/modsecurity.conf
+#/usr/bin/wget https://github.com/SpiderLabs/owasp-modsecurity-crs/tarball/master
+#/bin/mv master master.tar.gz
+#/bin/tar xvfz master.tar.gz
+#/bin/cp -R SpiderLabs-owasp-modsecurity-crs-*/ /usr/local/apache2/conf/crs/
+#cd /usr/local/apache2/conf/crs/
+#/bin/mv modsecurity_crs_10_setup.conf.example modsecurity_crs_10_setup.conf
+#/bin/ln -s /usr/local/apache2/conf/crs/modsecurity_crs_10_setup.conf activated_rules/
+#for f in `ls base_rules/` ; do ln -s /usr/local/apache2/conf/crs/base_rules/$f activated_rules/$f ; done
+#for f in `ls optional_rules/` ; do ln -s /usr/local/apache2/conf/crs/optional_rules/$f activated_rules/$f ; done
+#/bin/mkdir /etc/modsecurity
+#cd ${dir}
+#/bin/cp ModSecurity/modsecurity.conf-recommended /etc/modsecurity/modsecurity.conf
+#/bin/cp ModSecurity/unicode.mapping /etc/modsecurity/
+#/bin/sed -i "s/DetectionOnly/On/g" /etc/modsecurity/modsecurity.conf
 ####################################################################
 
 /bin/cp /usr/local/apache2/conf/mime.types /etc/apache2/conf
@@ -215,7 +212,7 @@ LoadModule headers_module /usr/local/apache2/modules/mod_headers.so
 LoadModule rewrite_module /usr/local/apache2/modules/mod_rewrite.so
 LoadModule mime_module /usr/local/apache2/modules/mod_mime.so
 LoadModule unique_id_module /usr/local/apache2/modules/mod_unique_id.so
-LoadModule security2_module /usr/local/apache2/modules/mod_security2.so
+LoadModule security3_module /usr/local/apache2/modules/mod_security3.so
 LoadModule session_module /usr/local/apache2/modules/mod_session.so
 LoadModule session_cookie_module /usr/local/apache2/modules/mod_session_cookie.so
 LoadModule session_crypto_module /usr/local/apache2/modules/mod_session_crypto.so" > /etc/apache2/httpd.conf.$$
