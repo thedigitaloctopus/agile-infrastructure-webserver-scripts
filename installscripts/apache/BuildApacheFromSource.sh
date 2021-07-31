@@ -138,12 +138,15 @@ cd ${dir}
 /bin/sed -i 's/SecRuleEngine DetectionOnly/SecRuleEngine On/' /etc/apache2/modsecurity.d/modsecurity.conf
 /usr/bin/git clone https://github.com/SpiderLabs/owasp-modsecurity-crs.git /etc/apache2/modsecurity.d/owasp-crs 
 /bin/cp /etc/apache2/modsecurity.d/owasp-crs/crs-setup.conf.example /etc/apache2/modsecurity.d/owasp-crs/crs-setup.conf
+cd /etc/apache2/modsecurity.d
 
 cat > modsec_rules.conf << 'EOL'
 Include "/etc/apache2/modsecurity.d/modsecurity.conf"
 Include "/etc/apache2/modsecurity.d/owasp-crs/crs-setup.conf"
 Include "/etc/apache2/modsecurity.d/owasp-crs/rules/*.conf"
 EOL
+
+cd ${dir}
 
 /bin/rm /etc/apache2/modsecurity.d/owasp-crs/rules/REQUEST-910-IP-REPUTATION.conf #Requires max mind
 
