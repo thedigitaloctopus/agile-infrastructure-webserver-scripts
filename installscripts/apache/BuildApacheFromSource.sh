@@ -215,7 +215,7 @@ LoadModule headers_module /usr/local/apache2/modules/mod_headers.so
 LoadModule rewrite_module /usr/local/apache2/modules/mod_rewrite.so
 LoadModule mime_module /usr/local/apache2/modules/mod_mime.so
 LoadModule unique_id_module /usr/local/apache2/modules/mod_unique_id.so
-LoadModule security3_module /usr/local/apache2/modules/mod_security3.so
+LoadModule security2_module /usr/local/apache2/modules/mod_security2.so
 LoadModule session_module /usr/local/apache2/modules/mod_session.so
 LoadModule session_cookie_module /usr/local/apache2/modules/mod_session_cookie.so
 LoadModule session_crypto_module /usr/local/apache2/modules/mod_session_crypto.so" > /etc/apache2/httpd.conf.$$
