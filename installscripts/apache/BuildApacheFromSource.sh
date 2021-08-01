@@ -91,7 +91,7 @@ apr_util_download_link="`/usr/bin/curl http://apr.apache.org/download.cgi | /bin
 
 cd apr-util*
 
-./configure --prefix=/usr/local/apr-util --with-apr=/usr/local/apr
+./configure --prefix=/usr/local/apr-util --with-apr=/usr/local/apr/bin/apr-1-config
 make
 make install
 
@@ -127,7 +127,7 @@ cd httpd-*
 /bin/mkdir /etc/apache2/conf-available
 /bin/mkdir /etc/apache2/sites-available
 
-./configure --prefix=/usr/local/apache2 --sysconfdir=/etc/apache2 --with-pcre=/usr/local/pcre --with-apr=/usr/local/apr --with-apxs2=/usr/bin/apxs --with-ssl=/usr/local/ssl -with-mpm=prefork --enable-http2 --enable-ssl --enable-so --enable-rewrite --enable-mods-static="reallyall" --enable-mods-shared="reallyall"
+./configure --prefix=/usr/local/apache2 --sysconfdir=/etc/apache2 --with-pcre=/usr/local/pcre/bin/pcre-config --with-apr=/usr/local/apr/bin/apr-1-config --with-apxs2=/usr/bin/apxs --with-ssl=/usr/local/ssl -with-mpm=prefork --enable-http2 --enable-ssl --enable-so --enable-rewrite --enable-mods-static="reallyall" --enable-mods-shared="reallyall"
 
 /usr/bin/make
 
