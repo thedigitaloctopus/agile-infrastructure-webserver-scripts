@@ -149,10 +149,10 @@ cd ModSecurity
 /usr/bin/make
 /usr/bin/make install
 cd ${dir}
-/bin/sh build.sh 
-./configure 
-/usr/bin/make
-/usr/bin/make install
+#/bin/sh build.sh 
+#./configure 
+#/usr/bin/make
+#/usr/bin/make install
 /usr/bin/git clone https://github.com/SpiderLabs/ModSecurity-apache
 cd ModSecurity-apache
 ./autogen.sh
