@@ -124,7 +124,6 @@ cd httpd-*
 /bin/mkdir /etc/apache2/conf-available
 /bin/mkdir /etc/apache2/sites-available
 
-
 ./configure --prefix=/usr/local/apache2 --sysconfdir=/etc/apache2 --with-pcre=/usr/local/pcre --with-apr=/usr/local/apr --with-apxs2=/usr/bin/apxs --with-ssl=/usr/local/ssl -with-mpm=prefork --enable-http2 --enable-ssl --enable-so --enable-rewrite --enable-mods-static="reallyall" --enable-mods-shared="reallyall"
 
 /usr/bin/make
@@ -241,10 +240,6 @@ WantedBy=multi-user.target" > /etc/systemd/system/rc-local.service
 /bin/mkdir /var/log/apache2
 /bin/chown www-data.www-data /var/log/apache2
 
-
-libmaxmind="`/usr/bin/find / -name "libmaxminddb.so" -print`"
-/bin/cp ${libmaxmind} /usr/local/apache2/modules/mod_libmaxminddb.so
-
 #Set required modules for loading
 /bin/echo "LoadModule unixd_module  /usr/local/apache2/modules/mod_unixd.so
 LoadModule authz_core_module  /usr/local/apache2/modules/mod_authz_core.so
@@ -267,7 +262,7 @@ LoadModule security3_module /usr/local/apache2/modules/mod_security3.so
 LoadModule session_module /usr/local/apache2/modules/mod_session.so
 LoadModule session_cookie_module /usr/local/apache2/modules/mod_session_cookie.so
 LoadModule session_crypto_module /usr/local/apache2/modules/mod_session_crypto.so
-LoadModule libmaxminddb_module /usr/local/apache2/modules/mod_libmaxminddb.so" > /etc/apache2/httpd.conf.$$
+LoadModule maxminddb.so_module /usr/local/apache2/modules/mod_maxminddb.so" > /etc/apache2/httpd.conf.$$
 
 /bin/cat /etc/apache2/httpd.conf >> /etc/apache2/httpd.conf.$$
 /bin/mv /etc/apache2/httpd.conf.$$ /etc/apache2/httpd.conf
