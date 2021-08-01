@@ -106,6 +106,10 @@ cd ..
 cd *max*
 ./bootstrap
 ./configure --with-apxs2=/usr/bin/apxs
+/usr/bin/make
+/usr/bin/make install
+
+cd ..
 
 #Download and build apache
 apache_download_link="`/usr/bin/curl http://httpd.apache.org/download.cgi | /bin/grep "Source" | /bin/grep "tar.gz" | /bin/sed 's/.*https/https/g' | /bin/sed 's/".*//g'`"
