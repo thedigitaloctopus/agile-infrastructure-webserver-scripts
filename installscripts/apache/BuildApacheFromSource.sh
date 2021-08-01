@@ -101,7 +101,7 @@ cd ..
 /bin/mv /usr/local/src/apr-*/* `/bin/ls /usr/local/src/ | /bin/grep httpd`/srclib/apr
 
 #Download and build maxmind
-
+/bin/mkdir -p /usr/lib/apache2/modules
 /usr/bin/git clone https://github.com/maxmind/mod_maxminddb.git
 cd *max*
 ./bootstrap
