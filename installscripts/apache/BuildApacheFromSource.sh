@@ -103,15 +103,15 @@ cd ..
 /bin/mv /usr/local/src/apr-*/* `/bin/ls /usr/local/src/ | /bin/grep httpd`/srclib/apr
 
 #Download and build maxmind
-/bin/mkdir -p /usr/lib/apache2/modules
-/usr/bin/git clone https://github.com/maxmind/mod_maxminddb.git
-cd *max*
-./bootstrap
-./configure --with-apxs=/usr/bin/apxs2
-/usr/bin/make
-/usr/bin/make install
+#/bin/mkdir -p /usr/lib/apache2/modules
+#/usr/bin/git clone https://github.com/maxmind/mod_maxminddb.git
+#cd *max*
+#./bootstrap
+#./configure --with-apxs=/usr/bin/apxs2
+#/usr/bin/make
+#/usr/bin/make install
 
-cd ..
+#cd ..
 
 #Download and build apache
 apache_download_link="`/usr/bin/curl http://httpd.apache.org/download.cgi | /bin/grep "Source" | /bin/grep "tar.gz" | /bin/sed 's/.*https/https/g' | /bin/sed 's/".*//g'`"
