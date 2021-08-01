@@ -105,7 +105,7 @@ cd ..
 /usr/bin/git clone https://github.com/maxmind/mod_maxminddb.git
 cd *max*
 ./bootstrap
-./configure --with-apxs2=/usr/bin/apxs
+./configure --with-apxs=/usr/bin/apxs2
 /usr/bin/make
 /usr/bin/make install
 
