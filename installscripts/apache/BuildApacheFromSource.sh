@@ -26,7 +26,8 @@
 #set -x
 
 #Install needed libraries
-/usr/bin/apt-get -qq -y  install libnghttp2-dev libssl-dev  build-essential autoconf libtool openssl apache2-dev
+/usr/bin/apt-get -qq -y  install libnghttp2-dev  build-essential autoconf libtool software-properties-common
+#apache2-dev libssl-dev openssl
 /usr/bin/add-apt-repository ppa:maxmind/ppa
 /usr/bin/apt -qq -y update
 /usr/bin/apt -qq -y install libmaxminddb0 libmaxminddb-dev mmdb-bin
