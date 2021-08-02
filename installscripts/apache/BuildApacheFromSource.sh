@@ -28,11 +28,9 @@
 #Install needed libraries
 /usr/bin/apt-get -qq -y  install libnghttp2-dev  build-essential automake autoconf libtool software-properties-common
 #apache2-dev libssl-dev openssl
-#/usr/bin/add-apt-repository -y ppa:maxmind/ppa
-#/usr/bin/apt -qq -y update
-#/usr/bin/apt -qq -y install libmaxminddb0 libmaxminddb-dev 
-
-#mmdb-bin
+/usr/bin/add-apt-repository -y ppa:maxmind/ppa
+/usr/bin/apt -qq -y update
+/usr/bin/apt -qq -y install libmaxminddb-dev 
 
 cd /usr/local/src
 
@@ -60,18 +58,15 @@ cd /usr/local/src/libexpat/expat
 cd /usr/local/src
 
 #Download and build openssl
-
 /usr/bin/git clone https://github.com/openssl/openssl.git
 cd /usr/local/src/openssl
 ./Configure --prefix=/usr/local/ssl --openssldir=/usr/local/ssl '-Wl,--enable-new-dtags,-rpath,$(LIBRPATH)'
 /usr/bin/make
 /usr/bin/make install
 
-
 cd /usr/local/src
 
 #Download about build apr
-
 apr_latest_version="`/usr/bin/curl http://apr.apache.org/download.cgi | /bin/grep "apr1" | /bin/sed 's/.*APR //g' | /usr/bin/awk '{print $1}'`"
 apr_download_link="https://mirrors.ukfast.co.uk/sites/ftp.apache.org/apr/apr-${apr_latest_version}.tar.gz"
 
@@ -86,9 +81,7 @@ make install
 cd /usr/local/src
 
 #Download and build apr-util
-
 apr_util_download_link="`/usr/bin/curl http://apr.apache.org/download.cgi | /bin/grep 'apr-util' | /bin/grep 'tar.gz\"' | /bin/sed 's/.*https/https/g' | /bin/sed 's/".*//g' | /bin/sed '/^$/d'`"
-
 /usr/bin/wget -O- ${apr_util_download_link} | /bin/tar -zxf -
 
 cd apr-util*
@@ -104,16 +97,6 @@ cd ..
 
 /bin/mkdir /usr/local/src/`/bin/ls /usr/local/src/ | /bin/grep httpd`/srclib/apr
 /bin/mv /usr/local/src/apr-*/* `/bin/ls /usr/local/src/ | /bin/grep httpd`/srclib/apr
-
-#Download and build maxmind
-#/bin/mkdir -p /usr/lib/apache2/modules
-#/usr/bin/git clone https://github.com/maxmind/mod_maxminddb.git
-#cd *max*
-#./bootstrap
-#./configure --with-apxs2=/usr/local/apache2/bin/apxs
-#/usr/bin/make
-#/usr/bin/make install
-#cd ..
 
 #Download and build apache
 apache_download_link="`/usr/bin/curl http://httpd.apache.org/download.cgi | /bin/grep "Source" | /bin/grep "tar.gz" | /bin/sed 's/.*https/https/g' | /bin/sed 's/".*//g'`"
@@ -153,7 +136,6 @@ cd ModSecurity
 /usr/bin/git submodule update 
 /bin/sh build.sh 
 ./configure 
-#--with-ssl=/usr/local/ssl
 /usr/bin/make
 /usr/bin/make install
 cd ${dir}
@@ -201,7 +183,7 @@ WEBSITE_NAME="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITED
 /usr/bin/git clone https://github.com/maxmind/mod_maxminddb.git
 cd *max*
 ./bootstrap
-./configure --with-apxs2=/usr/local/apache2/bin/apxs
+./configure --with-apxs=/usr/local/apache2/bin/apxs
 /usr/bin/make
 /usr/bin/make install
 cd ..
