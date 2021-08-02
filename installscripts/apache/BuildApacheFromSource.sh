@@ -151,7 +151,8 @@ cd ModSecurity
 /usr/bin/git submodule init 
 /usr/bin/git submodule update 
 /bin/sh build.sh 
-./configure --with-ssl=/usr/local/ssl
+./configure 
+#--with-ssl=/usr/local/ssl
 /usr/bin/make
 /usr/bin/make install
 cd ${dir}
