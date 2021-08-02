@@ -28,9 +28,9 @@
 #Install needed libraries
 /usr/bin/apt-get -qq -y  install libnghttp2-dev  build-essential autoconf libtool software-properties-common
 #apache2-dev libssl-dev openssl
-/usr/bin/add-apt-repository -y ppa:maxmind/ppa
-/usr/bin/apt -qq -y update
-/usr/bin/apt -qq -y install libmaxminddb0 libmaxminddb-dev mmdb-bin
+#/usr/bin/add-apt-repository -y ppa:maxmind/ppa
+#/usr/bin/apt -qq -y update
+#/usr/bin/apt -qq -y install libmaxminddb0 libmaxminddb-dev mmdb-bin
 
 cd /usr/local/src
 
@@ -104,15 +104,15 @@ cd ..
 /bin/mv /usr/local/src/apr-*/* `/bin/ls /usr/local/src/ | /bin/grep httpd`/srclib/apr
 
 #Download and build maxmind
-#/bin/mkdir -p /usr/lib/apache2/modules
-#/usr/bin/git clone https://github.com/maxmind/mod_maxminddb.git
-#cd *max*
-#./bootstrap
-#./configure --with-apxs=/usr/bin/apxs2
-#/usr/bin/make
-#/usr/bin/make install
+/bin/mkdir -p /usr/lib/apache2/modules
+/usr/bin/git clone https://github.com/maxmind/mod_maxminddb.git
+cd *max*
+./bootstrap
+./configure --with-apxs2=/usr/local/apache2/bin/apxs
+/usr/bin/make
+/usr/bin/make install
 
-#cd ..
+cd ..
 
 #Download and build apache
 apache_download_link="`/usr/bin/curl http://httpd.apache.org/download.cgi | /bin/grep "Source" | /bin/grep "tar.gz" | /bin/sed 's/.*https/https/g' | /bin/sed 's/".*//g'`"
@@ -127,7 +127,9 @@ cd httpd-*
 /bin/mkdir /etc/apache2/conf-available
 /bin/mkdir /etc/apache2/sites-available
 
-./configure --prefix=/usr/local/apache2 --sysconfdir=/etc/apache2 --with-pcre=/usr/local/pcre --with-apr-util=/usr/local/apr-util --with-apr=/usr/local/apr --with-apxs2=/usr/local/apache2/bin/apxs --with-ssl=/usr/local/ssl --with-mpm=prefork --enable-http2 --enable-ssl --enable-so --enable-rewrite --enable-mods-static="reallyall" --enable-mods-shared="reallyall"
+./configure --prefix=/usr/local/apache2 --sysconfdir=/etc/apache2 --with-pcre=/usr/local/pcre --with-apr-util=/usr/local/apr-util --with-apr=/usr/local/apr --with-apxs2=/usr/local/apache2/bin/apxs --with-ssl=/usr/local/ssl --with-mpm=prefork --enable-http2 --enable-ssl --enable-so --enable-rewrite --enable-mods-shared="reallyall"
+
+#--enable-mods-static="reallyall" 
 /usr/bin/make
 
 /usr/bin/make install
