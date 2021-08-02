@@ -132,6 +132,8 @@ cd httpd-*
 
 /usr/bin/make install
 
+cd ..
+
 #Download and build and configure mod security
 dir="`/usr/bin/pwd`"
 /usr/bin/git clone https://github.com/ssdeep-project/ssdeep
