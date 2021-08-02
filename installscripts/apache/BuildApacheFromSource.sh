@@ -28,9 +28,9 @@
 #Install needed libraries
 /usr/bin/apt-get -qq -y  install libnghttp2-dev  build-essential automake autoconf libtool software-properties-common
 #apache2-dev libssl-dev openssl
-/usr/bin/add-apt-repository -y ppa:maxmind/ppa
-/usr/bin/apt -qq -y update
-/usr/bin/apt -qq -y install libmaxminddb-dev 
+#/usr/bin/add-apt-repository -y ppa:maxmind/ppa
+#/usr/bin/apt -qq -y update
+#/usr/bin/apt -qq -y install libmaxminddb-dev 
 
 cd /usr/local/src
 
@@ -179,6 +179,9 @@ WEBSITE_NAME="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITED
 
 
 #Download and build maxmind
+/usr/bin/add-apt-repository -y ppa:maxmind/ppa
+/usr/bin/apt -qq -y update
+/usr/bin/apt -qq -y install libmaxminddb-dev 
 /bin/mkdir -p /usr/lib/apache2/modules
 /usr/bin/git clone https://github.com/maxmind/mod_maxminddb.git
 cd *max*
