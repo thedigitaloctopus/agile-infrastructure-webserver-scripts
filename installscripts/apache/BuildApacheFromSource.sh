@@ -168,6 +168,8 @@ cd ModSecurity-apache
 /usr/bin/make install
 cd ${dir}
 
+/usr/sbin/ldconfig
+
 #Install modsecurity rules
 /usr/bin/git clone https://github.com/SpiderLabs/ModSecurity 
 /bin/mkdir /etc/apache2/modsecurity.d 
