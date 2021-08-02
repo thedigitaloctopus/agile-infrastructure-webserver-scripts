@@ -196,8 +196,17 @@ WEBSITE_NAME="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITED
 /bin/sed -i '/:443/a modsecurity on\nmodsecurity_rules_file /etc/apache2/modsecurity.d/modsec_rules.conf' /etc/apache2/sites-available/${WEBSITE_NAME}
 
 
-/bin/cp /usr/local/apache2/conf/mime.types /etc/apache2/conf
+#Download and build maxmind
+/bin/mkdir -p /usr/lib/apache2/modules
+/usr/bin/git clone https://github.com/maxmind/mod_maxminddb.git
+cd *max*
+./bootstrap
+./configure --with-apxs2=/usr/local/apache2/bin/apxs
+/usr/bin/make
+/usr/bin/make install
+cd ..
 
+/bin/cp /usr/local/apache2/conf/mime.types /etc/apache2/conf
 
 #Put code to start apache after a reboot
 /bin/echo "#!/bin/bash
@@ -271,7 +280,6 @@ LoadModule unique_id_module /usr/local/apache2/modules/mod_unique_id.so
 LoadModule security3_module /usr/local/apache2/modules/mod_security3.so
 LoadModule session_module /usr/local/apache2/modules/mod_session.so
 LoadModule session_cookie_module /usr/local/apache2/modules/mod_session_cookie.so
-LoadModule session_crypto_module /usr/local/apache2/modules/mod_session_crypto.so
 LoadModule maxminddb_module /usr/local/apache2/modules/mod_maxminddb.so" > /etc/apache2/httpd.conf.$$
 
 /bin/cat /etc/apache2/httpd.conf >> /etc/apache2/httpd.conf.$$
