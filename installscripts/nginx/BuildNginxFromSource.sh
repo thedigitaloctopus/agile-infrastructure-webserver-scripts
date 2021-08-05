@@ -26,7 +26,7 @@
 buildtype="${1}"
 
 #Instll the tools needed for complilation
-/usr/bin/apt-get install -qq -y software-properties-common libtool build-essential curl
+/usr/bin/apt-get install -qq -y software-properties-common libtool build-essential curl libmaxminddb-dev
 
 #Get the latest version numbers of the software that we need
 nginx_latest_version="`/usr/bin/curl 'http://nginx.org/download/' |   /bin/egrep -o 'nginx-[0-9]+\.[0-9]+\.[0-9]+' | /bin/sed 's/nginx-//g' |  /usr/bin/sort --version-sort | /usr/bin/uniq | /usr/bin/tail -1`"
@@ -63,12 +63,11 @@ cd ..
 
 #Prepare and install ModSecurity nginx adapter
 /usr/bin/git clone https://github.com/SpiderLabs/ModSecurity-nginx
-/usr/bin/git clone https://github.com/leev/ngx_http_geoip2_module.git
 
 /bin/rm *.tar.gz*
 
 #Install additional libraries that we are building NGINX with
-/usr/bin/apt-get install -qq -y perl libperl-dev libgd3 libgd-dev libgeoip1 libgeoip-dev geoip-bin libxml2 libxml2-dev libxslt1.1 libxslt1-dev
+/usr/bin/apt-get install -qq -y perl libperl-dev libgd3 libgd-dev libxml2 libxml2-dev libxslt1.1 libxslt1-dev
 
 #Setup the manual page
 /bin/cp ~/nginx-${nginx_latest_version}/man/nginx.8 /usr/share/man/man8
@@ -102,7 +101,6 @@ cd nginx*
             --with-http_addition_module \
             --with-http_xslt_module=dynamic \
             --with-http_image_filter_module=dynamic \
-            --with-http_geoip_module=dynamic \
             --with-http_sub_module \
             --with-http_dav_module \
             --with-http_flv_module \
@@ -129,7 +127,6 @@ cd nginx*
             --with-stream=dynamic \
             --with-stream_ssl_module \
             --with-stream_realip_module \
-            --with-stream_geoip_module=dynamic \
             --with-stream_ssl_preread_module \
             --with-compat \
             --with-pcre=../pcre-${pcre_latest_version} \
@@ -252,7 +249,7 @@ ssl_certificate_key /etc/ssl/private/ssl-cert-snakeoil.key;" > /etc/nginx/snippe
 
 #Cleanup
 
-/bin/rm -rf nginx-* openssl-* pcre* zlib-* ModSecurity*
+/bin/rm -rf nginx-* openssl-* pcre* zlib-* ModSecurity* ngx_http*
 
 #Start NGINX
 
