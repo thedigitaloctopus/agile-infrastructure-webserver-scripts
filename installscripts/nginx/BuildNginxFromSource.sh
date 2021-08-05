@@ -139,8 +139,10 @@ cd nginx*
             --add-dynamic-module=../ngx_http_geoip2_module
             
 /usr/bin/make modules
-/bin/cp objs/ngx_http_modsecurity_module.so /etc/nginx/modules
-/bin/cp objs/ngx_http_geoip2_module.so /etc/nginx/modules
+#/bin/cp nginx-*/ngx_http_modsecurity_module.so /etc/nginx/modules
+#/bin/cp nginx-*/ngx_http_geoip2_module.so /etc/nginx/modules
+/bin/cp nginx-*/*.so /etc/nginx/modules
+
 /usr/bin/make
 /usr/bin/make install
 
