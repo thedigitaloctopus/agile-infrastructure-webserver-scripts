@@ -74,6 +74,9 @@ cd ..
 /bin/cp ~/nginx-${nginx_latest_version}/man/nginx.8 /usr/share/man/man8
 /bin/gzip /usr/share/man/man8/nginx.8
 
+#download geoip2 module
+/usr/bin/git clone https://github.com/leev/ngx_http_geoip2_module.git
+
 cd nginx*
 
 #Perform the build. You can add and remove modules from here as suits your build requirements
@@ -136,9 +139,11 @@ cd nginx*
             --with-openssl-opt=no-nextprotoneg \
             --with-debug \
             --add-dynamic-module=../ModSecurity-nginx \
+            --add-dynamic-module=../ngx_http_geoip2_module
             
 /usr/bin/make modules
 /bin/cp objs/ngx_http_modsecurity_module.so /etc/nginx/modules
+/bin/cp objs/ngx_http_geoip2_module.so /etc/nginx/modules
 /usr/bin/make
 /usr/bin/make install
 
