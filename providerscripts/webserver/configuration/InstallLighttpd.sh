@@ -94,5 +94,6 @@ fi
 /bin/sed -i '/^server.modules/a \"mod_compress\",' ${modules_file}
 /bin/sed -i '/^server.modules/a \"mod_expire\",' ${modules_file}
 /bin/sed -i '/^server.modules/a \"mod_accesslog\",' ${modules_file}
+/bin/sed -i '/^server.modules/a \"mod_openssl\",' ${modules_file}
 
 ${HOME}/providerscripts/email/SendEmail.sh "THE LIGHTTPD WEBSERVER HAS BEEN INSTALLED" "Lighttpd webserver is installed and primed"
