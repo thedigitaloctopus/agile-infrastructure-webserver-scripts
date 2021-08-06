@@ -10,12 +10,12 @@ cd lighttp*
 
 #Put code to start apache after a reboot
 /bin/echo "#!/bin/bash
-/usr/bin/lighttpd
+/usr/sbin/lighttpd
 /bin/sleep 10
 lighties=\"\`/usr/bin/ps -ef | /bin/grep lighttp | /bin/grep -v grep | /usr/bin/wc -l\`\"
 while ( [ \"\${lighties}\" = \"0\" ] )
 do
-    /usr/bin/lighttpd
+    /usr/sbin/lighttpd
     lighties=\"\`/usr/bin/ps -ef | /bin/grep lighttp | /bin/grep -v grep | /usr/bin/wc -l\`\"
     /bin/sleep 10
 done
