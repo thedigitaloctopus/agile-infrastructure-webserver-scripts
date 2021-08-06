@@ -80,19 +80,19 @@ else
     modules_file="/etc/lighttpd/lighttpd.conf"
 fi
 
-/bin/sed -i '/server.modules/a \"mod_rewrite\",' ${modules_file}
-/bin/sed -i '/server.modules/a \"mod_proxy\",' ${modules_file}
-/bin/sed -i '/server.modules/a \"mod_access\",' ${modules_file}
-/bin/sed -i '/server.modules/a \"mod_setenv\",' ${modules_file}
-/bin/sed -i '/server.modules/a \"mod_auth\",' ${modules_file}
-/bin/sed -i '/server.modules/a \"mod_redirect\",' ${modules_file}
-/bin/sed -i '/server.modules/a \"mod_status\",' ${modules_file}
-/bin/sed -i '/server.modules/a \"mod_alias\",' ${modules_file}
-/bin/sed -i '/server.modules/a \"mod_userdir\",' ${modules_file}
-/bin/sed -i '/server.modules/a \"mod_fastcgi\",' ${modules_file}
-/bin/sed -i '/server.modules/a \"mod_ssi\",' ${modules_file}
-/bin/sed -i '/server.modules/a \"mod_compress\",' ${modules_file}
-/bin/sed -i '/server.modules/a \"mod_expire\",' ${modules_file}
-/bin/sed -i '/server.modules/a \"mod_accesslog\",' ${modules_file}
+/bin/sed -i '/^server.modules/a \"mod_rewrite\",' ${modules_file}
+/bin/sed -i '/^server.modules/a \"mod_proxy\",' ${modules_file}
+/bin/sed -i '/^server.modules/a \"mod_access\",' ${modules_file}
+/bin/sed -i '/^server.modules/a \"mod_setenv\",' ${modules_file}
+/bin/sed -i '/^server.modules/a \"mod_auth\",' ${modules_file}
+/bin/sed -i '/^server.modules/a \"mod_redirect\",' ${modules_file}
+/bin/sed -i '/^server.modules/a \"mod_status\",' ${modules_file}
+/bin/sed -i '/^server.modules/a \"mod_alias\",' ${modules_file}
+/bin/sed -i '/^server.modules/a \"mod_userdir\",' ${modules_file}
+/bin/sed -i '/^server.modules/a \"mod_fastcgi\",' ${modules_file}
+/bin/sed -i '/^server.modules/a \"mod_ssi\",' ${modules_file}
+/bin/sed -i '/^server.modules/a \"mod_compress\",' ${modules_file}
+/bin/sed -i '/^server.modules/a \"mod_expire\",' ${modules_file}
+/bin/sed -i '/^server.modules/a \"mod_accesslog\",' ${modules_file}
 
 ${HOME}/providerscripts/email/SendEmail.sh "THE LIGHTTPD WEBSERVER HAS BEEN INSTALLED" "Lighttpd webserver is installed and primed"
