@@ -8,6 +8,12 @@ cd lighttp*
 /usr/bin/make
 /usr/bin/make install 
 
+/bin/mkdir /etc/lighttpd
+
+/bin/cp ./doc/config/lighttpd.conf /etc/lighttpd/lighttpd.conf
+/bin/cp ./doc/config/modules.conf /etc/lighttpd/modules.conf
+/bin/cp -r ./doc/config/conf.d /etc/lighttpd/
+
 #Put code to start apache after a reboot
 /bin/echo "#!/bin/bash
 /usr/sbin/lighttpd
