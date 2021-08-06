@@ -28,10 +28,6 @@ buildtype="${1}"
 #Instll the tools needed for complilation
 /usr/bin/apt-get install -qq -y software-properties-common libtool build-essential curl libmaxminddb-dev
 
-/usr/bin/add-apt-repository -y ppa:maxmind/ppa
-/usr/bin/apt-get -qq -y update
-/usr/bin/apt-get -qq -y install libmaxminddb0 libmaxminddb-dev mmdb-bin
-
 #Get the latest version numbers of the software that we need
 nginx_latest_version="`/usr/bin/curl 'http://nginx.org/download/' |   /bin/egrep -o 'nginx-[0-9]+\.[0-9]+\.[0-9]+' | /bin/sed 's/nginx-//g' |  /usr/bin/sort --version-sort | /usr/bin/uniq | /usr/bin/tail -1`"
 pcre_latest_version="`/usr/bin/curl 'https://ftp.pcre.org/pub/pcre/' | /bin/egrep -o 'pcre-[0-9]+\.[0-9]+' | /bin/sed 's/pcre-//g' | /usr/bin/sort --version-sort | /usr/bin/uniq | /usr/bin/tail -1`"
@@ -118,6 +114,8 @@ cd nginx*
             --with-http_slice_module \
             --with-http_stub_status_module \
             --with-http_perl_module=dynamic \
+            --with-http_geoip_module \
+            --with-stream_geoip_module \
             --with-perl_modules_path=/usr/share/perl/${perl_version} \
             --with-perl=/usr/bin/perl \
             --http-log-path=/var/log/nginx/access.log \
