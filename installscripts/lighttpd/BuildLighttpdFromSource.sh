@@ -4,7 +4,7 @@
 /usr/bin/git clone https://github.com/lighttpd/lighttpd1.4.git
 cd lighttp*
 ./autogen.sh
-./configure -C --with-geoip --with-gnutls --with-maxminddb --with-pgsql --with-mysql --with-openssl --with-pcre
+./configure -C --prefix=/usr --bindir=/usr/bin --sbindir=/usr/sbin --sysconfdir=/etc --datadir=/usr/share --includedir=/usr/include --libdir=/usr/lib --with-geoip --with-gnutls --with-maxminddb --with-pgsql --with-mysql --with-openssl --with-pcre --with-rewrite --with-redirect --with-ssl
 /usr/bin/make
 /usr/bin/make install 
 
