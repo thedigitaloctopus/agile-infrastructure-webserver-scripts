@@ -96,4 +96,23 @@ fi
 /bin/sed -i '/^server.modules/a \"mod_accesslog\",' ${modules_file}
 /bin/sed -i '/^server.modules/a \"mod_openssl\",' ${modules_file}
 
+if ( [ "${modules_file}" = "/etc/lighttpd/lighttpd.conf" ] )
+then
+    /bin/sed -i '/.*include.*rewrite.conf.*/c\include \"conf.d/rewrite.conf\"' ${modules_file}
+    /bin/sed -i '/.*include.*proxy.conf.*/c\include \"conf.d/proxy.conf\"' ${modules_file}
+    /bin/sed -i '/.*include.*access.conf.*/c\include \"conf.d/access.conf\"' ${modules_file}
+    /bin/sed -i '/.*include.*setenv.conf.*/c\include \"conf.d/setenv.conf\"' ${modules_file}
+    /bin/sed -i '/.*include.*auth.conf.*/c\include \"conf.d/auth.conf\"' ${modules_file}
+    /bin/sed -i '/.*include.*redirect.conf.*/c\include \"conf.d/redirect.conf\"' ${modules_file}
+    /bin/sed -i '/.*include.*status.conf.*/c\include \"conf.d/status.conf\"' ${modules_file}
+    /bin/sed -i '/.*include.*alias.conf.*/c\include \"conf.d/alias.conf\"' ${modules_file}
+    /bin/sed -i '/.*include.*userdir.conf.*/c\include \"conf.d/userdir.conf\"' ${modules_file}
+    /bin/sed -i '/.*include.*fastcgi.conf.*/c\include \"conf.d/fastcgi.conf\"' ${modules_file}
+    /bin/sed -i '/.*include.*ssi.conf.*/c\include \"conf.d/ssi.conf\"' ${modules_file}
+    /bin/sed -i '/.*include.*compress.conf.*/c\include \"conf.d/compress.conf\"' ${modules_file}
+    /bin/sed -i '/.*include.*expire.conf.*/c\include \"conf.d/expire.conf\"' ${modules_file}
+    /bin/sed -i '/.*include.*accesslog.conf.*/c\include \"conf.d/accesslog.conf\"' ${modules_file}
+    /bin/sed -i '/.*include.*openssl.conf.*/c\include \"conf.d/openssl.conf\"' ${modules_file}
+fi
+
 ${HOME}/providerscripts/email/SendEmail.sh "THE LIGHTTPD WEBSERVER HAS BEEN INSTALLED" "Lighttpd webserver is installed and primed"
