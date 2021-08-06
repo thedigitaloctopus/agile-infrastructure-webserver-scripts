@@ -63,5 +63,17 @@ accesslog.filename = \"/var/log/lighttpd/access.log\"
 
 /bin/sed -i '/server.modules/a \"mod_rewrite\",' /etc/lighttpd/lighttpd.conf
 /bin/sed -i '/server.modules/a \"mod_proxy\",' /etc/lighttpd/lighttpd.conf
+/bin/sed -i '/server.modules/a \"mod_access\",' /etc/lighttpd/lighttpd.conf
+/bin/sed -i '/server.modules/a \"mod_setenv\",' /etc/lighttpd/lighttpd.conf
+/bin/sed -i '/server.modules/a \"mod_auth\",' /etc/lighttpd/lighttpd.conf
+/bin/sed -i '/server.modules/a \"mod_redirect\",' /etc/lighttpd/lighttpd.conf
+/bin/sed -i '/server.modules/a \"mod_status\",' /etc/lighttpd/lighttpd.conf
+/bin/sed -i '/server.modules/a \"mod_alias\",' /etc/lighttpd/lighttpd.conf
+/bin/sed -i '/server.modules/a \"mod_userdir\",' /etc/lighttpd/lighttpd.conf
+/bin/sed -i '/server.modules/a \"mod_fastcgi\",' /etc/lighttpd/lighttpd.conf
+/bin/sed -i '/server.modules/a \"mod_ssi\",' /etc/lighttpd/lighttpd.conf
+/bin/sed -i '/server.modules/a \"mod_compress\",' /etc/lighttpd/lighttpd.conf
+/bin/sed -i '/server.modules/a \"mod_expire\",' /etc/lighttpd/lighttpd.conf
+/bin/sed -i '/server.modules/a \"mod_accesslog\",' /etc/lighttpd/lighttpd.conf
 
 ${HOME}/providerscripts/email/SendEmail.sh "THE LIGHTTPD WEBSERVER HAS BEEN INSTALLED" "Lighttpd webserver is installed and primed"
