@@ -1,0 +1,47 @@
+var.log_root    = "/var/log/lighttpd"
+var.server_root = "/var/www/html"
+var.state_dir   = "/var/run"
+var.home_dir    = "/var/lib/lighttpd"
+var.conf_dir    = "/etc/lighttpd"
+var.cache_dir   = "/var/cache/lighttpd"
+var.socket_dir  = home_dir + "/sockets"
+include "modules.conf"
+server.use-ipv6 = "disable"
+server.bind = "localhost"
+server.username  = "www-data"
+server.groupname = "www-data"
+server.document-root = "/var/www/html"
+server.pid-file = state_dir + "/lighttpd.pid"
+server.errorlog             = log_root + "/error.log"
+include "conf.d/access_log.conf"
+include "conf.d/debug.conf"
+server.network-backend = "sendfile"
+server.max-fds = 2048
+#server.listen-backlog = 128
+server.stat-cache-engine = "simple"
+server.max-connections = 1024
+#server.max-keep-alive-idle = 5
+#server.max-keep-alive-requests = 16
+#server.max-request-size = 0
+#server.max-read-idle = 60
+#server.max-write-idle = 360
+#server.kbytes-per-second = 128
+#connection.kbytes-per-second = 32
+index-file.names += (
+  "index.xhtml", "index.html", "index.htm", "default.htm", "index.php"
+)
+url.access-deny             = ( "~", ".inc" )
+$HTTP["url"] =~ "\.pdf$" {
+  server.range-requests = "disable"
+}
+#url.rewrite                = ( "^/$"             => "/server-status" )
+#url.redirect               = ( "^/wishlist/(.+)" => "http://www.example.com/$1" )
+#$HTTP["host"] =~ "^www\.(.*)" {
+#  url.redirect            = ( "^/(.*)" => "http://%1/$1" )
+#}
+static-file.exclude-extensions = ( ".php", ".pl", ".fcgi", ".scgi" )
+include "conf.d/mime.conf"
+include "conf.d/dirlisting.conf"
+#server.follow-symlink = "enable"
+#server.force-lowercase-filenames = "disable"
+#server.upload-dirs = ( "/var/tmp" )
