@@ -9,6 +9,7 @@ cd lighttp*
 /usr/bin/make install 
 
 /bin/mkdir /etc/lighttpd
+/bin/mkdir /var/log/lighttpd
 
 /bin/cp ./doc/config/lighttpd.conf /etc/lighttpd/lighttpd.conf
 /bin/cp ./doc/config/modules.conf /etc/lighttpd/modules.conf
