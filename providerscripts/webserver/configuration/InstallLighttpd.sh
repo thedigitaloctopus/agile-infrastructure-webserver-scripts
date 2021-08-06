@@ -28,15 +28,27 @@ ${HOME}/installscripts/InstallLighttpd.sh ${BUILDOS}
 #${HOME}/installscripts/InstallPHPCGI.sh ${BUILDOS}
 
 /bin/sed -i "/cgi.fix_pathinfo/c\ cgi.fix_pathinfo=1" /etc/php/${PHP_VERSION}/fpm/php.ini
-/bin/cp /etc/lighttpd/conf-available/15-fastcgi-php.conf /etc/lighttpd/conf-available/15-fastcgi-php.conf.bak
 
-/bin/echo "fastcgi.server += ( \".php\" =>
+if ( [ -f /etc/lighttpd/conf-available/15-fastcgi-php.conf ] )
+then
+     /bin/cp /etc/lighttpd/conf-available/15-fastcgi-php.conf /etc/lighttpd/conf-available/15-fastcgi-php.conf.bak
+
+    /bin/echo "fastcgi.server += ( \".php\" =>
         ((
                 \"host\" => \"127.0.0.1\",
                 \"port\" => \"9000\",
                 \"broken-scriptfilename\" => \"enable\"
         ))
-)" > /etc/lighttpd/conf-available/15-fastcgi-php.conf
+    )" > /etc/lighttpd/conf-available/15-fastcgi-php.conf
+else
+    /bin/echo "fastcgi.server += ( \".php\" =>
+        ((
+                \"host\" => \"127.0.0.1\",
+                \"port\" => \"9000\",
+                \"broken-scriptfilename\" => \"enable\"
+        ))
+    )" > /etc/lighttpd/conf.d/fastcgi.conf
+fi
 
 /usr/sbin/lighttpd-enable-mod fastcgi
 /usr/sbin/lighttpd-enable-mod fastcgi-php
