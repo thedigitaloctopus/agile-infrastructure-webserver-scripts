@@ -73,19 +73,26 @@ server.name = \"${website_url}\"
 accesslog.filename = \"/var/log/lighttpd/access.log\"
 " >>  /etc/lighttpd/lighttpd.conf
 
-/bin/sed -i '/server.modules/a \"mod_rewrite\",' /etc/lighttpd/lighttpd.conf
-/bin/sed -i '/server.modules/a \"mod_proxy\",' /etc/lighttpd/lighttpd.conf
-/bin/sed -i '/server.modules/a \"mod_access\",' /etc/lighttpd/lighttpd.conf
-/bin/sed -i '/server.modules/a \"mod_setenv\",' /etc/lighttpd/lighttpd.conf
-/bin/sed -i '/server.modules/a \"mod_auth\",' /etc/lighttpd/lighttpd.conf
-/bin/sed -i '/server.modules/a \"mod_redirect\",' /etc/lighttpd/lighttpd.conf
-/bin/sed -i '/server.modules/a \"mod_status\",' /etc/lighttpd/lighttpd.conf
-/bin/sed -i '/server.modules/a \"mod_alias\",' /etc/lighttpd/lighttpd.conf
-/bin/sed -i '/server.modules/a \"mod_userdir\",' /etc/lighttpd/lighttpd.conf
-/bin/sed -i '/server.modules/a \"mod_fastcgi\",' /etc/lighttpd/lighttpd.conf
-/bin/sed -i '/server.modules/a \"mod_ssi\",' /etc/lighttpd/lighttpd.conf
-/bin/sed -i '/server.modules/a \"mod_compress\",' /etc/lighttpd/lighttpd.conf
-/bin/sed -i '/server.modules/a \"mod_expire\",' /etc/lighttpd/lighttpd.conf
-/bin/sed -i '/server.modules/a \"mod_accesslog\",' /etc/lighttpd/lighttpd.conf
+if ( [ -f /etc/lighttpd/modules.conf ] )
+then
+    modules_file="/etc/lighttpd/modules.conf"
+else
+    modules_file="/etc/lighttpd/lighttpd.conf"
+fi
+
+/bin/sed -i '/server.modules/a \"mod_rewrite\",' ${modules_file}
+/bin/sed -i '/server.modules/a \"mod_proxy\",' ${modules_file}
+/bin/sed -i '/server.modules/a \"mod_access\",' ${modules_file}
+/bin/sed -i '/server.modules/a \"mod_setenv\",' ${modules_file}
+/bin/sed -i '/server.modules/a \"mod_auth\",' ${modules_file}
+/bin/sed -i '/server.modules/a \"mod_redirect\",' ${modules_file}
+/bin/sed -i '/server.modules/a \"mod_status\",' ${modules_file}
+/bin/sed -i '/server.modules/a \"mod_alias\",' ${modules_file}
+/bin/sed -i '/server.modules/a \"mod_userdir\",' ${modules_file}
+/bin/sed -i '/server.modules/a \"mod_fastcgi\",' ${modules_file}
+/bin/sed -i '/server.modules/a \"mod_ssi\",' ${modules_file}
+/bin/sed -i '/server.modules/a \"mod_compress\",' ${modules_file}
+/bin/sed -i '/server.modules/a \"mod_expire\",' ${modules_file}
+/bin/sed -i '/server.modules/a \"mod_accesslog\",' ${modules_file}
 
 ${HOME}/providerscripts/email/SendEmail.sh "THE LIGHTTPD WEBSERVER HAS BEEN INSTALLED" "Lighttpd webserver is installed and primed"
