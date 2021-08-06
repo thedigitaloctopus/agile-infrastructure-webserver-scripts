@@ -12,7 +12,7 @@ cd lighttp*
 /bin/mkdir /var/log/lighttpd
 /bin/chown www-data.www-data /var/log/lighttpd
 
-/bin/cp ./doc/config/lighttpd.conf /etc/lighttpd/lighttpd.conf
+/bin/cp ${HOME}/installscripts/lighttpd/lighttpd.conf.base /etc/lighttpd/lighttpd.conf
 /bin/cp ./doc/config/modules.conf /etc/lighttpd/modules.conf
 /bin/cp -r ./doc/config/conf.d /etc/lighttpd/
 
