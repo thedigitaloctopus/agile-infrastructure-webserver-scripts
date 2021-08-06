@@ -96,7 +96,7 @@ fi
 /bin/sed -i '/^server.modules/a \"mod_accesslog\",' ${modules_file}
 /bin/sed -i '/^server.modules/a \"mod_openssl\",' ${modules_file}
 
-if ( [ "${modules_file}" = "/etc/lighttpd/lighttpd.conf" ] )
+if ( [ "${modules_file}" = "/etc/lighttpd/modules.conf" ] )
 then
     /bin/sed -i '/.*include.*rewrite.conf.*/c\include \"conf.d/rewrite.conf\"' ${modules_file}
     /bin/sed -i '/.*include.*proxy.conf.*/c\include \"conf.d/proxy.conf\"' ${modules_file}
