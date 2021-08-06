@@ -44,6 +44,15 @@ fi
 
 if ( [ "${BUILDOS}" = "debian" ] )
 then
-    /usr/bin/apt-get -y -qq install lighttpd
+    if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'LIGHTTPD:source'`" = "1" ] )
+    then
+        ${HOME}/installscripts/Update.sh ${BUILDOS}
+        ${HOME}/installscripts/lighttpd/BuildLighttpdFromSource.sh 
+        /bin/touch /etc/apache2/BUILT_FROM_SOURCE
+    elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'LIGHTTPD:repo'`" = "1" ] )
+    then
+        /usr/bin/apt-get -y -qq install lighttpd
+        /bin/touch /etc/apache2/BUILT_FROM_REPO
+    fi
 fi
 
