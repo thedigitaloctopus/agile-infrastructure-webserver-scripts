@@ -140,6 +140,31 @@ then
                 ${HOME}/providerscripts/email/SendEmail.sh "NEW SSL CERT GENERATION FAILED" "Failed to generate a new SSL certificate, you might want to look into why..."
             fi
         fi
+        
+        if ( [ "${DNS_CHOICE}" = "exoscale" ] )
+        then
+            DNS_USERNAME="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DNSUSERNAME'`"
+            EXOSCALE_API_KEY="`/bin/grep DNSSECURITYKEY ${HOME}/.ssh/webserver_configuration_settings.dat | /usr/bin/awk -F':' '{print $2}'`"
+            EXOSCALE_API_SECRET="`/bin/grep DNSSECURITYKEY ${HOME}/.ssh/webserver_configuration_settings.dat | /usr/bin/awk -F':' '{print $3}'`"
+
+            #For production
+            if ( [ "${PRODUCTION}" = "1" ] && [ "${DEVELOPMENT}" = "0" ] )
+            then
+                /bin/echo ${SERVER_USER_PASSWORD}  | /usr/bin/sudo -S -E EXOSCALE_API_KEY=${EXOSCALE_API_KEY} EXOSCALE_API_SECRET=${EXOSCALE_API_SECRET} /usr/bin/lego --email ${DNS_USERNAME} --dns exoscale --domains ${WEBSITE_URL} --dns-timeout=120 --accept-tos run
+            fi
+    
+            if ( [ "${PRODUCTION}" = "0" ] && [ "${DEVELOPMENT}" = "1" ] )
+            then
+                /bin/echo ${SERVER_USER_PASSWORD}  | /usr/bin/sudo -S -E EXOSCALE_API_KEY=${EXOSCALE_API_KEY} EXOSCALE_API_SECRET=${EXOSCALE_API_SECRET} /usr/bin/lego --email ${DNS_USERNAME} --server=https://acme-staging-v02.api.letsencrypt.org/directory --dns exoscale --domains ${WEBSITE_URL} --dns-timeout=120 --accept-tos run
+            fi
+             
+            if ( [ "$?" = "0" ] )
+            then
+                ${HOME}/providerscripts/email/SendEmail.sh "NEW SSL CERT GENERATED" "Successfully generated a new SSL Certificate"
+            else
+                ${HOME}/providerscripts/email/SendEmail.sh "NEW SSL CERT GENERATION FAILED" "Failed to generate a new SSL certificate, you might want to look into why..."
+            fi
+        fi
 
         if ( [ ! -d ${HOME}/ssl/live/${WEBSITE_URL} ] )
         then
