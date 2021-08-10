@@ -211,8 +211,13 @@ else
     /bin/sed -i "/\$host /c\        public \$host = \'${host}:${DB_PORT}\';" ${HOME}/runtime/joomla_configuration.php
 fi
 
-secret="`< /dev/urandom tr -dc a-z | head -c${1:-16};echo;`"
-/bin/touch ${HOME}/config/SECRET:${secret}
+secret="`/bin/ls ${HOME}/config/SECRET:* | /usr/bin/awk -F':' '{print $NF}' 2>/dev/null`"
+if ( [ "${secret}" = "" ] )
+then
+    secret="`< /dev/urandom tr -dc a-z | head -c${1:-16};echo;`"
+    /bin/touch ${HOME}/config/SECRET:${secret}
+fi
+
 /bin/sed -i "/\$secret /c\        public \$secret = \'${secret}\';" ${HOME}/runtime/joomla_configuration.php
 /bin/sed -i "/\$cachetime /c\        public \$cachetime = \'30\';" ${HOME}/runtime/joomla_configuration.php
 /bin/sed -i "/\$cache_handler /c\        public \$cache_handler = \'${cache}\';" ${HOME}/runtime/joomla_configuration.php
