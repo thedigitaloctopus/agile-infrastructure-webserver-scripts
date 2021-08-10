@@ -144,8 +144,12 @@ then
         if ( [ "${DNS_CHOICE}" = "exoscale" ] )
         then
             DNS_USERNAME="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DNSUSERNAME'`"
-            EXOSCALE_API_KEY="`/bin/grep DNSSECURITYKEY ${HOME}/.ssh/webserver_configuration_settings.dat | /usr/bin/awk -F':' '{print $2}'`"
-            EXOSCALE_API_SECRET="`/bin/grep DNSSECURITYKEY ${HOME}/.ssh/webserver_configuration_settings.dat | /usr/bin/awk -F':' '{print $3}'`"
+            DNS_SECURITY_KEYS="`${HOME}/providerscripts/utilities/ExtractConfigValues.sh 'DNSSECURITYKEY' stripped`"
+            EXOSCALE_API_KEY="`/bin/echo ${DNS_SECURITY_KEYS} | /usr/bin/awk '{print $1}'`"
+            EXOSCALE_API_SECRET="`/bin/echo ${DNS_SECURITY_KEYS} | /usr/bin/awk '{print $2}'`"
+
+            #EXOSCALE_API_KEY="`/bin/grep DNSSECURITYKEY ${HOME}/.ssh/webserver_configuration_settings.dat | /usr/bin/awk -F':' '{print $2}'`"
+            #EXOSCALE_API_SECRET="`/bin/grep DNSSECURITYKEY ${HOME}/.ssh/webserver_configuration_settings.dat | /usr/bin/awk -F':' '{print $3}'`"
 
             #For production
             if ( [ "${PRODUCTION}" = "1" ] && [ "${DEVELOPMENT}" = "0" ] )
