@@ -27,14 +27,19 @@ do
     applicationname="`/bin/echo ${applicationdir} | /bin/sed 's/\/$//' | /usr/bin/awk -F'/' '{print $NF}'`"
     if ( [ "`/home/${SERVER_USER}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:${applicationname}`" = "1" ] )
     then
-        . ${applicationdir}PerformPostProcessing.sh
+        if ( [ "`/home/${SERVER_USER}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOICE:virgin`" = "1" ] )
+       then
+           . ${applicationdir}PerformPostProcessing.sh
+       fi
     fi
 done
 
-if ( [ "`/home/${SERVER_USER}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOICE:virgin`" = "1" ] )
-then
-    exit
-fi
+#if ( [ "`/home/${SERVER_USER}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOICE:virgin`" = "1" ] )
+#then
+#    exit
+#fi
+
+
 
 if ( [ "`/home/${SERVER_USER}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:None`" = "0" ] )
 then
