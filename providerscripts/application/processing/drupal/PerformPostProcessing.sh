@@ -14,6 +14,12 @@
 #######################################################################################################
 #set -x
 
+#If we are not a virgin, exit
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOICE:virgin`" = "0" ] ) 
+then
+    exit
+fi
+
 while ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] ) 
 do 
         /bin/sleep 10 
