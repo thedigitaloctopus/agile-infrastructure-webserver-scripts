@@ -140,8 +140,8 @@ fi
 
 #/bin/sed -i "/\$host = /c\   public \$host = \'${dbipandport}\';" ${HOME}/runtime/joomla_configuration.php
 /bin/echo "${0} `/bin/date`: Updating the database ip" >> ${HOME}/logs/MonitoringLog.dat
-/bin/sed -i "/\$dbtype /c\    public \$dbtype = \'mysqli\';" ${HOME}/runtime/joomla_configuration.php
-/bin/echo "${0} `/bin/date`: Updating the database driver" >> ${HOME}/logs/MonitoringLog.dat
+#/bin/sed -i "/\$dbtype /c\    public \$dbtype = \'mysqli\';" ${HOME}/runtime/joomla_configuration.php
+#/bin/echo "${0} `/bin/date`: Updating the database driver" >> ${HOME}/logs/MonitoringLog.dat
 /bin/sed -i "/\$user/c\       public \$user = \'${name}\';" ${HOME}/runtime/joomla_configuration.php
 /bin/echo "${0} `/bin/date`: Updating the database user credential" >> ${HOME}/logs/MonitoringLog.dat
 /bin/sed -i "/\$password/c\   public \$password = \'${password}\';" ${HOME}/runtime/joomla_configuration.php
