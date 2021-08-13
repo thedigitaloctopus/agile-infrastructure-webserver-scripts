@@ -24,8 +24,6 @@
 #######################################################################################################
 #set -x
 
-
-
 if ( [ "${1}" = "" ] )
 then
     /bin/echo "Your application type is set to: `${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'APPLICATIONIDENTIFIER'`"
