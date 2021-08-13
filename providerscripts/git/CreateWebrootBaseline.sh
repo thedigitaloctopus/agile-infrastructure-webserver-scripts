@@ -24,14 +24,15 @@
 #######################################################################################################
 #set -x
 
-/bin/echo "Your application type is set to: `${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'APPLICATIONIDENTIFIER'`"
 
-/bin/echo "Please make very sure this is correct for your application otherwise things will break"
-/bin/echo "Press <enter> when you are sure"
-read x
 
 if ( [ "${1}" = "" ] )
 then
+    /bin/echo "Your application type is set to: `${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'APPLICATIONIDENTIFIER'`"
+    /bin/echo "Please make very sure this is correct for your application otherwise things will break"
+    /bin/echo "Press <enter> when you are sure"
+    read x
+    
     /bin/echo "Also, please make sure that there is an empty repository of the format <identifier>-webroot-sourcecode-baseline"
     /bin/echo "With your repository provider"
     /bin/echo "Building a baseline and storing it in your repository may take a little while"
