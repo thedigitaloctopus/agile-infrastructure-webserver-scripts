@@ -30,11 +30,16 @@
 /bin/echo "Press <enter> when you are sure"
 read x
 
-/bin/echo "Also, please make sure that there is an empty repository of the format <identifier>-webroot-sourcecode-baseline"
-/bin/echo "With your repository provider"
-/bin/echo "Building a baseline and storing it in your repository may take a little while"
-/bin/echo "Please enter an identifier for your baseline for example 'mysocialnetwork'"
-read baseline_name
+if ( [ "${1}" = "" ] )
+then
+    /bin/echo "Also, please make sure that there is an empty repository of the format <identifier>-webroot-sourcecode-baseline"
+    /bin/echo "With your repository provider"
+    /bin/echo "Building a baseline and storing it in your repository may take a little while"
+    /bin/echo "Please enter an identifier for your baseline for example 'mysocialnetwork'"
+    read baseline_name
+else
+    baseline_name="${1}"
+fi
 
 APPLICATION_REPOSITORY_USERNAME="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'APPLICATIONREPOSITORYUSERNAME'`"
 APPLICATION_REPOSITORY_PASSWORD="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'APPLICATIONREPOSITORYPASSWORD'`"
