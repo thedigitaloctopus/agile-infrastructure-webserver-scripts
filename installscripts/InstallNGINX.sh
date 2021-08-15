@@ -33,7 +33,14 @@ then
     if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'NGINX:source'`" = "1" ] )
     then
          ${HOME}/installscripts/Update.sh ${BUILDOS}
-         ${HOME}/installscripts/nginx/BuildNginxFromSource.sh Ubuntu
+         
+         if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'NGINX:source:modsecurity'`" = "1" ] )
+         then
+             ${HOME}/installscripts/nginx/BuildNginxFromSource.sh Ubuntu modsecurity
+         else
+             ${HOME}/installscripts/nginx/BuildNginxFromSource.sh Ubuntu
+         fi 
+         
          /bin/touch /etc/nginx/BUILT_FROM_SOURCE
     elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'NGINX:repo'`" = "1" ] )
     then
@@ -52,7 +59,14 @@ then
     if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'NGINX:source'`" = "1" ] )
     then
         ${HOME}/installscripts/Update.sh ${BUILDOS}
-        ${HOME}/installscripts/nginx/BuildNginxFromSource.sh Debian
+        
+        if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'NGINX:source:modsecurity'`" = "1" ] )
+        then
+            ${HOME}/installscripts/nginx/BuildNginxFromSource.sh Debian modsecurity
+        else
+            ${HOME}/installscripts/nginx/BuildNginxFromSource.sh Debian
+        fi
+        
         /bin/touch /etc/nginx/BUILT_FROM_SOURCE
     elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'NGINX:repo'`" = "1" ] )
     then    
