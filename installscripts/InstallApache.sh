@@ -33,7 +33,14 @@ then
     if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:source'`" = "1" ] )
     then
         ${HOME}/installscripts/Update.sh ${BUILDOS}
-        ${HOME}/installscripts/apache/BuildApacheFromSource.sh 
+        
+         if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:source:modsecurity'`" = "1" ] )
+         then
+             ${HOME}/installscripts/apache/BuildApacheFromSource.sh  Ubuntu modsecurity
+         else
+             ${HOME}/installscripts/apache/BuildApacheFromSource.sh  Ubuntu
+         fi 
+        
         /bin/touch /etc/apache2/BUILT_FROM_SOURCE
     elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:repo'`" = "1" ] )
     then
@@ -57,7 +64,13 @@ then
     if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:source'`" = "1" ] )
     then
         ${HOME}/installscripts/Update.sh ${BUILDOS}
-        ${HOME}/installscripts/apache/BuildApacheFromSource.sh
+        
+         if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:source:modsecurity'`" = "1" ] )
+         then
+             ${HOME}/installscripts/apache/BuildApacheFromSource.sh  Debian modsecurity
+         else
+             ${HOME}/installscripts/apache/BuildApacheFromSource.sh  Debian
+         fi 
         /bin/touch /etc/apache2/BUILT_FROM_SOURCE
     elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:repo'`" = "1" ] )
     then
