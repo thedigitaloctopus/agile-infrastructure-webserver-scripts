@@ -48,7 +48,7 @@ LimitRequestFields 50
 
 NameVirtualHost *:80
 <VirtualHost *:80>
-   ServerName ${website_url
+   ServerName ${website_url}
    Redirect permanent / https://${website_url/
 </VirtualHost>
 
