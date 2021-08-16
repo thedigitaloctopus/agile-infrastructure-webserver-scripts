@@ -166,11 +166,11 @@ then
     /bin/cp /etc/apache2/modsecurity.d/owasp-crs/crs-setup.conf.example /etc/apache2/modsecurity.d/owasp-crs/crs-setup.conf
     cd /etc/apache2/modsecurity.d
 
-    cat > modsec_rules.conf << 'EOL'
+    `/bin/cat > modsec_rules.conf << 'EOL'
     Include "/etc/apache2/modsecurity.d/modsecurity.conf"
     Include "/etc/apache2/modsecurity.d/owasp-crs/crs-setup.conf"
     Include "/etc/apache2/modsecurity.d/owasp-crs/rules/*.conf"
-    EOL
+    EOL`
 
     cd ${dir}
 
