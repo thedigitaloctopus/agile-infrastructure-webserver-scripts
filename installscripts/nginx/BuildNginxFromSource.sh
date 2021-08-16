@@ -49,10 +49,13 @@ cd pcre-${pcre_latest_version}
 cd ..
 
 cd openssl-${openssl_latest_version}
+/usr/bin/apt-get -qq -y remove --auto-remove openssl
+/usr/bin/apt-get -qq -y purge --auto-remove openssl
 ./config --prefix=/opt/openssl-${openssl_latest_version} --openssldir=/opt/openssl-${openssl_latest_version}
-make
-make install
+/usr/bin/make
+/usr/bin/make install
 cd ..
+/bin/cp /opt/openssl-${openssl_latest_version}/bin/openssl /usr/bin/openssl
 
 if ( [ "${2}" = "modsecurity" ] )
 then
