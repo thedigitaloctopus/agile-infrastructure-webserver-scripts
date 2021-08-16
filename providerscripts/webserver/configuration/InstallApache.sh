@@ -46,7 +46,6 @@ fi
 TimeOut 45 
 LimitRequestFields 50 
 
-NameVirtualHost *:80
 <VirtualHost *:80>
    ServerName ${website_url}
    Redirect permanent / https://${website_url}/
@@ -67,7 +66,6 @@ NameVirtualHost *:80
         ExpiresActive On
         Protocols h2 http/1.1
         SSLEngine on
-        SSLRequireSSL on
         SSLProtocol         all -SSLv3 -TLSv1 -TLSv1.1
         SSLCipherSuite      ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256
         SSLHonorCipherOrder on
