@@ -37,23 +37,23 @@ cd /usr/local/src
 #Download and build PCRE
 pcre_latest_version="`/usr/bin/curl 'https://ftp.pcre.org/pub/pcre/' | /bin/egrep -o 'pcre-[0-9]+\.[0-9]+' | /bin/sed 's/pcre-//g' | /usr/bin/sort --version-sort | /usr/bin/uniq | /usr/bin/tail -1`"
 /usr/bin/wget -O- https://ftp.pcre.org/pub/pcre/pcre-${pcre_latest_version}.tar.gz | /bin/tar -zxf -
-openssl_latest_version="`/usr/bin/wget -q -O - https://www.openssl.org/source | grep openssl-1. | /bin/sed 's/.*openssl-//g' | /bin/sed 's/.tar.*//g'`"
-/usr/bin/wget https://www.openssl.org/source/openssl-${openssl_latest_version}.tar.gz && tar xzvf openssl-${openssl_latest_version}.tar.gz
+###openssl_latest_version="`/usr/bin/wget -q -O - https://www.openssl.org/source | grep openssl-1. | /bin/sed 's/.*openssl-//g' | /bin/sed 's/.tar.*//g'`"
+###/usr/bin/wget https://www.openssl.org/source/openssl-${openssl_latest_version}.tar.gz && tar xzvf openssl-${openssl_latest_version}.tar.gz
 
-/usr/bin/apt-get -qq -y remove --auto-remove openssl
-/usr/bin/apt-get -qq -y purge --auto-remove openssl
+###/usr/bin/apt-get -qq -y remove --auto-remove openssl
+###/usr/bin/apt-get -qq -y purge --auto-remove openssl
 
-cd openssl-${openssl_latest_version}
-./config --prefix=/opt/openssl-${openssl_latest_version} --openssldir=/opt/openssl-${openssl_latest_version}
-/usr/bin/make
-/usr/bin/make install
-cd ..
+####cd openssl-${openssl_latest_version}
+###./config --prefix=/opt/openssl-${openssl_latest_version} --openssldir=/opt/openssl-${openssl_latest_version}
+###/usr/bin/make
+###/usr/bin/make install
+###cd ..
 
-/bin/cp /opt/openssl-${openssl_latest_version}/bin/openssl /usr/bin/openssl
+###/bin/cp /opt/openssl-${openssl_latest_version}/bin/openssl /usr/bin/openssl
 
 cd /usr/local/src/pcre*
 
-./configure --prefix=/usr/local/pcre --withssl=
+./configure --prefix=/usr/local/pcre ####--with-ssl=
 /usr/bin/make
 /usr/bin/make install
 
@@ -64,7 +64,7 @@ cd /usr/local/src
 
 cd /usr/local/src/libexpat/expat
 ./buildconf.sh
-./configure --prefix=/usr/local/expat --with-ssl=/opt/openssl-${openssl_latest_version}
+./configure --prefix=/usr/local/expat ###--with-ssl=/opt/openssl-${openssl_latest_version}
 /usr/bin/make 
 /usr/bin/make install
 
@@ -115,7 +115,10 @@ cd httpd-*
 /bin/mkdir /etc/apache2/conf-available
 /bin/mkdir /etc/apache2/sites-available
 
-./configure --prefix=/usr/local/apache2 --sysconfdir=/etc/apache2 --with-pcre=/usr/local/pcre --with-apr-util=/usr/local/apr-util --with-apr=/usr/local/apr --with-apxs2=/usr/local/apache2/bin/apxs --with-expat=/usr/local/expat --with-ssl=/opt/openssl-${openssl_latest_version} --with-mpm=prefork --enable-http2 --enable-ssl --enable-so --enable-rewrite --enable-mods-shared="reallyall" --enable-mods-static="reallyall"
+./configure --prefix=/usr/local/apache2 --sysconfdir=/etc/apache2 --with-pcre=/usr/local/pcre --with-apr-util=/usr/local/apr-util --with-apr=/usr/local/apr --with-apxs2=/usr/local/apache2/bin/apxs --with-expat=/usr/local/expat  --with-mpm=prefork --enable-http2 --enable-ssl --enable-so --enable-rewrite --enable-mods-shared="reallyall" --enable-mods-static="reallyall"
+
+###--with-ssl=/opt/openssl-${openssl_latest_version}
+
 
 /usr/bin/make
 
@@ -130,7 +133,7 @@ then
     /usr/bin/git clone https://github.com/ssdeep-project/ssdeep
     cd ssdeep/
     ./bootstrap
-    ./configure --with-ssl=/opt/openssl-${openssl_latest_version}
+    ./configure ###--with-ssl=/opt/openssl-${openssl_latest_version}
     /usr/bin/make
     /usr/bin/make install
     cd ${dir}
@@ -140,7 +143,7 @@ then
     /usr/bin/git submodule init 
     /usr/bin/git submodule update 
     /bin/sh build.sh 
-    ./configure  --with-ssl=/opt/openssl-${openssl_latest_version}
+    ./configure ### --with-ssl=/opt/openssl-${openssl_latest_version}
     /usr/bin/make
     /usr/bin/make install
     cd ${dir}
@@ -151,7 +154,7 @@ then
     /usr/bin/git clone https://github.com/SpiderLabs/ModSecurity-apache
     cd ModSecurity-apache
     ./autogen.sh
-    ./configure --with-libmodsecurity=/usr/local/modsecurity --with-pcre=../pcre-${pcre_latest_version} --with-ssl=/opt/openssl-${openssl_latest_version}
+    ./configure --with-libmodsecurity=/usr/local/modsecurity --with-pcre=../pcre-${pcre_latest_version} ###--with-ssl=/opt/openssl-${openssl_latest_version}
     /usr/bin/make
     /usr/bin/make install
     cd ${dir}
