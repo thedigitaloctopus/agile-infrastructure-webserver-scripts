@@ -91,7 +91,7 @@ apr_util_download_link="`/usr/bin/curl http://apr.apache.org/download.cgi | /bin
 
 cd apr-util*
 
-./configure --prefix=/usr/local/apr-util --with-apr=/usr/local/apr/bin/apr-1-config
+./configure --prefix=/usr/local/apr-util --with-apr=/usr/local/apr/bin/apr-1-config --with-expat=/usr/local/expat
 make
 make install
 
