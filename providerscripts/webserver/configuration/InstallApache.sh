@@ -86,6 +86,11 @@ LimitRequestFields 50
             ExpiresByType text/css \"access plus 8 days\"
 </IfModule>" > /etc/apache2/sites-available/${WEBSITE_NAME}
 
+if ( [ -f /etc/apache2/mods-available/security2.conf ] )
+then
+    /bin/echo "SecRuleEngine On" >> /etc/apache2/sites-available/${WEBSITE_NAME}
+fi
+
 /bin/echo "
          <Directory />
             Order Deny,Allow
