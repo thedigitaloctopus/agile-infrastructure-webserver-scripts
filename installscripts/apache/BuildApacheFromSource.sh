@@ -37,6 +37,8 @@ cd /usr/local/src
 #Download and build PCRE
 pcre_latest_version="`/usr/bin/curl 'https://ftp.pcre.org/pub/pcre/' | /bin/egrep -o 'pcre-[0-9]+\.[0-9]+' | /bin/sed 's/pcre-//g' | /usr/bin/sort --version-sort | /usr/bin/uniq | /usr/bin/tail -1`"
 /usr/bin/wget -O- https://ftp.pcre.org/pub/pcre/pcre-${pcre_latest_version}.tar.gz | /bin/tar -zxf -
+openssl_latest_version="`/usr/bin/wget -q -O - https://www.openssl.org/source | grep openssl-1. | /bin/sed 's/.*openssl-//g' | /bin/sed 's/.tar.*//g'`"
+/usr/bin/wget https://www.openssl.org/source/openssl-${openssl_latest_version}.tar.gz && tar xzvf openssl-${openssl_latest_version}.tar.gz
 
 cd /usr/local/src/pcre*
 
@@ -59,8 +61,8 @@ cd /usr/local/src
 
 cd openssl-${openssl_latest_version}
 ./config --prefix=/opt/openssl-${openssl_latest_version} --openssldir=/opt/openssl-${openssl_latest_version}
-make
-make install
+/usr/bin/make
+/usr/bin/make install
 cd ..
 
 cd /usr/local/src
@@ -110,7 +112,7 @@ cd httpd-*
 /bin/mkdir /etc/apache2/conf-available
 /bin/mkdir /etc/apache2/sites-available
 
-./configure --prefix=/usr/local/apache2 --sysconfdir=/etc/apache2 --with-pcre=/usr/local/pcre --with-apr-util=/usr/local/apr-util --with-apr=/usr/local/apr --with-apxs2=/usr/local/apache2/bin/apxs --with-ssl=/usr/local/ssl --with-mpm=prefork --enable-http2 --enable-ssl --enable-so --enable-rewrite --enable-mods-shared="reallyall"
+./configure --prefix=/usr/local/apache2 --sysconfdir=/etc/apache2 --with-pcre=/usr/local/pcre --with-apr-util=/usr/local/apr-util --with-apr=/usr/local/apr --with-apxs2=/usr/local/apache2/bin/apxs --with-ssl=/opt/openssl-${openssl_latest_version} --with-mpm=prefork --enable-http2 --enable-ssl --enable-so --enable-rewrite --enable-mods-shared="reallyall"
 
 #--enable-mods-static="reallyall" 
 /usr/bin/make
