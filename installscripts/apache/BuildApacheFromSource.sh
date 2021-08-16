@@ -57,12 +57,11 @@ cd /usr/local/src/libexpat/expat
 
 cd /usr/local/src
 
-#Download and build openssl
-/usr/bin/git clone https://github.com/openssl/openssl.git
-cd /usr/local/src/openssl
-./Configure --prefix=/usr/local/ssl --openssldir=/usr/local/ssl '-Wl,--enable-new-dtags,-rpath,$(LIBRPATH)'
-/usr/bin/make
-/usr/bin/make install
+cd openssl-${openssl_latest_version}
+./config --prefix=/opt/openssl-${openssl_latest_version} --openssldir=/opt/openssl-${openssl_latest_version}
+make
+make install
+cd ..
 
 cd /usr/local/src
 
