@@ -49,11 +49,31 @@ then
         then
             /usr/bin/apt-get -qq -y install libapache2-mod-php${PHP_VERSION}
         fi
+        
+        if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:repo:modsecurity'`" = "1" ] )
+        then
+            /usr/bin/apt -y -qq install libapache2-mod-security2 
+            /usr/sbin/a2enmod headers
+            /bin/cp /etc/modsecurity/modsecurity.conf-recommended /etc/modsecurity/modsecurity.conf
+            /bin/sed -i 's/SecRuleEngine DetectionOnly/SecRuleEngine On/' /etc/modsecurity/modsecurity.conf
 
-        /usr/bin/apt-get -qq -y install libapache2-mod-security2
-        /bin/cp /etc/modsecurity/modsecurity.conf-recommended /etc/modsecurity/modsecurity.conf
-        /bin/sed -i 's/DetectionOnly/On/g' /etc/modsecurity/modsecurity.conf
-        /usr/bin/apt-get -qq -y install libapache2-mod-fcgid        
+            /bin/rm -rf /usr/share/modsecurity-crs
+
+            /usr/bin/git clone https://github.com/coreruleset/coreruleset /usr/share/modsecurity-crs
+            /bin/mv /usr/share/modsecurity-crs/crs-setup.conf.example /usr/share/modsecurity-crs/crs-setup.conf
+            /bin/mv /usr/share/modsecurity-crs/rules/REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf.example /usr/share/modsecurity-crs/rules/REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf
+
+            /bin/echo "<IfModule security2_module>
+        SecDataDir /var/cache/modsecurity
+        Include /usr/share/modsecurity-crs/crs-setup.conf
+        Include /usr/share/modsecurity-crs/rules/*.conf
+</IfModule>" > /etc/apache2/mods-available/security2.conf
+        fi
+
+     #   /usr/bin/apt-get -qq -y install libapache2-mod-security2
+     #   /bin/cp /etc/modsecurity/modsecurity.conf-recommended /etc/modsecurity/modsecurity.conf
+     #   /bin/sed -i 's/DetectionOnly/On/g' /etc/modsecurity/modsecurity.conf
+     #   /usr/bin/apt-get -qq -y install libapache2-mod-fcgid        
         /bin/touch /etc/apache2/BUILT_FROM_REPO
     fi
 fi
@@ -80,10 +100,32 @@ then
             /usr/bin/apt-get -qq -y install libapache2-mod-php${PHP_VERSION}
         fi
         
-        /usr/bin/apt-get -qq -y install libapache2-mod-security2
-        /bin/cp /etc/modsecurity/modsecurity.conf-recommended /etc/modsecurity/modsecurity.conf
-        /bin/sed -i 's/DetectionOnly/On/g' /etc/modsecurity/modsecurity.conf
-        /usr/bin/apt-get -qq -y install libapache2-mod-fcgid
+        if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:repo:modsecurity'`" = "1" ] )
+        then
+            /usr/bin/apt -y -qq install libapache2-mod-security2 
+            /usr/sbin/a2enmod headers
+            /bin/cp /etc/modsecurity/modsecurity.conf-recommended /etc/modsecurity/modsecurity.conf
+            /bin/sed -i 's/SecRuleEngine DetectionOnly/SecRuleEngine On/' /etc/modsecurity/modsecurity.conf
+
+            /bin/rm -rf /usr/share/modsecurity-crs
+
+            /usr/bin/git clone https://github.com/coreruleset/coreruleset /usr/share/modsecurity-crs
+            /bin/mv /usr/share/modsecurity-crs/crs-setup.conf.example /usr/share/modsecurity-crs/crs-setup.conf
+            /bin/mv /usr/share/modsecurity-crs/rules/REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf.example /usr/share/modsecurity-crs/rules/REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf
+
+            /bin/echo "<IfModule security2_module>
+        SecDataDir /var/cache/modsecurity
+        Include /usr/share/modsecurity-crs/crs-setup.conf
+        Include /usr/share/modsecurity-crs/rules/*.conf
+</IfModule>" > /etc/apache2/mods-available/security2.conf
+        fi
+        
+        
+        
+     #   /usr/bin/apt-get -qq -y install libapache2-mod-security2
+     #   /bin/cp /etc/modsecurity/modsecurity.conf-recommended /etc/modsecurity/modsecurity.conf
+     #   /bin/sed -i 's/DetectionOnly/On/g' /etc/modsecurity/modsecurity.conf
+     #   /usr/bin/apt-get -qq -y install libapache2-mod-fcgid
         /bin/touch /etc/apache2/BUILT_FROM_REPO
     fi
 fi
