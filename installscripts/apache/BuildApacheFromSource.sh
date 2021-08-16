@@ -252,25 +252,25 @@ WantedBy=multi-user.target" > /etc/systemd/system/rc-local.service
 /bin/chown www-data.www-data /var/log/apache2
 
 #Set required modules for loading
-/bin/echo "LoadModule unixd_module  /usr/local/apache2/modules/mod_unixd.so
-LoadModule authz_core_module  /usr/local/apache2/modules/mod_authz_core.so
-LoadModule log_config_module /usr/local/apache2/modules/mod_log_config.so
-LoadModule log_debug_module /usr/local/apache2/modules/mod_log_debug.so
-LoadModule logio_module /usr/local/apache2/modules/mod_logio.so
-LoadModule remoteip_module /usr/local/apache2/modules/mod_remoteip.so
-LoadModule expires_module /usr/local/apache2/modules/mod_expires.so
-LoadModule ssl_module /usr/local/apache2/modules/mod_ssl.so
-LoadModule access_compat_module /usr/local/apache2/modules/mod_access_compat.so
-LoadModule dir_module /usr/local/apache2/modules/mod_dir.so
-LoadModule proxy_module /usr/local/apache2/modules/mod_proxy.so
-LoadModule proxy_http_module /usr/local/apache2/modules/mod_proxy_http.so
-LoadModule proxy_fcgi_module /usr/local/apache2/modules/mod_proxy_fcgi.so
-LoadModule headers_module /usr/local/apache2/modules/mod_headers.so
-LoadModule rewrite_module /usr/local/apache2/modules/mod_rewrite.so
-LoadModule mime_module /usr/local/apache2/modules/mod_mime.so
-LoadModule unique_id_module /usr/local/apache2/modules/mod_unique_id.so
-LoadModule session_module /usr/local/apache2/modules/mod_session.so
-LoadModule session_cookie_module /usr/local/apache2/modules/mod_session_cookie.so" > /etc/apache2/httpd.conf.$$
+#/bin/echo "LoadModule unixd_module  /usr/local/apache2/modules/mod_unixd.so
+#LoadModule authz_core_module  /usr/local/apache2/modules/mod_authz_core.so
+#LoadModule log_config_module /usr/local/apache2/modules/mod_log_config.so
+#LoadModule log_debug_module /usr/local/apache2/modules/mod_log_debug.so
+#LoadModule logio_module /usr/local/apache2/modules/mod_logio.so
+#LoadModule remoteip_module /usr/local/apache2/modules/mod_remoteip.so
+#LoadModule expires_module /usr/local/apache2/modules/mod_expires.so
+#LoadModule ssl_module /usr/local/apache2/modules/mod_ssl.so
+#LoadModule access_compat_module /usr/local/apache2/modules/mod_access_compat.so
+#LoadModule dir_module /usr/local/apache2/modules/mod_dir.so
+#LoadModule proxy_module /usr/local/apache2/modules/mod_proxy.so
+#LoadModule proxy_http_module /usr/local/apache2/modules/mod_proxy_http.so
+#LoadModule proxy_fcgi_module /usr/local/apache2/modules/mod_proxy_fcgi.so
+#LoadModule headers_module /usr/local/apache2/modules/mod_headers.so
+#LoadModule rewrite_module /usr/local/apache2/modules/mod_rewrite.so
+#LoadModule mime_module /usr/local/apache2/modules/mod_mime.so
+#LoadModule unique_id_module /usr/local/apache2/modules/mod_unique_id.so
+#LoadModule session_module /usr/local/apache2/modules/mod_session.so
+#LoadModule session_cookie_module /usr/local/apache2/modules/mod_session_cookie.so" > /etc/apache2/httpd.conf.$$
 
 if ( [ "${2}" = "modsecurity" ] )
 then
