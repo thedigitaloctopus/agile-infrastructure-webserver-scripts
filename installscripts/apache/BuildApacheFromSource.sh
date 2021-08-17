@@ -76,7 +76,7 @@ apr_download_link="https://mirrors.ukfast.co.uk/sites/ftp.apache.org/apr/apr-${a
 /usr/bin/wget -O- ${apr_download_link} | /bin/tar -zxf - -C httpd-*/srclib
 
 cd /usr/local/src/httpd-*/srclib
-/bin/ln -s ${apr_latest_version}/ apr
+/bin/ln -s apr-${apr_latest_version}/ apr
 
 #cd apr*
 
