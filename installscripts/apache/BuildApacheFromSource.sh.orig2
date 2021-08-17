@@ -59,55 +59,54 @@ cd /usr/local/src/libexpat/expat
 
 cd /usr/local/src
 
-/usr/bin/apt-get -qq -y remove --auto-remove openssl
-/usr/bin/apt-get -qq -y purge --auto-remove openssl
-
 cd openssl-${openssl_latest_version}
+./config --prefix=/opt/openssl-${openssl_latest_version} --openssldir=/opt/openssl-${openssl_latest_version}
 ./config --prefix=/opt/openssl-${openssl_latest_version} --openssldir=/opt/openssl-${openssl_latest_version}
 /usr/bin/make
 /usr/bin/make install
 cd ..
-/bin/cp /opt/openssl-${openssl_latest_version}/bin/openssl /usr/bin/openssl
-
-cd /usr/local/src
-
-#Download about build apr
-apr_latest_version="`/usr/bin/curl http://apr.apache.org/download.cgi | /bin/grep "apr1" | /bin/sed 's/.*APR //g' | /usr/bin/awk '{print $1}'`"
-apr_download_link="https://mirrors.ukfast.co.uk/sites/ftp.apache.org/apr/apr-${apr_latest_version}.tar.gz"
-
-/usr/bin/wget -O- ${apr_download_link} | /bin/tar -zxf -
-
-cd apr*
-
-./configure --prefix=/usr/local/apr
-make
-make install
-
-cd /usr/local/src
-
-#Download and build apr-util
-apr_util_download_link="`/usr/bin/curl http://apr.apache.org/download.cgi | /bin/grep 'apr-util' | /bin/grep 'tar.gz\"' | /bin/sed 's/.*https/https/g' | /bin/sed 's/".*//g' | /bin/sed '/^$/d'`"
-/usr/bin/wget -O- ${apr_util_download_link} | /bin/tar -zxf -
-
-cd apr-util*
-
-./configure --prefix=/usr/local/apr-util --with-apr=/usr/local/apr/bin/apr-1-config --with-expat=/usr/local/expat
-make
-make install
-
-cd ..
-
-/bin/mkdir /usr/local/src/`/bin/ls /usr/local/src/ | /bin/grep httpd`/srclib/apr-util
-/bin/mv /usr/local/src/apr-util-*/* `/bin/ls /usr/local/src/ | /bin/grep httpd`/srclib/apr-util
-
-/bin/mkdir /usr/local/src/`/bin/ls /usr/local/src/ | /bin/grep httpd`/srclib/apr
-/bin/mv /usr/local/src/apr-*/* `/bin/ls /usr/local/src/ | /bin/grep httpd`/srclib/apr
 
 #Download and build apache
 apache_download_link="`/usr/bin/curl http://httpd.apache.org/download.cgi | /bin/grep "Source" | /bin/grep "tar.gz" | /bin/sed 's/.*https/https/g' | /bin/sed 's/".*//g'`"
 /usr/bin/wget -O- ${apache_download_link} | /bin/tar -zxf -
 
-cd httpd-*
+#Download about build apr
+apr_latest_version="`/usr/bin/curl http://apr.apache.org/download.cgi | /bin/grep "apr1" | /bin/sed 's/.*APR //g' | /usr/bin/awk '{print $1}'`"
+apr_download_link="https://mirrors.ukfast.co.uk/sites/ftp.apache.org/apr/apr-${apr_latest_version}.tar.gz"
+
+/usr/bin/wget -O- ${apr_download_link} | /bin/tar -zxf - -C httpd-*/srclib
+
+#cd apr*
+
+#./configure --prefix=/usr/local/apr
+#make
+#make install
+
+#cd /usr/local/src
+
+#Download and build apr-util
+apr_util_download_link="`/usr/bin/curl http://apr.apache.org/download.cgi | /bin/grep 'apr-util' | /bin/grep 'tar.gz\"' | /bin/sed 's/.*https/https/g' | /bin/sed 's/".*//g' | /bin/sed '/^$/d'`"
+/usr/bin/wget -O- ${apr_util_download_link} | /bin/tar -zxf - _C httpd-*/srclib
+
+#cd apr-util*
+
+#./configure --prefix=/usr/local/apr-util --with-apr=/usr/local/apr/bin/apr-1-config --with-expat=/usr/local/expat
+#make
+#make install
+
+#cd ..
+
+#/bin/mkdir /usr/local/src/`/bin/ls /usr/local/src/ | /bin/grep httpd`/srclib/apr-util
+#/bin/mv /usr/local/src/apr-util-*/* `/bin/ls /usr/local/src/ | /bin/grep httpd`/srclib/apr-util
+
+#/bin/mkdir /usr/local/src/`/bin/ls /usr/local/src/ | /bin/grep httpd`/srclib/apr
+#/bin/mv /usr/local/src/apr-*/* `/bin/ls /usr/local/src/ | /bin/grep httpd`/srclib/apr
+
+
+
+#cd httpd-*/srclib
+
+
 
 /bin/mkdir /usr/local/apache2
 /bin/mkdir /etc/apache2
