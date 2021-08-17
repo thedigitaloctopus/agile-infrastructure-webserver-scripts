@@ -118,12 +118,6 @@ apr_util_download_link="`/usr/bin/curl http://apr.apache.org/download.cgi | /bin
 /bin/mkdir /etc/apache2/conf-available
 /bin/mkdir /etc/apache2/sites-available
 
-    --prefix=/opt/httpd \
-    --with-included-apr \
-    --enable-ssl \
-    --with-ssl=/opt/openssl-1.0.1e \
-    --enable-ssl-staticlib-deps \
-    --enable-mods-static=ssl
     
 options=" --prefix=/usr/local/apache2 --sysconfdir=/etc/apache2 --with-pcre=/usr/local/pcre --with-included-apr --with-apxs2=/usr/local/apache2/bin/apxs --with-expat=/usr/local/expat --with-ssl=/opt/openssl-${openssl_latest_version} --with-mpm=prefork --enable-http2 --enable-ssl --enable-so --enable-rewrite --enable-mods-shared="reallyall" --enable-mods-static="reallyall" --enable-ssl-staticlib-deps --enable-mods-static=ssl"
 #./configure --prefix=/usr/local/apache2 --sysconfdir=/etc/apache2 --with-pcre=/usr/local/pcre --with-apr-util=/usr/local/apr-util --with-apr=/usr/local/apr --with-apxs2=/usr/local/apache2/bin/apxs --with-expat=/usr/local/expat --with-ssl=/opt/openssl-${openssl_latest_version} --with-mpm=prefork --enable-http2 --enable-ssl --enable-so --enable-rewrite --enable-mods-shared="reallyall" --enable-mods-static="reallyall"
