@@ -63,7 +63,7 @@ cd openssl-${openssl_latest_version}
 ./config --prefix=/opt/openssl-${openssl_latest_version} --openssldir=/opt/openssl-${openssl_latest_version}/ssl no-shared
 /usr/bin/make
 /usr/bin/make install
-/bin/echo "/opt/${openssl_latest_version}/lib" > /etc/ld.so.conf.d/openssl.conf
+/bin/echo "/opt/openssl-${openssl_latest_version}/lib" > /etc/ld.so.conf.d/openssl.conf
 /usr/sbin/ldconfig
 cd ..
 
