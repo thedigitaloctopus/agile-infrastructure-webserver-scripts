@@ -61,7 +61,6 @@ cd /usr/local/src
 
 cd openssl-${openssl_latest_version}
 ./config --prefix=/opt/openssl-${openssl_latest_version} --openssldir=/opt/openssl-${openssl_latest_version}
-./config --prefix=/opt/openssl-${openssl_latest_version} --openssldir=/opt/openssl-${openssl_latest_version}
 /usr/bin/make
 /usr/bin/make install
 cd ..
@@ -75,7 +74,9 @@ apr_latest_version="`/usr/bin/curl http://apr.apache.org/download.cgi | /bin/gre
 apr_download_link="https://mirrors.ukfast.co.uk/sites/ftp.apache.org/apr/apr-${apr_latest_version}.tar.gz"
 
 /usr/bin/wget -O- ${apr_download_link} | /bin/tar -zxf - -C httpd-*/srclib
-/bin/ln -s ${apr_latest_version}/ httpd-*/srclib/apr
+
+cd /usr/local/src/httpd-*/srclib
+/bin/ln -s ${apr_latest_version}/ apr
 
 #cd apr*
 
@@ -83,13 +84,16 @@ apr_download_link="https://mirrors.ukfast.co.uk/sites/ftp.apache.org/apr/apr-${a
 #make
 #make install
 
-#cd /usr/local/src
+cd /usr/local/src
 
 #Download and build apr-util
 apr_util_download_link="`/usr/bin/curl http://apr.apache.org/download.cgi | /bin/grep 'apr-util' | /bin/grep 'tar.gz\"' | /bin/sed 's/.*https/https/g' | /bin/sed 's/".*//g' | /bin/sed '/^$/d'`"
 /usr/bin/wget -O- ${apr_util_download_link} | /bin/tar -zxf - -C httpd-*/srclib
-/bin/ln -s apr-util*/ httpd-*/srclib/apr-util
 
+cd /usr/local/src/httpd-*/srclib
+/bin/ln -s apr-util* apr-util
+
+cd /usr/local/src
 
 #cd apr-util*
 
@@ -118,6 +122,7 @@ apr_util_download_link="`/usr/bin/curl http://apr.apache.org/download.cgi | /bin
 /bin/mkdir /etc/apache2/conf-available
 /bin/mkdir /etc/apache2/sites-available
 
+cd /usr/local/src/httpd-*
     
 options=" --prefix=/usr/local/apache2 --sysconfdir=/etc/apache2 --with-pcre=/usr/local/pcre --with-included-apr --with-apxs2=/usr/local/apache2/bin/apxs --with-expat=/usr/local/expat --with-ssl=/opt/openssl-${openssl_latest_version} --with-mpm=prefork --enable-http2 --enable-ssl --enable-so --enable-rewrite --enable-mods-shared="reallyall" --enable-mods-static="reallyall" --enable-ssl-staticlib-deps --enable-mods-static=ssl"
 #./configure --prefix=/usr/local/apache2 --sysconfdir=/etc/apache2 --with-pcre=/usr/local/pcre --with-apr-util=/usr/local/apr-util --with-apr=/usr/local/apr --with-apxs2=/usr/local/apache2/bin/apxs --with-expat=/usr/local/expat --with-ssl=/opt/openssl-${openssl_latest_version} --with-mpm=prefork --enable-http2 --enable-ssl --enable-so --enable-rewrite --enable-mods-shared="reallyall" --enable-mods-static="reallyall"
