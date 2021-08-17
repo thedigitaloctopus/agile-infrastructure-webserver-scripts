@@ -75,6 +75,7 @@ apr_latest_version="`/usr/bin/curl http://apr.apache.org/download.cgi | /bin/gre
 apr_download_link="https://mirrors.ukfast.co.uk/sites/ftp.apache.org/apr/apr-${apr_latest_version}.tar.gz"
 
 /usr/bin/wget -O- ${apr_download_link} | /bin/tar -zxf - -C httpd-*/srclib
+/bin/ln -s ${apr_latest_version}/ httpd-*/srclib/apr
 
 #cd apr*
 
@@ -86,7 +87,9 @@ apr_download_link="https://mirrors.ukfast.co.uk/sites/ftp.apache.org/apr/apr-${a
 
 #Download and build apr-util
 apr_util_download_link="`/usr/bin/curl http://apr.apache.org/download.cgi | /bin/grep 'apr-util' | /bin/grep 'tar.gz\"' | /bin/sed 's/.*https/https/g' | /bin/sed 's/".*//g' | /bin/sed '/^$/d'`"
-/usr/bin/wget -O- ${apr_util_download_link} | /bin/tar -zxf - _C httpd-*/srclib
+/usr/bin/wget -O- ${apr_util_download_link} | /bin/tar -zxf - -C httpd-*/srclib
+/bin/ln -s apr-util*/ httpd-*/srclib/apr-util
+
 
 #cd apr-util*
 
