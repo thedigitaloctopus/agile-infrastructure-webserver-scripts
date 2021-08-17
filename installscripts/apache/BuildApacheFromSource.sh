@@ -38,8 +38,7 @@ cd /usr/local/src
 pcre_latest_version="`/usr/bin/curl 'https://ftp.pcre.org/pub/pcre/' | /bin/egrep -o 'pcre-[0-9]+\.[0-9]+' | /bin/sed 's/pcre-//g' | /usr/bin/sort --version-sort | /usr/bin/uniq | /usr/bin/tail -1`"
 /usr/bin/wget -O- https://ftp.pcre.org/pub/pcre/pcre-${pcre_latest_version}.tar.gz | /bin/tar -zxf -
 #openssl_latest_version="`/usr/bin/wget -q -O - https://www.openssl.org/source | grep openssl-1. | /bin/sed 's/.*openssl-//g' | /bin/sed 's/.tar.*//g'`"
-openssl_latest_version="`/usr/bin/php -i | /bin/grep -i openssl | /bin/grep Version | /usr/bin/awk -F'/' '{print $NF}' | /usr/bin/head -1`"
-/usr/bin/wget https://www.openssl.org/source/openssl-${openssl_latest_version}.tar.gz && tar xzvf openssl-${openssl_latest_version}.tar.gz
+#/usr/bin/wget https://www.openssl.org/source/openssl-${openssl_latest_version}.tar.gz && tar xzvf openssl-${openssl_latest_version}.tar.gz
 
 cd /usr/local/src/pcre*
 
@@ -60,11 +59,11 @@ cd /usr/local/src/libexpat/expat
 
 cd /usr/local/src
 
-cd openssl-${openssl_latest_version}
-./config --prefix=/opt/openssl-${openssl_latest_version} --openssldir=/opt/openssl-${openssl_latest_version} 
-/usr/bin/make
-/usr/bin/make install
-cd ..
+#cd openssl-${openssl_latest_version}
+#./config --prefix=/opt/openssl-${openssl_latest_version} --openssldir=/opt/openssl-${openssl_latest_version} 
+#/usr/bin/make
+#/usr/bin/make install
+#cd ..
 
 #Download and build apache
 apache_download_link="`/usr/bin/curl http://httpd.apache.org/download.cgi | /bin/grep "Source" | /bin/grep "tar.gz" | /bin/sed 's/.*https/https/g' | /bin/sed 's/".*//g'`"
@@ -125,7 +124,9 @@ cd /usr/local/src
 
 cd /usr/local/src/httpd-*
     
-options=" --prefix=/usr/local/apache2 --sysconfdir=/etc/apache2 --with-pcre=/usr/local/pcre --with-included-apr --with-apxs2=/usr/local/apache2/bin/apxs --with-expat=/usr/local/expat --with-ssl=/opt/openssl-${openssl_latest_version} --with-mpm=prefork --enable-http2 --enable-ssl --enable-so --enable-rewrite --enable-mods-shared="reallyall" --enable-ssl-staticlib-deps --enable-mods-static=ssl"
+#options=" --prefix=/usr/local/apache2 --sysconfdir=/etc/apache2 --with-pcre=/usr/local/pcre --with-included-apr --with-apxs2=/usr/local/apache2/bin/apxs --with-expat=/usr/local/expat --with-ssl=/opt/openssl-${openssl_latest_version} --with-mpm=prefork --enable-http2 --enable-ssl --enable-so --enable-rewrite --enable-mods-shared="reallyall" --enable-ssl-staticlib-deps --enable-mods-static=ssl"
+options=" --prefix=/usr/local/apache2 --sysconfdir=/etc/apache2 --with-pcre=/usr/local/pcre --with-included-apr --with-apxs2=/usr/local/apache2/bin/apxs --with-expat=/usr/local/expat --with-mpm=prefork --enable-http2 --enable-ssl --enable-so --enable-rewrite --enable-mods-shared="reallyall" --enable-ssl-staticlib-deps --enable-mods-static=ssl"
+
 #./configure --prefix=/usr/local/apache2 --sysconfdir=/etc/apache2 --with-pcre=/usr/local/pcre --with-apr-util=/usr/local/apr-util --with-apr=/usr/local/apr --with-apxs2=/usr/local/apache2/bin/apxs --with-expat=/usr/local/expat --with-ssl=/opt/openssl-${openssl_latest_version} --with-mpm=prefork --enable-http2 --enable-ssl --enable-so --enable-rewrite --enable-mods-shared="reallyall" --enable-mods-static="reallyall"
 
 ./configure ${options}
