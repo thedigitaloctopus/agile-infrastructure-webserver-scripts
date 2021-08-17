@@ -57,7 +57,7 @@ cd /usr/local/src/libexpat/expat
 /usr/bin/make 
 /usr/bin/make install
 
-cd /usr/local/src
+cd /usr/local/src/openssl-${openssl_latest_version}
 export LD_LIBRARY_PATH=/opt/openssl-${openssl_latest_version}/lib
 ./config --prefix=/opt/openssl-${openssl_latest_version} --openssldir=/opt/openssl-${openssl_latest_version}/ssl no-shared
 /usr/bin/make
