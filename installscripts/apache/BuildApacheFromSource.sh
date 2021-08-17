@@ -124,7 +124,7 @@ cd /usr/local/src
 
 cd /usr/local/src/httpd-*
     
-options=" --prefix=/usr/local/apache2 --sysconfdir=/etc/apache2 --with-pcre=/usr/local/pcre --with-included-apr --with-apxs2=/usr/local/apache2/bin/apxs --with-expat=/usr/local/expat --with-ssl=/opt/openssl-${openssl_latest_version} --with-mpm=prefork --enable-http2 --enable-ssl --enable-so --enable-rewrite --enable-mods-shared="reallyall" --enable-ssl-staticlib-deps --enable-mods-static=ssl"
+options=" --prefix=/usr/local/apache2 --sysconfdir=/etc/apache2 --with-pcre=/usr/local/pcre --with-included-apr --with-apxs2=/usr/local/apache2/bin/apxs --with-expat=/usr/local/expat --with-ssl=/opt/openssl-${openssl_latest_version} --with-mpm=prefork --enable-http2 --enable-ssl --enable-so --enable-rewrite --enable-mods-shared="reallyall" --enable-ssl-staticlib-deps"
 
 #./configure --prefix=/usr/local/apache2 --sysconfdir=/etc/apache2 --with-pcre=/usr/local/pcre --with-apr-util=/usr/local/apr-util --with-apr=/usr/local/apr --with-apxs2=/usr/local/apache2/bin/apxs --with-expat=/usr/local/expat --with-ssl=/opt/openssl-${openssl_latest_version} --with-mpm=prefork --enable-http2 --enable-ssl --enable-so --enable-rewrite --enable-mods-shared="reallyall" --enable-mods-static="reallyall"
 
@@ -278,6 +278,7 @@ LoadModule proxy_http_module /usr/local/apache2/modules/mod_proxy_http.so
 LoadModule proxy_fcgi_module /usr/local/apache2/modules/mod_proxy_fcgi.so
 LoadModule headers_module /usr/local/apache2/modules/mod_headers.so
 LoadModule rewrite_module /usr/local/apache2/modules/mod_rewrite.so
+LoadModule ssl_module /usr/local/apache2/modules/mod_ssl.so
 LoadModule mime_module /usr/local/apache2/modules/mod_mime.so
 LoadModule unique_id_module /usr/local/apache2/modules/mod_unique_id.so
 LoadModule session_module /usr/local/apache2/modules/mod_session.so
