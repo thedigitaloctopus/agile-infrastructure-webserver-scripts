@@ -63,7 +63,7 @@ cd /usr/local/src
 /usr/bin/apt-get -qq -y purge --auto-remove openssl
 
 cd openssl-${openssl_latest_version}
-./config --prefix=/opt/openssl-${openssl_latest_version} --openssldir=/opt/openssl-${openssl_latest_version}/ssl shared
+./config --prefix=/opt/openssl-${openssl_latest_version} --openssldir=/opt/openssl-${openssl_latest_version}/ssl no-shared
 /usr/bin/make
 /usr/bin/make install
 cd ..
