@@ -60,7 +60,7 @@ cd /usr/local/src/libexpat/expat
 cd /usr/local/src
 
 cd openssl-${openssl_latest_version}
-./config --prefix=/opt/openssl-${openssl_latest_version} --openssldir=/opt/openssl-${openssl_latest_version}
+./config --prefix=/opt/openssl-${openssl_latest_version} --openssldir=/opt/openssl-${openssl_latest_version} --disable-ssl2 --disable-ssl3
 /usr/bin/make
 /usr/bin/make install
 cd ..
