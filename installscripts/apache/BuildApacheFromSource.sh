@@ -111,7 +111,8 @@ cd /usr/local/src/httpd-*
 
 #options=" --enable-ssl --enable-so --enable-http2 --enable-so --enable-rewrite --enable-mods-shared="reallyall" --enable-ssl-staticlib-deps --with-mpm=event --with-included-apr --with-pcre=/usr/local/pcre --with-ssl=/usr/local/openssl --with-expat=/usr/local/expat --prefix=/usr/local/apache2"
 
-options=" --enable-ssl --enable-so --enable-http2 --enable-rewrite --enable-mods-shared=\"reallyall\" --enable-ssl-staticlib-deps --with-mpm=prefork --with-included-apr --with-pcre=/usr/local/pcre --with-expat=/usr/local/expat --prefix=/usr/local/apache2"
+options=" --prefix=/usr/local/apache2 --sysconfdir=/etc/apache2 --enable-ssl --enable-so --enable-http2 --enable-rewrite --enable-mods-shared=\"reallyall\" --enable-ssl-staticlib-deps --with-mpm=prefork --with-included-apr --with-pcre=/usr/local/pcre --with-expat=/usr/local/expat "
+
 ./configure ${options}
 
 /usr/bin/make
