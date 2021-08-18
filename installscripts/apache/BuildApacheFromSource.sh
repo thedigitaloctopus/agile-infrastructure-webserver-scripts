@@ -26,7 +26,8 @@
 #set -x
 
 #Install needed libraries
-/usr/bin/apt-get -qq -y  install libnghttp2-dev  build-essential automake autoconf libtool software-properties-common libtool-bin mmdb-bin
+/usr/bin/apt-get -qq -y  install libnghttp2-dev  build-essential automake autoconf libtool software-properties-common libtool-bin 
+#mmdb-bin
 #apache2-dev libssl-dev openssl
 #/usr/bin/add-apt-repository -y ppa:maxmind/ppa
 #/usr/bin/apt -qq -y update
