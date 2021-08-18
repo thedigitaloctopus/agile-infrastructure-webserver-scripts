@@ -280,8 +280,8 @@ LoadModule session_cookie_module /usr/local/apache2/modules/mod_session_cookie.s
   
 if ( [ "${2}" = "modsecurity" ] )
 then
-    /bin/echo "LoadModule security3_module /usr/local/apache2/modules/mod_security3.so
-LoadModule maxminddb_module /usr/local/apache2/modules/mod_maxminddb.so" >> /etc/apache2/httpd.conf.$$
+    /bin/echo "LoadModule security3_module /usr/local/apache2/modules/mod_security3.so" >> /etc/apache2/httpd.conf.$$
+# LoadModule maxminddb_module /usr/local/apache2/modules/mod_maxminddb.so" >> /etc/apache2/httpd.conf.$$
 fi
 
 /bin/cat /etc/apache2/httpd.conf >> /etc/apache2/httpd.conf.$$
