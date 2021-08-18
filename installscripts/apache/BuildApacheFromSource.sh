@@ -142,24 +142,24 @@ then
     cd ${dir}
     
     #Download and build maxmind
-    /usr/bin/add-apt-repository -y ppa:maxmind/ppa
-    /usr/bin/apt -qq -y update
-    /usr/bin/apt -qq -y install libmaxminddb-dev 
-    /bin/mkdir -p /usr/lib/apache2/modules
-    /usr/bin/git clone https://github.com/maxmind/mod_maxminddb.git
-    cd *max*
-    ./bootstrap
-    ./configure --with-apxs=/usr/local/apache2/bin/apxs
-    /usr/bin/make
-    /usr/bin/make install
-    cd ..
+   # /usr/bin/add-apt-repository -y ppa:maxmind/ppa
+   # /usr/bin/apt -qq -y update
+   # /usr/bin/apt -qq -y install libmaxminddb-dev 
+   # /bin/mkdir -p /usr/lib/apache2/modules
+   # /usr/bin/git clone https://github.com/maxmind/mod_maxminddb.git
+   # cd *max*
+   # ./bootstrap
+   # ./configure --with-apxs=/usr/local/apache2/bin/apxs
+   # /usr/bin/make
+   # /usr/bin/make install
+   # cd ..
     /usr/bin/git clone https://github.com/SpiderLabs/ModSecurity 
     cd ModSecurity 
     /usr/bin/git checkout -b v3/master origin/v3/master 
     /usr/bin/git submodule init 
     /usr/bin/git submodule update 
     /bin/sh build.sh 
-    ./configure 
+    ./configure  -with-maxmind=no
     /usr/bin/make
     /usr/bin/make install
     cd ${dir}
@@ -170,7 +170,8 @@ then
     /usr/bin/git clone https://github.com/SpiderLabs/ModSecurity-apache
     cd ModSecurity-apache
     ./autogen.sh
-    ./configure --with-libmodsecurity=/usr/local/modsecurity --with-pcre=../pcre-${pcre_latest_version}
+    ./configure --with-libmodsecurity=/usr/local/modsecurity 
+    #--with-pcre=../pcre-${pcre_latest_version}
     /usr/bin/make
     /usr/bin/make install
     cd ${dir}
