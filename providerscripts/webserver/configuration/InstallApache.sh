@@ -51,7 +51,7 @@ LimitRequestFields 50
    Redirect permanent / https://${website_url}/
 </VirtualHost>
 
-<VirtualHost _default_:443>
+<VirtualHost *:443>
         ServerAdmin webmaster@${website_url}
         ServerName ${website_url}
         ServerAlias ${website_url}
