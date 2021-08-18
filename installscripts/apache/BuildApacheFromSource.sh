@@ -26,7 +26,7 @@
 #set -x
 
 #Install needed libraries
-/usr/bin/apt-get -qq -y  install libnghttp2-dev  build-essential automake autoconf libtool software-properties-common libtool-bin
+/usr/bin/apt-get -qq -y  install libnghttp2-dev  build-essential automake autoconf libtool software-properties-common libtool-bin mmdb-bin
 #apache2-dev libssl-dev openssl
 #/usr/bin/add-apt-repository -y ppa:maxmind/ppa
 #/usr/bin/apt -qq -y update
@@ -193,17 +193,17 @@ then
 
 
     #Download and build maxmind
-    /usr/bin/add-apt-repository -y ppa:maxmind/ppa
-    /usr/bin/apt -qq -y update
-    /usr/bin/apt -qq -y install libmaxminddb-dev 
-    /bin/mkdir -p /usr/lib/apache2/modules
-    /usr/bin/git clone https://github.com/maxmind/mod_maxminddb.git
-    cd *max*
-    ./bootstrap
-    ./configure --with-apxs=/usr/local/apache2/bin/apxs
-    /usr/bin/make
-    /usr/bin/make install
-    cd ..
+  #  /usr/bin/add-apt-repository -y ppa:maxmind/ppa
+  #  /usr/bin/apt -qq -y update
+  #  /usr/bin/apt -qq -y install libmaxminddb-dev 
+  #  /bin/mkdir -p /usr/lib/apache2/modules
+  #  /usr/bin/git clone https://github.com/maxmind/mod_maxminddb.git
+  #  cd *max*
+   # ./bootstrap
+   # ./configure --with-apxs=/usr/local/apache2/bin/apxs
+   # /usr/bin/make
+   # /usr/bin/make install
+   # cd ..
 fi
 
 /bin/cp /usr/local/apache2/conf/mime.types /etc/apache2/conf
