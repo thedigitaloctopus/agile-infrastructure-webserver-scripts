@@ -269,6 +269,27 @@ LoadModule unique_id_module /usr/local/apache2/modules/mod_unique_id.so
 LoadModule session_module /usr/local/apache2/modules/mod_session.so
 LoadModule session_cookie_module /usr/local/apache2/modules/mod_session_cookie.so" > /etc/apache2/httpd.conf.$$
 
+/bin/echo "LoadModule authz_core_module modules/mod_authz_core.so
+LoadModule mime_module modules/mod_mime.so
+LoadModule log_config_module modules/mod_log_config.so
+LoadModule unixd_module modules/mod_unixd.so
+LoadModule dir_module modules/mod_dir.so
+LoadModule proxy_module modules/mod_proxy.so 
+LoadModule proxy_fcgi_module modules/mod_proxy_fcgi.so 
+LoadModule rewrite_module modules/mod_rewrite.so 
+LoadModule access_compat_module modules/mod_access_compat.so 
+LoadModule alias_module modules/mod_alias.so 
+LoadModule deflate_module modules/mod_deflate.so 
+LoadModule filter_module modules/mod_filter.so 
+LoadModule expires_module modules/mod_expires.so 
+LoadModule http2_module modules/mod_http2.so 
+LoadModule socache_shmcb_module modules/mod_socache_shmcb.so 
+LoadModule ssl_module modules/mod_ssl.so 
+LoadModule authz_host_module modules/mod_authz_host.so 
+LoadModule status_module modules/mod_status.so
+LoadModule remoteip_module modules/mod_remoteip.so 
+LoadModule setenvif_module modules/mod_setenvif.so" > /etc/apache2/httpd.conf.$$
+  
 if ( [ "${2}" = "modsecurity" ] )
 then
     /bin/echo "LoadModule security3_module /usr/local/apache2/modules/mod_security3.so
