@@ -139,6 +139,19 @@ then
     /usr/bin/make
     /usr/bin/make install
     cd ${dir}
+    
+    #Download and build maxmind
+    /usr/bin/add-apt-repository -y ppa:maxmind/ppa
+    /usr/bin/apt -qq -y update
+    /usr/bin/apt -qq -y install libmaxminddb-dev 
+    /bin/mkdir -p /usr/lib/apache2/modules
+    /usr/bin/git clone https://github.com/maxmind/mod_maxminddb.git
+    cd *max*
+    ./bootstrap
+    ./configure --with-apxs=/usr/local/apache2/bin/apxs
+    /usr/bin/make
+    /usr/bin/make install
+    cd ..
     /usr/bin/git clone https://github.com/SpiderLabs/ModSecurity 
     cd ModSecurity 
     /usr/bin/git checkout -b v3/master origin/v3/master 
@@ -192,18 +205,7 @@ then
    # /bin/sed -i '/:443/a modsecurity on\nmodsecurity_rules_file /etc/apache2/modsecurity.d/modsec_rules.conf' /etc/apache2/sites-available/${WEBSITE_NAME}
 
 
-    #Download and build maxmind
-  #  /usr/bin/add-apt-repository -y ppa:maxmind/ppa
-  #  /usr/bin/apt -qq -y update
-  #  /usr/bin/apt -qq -y install libmaxminddb-dev 
-  #  /bin/mkdir -p /usr/lib/apache2/modules
-  #  /usr/bin/git clone https://github.com/maxmind/mod_maxminddb.git
-  #  cd *max*
-   # ./bootstrap
-   # ./configure --with-apxs=/usr/local/apache2/bin/apxs
-   # /usr/bin/make
-   # /usr/bin/make install
-   # cd ..
+
 fi
 
 /bin/cp /usr/local/apache2/conf/mime.types /etc/apache2/conf
