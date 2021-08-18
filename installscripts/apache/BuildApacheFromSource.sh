@@ -115,11 +115,12 @@ cd /usr/local/src/httpd-*
 
 #options=" --prefix=/usr/local/apache2 --sysconfdir=/etc/apache2 --enable-ssl --enable-so --enable-http2 --enable-rewrite --enable-mods-static=\"reallyall\" --enable-ssl-staticlib-deps --with-mpm=event --with-included-apr --with-pcre=/usr/local/pcre --with-expat=/usr/local/expat "
 
+options=" --prefix=/usr/local/apache2 --sysconfdir=/etc/apache2 --enable-ssl --enable-so --enable-http2 --enable-rewrite --enable-mods-static="most"  --with-mpm=prefork --with-included-apr --with-pcre=/usr/local/pcre --with-expat=/usr/local/expat/ "
+
 ./buildconf 
 
-#./configure ${options}
+./configure ${options}
 
-./configure --prefix=/usr/local/apache2 --sysconfdir=/etc/apache2 --enable-ssl --enable-http2 --enable-rewrite --enable-mods-static="reallyall"  --with-mpm=prefork --with-included-apr --with-pcre=/usr/local/pcre --with-expat=/usr/local/expat/ 
 /usr/bin/make
 
 /usr/bin/make install
