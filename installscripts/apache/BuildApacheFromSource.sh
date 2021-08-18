@@ -131,42 +131,21 @@ cd ..
 
 if ( [ "${2}" = "modsecurity" ] )
 then
-    #Download and build and configure mod security
-    dir="`/usr/bin/pwd`"
-    /usr/bin/git clone https://github.com/ssdeep-project/ssdeep
-    cd ssdeep/
-    ./bootstrap
-    ./configure
-    /usr/bin/make
-    /usr/bin/make install
-    cd ${dir}
-    
-    #Download and build maxmind
-    /usr/bin/add-apt-repository -y ppa:maxmind/ppa
-    /usr/bin/apt -qq -y update
-    /usr/bin/apt -qq -y install libmaxminddb-dev 
-    /bin/mkdir -p /usr/lib/apache2/modules
-    /usr/bin/git clone https://github.com/maxmind/mod_maxminddb.git
-    cd *max*
-    ./bootstrap
-    ./configure --with-apxs=/usr/local/apache2/bin/apxs
+    #Prepare and install ModSecurity
+    /usr/bin/git clone https://github.com/SpiderLabs/ModSecurity
+    cd ModSecurity
+    dir=`/usr/bin/pwd`
+    /usr/bin/git checkout v3/master
+    /usr/bin/git submodule init
+    /usr/bin/git submodule update
+    /bin/sh build.sh
+    ./configure --with-pcre=../pcre-${pcre_latest_version} --with-maxmind=no
     /usr/bin/make
     /usr/bin/make install
     cd ..
-    /usr/bin/git clone https://github.com/SpiderLabs/ModSecurity 
-    cd ModSecurity 
-    /usr/bin/git checkout -b v3/master origin/v3/master 
-    /usr/bin/git submodule init 
-    /usr/bin/git submodule update 
-    /bin/sh build.sh 
-    ./configure 
-    /usr/bin/make
-    /usr/bin/make install
-    cd ${dir}
-    #/bin/sh build.sh 
-    #./configure 
-    #/usr/bin/make
-    #/usr/bin/make install
+
+    #Prepare and install ModSecurity nginx adapter
+    
     /usr/bin/git clone https://github.com/SpiderLabs/ModSecurity-apache
     cd ModSecurity-apache
     ./autogen.sh
@@ -188,26 +167,89 @@ then
     /bin/cp /etc/apache2/modsecurity.d/owasp-crs/crs-setup.conf.example /etc/apache2/modsecurity.d/owasp-crs/crs-setup.conf
     cd /etc/apache2/modsecurity.d
 
-  #  `/bin/cat > modsec_rules.conf << 'EOL'
-  #  Include "/etc/apache2/modsecurity.d/modsecurity.conf"
-  #  Include "/etc/apache2/modsecurity.d/owasp-crs/crs-setup.conf"
-  #  Include "/etc/apache2/modsecurity.d/owasp-crs/rules/*.conf"
-  #  EOL`
+
   
     /bin/echo "Include \"/etc/apache2/modsecurity.d/modsecurity.conf\"" > modsec_rules.conf
     /bin/echo "Include \"/etc/apache2/modsecurity.d/owasp-crs/crs-setup.conf\"" >> modsec_rules.conf
     /bin/echo "Include \"/etc/apache2/modsecurity.d/owasp-crs/rules/*.conf\"" >> modsec_rules.conf
+fi
 
-    cd ${dir}
+##ORIGINAL
+#if ( [ "${2}" = "modsecurity" ] )
+#then
+#    #Download and build and configure mod security
+#    dir="`/usr/bin/pwd`"
+#    /usr/bin/git clone https://github.com/ssdeep-project/ssdeep
+#    cd ssdeep/
+#    ./bootstrap
+#    ./configure
+#    /usr/bin/make
+#    /usr/bin/make install
+#    cd ${dir}
+#    
+#    #Download and build maxmind
+#    /usr/bin/add-apt-repository -y ppa:maxmind/ppa
+#    /usr/bin/apt -qq -y update
+#    /usr/bin/apt -qq -y install libmaxminddb-dev 
+#    /bin/mkdir -p /usr/lib/apache2/modules
+#    /usr/bin/git clone https://github.com/maxmind/mod_maxminddb.git
+#    cd *max*
+#    ./bootstrap
+ #   ./configure --with-apxs=/usr/local/apache2/bin/apxs
+ #   /usr/bin/make
+ #   /usr/bin/make install
+ #   cd ..
+ #   /usr/bin/git clone https://github.com/SpiderLabs/ModSecurity 
+ #   cd ModSecurity 
+ #   /usr/bin/git checkout -b v3/master origin/v3/master 
+ #   /usr/bin/git submodule init 
+ #   /usr/bin/git submodule update 
+ #   /bin/sh build.sh 
+ #   ./configure 
+ #   /usr/bin/make
+ #   /usr/bin/make install
+ #   cd ${dir}
+ #   #/bin/sh build.sh 
+ #   #./configure 
+ #   #/usr/bin/make
+ #   #/usr/bin/make install
+ #   /usr/bin/git clone https://github.com/SpiderLabs/ModSecurity-apache
+ #   cd ModSecurity-apache
+ #   ./autogen.sh
+ #   ./configure --with-libmodsecurity=/usr/local/modsecurity --with-pcre=../pcre-${pcre_latest_version}
+ #   /usr/bin/make
+  #  /usr/bin/make install
+  #  cd ${dir}
 
-    #/bin/rm /etc/apache2/modsecurity.d/owasp-crs/rules/REQUEST-910-IP-REPUTATION.conf #Requires max mind
+  #  /usr/sbin/ldconfig
+
+    #Install modsecurity rules
+ #   /usr/bin/git clone https://github.com/SpiderLabs/ModSecurity 
+ #   /bin/mkdir /etc/apache2/modsecurity.d 
+ #   /bin/cp ./ModSecurity/modsecurity.conf-recommended /etc/apache2/modsecurity.d/modsecurity.conf 
+ #   /bin/cp ./ModSecurity/modsec_rules.conf /etc/apache2/modsecurity.d/modsec_rules.conf
+ #   /bin/cp ./ModSecurity/unicode.mapping /etc/apache2/modsecurity.d/ 
+ #   /bin/sed -i 's/SecRuleEngine DetectionOnly/SecRuleEngine On/' /etc/apache2/modsecurity.d/modsecurity.conf
+ #   /usr/bin/git clone https://github.com/SpiderLabs/owasp-modsecurity-crs.git /etc/apache2/modsecurity.d/owasp-crs 
+ #   /bin/cp /etc/apache2/modsecurity.d/owasp-crs/crs-setup.conf.example /etc/apache2/modsecurity.d/owasp-crs/crs-setup.conf
+ #   cd /etc/apache2/modsecurity.d
+
+#
+#  
+#    /bin/echo "Include \"/etc/apache2/modsecurity.d/modsecurity.conf\"" > modsec_rules.conf
+#    /bin/echo "Include \"/etc/apache2/modsecurity.d/owasp-crs/crs-setup.conf\"" >> modsec_rules.conf
+#    /bin/echo "Include \"/etc/apache2/modsecurity.d/owasp-crs/rules/*.conf\"" >> modsec_rules.conf
+
+ #   cd ${dir}
+
+  #  #/bin/rm /etc/apache2/modsecurity.d/owasp-crs/rules/REQUEST-910-IP-REPUTATION.conf #Requires max mind
 
    # WEBSITE_NAME="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEDISPLAYNAME'`"
    # /bin/sed -i '/:443/a modsecurity on\nmodsecurity_rules_file /etc/apache2/modsecurity.d/modsec_rules.conf' /etc/apache2/sites-available/${WEBSITE_NAME}
 
 
 
-fi
+#fi
 
 /bin/cp /usr/local/apache2/conf/mime.types /etc/apache2/conf
 
