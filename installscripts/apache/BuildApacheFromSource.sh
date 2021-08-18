@@ -117,7 +117,7 @@ cd /usr/local/src/httpd-*
 
 ./buildconf 
 
-./configure ${options}
+#./configure ${options}
 
 ./configure --prefix=/usr/local/apache2 --sysconfdir=/etc/apache2 --enable-ssl --enable-http2 --enable-rewrite --enable-mods-static="reallyall"  --with-mpm=prefork --with-included-apr --with-pcre=/usr/local/pcre --with-expat=/usr/local/expat/ 
 /usr/bin/make
