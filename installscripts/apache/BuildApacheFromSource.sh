@@ -109,8 +109,9 @@ cd /usr/local/src/httpd-*
 
 #./configure --prefix=/usr/local/apache2 --sysconfdir=/etc/apache2 --with-pcre=/usr/local/pcre --with-apr-util=/usr/local/apr-util --with-apr=/usr/local/apr --with-apxs2=/usr/local/apache2/bin/apxs --with-expat=/usr/local/expat --with-ssl=/opt/openssl-${openssl_latest_version} --with-mpm=prefork --enable-http2 --enable-ssl --enable-so --enable-rewrite --enable-mods-shared="reallyall" --enable-mods-static="reallyall"
 
-options=" --enable-ssl --enable-so --enable-http2 --enable-so --enable-rewrite --enable-mods-shared="reallyall" --enable-ssl-staticlib-deps --with-mpm=event --with-included-apr --with-pcre=/usr/local/pcre --with-ssl=/usr/local/openssl --with-expat=/usr/local/expat --prefix=/usr/local/apache2"
+#options=" --enable-ssl --enable-so --enable-http2 --enable-so --enable-rewrite --enable-mods-shared="reallyall" --enable-ssl-staticlib-deps --with-mpm=event --with-included-apr --with-pcre=/usr/local/pcre --with-ssl=/usr/local/openssl --with-expat=/usr/local/expat --prefix=/usr/local/apache2"
 
+options=" --enable-ssl --enable-so --enable-http2 --enable-rewrite --enable-mods-shared=\"reallyall\" --enable-ssl-staticlib-deps --with-mpm=prefork --with-included-apr --with-pcre=/usr/local/pcre --with-expat=/usr/local/expat --prefix=/usr/local/apache2"
 ./configure ${options}
 
 /usr/bin/make
