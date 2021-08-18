@@ -94,7 +94,7 @@ LimitRequestFields 50
 
 if ( [ -f /usr/local/apache2/modules/mod_security3.so ] )
 then
-    /bin/echo "SecRuleEngine On" >> /etc/apache2/sites-available/${WEBSITE_NAME}
+   # /bin/echo "SecRuleEngine On" >> /etc/apache2/sites-available/${WEBSITE_NAME}
     /bin/echo "modsecurity on" >> /etc/apache2/sites-available/${WEBSITE_NAME}
     /bin/echo "modsecurity_rules_file /etc/apache2/modsecurity.d/modsec_rules.conf" >> /etc/apache2/sites-available/${WEBSITE_NAME}
 fi
