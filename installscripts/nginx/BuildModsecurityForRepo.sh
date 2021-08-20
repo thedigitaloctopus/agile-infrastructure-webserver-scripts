@@ -57,16 +57,14 @@ fi
 
 /bin/mv /usr/local/modsecurity-crs/rules/REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf.example /usr/local/modsecurity-crs/rules/REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf
 
-/bin/mkdir -p /etc/nginx/modsec
+/bin/mkdir -p /etc/modsecurity
 
-/bin/cp /opt/ModSecurity/unicode.mapping /etc/nginx/modsec
+/bin/cp /opt/ModSecurity/unicode.mapping /etc/modsecurity
 
-/bin/cp /opt/ModSecurity/modsecurity.conf-recommended /etc/nginx/modsec/modsecurity.conf
-
-/bin/cp /etc/modsecurity/modsecurity.conf-recommended /etc/modsecurity/modsecurity.conf
+/bin/cp /opt/ModSecurity/modsecurity.conf-recommended /etc/modsecurity/modsecurity.conf
 
 /bin/sed -i 's/SecRuleEngine.*/SecRuleEngine On/g' /etc/modsecurity/modsecurity.conf
 
-/bin/echo "Include /etc/nginx/modsec/modsecurity.conf
+/bin/echo "Include /etc/modsecurity/modsecurity.conf
 Include /usr/local/modsecurity-crs/crs-setup.conf
 Include /usr/local/modsecurity-crs/rules/*.conf" > /etc/nginx/modsec/main.conf
