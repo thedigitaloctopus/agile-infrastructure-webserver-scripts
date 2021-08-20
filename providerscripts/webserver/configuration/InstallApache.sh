@@ -60,7 +60,6 @@ LimitRequestFields 50
         CustomLog \${APACHE_LOG_DIR}/access.log combined
         ServerSignature Off
         ServerTokens Prod
-	    ServerSignature off
         FileETag none
         Options -Includes
         Options -ExecCGI
