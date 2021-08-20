@@ -130,17 +130,28 @@ fi
 
 
 /bin/ln -s /etc/apache2/sites-available/${WEBSITE_NAME} /etc/apache2/sites-enabled/${WEBSITE_NAME}
-/bin/sed -i "s/\/var\/www\//\/var\/www\/html/g" /etc/apache2/apache2.conf
-/bin/sed -i "s/ServerSignature/ServerSignature Off/g" /etc/apache2/apache2.conf
-/bin/sed -i "s/ServerTokens/ServerTokens Prod/g" /etc/apache2/apache2.conf
-/bin/sed -i '/sites-enabled/d' /etc/apache2/apache2.conf
-/bin/echo "IncludeOptional sites-enabled/${WEBSITE_NAME}" >> /etc/apache2/apache2.conf
+
+if ( [ -f /etc/apache2/apache2.conf ] )
+then
+    /bin/sed -i "s/\/var\/www\//\/var\/www\/html/g" /etc/apache2/apache2.conf
+    /bin/sed -i '/sites-enabled/d' /etc/apache2/apache2.conf
+    /bin/echo "IncludeOptional sites-enabled/${WEBSITE_NAME}" >> /etc/apache2/apache2.conf
+fi
+
+if ( [ -f /etc/apache2/httpd.conf ] )
+then
+    /bin/sed -i "s/\/var\/www\//\/var\/www\/html/g" /etc/apache2/httpd.conf
+    /bin/sed -i '/sites-enabled/d' /etc/apache2/httpd.conf
+fi
+
+
 /bin/sed -i 's/LoadModule/#LoadModule/g' /etc/apache2/mods-available/include.load
 /bin/sed -i 's/LoadModule/#LoadModule/g' /etc/apache2/mods-available/info.load
 /bin/sed -i 's/LoadModule/#LoadModule/g' /etc/apache2/mods-available/userdir.load
 /bin/sed -i 's/LoadModule/#LoadModule/g' /etc/apache2/mods-available/status.load
-#/bin/sed -i '/SetHandler/c\ SetHandler "proxy:fcgi://localhost:9000"' /etc/apache2/conf-available/php${PHP_VERSION}-fpm.conf
+
 /bin/sed -i '0,/SetHandler.*/s//SetHandler "proxy:fcgi:\/\/localhost:9000"/g' /etc/apache2/conf-available/php${PHP_VERSION}-fpm.conf
+
 /bin/rm /etc/apache2/sites-available/*def*
 
 /usr/sbin/a2enmod proxy_fcgi
