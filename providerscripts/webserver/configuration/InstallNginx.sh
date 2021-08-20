@@ -168,7 +168,7 @@ fi
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'NGINX:repo:modsecurity'`" = "1" ]  || [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'NGINX:source:modsecurity'`" = "1" ] )
 then
-    /bin/sed -i "/^pid/a load_module \"modules\/ngx_http_modsecurity_module.so\";" /etc/nginx/nginx.conf
+    /bin/sed -i "/^pid/a load_module \"\/etc\/nginx\/modules\/ngx_http_modsecurity_module.so\";" /etc/nginx/nginx.conf
     /bin/sed -i '/server_name/a modsecurity on;\nmodsecurity_rules_file /etc/nginx/modsec/main.conf;' /etc/nginx/sites-available/${website_name}
 fi
 
