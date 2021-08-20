@@ -67,4 +67,4 @@ fi
 
 /bin/echo "Include /etc/modsecurity/modsecurity.conf
 Include /usr/local/modsecurity-crs/crs-setup.conf
-Include /usr/local/modsecurity-crs/rules/*.conf" > /etc/nginx/modsec/main.conf
+Include /usr/local/modsecurity-crs/rules/*.conf" > /etc/modsecurity/main.conf
