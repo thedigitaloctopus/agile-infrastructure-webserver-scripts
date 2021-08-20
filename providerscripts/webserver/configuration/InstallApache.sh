@@ -53,7 +53,7 @@ LimitRequestFields 50
 
 <VirtualHost *:443>
         ServerAdmin webmaster@${website_url}
-        ServerName ${website_url}
+        ServerName 127.0.0.1
         ServerAlias ${website_url}
         DocumentRoot /var/www/html
         ErrorLog \${APACHE_LOG_DIR}/error.log
@@ -64,7 +64,7 @@ LimitRequestFields 50
         Options -FollowSymLinks
         LimitRequestFieldSize 16380
         ExpiresActive On
-        Protocols h2 ## http/1.1
+        Protocols h2 
         SSLEngine on
         SSLProtocol         -all +TLSv1.2 +TLSv1.3
         SSLCipherSuite      ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256
