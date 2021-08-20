@@ -21,7 +21,7 @@ cd /opt
 
 /usr/bin/git clone --depth 1 https://github.com/SpiderLabs/ModSecurity-nginx.git
 
-${version}="`/usr/sbin/nginx -v 2>&1 >/dev/null | /usr/bin/awk -F'/' '{print $NF}' | /usr/bin/awk '{print $1}'`" 
+version="`/usr/sbin/nginx -v 2>&1 >/dev/null | /usr/bin/awk -F'/' '{print $NF}' | /usr/bin/awk '{print $1}'`" 
 
 /usr/bin/wget http://nginx.org/download/nginx-${version}.tar.gz
 
