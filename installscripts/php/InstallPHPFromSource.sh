@@ -1,5 +1,4 @@
-/usr/bin/apt-get -qq -y install build-essential autoconf re2c bison libpq-dev libonig-dev libfcgi-dev libfcgi0ldbl libjpeg-dev libpng-dev libssl-dev libxml2-dev libcurl4-openssl-dev libxpm-dev libgd-dev libmysqlclient-dev libfreetype6-dev libxslt1-dev libpspell-dev libzip-dev libgccjit-10-dev
-
+/usr/bin/apt-get -qq -y install build-essential autoconf re2c bison libpq-dev libonig-dev libfcgi-dev libfcgi0ldbl libjpeg-dev libpng-dev libssl-dev libxml2-dev libcurl4-openssl-dev libxpm-dev libgd-dev libmysqlclient-dev libfreetype6-dev libxslt1-dev libpspell-dev libzip-dev libsqlite3-dev
 cd /opt
 
 /usr/bin/git clone https://github.com/php/php-src.git
