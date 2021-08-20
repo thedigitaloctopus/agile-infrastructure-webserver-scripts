@@ -45,6 +45,7 @@ fi
 /bin/echo "
 TimeOut 45 
 LimitRequestFields 50 
+ServerTokens Prod
 
 <VirtualHost *:80>
    ServerName ${website_url}
@@ -53,13 +54,12 @@ LimitRequestFields 50
 
 <VirtualHost *:443>
         ServerAdmin webmaster@${website_url}
-        ServerName 127.0.0.1
+        ServerName ${website_url}
         ServerAlias ${website_url}
         DocumentRoot /var/www/html
         ErrorLog \${APACHE_LOG_DIR}/error.log
         CustomLog \${APACHE_LOG_DIR}/access.log combined
         ServerSignature Off
-        ServerTokens Prod
         FileETag none
         Options -Includes
         Options -ExecCGI
