@@ -76,29 +76,29 @@ then
     if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'PHP:source'`" = "1" ] )
     then
         ${HOME}/installscripts/php/InstallPHPFromSource.sh
-    fi
+    else
 
-    /usr/bin/apt-get -qq -y install apt-transport-https lsb-release ca-certificates
-    /usr/bin/wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
-    /bin/sh -c 'echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list'
+        /usr/bin/apt-get -qq -y install apt-transport-https lsb-release ca-certificates
+        /usr/bin/wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
+        /bin/sh -c 'echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list'
 
-    ${HOME}/installscripts/Update.sh ${BUILDOS}    
+        ${HOME}/installscripts/Update.sh ${BUILDOS}    
 
-    installed_php_version="`/usr/bin/php -v | /bin/grep "^PHP" | /usr/bin/awk '{print $2}' | /usr/bin/awk -F'.' '{print $1,$2}' | /bin/sed 's/ /\./g'`"
+        installed_php_version="`/usr/bin/php -v | /bin/grep "^PHP" | /usr/bin/awk '{print $2}' | /usr/bin/awk -F'.' '{print $1,$2}' | /bin/sed 's/ /\./g'`"
       
-    if ( [ "${installed_php_version}" != "${PHP_VERSION}" ] )
-    then
-        /usr/bin/apt-get -qq -y purge php*
-        /usr/bin/apt-get -qq -y autoclean
-        /usr/bin/apt-get -qq -y autoremove
-        #/usr/bin/apt-get -qq -y install php-fpm php-cli php-common php-dev php-opcache php-mysqli php-phpdbg php-mbstring php-gd php-imap php-ldap php-pgsql php-pspell php-tidy php-intl php-gd php-curl php-zip php-xml
-    fi
+        if ( [ "${installed_php_version}" != "${PHP_VERSION}" ] )
+        then
+            /usr/bin/apt-get -qq -y purge php*
+            /usr/bin/apt-get -qq -y autoclean
+            /usr/bin/apt-get -qq -y autoremove
+            #/usr/bin/apt-get -qq -y install php-fpm php-cli php-common php-dev php-opcache php-mysqli php-phpdbg php-mbstring php-gd php-imap php-ldap php-pgsql php-pspell php-tidy php-intl php-gd php-curl php-zip php-xml
+       fi
 
-    /usr/bin/apt-get -qq -y install php${PHP_VERSION}-fpm php${PHP_VERSION}-cli php${PHP_VERSION}-gmp php${PHP_VERSION}-xmlrpc php${PHP_VERSION}-soap php${PHP_VERSION}-dev php${PHP_VERSION}-mysqli php${PHP_VERSION}-phpdbg php${PHP_VERSION}-mbstring php${PHP_VERSION}-gd php${PHP_VERSION}-imap php${PHP_VERSION}-ldap php${PHP_VERSION}-pgsql php${PHP_VERSION}-pspell php${PHP_VERSION}-tidy php${PHP_VERSION}-intl php${PHP_VERSION}-gd php${PHP_VERSION}-curl php${PHP_VERSION}-zip php${PHP_VERSION}-xml php${PHP_VERSION}-imagick php${PHP_VERSION}-ssh2 php${PHP_VERSION}-sqlite3
+        /usr/bin/apt-get -qq -y install php${PHP_VERSION}-fpm php${PHP_VERSION}-cli php${PHP_VERSION}-gmp php${PHP_VERSION}-xmlrpc php${PHP_VERSION}-soap php${PHP_VERSION}-dev php${PHP_VERSION}-mysqli php${PHP_VERSION}-phpdbg php${PHP_VERSION}-mbstring php${PHP_VERSION}-gd php${PHP_VERSION}-imap php${PHP_VERSION}-ldap php${PHP_VERSION}-pgsql php${PHP_VERSION}-pspell php${PHP_VERSION}-tidy php${PHP_VERSION}-intl php${PHP_VERSION}-gd php${PHP_VERSION}-curl php${PHP_VERSION}-zip php${PHP_VERSION}-xml php${PHP_VERSION}-imagick php${PHP_VERSION}-ssh2 php${PHP_VERSION}-sqlite3
 
-    if ( [ "`/bin/echo ${PHP_VERSION} | /bin/grep '7\.'`" != "" ] )
-    then
-        /usr/bin/apt-get -qq -y install php${PHP_VERSION}-json
-    fi
-   #fi
+        if ( [ "`/bin/echo ${PHP_VERSION} | /bin/grep '7\.'`" != "" ] )
+        then
+            /usr/bin/apt-get -qq -y install php${PHP_VERSION}-json
+        fi
+   fi
 fi
