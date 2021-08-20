@@ -138,12 +138,6 @@ then
     /bin/echo "IncludeOptional sites-enabled/${WEBSITE_NAME}" >> /etc/apache2/apache2.conf
 fi
 
-if ( [ -f /etc/apache2/httpd.conf ] )
-then
-    /bin/sed -i "s/\/var\/www\//\/var\/www\/html/g" /etc/apache2/httpd.conf
-    /bin/sed -i '/sites-enabled/d' /etc/apache2/httpd.conf
-fi
-
 
 /bin/sed -i 's/LoadModule/#LoadModule/g' /etc/apache2/mods-available/include.load
 /bin/sed -i 's/LoadModule/#LoadModule/g' /etc/apache2/mods-available/info.load
