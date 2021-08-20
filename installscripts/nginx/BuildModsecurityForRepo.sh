@@ -65,6 +65,8 @@ fi
 
 /bin/sed -i 's/SecRuleEngine.*/SecRuleEngine On/g' /etc/modsecurity/modsecurity.conf
 
+/bin/mkdir -p /etc/nginx/modsec
+
 /bin/echo "Include /etc/modsecurity/modsecurity.conf
 Include /usr/local/modsecurity-crs/crs-setup.conf
-Include /usr/local/modsecurity-crs/rules/*.conf" > /etc/modsecurity/main.conf
+Include /usr/local/modsecurity-crs/rules/*.conf" > /etc/nginx/modsec/main.conf
