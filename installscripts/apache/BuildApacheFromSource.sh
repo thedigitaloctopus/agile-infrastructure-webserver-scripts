@@ -287,7 +287,7 @@ fi
 /bin/cat /etc/apache2/httpd.conf >> /etc/apache2/httpd.conf.$$
 /bin/mv /etc/apache2/httpd.conf.$$ /etc/apache2/httpd.conf
 /bin/sed -i "s/^#ServerRoot.*/ServerRoot \"\/etc\/apache2\"/g" /etc/apache2/httpd.conf
-/bin/sed -i "s/\/var\/www\//\/var\/www\/html/g" /etc/apache2/httpd.conf
+#/bin/sed -i "s/\/var\/www\//\/var\/www\/html/g" /etc/apache2/httpd.conf
 
 /bin/mv /etc/apache2/conf/magic.conf /etc/apache2/conf/magic.orig
 /bin/ln -s /etc/apache2/magic /etc/apache2/conf/magic
