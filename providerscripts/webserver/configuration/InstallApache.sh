@@ -59,6 +59,9 @@ LimitRequestFields 50
         ErrorLog \${APACHE_LOG_DIR}/error.log
         CustomLog \${APACHE_LOG_DIR}/access.log combined
         ServerSignature Off
+        ServerTokens Prod
+	    ServerSignature off
+        FileETag none
         Options -Includes
         Options -ExecCGI
         Options -FollowSymLinks
@@ -125,6 +128,7 @@ fi
                # Require valid-user
         </Directory>
 </VirtualHost>" >> /etc/apache2/sites-available/${WEBSITE_NAME}
+
 
 /bin/ln -s /etc/apache2/sites-available/${WEBSITE_NAME} /etc/apache2/sites-enabled/${WEBSITE_NAME}
 /bin/sed -i "s/\/var\/www\//\/var\/www\/html/g" /etc/apache2/apache2.conf
