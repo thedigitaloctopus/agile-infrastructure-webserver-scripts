@@ -48,6 +48,10 @@ then
         ${HOME}/installscripts/Update.sh ${BUILDOS}
         /usr/bin/apt-get -qq install nginx
         /bin/systemctl unmask nginx.service
+        if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'NGINX:repo:modsecurity'`" = "1" ] )
+        then
+            ${HOME}/installscripts/nginx/BuildModsecurityForRepo.sh
+        fi
         /bin/touch /etc/nginx/BUILT_FROM_REPO
     fi
 fi
@@ -78,6 +82,10 @@ then
         ${HOME}/installscripts/Update.sh ${BUILDOS}
         /usr/bin/apt-get -qq install nginx
         /bin/systemctl unmask nginx.service
+        if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'NGINX:repo:modsecurity'`" = "1" ] )
+        then
+            ${HOME}/installscripts/nginx/BuildModsecurityForRepo.sh
+        fi
         /bin/touch /etc/nginx/BUILT_FROM_REPO
     fi
 fi
