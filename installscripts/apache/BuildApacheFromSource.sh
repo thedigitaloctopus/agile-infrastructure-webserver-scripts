@@ -208,6 +208,8 @@ then
             #/usr/bin/apt -qq -y install apache2-utils
             #/usr/bin/apt -qq -y install libapache2-mod-evasive
             
+            /bin/mkdir /usr/lib/apache2
+            
             /usr/bin/git clone https://github.com/jzdziarski/mod_evasive.git
             /usr/bin/apt -qq -y install apache2-dev
             cd mod_evasive
