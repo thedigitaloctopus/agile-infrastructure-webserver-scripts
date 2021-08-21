@@ -74,8 +74,8 @@ then
         then
             /usr/bin/apt -qq -y install apache2-utils
             /usr/bin/apt -qq -y install libapache2-mod-evasive
-            /usr/bin/ln -s /etc/apache2/mods-available/mod_evasive.conf /etc/apache2/mods-enabled/evasive.conf
-            /bin/sed -i 's/#//g' /etc/apache2/mods-enabled/evasive.conf
+            /usr/bin/ln -s /etc/apache2/mods-available/evasive.conf /etc/apache2/mods-enabled/evasive.conf
+            /bin/sed -i 's/#//g' /etc/apache2/mods-available/evasive.conf
         fi
         
      #   /usr/bin/apt-get -qq -y install libapache2-mod-security2
@@ -132,9 +132,10 @@ then
         then
             /usr/bin/apt -qq -y install apache2-utils
             /usr/bin/apt -qq -y install libapache2-mod-evasive
-            /usr/bin/ln -s /etc/apache2/mods-available/mod_evasive.conf /etc/apache2/mods-enabled/evasive.conf
-            /bin/sed -i 's/#//g' /etc/apache2/mods-enabled/evasive.conf
+            /usr/bin/ln -s /etc/apache2/mods-available/evasive.conf /etc/apache2/mods-enabled/evasive.conf
+            /bin/sed -i 's/#//g' /etc/apache2/mods-available/evasive.conf
         fi
+        
         /bin/touch /etc/apache2/BUILT_FROM_REPO
     fi
 fi
