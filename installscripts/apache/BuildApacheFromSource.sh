@@ -216,7 +216,11 @@ then
             /usr/bin/apt-get -qq -y install apache2-utils
             /usr/bin/apt-get -qq -y install libapache2-mod-evasive
             
+            /bin/mkdir /var/log/mod_evasive 
+            /bin/chown -R www-data:www-data /var/log/mod_evasive
+            
             cd ..
+            
             /bin/rm /etc/apache2/mods-available/evasive.conf
             /bin/cp ${HOME}/installscripts/apache/mod_evasive.sample /etc/apache2/mods-available/evasive.conf
             /usr/bin/ln -s /etc/apache2/mods-available/evasive.conf /etc/apache2/mods-enabled/evasive.conf
