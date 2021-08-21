@@ -55,6 +55,10 @@ then
         then
            /bin/sleep 5
            /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from ${autoscalerip}
+           if ( [ -f /etc/apache2/mods-available/evasive.conf ] )
+           then
+               /bin/sed -i "/.*\/IfModule.*/i DOSWhitelist ${autoscalerip}" /etc/apache2/mods-available/evasive.conf
+           fi
         fi
     done
     
@@ -64,6 +68,10 @@ then
         then
             /bin/sleep 5
             /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from ${publicautoscalerip}
+           if ( [ -f /etc/apache2/mods-available/evasive.conf ] )
+           then
+               /bin/sed -i "/.*\/IfModule.*/i DOSWhitelist ${publicautoscalerip}" /etc/apache2/mods-available/evasive.conf
+           fi
         fi
     done
 fi
