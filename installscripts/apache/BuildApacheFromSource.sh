@@ -284,6 +284,11 @@ then
 # LoadModule maxminddb_module /usr/local/apache2/modules/mod_maxminddb.so" >> /etc/apache2/httpd.conf.$$
 fi
 
+if ( [ "${3}" = "modevasive" ] )
+then
+    /bin/echo "LoadModule evasive20_module /usr/lib/apache2/modules/mod_evasive20.so" >> /etc/apache2/httpd.conf.$$
+fi
+
 /bin/cat /etc/apache2/httpd.conf >> /etc/apache2/httpd.conf.$$
 /bin/mv /etc/apache2/httpd.conf.$$ /etc/apache2/httpd.conf
 /bin/sed -i "s/^#ServerRoot.*/ServerRoot \"\/etc\/apache2\"/g" /etc/apache2/httpd.conf
