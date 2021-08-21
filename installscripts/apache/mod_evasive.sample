@@ -7,6 +7,6 @@
     DOSBlockingPeriod   10
 
     DOSEmailNotify "dummy@123zxc821.com"
-    DOSSystemCommand    "su - someuser -c '/sbin/... %s ...'"
+    DOSSystemCommand    "/usr/bin/su - root -c '/usr/sbin/ufw deny from %s to any'"
     DOSLogDir           "/var/log/mod_evasive"
 </IfModule>
