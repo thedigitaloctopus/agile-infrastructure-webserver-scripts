@@ -40,6 +40,16 @@ then
          else
              ${HOME}/installscripts/apache/BuildApacheFromSource.sh  Ubuntu
          fi 
+         
+        if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:source:modsecurity:modevasive'`" = "1" ] || [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:source:modevasive'`" = "1" ] )
+        then
+            /usr/bin/apt -qq -y install apache2-utils
+            /usr/bin/apt -qq -y install libapache2-mod-evasive
+            /usr/bin/ln -s /etc/apache2/mods-available/evasive.conf /etc/apache2/mods-enabled/evasive.conf
+            /bin/sed -i 's/#//g' /etc/apache2/mods-available/evasive.conf
+            notify_email_address="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SYSTEMTOEMAILADDRESS'`"
+            /bin/sed -i "s/DOSEmailNotify.*/DOSEmailNotify ${notify_email_address}/g" /etc/apache2/mods-available/evasive.conf
+        fi
         
         /bin/touch /etc/apache2/BUILT_FROM_SOURCE
     elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:repo'`" = "1" ] )
@@ -72,18 +82,14 @@ then
         
         if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:repo:modsecurity:modevasive'`" = "1" ] || [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:repo:modevasive'`" = "1" ] )
         then
-            /usr/bin/apt -qq -y install apache2-utils
-            /usr/bin/apt -qq -y install libapache2-mod-evasive
-            /usr/bin/ln -s /etc/apache2/mods-available/evasive.conf /etc/apache2/mods-enabled/evasive.conf
-            /bin/sed -i 's/#//g' /etc/apache2/mods-available/evasive.conf
-            notify_email_address="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SYSTEMTOEMAILADDRESS'`"
-            /bin/sed -i "s/DOSEmailNotify.*/DOSEmailNotify ${notify_email_address}/g" /etc/apache2/mods-available/evasive.conf
+             /usr/bin/apt -qq -y install apache2-utils
+             /usr/bin/apt -qq -y install libapache2-mod-evasive
+             /usr/bin/ln -s /etc/apache2/mods-available/evasive.conf /etc/apache2/mods-enabled/evasive.conf
+             /bin/sed -i 's/#//g' /etc/apache2/mods-available/evasive.conf
+             notify_email_address="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SYSTEMTOEMAILADDRESS'`"
+             /bin/sed -i "s/DOSEmailNotify.*/DOSEmailNotify ${notify_email_address}/g" /etc/apache2/mods-available/evasive.conf
         fi
-        
-     #   /usr/bin/apt-get -qq -y install libapache2-mod-security2
-     #   /bin/cp /etc/modsecurity/modsecurity.conf-recommended /etc/modsecurity/modsecurity.conf
-     #   /bin/sed -i 's/DetectionOnly/On/g' /etc/modsecurity/modsecurity.conf
-     #   /usr/bin/apt-get -qq -y install libapache2-mod-fcgid        
+             
         /bin/touch /etc/apache2/BUILT_FROM_REPO
     fi
 fi
@@ -101,6 +107,15 @@ then
          else
              ${HOME}/installscripts/apache/BuildApacheFromSource.sh  Debian
          fi 
+         if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:source:modsecurity:modevasive'`" = "1" ] || [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:source:modevasive'`" = "1" ] )
+         then
+             /usr/bin/apt -qq -y install apache2-utils
+             /usr/bin/apt -qq -y install libapache2-mod-evasive
+             /usr/bin/ln -s /etc/apache2/mods-available/evasive.conf /etc/apache2/mods-enabled/evasive.conf
+             /bin/sed -i 's/#//g' /etc/apache2/mods-available/evasive.conf
+             notify_email_address="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SYSTEMTOEMAILADDRESS'`"
+             /bin/sed -i "s/DOSEmailNotify.*/DOSEmailNotify ${notify_email_address}/g" /etc/apache2/mods-available/evasive.conf
+         fi
         /bin/touch /etc/apache2/BUILT_FROM_SOURCE
     elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:repo'`" = "1" ] )
     then
