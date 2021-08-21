@@ -36,7 +36,12 @@ then
         
          if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:source:modsecurity'`" = "1" ] )
          then
-             ${HOME}/installscripts/apache/BuildApacheFromSource.sh  Ubuntu modsecurity
+             if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:source:modsecurity:modevasive'`" = "1" ] )
+             then
+                 ${HOME}/installscripts/apache/BuildApacheFromSource.sh  Ubuntu modsecurity modevasive
+             else
+                 ${HOME}/installscripts/apache/BuildApacheFromSource.sh  Ubuntu modsecurity
+             fi
          else
              ${HOME}/installscripts/apache/BuildApacheFromSource.sh  Ubuntu
          fi 
@@ -103,7 +108,12 @@ then
         
          if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:source:modsecurity'`" = "1" ] )
          then
-             ${HOME}/installscripts/apache/BuildApacheFromSource.sh  Debian modsecurity
+             if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:source:modsecurity:modevasive'`" = "1" ] )
+             then
+                 ${HOME}/installscripts/apache/BuildApacheFromSource.sh  Ubuntu modsecurity modevasive
+             else
+                 ${HOME}/installscripts/apache/BuildApacheFromSource.sh  Ubuntu modsecurity
+             fi
          else
              ${HOME}/installscripts/apache/BuildApacheFromSource.sh  Debian
          fi 
