@@ -310,7 +310,8 @@ LoadModule ssl_module /usr/local/apache2/modules/mod_ssl.so
 LoadModule mime_module /usr/local/apache2/modules/mod_mime.so
 LoadModule unique_id_module /usr/local/apache2/modules/mod_unique_id.so
 LoadModule session_module /usr/local/apache2/modules/mod_session.so
-LoadModule session_cookie_module /usr/local/apache2/modules/mod_session_cookie.so" > /etc/apache2/httpd.conf.$$
+LoadModule session_cookie_module /usr/local/apache2/modules/mod_session_cookie.so
+LoadModule http2_module /usr/local/apache2/modules/mod_http2.so" > /etc/apache2/httpd.conf.$$
   
 if ( [ "${2}" = "modsecurity" ] )
 then
