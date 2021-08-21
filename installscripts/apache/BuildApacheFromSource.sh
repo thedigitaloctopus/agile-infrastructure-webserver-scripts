@@ -203,6 +203,19 @@ then
     /bin/sed -i '/:443/a modsecurity on\nmodsecurity_rules_file /etc/apache2/modsecurity.d/modsec_rules.conf' /etc/apache2/sites-available/${WEBSITE_NAME}
 fi
 
+if ( [ "${3}" = "modevasive" ] )
+then
+            /usr/bin/apt -qq -y install apache2-utils
+            /usr/bin/apt -qq -y install libapache2-mod-evasive
+            /usr/bin/ln -s /etc/apache2/mods-available/evasive.conf /etc/apache2/mods-enabled/evasive.conf
+            /bin/sed -i 's/#//g' /etc/apache2/mods-available/evasive.conf
+            notify_email_address="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SYSTEMTOEMAILADDRESS'`"
+     if ( [ "${notify_email_address}" = "" ] )
+     then
+         notify_email_address="dummy@123zxc821.com"
+     fi
+     /bin/sed -i "s/DOSEmailNotify.*/DOSEmailNotify ${notify_email_address}/g" /etc/apache2/mods-available/evasive.conf
+fi
 /bin/cp /usr/local/apache2/conf/mime.types /etc/apache2/conf
 
 #Put code to start apache after a reboot
