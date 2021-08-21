@@ -208,11 +208,12 @@ then
             #/usr/bin/apt -qq -y install apache2-utils
             #/usr/bin/apt -qq -y install libapache2-mod-evasive
             
-            /bin/mkdir /usr/lib/apache2
+            /bin/mkdir -p /usr/lib/apache2/modules
             
             /usr/bin/git clone https://github.com/jzdziarski/mod_evasive.git
             /usr/bin/apt -qq -y install apache2-dev
             cd mod_evasive
+            /bin/sed -i "s/remote_ip/client_ip/g" mod_evasive20.c
             /usr/bin/apxs2 -i mod_evasive20.c
             cd ..
             /bin/cp ${HOME}/installscripts/apache/mod_evasive.sample /etc/apache2/mods-available/evasive.conf
