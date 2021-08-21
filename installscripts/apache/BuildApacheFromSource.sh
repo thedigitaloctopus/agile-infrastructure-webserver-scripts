@@ -221,7 +221,13 @@ then
             
             cd ..
             
-            /bin/rm /etc/apache2/mods-available/evasive.conf
+            if ( [ -f /etc/apache2/mods-available/evasive.conf ] )
+            then 
+                /bin/rm /etc/apache2/mods-available/evasive.conf
+            fi
+            /bin/mkdir /etc/apache2/mods-available
+            /bin/mkdir /etc/apache2/mods-enabled
+            
             /bin/cp ${HOME}/installscripts/apache/mod_evasive.sample /etc/apache2/mods-available/evasive.conf
             /usr/bin/ln -s /etc/apache2/mods-available/evasive.conf /etc/apache2/mods-enabled/evasive.conf
             notify_email_address="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SYSTEMTOEMAILADDRESS'`"
