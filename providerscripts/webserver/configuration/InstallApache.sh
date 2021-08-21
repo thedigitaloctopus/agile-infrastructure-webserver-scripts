@@ -49,7 +49,11 @@ ServerTokens Prod
 
 <VirtualHost *:80>
    ServerName ${website_url}
-   Redirect permanent / https://${website_url}/
+   DocumentRoot /var/www/html
+   <Directory /var/www/html>
+       DirectoryIndex index.html index.php
+       Require all granted
+   </Directory>
 </VirtualHost>
 
 <VirtualHost _default_:443>
