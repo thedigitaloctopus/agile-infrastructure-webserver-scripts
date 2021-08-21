@@ -76,6 +76,8 @@ then
             /usr/bin/apt -qq -y install libapache2-mod-evasive
             /usr/bin/ln -s /etc/apache2/mods-available/evasive.conf /etc/apache2/mods-enabled/evasive.conf
             /bin/sed -i 's/#//g' /etc/apache2/mods-available/evasive.conf
+            notify_email_address="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SYSTEMTOEMAILADDRESS'`"
+            /bin/sed -i "s/DOSEmailNotify.*/DOSEmailNotify ${notify_email_address}/g" /etc/apache2/mods-available/evasive.conf
         fi
         
      #   /usr/bin/apt-get -qq -y install libapache2-mod-security2
@@ -134,6 +136,8 @@ then
             /usr/bin/apt -qq -y install libapache2-mod-evasive
             /usr/bin/ln -s /etc/apache2/mods-available/evasive.conf /etc/apache2/mods-enabled/evasive.conf
             /bin/sed -i 's/#//g' /etc/apache2/mods-available/evasive.conf
+            notify_email_address="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SYSTEMTOEMAILADDRESS'`"
+            /bin/sed -i "s/DOSEmailNotify.*/DOSEmailNotify ${notify_email_address}/g" /etc/apache2/mods-available/evasive.conf
         fi
         
         /bin/touch /etc/apache2/BUILT_FROM_REPO
