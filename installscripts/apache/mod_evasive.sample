@@ -6,7 +6,7 @@
     DOSSiteInterval     1
     DOSBlockingPeriod   10
 
-    DOSEmailNotify 
+    DOSEmailNotify "dummy@123zxc821.com"
     DOSSystemCommand    "su - someuser -c '/sbin/... %s ...'"
     DOSLogDir           "/var/log/mod_evasive"
 </IfModule>
