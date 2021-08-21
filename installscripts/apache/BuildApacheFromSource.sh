@@ -217,6 +217,7 @@ then
             /usr/bin/apt-get -qq -y install libapache2-mod-evasive
             
             cd ..
+            /bin/rm /etc/apache2/mods-available/evasive.conf
             /bin/cp ${HOME}/installscripts/apache/mod_evasive.sample /etc/apache2/mods-available/evasive.conf
             /usr/bin/ln -s /etc/apache2/mods-available/evasive.conf /etc/apache2/mods-enabled/evasive.conf
             notify_email_address="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SYSTEMTOEMAILADDRESS'`"
