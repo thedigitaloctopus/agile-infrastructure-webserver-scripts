@@ -211,7 +211,7 @@ then
             /usr/bin/apt -qq -y install apache2-dev
             cd mod_evasive
             /bin/sed -i "s/remote_ip/client_ip/g" mod_evasive20.c
-            /usr/bin/apxs2 -i mod_evasive20.c
+            /usr/bin/apxs2 -i -c mod_evasive20.c
             cd ..
             /bin/cp ${HOME}/installscripts/apache/mod_evasive.sample /etc/apache2/mods-available/evasive.conf
             /usr/bin/ln -s /etc/apache2/mods-available/evasive.conf /etc/apache2/mods-enabled/evasive.conf
