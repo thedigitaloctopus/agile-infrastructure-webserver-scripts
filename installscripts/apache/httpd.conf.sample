@@ -219,6 +219,8 @@ LogFormat "%{User-agent}i" agent
 # Include generic snippets of statements
 IncludeOptional conf-enabled/*.conf
 
+IncludeOptional mods-enabled/*
+
 # Include the virtual host configurations:
 
 # vim: syntax=apache ts=4 sw=4 sts=4 sr noet
