@@ -52,7 +52,7 @@ ServerTokens Prod
    Redirect permanent / https://${website_url}/
 </VirtualHost>
 
-<VirtualHost *:443>
+<VirtualHost _default_:443>
         ServerAdmin webmaster@${website_url}
         ServerName ${website_url}
         ServerAlias ${website_url}
