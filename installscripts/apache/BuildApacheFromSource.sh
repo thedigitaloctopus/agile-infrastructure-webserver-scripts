@@ -213,14 +213,11 @@ then
             cd mod_evasive
             /usr/bin/apxs2 -i mod_evasive20.c
             cd ..
-            /bin/cp ${HOME}/installscripts/apache/mod_evasive.dat /etc/apache2/mods-available/evasive.conf
+            /bin/cp ${HOME}/installscripts/apache/mod_evasive.sample /etc/apache2/mods-available/evasive.conf
             /usr/bin/ln -s /etc/apache2/mods-available/evasive.conf /etc/apache2/mods-enabled/evasive.conf
             /bin/sed -i 's/#//g' /etc/apache2/mods-available/evasive.conf
             notify_email_address="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SYSTEMTOEMAILADDRESS'`"
-     if ( [ "${notify_email_address}" = "" ] )
-     then
-         notify_email_address="dummy@123zxc821.com"
-     fi
+
      /bin/sed -i "s/DOSEmailNotify.*/DOSEmailNotify ${notify_email_address}/g" /etc/apache2/mods-available/evasive.conf
 fi
 /bin/cp /usr/local/apache2/conf/mime.types /etc/apache2/conf
