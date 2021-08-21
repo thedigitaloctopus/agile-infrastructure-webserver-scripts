@@ -205,8 +205,15 @@ fi
 
 if ( [ "${3}" = "modevasive" ] )
 then
-            /usr/bin/apt -qq -y install apache2-utils
-            /usr/bin/apt -qq -y install libapache2-mod-evasive
+            #/usr/bin/apt -qq -y install apache2-utils
+            #/usr/bin/apt -qq -y install libapache2-mod-evasive
+            
+            /usr/bin/git clone https://github.com/jzdziarski/mod_evasive.git
+            /usr/bin/apt -qq -y install apache2-dev
+            cd mod_evasive
+            /usr/bin/apxs2 -i mod_evasive20.c
+            cd ..
+            /bin/cp ${HOME}/installscripts/apache/mod_evasive.dat /etc/apache2/mods-available/evasive.conf
             /usr/bin/ln -s /etc/apache2/mods-available/evasive.conf /etc/apache2/mods-enabled/evasive.conf
             /bin/sed -i 's/#//g' /etc/apache2/mods-available/evasive.conf
             notify_email_address="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SYSTEMTOEMAILADDRESS'`"
