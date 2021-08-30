@@ -47,19 +47,6 @@ TimeOut 45
 LimitRequestFields 50 
 ServerTokens Prod
 
-RewriteEngine On 
-RewriteCond %{HTTPS} off 
-RewriteRule ^(.*)\$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-
-<VirtualHost *:80>
-   ServerName ${website_url}
-   DocumentRoot /var/www/html
-   <Directory /var/www/html>
-       DirectoryIndex index.html index.php
-       Require all granted
-   </Directory>
-</VirtualHost>
-
 <VirtualHost _default_:443>
         ServerAdmin webmaster@${website_url}
         ServerName ${website_url}
