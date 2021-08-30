@@ -265,6 +265,7 @@ cd ${HOME}
 /usr/bin/git init
 /usr/bin/git config --global user.name "${GIT_USER}"
 /usr/bin/git config --global user.email ${GIT_EMAIL_ADDRESS}
+/usr/bin/git config --global init.defaultBranch master
 
 /bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
 /bin/echo "${0} `/bin/date`: Pulling scripts from infrastructure repository with credentials parameters:" >> ${HOME}/logs/WEBSERVER_BUILD.log
