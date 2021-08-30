@@ -2,7 +2,11 @@
 /usr/bin/apt install -qq -y bzip2 libgeoip-dev gnutls-bin gnutls-dev libmaxminddb-dev libxml2 libmariadb-dev libpq-dev zlib1g-dev libssl-dev libpcre3-dev
 
 release_series="1"
-version_name="`/usr/bin/wget -O- - https://github.com/lighttpd | /bin/grep -E -o lighttpd[${release_series}].* | /bin/grep lighttpd | /usr/bin/head -1`"
+version_name="`/usr/bin/wget -O- - https://github.com/lighttpd | /bin/grep -o lighttpd[${release_series}].[0-9][0-9] | /bin/grep lighttpd | /usr/bin/head -1`"
+if ( [ "${version_name}" = "" ] )
+then
+    version_name="`/usr/bin/wget -O- - https://github.com/lighttpd | /bin/grep -o lighttpd[${release_series}].[0-9] | /bin/grep lighttpd | /usr/bin/head -1`"
+fi
 
 /usr/bin/git clone https://github.com/lighttpd/${version_name}.git
 cd ${version_name}
