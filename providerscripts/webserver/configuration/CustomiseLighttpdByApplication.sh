@@ -26,7 +26,7 @@ if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:jooml
 then
     /bin/echo "
 url.rewrite-final = (
-"^/$" => "/index.php",
+\"^/$\" => \"/index.php\",
 \"^/images.*\$\" => \"\$0\",
 \"^/media.*\$\" => \"\$0\",
 \"^/administrator.*\$\" => \"\$0\",
