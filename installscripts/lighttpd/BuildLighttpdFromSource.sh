@@ -1,8 +1,8 @@
 /usr/bin/apt-get install -qq -y autoconf automake libtool m4 pkg-config 
-/usr/bin/apt install -qq -y bzip2 libgeoip-dev gnutls-bin libmaxminddb-dev libxml2 libmariadb-dev libpq-dev zlib1g-dev libssl-dev libpcre3-dev
+/usr/bin/apt install -qq -y bzip2 libgeoip-dev gnutls-bin gnutls-dev libmaxminddb-dev libxml2 libmariadb-dev libpq-dev zlib1g-dev libssl-dev libpcre3-dev
 
 /usr/bin/git clone https://github.com/lighttpd/lighttpd1.4.git
-cd lighttp*
+cd lighttp*4
 ./autogen.sh
 ./configure -C --prefix=/usr --bindir=/usr/bin --sbindir=/usr/sbin --sysconfdir=/etc --datadir=/usr/share --includedir=/usr/include --libdir=/usr/lib --with-geoip --with-gnutls --with-maxminddb --with-pgsql --with-mysql --with-openssl --with-pcre --with-rewrite --with-redirect --with-ssl
 /usr/bin/make
