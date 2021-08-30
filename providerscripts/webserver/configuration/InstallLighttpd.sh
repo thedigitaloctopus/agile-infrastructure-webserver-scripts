@@ -80,21 +80,21 @@ else
     modules_file="/etc/lighttpd/lighttpd.conf"
 fi
 
-/bin/sed -i '/^server.modules/a \"mod_rewrite\",' ${modules_file}
-/bin/sed -i '/^server.modules/a \"mod_proxy\",' ${modules_file}
-/bin/sed -i '/^server.modules/a \"mod_access\",' ${modules_file}
-/bin/sed -i '/^server.modules/a \"mod_setenv\",' ${modules_file}
-/bin/sed -i '/^server.modules/a \"mod_auth\",' ${modules_file}
-/bin/sed -i '/^server.modules/a \"mod_redirect\",' ${modules_file}
-/bin/sed -i '/^server.modules/a \"mod_status\",' ${modules_file}
-/bin/sed -i '/^server.modules/a \"mod_alias\",' ${modules_file}
-/bin/sed -i '/^server.modules/a \"mod_userdir\",' ${modules_file}
-/bin/sed -i '/^server.modules/a \"mod_fastcgi\",' ${modules_file}
-/bin/sed -i '/^server.modules/a \"mod_ssi\",' ${modules_file}
-/bin/sed -i '/^server.modules/a \"mod_compress\",' ${modules_file}
-/bin/sed -i '/^server.modules/a \"mod_expire\",' ${modules_file}
-/bin/sed -i '/^server.modules/a \"mod_accesslog\",' ${modules_file}
-/bin/sed -i '/^server.modules/a \"mod_openssl\",' ${modules_file}
+/bin/sed -i '0,/^server.modules/a \"mod_rewrite\",' ${modules_file}
+/bin/sed -i '0,/^server.modules/a \"mod_proxy\",' ${modules_file}
+/bin/sed -i '0,/^server.modules/a \"mod_access\",' ${modules_file}
+/bin/sed -i '0,/^server.modules/a \"mod_setenv\",' ${modules_file}
+/bin/sed -i '0,/^server.modules/a \"mod_auth\",' ${modules_file}
+/bin/sed -i '0,/^server.modules/a \"mod_redirect\",' ${modules_file}
+/bin/sed -i '0,/^server.modules/a \"mod_status\",' ${modules_file}
+/bin/sed -i '0,/^server.modules/a \"mod_alias\",' ${modules_file}
+/bin/sed -i '0,/^server.modules/a \"mod_userdir\",' ${modules_file}
+/bin/sed -i '0,/^server.modules/a \"mod_fastcgi\",' ${modules_file}
+/bin/sed -i '0,/^server.modules/a \"mod_ssi\",' ${modules_file}
+/bin/sed -i '0,/^server.modules/a \"mod_compress\",' ${modules_file}
+/bin/sed -i '0,/^server.modules/a \"mod_expire\",' ${modules_file}
+/bin/sed -i '0,/^server.modules/a \"mod_accesslog\",' ${modules_file}
+/bin/sed -i '0,/^server.modules/a \"mod_openssl\",' ${modules_file}
 
 if ( [ "${modules_file}" = "/etc/lighttpd/modules.conf" ] )
 then
