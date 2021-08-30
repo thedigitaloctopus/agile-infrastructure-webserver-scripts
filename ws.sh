@@ -22,12 +22,6 @@
 #If there is a problem with building a webserver, you can uncomment the set -x command and debug output will be
 #presented on the screen as your webserver is built
 
-#HOMEDIRFORROOT="`/bin/echo ${HOME} | /bin/sed 's/\///g' | /bin/sed 's/home//g'`"
-#HOMEDIRFORROOT="`/bin/ls /home | /bin/grep '^X'`"
-#/usr/bin/touch /root/.ssh/HOMEDIRFORROOT:${HOMEDIRFORROOT}
-#HOMEDIR="/home/`/bin/ls /root/.ssh/HOMEDIRFORROOT:* | /usr/bin/awk -F':' '{print $NF}'`"
-#export HOME="${HOMEDIR}"
-
 USER_HOME="`/usr/bin/awk -F: '{ print $1}' /etc/passwd | /bin/grep "X*X"`"
 export HOME="/home/${USER_HOME}" | /usr/bin/tee -a ~/.bashrc
 export HOMEDIR=${HOME}
@@ -266,6 +260,7 @@ cd ${HOME}
 /usr/bin/git config --global user.name "${GIT_USER}"
 /usr/bin/git config --global user.email ${GIT_EMAIL_ADDRESS}
 /usr/bin/git config --global init.defaultBranch master
+/usr/bin/git config --global pull.rebase false 
 
 /bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
 /bin/echo "${0} `/bin/date`: Pulling scripts from infrastructure repository with credentials parameters:" >> ${HOME}/logs/WEBSERVER_BUILD.log
@@ -355,19 +350,6 @@ ClientAliveInterval 200
 ClientAliveCountMax 10" >> /etc/ssh/sshd_config
 fi
 
-#Set the port for ssh to use
-#/bin/sed -i "s/22/${SSH_PORT}/g" /etc/ssh/sshd_config
-#/bin/sed -i 's/^#Port/Port/' /etc/ssh/sshd_config
-#/bin/sed -i 's/PermitRootLogin yes/PermitRootLogin no/g' /etc/ssh/sshd_config
-#/bin/sed -i 's/.*PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config
-
-#Make sure that client connections to sshd are long lasting
-#if ( [ "`/bin/grep 'ClientAliveInterval 200' /etc/ssh/sshd_config 2>/dev/null`" = "" ] )
-#then
-#    /bin/echo "
-#ClientAliveInterval 200
-#    ClientAliveCountMax 10" >> /etc/ssh/sshd_config
-#fi
 
 /usr/sbin/service sshd restart
 
