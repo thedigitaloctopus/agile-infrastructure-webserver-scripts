@@ -82,22 +82,31 @@ fi
 
 if ( [ "${modules_file}" = "/etc/lighttpd/lighttpd.conf" ] )
 then
-    /bin/sed -i '0,/^server.modules/!b;//a \"mod_rewrite\",' ${modules_file}
-    /bin/sed -i '0,/^server.modules/!b;//a \"mod_proxy\",' ${modules_file}
-    /bin/sed -i '0,/^server.modules/!b;//a \"mod_access\",' ${modules_file}
-    /bin/sed -i '0,/^server.modules/!b;//a \"mod_setenv\",' ${modules_file}
-    /bin/sed -i '0,/^server.modules/!b;//a \"mod_auth\",' ${modules_file}
-    /bin/sed -i '0,/^server.modules/!b;//a \"mod_redirect\",' ${modules_file}
-    /bin/sed -i '0,/^server.modules/!b;//a \"mod_status\",' ${modules_file}
-    /bin/sed -i '0,/^server.modules/!b;//a \"mod_alias\",' ${modules_file}
-    /bin/sed -i '0,/^server.modules/!b;//a \"mod_userdir\",' ${modules_file}
-    /bin/sed -i '0,/^server.modules/!b;//a \"mod_fastcgi\",' ${modules_file}
-    /bin/sed -i '0,/^server.modules/!b;//a \"mod_ssi\",' ${modules_file}
-    /bin/sed -i '0,/^server.modules/!b;//a \"mod_compress\",' ${modules_file}
-    /bin/sed -i '0,/^server.modules/!b;//a \"mod_expire\",' ${modules_file}
-    /bin/sed -i '0,/^server.modules/!b;//a \"mod_accesslog\",' ${modules_file}
-    /bin/sed -i '0,/^server.modules/!b;//a \"mod_openssl\",' ${modules_file}
+    /bin/echo "server.modules = (
+"mod_openssl",
+"mod_accesslog",
+"mod_expire",
+"mod_compress",
+"mod_ssi",
+"mod_fastcgi",
+"mod_userdir",
+"mod_alias",
+"mod_status",
+"mod_redirect",
+"mod_auth",
+"mod_setenv",
+"mod_access",
+"mod_proxy",
+"mod_rewrite",
+"mod_indexfile",
+"mod_access",
+"mod_alias",
+"mod_redirect",
+)" > /etc/lighttpd/modules.conf
+
+    /bin/echo "include \"/etc/lighttpd/modules.conf\"" >> /etc/lighttpd/lighttpd.conf
 fi
+
 if ( [ "${modules_file}" = "/etc/lighttpd/modules.conf" ] )
 then
     /bin/sed -i '0,/^server.modules/!b;//a \"mod_rewrite\",' ${modules_file}
