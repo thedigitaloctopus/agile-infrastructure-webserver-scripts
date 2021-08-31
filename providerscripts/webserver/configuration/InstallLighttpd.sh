@@ -114,7 +114,6 @@ then
     /bin/sed -i '/.*include.*compress.conf.*/c\include \"conf.d/compress.conf\"' ${modules_file}
     /bin/sed -i '/.*include.*expire.conf.*/c\include \"conf.d/expire.conf\"' ${modules_file}
     /bin/sed -i '/.*include.*accesslog.conf.*/c\include \"conf.d/accesslog.conf\"' ${modules_file}
-    /bin/sed -i '/.*include.*openssl.conf.*/c\include \"conf.d/openssl.conf\"' ${modules_file}
     /bin/sed -i '0,/^server.modules/a \"mod_openssl\",' ${modules_file}
 fi
 
