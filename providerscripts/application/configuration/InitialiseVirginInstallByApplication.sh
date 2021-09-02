@@ -31,7 +31,6 @@ fi
 for applicationdir in `/bin/ls -d ${HOME}/providerscripts/application/configuration/*/`
 do
     applicationname="`/bin/echo ${applicationdir} | /bin/sed 's/\/$//' | /usr/bin/awk -F'/' '{print $NF}' | /usr/bin/tr 'a-z' 'A-Z'`"
-    #if ( [ "`/bin/ls ${HOME}/.ssh/APPLICATIONBASELINESOURCECODEREPOSITORY:* | /bin/grep ${applicationname}`" != "" ] )
     if ( [ "`/bin/grep "APPLICATIONBASELINESOURCECODEREPOSITORY:${applicationname}" ${HOME}/.ssh/webserver_configuration_settings.dat`" != "" ] )
     then
         . ${applicationdir}InitialiseVirginInstall.sh
