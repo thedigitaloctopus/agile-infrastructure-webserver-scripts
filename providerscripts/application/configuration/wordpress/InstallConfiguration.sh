@@ -27,10 +27,6 @@ do
     /bin/sleep 10
 done
 
-#if ( [ ! -f ${HOME}/runtime/VIRGINCONFIGSET ] )
-#then
-#    exit
-#fi
 
 if ( [ -f ${HOME}/config/credentials/shit ] && [ ! -f ${HOME}/config/APPLICATION_CONFIGURATION_PREPARED ] )
 then
