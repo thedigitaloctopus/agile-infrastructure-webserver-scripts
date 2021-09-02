@@ -118,9 +118,6 @@ else
     /bin/cp /var/www/html/configuration.php.default ${HOME}/runtime/joomla_configuration.php
 fi
 
-#This file enables us to detect which configuration file has been set from elsewhere if we are not sure
-#/bin/touch ${HOME}/.ssh/CONFIGFILE:joomla_configuration.php
-
 #Set the credentials that we need
 DB_PORT="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBPORT'`"
 
