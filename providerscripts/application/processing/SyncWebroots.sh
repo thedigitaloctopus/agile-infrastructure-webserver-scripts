@@ -22,7 +22,6 @@
 #####################################################################################
 set -x
 
-#directoriestomiss="`/bin/ls ${HOME}/.ssh/DIRECTORIESTOMOUNT:* | /bin/sed 's/.*DIRECTORIESTOMOUNT://g' | /bin/sed 's/:/ /g' | /usr/bin/tr '\n' ' ' | /bin/sed 's/  / /g'`"
 directoriestomiss="`${HOME}/providerscripts/utilities/ExtractConfigValues.sh 'DIRECTORIESTOMOUNT' 'stripped' | /usr/bin/tr '\n' ' ' | /bin/sed 's/  / /g'`"
 
 if ( [ "${directoriestomiss}" = "" ] )
