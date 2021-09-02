@@ -34,13 +34,6 @@ do
     fi
 done
 
-#if ( [ "`/home/${SERVER_USER}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOICE:virgin`" = "1" ] )
-#then
-#    exit
-#fi
-
-
-
 if ( [ "`/home/${SERVER_USER}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:None`" = "0" ] )
 then
     while ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] )
