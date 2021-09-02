@@ -27,7 +27,7 @@ cd /var/www/html
 if ( [ "`/bin/echo ${version} | /bin/grep alpha`" != "" ] )
 then
     /usr/bin/wget https://github.com/joomla/joomla-cms/releases/download/${version}/Joomla_${version}-Alpha-Full_Package.zip
-	/usr/bin/unzip Joomla_${version}-Alpha-Full_Package.zip
+    /usr/bin/unzip Joomla_${version}-Alpha-Full_Package.zip
     /bin/rm Joomla_${version}-Alpha-Full_Package.zip
     /bin/mv /var/www/html/htaccess.txt /var/www/html/.htaccess
     /bin/chown -R www-data.www-data /var/www/html/*
