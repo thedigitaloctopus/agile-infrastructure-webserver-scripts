@@ -22,16 +22,6 @@
 
 directories="`/bin/ls /var/www/html/sites/default/files | /bin/grep "^20"`"
 
-#for directory in ${directories}
-#do
-#   mounted_directories="`/bin/ls ${HOME}/.ssh/DIRECTORIESTOMOUNT:*`"
-#   if ( [ "`/bin/echo ${mounted_directories} | /bin/grep ${directory}`" = "" ] )
-#   then
-#       #/bin/touch ${HOME}/.ssh/DIRECTORIESTOMOUNT:sites.default.files.${directory}
-#        ${HOME}/providerscripts/utilities/StoreConfigValue.sh "DIRECTORIESTOMOUNT" "sites.default.files.${directory}" "append"
-#   fi
-#done
-
 WEBSITE_URL="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEURL'`"
 assetbucket="`/bin/echo ${WEBSITE_URL} | /usr/bin/awk -F'.' '{ for(i = 1; i <= NF; i++) { print $i; } }' | /usr/bin/cut -c1-3 | /usr/bin/tr '\n' ' ' | /bin/sed 's/ //g'`"
 
@@ -157,9 +147,6 @@ else
         /bin/cp /var/www/html/sites/default/default.settings.php ${HOME}/runtime/drupal_settings.php
     fi
 fi
-
-#Record which configuration file we are working on for use elsewhere
-#/bin/touch ${HOME}/.ssh/CONFIGFILE:drupal_settings.php
 
 if ( [ -f ${HOME}/runtime/drupal_settings.php ] && [ "`/bin/grep "'${name}'" ${HOME}/runtime/drupal_settings.php`" = "" ] || [ "`/bin/grep "'${password}'" ${HOME}/runtime/drupal_settings.php`" = "" ] || [ "`/bin/grep "'${database}'" ${HOME}/runtime/drupal_settings.php`" = "" ] || [ "`/bin/grep "'${name}'" ${HOME}/runtime/drupal_settings.php`" = "" ] )
 then
