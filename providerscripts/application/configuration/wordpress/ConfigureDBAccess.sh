@@ -109,11 +109,6 @@ then
     name="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBaaSUSERNAME'`"
 fi
 
-#if ( [ "`/bin/grep session_save_path /var/www/html/index.php`" = "" ] )
-#then
-#    /bin/sed -i '1 s/^.*$/<?php \nsession_save_path \(\"\/var\/www\/html\/wp-content\/uploads\/\"\);/' /var/www/html/index.php
-#fi
-
 if ( [ ! -f ${HOME}/config/wordpress_config.php ] )
 then
     /bin/rm ${HOME}/config/APPLICATION_DB_CONFIGURED
@@ -128,9 +123,6 @@ then
         /bin/chown www-data.www-data /var/www/DELETE_ME
     fi
 fi
-
-#Record which configuration file we are working on for use elsewhere as needed
-#/bin/touch ${HOME}/.ssh/CONFIGFILE:wordpress_config.php
 
 if ( [ -f ${HOME}/config/wordpress_config.php ] &&
     [ -f ${HOME}/config/APPLICATION_DB_CONFIGURED ] &&
