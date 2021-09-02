@@ -86,14 +86,10 @@ DB_PORT="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBPORT'`"
 
 #Set a prefix for our database tables. Make sure we only ever set one in the case where the script runs more than once
 #and exits for some reason.
-#if ( [ "`/bin/ls ${HOME}/.ssh/DBPREFIX:* 2>/dev/null`" = "" ] && [ ! -f /var/www/html/dpb.dat ] )
 if ( [ ! -f /var/www/html/dpb.dat ] )
 then
     prefix="`< /dev/urandom tr -dc a-z | head -c${1:-6};echo;`"
     ${HOME}/providerscripts/utilities/StoreConfigValue.sh "DBPREFIX" "${prefix}"
- #   /bin/touch ${HOME}/.ssh/DBPREFIX:${prefix}
- #   /bin/chown www-data.www-data ${HOME}/.ssh/DBPREFIX:*
- #   /bin/chmod 755 ${HOME}/.ssh/DBPREFIX:*
     /bin/echo "${prefix}" > /var/www/html/dpb.dat
 else
     prefix="`/bin/cat /var/www/html/dpb.dat`"
@@ -200,16 +196,6 @@ fi
 /bin/sed -i "/\$user /c\        public \$user = \'${username}\';" ${HOME}/runtime/joomla_configuration.php
 /bin/sed -i "/\$password /c\        public \$password = \'${password}\';" ${HOME}/runtime/joomla_configuration.php
 /bin/sed -i "/\$db /c\        public \$db = \'${database}\';" ${HOME}/runtime/joomla_configuration.php
-
-#if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEDBaaSINSTALLATIONTYPE:Postgres`" = "1" ] || [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:Postgres`" = "1" ] )
-#then
-#    /bin/sed -i "/\$dbtype /c\        public \$dbtype = \'pgsql\';" ${HOME}/runtime/joomla_configuration.php
-#    /bin/sed -i "/\$host /c\        public \$host = \'${host}\';" ${HOME}/runtime/joomla_configuration.php
-#    /bin/sed -i "/\$host /a        public \$port = \'${DB_PORT}\';" ${HOME}/runtime/joomla_configuration.php
-#else
-#    /bin/sed -i "/\$dbtype /c\        public \$dbtype = \'mysqli\';" ${HOME}/runtime/joomla_configuration.php
-#    /bin/sed -i "/\$host /c\        public \$host = \'${host}:${DB_PORT}\';" ${HOME}/runtime/joomla_configuration.php
-#fi
 
 dbipandport="${host}:${DB_PORT}"
 
