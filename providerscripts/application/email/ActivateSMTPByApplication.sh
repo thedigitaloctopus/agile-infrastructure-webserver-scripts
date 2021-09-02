@@ -20,11 +20,6 @@
 ######################################################################################
 #set -x
 
-#if ( [  ${HOME}/config/EMAILINITIALISED ] )
-#then
-#    exit
-#fi
-
 for applicationdir in `/bin/ls -d ${HOME}/providerscripts/application/email/*/`
 do
     applicationname="`/bin/echo ${applicationdir} | /bin/sed 's/\/$//' | /usr/bin/awk -F'/' '{print $NF}'`"
