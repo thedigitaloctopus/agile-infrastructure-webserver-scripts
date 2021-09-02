@@ -82,14 +82,10 @@ DB_PORT="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBPORT'`"
 
 #Set a prefix for our database tables. Make sure we only ever set one in the case where the script runs more than once
 #and exits for some reason.
-#if ( [ "`/bin/ls ${HOME}/.ssh/DBPREFIX:* 2>/dev/null`" = "" ] && [ ! -f /var/www/html/dpb.dat ] )
 if ( [ ! -f /var/www/html/dpb.dat ] )
 then
     prefix="`< /dev/urandom tr -dc a-z | head -c${1:-6};echo;`"
-   # /bin/touch ${HOME}/.ssh/DBPREFIX:${prefix}
     ${HOME}/providerscripts/utilities/StoreConfigValue.sh "DBPREFIX" "${prefix}"
-   # /bin/chown www-data.www-data ${HOME}/.ssh/DBPREFIX:*
-   # /bin/chmod 755 ${HOME}/.ssh/DBPREFIX:*
     /bin/echo "${prefix}" > /var/www/html/dpb.dat
 else
     prefix="`/bin/cat /var/www/html/dpb.dat`"
@@ -144,30 +140,16 @@ fi
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:Postgres`" = "1" ] || [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEDBaaSINSTALLATIONTYPE:Postgres`" = "1" ] )
 then
-    # /bin/sed -i "/^\$databases.*;/c  \$databases['default']['default'] = array ( \\n 'database' => '${database}', \\n 'username' => '${username}', \\n 'password' => '${password}', \\n 'host' => '${host}', \\n 'port' => '${DB_PORT}', \\n 'driver' => 'pgsql', \\n 'prefix' => '${prefix}_', \\n 'collation' => 'utf8mb4_general_ci', \\n );" ${HOME}/runtime/drupal_settings.php
     credentialstring="\$databases ['default']['default'] =array (\n 'database' => '${database}', \n 'username' => '${username}', \n 'password' => '${password}', \n 'host' => '${host}', \n 'port' => '${DB_PORT}', \n 'driver' => 'pgsql', \n 'prefix' => '${prefix}_', \n 'collation' => 'utf8mb4_general_ci',\n);"
 
 else
-    # /bin/sed -i "/^\$databases.*;/c  \$databases['default']['default'] = array ( \\n 'database' => '${database}', \\n 'username' => '${username}', \\n 'password' => '${password}', \\n 'host' => '${host}', \\n 'port' => '${DB_PORT}', \\n 'driver' => 'mysql', \\n 'prefix' => '${prefix}_', \\n 'collation' => 'utf8mb4_general_ci', \\n );" ${HOME}/runtime/drupal_settings.php
     credentialstring="\$databases ['default']['default'] =array (\n 'database' => '${database}', \n 'username' => '${username}', \n 'password' => '${password}', \n 'host' => '${host}', \n 'port' => '${DB_PORT}', \n 'driver' => 'mysql', \n 'prefix' => '${prefix}_', \n 'collation' => 'utf8mb4_general_ci',\n);"
-
 fi
 
 /bin/sed -i "s/^\$databases = \[\]\;/${credentialstring}/" ${HOME}/runtime/drupal_settings.php
 
 salt="`< /dev/urandom tr -dc a-z | head -c${1:-16};echo;`"
 /bin/sed -i "/^\$settings\['hash_salt'\]/c\$settings['hash_salt'] = '${salt}';" ${HOME}/runtime/drupal_settings.php
-
-
-###DEPRECATED
-#if ( [ "`/bin/grep 'CONFIG_SYNC_DIRECTORY' ${HOME}/runtime/drupal_settings.php`" = "" ] )
-#then
-#    /bin/echo "\$settings['trusted_host_patterns'] = [ '.*' ];" >> ${HOME}/runtime/drupal_settings.php
-#
-#    /bin/echo "\$config_directories = array(
-#    CONFIG_SYNC_DIRECTORY => '/var/www/html/sites/default',
-#    );" >> ${HOME}/runtime/drupal_settings.php
-#fi
 
 if ( [ "`/bin/grep 'ADDED BY CONFIG PROCESS' ${HOME}/runtime/drupal_settings.php`" = "" ] )
 then
@@ -209,6 +191,7 @@ if ( [ -f ${HOME}/config/drupal_settings.php ] &&
 then
     /bin/mkdir -p /var/www/html/sites/default/files/pictures
     /bin/chown -R www-data.www-data /var/www/html/sites/default
+    
     #We are ready to set up services and switch off twig caching
     if ( [ -f /var/www/html/sites/default/default.services.yml ] )
     then
