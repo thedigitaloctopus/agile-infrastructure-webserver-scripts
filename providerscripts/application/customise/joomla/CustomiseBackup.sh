@@ -20,8 +20,6 @@ baseline_name="${1}"
 /bin/cp ${HOME}/backups/${baseline_name}/configuration.php ${HOME}/backups/${baseline_name}/configuration.php.default
 /usr/bin/unlink ${HOME}/backups/${baseline_name}/configuration.php
 /bin/rm ${HOME}/backups/${baseline_name}/configuration.php
-#/bin/rm -r ${HOME}/backups/${baseline_name}/cache/*
-#/bin/rm -r ${HOME}/backups/${baseline_name}/administrator/cache/*
 /bin/rm -r ${HOME}/backups/${baseline_name}/logs/*
 /bin/rm -r ${HOME}/backups/${baseline_name}/tmp/*
 /bin/sed -i "/\$host/c\        public \$host = \'xxxxxx\';" ${HOME}/backups/${baseline_name}/configuration.php.default
