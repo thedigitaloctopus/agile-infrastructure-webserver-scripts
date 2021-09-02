@@ -29,12 +29,6 @@ username="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'EMAILUSERNAM
 password="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'EMAILPASSWORD'`"
 emailprovider="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'EMAILPROVIDER'`"
 
-
-#if ( [ "${password}" = "" ] )
-#then
-#    password="`/bin/cat ${HOME}/.ssh/SYSTEMEMAILPASSWORD`"
-#fi
-
 while ( [ ! -f ${HOME}/config/APPLICATION_CONFIGURATION_PREPARED ] )
 do
     /bin/sleep 30
@@ -53,7 +47,6 @@ then
     /bin/sed -i "/smtpport/c\        public \$smtpport= '"465"';" ${HOME}/runtime/joomla_configuration.php
     /bin/sed -i "/smtpauth/c\        public \$smtpauth= '"1"';" ${HOME}/runtime/joomla_configuration.php
     /bin/sed -i "/smtpsecure/c\        public \$smtpsecure= '"ssl"';" ${HOME}/runtime/joomla_configuration.php
-   # /bin/cp ${HOME}/runtime/joomla_configuration.php ${HOME}/config/joomla_configuration.php
 fi
 if ( [ "${emailprovider}" = "2" ] )
 then
@@ -67,7 +60,6 @@ then
     /bin/sed -i "/smtpport/c\        public \$smtpport= '"465"';" ${HOME}/runtime/joomla_configuration.php
     /bin/sed -i "/smtpauth/c\        public \$smtpauth= '"1"';" ${HOME}/runtime/joomla_configuration.php
     /bin/sed -i "/smtpsecure/c\        public \$smtpsecure= '"ssl"';" ${HOME}/runtime/joomla_configuration.php
-   # /bin/cp ${HOME}/runtime/joomla_configuration.php ${HOME}/config/joomla_configuration.php
 fi
 if ( [ "${emailprovider}" = "3" ] )
 then
@@ -81,25 +73,4 @@ then
     /bin/sed -i "/smtpport/c\      public \$smtpport= '"465"';" ${HOME}/runtime/joomla_configuration.php
     /bin/sed -i "/smtpauth/c\      public \$smtpauth= '"1"';" ${HOME}/runtime/joomla_configuration.php
     /bin/sed -i "/smtpsecure/c\    public \$smtpsecure= '"ssl"';" ${HOME}/runtime/joomla_configuration.php
-   # /bin/cp ${HOME}/runtime/joomla_configuration.php ${HOME}/config/joomla_configuration.php
 fi
-
-#This is put here because the ${HOME}/config directory is remote mounted and there is a small potential for partial copying
-#count="0"
-#while ( [ "${count}" -lt "5" ] && [ "`/usr/bin/diff ${HOME}/config/joomla_configuration.php ${HOME}/runtime/joomla_configuration.php`" != "" ] )
-#do
-#    /bin/cp ${HOME}/runtime/joomla_configuration.php  ${HOME}/config/joomla_configuration.php
-#    count="`/usr/bin/expr ${count} + 1`"
-#    /bin/sleep 5
-#done
-
-#if ( [ "${count}" = "5" ] )
-#then
-#    /bin/echo "${0} `/bin/date`: Failed to copy the configuration file successfully" >> ${HOME}/logs/MonitoringLog.dat
-#    exit
-#fi
-
-#if ( [ "`/usr/bin/diff ${HOME}/config/joomla_configuration.php ${HOME}/runtime/joomla_configuration.php`" = "" ] )
-#then
-#    /bin/touch ${HOME}/config/EMAILINITIALISED
-#fi
