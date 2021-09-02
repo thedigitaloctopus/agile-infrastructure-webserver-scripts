@@ -70,18 +70,6 @@ then
     exit
 fi
 
-#If we the default configuration file hasn't been set yet, then exit. It will be on the shared config directory or the
-#not shared runtime directory on an application by application basis
-#if ( [ ! -f ${HOME}/config/APPLICATION_CONFIGURATION_PREPARED ] && [ ! -f ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED ] )
-#then
-#    exit
-#fi
-
-#if ( [ -f ${HOME}/config/APPLICATION_DB_CONFIGURED ] || [ -f ${HOME}/runtime/APPLICATION_DB_CONFIGURED ]  )
-#then
-#   exit
-#fi
-
 
 #Retrieve the database server ip address
 if ( [ "`/bin/ls ${HOME}/config/databaseip`" = "" ] )
