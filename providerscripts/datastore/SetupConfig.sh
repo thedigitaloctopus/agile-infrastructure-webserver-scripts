@@ -37,7 +37,7 @@ then
 
     for ip in ${ASIPS}
     do
-        /bin/touch ${HOME}/config/autoscalerip/${ip}
+        /bin/touch ${HOME}/config/autoscalerpublicip/${ip}
         #if ( [ "${ASIP}" != "${ip}" ] )
         #then
         #    /usr/bin/scp -P ${SSH_PORT} -i ${HOME}/.ssh/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY -o ConnectTimeout=2 -o ConnectionAttempts=2 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no ${SERVER_USER}@${ip}:${HOME}/config ${HOME}/config
