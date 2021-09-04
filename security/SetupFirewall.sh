@@ -86,6 +86,33 @@ do
     fi
 done
 
+for ip in `/bin/ls ${HOME}/config/webserverpublicips/`
+do
+    if ( [ "`/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw status | /bin/grep ${ip} | /bin/grep ALLOW`" = "" ] )
+    then
+        /bin/sleep 5
+        /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from ${ip} to any port ${SSH_PORT}
+    fi
+done
+
+for ip in `/bin/ls ${HOME}/config/databaseip/`
+do
+    if ( [ "`/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw status | /bin/grep ${ip} | /bin/grep ALLOW`" = "" ] )
+    then
+        /bin/sleep 5
+        /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from ${ip} to any port ${SSH_PORT}
+    fi
+done
+
+for ip in `/bin/ls ${HOME}/config/databasepublicip/`
+do
+    if ( [ "`/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw status | /bin/grep ${ip} | /bin/grep ALLOW`" = "" ] )
+    then
+        /bin/sleep 5
+        /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from ${ip} to any port ${SSH_PORT}
+    fi
+done
+
 
 . ${HOME}/providerscripts/dns/SetupDNSFirewallRules.sh
 
