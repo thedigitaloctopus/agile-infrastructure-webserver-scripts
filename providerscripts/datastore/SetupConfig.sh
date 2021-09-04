@@ -35,7 +35,7 @@ then
     /bin/touch ${HOME}/config/autoscalerpublicip/${ASIP}
     
    # /usr/bin/scp -P ${SSH_PORT} -i ${HOME}/.ssh/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY -o ConnectTimeout=2 -o ConnectionAttempts=2 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no ${SERVER_USER}@${ASIP}:${HOME}/config ${HOME}/config
-    ASIPS="`${HOME}/providerscripts/utilities/ExtractConfigValues.sh 'ASIPS'`"
+    ASIPS="`${HOME}/providerscripts/utilities/ExtractConfigValues.sh 'ASIPS' | /bin/sed 's/ASIPS\://g' | /bin/sed 's/:/ /g'`"
 
     for ip in ${ASIPS}
     do
