@@ -1,5 +1,5 @@
 if ( [ -f ${HOME}/runtime/MARKEDFORSHUTDOWN ] )
 then
     /bin/rm ${HOME}/runtime/MARKEDFORSHUTDOWN
-    /usr/sbin/shutdown -h now
+    ${HOME}/providerscripts/utilities/ShutdownThisWebserver.sh
 fi
