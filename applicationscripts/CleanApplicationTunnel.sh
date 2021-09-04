@@ -25,19 +25,14 @@ APPLICATION="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'APPLICATI
 
 if ( [ "${APPLICATION}" = "joomla" ] )
 then
-    archives="`/bin/ls ${HOME}/config/webrootsynctunnel/webroot*`"
-    for archive in ${archives}
-    do
-        /bin/tar -vf ${archive} --wildcards --delete cache*
-        /bin/tar -vf ${archive} --wildcards --delete session*
-    done
+    /bin/sed -i '/\/var\/www\/html\/administrator\/cache\//d' ${HOME}/runtime/newandmodfiles.dat
+    /bin/sed -i '/\/var\/www\/html\/administrator\/logs\//d' ${HOME}/runtime/newandmodfiles.dat
+    /bin/sed -i '/\/var\/www\/html\/cache\//d' ${HOME}/runtime/newandmodfiles.dat
+    /bin/sed -i '/\/var\/www\/html\/logs\//d' ${HOME}/runtime/newandmodfiles.dat
+    /bin/sed -i '/\/var\/www\/html\/tmp\//d' ${HOME}/runtime/newandmodfiles.dat
 elif ( [ "${APPLICATION}" = "wordpress" ] )
 then
-    archives="`/bin/ls ${HOME}/config/webrootsynctunnel/webroot*`"
-    for archive in ${archives}
-    do
-        /bin/tar -vf ${archive} --wildcards --delete wp-content/uploads/sess*
-    done
+    /bin/sed -i '/\/var\/www\/html\/wp-content\/uploads\/session/d' ${HOME}/runtime/newandmodfiles.dat
 elif ( [ "${APPLICATION}" = "moodle" ] )
 then
     :
