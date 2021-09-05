@@ -27,6 +27,8 @@
 
 /bin/echo "Shutting down a webserver, please wait whilst I clean the place up first"
 
+#make sure a backup isn't running when we shutdown because if it is it would get corrupted
+
 while ( [ -f ${HOME}/config/backuplock.file ] )
 do
     /bin/sleep 10
