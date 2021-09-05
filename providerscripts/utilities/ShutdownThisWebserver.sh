@@ -27,6 +27,12 @@
 
 /bin/echo "Shutting down a webserver, please wait whilst I clean the place up first"
 
+while ( [ -f ${HOME}/config/backuplock.file ] )
+do
+    /bin/sleep 10
+done
+
+
 ip="`${HOME}/providerscripts/utilities/GetIP.sh`"
 
 if ( [ -f ${HOME}/config/bootedwebserverips/${ip} ] )
