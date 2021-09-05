@@ -27,19 +27,6 @@
 
 /bin/echo "Shutting down a webserver, please wait whilst I clean the place up first"
 
-#You can add any additional shutdown procedures you need for your webserver here.
-#There are two places a webserver should be shutdown from, the autoscaler as part of a "scale down" event and
-#the build client as part of a manual "shutdown" of the infrastructure. Please note, on a shutdown, the
-#webroot of the webserver is not preserved. There are backups every hour and that is what you will need to
-#reference to be able to restore the latest webroot. If you really need a backup of your webroot which is just before shutdown
-#then you can utilise the manual backup script which is stored in ${HOME}/ManualBackup.sh of your webserver
-if ( [ "$1" = "backup" ] )
-then
-    BUILD_IDENTIFIER="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDIDENTIFIER'`"
-    ${HOME}/providerscripts/git/Backup.sh "HOURLY" ${BUILD_IDENTIFIER} > /dev/null 2>&1
-    ${HOME}/providerscripts/datastore/BackupEFSToDatastore.sh
-fi
-
 ip="`${HOME}/providerscripts/utilities/GetIP.sh`"
 
 if ( [ -f ${HOME}/config/bootedwebserverips/${ip} ] )
