@@ -95,7 +95,7 @@ fi
 dir="`/usr/bin/pwd`"
 cd /tmp/check
 
-/usr/bin/git clone https://${APPLICATION_REPOSITORY_USERNAME}:${APPLICATION_REPOSITORY_PASSWORD}@github.com/${APPLICATION_REPOSITORY_OWNER}/${APPLICATION_REPOSITORY_NAME}.git
+${HOME}/providerscripts/git/GitClone.sh ${repository_provider} ${APPLICATION_REPOSITORY_USERNAME} ${APPLICATION_REPOSITORY_PASSWORD} ${APPLICATION_REPOSITORY_OWNER} ${APPLICATION_REPOSITORY_NAME}
 
 /usr/bin/diff -r /tmp/check/*/  /tmp/backup/ | /bin/grep -v '\.git' | grep "/tmp/check"  > /tmp/BackupDeltas.log
 if ( [ "`/bin/cat /tmp/BackupDeltas.log`" != "" ] )
