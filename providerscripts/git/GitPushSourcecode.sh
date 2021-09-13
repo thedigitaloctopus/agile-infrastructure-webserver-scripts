@@ -85,6 +85,7 @@ then
 fi
 
 /usr/bin/git push -f -u origin master
+
 if ( [ ! -d /tmp/check ] )
 then
     /bin/mkdir /tmp/check
@@ -102,7 +103,7 @@ then
     /bin/echo "###########################################################################################" >> ${HOME}/logs/BackupDeltas.log
     /bin/echo "${APPLICATION_REPOSITORY_NAME} `/usr/bin/date`" >> ${HOME}/logs/BackupDeltas.log
     /bin/echo "###########################################################################################"
-    /bin/cat /tmp/BackupDeltas.log >> ${HOME}/logs/BackupDeltas.log >> ${HOME}/logs/BackupDelta.log
+    /bin/cat /tmp/BackupDeltas.log >> ${HOME}/logs/BackupDeltas.log 
     ${HOME}/providerscripts/email/SendEmail.sh "POTENTIAL BACKUP INCONSISTENCY" "Check ${HOME}/logs/BackupDelta.log on machine: `${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'MYPUBLICIP'`"
 fi
 
