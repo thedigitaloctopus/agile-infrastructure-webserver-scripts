@@ -73,11 +73,6 @@ then
         /bin/touch /etc/nginx/BUILT_FROM_SOURCE
     elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'NGINX:repo'`" = "1" ] )
     then    
-        if ( [ "${BUILDOSVERSION}" = "9" ] )
-        then
-            /bin/echo "deb http://packages.dotdeb.org stretch all
-            deb-src http://packages.dotdeb.org stretch all" >> /etc/apt/sources.list
-        fi
         /usr/bin/curl http://nginx.org/keys/nginx_signing.key | /usr/bin/apt-key add -
         ${HOME}/installscripts/Update.sh ${BUILDOS}
         /usr/bin/apt-get -qq install nginx
