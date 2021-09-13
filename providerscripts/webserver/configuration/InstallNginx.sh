@@ -159,12 +159,7 @@ server
     ssl_session_timeout 5m;
     ssl_prefer_server_ciphers on; " > /etc/nginx/sites-available/${website_name}
     
-if ( [ "${BUILDOS}" = "debian" ] && [ "${BUILDOS_VERSION}" = "9" ]  )
-then
-    /bin/echo "    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;" >> /etc/nginx/sites-available/${website_name}
-else
-    /bin/echo "    ssl_protocols TLSv1.2 TLSv1.3;" >> /etc/nginx/sites-available/${website_name}
-fi
+/bin/echo "    ssl_protocols TLSv1.2 TLSv1.3;" >> /etc/nginx/sites-available/${website_name}
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'NGINX:repo:modsecurity'`" = "1" ]  || [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'NGINX:source:modsecurity'`" = "1" ] )
 then
