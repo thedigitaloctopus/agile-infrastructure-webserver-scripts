@@ -149,12 +149,6 @@ then
     /bin/chmod 755 ${HOME}/applicationscripts
 fi
 
-if ( [ ! -d ${HOME}/cpuaggregator ] )
-then
-    /bin/mkdir ${HOME}/cpuaggregator
-    /bin/chmod 755 ${HOME}/cpuaggregator
-fi
-
 if ( [ ! -d ${HOME}/runtime ] )
 then
     /bin/mkdir ${HOME}/runtime
