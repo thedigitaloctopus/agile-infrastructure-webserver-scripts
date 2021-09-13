@@ -25,12 +25,11 @@ APPLICATION_LANGUAGE="$1"
 if ( [ "${APPLICATION_LANGUAGE}" = "PHP" ] )
 then
     BUILDOS="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDOS'`"
-    BUILDOSVERSION="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDOSVERSION'`"
     
     if ( [ "${BUILDOS}" = "ubuntu" ] )
     then
         ${HOME}/installscripts/InstallPHPBase.sh ${BUILDOS}
-elif ( [ "${BUILDOS}" = "debian" ] )
+    elif ( [ "${BUILDOS}" = "debian" ] )
     then
         /usr/bin/wget https://www.dotdeb.org/dotdeb.gpg
         /usr/bin/apt-key add dotdeb.gpg
