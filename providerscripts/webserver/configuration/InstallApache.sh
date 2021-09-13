@@ -47,6 +47,13 @@ TimeOut 45
 LimitRequestFields 50 
 ServerTokens Prod
 
+NameVirtualHost *:80
+<VirtualHost *:80>
+   ServerName ${website_url}
+   DocumentRoot /var/www/html
+   Redirect / https://${website_url}
+</VirtualHost>
+
 <VirtualHost _default_:443>
         ServerAdmin webmaster@${website_url}
         ServerName ${website_url}
