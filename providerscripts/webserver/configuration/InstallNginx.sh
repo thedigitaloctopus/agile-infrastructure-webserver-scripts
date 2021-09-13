@@ -159,7 +159,7 @@ server
     ssl_session_timeout 5m;
     ssl_prefer_server_ciphers on; " > /etc/nginx/sites-available/${website_name}
     
-if ( ( [ "${BUILDOS}" = "ubuntu" ] && [ "${BUILDOS_VERSION}" = "18.04" ] ) || ( [ "${BUILDOS}" = "debian" ] && [ "${BUILDOS_VERSION}" = "9" ] ) )
+if ( [ "${BUILDOS}" = "debian" ] && [ "${BUILDOS_VERSION}" = "9" ]  )
 then
     /bin/echo "    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;" >> /etc/nginx/sites-available/${website_name}
 else
