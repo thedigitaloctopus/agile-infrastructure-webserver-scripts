@@ -24,15 +24,23 @@
 directory="$1"
 mounteddirectories="`${HOME}/providerscripts/utilities/ExtractConfigValues.sh 'DIRECTORIESTOMOUNT' 'stripped' | /bin/sed 's/\./\//g' | /usr/bin/tr '\n' ' ' | /bin/sed 's/  / /g'`"
 
-CMD="/bin/tar cPvfz /tmp/applicationsourcecode.tar.gz ${directory}/* "
+CMD="/bin/tar cPvfz /tmp/applicationsourcecode.tar.gz "
+if ( [ "`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'PERSISTASSETSTOCLOUD'`" = "1" ] )
+then
+    for mounteddirectory in ${mounteddirectories}
+    do
+        if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOICE:virgin`" = "0" ] && [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOICE:baseline`" = "0" ] )
+        then
+            if ( [ ! -d ${directory}/${mounteddirectory} ] )
+            then
+                /bin/mkdir -p ${directory}/${mounteddirectory}
+            fi
+            CMD=${CMD}"--exclude=\"${directory}/${mounteddirectory}\" "
+        fi
+    done
+fi
 
-for mounteddirectory in ${mounteddirectories}
-do
-    if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOICE:virgin`" = "0" ] && [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOICE:baseline`" = "0" ] )
-    then
-        CMD=${CMD}"--exclude=\"${directory}/${mounteddirectory}\" "
-    fi
-done
+CMD="${CMD} ${directory}/* "
 
 eval ${CMD}
 
