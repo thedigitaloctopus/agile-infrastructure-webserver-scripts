@@ -240,4 +240,3 @@ then
 else
     /bin/cp ${HOME}/runtime/wordpress_config.php ${HOME}/config/wordpress_config.php
 fi
-fi
