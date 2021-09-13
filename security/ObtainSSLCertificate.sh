@@ -97,28 +97,6 @@ then
                 ${HOME}/providerscripts/email/SendEmail.sh "NEW SSL CERT GENERATION FAILED" "Failed to generate a new SSL certificate, you might want to look into why..."
             fi
         fi
-
-        if ( [ "${DNS_CHOICE}" = "rackspace" ] )
-        then
-            DNS_EMAIL="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DNSUSERNAME'`"
-
-            if ( [ "${PRODUCTION}" = "1" ] && [ "${DEVELOPMENT}" = "0" ] )
-            then
-                /bin/echo ${SERVER_USER_PASSWORD}  | /usr/bin/sudo -S -E RACKSPACE_USER="${DNS_USERNAME}" RACKSPACE_API_KEY="${DNS_SECURITY_KEY}" /usr/bin/lego --email="${DNS_EMAIL}" --domains="${WEBSITE_URL}" --dns="${DNS_CHOICE}" --accept-tos run
-            fi
-            
-            if ( [ "${PRODUCTION}" = "0" ] && [ "${DEVELOPMENT}" = "1" ] )
-            then
-                /bin/echo ${SERVER_USER_PASSWORD}  | /usr/bin/sudo -S -E RACKSPACE_USER="${DNS_USERNAME}" RACKSPACE_API_KEY="${DNS_SECURITY_KEY}" /usr/bin/lego --email="${DNS_EMAIL}"  --server=https://acme-staging-v02.api.letsencrypt.org/directory --domains="${WEBSITE_URL}" --dns="${DNS_CHOICE}" --accept-tos run
-            fi
-
-            if ( [ "$?" = "0" ] )
-            then
-                ${HOME}/providerscripts/email/SendEmail.sh "NEW SSL CERT GENERATED" "Successfully generated a new SSL Certificate"
-            else
-                ${HOME}/providerscripts/email/SendEmail.sh "NEW SSL CERT GENERATION FAILED" "Failed to generate a new SSL certificate, you might want to look into why..."
-            fi
-        fi
        
         if ( [ "${DNS_CHOICE}" = "digitalocean" ] )
         then
