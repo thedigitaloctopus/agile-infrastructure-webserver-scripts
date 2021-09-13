@@ -85,3 +85,25 @@ then
 fi
 
 /usr/bin/git push -f -u origin master
+if ( [ ! -d /tmp/check ] )
+then
+    /bin/mkdir /tmp/check
+fi 
+/bin/rm -r /tmp/check/*
+
+dir="`/usr/bin/pwd`"
+cd /tmp/check
+
+/usr/bin/git clone https://${APPLICATION_REPOSITORY_USERNAME}:${APPLICATION_REPOSITORY_PASSWORD}@github.com/${APPLICATION_REPOSITORY_OWNER}/${APPLICATION_REPOSITORY_NAME}.git
+
+/usr/bin/diff -r /tmp/check/*/  /tmp/backup/ | /bin/grep -v '\.git' | grep "/tmp/check"  > /tmp/BackupDeltas.log
+if ( [ "`/bin/cat /tmp/BackupDeltas.log`" != "" ] )
+then
+    /bin/echo "###########################################################################################" >> ${HOME}/logs/BackupDeltas.log
+    /bin/echo "${APPLICATION_REPOSITORY_NAME} `/usr/bin/date`" >> ${HOME}/logs/BackupDeltas.log
+    /bin/echo "###########################################################################################"
+    /bin/cat /tmp/BackupDeltas.log >> ${HOME}/logs/BackupDeltas.log >> ${HOME}/logs/BackupDelta.log
+    ${HOME}/providerscripts/email/SendEmail.sh "POTENTIAL BACKUP INCONSISTENCY" "Check ${HOME}/logs/BackupDelta.log on machine: `${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'MYPUBLICIP'`"
+fi
+
+cd ${dir}
