@@ -32,11 +32,6 @@ then
         ${HOME}/installscripts/InstallPHPBase.sh ${BUILDOS}
 elif ( [ "${BUILDOS}" = "debian" ] )
     then
-        if ( [ "${BUILDOSVERSION}" = "9" ] )
-        then
-            /bin/echo "deb http://packages.dotdeb.org stretch all
-            deb-src http://packages.dotdeb.org stretch all" >> /etc/apt/sources.list
-        fi
         /usr/bin/wget https://www.dotdeb.org/dotdeb.gpg
         /usr/bin/apt-key add dotdeb.gpg
         ${HOME}/installscripts/Update.sh ${BUILDOS}
