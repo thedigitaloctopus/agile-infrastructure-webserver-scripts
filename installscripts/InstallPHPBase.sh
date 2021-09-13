@@ -33,21 +33,7 @@ fi
 
 if ( [ "${BUILDOS}" = "ubuntu" ] )
 then
-    if ( [ "${BUILDOSVERSION}" = "18.04" ] )
-    then
-        /usr/bin/add-apt-repository -y ppa:ondrej/php
-        ${HOME}/installscripts/Update.sh ${BUILDOS}
-
-        installed_php_version="`/usr/bin/php -v | /bin/grep "^PHP" | /usr/bin/awk '{print $2}' | /usr/bin/awk -F'.' '{print $1,$2}' | /bin/sed 's/ /\./g'`"
-
-        if ( [ "${installed_php_version}" != "${PHP_VERSION}" ] )
-        then
-            /usr/bin/apt-get -qq -y purge php*
-            /usr/bin/apt-get -qq -y autoclean
-            /usr/bin/apt-get -qq -y autoremove
-        fi
-        /usr/bin/apt-get -qq -y install php-fpm php-cli php-common php-dev php-xmlrpc php-soap php-json php-opcache php-mysqli php-phpdbg php-mbstring php-gd php-imap php-ldap php-pgsql php-pspell php-tidy php-intl php-gd php-curl php-zip php-xml
-    elif ( [ "${BUILDOSVERSION}" = "20.04" ] )
+    if ( [ "${BUILDOSVERSION}" = "20.04" ] )
     then
         /usr/bin/add-apt-repository -y ppa:ondrej/php
         ${HOME}/installscripts/Update.sh ${BUILDOS}
