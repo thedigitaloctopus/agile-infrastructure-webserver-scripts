@@ -90,16 +90,14 @@ then
 
     /bin/echo "This will vary by provider. Moodle requires that the database is set up in a specific way. This requires extra privileges"
     /bin/echo "Which the for some providers, only the root user has. If you are with AWS, for example, you should have already configured"
-    /bin/echo "These parameters using a parameter group so you don't need to do anything. With rackspace, for example, the root user is"
-    /bin/echo "not activated by default and so we need to activate the root user. To do this, for rackspace, please refer to helperscripts/EnableRootForRackspaceCloudDatabase.sh"
-    /bin/echo "And glean the root password form the output. This process will vary by DBaaS provider and clearly, I can't test them all"
-    /bin/echo
+    /bin/echo "These parameters using a parameter group so you don't need to do anything"
+    /bin/echo ""
     /bin/echo "So, I hope that is clear. If the parameters haven't been set when you deployed the database, you will need to tell me the master"
     /bin/echo "username and the master password for your database so that I can set them now for you so, let's push on"
     /bin/echo
     /bin/echo "Please enter the master username for your database (probably root)"
     read master_username
-    /bin/echo "Please enter the master password for your database (for rackspace please refer to helperscripts/EnableRootForRackspaceCloudDatabase.sh)"
+    /bin/echo "Please enter the master password for your database"
     read root_password
 
     /usr/bin/mysql -A -u ${master_username} -p${master_password} ${database} --host="${host}" --port="${DB_PORT}" -e "SET GLOBAL innodb_file_per_table=ON;"
