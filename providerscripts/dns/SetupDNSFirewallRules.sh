@@ -199,12 +199,6 @@ then
     fi
 fi
 
-if ( [ "${DNS_CHOICE}" = "rackspace" ] )
-then
-    /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow 443/tcp
-    /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow 80/tcp
-fi
-
 if ( [ "${DNS_CHOICE}" = "digitalocean" ] )
 then
     /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow 443/tcp
