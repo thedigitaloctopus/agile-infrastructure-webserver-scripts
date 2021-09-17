@@ -25,6 +25,8 @@
 
 /bin/echo "${0} `/bin/date`: This webserver is shutting down" >> ${HOME}/logs/MonitoringLog.dat
 
+/bin/echo ""
+/bin/echo "#######################################################################"
 /bin/echo "Shutting down a webserver, please wait whilst I clean the place up first"
 
 #make sure a backup isn't running when we shutdown because if it is it would get corrupted
@@ -36,10 +38,14 @@ done
 
 if ( [ "$1" = "backup" ] )
 then
+    /bin/echo
     /bin/echo "Making an daily backup of your webserver for safety"
     BUILD_IDENTIFIER="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDIDENTIFIER'`"
     ${HOME}/providerscripts/git/Backup.sh "DAILY" ${BUILD_IDENTIFIER} > /dev/null 2>&1
 fi
+
+/bin/echo "#######################################################################"
+/bin/echo ""
 
 
 ip="`${HOME}/providerscripts/utilities/GetIP.sh`"
