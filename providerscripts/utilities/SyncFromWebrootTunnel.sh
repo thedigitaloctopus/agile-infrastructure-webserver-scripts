@@ -37,8 +37,13 @@ then
     /bin/mkdir -p ${HOME}/webrootsync/incomingupdates
 fi
 
-/bin/cp ${HOME}/config/webrootsynctunnel/webrootsync*.tar ${HOME}/webrootsync/incomingupdates
-/bin/rm ${HOME}/webrootsync/incomingupdates/*${ip}* > /dev/null
+/bin/cp ${HOME}/config/webrootsynctunnel/webrootsync*.tar ${HOME}/webrootsync/incomingupdates 2>/dev/null
+/bin/rm ${HOME}/webrootsync/incomingupdates/*${ip}* 2>/dev/null
+
 cd /var/www/html
-/bin/cat ${HOME}/webrootsync/incomingupdates/webrootsync*.tar | /bin/tar -xf - --keep-newer-files -i
-/bin/rm ${HOME}/webrootsync/incomingupdates/webrootsync*.tar
+
+if ( [ "`/bin/ls -l ${HOME}/webrootsync/incomingupdates/webrootsync*.tar | /usr/bin/wc -l`" -gt "0" ] )
+then
+    /bin/cat ${HOME}/webrootsync/incomingupdates/webrootsync*.tar | /bin/tar -xf - --keep-newer-files -i
+    /bin/rm ${HOME}/webrootsync/incomingupdates/webrootsync*.tar
+fi
