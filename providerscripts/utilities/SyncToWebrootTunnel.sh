@@ -63,6 +63,8 @@ eval ${CMD} > ${HOME}/runtime/checklist.chk.new
 
 /usr/bin/diff ${HOME}/runtime/checklist.chk ${HOME}/runtime/checklist.chk.new | /bin/grep "^>" | /usr/bin/awk '{print $NF}' > ${HOME}/runtime/newandmodfiles.dat
 
+${HOME}/applicationscripts/CleanApplicationTunnel.sh 2>/dev/null
+
 if ( [ ! -d ${HOME}/webrootsync ] )
 then
     /bin/mkdir ${HOME}/webrootsync 
@@ -99,4 +101,3 @@ then
     /bin/cp ${HOME}/webrootsync/webrootsync.${ip}.tar ${HOME}/config/webrootsynctunnel
 fi
 
-${HOME}/applicationscripts/CleanApplicationTunnel.sh 2>/dev/null
