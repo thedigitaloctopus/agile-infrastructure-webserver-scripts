@@ -104,6 +104,10 @@ if ( [ "$1" = "BIMONTHLY" ] )
 then
     period="bimonthly"
 fi
+if ( [ "$1" = "SHUTDOWN" ] )
+then
+   period="shutdown"
+fi
 
 BUILD_IDENTIFIER="$2"
 ip="`${HOME}/providerscripts/utilities/GetIP.sh`"
