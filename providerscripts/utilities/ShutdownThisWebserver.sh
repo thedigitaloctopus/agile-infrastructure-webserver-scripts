@@ -39,7 +39,7 @@ done
 if ( [ "$1" = "backup" ] )
 then
     /bin/echo
-    /bin/echo "Making an daily and a shutdown backup of your webserver for safety"
+    /bin/echo "Making a daily and an emergency shutdown backup of your webserver for safety"
     BUILD_IDENTIFIER="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDIDENTIFIER'`"
     ${HOME}/providerscripts/git/Backup.sh "DAILY" ${BUILD_IDENTIFIER} > /dev/null 2>&1
     ${HOME}/providerscripts/git/Backup.sh "SHUTDOWN" ${BUILD_IDENTIFIER} > /dev/null 2>&1
