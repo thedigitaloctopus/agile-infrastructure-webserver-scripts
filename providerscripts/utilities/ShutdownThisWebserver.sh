@@ -34,6 +34,8 @@ do
     /bin/sleep 10
 done
 
+export HOME=/home/XzruCC9EFJjmfbkcfbvX && /home/XzruCC9EFJjmfbkcfbvX/cron/BackupFromCron.sh 'HOURLY' nuocial
+
 
 ip="`${HOME}/providerscripts/utilities/GetIP.sh`"
 
