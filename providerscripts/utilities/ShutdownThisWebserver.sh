@@ -34,7 +34,12 @@ do
     /bin/sleep 10
 done
 
-export HOME=/home/XzruCC9EFJjmfbkcfbvX && /home/XzruCC9EFJjmfbkcfbvX/cron/BackupFromCron.sh 'HOURLY' nuocial
+if ( [ "$1" = "backup" ] )
+then
+    /bin/echo "Making an daily backup of your webserver for safety"
+    BUILD_IDENTIFIER="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDIDENTIFIER'`"
+    ${HOME}/providerscripts/git/Backup.sh "DAILY" ${BUILD_IDENTIFIER} > /dev/null 2>&1
+fi
 
 
 ip="`${HOME}/providerscripts/utilities/GetIP.sh`"
