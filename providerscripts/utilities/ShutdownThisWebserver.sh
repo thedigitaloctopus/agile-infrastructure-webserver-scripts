@@ -31,12 +31,8 @@
 
 #make sure a backup isn't running when we shutdown because if it is it would get corrupted
 
-while ( [ -f ${HOME}/config/backuplock.file ] )
-do
-    /bin/sleep 10
-done
 
-if ( [ "$1" = "backup" ] )
+if ( [ "$1" = "backup" ] && [ ! -f ${HOME}/config/backuplock.file ] )
 then
     /bin/echo
     /bin/echo "Making a daily and an emergency shutdown backup of your webserver for safety"
