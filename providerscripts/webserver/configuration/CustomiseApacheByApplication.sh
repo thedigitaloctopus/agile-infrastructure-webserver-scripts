@@ -26,7 +26,9 @@ WEBSITE_NAME="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITED
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:drupal`" = "1" ] )
 then
-    /bin/sed -i 's/<\/VirtualHost>//g' /etc/apache2/sites-available/${WEBSITE_NAME}
+    #/bin/sed -i 's/<\/VirtualHost>//g' /etc/apache2/sites-available/${WEBSITE_NAME}
+    /usr/bin/tac /etc/apache2/sites-available/${WEBSITE_NAME} | /bin/sed '0,/<\/VirtualHost>/{/<\/VirtualHost>/d;}' | /usr/bin/tac > /etc/apache2/sites-available/${WEBSITE_NAME}.$$
+    /bin/mv /etc/apache2/sites-available/${WEBSITE_NAME}.$$ /etc/apache2/sites-available/${WEBSITE_NAME}
     /bin/echo "<Directory /var/www/html>
     Options Indexes FollowSymLinks
     AllowOverride All
