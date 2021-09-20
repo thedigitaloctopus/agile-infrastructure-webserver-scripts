@@ -33,6 +33,10 @@ then
 elif ( [ "${APPLICATION}" = "wordpress" ] )
 then
     /bin/sed -i '/\/var\/www\/html\/wp-content\/uploads\/session/d' ${HOME}/runtime/newandmodfiles.dat
+    /bin/sed -i '/\/var\/www\/html\/wp-content\/cache/d' ${HOME}/runtime/newandmodfiles.dat
+    /bin/sed -i '/\/var\/www\/html\/wp-content\/tmp/d' ${HOME}/runtime/newandmodfiles.dat
+    /bin/sed -i '/\/var\/www\/html\/wp-content\/logs/d' ${HOME}/runtime/newandmodfiles.dat
+
 elif ( [ "${APPLICATION}" = "moodle" ] )
 then
     /bin/sed -i '/\/var\/www\/html\/moodledata\/cache\//d' ${HOME}/runtime/newandmodfiles.dat
