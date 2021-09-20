@@ -45,18 +45,18 @@ then
 else
     if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh PERSISTASSETSTOCLOUD:0`" = "1" ] )
     then
-        CMD="/usr/bin/find /var/www/html/ -type f -exec md5sum {} \;"
+        CMD="/usr/bin/find /var/www/html/ -type f "
     else
-        CMD="/usr/bin/find /var/www/html/ -type f -exec md5sum {} \; -not -path "
+        CMD="/usr/bin/find /var/www/html/ -type f -not -path "
 
         for directorytomiss in ${directoriestomiss}
         do
             CMD=${CMD}"'/var/www/html/${directorytomiss}/*' -not -path "
             CMD=${CMD}"'/var/www/html/${directorytomiss}' -not -path "
         done
-
         CMD="`/bin/echo ${CMD} | /bin/sed 's/-not -path$//g'`"
     fi
+    CMD="`${CMD} -exec md5sum {} \;"
 fi
 
 eval ${CMD} > ${HOME}/runtime/checklist.chk.new
