@@ -38,5 +38,6 @@ then
     :
 elif ( [ "${APPLICATION}" = "drupal" ] )
 then
-    :
+    /bin/sed -i '/\/var\/www\/html\/logs\//d' ${HOME}/runtime/newandmodfiles.dat
+    /bin/sed -i '/\/var\/www\/html\/tmp\//d' ${HOME}/runtime/newandmodfiles.dat
 fi
