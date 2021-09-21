@@ -152,11 +152,11 @@ fi
 /bin/echo "${0} `/bin/date`: Updating the cache handler" >> ${HOME}/logs/MonitoringLog.dat
 /bin/sed -i "/\$caching /c\        public \$caching = \'1\';" ${HOME}/runtime/joomla_configuration.php
 /bin/echo "${0} `/bin/date`: Updating the caching" >> ${HOME}/logs/MonitoringLog.dat
-/bin/sed -i "/\$sef /c\        public \$sef = \'1\';" ${HOME}/runtime/joomla_configuration.php
+/bin/sed -i "/\$sef /c\        public \$sef = \'0\';" ${HOME}/runtime/joomla_configuration.php
 /bin/echo "${0} `/bin/date`: Updating the sef" >> ${HOME}/logs/MonitoringLog.dat
-/bin/sed -i "/\$sef_suffix /c\        public \$sef_suffix = \'1\';" ${HOME}/runtime/joomla_configuration.php
+/bin/sed -i "/\$sef_suffix /c\        public \$sef_suffix = \'0\';" ${HOME}/runtime/joomla_configuration.php
 /bin/echo "${0} `/bin/date`: Updating the sef_suffix" >> ${HOME}/logs/MonitoringLog.dat
-/bin/sed -i "/\$sef_rewrite /c\        public \$sef_rewrite = \'1\';" ${HOME}/runtime/joomla_configuration.php
+/bin/sed -i "/\$sef_rewrite /c\        public \$sef_rewrite = \'0\';" ${HOME}/runtime/joomla_configuration.php
 /bin/echo "${0} `/bin/date`: Updating the sef_rewrite" >> ${HOME}/logs/MonitoringLog.dat
 /bin/sed -i "/\$gzip /c\        public \$gzip = \'1\';" ${HOME}/runtime/joomla_configuration.php
 /bin/echo "${0} `/bin/date`: Updating the gzip" >> ${HOME}/logs/MonitoringLog.dat
