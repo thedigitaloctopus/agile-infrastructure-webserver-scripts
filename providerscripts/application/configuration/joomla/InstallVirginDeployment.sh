@@ -31,6 +31,7 @@ then
     /bin/rm Joomla_${version}-Alpha-Full_Package.zip
     /bin/mv /var/www/html/htaccess.txt /var/www/html/.htaccess
     /bin/chown -R www-data.www-data /var/www/html/*
+    /bin/chmod 440 /var/www/html/.htaccess
     cd /home/${SERVER_USER}
     /bin/echo "1"
 elif ( [ "`/bin/echo ${version} | /bin/grep beta`" != "" ] )
@@ -40,6 +41,7 @@ then
     /bin/rm Joomla_${version}-Beta-Full_Package.zip
     /bin/mv /var/www/html/htaccess.txt /var/www/html/.htaccess
     /bin/chown -R www-data.www-data /var/www/html/*
+    /bin/chmod 440 /var/www/html/.htaccess
     cd /home/${SERVER_USER}
     /bin/echo "1"
 elif ( [ "`/bin/echo ${version} | /bin/grep rc`" != "" ] )
@@ -49,6 +51,7 @@ then
     /bin/rm Joomla_${version}-Release_Candidate-Full_Package.zip
     /bin/mv /var/www/html/htaccess.txt /var/www/html/.htaccess
     /bin/chown -R www-data.www-data /var/www/html/*
+    /bin/chmod 440 /var/www/html/.htaccess
     cd /home/${SERVER_USER}
     /bin/echo "1"
 
@@ -58,6 +61,7 @@ else
     /bin/rm Joomla_${version}-Stable-Full_Package.zip
     /bin/mv /var/www/html/htaccess.txt /var/www/html/.htaccess
     /bin/chown -R www-data.www-data /var/www/html/*
+    /bin/chmod 440 /var/www/html/.htaccess
     cd /home/${SERVER_USER}
     /bin/echo "1"
 fi
