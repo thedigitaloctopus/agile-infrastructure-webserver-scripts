@@ -222,9 +222,9 @@ fi
 /bin/sed -i "/\$cache_handler /c\        public \$cache_handler = \'${cache}\';" ${HOME}/runtime/joomla_configuration.php
 /bin/sed -i "/\$caching /c\        public \$caching = \'1\';" ${HOME}/runtime/joomla_configuration.php
 /bin/sed -i "/\$cache_handler /c\        public \$cache_handler = \'file\';" ${HOME}/runtime/joomla_configuration.php
-/bin/sed -i "/\$sef /c\        public \$sef = \'1\';" ${HOME}/runtime/joomla_configuration.php
-/bin/sed -i "/\$sef_suffix /c\        public \$sef_suffix = \'1\';" ${HOME}/runtime/joomla_configuration.php
-/bin/sed -i "/\$sef_rewrite /c\        public \$sef_rewrite = \'1\';" ${HOME}/runtime/joomla_configuration.php
+/bin/sed -i "/\$sef /c\        public \$sef = \'0\';" ${HOME}/runtime/joomla_configuration.php
+/bin/sed -i "/\$sef_suffix /c\        public \$sef_suffix = \'0\';" ${HOME}/runtime/joomla_configuration.php
+/bin/sed -i "/\$sef_rewrite /c\        public \$sef_rewrite = \'0\';" ${HOME}/runtime/joomla_configuration.php
 /bin/sed -i "/\$gzip /c\        public \$gzip = \'1\';" ${HOME}/runtime/joomla_configuration.php
 /bin/sed -i "/\$force_ssl /c\        public \$force_ssl = \'2\';" ${HOME}/runtime/joomla_configuration.php
 /bin/echo "${0} `/bin/date`: Updating the force ssl" >> ${HOME}/logs/MonitoringLog.dat
