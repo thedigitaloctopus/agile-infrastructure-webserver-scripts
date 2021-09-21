@@ -113,9 +113,10 @@ fi
             AllowOverride None
         </Directory>
         <Directory /var/www/html>
-                DirectoryIndex index.html index.php
+                DirectoryIndex index.php
                 LimitRequestBody 512000
                 LimitXMLRequestBody 10485760
+                AllowOverride ALL
                 Options -Includes -ExecCGI -Indexes -FollowSymLinks
                 Require all granted
                 ################################################################################################
