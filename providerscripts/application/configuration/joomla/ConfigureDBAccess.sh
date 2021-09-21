@@ -37,12 +37,12 @@ then
     exit
 fi
 
-if ( [ ! -f /var/www/html/.htaccess ] )
-then
-    /bin/cp ${HOME}/providerscripts/application/configuration/joomla-htaccess.txt /var/www/html/.htaccess
-    /bin/chown www-data.www-data /var/www/html/.htaccess
-    /bin/chmod 440 /var/www/html/.htaccess
-fi
+#if ( [ ! -f /var/www/html/.htaccess ] )
+#then
+#    /bin/cp ${HOME}/providerscripts/application/configuration/joomla-htaccess.txt /var/www/html/.htaccess
+#    /bin/chown www-data.www-data /var/www/html/.htaccess
+#    /bin/chmod 440 /var/www/html/.htaccess
+#fi
 
 if ( [ -f ${HOME}/runtime/CONFIG_VERIFIED ] )
 then
