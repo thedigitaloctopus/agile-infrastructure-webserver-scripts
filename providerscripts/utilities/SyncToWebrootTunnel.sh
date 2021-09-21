@@ -61,43 +61,47 @@ fi
 
 eval ${CMD} > ${HOME}/runtime/checklist.chk.new
 
-/usr/bin/diff ${HOME}/runtime/checklist.chk ${HOME}/runtime/checklist.chk.new | /bin/grep "^>" | /usr/bin/awk '{print $NF}' > ${HOME}/runtime/newandmodfiles.dat
-
-${HOME}/applicationscripts/CleanApplicationTunnel.sh 2>/dev/null
-
-if ( [ ! -d ${HOME}/webrootsync ] )
+if ( [ ! -f ${HOME}/runtime/checklist.chk ] )
 then
-    /bin/mkdir ${HOME}/webrootsync 
-fi
-
-if ( [ ! -d ${HOME}/config/webrootsynctunnel ] )
-then
-    /bin/mkdir -p ${HOME}/config/webrootsynctunnel
-fi
- 
-cd /var/www/html
-
-if ( [ -f ${HOME}/config/webrootsynctunnel/sync*purge ] )
-then
-    syncfile="webrootsyncXX.${ip}.tar"
+   /bin/cp ${HOME}/runtime/checklist.chk.new
 else
-    syncfile="webrootsync.${ip}.tar"
+    /usr/bin/diff ${HOME}/runtime/checklist.chk ${HOME}/runtime/checklist.chk.new | /bin/grep "^>" | /usr/bin/awk '{print $NF}' > ${HOME}/runtime/newandmodfiles.dat
+
+    ${HOME}/applicationscripts/CleanApplicationTunnel.sh 2>/dev/null
+
+    if ( [ ! -d ${HOME}/webrootsync ] )
+    then
+        /bin/mkdir ${HOME}/webrootsync 
+    fi
+
+    if ( [ ! -d ${HOME}/config/webrootsynctunnel ] )
+    then
+        /bin/mkdir -p ${HOME}/config/webrootsynctunnel
+    fi
+ 
+    cd /var/www/html
+
+    if ( [ -f ${HOME}/config/webrootsynctunnel/sync*purge ] )
+    then
+        syncfile="webrootsyncXX.${ip}.tar"
+    else
+        syncfile="webrootsync.${ip}.tar"
+    fi
+
+    if ( [ ! -f ${HOME}/config/webrootsynctunnel/sync*purge ] && [ -f ${HOME}/webrootsync/webrootsyncXX.${ip}.tar ] )
+    then
+        /bin/mv ${HOME}/webrootsync/webrootsyncXX.${ip}.tar  ${HOME}/webrootsync/webrootsync.${ip}.tar  
+    fi
+
+    for file in `/bin/cat ${HOME}/runtime/newandmodfiles.dat`
+    do
+        file="`/bin/echo ${file} | /bin/sed 's/\/var\/www\/html\///g'`"
+        dir="`/bin/echo ${file} | /usr/bin/awk 'BEGIN {FS = "/";OFS = "/";} {$NF=""}1'`"
+        /bin/tar auf ${HOME}/webrootsync/${syncfile} ${file} 
+    done
+
+    if ( [ "`/usr/bin/cmp --silent ${HOME}/webrootsync/webrootsync.${ip}.tar ${HOME}/config/webrootsynctunnel/webrootsync.${ip}.tar || /bin/echo 'files are different'`" != "" ] || [ ! -f ${HOME}/config/webrootsynctunnel/webrootsync.${ip}.tar ] )
+    then
+        /bin/cp ${HOME}/webrootsync/webrootsync.${ip}.tar ${HOME}/config/webrootsynctunnel
+    fi
 fi
-
-if ( [ ! -f ${HOME}/config/webrootsynctunnel/sync*purge ] && [ -f ${HOME}/webrootsync/webrootsyncXX.${ip}.tar ] )
-then
-    /bin/mv ${HOME}/webrootsync/webrootsyncXX.${ip}.tar  ${HOME}/webrootsync/webrootsync.${ip}.tar  
-fi
-
-for file in `/bin/cat ${HOME}/runtime/newandmodfiles.dat`
-do
-    file="`/bin/echo ${file} | /bin/sed 's/\/var\/www\/html\///g'`"
-    dir="`/bin/echo ${file} | /usr/bin/awk 'BEGIN {FS = "/";OFS = "/";} {$NF=""}1'`"
-    /bin/tar auf ${HOME}/webrootsync/${syncfile} ${file} 
-done
-
-if ( [ "`/usr/bin/cmp --silent ${HOME}/webrootsync/webrootsync.${ip}.tar ${HOME}/config/webrootsynctunnel/webrootsync.${ip}.tar || /bin/echo 'files are different'`" != "" ] || [ ! -f ${HOME}/config/webrootsynctunnel/webrootsync.${ip}.tar ] )
-then
-    /bin/cp ${HOME}/webrootsync/webrootsync.${ip}.tar ${HOME}/config/webrootsynctunnel
-fi
-
