@@ -63,7 +63,7 @@ eval ${CMD} > ${HOME}/runtime/checklist.chk.new
 
 if ( [ ! -f ${HOME}/runtime/checklist.chk ] )
 then
-   /bin/cp ${HOME}/runtime/checklist.chk.new
+   /bin/cp ${HOME}/runtime/checklist.chk.new ${HOME}/runtime/checklist.chk
 else
     /usr/bin/diff ${HOME}/runtime/checklist.chk ${HOME}/runtime/checklist.chk.new | /bin/grep "^>" | /usr/bin/awk '{print $NF}' > ${HOME}/runtime/newandmodfiles.dat
 
