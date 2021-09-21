@@ -40,6 +40,10 @@ then
 elif ( [ "${APPLICATION}" = "moodle" ] )
 then
     /bin/sed -i '/\/var\/www\/html\/moodledata\/cache\//d' ${HOME}/runtime/newandmodfiles.dat
+    /bin/sed -i '/\/var\/www\/html\/moodledata\/trashdir\//d' ${HOME}/runtime/newandmodfiles.dat
+    /bin/sed -i '/\/var\/www\/html\/moodledata\/temp\//d' ${HOME}/runtime/newandmodfiles.dat
+    /bin/sed -i '/\/var\/www\/html\/moodledata\/localcache\//d' ${HOME}/runtime/newandmodfiles.dat
+
 elif ( [ "${APPLICATION}" = "drupal" ] )
 then
     /bin/sed -i '/\/var\/www\/html\/logs\//d' ${HOME}/runtime/newandmodfiles.dat
