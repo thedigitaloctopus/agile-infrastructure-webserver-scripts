@@ -53,7 +53,13 @@ fi
 /usr/sbin/lighttpd-enable-mod fastcgi
 /usr/sbin/lighttpd-enable-mod fastcgi-php
 
-/bin/echo "\$SERVER[\"socket\"] == \":443\" {
+/bin/echo "
+\$HTTP[\"scheme\"] == \"http\" {
+    url.redirect = (\"\" => \"https://\${url.authority}\${url.path}\${qsa}\")
+    url.redirect-code = 308
+}
+
+\$SERVER[\"socket\"] == \":443\" {
 ssl.engine = \"enable\"
 ssl.pemfile = \"${HOME}/ssl/live/${website_url}/privkey.pem\"
 ssl.ca-file = \"${HOME}/ssl/live/${website_url}/fullchain.pem\"
