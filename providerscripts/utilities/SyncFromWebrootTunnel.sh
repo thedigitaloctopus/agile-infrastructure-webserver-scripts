@@ -20,7 +20,7 @@
 ############################################################################
 #set -x
 
-if ( [ ! -f ${HOME}/runtime/INSTALLEDSUCCESSFULLY ] )
+if ( [ ! -f ${HOME}/config/INSTALLEDSUCCESSFULLY ] )
 then
     exit
 fi
