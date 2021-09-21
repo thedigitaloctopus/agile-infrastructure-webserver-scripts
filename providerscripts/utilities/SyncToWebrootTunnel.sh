@@ -56,7 +56,7 @@ else
         done
         CMD="`/bin/echo ${CMD} | /bin/sed 's/-not -path$//g'`"
     fi
-    CMD="`${CMD} -exec md5sum {} \;"
+    CMD="`${CMD} -exec md5sum {} \;`"
 fi
 
 eval ${CMD} > ${HOME}/runtime/checklist.chk.new
