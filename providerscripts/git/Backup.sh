@@ -108,6 +108,10 @@ if ( [ "$1" = "SHUTDOWN" ] )
 then
    period="shutdown"
 fi
+if ( [ "$1" = "MANUAL" ] )
+then
+   period="manual"
+fi
 
 BUILD_IDENTIFIER="$2"
 ip="`${HOME}/providerscripts/utilities/GetIP.sh`"
