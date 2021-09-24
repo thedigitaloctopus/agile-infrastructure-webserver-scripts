@@ -54,7 +54,7 @@ then
         /bin/mv /etc/apache2/sites-available/${WEBSITE_NAME}.$$ /etc/apache2/sites-available/${WEBSITE_NAME}
         /bin/echo "    <Directory /var/www/html/administrator>
                 AuthType Basic
-                AuthName "Private Property"
+                AuthName \"Private Property\"
                 AuthUserFile /var/www/html/administrator/.htpasswd
                 Require valid-user
         </Directory>
