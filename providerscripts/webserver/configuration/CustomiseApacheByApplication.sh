@@ -53,6 +53,10 @@ then
         /usr/bin/tac /etc/apache2/sites-available/${WEBSITE_NAME} | /bin/sed '0,/<\/VirtualHost>/{/<\/VirtualHost>/d;}' | /usr/bin/tac > /etc/apache2/sites-available/${WEBSITE_NAME}.$$
         /bin/mv /etc/apache2/sites-available/${WEBSITE_NAME}.$$ /etc/apache2/sites-available/${WEBSITE_NAME}
         /bin/echo "    <Directory /var/www/html/administrator>
+                AuthType Basic
+                AuthName "Private Property"
+                AuthUserFile /var/www/html/administrator/.htpasswd
+                Require valid-user
         </Directory>
     </VirtualHost>" >> /etc/apache2/sites-available/${WEBSITE_NAME}
     fi
