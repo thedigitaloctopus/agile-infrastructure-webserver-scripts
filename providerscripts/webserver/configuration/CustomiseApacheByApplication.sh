@@ -49,7 +49,7 @@ then
         /bin/echo "    <Directory /var/www/html/admin>
                 AuthType Basic
                 AuthName \"Private Property\"
-                AuthUserFile /var/www/html/.htpasswd
+                AuthUserFile /etc/basicauth/.htpasswd
                 Require valid-user
         </Directory>
     </VirtualHost>" >> /etc/apache2/sites-available/${WEBSITE_NAME}
@@ -67,7 +67,7 @@ then
         /bin/echo "    <Directory /var/www/html/administrator>
                 AuthType Basic
                 AuthName \"Private Property\"
-                AuthUserFile /var/www/html/administrator/.htpasswd
+                AuthUserFile /etc/basicauth/.htpasswd
                 Require valid-user
         </Directory>
     </VirtualHost>" >> /etc/apache2/sites-available/${WEBSITE_NAME}
@@ -85,7 +85,7 @@ then
         /bin/echo "    <Directory /var/www/html/wp-admin>
                 AuthType Basic
                 AuthName \"Private Property\"
-                AuthUserFile /var/www/html/wp-admin/.htpasswd
+                AuthUserFile /etc/basicauth/.htpasswd
                 Require valid-user
         </Directory>
     </VirtualHost>" >> /etc/apache2/sites-available/${WEBSITE_NAME}
@@ -103,7 +103,7 @@ then
         /bin/echo "    <Directory /var/www/html/moodle/admin>
                 AuthType Basic
                 AuthName \"Private Property\"
-                AuthUserFile /var/www/html/moodle/admin/.htpasswd
+                AuthUserFile /etc/basicauth/.htpasswd
                 Require valid-user
         </Directory>
     </VirtualHost>" >> /etc/apache2/sites-available/${WEBSITE_NAME}
