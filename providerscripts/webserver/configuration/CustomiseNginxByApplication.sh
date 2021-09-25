@@ -57,9 +57,10 @@ fi
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:drupal`" = "1" ] )
 then
     /bin/echo "location /admin {
-    auth_basic           “Private Property”;
+    auth_basic           \“Private Property\”;
     auth_basic_user_file /etc/apache2/.htpasswd; 
-}
+}" >> /etc/nginx/sites-available/${website_name}
+
     /bin/echo "    location ~ '\.php$|^/update.php' {
         fastcgi_split_path_info ^(.+?\.php)(|/.*)$;
         include fastcgi_params;
