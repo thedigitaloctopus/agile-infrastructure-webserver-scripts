@@ -32,7 +32,7 @@ then
     then
          /bin/echo "location /moodle/admin {
     auth_basic           \“Private Property\”;
-    auth_basic_user_file /etc/apache2/.htpasswd; 
+    auth_basic_user_file /etc/basicauth/.htpasswd; 
 }" >> /etc/nginx/sites-available/${website_name}
     fi
 
@@ -67,7 +67,7 @@ then
     then
          /bin/echo "location /admin {
     auth_basic           \“Private Property\”;
-    auth_basic_user_file /etc/apache2/.htpasswd; 
+    auth_basic_user_file /etc/basicauth/.htpasswd 
 }" >> /etc/nginx/sites-available/${website_name}
     fi
 
@@ -92,7 +92,7 @@ then
     then
          /bin/echo "location /wp-admin {
     auth_basic           \“Private Property\”;
-    auth_basic_user_file /etc/apache2/.htpasswd; 
+    auth_basic_user_file /etc/basicauth/.htpasswd; 
 }" >> /etc/nginx/sites-available/${website_name}
     fi
     
@@ -128,7 +128,7 @@ then
     then
          /bin/echo "location /administrator {
     auth_basic           \“Private Property\”;
-    auth_basic_user_file /etc/apache2/.htpasswd; 
+    auth_basic_user_file /etc/basicauth/.htpasswd; 
 }" >> /etc/nginx/sites-available/${website_name}
     fi
     
