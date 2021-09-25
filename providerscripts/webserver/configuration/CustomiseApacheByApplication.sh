@@ -84,4 +84,25 @@ if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:moodl
 then
     PHP_VERSION="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'PHPVERSION'`"
     /bin/sed -i "/cgi.fix_pathinfo/c\ cgi.fix_pathinfo=1" /etc/php/${PHP_VERSION}/fpm/php.ini
+    if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh GATEWAYGUARDIAN:1`" = "1" ] )
+    then
+        /usr/bin/tac /etc/apache2/sites-available/${WEBSITE_NAME} | /bin/sed '0,/<\/VirtualHost>/{/<\/VirtualHost>/d;}' | /usr/bin/tac > /etc/apache2/sites-available/${WEBSITE_NAME}.$$
+        /bin/mv /etc/apache2/sites-available/${WEBSITE_NAME}.$$ /etc/apache2/sites-available/${WEBSITE_NAME}
+        /bin/echo "    <Directory /var/www/html/moodle/admin>
+                AuthType Basic
+                AuthName \"Private Property\"
+                AuthUserFile /var/www/html/moodle/admin/.htpasswd
+                Require valid-user
+        </Directory>
+    </VirtualHost>" >> /etc/apache2/sites-available/${WEBSITE_NAME}
+    fi
+    
+    /usr/bin/tac /etc/apache2/sites-available/${WEBSITE_NAME} | /bin/sed '0,/<\/VirtualHost>/{/<\/VirtualHost>/d;}' | /usr/bin/tac > /etc/apache2/sites-available/${WEBSITE_NAME}.$$
+    /bin/mv /etc/apache2/sites-available/${WEBSITE_NAME}.$$ /etc/apache2/sites-available/${WEBSITE_NAME}
+    /bin/echo "        <Directory "/var/www/html/moodledata">
+    Require all denied
+        </Directory>
+    </VirtualHost>" >> /etc/apache2/sites-available/${WEBSITE_NAME}
+    
+
 fi
