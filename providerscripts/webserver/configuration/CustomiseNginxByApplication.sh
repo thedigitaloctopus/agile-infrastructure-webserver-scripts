@@ -28,6 +28,13 @@ WEBSITE_URL="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEUR
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:moodle`" = "1" ] )
 then
+    if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh GATEWAYGUARDIAN:1`" = "1" ] )
+    then
+         /bin/echo "location /moodle/admin {
+    auth_basic           \“Private Property\”;
+    auth_basic_user_file /etc/apache2/.htpasswd; 
+}" >> /etc/nginx/sites-available/${website_name}
+    fi
 
     /bin/echo "
     location = / {
@@ -56,10 +63,13 @@ fi
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:drupal`" = "1" ] )
 then
-    /bin/echo "location /admin {
+    if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh GATEWAYGUARDIAN:1`" = "1" ] )
+    then
+         /bin/echo "location /admin {
     auth_basic           \“Private Property\”;
     auth_basic_user_file /etc/apache2/.htpasswd; 
 }" >> /etc/nginx/sites-available/${website_name}
+    fi
 
     /bin/echo "    location ~ '\.php$|^/update.php' {
         fastcgi_split_path_info ^(.+?\.php)(|/.*)$;
@@ -78,16 +88,50 @@ fi
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:wordpress`" = "1" ] )
 then
+    if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh GATEWAYGUARDIAN:1`" = "1" ] )
+    then
+         /bin/echo "location /wp-admin {
+    auth_basic           \“Private Property\”;
+    auth_basic_user_file /etc/apache2/.htpasswd; 
+}" >> /etc/nginx/sites-available/${website_name}
+    fi
+    
     /bin/echo "location /wp-content/uploads/bp-attachments/ {
     rewrite ^.*uploads/bp-attachments/([0-9]+)/(.*) /?p=\$1&bp-attachment=\$2 permanent;
 }" >> /etc/nginx/sites-available/${website_name}
 
     /bin/echo "location ^~ /uploads/ {
 }" >> /etc/nginx/sites-available/${website_name}
+
+   /bin/echo "
+    location ~ \.php\$ {
+        allow all;
+        try_files \$uri =404;
+        fastcgi_buffers 8 16k;
+        fastcgi_buffer_size 32k;
+        include /etc/nginx/fastcgi_params;
+        fastcgi_read_timeout 90;
+        fastcgi_send_timeout 90;
+        fastcgi_connect_timeout 90;
+        fastcgi_keep_conn on;
+        #fastcgi_pass unix:/var/run/php/php-fpm.sock;
+        fastcgi_pass 127.0.0.1:9000;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
+    }
+    " >> /etc/nginx/sites-available/${website_name}
 fi
 
-if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:joomla`" = "1" ] || [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:wordpress`" = "1" ] || [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:drupal`" = "1" ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:joomla`" = "1" ] )
 then
+    if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh GATEWAYGUARDIAN:1`" = "1" ] )
+    then
+         /bin/echo "location /administrator {
+    auth_basic           \“Private Property\”;
+    auth_basic_user_file /etc/apache2/.htpasswd; 
+}" >> /etc/nginx/sites-available/${website_name}
+    fi
+    
     /bin/echo "
     location ~ \.php\$ {
         allow all;
