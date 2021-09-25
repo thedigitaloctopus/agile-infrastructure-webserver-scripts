@@ -26,6 +26,14 @@ website_name="${2}"
 website_url="${3}"
 SERVER_USER="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SERVERUSER'`"
 
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh GATEWAYGUARDIAN:1`" = "1" ] )
+then
+    if ( [ ! -d /etc/basicauth ] )
+    then
+        /bin/mkdir /etc/basicauth
+    fi
+fi
+
 if ( [ "${webserver_type}" = "NGINX" ] )
 then
     #install nginx
