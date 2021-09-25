@@ -41,6 +41,18 @@ then
     RewriteRule ^ index.php [L]
     </Directory>
     </VirtualHost>" >> /etc/apache2/sites-available/${WEBSITE_NAME}
+    
+    if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh GATEWAYGUARDIAN:1`" = "1" ] )
+    then
+        /usr/bin/tac /etc/apache2/sites-available/${WEBSITE_NAME} | /bin/sed '0,/<\/VirtualHost>/{/<\/VirtualHost>/d;}' | /usr/bin/tac > /etc/apache2/sites-available/${WEBSITE_NAME}.$$
+        /bin/mv /etc/apache2/sites-available/${WEBSITE_NAME}.$$ /etc/apache2/sites-available/${WEBSITE_NAME}
+        /bin/echo "    <Directory /var/www/html/admin>
+                AuthType Basic
+                AuthName \"Private Property\"
+                AuthUserFile /var/www/html/.htpasswd
+                Require valid-user
+        </Directory>
+    </VirtualHost>" >> /etc/apache2/sites-available/${WEBSITE_NAME}
 
 fi
 
