@@ -24,7 +24,10 @@
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:joomla`" = "1" ] )
 then
-    /bin/echo "auth.backend = \"htpasswd\"
+
+    if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh GATEWAYGUARDIAN:1`" = "1" ] )
+    then
+        /bin/echo "auth.backend = \"htpasswd\"
 auth.backend.htpasswd.userfile= \"/etc/basicauth/.htpasswd\"
 auth.require = ( \"/var/www/html/administrator\" => 
     (
@@ -33,7 +36,8 @@ auth.require = ( \"/var/www/html/administrator\" =>
     \"require\" => \"valid-user\"
     ),
 )" >> /etc/lighttpd/lighttpd.conf
-
+    fi
+    
     /bin/echo "
 url.rewrite-final = (
 \"^/$\" => \"/index.php\",
@@ -49,7 +53,9 @@ fi
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:wordpress`" = "1" ] )
 then
-    /bin/echo "auth.backend = \"htpasswd\"
+    if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh GATEWAYGUARDIAN:1`" = "1" ] )
+    then
+        /bin/echo "auth.backend = \"htpasswd\"
 auth.backend.htpasswd.userfile= \"/etc/basicauth/.htpasswd\"
 auth.require = ( \"/var/www/html/wp-admin\" => 
     (
@@ -58,7 +64,8 @@ auth.require = ( \"/var/www/html/wp-admin\" =>
     \"require\" => \"valid-user\"
     ),
 )" >> /etc/lighttpd/lighttpd.conf
-
+    fi
+    
     /bin/echo "url.rewrite-once = (
 \"^/(wp-.+).*/?\" => \"\$0\",
 \"^/.*?(\?.*)?\$\" => \"/index.php\$1\"
@@ -68,7 +75,9 @@ fi
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:drupal`" = "1" ] )
 then
-    /bin/echo "auth.backend = \"htpasswd\"
+    if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh GATEWAYGUARDIAN:1`" = "1" ] )
+    then
+        /bin/echo "auth.backend = \"htpasswd\"
 auth.backend.htpasswd.userfile= \"/etc/basicauth/.htpasswd\"
 auth.require = ( \"/var/www/html/admin\" => 
     (
@@ -77,7 +86,8 @@ auth.require = ( \"/var/www/html/admin\" =>
     \"require\" => \"valid-user\"
     ),
 )" >> /etc/lighttpd/lighttpd.conf
-
+    fi
+    
     /bin/echo "
 url.rewrite-final = (
   \"^/system/test/(.*)\$\" => \"/index.php?q=system/test/\$1\",
@@ -90,7 +100,9 @@ fi
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:moodle`" = "1" ] )
 then
-    /bin/echo "auth.backend = \"htpasswd\"
+    if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh GATEWAYGUARDIAN:1`" = "1" ] )
+    then
+        /bin/echo "auth.backend = \"htpasswd\"
 auth.backend.htpasswd.userfile= \"/etc/basicauth/.htpasswd\"
 auth.require = ( \"/var/www/html/moodleadmin\" => 
     (
@@ -99,6 +111,7 @@ auth.require = ( \"/var/www/html/moodleadmin\" =>
     \"require\" => \"valid-user\"
     ),
 )" >> /etc/lighttpd/lighttpd.conf
+    fi
 fi
 
 /bin/echo "}" >>  /etc/lighttpd/lighttpd.conf
