@@ -24,6 +24,16 @@
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:joomla`" = "1" ] )
 then
+    /bin/echo "auth.backend = \"htpasswd\"
+auth.backend.htpasswd.userfile= \"/etc/basicauth/.htpasswd\"
+auth.require = ( \"/var/www/html/administrator\" => 
+    (
+    \"method\"  => \"basic\",
+    \"realm\"   => \"Private Property\",
+    \"require\" => \"valid-user\"
+    ),
+)" >> /etc/lighttpd/lighttpd.conf
+
     /bin/echo "
 url.rewrite-final = (
 \"^/$\" => \"/index.php\",
@@ -39,6 +49,16 @@ fi
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:wordpress`" = "1" ] )
 then
+    /bin/echo "auth.backend = \"htpasswd\"
+auth.backend.htpasswd.userfile= \"/etc/basicauth/.htpasswd\"
+auth.require = ( \"/var/www/html/wp-admin\" => 
+    (
+    \"method\"  => \"basic\",
+    \"realm\"   => \"Private Property\",
+    \"require\" => \"valid-user\"
+    ),
+)" >> /etc/lighttpd/lighttpd.conf
+
     /bin/echo "url.rewrite-once = (
 \"^/(wp-.+).*/?\" => \"\$0\",
 \"^/.*?(\?.*)?\$\" => \"/index.php\$1\"
@@ -48,6 +68,16 @@ fi
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:drupal`" = "1" ] )
 then
+    /bin/echo "auth.backend = \"htpasswd\"
+auth.backend.htpasswd.userfile= \"/etc/basicauth/.htpasswd\"
+auth.require = ( \"/var/www/html/admin\" => 
+    (
+    \"method\"  => \"basic\",
+    \"realm\"   => \"Private Property\",
+    \"require\" => \"valid-user\"
+    ),
+)" >> /etc/lighttpd/lighttpd.conf
+
     /bin/echo "
 url.rewrite-final = (
   \"^/system/test/(.*)\$\" => \"/index.php?q=system/test/\$1\",
@@ -58,7 +88,22 @@ url.rewrite-final = (
     ) " >> /etc/lighttpd/lighttpd.conf
 fi
 
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:moodle`" = "1" ] )
+then
+    /bin/echo "auth.backend = \"htpasswd\"
+auth.backend.htpasswd.userfile= \"/etc/basicauth/.htpasswd\"
+auth.require = ( \"/var/www/html/moodleadmin\" => 
+    (
+    \"method\"  => \"basic\",
+    \"realm\"   => \"Private Property\",
+    \"require\" => \"valid-user\"
+    ),
+)" >> /etc/lighttpd/lighttpd.conf
+fi
+
 /bin/echo "}" >>  /etc/lighttpd/lighttpd.conf
+
+
 
 
 
