@@ -10,6 +10,8 @@ then
     exit
 fi
 
+
+
 BUILD_IDENTIFIER="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDIDENTIFIER'`"
 
 if ( [ ! -d /etc/basicauth ] )
@@ -26,10 +28,13 @@ then
             /usr/bin/s3cmd mv s3://gatewayguardian-${BUILD_IDENTIFIER}/htpasswd s3://gatewayguardian-${BUILD_IDENTIFIER}/htpasswd.$$
             /bin/touch ${HOME}/runtime/VIRGINADJUSTED
         fi
-        
         /usr/bin/s3cmd get s3://gatewayguardian-${BUILD_IDENTIFIER}/htpasswd
         /bin/mv htpasswd /etc/basicauth/.htpasswd
         /bin/chown www-data.www-data /etc/basicauth/.htpasswd
+        if ( [ "`/bin/cat /etc/basicauth/.htpasswd`" = "" ] )
+        then
+           /bin/rm /etc/basicauth/.htpasswd
+        fi
         /bin/sleep 40
         /bin/rm ${HOME}/config/credentials/GATEWAY_GUARDIAN_UPDATED
     fi
@@ -47,6 +52,10 @@ then
         /usr/bin/s3cmd get s3://gatewayguardian-${BUILD_IDENTIFIER}/htpasswd
         /bin/mv htpasswd /etc/basicauth/.htpasswd
         /bin/chown www-data.www-data /etc/basicauth/.htpasswd
+        if ( [ "`/bin/cat /etc/basicauth/.htpasswd`" = "" ] )
+        then
+           /bin/rm /etc/basicauth/.htpasswd
+        fi
         /bin/sleep 40
         /bin/rm ${HOME}/config/credentials/GATEWAY_GUARDIAN_UPDATED
     fi
@@ -65,6 +74,10 @@ then
         /usr/bin/s3cmd get s3://gatewayguardian-${BUILD_IDENTIFIER}/htpasswd
         /bin/mv htpasswd /etc/basicauth/.htpasswd
         /bin/chown www-data.www-data /etc/basicauth/.htpasswd
+        if ( [ "`/bin/cat /etc/basicauth/.htpasswd`" = "" ] )
+        then
+           /bin/rm /etc/basicauth/.htpasswd
+        fi
         /bin/sleep 40
         /bin/rm ${HOME}/config/credentials/GATEWAY_GUARDIAN_UPDATED
     fi
@@ -83,6 +96,10 @@ then
         /usr/bin/s3cmd get s3://gatewayguardian-${BUILD_IDENTIFIER}/htpasswd
         /bin/mv htpasswd /etc/basicauth/.htpasswd
         /bin/chown www-data.www-data /etc/basicauth/.htpasswd
+        if ( [ "`/bin/cat /etc/basicauth/.htpasswd`" = "" ] )
+        then
+           /bin/rm /etc/basicauth/.htpasswd
+        fi
         /bin/sleep 40
         /bin/rm ${HOME}/config/credentials/GATEWAY_GUARDIAN_UPDATED
     fi
