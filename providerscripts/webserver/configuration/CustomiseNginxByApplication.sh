@@ -65,7 +65,7 @@ if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:drupa
 then
     if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh GATEWAYGUARDIAN:1`" = "1" ] )
     then
-         /bin/echo "location /admin {
+         /bin/echo "location /core {
     auth_basic           \“Private Property\”;
     auth_basic_user_file /etc/basicauth/.htpasswd 
 }" >> /etc/nginx/sites-available/${website_name}
