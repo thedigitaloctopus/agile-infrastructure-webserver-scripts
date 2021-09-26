@@ -51,7 +51,7 @@ NameVirtualHost *:80
 <VirtualHost *:80>
    ServerName ${website_url}
    DocumentRoot /var/www/html
-   Redirect permanent / https://${website_url}
+   Redirect permanent / https://${website_url}/
 </VirtualHost>
 
 <VirtualHost _default_:443>
