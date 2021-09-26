@@ -21,6 +21,12 @@ if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:jooml
 then
     if ( [ -f ${HOME}/config/credentials/GATEWAY_GUARDIAN_UPDATED ] || [ ! -f /etc/basicauth/.htpasswd ] )
     then
+        if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOICE:virgin`" = "1" ] && [ ! -f ${HOME}/runtime/VIRGINADJUSTED ] )
+        then
+            /usr/bin/s3cmd mv s3://gatewayguardian-${BUILD_IDENTIFIER}/htpasswd s3://gatewayguardian-${BUILD_IDENTIFIER}/htpasswd.$$
+            /bin/touch ${HOME}/runtime/VIRGINADJUSTED
+        fi
+        
         /usr/bin/s3cmd get s3://gatewayguardian-${BUILD_IDENTIFIER}/htpasswd
         /bin/mv htpasswd /etc/basicauth/.htpasswd
         /bin/chown www-data.www-data /etc/basicauth/.htpasswd
@@ -33,6 +39,11 @@ if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:wordp
 then
     if ( [ -f ${HOME}/config/credentials/GATEWAY_GUARDIAN_UPDATED ] || [ ! -f /etc/basicauth/.htpasswd ] )
     then
+        if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOICE:virgin`" = "1" ] && [ ! -f ${HOME}/runtime/VIRGINADJUSTED ] )
+        then
+            /usr/bin/s3cmd mv s3://gatewayguardian-${BUILD_IDENTIFIER}/htpasswd s3://gatewayguardian-${BUILD_IDENTIFIER}/htpasswd.$$
+            /bin/touch ${HOME}/runtime/VIRGINADJUSTED
+        fi
         /usr/bin/s3cmd get s3://gatewayguardian-${BUILD_IDENTIFIER}/htpasswd
         /bin/mv htpasswd /etc/basicauth/.htpasswd
         /bin/chown www-data.www-data /etc/basicauth/.htpasswd
@@ -45,6 +56,12 @@ if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:drupa
 then
     if ( [ -f ${HOME}/config/credentials/GATEWAY_GUARDIAN_UPDATED ] || [ ! -f /etc/basicauth/.htpasswd ] )
     then
+        if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOICE:virgin`" = "1" ] && [ ! -f ${HOME}/runtime/VIRGINADJUSTED ] )
+        then
+            /usr/bin/s3cmd mv s3://gatewayguardian-${BUILD_IDENTIFIER}/htpasswd s3://gatewayguardian-${BUILD_IDENTIFIER}/htpasswd.$$
+            /bin/touch ${HOME}/runtime/VIRGINADJUSTED
+        fi
+        
         /usr/bin/s3cmd get s3://gatewayguardian-${BUILD_IDENTIFIER}/htpasswd
         /bin/mv htpasswd /etc/basicauth/.htpasswd
         /bin/chown www-data.www-data /etc/basicauth/.htpasswd
@@ -57,6 +74,12 @@ if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:moodl
 then
     if ( [ -f ${HOME}/config/credentials/GATEWAY_GUARDIAN_UPDATED ] || [ ! -f /etc/basicauth/.htpasswd ] )
     then
+        if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOICE:virgin`" = "1" ] && [ ! -f ${HOME}/runtime/VIRGINADJUSTED ] )
+        then
+            /usr/bin/s3cmd mv s3://gatewayguardian-${BUILD_IDENTIFIER}/htpasswd s3://gatewayguardian-${BUILD_IDENTIFIER}/htpasswd.$$
+            /bin/touch ${HOME}/runtime/VIRGINADJUSTED
+        fi
+        
         /usr/bin/s3cmd get s3://gatewayguardian-${BUILD_IDENTIFIER}/htpasswd
         /bin/mv htpasswd /etc/basicauth/.htpasswd
         /bin/chown www-data.www-data /etc/basicauth/.htpasswd
