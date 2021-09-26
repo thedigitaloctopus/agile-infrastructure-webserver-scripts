@@ -23,8 +23,6 @@
 #set -x
 
 WEBSITE_NAME="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEDISPLAYNAME'`"
-WEBSITE_URL="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEURL'`"
-
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:drupal`" = "1" ] )
 then
@@ -41,7 +39,7 @@ then
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_URI} !=/favicon.ico
     RewriteRule ^ index.php [L]
-    Redirect permanent /index.php/user/login https://${WEBSITE_URL}/user/login
+    Redirect permanent /index.php/user/login https://${website_url}/user/login
     </Directory>
     </VirtualHost>" >> /etc/apache2/sites-available/${WEBSITE_NAME}
     
