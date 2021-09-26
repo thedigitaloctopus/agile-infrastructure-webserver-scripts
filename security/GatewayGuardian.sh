@@ -1,5 +1,10 @@
 #!/bin/sh
 
+if ( [ ! -f ${HOME}/config/INSTALLEDSUCCESSFULLY ] )
+then
+    exit
+fi
+
 BUILD_IDENTIFIER="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDIDENTIFIER'`"
 
 if ( [ ! -d /etc/basicauth ] )
