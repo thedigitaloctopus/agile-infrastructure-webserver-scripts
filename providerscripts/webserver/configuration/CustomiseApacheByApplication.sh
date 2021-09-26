@@ -53,6 +53,7 @@ then
                 Require valid-user
         </Directory>
     </VirtualHost>" >> /etc/apache2/sites-available/${WEBSITE_NAME}
+    fi
 
 fi
 
