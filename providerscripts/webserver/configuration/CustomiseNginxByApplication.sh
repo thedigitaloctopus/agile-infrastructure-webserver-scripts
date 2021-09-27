@@ -72,7 +72,7 @@ if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:drupa
 then
     if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh GATEWAYGUARDIAN:1`" = "1" ] )
     then
-         /bin/echo "location /core {
+         /bin/echo "location / {
       
       set \$auth_basic off;
       
