@@ -32,13 +32,7 @@ then
     then
          /bin/echo "location ~* /moodle/admin/ {
       
-      set \$auth_basic off;
-      
-      if (-f /etc/basicauth/.htpasswd) {
-         set \$auth_basic \"Private Property\";
-      }
-
-      auth_basic \$auth_basic;
+      auth_basic \"Private Property\";
       auth_basic_user_file /etc/basicauth/.htpasswd;
       
       location ~ [^/]\.php(/|\$) {
@@ -93,13 +87,7 @@ then
     then
          /bin/echo "location ~* / {
       
-      set \$auth_basic off;
-      
-      if (-f /etc/basicauth/.htpasswd) {
-         set \$auth_basic \"Private Property\";
-      }
-
-      auth_basic \$auth_basic;
+      auth_basic \"Private Property\";
       auth_basic_user_file /etc/basicauth/.htpasswd;
       
        location ~ '\.php$|^/update.php' {
@@ -146,13 +134,7 @@ then
     then
          /bin/echo "location ~* /wp-admin/ {
       
-      set \$auth_basic off;
-      
-      if (-f /etc/basicauth/.htpasswd) {
-         set \$auth_basic \"Private Property\";
-      }
-
-      auth_basic \$auth_basic;
+      auth_basic \"Private Property\";
       auth_basic_user_file /etc/basicauth/.htpasswd;
       location ~ \.php\$ {
         allow all;
@@ -200,13 +182,7 @@ then
     then
          /bin/echo "location ~* /administrator/ {
       
-      set \$auth_basic off;
-      
-      if (-f /etc/basicauth/.htpasswd) {
-         set \$auth_basic \"Private Property\";
-      }
-
-      auth_basic \$auth_basic;
+      auth_basic \"Private Property\";
       auth_basic_user_file /etc/basicauth/.htpasswd;
       
           location ~ \.php\$ {
