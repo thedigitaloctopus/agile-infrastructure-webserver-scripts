@@ -31,10 +31,10 @@ then
         /usr/bin/s3cmd get s3://gatewayguardian-${BUILD_IDENTIFIER}/htpasswd
         /bin/mv htpasswd /etc/basicauth/.htpasswd
         /bin/chown www-data.www-data /etc/basicauth/.htpasswd
-        if ( [ "`/bin/cat /etc/basicauth/.htpasswd`" = "" ] )
-        then
-           /bin/rm /etc/basicauth/.htpasswd
-        fi
+      #  if ( [ "`/bin/cat /etc/basicauth/.htpasswd`" = "" ] )
+      #  then
+      #     /bin/rm /etc/basicauth/.htpasswd
+      #  fi
         /bin/sleep 40
         /bin/rm ${HOME}/config/credentials/GATEWAY_GUARDIAN_UPDATED
     fi
@@ -52,10 +52,10 @@ then
         /usr/bin/s3cmd get s3://gatewayguardian-${BUILD_IDENTIFIER}/htpasswd
         /bin/mv htpasswd /etc/basicauth/.htpasswd
         /bin/chown www-data.www-data /etc/basicauth/.htpasswd
-        if ( [ "`/bin/cat /etc/basicauth/.htpasswd`" = "" ] )
-        then
-           /bin/rm /etc/basicauth/.htpasswd
-        fi
+      #  if ( [ "`/bin/cat /etc/basicauth/.htpasswd`" = "" ] )
+      #  then
+      #     /bin/rm /etc/basicauth/.htpasswd
+      #  fi
         /bin/sleep 40
         /bin/rm ${HOME}/config/credentials/GATEWAY_GUARDIAN_UPDATED
     fi
@@ -74,10 +74,10 @@ then
         /usr/bin/s3cmd get s3://gatewayguardian-${BUILD_IDENTIFIER}/htpasswd
         /bin/mv htpasswd /etc/basicauth/.htpasswd
         /bin/chown www-data.www-data /etc/basicauth/.htpasswd
-        if ( [ "`/bin/cat /etc/basicauth/.htpasswd`" = "" ] )
-        then
-           /bin/rm /etc/basicauth/.htpasswd
-        fi
+      #  if ( [ "`/bin/cat /etc/basicauth/.htpasswd`" = "" ] )
+      #  then
+      #     /bin/rm /etc/basicauth/.htpasswd
+      #  fi
         /bin/sleep 40
         /bin/rm ${HOME}/config/credentials/GATEWAY_GUARDIAN_UPDATED
     fi
@@ -96,10 +96,10 @@ then
         /usr/bin/s3cmd get s3://gatewayguardian-${BUILD_IDENTIFIER}/htpasswd
         /bin/mv htpasswd /etc/basicauth/.htpasswd
         /bin/chown www-data.www-data /etc/basicauth/.htpasswd
-        if ( [ "`/bin/cat /etc/basicauth/.htpasswd`" = "" ] )
-        then
-           /bin/rm /etc/basicauth/.htpasswd
-        fi
+      #  if ( [ "`/bin/cat /etc/basicauth/.htpasswd`" = "" ] )
+      #  then
+      #     /bin/rm /etc/basicauth/.htpasswd
+      #  fi
         /bin/sleep 40
         /bin/rm ${HOME}/config/credentials/GATEWAY_GUARDIAN_UPDATED
     fi
