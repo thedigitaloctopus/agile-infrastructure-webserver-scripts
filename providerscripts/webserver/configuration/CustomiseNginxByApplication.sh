@@ -35,7 +35,7 @@ then
       set \$auth_basic off;
       
       if (-f /etc/basicauth/.htpasswd) {
-         set \$auth_basic "Private Property";
+         set \$auth_basic \"Private Property\";
       }
 
       auth_basic \$auth_basic;
@@ -77,7 +77,7 @@ then
       set \$auth_basic off;
       
       if (-f /etc/basicauth/.htpasswd) {
-         set \$auth_basic "Private Property";
+         set \$auth_basic \"Private Property\";
       }
 
       auth_basic \$auth_basic;
@@ -109,7 +109,7 @@ then
       set \$auth_basic off;
       
       if (-f /etc/basicauth/.htpasswd) {
-         set \$auth_basic "Private Property";
+         set \$auth_basic \"Private Property\";
       }
 
       auth_basic \$auth_basic;
@@ -152,7 +152,7 @@ then
       set \$auth_basic off;
       
       if (-f /etc/basicauth/.htpasswd) {
-         set \$auth_basic "Private Property";
+         set \$auth_basic \"Private Property\";
       }
 
       auth_basic \$auth_basic;
