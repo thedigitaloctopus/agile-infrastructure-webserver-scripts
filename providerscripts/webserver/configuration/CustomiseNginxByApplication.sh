@@ -30,7 +30,7 @@ if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:moodl
 then
     if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh GATEWAYGUARDIAN:1`" = "1" ] )
     then
-       /bin/sed 's/####XXXX####//g' /etc/nginx/sites-available/${website_name}
+       /bin/sed -i 's/####XXXX####//g' /etc/nginx/sites-available/${website_name}
     fi
 
     /bin/echo "
@@ -65,7 +65,7 @@ then
 
     if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh GATEWAYGUARDIAN:1`" = "1" ] )
     then
-       /bin/sed 's/####XXXX####//g' /etc/nginx/sites-available/${website_name}
+       /bin/sed -i 's/####XXXX####//g' /etc/nginx/sites-available/${website_name}
     fi
 
     /bin/echo "    location ~ '\.php$|^/update.php' {
@@ -94,7 +94,7 @@ then
 
     if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh GATEWAYGUARDIAN:1`" = "1" ] )
     then
-       /bin/sed 's/####XXXX####//g' /etc/nginx/sites-available/${website_name}
+       /bin/sed -i 's/####XXXX####//g' /etc/nginx/sites-available/${website_name}
     fi
     
    /bin/echo "
@@ -123,7 +123,7 @@ then
 
     if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh GATEWAYGUARDIAN:1`" = "1" ] )
     then
-       /bin/sed 's/####XXXX####//g' /etc/nginx/sites-available/${website_name}
+       /bin/sed -i 's/####XXXX####//g' /etc/nginx/sites-available/${website_name}
     fi
     
     /bin/echo "
