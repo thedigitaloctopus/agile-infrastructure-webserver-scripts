@@ -28,6 +28,21 @@ WEBSITE_URL="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEUR
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:moodle`" = "1" ] )
 then
+    if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh GATEWAYGUARDIAN:1`" = "1" ] )
+    then
+         /bin/echo "location ~* /moodle/admin {
+      
+      set \$auth_basic off;
+      
+      if (-f /etc/basicauth/.htpasswd) {
+         set \$auth_basic \"Private Property\";
+      }
+
+      auth_basic \$auth_basic;
+      auth_basic_user_file /etc/basicauth/.htpasswd;
+}" >> /etc/nginx/sites-available/${website_name}
+    fi
+
     /bin/echo "
     location = / {
         rewrite ^ https://${WEBSITE_URL}/moodle redirect;
@@ -52,38 +67,12 @@ then
     }    
     "  >> /etc/nginx/sites-available/${website_name}
     
-    if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh GATEWAYGUARDIAN:1`" = "1" ] )
-    then
-         /bin/echo "location ~* /moodle/admin {
-      
-      set \$auth_basic off;
-      
-      if (-f /etc/basicauth/.htpasswd) {
-         set \$auth_basic \"Private Property\";
-      }
 
-      auth_basic \$auth_basic;
-      auth_basic_user_file /etc/basicauth/.htpasswd;
-}" >> /etc/nginx/sites-available/${website_name}
-    fi
 fi
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:drupal`" = "1" ] )
 then
-    /bin/echo "    location ~ '\.php$|^/update.php' {
-        fastcgi_split_path_info ^(.+?\.php)(|/.*)$;
-        include fastcgi_params;
-        fastcgi_param HTTP_PROXY \"\";
-        fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
-        fastcgi_param PATH_INFO \$fastcgi_path_info;
-        fastcgi_param QUERY_STRING \$query_string;
-        fastcgi_intercept_errors on;
-        # PHP 7 socket location.
-        #fastcgi_pass unix:/var/run/php/php-fpm.sock;
-        fastcgi_pass 127.0.0.1:9000;
-    }
-    "  >> /etc/nginx/sites-available/${website_name}
-    
+
     if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh GATEWAYGUARDIAN:1`" = "1" ] )
     then
          /bin/echo "location ~* / {
@@ -97,7 +86,22 @@ then
       auth_basic \$auth_basic;
       auth_basic_user_file /etc/basicauth/.htpasswd;
 }" >> /etc/nginx/sites-available/${website_name}
+
     fi
+
+    /bin/echo "    location ~ '\.php$|^/update.php' {
+        fastcgi_split_path_info ^(.+?\.php)(|/.*)$;
+        include fastcgi_params;
+        fastcgi_param HTTP_PROXY \"\";
+        fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
+        fastcgi_param PATH_INFO \$fastcgi_path_info;
+        fastcgi_param QUERY_STRING \$query_string;
+        fastcgi_intercept_errors on;
+        # PHP 7 socket location.
+        #fastcgi_pass unix:/var/run/php/php-fpm.sock;
+        fastcgi_pass 127.0.0.1:9000;
+    }
+    "  >> /etc/nginx/sites-available/${website_name}
 fi
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:wordpress`" = "1" ] )
@@ -108,6 +112,21 @@ then
 
     /bin/echo "location ^~ /uploads/ {
 }" >> /etc/nginx/sites-available/${website_name}
+
+    if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh GATEWAYGUARDIAN:1`" = "1" ] )
+    then
+         /bin/echo "location ~* /wp-admin {
+      
+      set \$auth_basic off;
+      
+      if (-f /etc/basicauth/.htpasswd) {
+         set \$auth_basic \"Private Property\";
+      }
+
+      auth_basic \$auth_basic;
+      auth_basic_user_file /etc/basicauth/.htpasswd;
+}" >> /etc/nginx/sites-available/${website_name}
+    fi
 
    /bin/echo "
     location ~ \.php\$ {
@@ -127,9 +146,15 @@ then
     }
     " >> /etc/nginx/sites-available/${website_name}
     
+
+fi
+
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:joomla`" = "1" ] )
+then
+
     if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh GATEWAYGUARDIAN:1`" = "1" ] )
     then
-         /bin/echo "location ~* /wp-admin {
+         /bin/echo "location ~* /administrator {
       
       set \$auth_basic off;
       
@@ -141,10 +166,6 @@ then
       auth_basic_user_file /etc/basicauth/.htpasswd;
 }" >> /etc/nginx/sites-available/${website_name}
     fi
-fi
-
-if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:joomla`" = "1" ] )
-then
 
     
     /bin/echo "
@@ -165,20 +186,7 @@ then
     }
     " >> /etc/nginx/sites-available/${website_name}
     
-    if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh GATEWAYGUARDIAN:1`" = "1" ] )
-    then
-         /bin/echo "location ~* /administrator {
-      
-      set \$auth_basic off;
-      
-      if (-f /etc/basicauth/.htpasswd) {
-         set \$auth_basic \"Private Property\";
-      }
 
-      auth_basic \$auth_basic;
-      auth_basic_user_file /etc/basicauth/.htpasswd;
-}" >> /etc/nginx/sites-available/${website_name}
-    fi
 fi
 
 /bin/echo "}" >> /etc/nginx/sites-available/${website_name}
