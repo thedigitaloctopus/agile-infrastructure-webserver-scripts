@@ -104,7 +104,7 @@ then
     then
         /bin/echo "auth.backend = \"htpasswd\"
 auth.backend.htpasswd.userfile= \"/etc/basicauth/.htpasswd\"
-auth.require = ( \"/moodle/\" => 
+auth.require = ( \"/moodle/admin\" => 
     (
     \"method\"  => \"basic\",
     \"realm\"   => \"Private Property\",
