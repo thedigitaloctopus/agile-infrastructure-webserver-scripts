@@ -229,14 +229,11 @@ fi
         expires 1w;
         add_header Cache-Control "public";
         try_files \$uri \$uri/ /index.php?q=\$uri&\$args;
-        ################################################################################################
-        #Uncomment these two lines to require basic authentication before accessing your application.
-        #This is a strong security measure, but, it means your authorised users will have to input
-        #Their credentials twice. If you are using cloudflare, for example, you might want to use their
-        #system to do the same thing, but, if you are not on cloudflare, you might want to consider this.
-        #################################################################################################
-        #auth_basic "Private Property";
-        #auth_basic_user_file /etc/nginx/.htpasswd;
+        
+        #If we discover later on that we want the gateway guardian enabled we can sed out these placeholders
+        ####XXXX#### auth_basic \"Private Property\";
+        ####XXXX#### auth_basic_user_file /etc/basicauth/.htpasswd;
+        
 } " >> /etc/nginx/sites-available/${website_name}
 
 ${HOME}/providerscripts/dns/TrustRemoteProxy.sh
