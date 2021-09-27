@@ -29,7 +29,7 @@ then
     then
         /bin/echo "auth.backend = \"htpasswd\"
 auth.backend.htpasswd.userfile= \"/etc/basicauth/.htpasswd\"
-auth.require = ( \"/var/www/html/administrator\" => 
+auth.require = ( \"/administrator\" => 
     (
     \"method\"  => \"basic\",
     \"realm\"   => \"Private Property\",
@@ -57,7 +57,7 @@ then
     then
         /bin/echo "auth.backend = \"htpasswd\"
 auth.backend.htpasswd.userfile= \"/etc/basicauth/.htpasswd\"
-auth.require = ( \"/var/www/html/wp-admin\" => 
+auth.require = ( \"/wp-admin\" => 
     (
     \"method\"  => \"basic\",
     \"realm\"   => \"Private Property\",
@@ -79,7 +79,7 @@ then
     then
         /bin/echo "auth.backend = \"htpasswd\"
 auth.backend.htpasswd.userfile= \"/etc/basicauth/.htpasswd\"
-auth.require = ( \"/var/www/html/admin\" => 
+auth.require = ( \"/core\" => 
     (
     \"method\"  => \"basic\",
     \"realm\"   => \"Private Property\",
@@ -104,7 +104,7 @@ then
     then
         /bin/echo "auth.backend = \"htpasswd\"
 auth.backend.htpasswd.userfile= \"/etc/basicauth/.htpasswd\"
-auth.require = ( \"/var/www/html/moodleadmin\" => 
+auth.require = ( \"/moodle/\" => 
     (
     \"method\"  => \"basic\",
     \"realm\"   => \"Private Property\",
