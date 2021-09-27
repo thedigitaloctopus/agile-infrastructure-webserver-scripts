@@ -32,13 +32,13 @@ then
     then
          /bin/echo "location /moodle/admin {
       
-      set $auth_basic off;
+      set \$auth_basic off;
       
       if (-f /etc/basicauth/.htpasswd) {
-         set $auth_basic "Private Property";
+         set \$auth_basic "Private Property";
       }
 
-      auth_basic $auth_basic;
+      auth_basic \$auth_basic;
       auth_basic_user_file /etc/basicauth/.htpasswd;
 }" >> /etc/nginx/sites-available/${website_name}
     fi
@@ -72,15 +72,15 @@ if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:drupa
 then
     if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh GATEWAYGUARDIAN:1`" = "1" ] )
     then
-         /bin/echo "location /wp-core {
+         /bin/echo "location /core {
       
-      set $auth_basic off;
+      set \$auth_basic off;
       
       if (-f /etc/basicauth/.htpasswd) {
-         set $auth_basic "Private Property";
+         set \$auth_basic "Private Property";
       }
 
-      auth_basic $auth_basic;
+      auth_basic \$auth_basic;
       auth_basic_user_file /etc/basicauth/.htpasswd;
 }" >> /etc/nginx/sites-available/${website_name}
     fi
@@ -106,13 +106,13 @@ then
     then
          /bin/echo "location /wp-admin {
       
-      set $auth_basic off;
+      set \$auth_basic off;
       
       if (-f /etc/basicauth/.htpasswd) {
-         set $auth_basic "Private Property";
+         set \$auth_basic "Private Property";
       }
 
-      auth_basic $auth_basic;
+      auth_basic \$auth_basic;
       auth_basic_user_file /etc/basicauth/.htpasswd;
 }" >> /etc/nginx/sites-available/${website_name}
     fi
@@ -149,13 +149,13 @@ then
     then
          /bin/echo "location /administrator {
       
-      set $auth_basic off;
+      set \$auth_basic off;
       
       if (-f /etc/basicauth/.htpasswd) {
-         set $auth_basic "Private Property";
+         set \$auth_basic "Private Property";
       }
 
-      auth_basic $auth_basic;
+      auth_basic \$auth_basic;
       auth_basic_user_file /etc/basicauth/.htpasswd;
 }" >> /etc/nginx/sites-available/${website_name}
     fi
