@@ -224,16 +224,14 @@ fi
 /bin/echo "
    location / {
         allow all;
+        #If we discover later on that we want the gateway guardian enabled we can sed out these placeholders
+        ####XXXX#### auth_basic \"Private Property\";
+        ####XXXX#### auth_basic_user_file /etc/basicauth/.htpasswd;
         etag off;
         add_header Pragma "public";
         expires 1w;
         add_header Cache-Control "public";
-        try_files \$uri \$uri/ /index.php?q=\$uri&\$args;
-        
-        #If we discover later on that we want the gateway guardian enabled we can sed out these placeholders
-        ####XXXX#### auth_basic \"Private Property\";
-        ####XXXX#### auth_basic_user_file /etc/basicauth/.htpasswd;
-        
+        try_files \$uri \$uri/ /index.php?q=\$uri&\$args;  
 } " >> /etc/nginx/sites-available/${website_name}
 
 ${HOME}/providerscripts/dns/TrustRemoteProxy.sh
