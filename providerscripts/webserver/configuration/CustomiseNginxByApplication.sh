@@ -30,27 +30,7 @@ if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:moodl
 then
     if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh GATEWAYGUARDIAN:1`" = "1" ] )
     then
-         /bin/echo "location ~* /moodle/admin/ {
-      
-      auth_basic \"Private Property\";
-      auth_basic_user_file /etc/basicauth/.htpasswd;
-      
-      location ~ [^/]\.php(/|\$) {
-        fastcgi_split_path_info  ^(.+\.php)(/.+)\$;
-        fastcgi_buffers 8 16k;
-        fastcgi_buffer_size 32k;
-        fastcgi_index index.php;
-     #   fastcgi_pass unix:/var/run/php/php-fpm.sock;
-        fastcgi_pass 127.0.0.1:9000;
-        include fastcgi_params;
-        fastcgi_read_timeout 90;
-        fastcgi_send_timeout 90;
-        fastcgi_connect_timeout 90;
-        fastcgi_keep_conn on;
-        fastcgi_param PATH_INFO \$fastcgi_path_info;
-        fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
-    }   
-}" >> /etc/nginx/sites-available/${website_name}
+       /bin/sed 's/####XXXX####//g' /etc/nginx/sites-available/${website_name}
     fi
 
     /bin/echo "
@@ -85,25 +65,7 @@ then
 
     if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh GATEWAYGUARDIAN:1`" = "1" ] )
     then
-         /bin/echo "location ~* / {
-      
-      auth_basic \"Private Property\";
-      auth_basic_user_file /etc/basicauth/.htpasswd;
-      
-       location ~ '\.php$|^/update.php' {
-        fastcgi_split_path_info ^(.+?\.php)(|/.*)$;
-        include fastcgi_params;
-        fastcgi_param HTTP_PROXY \"\";
-        fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
-        fastcgi_param PATH_INFO \$fastcgi_path_info;
-        fastcgi_param QUERY_STRING \$query_string;
-        fastcgi_intercept_errors on;
-        # PHP 7 socket location.
-        #fastcgi_pass unix:/var/run/php/php-fpm.sock;
-        fastcgi_pass 127.0.0.1:9000;
-    }
-}" >> /etc/nginx/sites-available/${website_name}
-
+       /bin/sed 's/####XXXX####//g' /etc/nginx/sites-available/${website_name}
     fi
 
     /bin/echo "    location ~ '\.php$|^/update.php' {
@@ -132,28 +94,9 @@ then
 
     if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh GATEWAYGUARDIAN:1`" = "1" ] )
     then
-         /bin/echo "location ~* /wp-admin/ {
-      
-      auth_basic \"Private Property\";
-      auth_basic_user_file /etc/basicauth/.htpasswd;
-      location ~ \.php\$ {
-        allow all;
-        try_files \$uri =404;
-        fastcgi_buffers 8 16k;
-        fastcgi_buffer_size 32k;
-        include /etc/nginx/fastcgi_params;
-        fastcgi_read_timeout 90;
-        fastcgi_send_timeout 90;
-        fastcgi_connect_timeout 90;
-        fastcgi_keep_conn on;
-        #fastcgi_pass unix:/var/run/php/php-fpm.sock;
-        fastcgi_pass 127.0.0.1:9000;
-        fastcgi_index index.php;
-        fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
-    }
-}" >> /etc/nginx/sites-available/${website_name}
+       /bin/sed 's/####XXXX####//g' /etc/nginx/sites-available/${website_name}
     fi
-
+    
    /bin/echo "
     location ~ \.php\$ {
         allow all;
@@ -180,29 +123,8 @@ then
 
     if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh GATEWAYGUARDIAN:1`" = "1" ] )
     then
-         /bin/echo "location ~* /administrator/ {
-      
-      auth_basic \"Private Property\";
-      auth_basic_user_file /etc/basicauth/.htpasswd;
-      
-          location ~ \.php\$ {
-        allow all;
-        try_files \$uri =404;
-        fastcgi_buffers 8 16k;
-        fastcgi_buffer_size 32k;
-        include /etc/nginx/fastcgi_params;
-        fastcgi_read_timeout 90;
-        fastcgi_send_timeout 90;
-        fastcgi_connect_timeout 90;
-        fastcgi_keep_conn on;
-        #fastcgi_pass unix:/var/run/php/php-fpm.sock;
-        fastcgi_pass 127.0.0.1:9000;
-        fastcgi_index index.php;
-        fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
-    }
-}" >> /etc/nginx/sites-available/${website_name}
+       /bin/sed 's/####XXXX####//g' /etc/nginx/sites-available/${website_name}
     fi
-
     
     /bin/echo "
     location ~ \.php\$ {
@@ -221,8 +143,6 @@ then
         fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
     }
     " >> /etc/nginx/sites-available/${website_name}
-    
-
 fi
 
 /bin/echo "}" >> /etc/nginx/sites-available/${website_name}
