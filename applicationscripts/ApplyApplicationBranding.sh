@@ -22,5 +22,5 @@ fi
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATIONIDENTIFIER:2`" = "1" ] )
 then
-    . ${HOME}/applicationscripts/nuocialboss-wordpress/ApplyApplicationBranding.sh
+    . ${HOME}/applicationscripts/wordpress/ApplyApplicationBranding.sh
 fi
