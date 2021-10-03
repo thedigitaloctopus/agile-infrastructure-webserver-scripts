@@ -19,8 +19,3 @@ domainspecifier="`/bin/echo ${WEBSITE_URL} | /usr/bin/awk -F'.' '{ for(i = 1; i 
 
 /bin/echo "Customising your application. This may take a bit of time...."
 /usr/bin/find /var/www/html -type f -exec sed -i -e "s/ApplicationDomainSpec/${domainspecifier}/g" -e "s/applicationdomain.tld/${WEBSITE_URL}/g" -e "s/applicationrootdomain.tld/${ROOT_DOMAIN}/g" -e "s/The GreatApplication/${WEBSITE_DISPLAY_NAME}/g" -e "s/THE GREATAPPLICATION/${WEBSITE_DISPLAY_NAME_UPPER}/g" -e "s/GREATAPPLICATION/${WEBSITE_DISPLAY_NAME_UPPER}/g" -e  "s/GreatApplication/${WEBSITE_DISPLAY_NAME}/g" -e "s/greatapplication/${WEBSITE_DISPLAY_NAME_LOWER}/g" -e "s/Greatapplication/${WEBSITE_DISPLAY_NAME_FIRST}/g" {} \;
-
-if ( [ ! -d /var/www/html/wp-content/uploads ] )
-then
-    /bin/mkdir -p /var/www/html/wp-content/uploads
-fi
