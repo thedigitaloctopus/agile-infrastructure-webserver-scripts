@@ -17,7 +17,7 @@
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATIONIDENTIFIER:1`" = "1" ] )
 then
-    . ${HOME}/applicationscripts/demo-joomla/ApplyApplicationBranding.sh
+    . ${HOME}/applicationscripts/joomla/ApplyApplicationBranding.sh
 fi
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATIONIDENTIFIER:2`" = "1" ] )
