@@ -21,6 +21,14 @@
 #####################################################################################
 #set -x
 
+if ( [ -f ${HOME}/config/GLOBAL_CONFIG_UPDATE ] )
+then
+    /bin/cp ${HOME}/config/joomla_configuration.php ${HOME}/runtime/joomla_configuration.php
+    /bin/cp ${HOME}/runtime/joomla_configuration.php /var/www/html/configuration.php
+    /bin/sleep 30 
+    /bin/rm ${HOME}/config/GLOBAL_CONFIG_UPDATE 
+fi
+
 /usr/bin/wget --timeout=10 --tries=3 --spider --no-check-certificate https://localhost/index.php
 
 if ( [ "$?" != "0" ] || [ "`/usr/bin/diff /var/www/html/configuration.php ${HOME}/config/joomla_configuration.php`" != "" ]  )
