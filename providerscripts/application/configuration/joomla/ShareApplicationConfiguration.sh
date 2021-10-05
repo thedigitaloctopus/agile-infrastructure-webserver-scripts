@@ -23,19 +23,19 @@
 # You can manually update the configuration file for your application under ${HOME}/config/wordpress_config.php
 # and create an empty file ${HOME}/config/GLOBAL_CONFIG_UPDATE which will indicate that these changes will need 
 #to be pushed to each webserver. In this way, you can update all your webserver configurations
-if ( [ -f ${HOME}/config/GLOBAL_CONFIG_UPDATE ] && [ ! -f ${HOME}/runtime/GLOBAL_CONFIG_UPDATE_PROCESSED ] )
-then
-    /bin/cp ${HOME}/config/joomla_configuration.php ${HOME}/runtime/joomla_configuration.php
-    /bin/cp ${HOME}/runtime/joomla_configuration.php /var/www/html/configuration.php
-    /bin/touch ${HOME}/runtime/GLOBAL_CONFIG_UPDATE_PROCESSED 
-    /bin/sleep 300
-    if ( [ -f ${HOME}/config/GLOBAL_CONFIG_UPDATE ] )
-    then
-        /bin/rm ${HOME}/config/GLOBAL_CONFIG_UPDATE 
-    fi
-    /bin/rm ${HOME}/runtime/GLOBAL_CONFIG_UPDATE_PROCESSED
-fi
-
+#if ( [ -f ${HOME}/config/GLOBAL_CONFIG_UPDATE ] && [ ! -f ${HOME}/runtime/GLOBAL_CONFIG_UPDATE_PROCESSED ] )
+#then
+#    /bin/cp ${HOME}/config/joomla_configuration.php ${HOME}/runtime/joomla_configuration.php
+#    /bin/cp ${HOME}/runtime/joomla_configuration.php /var/www/html/configuration.php
+#    /bin/touch ${HOME}/runtime/GLOBAL_CONFIG_UPDATE_PROCESSED 
+#    /bin/sleep 300
+#    if ( [ -f ${HOME}/config/GLOBAL_CONFIG_UPDATE ] )
+#    then
+#        /bin/rm ${HOME}/config/GLOBAL_CONFIG_UPDATE 
+#    fi
+#    /bin/rm ${HOME}/runtime/GLOBAL_CONFIG_UPDATE_PROCESSED
+#fi#
+#
 if ( [ -f ${HOME}/runtime/CONFIG_VERIFIED ] && [ ! -f ${HOME}/runtime/CONFIG_UPDATING ] )
 then
     exit
