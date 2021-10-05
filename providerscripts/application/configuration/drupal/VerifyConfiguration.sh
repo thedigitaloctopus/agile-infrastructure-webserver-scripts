@@ -23,8 +23,8 @@
 
 if ( [ -f ${HOME}/config/GLOBAL_CONFIG_UPDATE ] )
 then
-    /bin/cp ${HOME}/config/joomla_configuration.php ${HOME}/runtime/joomla_configuration.php
-    /bin/cp ${HOME}/runtime/joomla_configuration.php /var/www/html/configuration.php
+    /bin/cp ${HOME}/config/drupal_settings.php ${HOME}/runtime/drupal_settings.php
+    /bin/cp ${HOME}/runtime/drupal_settings.php  /var/www/html/sites/default/settings.php
     /bin/sleep 30 
     /bin/rm ${HOME}/config/GLOBAL_CONFIG_UPDATE 
 fi
