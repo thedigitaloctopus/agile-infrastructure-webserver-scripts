@@ -21,14 +21,6 @@
 #####################################################################################
 #set -x
 
-if ( [ -f ${HOME}/config/GLOBAL_CONFIG_UPDATE ] )
-then
-    /bin/cp ${HOME}/config/drupal_settings.php ${HOME}/runtime/drupal_settings.php
-    /bin/cp ${HOME}/runtime/drupal_settings.php  /var/www/html/sites/default/settings.php
-    /bin/sleep 30 
-    /bin/rm ${HOME}/config/GLOBAL_CONFIG_UPDATE 
-fi
-
 if ( [ "`/usr/bin/curl -I --insecure https://localhost/moodle/index.php | /bin/grep HTTP | /bin/grep 200`" = "" ] &&
 [ "`/usr/bin/curl -I --insecure https://localhost/moodle/index.php | /bin/grep HTTP | /bin/grep 303`" = "" ] )
 then
