@@ -5,10 +5,10 @@ then
     exit
 fi
 
-if ( [ ! -f ${HOME}/config/INSTALLEDSUCCESSFULLY ] )
-then
-    exit
-fi
+#if ( [ ! -f ${HOME}/config/INSTALLEDSUCCESSFULLY ] )
+#then
+#    exit
+#fi
 
 
 
