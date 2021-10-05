@@ -23,8 +23,8 @@
 
 if ( [ -f ${HOME}/config/GLOBAL_CONFIG_UPDATE ] )
 then
-    /bin/cp ${HOME}/config/drupal_settings.php ${HOME}/runtime/drupal_settings.php
-    /bin/cp ${HOME}/runtime/drupal_settings.php  /var/www/html/sites/default/settings.php
+    /bin/cp ${HOME}/config/wordpress_config.php ${HOME}/runtime/wordpress_config.php
+    /bin/cp ${HOME}/runtime/wordpress_config.php /var/www/wp-config.php
     /bin/sleep 30 
     /bin/rm ${HOME}/config/GLOBAL_CONFIG_UPDATE 
 fi
