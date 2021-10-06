@@ -103,7 +103,7 @@ if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLAT
 then
     if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEDBaaSINSTALLATIONTYPE:Maria`" = "1" ] )
     then
-        /bin/sed -i "/->dbtype /c\    \$CFG->dbtype    = \"mysqli\";" /var/www/html/moodle/config.php
+        /bin/sed -i "/->dbtype /c\    \$CFG->dbtype    = \"mariadb\";" /var/www/html/moodle/config.php
     elif ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEDBaaSINSTALLATIONTYPE:MySQL`" = "1" ] )
     then
         /bin/sed -i "/->dbtype /c\    \$CFG->dbtype    = \"mysqli\";" /var/www/html/moodle/config.php
@@ -113,7 +113,7 @@ then
     fi
 elif ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:Maria`" = "1" ] )
 then
-    /bin/sed -i "/->dbtype /c\    \$CFG->dbtype    = \"mysqli\";" /var/www/html/moodle/config.php
+    /bin/sed -i "/->dbtype /c\    \$CFG->dbtype    = \"mariadb\";" /var/www/html/moodle/config.php
 elif ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:MySQL`" = "1" ] )
 then
     /bin/sed -i "/->dbtype /c\    \$CFG->dbtype    = \"mysqli\";" /var/www/html/moodle/config.php
