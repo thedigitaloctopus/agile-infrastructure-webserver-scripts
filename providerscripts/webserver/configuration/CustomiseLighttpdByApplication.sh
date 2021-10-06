@@ -79,7 +79,7 @@ then
     then
         /bin/echo "auth.backend = \"htpasswd\"
 auth.backend.htpasswd.userfile= \"/etc/basicauth/.htpasswd\"
-auth.require = ( \"/core\" => 
+auth.require = ( \"/\" => 
     (
     \"method\"  => \"basic\",
     \"realm\"   => \"Private Property\",
