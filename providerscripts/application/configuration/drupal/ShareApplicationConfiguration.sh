@@ -37,10 +37,10 @@
 #fi
 
 
-if ( [ -f ${HOME}/runtime/CONFIG_VERIFIED ] && [ ! -f ${HOME}/runtime/CONFIG_UPDATING ] )
-then
-    exit
-fi
+#if ( [ -f ${HOME}/runtime/CONFIG_VERIFIED ] && [ ! -f ${HOME}/runtime/CONFIG_UPDATING ] )
+#then
+#    exit
+#fi
 
 /usr/bin/rsync -au ${HOME}/runtime/drupal_settings.php /var/www/html/sites/default/settings.php
 /bin/chown www-data.www-data /var/www/html/sites/default/settings.php
