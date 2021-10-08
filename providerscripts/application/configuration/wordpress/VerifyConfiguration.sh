@@ -21,7 +21,7 @@
 #####################################################################################
 #set -x
 
-if ( [ -f ${HOME}/config/GLOBAL_CONFIG_UPDATE ] )
+if ( [ -f ${HOME}/config/GLOBAL_CONFIG_UPDATE ] || [ ! -f ${HOME}/runtime/CONFIG_VERIFIED ] )
 then
     /bin/cp ${HOME}/config/wordpress_config.php ${HOME}/runtime/wordpress_config.php
     /bin/cp ${HOME}/runtime/wordpress_config.php /var/www/wp-config.php
