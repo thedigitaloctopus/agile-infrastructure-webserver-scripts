@@ -200,5 +200,6 @@ then
     fi
     /bin/touch ${HOME}/runtime/VIRGINCONFIGSET
 else
+    /bin/cp /var/www/html/sites/default/settings.php.default ${HOME}/runtime/drupal_settings.php
     /bin/cp ${HOME}/runtime/drupal_settings.php ${HOME}/config/drupal_settings.php
 fi
