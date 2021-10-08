@@ -239,6 +239,7 @@ then
     /bin/chown -R www-data.www-data /var/www/html/sites/default
     /bin/touch ${HOME}/config/APPLICATION_DB_CONFIGURED
 else
+    /bin/cp /var/www/html/sites/default/settings.php.default ${HOME}/runtime/drupal_settings.php
     /bin/cp ${HOME}/runtime/drupal_settings.php ${HOME}/config/drupal_settings.php
 fi
 
