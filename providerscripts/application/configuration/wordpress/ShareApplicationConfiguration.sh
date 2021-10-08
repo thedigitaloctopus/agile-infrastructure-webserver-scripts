@@ -36,10 +36,10 @@
 #    /bin/rm ${HOME}/runtime/GLOBAL_CONFIG_UPDATE_PROCESSED
 #fi
 
-if ( [ -f ${HOME}/runtime/CONFIG_VERIFIED ] && [ ! -f ${HOME}/runtime/CONFIG_UPDATING ] )
-then
-    exit
-fi
+#if ( [ -f ${HOME}/runtime/CONFIG_VERIFIED ] && [ ! -f ${HOME}/runtime/CONFIG_UPDATING ] )
+#then
+#    exit
+#fi
 
 #Note the config file is outside the webroot. This is because wordpress checks one level higher and it's safer to have it there.
 if ( [ -f /var/www/wp-config.php ] && [ -f /var/www/html/wp-config.php ] )
