@@ -21,7 +21,7 @@
 #####################################################################################
 #set -x
 
-if ( [ -f ${HOME}/config/GLOBAL_CONFIG_UPDATE ] )
+if ( [ -f ${HOME}/config/GLOBAL_CONFIG_UPDATE ] || [ ! -f ${HOME}/runtime/CONFIG_VERIFIED ] )
 then
     /bin/cp ${HOME}/config/joomla_configuration.php ${HOME}/runtime/joomla_configuration.php
     /bin/cp ${HOME}/runtime/joomla_configuration.php /var/www/html/configuration.php
