@@ -21,7 +21,7 @@ then
             /usr/bin/s3cmd mv s3://gatewayguardian-${BUILD_IDENTIFIER}/htpasswd s3://gatewayguardian-${BUILD_IDENTIFIER}/htpasswd.$$
             /bin/touch ${HOME}/runtime/VIRGINADJUSTED
         fi
-        /usr/bin/s3cmd get s3://gatewayguardian-${BUILD_IDENTIFIER}/htpasswd
+        /usr/bin/s3cmd get --force s3://gatewayguardian-${BUILD_IDENTIFIER}/htpasswd
         /bin/mv htpasswd /etc/basicauth/.htpasswd
         /bin/chown www-data.www-data /etc/basicauth/.htpasswd
         /bin/sleep 130
@@ -38,7 +38,7 @@ then
             /usr/bin/s3cmd mv s3://gatewayguardian-${BUILD_IDENTIFIER}/htpasswd s3://gatewayguardian-${BUILD_IDENTIFIER}/htpasswd.$$
             /bin/touch ${HOME}/runtime/VIRGINADJUSTED
         fi
-        /usr/bin/s3cmd get s3://gatewayguardian-${BUILD_IDENTIFIER}/htpasswd
+        /usr/bin/s3cmd get --force s3://gatewayguardian-${BUILD_IDENTIFIER}/htpasswd
         /bin/mv htpasswd /etc/basicauth/.htpasswd
         /bin/chown www-data.www-data /etc/basicauth/.htpasswd
         /bin/sleep 130
@@ -56,7 +56,7 @@ then
             /bin/touch ${HOME}/runtime/VIRGINADJUSTED
         fi
         
-        /usr/bin/s3cmd get s3://gatewayguardian-${BUILD_IDENTIFIER}/htpasswd
+        /usr/bin/s3cmd get --force s3://gatewayguardian-${BUILD_IDENTIFIER}/htpasswd
         /bin/mv htpasswd /etc/basicauth/.htpasswd
         /bin/chown www-data.www-data /etc/basicauth/.htpasswd
         /bin/sleep 130
@@ -74,7 +74,7 @@ then
             /bin/touch ${HOME}/runtime/VIRGINADJUSTED
         fi
         
-        /usr/bin/s3cmd get s3://gatewayguardian-${BUILD_IDENTIFIER}/htpasswd
+        /usr/bin/s3cmd get --force s3://gatewayguardian-${BUILD_IDENTIFIER}/htpasswd
         /bin/mv htpasswd /etc/basicauth/.htpasswd
         /bin/chown www-data.www-data /etc/basicauth/.htpasswd
         /bin/sleep 130
