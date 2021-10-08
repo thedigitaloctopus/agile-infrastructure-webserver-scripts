@@ -36,10 +36,10 @@
 #    /bin/rm ${HOME}/runtime/GLOBAL_CONFIG_UPDATE_PROCESSED
 #fi#
 #
-if ( [ -f ${HOME}/runtime/CONFIG_VERIFIED ] && [ ! -f ${HOME}/runtime/CONFIG_UPDATING ] )
-then
-    exit
-fi
+#if ( [ -f ${HOME}/runtime/CONFIG_VERIFIED ] && [ ! -f ${HOME}/runtime/CONFIG_UPDATING ] )
+#then
+#    exit
+#fi
 
 
 /usr/bin/rsync -au ${HOME}/runtime/joomla_configuration.php /var/www/html/configuration.php
