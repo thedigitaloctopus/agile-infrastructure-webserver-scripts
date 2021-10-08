@@ -29,12 +29,12 @@ then
     /bin/rm ${HOME}/config/GLOBAL_CONFIG_UPDATE 
 fi
 
-/usr/bin/wget --timeout=10 --tries=3 --spider --no-check-certificate https://localhost/index.php
+#/usr/bin/wget --timeout=10 --tries=3 --spider --no-check-certificate https://localhost/index.php
 
-if ( [ "$?" != "0" ] || [ "`/usr/bin/diff /var/www/html/sites/default/settings.php ${HOME}/config/drupal_settings.php`" != "" ] )
-then
-    /bin/rm ${HOME}/runtime/CONFIG_VERIFIED
-fi
+#if ( [ "$?" != "0" ] || [ "`/usr/bin/diff /var/www/html/sites/default/settings.php ${HOME}/config/drupal_settings.php`" != "" ] )
+#then
+#    /bin/rm ${HOME}/runtime/CONFIG_VERIFIED
+#fi
 
 if ( [ -f ${HOME}/runtime/CONFIG_VERIFIED ] )
 then
