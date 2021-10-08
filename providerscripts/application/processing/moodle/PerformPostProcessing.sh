@@ -157,3 +157,6 @@ then
         fi
     fi
 fi
+
+/usr/bin/find /var/www/html/moodledata -type d -print | /usr/bin/xargs chmod 775
+/usr/bin/find /var/www/html/moodledata -type f -print | /usr/bin/xargs chmod 664
