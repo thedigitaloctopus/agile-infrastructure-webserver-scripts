@@ -21,7 +21,7 @@
 #####################################################################################
 #set -x
 
-if ( [ -f ${HOME}/config/GLOBAL_CONFIG_UPDATE ] )
+if ( [ -f ${HOME}/config/GLOBAL_CONFIG_UPDATE ] || [ ! -f ${HOME}/runtime/CONFIG_VERIFIED ] )
 then
     /bin/cp ${HOME}/config/drupal_settings.php ${HOME}/runtime/drupal_settings.php
     /bin/cp ${HOME}/runtime/drupal_settings.php  /var/www/html/sites/default/settings.php
