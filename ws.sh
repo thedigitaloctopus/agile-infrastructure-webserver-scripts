@@ -162,6 +162,8 @@ then
     /bin/chmod 755 ${HOME}/.cache
 fi
 
+/bin/touch ${HOME}/runtime/FIRST_TUNNEL_SYNC
+
 /bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
 /bin/echo "${0} `/bin/date`: Setting the hostname" >> ${HOME}/logs/WEBSERVER_BUILD.log
 /bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
