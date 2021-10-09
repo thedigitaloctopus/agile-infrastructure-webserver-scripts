@@ -38,6 +38,14 @@ then
         /bin/echo "                      Require valid-user" >> /etc/apache2/sites-available/bypass_snippet.dat
         /bin/echo "                 </RequireAny>" >> /etc/apache2/sites-available/bypass_snippet.dat
     done
+    
+    for ip in "`/bin/ls ${HOME}/config/autoscalerpublicip | /usr/bin/tr '\n' ' '`"
+    do
+        /bin/echo "                 <RequireAny>" >> /etc/apache2/sites-available/bypass_snippet.dat
+        /bin/echo "                      Require ip ${ip}" >> /etc/apache2/sites-available/bypass_snippet.dat
+        /bin/echo "                      Require valid-user" >> /etc/apache2/sites-available/bypass_snippet.dat
+        /bin/echo "                 </RequireAny>" >> /etc/apache2/sites-available/bypass_snippet.dat
+    done
 
     if ( [ -f /etc/apache2/sites-available/bypass_snippet.dat ] )
     then
