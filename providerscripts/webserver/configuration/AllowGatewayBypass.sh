@@ -1,3 +1,5 @@
+#set -x
+
 if ( [ -f ${HOME}/runtime/BYPASS_PROCESSED ] )
 then
     exit
@@ -8,22 +10,28 @@ then
    exit
 fi
 
-WEBSITE_NAME="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEDISPLAYNAME'`"
-
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh WEBSERVERCHOICE:NGINX`" = "1" ] )
 then
-    /bin/echo "satisfy any;" >> /etc/nginx/sites-available/bypass_snippet.dat
-    for ip in "`/bin/ls ${HOME}/config/autoscalerip | /usr/bin/tr '\n' ' '`"
+    WEBSITE_URL="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEURL'`"
+    WEBSITE_NAME="`/bin/echo ${WEBSITE_URL} | /usr/bin/awk -F'.' '{print $2}'`"
+    /bin/echo "                   satisfy any;" >> /etc/nginx/sites-available/bypass_snippet.dat
+    for ips in "`/bin/ls ${HOME}/config/autoscalerip | /usr/bin/tr '\n' ' '`"
     do
-        /bin/echo "                      allow ${ip};" >> /etc/nginx/sites-available/bypass_snippet.dat
+        for ip in ${ips}
+        do 
+            /bin/echo "                      allow ${ip};" >> /etc/nginx/sites-available/bypass_snippet.dat
+        done
     done
     
-    for ip in "`/bin/ls ${HOME}/config/autoscalerpublicip | /usr/bin/tr '\n' ' '`"
+    for ips in "`/bin/ls ${HOME}/config/autoscalerpublicip | /usr/bin/tr '\n' ' '`"
     do
-        /bin/echo "                      allow ${ip};" >> /etc/nginx/sites-available/bypass_snippet.dat
+        for ip in ${ips}
+        do
+            /bin/echo "                      allow ${ip};" >> /etc/nginx/sites-available/bypass_snippet.dat
+        done
     done
     
-    /bin/echo "deny all;" >> /etc/nginx/sites-available/bypass_snippet.dat
+    /bin/echo "                   deny all;" >> /etc/nginx/sites-available/bypass_snippet.dat
 
     if ( [ -f /etc/nginx/sites-available/bypass_snippet.dat ] )
     then
@@ -36,6 +44,7 @@ fi
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh WEBSERVERCHOICE:APACHE`" = "1" ] )
 then
+    WEBSITE_NAME="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEDISPLAYNAME'`"
     for ip in "`/bin/ls ${HOME}/config/autoscalerip | /usr/bin/tr '\n' ' '`"
     do
         /bin/echo "                 <RequireAny>" >> /etc/apache2/sites-available/bypass_snippet.dat
