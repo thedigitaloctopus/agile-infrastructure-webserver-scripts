@@ -44,6 +44,12 @@ cd /var/www/html
 
 if ( [ "`/bin/ls -l ${HOME}/webrootsync/incomingupdates/webrootsync*.tar | /usr/bin/wc -l`" -gt "0" ] )
 then
-    /bin/cat ${HOME}/webrootsync/incomingupdates/webrootsync*.tar | /bin/tar -xf - --keep-newer-files -i
-    /bin/rm ${HOME}/webrootsync/incomingupdates/webrootsync*.tar
+    if ( [ -f ${HOME}/runtime/FIRST_TUNNEL_SYNC ] )
+    then
+        /bin/cat ${HOME}/webrootsync/incomingupdates/webrootsync*.tar | /bin/tar -xf - -i
+        /bin/rm ${HOME}/runtime/FIRST_TUNNEL_SYNC
+    else
+        /bin/cat ${HOME}/webrootsync/incomingupdates/webrootsync*.tar | /bin/tar -xf - --keep-newer-files -i
+        /bin/rm ${HOME}/webrootsync/incomingupdates/webrootsync*.tar
+    fi
 fi
