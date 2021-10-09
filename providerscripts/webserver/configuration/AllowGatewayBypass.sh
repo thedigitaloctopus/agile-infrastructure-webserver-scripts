@@ -24,3 +24,4 @@ then
 fi
 
 /bin/touch ${HOME}/runtime/BYPASS_PROCESSED
+/bin/rm /etc/apache2/sites-available/bypass_snippet.dat
