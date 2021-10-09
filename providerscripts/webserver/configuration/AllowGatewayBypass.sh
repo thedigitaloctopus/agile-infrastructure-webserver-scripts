@@ -25,13 +25,13 @@ then
     
     /bin/echo "deny all;" >> /etc/nginx/sites-available/bypass_snippet.dat
 
-    if ( [ -f /etc/apache2/sites-available/bypass_snippet.dat ] )
+    if ( [ -f /etc/nginx/sites-available/bypass_snippet.dat ] )
     then
         /bin/sed -i -e '/####BYPASS####/{r /etc/nginx/sites-available/bypass_snippet.dat' -e 'd}' /etc/nginx/sites-available/${WEBSITE_NAME} 
     fi
 
     /bin/touch ${HOME}/runtime/BYPASS_PROCESSED
-    /bin/rm /etc/apache2/sites-available/bypass_snippet.dat
+    /bin/rm /etc/nginx/sites-available/bypass_snippet.dat
 fi
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh WEBSERVERCHOICE:APACHE`" = "1" ] )
