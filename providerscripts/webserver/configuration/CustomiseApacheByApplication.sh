@@ -51,8 +51,15 @@ then
                 AuthType Basic
                 AuthName \"Private Property\"
                 AuthUserFile /etc/basicauth/.htpasswd
-                Require valid-user
-        </Directory>
+                Require valid-user " >> /etc/apache2/sites-available/${WEBSITE_NAME}
+        for ip in "`/bin/ls ${HOME}/config/autoscalerip`"
+        do
+           /bin/echo "<RequireAny>" >> /etc/apache2/sites-available/${WEBSITE_NAME}
+           /bin/echo "    Require ip ${ip}" >> /etc/apache2/sites-available/${WEBSITE_NAME}
+           /bin/echo "    Require valid-user" >> /etc/apache2/sites-available/${WEBSITE_NAME}
+           /bin/echo "</RequireAny>" >> /etc/apache2/sites-available/${WEBSITE_NAME}
+        done
+        /bin/echo "</Directory>
     </VirtualHost>" >> /etc/apache2/sites-available/${WEBSITE_NAME}
     fi
 
@@ -70,8 +77,15 @@ then
                 AuthType Basic
                 AuthName \"Private Property\"
                 AuthUserFile /etc/basicauth/.htpasswd
-                Require valid-user
-        </Directory>
+                Require valid-user " >> /etc/apache2/sites-available/${WEBSITE_NAME}
+        for ip in "`/bin/ls ${HOME}/config/autoscalerip`"
+        do
+           /bin/echo "<RequireAny>" >> /etc/apache2/sites-available/${WEBSITE_NAME}
+           /bin/echo "    Require ip ${ip}" >> /etc/apache2/sites-available/${WEBSITE_NAME}
+           /bin/echo "    Require valid-user" >> /etc/apache2/sites-available/${WEBSITE_NAME}
+           /bin/echo "</RequireAny>" >> /etc/apache2/sites-available/${WEBSITE_NAME}
+        done
+        /bin/echo "</Directory>
     </VirtualHost>" >> /etc/apache2/sites-available/${WEBSITE_NAME}
     fi
 fi
@@ -88,8 +102,15 @@ then
                 AuthType Basic
                 AuthName \"Private Property\"
                 AuthUserFile /etc/basicauth/.htpasswd
-                Require valid-user
-        </Directory>
+                Require valid-user " >> /etc/apache2/sites-available/${WEBSITE_NAME}
+        for ip in "`/bin/ls ${HOME}/config/autoscalerip`"
+        do
+           /bin/echo "<RequireAny>" >> /etc/apache2/sites-available/${WEBSITE_NAME}
+           /bin/echo "    Require ip ${ip}" >> /etc/apache2/sites-available/${WEBSITE_NAME}
+           /bin/echo "    Require valid-user" >> /etc/apache2/sites-available/${WEBSITE_NAME}
+           /bin/echo "</RequireAny>" >> /etc/apache2/sites-available/${WEBSITE_NAME}
+        done
+        /bin/echo "</Directory>
     </VirtualHost>" >> /etc/apache2/sites-available/${WEBSITE_NAME}
     fi
 fi
@@ -106,8 +127,15 @@ then
                 AuthType Basic
                 AuthName \"Private Property\"
                 AuthUserFile /etc/basicauth/.htpasswd
-                Require valid-user
-        </Directory>
+                Require valid-user " >> /etc/apache2/sites-available/${WEBSITE_NAME}
+        for ip in "`/bin/ls ${HOME}/config/autoscalerip`"
+        do
+           /bin/echo "<RequireAny>" >> /etc/apache2/sites-available/${WEBSITE_NAME}
+           /bin/echo "    Require ip ${ip}" >> /etc/apache2/sites-available/${WEBSITE_NAME}
+           /bin/echo "    Require valid-user" >> /etc/apache2/sites-available/${WEBSITE_NAME}
+           /bin/echo "</RequireAny>" >> /etc/apache2/sites-available/${WEBSITE_NAME}
+        done
+        /bin/echo "</Directory>
     </VirtualHost>" >> /etc/apache2/sites-available/${WEBSITE_NAME}
     fi
     
