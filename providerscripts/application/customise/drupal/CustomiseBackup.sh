@@ -22,4 +22,4 @@ salt="`/bin/cat ${HOME}/config/drupal_settings.php | /bin/grep '^\$settings' | /
 /bin/rm /tmp/backup/sites/default/settings.php
 
 #Don't really know what I am doing here, but there was a problem with this file when building from a backup, so, I had to modify it inline
-/bin/sed -i 's/!\$defaults/$defaults/' /var/www/html/core/modules/menu_ui/menu_ui.module
+#/bin/sed -i 's/!\$defaults/$defaults/' /var/www/html/core/modules/menu_ui/menu_ui.module
