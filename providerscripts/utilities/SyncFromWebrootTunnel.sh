@@ -25,6 +25,17 @@ then
     exit
 fi
 
+if ( [ ! -f ${HOME}/config/SYNCTUNNELENABLED ] )
+then
+    exit
+fi
+
+if ( [ -f ${HOME}/config/ENABLESYNCTUNNEL ] )
+then
+    /bin/touch ${HOME}/config/SYNCTUNNELENABLED
+    /bin/rm ${HOME}/config/ENABLESYNCTUNNE
+fi
+
 ip="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'MYPUBLICIP'`"
 
 if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] )
