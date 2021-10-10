@@ -116,7 +116,7 @@ cd /usr/local/src/httpd-*
 
 #options=" --prefix=/usr/local/apache2 --sysconfdir=/etc/apache2 --enable-ssl --enable-so --enable-http2 --enable-rewrite --enable-mods-static=\"reallyall\" --enable-ssl-staticlib-deps --with-mpm=event --with-included-apr --with-pcre=/usr/local/pcre --with-expat=/usr/local/expat "
 
-options=" --prefix=/usr/local/apache2 --sysconfdir=/etc/apache2 --enable-ssl --enable-so --enable-http2 --enable-authn-core --enable-rewrite --enable-mods-shared=\"reallyall\" --with-mpm=worker --with-included-apr --with-apxs2=/usr/local/apache2/bin/apxs --with-pcre=/usr/local/pcre --with-expat=/usr/local/expat/ "
+options=" --prefix=/usr/local/apache2 --sysconfdir=/etc/apache2 --enable-ssl --enable-so --enable-http2 --enable-rewrite --enable-mods-shared=\"reallyall\" --with-mpm=worker --with-included-apr --with-apxs2=/usr/local/apache2/bin/apxs --with-pcre=/usr/local/pcre --with-expat=/usr/local/expat/ "
 
 #--enable-mods-static=\"reallyall\"
 ./buildconf 
@@ -311,7 +311,10 @@ LoadModule mime_module /usr/local/apache2/modules/mod_mime.so
 LoadModule unique_id_module /usr/local/apache2/modules/mod_unique_id.so
 LoadModule session_module /usr/local/apache2/modules/mod_session.so
 LoadModule session_cookie_module /usr/local/apache2/modules/mod_session_cookie.so
-LoadModule http2_module /usr/local/apache2/modules/mod_http2.so" > /etc/apache2/httpd.conf.$$
+LoadModule http2_module /usr/local/apache2/modules/mod_http2.so
+LoadModule authn_core_module /usr/local/apache2/modules/mod_authn_core.so
+LoadModule authz_user_module /usr/local/apache2/modules/mod_authz_user.so
+LoadModule authn_file_module /usr/local/apache2/modules/mod_authn_file.so" > /etc/apache2/httpd.conf.$$
   
 if ( [ "${2}" = "modsecurity" ] )
 then
