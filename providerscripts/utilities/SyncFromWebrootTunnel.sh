@@ -25,15 +25,15 @@ then
     exit
 fi
 
-if ( [ ! -f ${HOME}/config/SYNCTUNNELENABLED ] )
-then
-    exit
-fi
-
 if ( [ -f ${HOME}/config/ENABLESYNCTUNNEL ] )
 then
     /bin/touch ${HOME}/config/SYNCTUNNELENABLED
-    /bin/rm ${HOME}/config/ENABLESYNCTUNNE
+    /bin/rm ${HOME}/config/ENABLESYNCTUNNEL
+fi
+
+if ( [ ! -f ${HOME}/config/SYNCTUNNELENABLED ] )
+then
+    exit
 fi
 
 ip="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'MYPUBLICIP'`"
