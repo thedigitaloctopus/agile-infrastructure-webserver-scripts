@@ -10,6 +10,11 @@ then
    exit
 fi
 
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DEVELOPMENT:1`" = "1" ] && [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh PRODUCTION:0`" = "1" ] )
+then
+    exit
+fi
+
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh WEBSERVERCHOICE:NGINX`" = "1" ] )
 then
     WEBSITE_URL="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEURL'`"
