@@ -30,8 +30,9 @@ if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" != "" ] )
 then
     if ( [ -f ${HOME}/config/REFRESH_MOUNT ] )
     then
-        /bin/sleep 20
-        /bin/rm ${HOME}/config/REFRESH_MOUNT
+        /bin/rm -r ${HOME}/config/*
+       # /bin/sleep 20
+       # /bin/rm ${HOME}/config/REFRESH_MOUNT
         /bin/umount -f ${HOME}/config
         exit
     fi
