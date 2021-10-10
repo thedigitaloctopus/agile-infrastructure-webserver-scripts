@@ -166,6 +166,7 @@ fi
 WEBSITE_DISPLAY_NAME="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEDISPLAYNAME'`"
 ${HOME}/providerscripts/application/email/ActivateSMTPByApplication.sh "${WEBSITE_DISPLAY_NAME}" 
 /bin/cp ${HOME}/runtime/drupal_settings.php ${HOME}/config/drupal_settings.php
+/bin/cp ${HOME}/runtime/drupal_settings.php /var/www/html/sites/default/settings.php
 
 if ( [ ! -d /var/www/html/tmp ] )
 then
