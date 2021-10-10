@@ -164,8 +164,13 @@ then
     fi
 
     /bin/sed -i "s/^\$databases = \[\]\;/${credentialstring}/" ${HOME}/runtime/drupal_settings.php
-
-    salt="`< /dev/urandom tr -dc a-z | head -c${1:-16};echo;`"
+    
+    salt="`/bin/cat /var/www/html/salt`"
+    
+    if ( [ "${salt}" = "" ] )
+    then
+        salt="`< /dev/urandom tr -dc a-z | head -c${1:-16};echo;`"
+    fi
     /bin/sed -i "/^\$settings\['hash_salt'\]/c\$settings['hash_salt'] = '${salt}';" ${HOME}/runtime/drupal_settings.php
 fi
 
