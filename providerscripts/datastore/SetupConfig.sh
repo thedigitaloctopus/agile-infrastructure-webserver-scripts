@@ -28,14 +28,20 @@ fi
 
 if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" != "" ] )
 then
-    if ( [ -f ${HOME}/config/REFRESH_MOUNT ] )
+    SERVER_USER="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SERVERUSER'`"
+    if ( [ "`/bin/ls ${HOME}/config/${SERVER_USER}`" = "" ] )
     then
-        /bin/rm -r ${HOME}/config/*
-       # /bin/sleep 20
-       # /bin/rm ${HOME}/config/REFRESH_MOUNT
-        /bin/umount -f ${HOME}/config
-        exit
+        /bin/rm ${HOME}/config/*
+        /bin/touch ${HOME}/config/${SERVER_USER}
     fi
+    #if ( [ -f ${HOME}/config/REFRESH_MOUNT ] )
+    #then
+    #    /bin/rm -r ${HOME}/config/*
+    #   # /bin/sleep 20
+    #   # /bin/rm ${HOME}/config/REFRESH_MOUNT
+    #    /bin/umount -f ${HOME}/config
+    #    exit
+    #fi
     if ( [ ! -d ${HOME}/config/beingbuiltips ] || [ ! -d ${HOME}/config/webserverpublicips ] || [ ! -d ${HOME}/config/webserverips ] || [ ! -d ${HOME}/config/databaseip ] || [ ! -d ${HOME}/config/databasepublicip ] || [ ! -d ${HOME}/config/bootedwebserverips ] || [ ! -d ${HOME}/config/shuttingdownwebserverips ] || [ ! -d ${HOME}/config/autoscalerip ] || [ ! -d ${HOME}/config/autoscalerpublicip ] || [ ! -d ${HOME}/config/buildclientip ] || [ ! -d ${HOME}/config/credentials ] || [ ! -d ${HOME}/config/webrootsynctunnel ] || [ ! -d ${HOME}/config/ssl ] )
     then
         DIRECTORIESSET="0"
