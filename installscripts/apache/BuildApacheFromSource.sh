@@ -240,43 +240,43 @@ fi
 /bin/cp /usr/local/apache2/conf/mime.types /etc/apache2/conf
 
 #Put code to start apache after a reboot
-/bin/echo "#!/bin/bash
-/bin/mkdir /var/run/apache2
-/bin/chown www-data.www-data /var/run/apache2
-
-. /etc/apache2/conf/envvars && /usr/local/apache2/bin/apachectl -k start
-
-/bin/sleep 10
-
-apaches=\"\`/usr/bin/ps -ef | /bin/grep apache2 | /bin/grep -v grep | /usr/bin/wc -l\`\"
-
-while ( [ \"\${apaches}\" = \"0\" ] )
-do
-    . /etc/apache2/conf/envvars && /usr/local/apache2/bin/apachectl -k start
-    apaches=\"\`/usr/bin/ps -ef | /bin/grep apache2 | /bin/grep -v grep | /usr/bin/wc -l\`\"
-    /bin/sleep 10
-done
-
-exit 0" > /etc/rc.local
-
-/bin/chmod +x /etc/rc.local
-
-/bin/echo "[Unit]
-Description=/etc/rc.local Compatibility
-Documentation=man:systemd-rc-local-generator(8)
-ConditionFileIsExecutable=/etc/rc.local
-After=network.target
-
-[Service]
-Type=forking
-ExecStart=/etc/rc.local start
-TimeoutSec=0
-RemainAfterExit=yes
-GuessMainPID=no
-
-[Install]
-WantedBy=multi-user.target" > /etc/systemd/system/rc-local.service
-
+#/bin/echo "#!/bin/bash
+#/bin/mkdir /var/run/apache2
+#/bin/chown www-data.www-data /var/run/apache2
+#
+#. /etc/apache2/conf/envvars && /usr/local/apache2/bin/apachectl -k start
+#
+#/bin/sleep 10
+#
+#apaches=\"\`/usr/bin/ps -ef | /bin/grep apache2 | /bin/grep -v grep | /usr/bin/wc -l\`\"
+#
+#while ( [ \"\${apaches}\" = \"0\" ] )
+#do
+#    . /etc/apache2/conf/envvars && /usr/local/apache2/bin/apachectl -k start
+#    apaches=\"\`/usr/bin/ps -ef | /bin/grep apache2 | /bin/grep -v grep | /usr/bin/wc -l\`\"
+#    /bin/sleep 10
+#done
+#
+#exit 0" > /etc/rc.local
+#
+#/bin/chmod +x /etc/rc.local
+#
+#/bin/echo "[Unit]
+#Description=/etc/rc.local Compatibility
+#Documentation=man:systemd-rc-local-generator(8)
+#ConditionFileIsExecutable=/etc/rc.local
+#After=network.target
+#
+#[Service]
+#Type=forking
+#ExecStart=/etc/rc.local start
+#TimeoutSec=0
+#RemainAfterExit=yes
+#GuessMainPID=no
+#
+#[Install]
+#WantedBy=multi-user.target" > /etc/systemd/system/rc-local.service
+#
 #Install configuration values for apache
 /bin/cp ${HOME}/installscripts/apache/httpd.conf.sample /etc/apache2/httpd.conf
 /bin/cp ${HOME}/installscripts/apache/envvars.sample /etc/apache2/envvars
@@ -347,8 +347,8 @@ then
    /bin/echo "ProxyPassMatch ^/(.*\.php(/.*)?)$ fcgi://127.0.0.1:9000/var/www/html/\$1" >> /etc/apache2/httpd.conf
 fi
     
-/usr/bin/systemctl enable rc-local.service
-/usr/bin/systemctl start rc-local.service &
+#/usr/bin/systemctl enable rc-local.service
+#/usr/bin/systemctl start rc-local.service &
 
 ########ADDED
 /bin/cp ${HOME}/installscripts/apache/init.d.sample /etc/init.d/apache2
