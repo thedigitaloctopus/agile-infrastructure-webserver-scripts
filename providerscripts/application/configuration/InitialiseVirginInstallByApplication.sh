@@ -22,6 +22,11 @@
 ####################################################################################
 #set -x
 
+if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] )
+then
+    exit
+fi
+
 #If our credentials are not available, that's no good to us
 if ( [ "`/bin/sed '1q;d' ${HOME}/config/credentials/shit`" = "" ] )
 then
