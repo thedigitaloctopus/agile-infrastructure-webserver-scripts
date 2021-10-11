@@ -51,7 +51,8 @@ fi
 
 if ( [ "${prefix}" = "" ] && [ ! -f /var/www/html/dpb.dat ] )
 then
-    prefix="`< /dev/urandom tr -dc a-z | head -c${1:-6};echo;`"
+    #prefix="`< /dev/urandom tr -dc a-z | head -c${1:-6};echo;`"
+    prefix="`/usr/bin/date +%s | /usr/bin/sha256sum | /usr/bin/base64 | /usr/bin/head -c 6; echo`"
     ${HOME}/providerscripts/utilities/StoreConfigValue.sh "DBPREFIX" "${prefix}"
     /bin/echo "${prefix}" > /var/www/html/dpb.dat
 else
