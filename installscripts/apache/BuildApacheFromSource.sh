@@ -353,5 +353,7 @@ fi
 ########ADDED
 /bin/cp ${HOME}/installscripts/apache/init.d.sample /etc/init.d/apache2
 /usr/sbin/update-rc.d apache2
+/usr/bin/systemctl enable apache2.service
+/usr/bin/systemctl start apache2.service &
 
 
