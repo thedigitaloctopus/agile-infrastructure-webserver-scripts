@@ -349,3 +349,8 @@ fi
     
 /usr/bin/systemctl enable rc-local.service
 /usr/bin/systemctl start rc-local.service &
+
+########ADDED
+/bin/cp ${HOME}/installscripts/apache/init.d.sample /etc/init.d
+
+
