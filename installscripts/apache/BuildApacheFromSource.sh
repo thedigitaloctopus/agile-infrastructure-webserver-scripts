@@ -27,11 +27,6 @@
 
 #Install needed libraries
 /usr/bin/apt-get -qq -y  install libnghttp2-dev  build-essential automake autoconf libtool software-properties-common libtool-bin libgeoip-dev
-#mmdb-bin
-#apache2-dev libssl-dev openssl
-#/usr/bin/add-apt-repository -y ppa:maxmind/ppa
-#/usr/bin/apt -qq -y update
-#/usr/bin/apt -qq -y install libmaxminddb-dev 
 
 cd /usr/local/src
 
@@ -58,15 +53,6 @@ cd /usr/local/src/libexpat/expat
 /usr/bin/make 
 /usr/bin/make install
 
-#cd /usr/local/src/openssl-${openssl_latest_version}
-#export LD_LIBRARY_PATH=/opt/openssl-${openssl_latest_version}/lib
-#./config --prefix=/opt/openssl-${openssl_latest_version} --openssldir=/opt/openssl-${openssl_latest_version}/ssl no-shared
-#/usr/bin/make
-#/usr/bin/make install
-#/bin/echo "/opt/openssl-${openssl_latest_version}/lib" > /etc/ld.so.conf.d/openssl.conf
-#/usr/sbin/ldconfig
-#cd ..
-
 cd /usr/local/src
 
 #Download and build apache
@@ -81,12 +67,6 @@ apr_download_link="https://mirrors.ukfast.co.uk/sites/ftp.apache.org/apr/apr-${a
 
 cd /usr/local/src/httpd-*/srclib
 /bin/ln -s apr-${apr_latest_version}/ apr
-
-#cd apr*
-
-#./configure --prefix=/usr/local/apr
-#make
-#make install
 
 cd /usr/local/src
 
@@ -106,19 +86,8 @@ cd /usr/local/src/httpd-*/srclib
 
 cd /usr/local/src/httpd-*
     
-#options=" --prefix=/usr/local/apache2 --sysconfdir=/etc/apache2 --with-pcre=/usr/local/pcre --with-included-apr --with-apxs2=/usr/local/apache2/bin/apxs --with-expat=/usr/local/expat --with-ssl=/opt/openssl-${openssl_latest_version} --with-mpm=prefork --enable-http2 --enable-ssl --enable-so --enable-rewrite --enable-mods-shared="reallyall" --enable-ssl-staticlib-deps"
-
-#./configure --prefix=/usr/local/apache2 --sysconfdir=/etc/apache2 --with-pcre=/usr/local/pcre --with-apr-util=/usr/local/apr-util --with-apr=/usr/local/apr --with-apxs2=/usr/local/apache2/bin/apxs --with-expat=/usr/local/expat --with-ssl=/opt/openssl-${openssl_latest_version} --with-mpm=prefork --enable-http2 --enable-ssl --enable-so --enable-rewrite --enable-mods-shared="reallyall" --enable-mods-static="reallyall"
-
-#options=" --enable-ssl --enable-so --enable-http2 --enable-so --enable-rewrite --enable-mods-shared="reallyall" --enable-ssl-staticlib-deps --with-mpm=event --with-included-apr --with-pcre=/usr/local/pcre --with-ssl=/usr/local/openssl --with-expat=/usr/local/expat --prefix=/usr/local/apache2"
-
-#options=" --prefix=/usr/local/apache2 --sysconfdir=/etc/apache2 --enable-ssl --enable-so --enable-http2 --enable-rewrite --enable-mods-shared=\"reallyall\" --enable-ssl-staticlib-deps --with-mpm=event --with-included-apr --with-pcre=/usr/local/pcre --with-expat=/usr/local/expat "
-
-#options=" --prefix=/usr/local/apache2 --sysconfdir=/etc/apache2 --enable-ssl --enable-so --enable-http2 --enable-rewrite --enable-mods-static=\"reallyall\" --enable-ssl-staticlib-deps --with-mpm=event --with-included-apr --with-pcre=/usr/local/pcre --with-expat=/usr/local/expat "
-
 options=" --prefix=/usr/local/apache2 --sysconfdir=/etc/apache2 --enable-ssl --enable-so --enable-http2 --enable-rewrite --enable-mods-shared=\"reallyall\" --with-mpm=worker --with-included-apr --with-apxs2=/usr/local/apache2/bin/apxs --with-pcre=/usr/local/pcre --with-expat=/usr/local/expat/ "
 
-#--enable-mods-static=\"reallyall\"
 ./buildconf 
 
 ./configure ${options}
@@ -141,18 +110,6 @@ then
     /usr/bin/make install
     cd ${dir}
     
-    #Download and build maxmind
-   # /usr/bin/add-apt-repository -y ppa:maxmind/ppa
-   # /usr/bin/apt -qq -y update
-   # /usr/bin/apt -qq -y install libmaxminddb-dev 
-   # /bin/mkdir -p /usr/lib/apache2/modules
-   # /usr/bin/git clone https://github.com/maxmind/mod_maxminddb.git
-   # cd *max*
-   # ./bootstrap
-   # ./configure --with-apxs=/usr/local/apache2/bin/apxs
-   # /usr/bin/make
-   # /usr/bin/make install
-   # cd ..
     /usr/bin/git clone https://github.com/SpiderLabs/ModSecurity 
     cd ModSecurity 
     /usr/bin/git checkout -b v3/master origin/v3/master 
@@ -163,15 +120,10 @@ then
     /usr/bin/make
     /usr/bin/make install
     cd ${dir}
-    #/bin/sh build.sh 
-    #./configure 
-    #/usr/bin/make
-    #/usr/bin/make install
     /usr/bin/git clone https://github.com/SpiderLabs/ModSecurity-apache
     cd ModSecurity-apache
     ./autogen.sh
     ./configure --with-libmodsecurity=/usr/local/modsecurity 
-    #--with-pcre=../pcre-${pcre_latest_version}
     /usr/bin/make
     /usr/bin/make install
     cd ${dir}
@@ -188,8 +140,6 @@ then
     /usr/bin/git clone https://github.com/SpiderLabs/owasp-modsecurity-crs.git /etc/apache2/modsecurity.d/owasp-crs 
     /bin/cp /etc/apache2/modsecurity.d/owasp-crs/crs-setup.conf.example /etc/apache2/modsecurity.d/owasp-crs/crs-setup.conf
     cd /etc/apache2/modsecurity.d
-
-
   
     /bin/echo "Include \"/etc/apache2/modsecurity.d/modsecurity.conf\"" > modsec_rules.conf
     /bin/echo "Include \"/etc/apache2/modsecurity.d/owasp-crs/crs-setup.conf\"" >> modsec_rules.conf
@@ -197,86 +147,39 @@ then
 
     cd ${dir}
 
-  #  #/bin/rm /etc/apache2/modsecurity.d/owasp-crs/rules/REQUEST-910-IP-REPUTATION.conf #Requires max mind
 
     WEBSITE_NAME="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEDISPLAYNAME'`"
     /bin/sed -i '/:443/a modsecurity on\nmodsecurity_rules_file /etc/apache2/modsecurity.d/modsec_rules.conf' /etc/apache2/sites-available/${WEBSITE_NAME}
 fi
 
 if ( [ "${3}" = "modevasive" ] )
-then            
-          #  /bin/mkdir -p /usr/lib/apache2/modules
+then                      
+    /usr/bin/apt-get -qq -y install apache2-utils
+    /usr/bin/apt-get -qq -y install libapache2-mod-evasive
             
-          #  /usr/bin/git clone https://github.com/jzdziarski/mod_evasive.git
-          #  /usr/bin/apt -qq -y install apache2-dev
-          #  cd mod_evasive
-          #  /bin/sed -i "s/remote_ip/client_ip/g" mod_evasive20.c
-          #  /usr/bin/apxs2 -i -c mod_evasive20.c
-          
-            /usr/bin/apt-get -qq -y install apache2-utils
-            /usr/bin/apt-get -qq -y install libapache2-mod-evasive
+    /bin/mkdir /var/log/mod_evasive 
+    /bin/chown -R www-data:www-data /var/log/mod_evasive
             
-            /bin/mkdir /var/log/mod_evasive 
-            /bin/chown -R www-data:www-data /var/log/mod_evasive
+    cd ..
             
-            cd ..
+    if ( [ -f /etc/apache2/mods-available/evasive.conf ] )
+    then 
+        /bin/rm /etc/apache2/mods-available/evasive.conf
+    fi
+    /bin/mkdir /etc/apache2/mods-available
+    /bin/mkdir /etc/apache2/mods-enabled
             
-            if ( [ -f /etc/apache2/mods-available/evasive.conf ] )
-            then 
-                /bin/rm /etc/apache2/mods-available/evasive.conf
-            fi
-            /bin/mkdir /etc/apache2/mods-available
-            /bin/mkdir /etc/apache2/mods-enabled
+    /bin/cp ${HOME}/installscripts/apache/mod_evasive.sample /etc/apache2/mods-available/evasive.conf
+    /usr/bin/ln -s /etc/apache2/mods-available/evasive.conf /etc/apache2/mods-enabled/evasive.conf
+    notify_email_address="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SYSTEMTOEMAILADDRESS'`"
             
-            /bin/cp ${HOME}/installscripts/apache/mod_evasive.sample /etc/apache2/mods-available/evasive.conf
-            /usr/bin/ln -s /etc/apache2/mods-available/evasive.conf /etc/apache2/mods-enabled/evasive.conf
-            notify_email_address="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SYSTEMTOEMAILADDRESS'`"
-            
-            if ( [ "${notify_email_address}" != "" ] )
-            then
-                /bin/sed -i "s/DOSEmailNotify.*/DOSEmailNotify ${notify_email_address}/g" /etc/apache2/mods-available/evasive.conf
-            fi
+    if ( [ "${notify_email_address}" != "" ] )
+    then
+        /bin/sed -i "s/DOSEmailNotify.*/DOSEmailNotify ${notify_email_address}/g" /etc/apache2/mods-available/evasive.conf
+    fi
 fi
 /bin/cp /usr/local/apache2/conf/mime.types /etc/apache2/conf
 
-#Put code to start apache after a reboot
-#/bin/echo "#!/bin/bash
-#/bin/mkdir /var/run/apache2
-#/bin/chown www-data.www-data /var/run/apache2
-#
-#. /etc/apache2/conf/envvars && /usr/local/apache2/bin/apachectl -k start
-#
-#/bin/sleep 10
-#
-#apaches=\"\`/usr/bin/ps -ef | /bin/grep apache2 | /bin/grep -v grep | /usr/bin/wc -l\`\"
-#
-#while ( [ \"\${apaches}\" = \"0\" ] )
-#do
-#    . /etc/apache2/conf/envvars && /usr/local/apache2/bin/apachectl -k start
-#    apaches=\"\`/usr/bin/ps -ef | /bin/grep apache2 | /bin/grep -v grep | /usr/bin/wc -l\`\"
-#    /bin/sleep 10
-#done
-#
-#exit 0" > /etc/rc.local
-#
-#/bin/chmod +x /etc/rc.local
-#
-#/bin/echo "[Unit]
-#Description=/etc/rc.local Compatibility
-#Documentation=man:systemd-rc-local-generator(8)
-#ConditionFileIsExecutable=/etc/rc.local
-#After=network.target
-#
-#[Service]
-#Type=forking
-#ExecStart=/etc/rc.local start
-#TimeoutSec=0
-#RemainAfterExit=yes
-#GuessMainPID=no
-#
-#[Install]
-#WantedBy=multi-user.target" > /etc/systemd/system/rc-local.service
-#
 #Install configuration values for apache
 /bin/cp ${HOME}/installscripts/apache/httpd.conf.sample /etc/apache2/httpd.conf
 /bin/cp ${HOME}/installscripts/apache/envvars.sample /etc/apache2/envvars
@@ -330,7 +233,6 @@ fi
 /bin/cat /etc/apache2/httpd.conf >> /etc/apache2/httpd.conf.$$
 /bin/mv /etc/apache2/httpd.conf.$$ /etc/apache2/httpd.conf
 /bin/sed -i "s/^#ServerRoot.*/ServerRoot \"\/etc\/apache2\"/g" /etc/apache2/httpd.conf
-#/bin/sed -i "s/\/var\/www\//\/var\/www\/html/g" /etc/apache2/httpd.conf
 
 /bin/mv /etc/apache2/conf/magic.conf /etc/apache2/conf/magic.orig
 /bin/ln -s /etc/apache2/magic /etc/apache2/conf/magic
@@ -346,11 +248,7 @@ if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATIONLANGUA
 then
    /bin/echo "ProxyPassMatch ^/(.*\.php(/.*)?)$ fcgi://127.0.0.1:9000/var/www/html/\$1" >> /etc/apache2/httpd.conf
 fi
-    
-#/usr/bin/systemctl enable rc-local.service
-#/usr/bin/systemctl start rc-local.service &
 
-########ADDED
 /bin/cp ${HOME}/installscripts/apache/init.d.sample /etc/init.d/apache2
 /usr/sbin/update-rc.d apache2
 /usr/bin/systemctl enable apache2.service
