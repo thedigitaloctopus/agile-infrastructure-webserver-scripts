@@ -38,33 +38,21 @@ fi
 SERVER_USER="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SERVERUSER'`"
 SERVER_USER_PASSWORD="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SERVERUSERPASSWORD'`"
 DB_PORT="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBPORT'`"
-#PREFIX="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBPREFIX'`"
+PREFIX="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBPREFIX'`"
 BUILD_IDENTIFIER="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDIDENTIFIER'`"
 
 SUDO="/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E"
 
-
 #Set a prefix for our database tables. Make sure we only ever set one in the case where the script runs more than once
 #and exits for some reason.
-#if ( [ "${PREFIX}" = "" ] && [ ! -f /var/www/html/dpb.dat ] )
-#then
-#    #PREFIX="`< /dev/urandom tr -dc a-z | head -c${1:-6};echo;`"
-#    PREFIX="`/usr/bin/date +%s | /usr/bin/sha256sum | /usr/bin/base64 | /usr/bin/head -c 6; echo`"
-#    ${HOME}/providerscripts/utilities/StoreConfigValue.sh "DBPREFIX" "${PREFIX}"
-#    /bin/echo "${PREFIX}" > /var/www/html/dpb.dat
-#else
-#    PREFIX="`command="${SUDO} /bin/cat /var/www/html/dpb.dat" && eval ${command}`"
-#fi
-
-#if ( [ "${PREFIX}" = "" ] )
-#then
-#    PREFIX="`/usr/bin/date +%s | /usr/bin/sha256sum | /usr/bin/base64 | /usr/bin/head -c 6; echo`"
-#fi
-
-#${HOME}/providerscripts/utilities/StoreConfigValue.sh "DBPREFIX" "${PREFIX}"
-#/bin/echo "${PREFIX}" > /var/www/html/dpb.dat
-
-PREFIX="`command="${SUDO} /bin/cat /var/www/html/dpb.dat" && eval ${command}`"
+if ( [ "${PREFIX}" = "" ] && [ ! -f /var/www/html/dpb.dat ] )
+then
+    PREFIX="`/bin/cat /dev/urandom | /usr/bin/tr -dc a-z | /usr/bin/head -c${1:-6};echo;`"
+    ${HOME}/providerscripts/utilities/StoreConfigValue.sh "DBPREFIX" "${PREFIX}"
+    /bin/echo "${PREFIX}" > /var/www/html/dpb.dat
+else
+    PREFIX="`command="${SUDO} /bin/cat /var/www/html/dpb.dat" && eval ${command}`"
+fi
 
 credentials_available=""
 database_available=""
