@@ -217,7 +217,8 @@ LoadModule session_cookie_module /usr/local/apache2/modules/mod_session_cookie.s
 LoadModule http2_module /usr/local/apache2/modules/mod_http2.so
 LoadModule authn_core_module /usr/local/apache2/modules/mod_authn_core.so
 LoadModule authz_user_module /usr/local/apache2/modules/mod_authz_user.so
-LoadModule authn_file_module /usr/local/apache2/modules/mod_authn_file.so" > /etc/apache2/httpd.conf.$$
+LoadModule authn_file_module /usr/local/apache2/modules/mod_authn_file.so
+LoadModule auth_basic_module /usr/local/apache2/modules/mod_auth_basic.so" > /etc/apache2/httpd.conf.$$
   
 if ( [ "${2}" = "modsecurity" ] )
 then
