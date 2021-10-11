@@ -47,15 +47,23 @@ SUDO="/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E"
 
 #Set a prefix for our database tables. Make sure we only ever set one in the case where the script runs more than once
 #and exits for some reason.
-if ( [ "${PREFIX}" = "" ] && [ ! -f /var/www/html/dpb.dat ] )
+#if ( [ "${PREFIX}" = "" ] && [ ! -f /var/www/html/dpb.dat ] )
+#then
+#    #PREFIX="`< /dev/urandom tr -dc a-z | head -c${1:-6};echo;`"
+#    PREFIX="`/usr/bin/date +%s | /usr/bin/sha256sum | /usr/bin/base64 | /usr/bin/head -c 6; echo`"
+#    ${HOME}/providerscripts/utilities/StoreConfigValue.sh "DBPREFIX" "${PREFIX}"
+#    /bin/echo "${PREFIX}" > /var/www/html/dpb.dat
+#else
+#    PREFIX="`command="${SUDO} /bin/cat /var/www/html/dpb.dat" && eval ${command}`"
+#fi
+
+if ( [ "${PREFIX}" = "" ] )
 then
-    #PREFIX="`< /dev/urandom tr -dc a-z | head -c${1:-6};echo;`"
     PREFIX="`/usr/bin/date +%s | /usr/bin/sha256sum | /usr/bin/base64 | /usr/bin/head -c 6; echo`"
-    ${HOME}/providerscripts/utilities/StoreConfigValue.sh "DBPREFIX" "${PREFIX}"
-    /bin/echo "${PREFIX}" > /var/www/html/dpb.dat
-else
-    PREFIX="`command="${SUDO} /bin/cat /var/www/html/dpb.dat" && eval ${command}`"
 fi
+
+${HOME}/providerscripts/utilities/StoreConfigValue.sh "DBPREFIX" "${PREFIX}"
+/bin/echo "${PREFIX}" > /var/www/html/dpb.dat
 
 credentials_available=""
 database_available=""
