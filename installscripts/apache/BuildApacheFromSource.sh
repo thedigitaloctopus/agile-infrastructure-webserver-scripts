@@ -351,6 +351,7 @@ fi
 /usr/bin/systemctl start rc-local.service &
 
 ########ADDED
-/bin/cp ${HOME}/installscripts/apache/init.d.sample /etc/init.d
+/bin/cp ${HOME}/installscripts/apache/init.d.sample /etc/init.d/apache2
+/usr/sbin/update-rc.d apache2
 
 
