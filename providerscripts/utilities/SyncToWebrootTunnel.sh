@@ -32,17 +32,17 @@ then
     exit
 fi
 
-if ( [ -f ${HOME}/config/ENABLESYNCTUNNEL ] )
-then
-    /bin/touch ${HOME}/config/SYNCTUNNELENABLED
-    /bin/rm ${HOME}/config/ENABLESYNCTUNNEL
-    /bin/rm -r ${HOME}/config/webrootsynctunnel/*
-fi
+#if ( [ -f ${HOME}/config/ENABLESYNCTUNNEL ] )
+#then
+#    /bin/touch ${HOME}/config/SYNCTUNNELENABLED
+#    /bin/rm ${HOME}/config/ENABLESYNCTUNNEL
+#    /bin/rm -r ${HOME}/config/webrootsynctunnel/*
+#fi
 
-if ( [ ! -f ${HOME}/config/SYNCTUNNELENABLED ] )
-then
-    exit
-fi
+#if ( [ ! -f ${HOME}/config/SYNCTUNNELENABLED ] )
+#then
+#    exit
+#fi
 
 if ( [ -f ${HOME}/runtime/checklist.chk.new ] )
 then
