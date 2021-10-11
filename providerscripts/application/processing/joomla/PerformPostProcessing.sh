@@ -38,8 +38,7 @@ fi
 SERVER_USER="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SERVERUSER'`"
 SERVER_USER_PASSWORD="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SERVERUSERPASSWORD'`"
 DB_PORT="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBPORT'`"
-PREFIX="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBPREFIX'`"
-#PREFIX="`/bin/ls ${HOME}/.ssh/DBPREFIX:* | /usr/bin/awk -F':' '{print $NF}' 2>/dev/null`"
+#PREFIX="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBPREFIX'`"
 BUILD_IDENTIFIER="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDIDENTIFIER'`"
 
 SUDO="/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E"
@@ -57,13 +56,15 @@ SUDO="/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E"
 #    PREFIX="`command="${SUDO} /bin/cat /var/www/html/dpb.dat" && eval ${command}`"
 #fi
 
-if ( [ "${PREFIX}" = "" ] )
-then
-    PREFIX="`/usr/bin/date +%s | /usr/bin/sha256sum | /usr/bin/base64 | /usr/bin/head -c 6; echo`"
-fi
+#if ( [ "${PREFIX}" = "" ] )
+#then
+#    PREFIX="`/usr/bin/date +%s | /usr/bin/sha256sum | /usr/bin/base64 | /usr/bin/head -c 6; echo`"
+#fi
 
-${HOME}/providerscripts/utilities/StoreConfigValue.sh "DBPREFIX" "${PREFIX}"
-/bin/echo "${PREFIX}" > /var/www/html/dpb.dat
+#${HOME}/providerscripts/utilities/StoreConfigValue.sh "DBPREFIX" "${PREFIX}"
+#/bin/echo "${PREFIX}" > /var/www/html/dpb.dat
+
+PREFIX="`command="${SUDO} /bin/cat /var/www/html/dpb.dat" && eval ${command}`"
 
 credentials_available=""
 database_available=""
