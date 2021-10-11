@@ -33,6 +33,7 @@ then
     then
         /bin/rm -r ${HOME}/config/*
         /bin/touch ${HOME}/config/${SERVER_USER}
+        /bin/sleep 20
     fi
     #if ( [ -f ${HOME}/config/REFRESH_MOUNT ] )
     #then
