@@ -49,21 +49,12 @@ then
     DB_HOST="`command="${SUDO} /bin/ls ${HOME}/config/databaseip" && eval ${command}`" 
 fi
 
-#if ( [ "${prefix}" = "" ] && [ ! -f /var/www/html/dpb.dat ] )
-#then
-#    #prefix="`< /dev/urandom tr -dc a-z | head -c${1:-6};echo;`"
-#    prefix="`/usr/bin/date +%s | /usr/bin/sha256sum | /usr/bin/base64 | /usr/bin/head -c 6; echo`"
-#    ${HOME}/providerscripts/utilities/StoreConfigValue.sh "DBPREFIX" "${prefix}"
-#    /bin/echo "${prefix}" > /var/www/html/dpb.dat
-#else
-#    prefix="`command="${SUDO} /bin/cat /var/www/html/dpb.dat" && eval ${command}`"
-#fi
-
-if ( [ "${prefix}" = "" ] )
+if ( [ "${prefix}" = "" ] && [ ! -f /var/www/html/dpb.dat ] )
 then
-    prefix="`/usr/bin/date +%s | /usr/bin/sha256sum | /usr/bin/base64 | /usr/bin/head -c 6; echo`"
+    prefix="`/bin/cat /dev/urandom | /usr/bin/tr -dc a-z | /usr/bin/head -c${1:-6};echo;`"
+    ${HOME}/providerscripts/utilities/StoreConfigValue.sh "DBPREFIX" "${prefix}"
+    /bin/echo "${prefix}" > /var/www/html/dpb.dat
+else
+    prefix="`command="${SUDO} /bin/cat /var/www/html/dpb.dat" && eval ${command}`"
 fi
-
-${HOME}/providerscripts/utilities/StoreConfigValue.sh "DBPREFIX" "${prefix}"
-/bin/echo "${prefix}" > /var/www/html/dpb.dat
 
