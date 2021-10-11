@@ -49,11 +49,9 @@ SUDO="/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E"
 #and exits for some reason.
 if ( [ "${PREFIX}" = "" ] && [ ! -f /var/www/html/dpb.dat ] )
 then
-    PREFIX="`< /dev/urandom tr -dc a-z | head -c${1:-6};echo;`"
+    #PREFIX="`< /dev/urandom tr -dc a-z | head -c${1:-6};echo;`"
+    PREFIX="`/usr/bin/date +%s | /usr/bin/sha256sum | /usr/bin/base64 | /usr/bin/head -c 6; echo`"
     ${HOME}/providerscripts/utilities/StoreConfigValue.sh "DBPREFIX" "${PREFIX}"
-  #  /bin/touch ${HOME}/.ssh/DBPREFIX:${PREFIX}
-  #  /bin/chown www-data.www-data ${HOME}/.ssh/DBPREFIX:*
-  #  /bin/chmod 755 ${HOME}/.ssh/DBPREFIX:*
     /bin/echo "${PREFIX}" > /var/www/html/dpb.dat
 else
     PREFIX="`command="${SUDO} /bin/cat /var/www/html/dpb.dat" && eval ${command}`"
