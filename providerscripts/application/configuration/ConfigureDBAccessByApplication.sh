@@ -78,6 +78,13 @@ then
 fi
 dbip="`/bin/ls ${HOME}/config/databaseip`"
 
+#If our credentials are not available, that's no good to us
+if ( [ "`/bin/sed '1q;d' ${HOME}/config/credentials/shit`" = "" ] )
+then
+    /bin/rm ${HOME}/config/credentials/shit
+    exit
+fi
+
 
 cd ${HOME}
 /bin/cp ${HOME}/config/credentials/shit ${HOME}/shit
