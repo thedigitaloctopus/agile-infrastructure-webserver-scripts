@@ -40,17 +40,12 @@ then
     exit
 fi
 
-if ( [ -f /var/www/wp-config.php ] &&
+if ( ( [ -f /var/www/wp-config.php ] &&
     [ "${username}" != "" ] && [ "${password}" != "" ] && [ "${database}" != "" ] && [ "${host}" != "" ] &&
     [ "`/bin/grep ${username} /var/www/wp-config.php`" != "" ] &&
     [ "`/bin/grep ${password} /var/www/wp-config.php`" != "" ] &&
     [ "`/bin/grep ${database} /var/www/wp-config.php`" != "" ] &&
-    [ "`/bin/grep ${host} /var/www/wp-config.php`" != "" ] )
-then
-    exit
-fi
-
-if ( [ -f ${HOME}/runtime/VIRGINCONFIGSET ] && [ -f ${HOME}/runtime/CONFIG_VERIFIED ] )
+    [ "`/bin/grep ${host} /var/www/wp-config.php`" != "" ] ) &&  ( [ -f ${HOME}/runtime/VIRGINCONFIGSET ] && [ -f ${HOME}/runtime/CONFIG_VERIFIED ] ) )
 then
     exit
 fi
