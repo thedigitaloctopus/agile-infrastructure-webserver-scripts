@@ -48,11 +48,9 @@ if ( ( [ -f /var/www/wp-config.php ] &&
     [ "`/bin/grep ${host} /var/www/wp-config.php`" != "" ] ) &&  ( [ -f ${HOME}/runtime/VIRGINCONFIGSET ] && [ -f ${HOME}/runtime/CONFIG_VERIFIED ] ) )
 then
     exit
-fi
-
-if ( [ ! -f ${HOME}/config/wordpress_config.php ] )
-then
+else
     /bin/rm ${HOME}/runtime/VIRGINCONFIGSET
+    /bin/rm ${HOME}/runtime/CONFIG_VERIFIED
 fi
 
 if ( [ ! -f /var/www/html/.htaccess ] )
