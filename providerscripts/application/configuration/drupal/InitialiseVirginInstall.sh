@@ -40,22 +40,17 @@ then
     exit
 fi
 
-if ( [ -f /var/www/html/sites/default/settings.php ] &&
+if ( ( [ -f /var/www/html/sites/default/settings.php ] &&
     [ "${username}" != "" ] && [ "${password}" != "" ] && [ "${database}" != "" ] && [ "${host}" != "" ] &&
     [ "`/bin/grep ${username} /var/www/html/sites/default/settings.php`" != "" ] &&
     [ "`/bin/grep ${password} /var/www/html/sites/default/settings.php`" != "" ] &&
     [ "`/bin/grep ${database} /var/www/html/sites/default/settings.php`" != "" ] &&
-    [ "`/bin/grep ${host} /var/www/html/sites/default/settings.php`" != "" ] )
+    [ "`/bin/grep ${host} /var/www/html/sites/default/settings.php`" != "" ] ) &&  ( [ -f ${HOME}/runtime/VIRGINCONFIGSET ] && [ -f ${HOME}/runtime/CONFIG_VERIFIED ] ) )
 then
     exit
 else
     /bin/rm ${HOME}/runtime/VIRGINCONFIGSET
     /bin/rm ${HOME}/runtime/CONFIG_VERIFIED
-fi
-
-if ( [ -f ${HOME}/runtime/VIRGINCONFIGSET ] && [ -f ${HOME}/runtime/CONFIG_VERIFIED ] )
-then
-    exit
 fi
 
 if ( [ ! -f ${HOME}/config/drupal_settings.php ] )
