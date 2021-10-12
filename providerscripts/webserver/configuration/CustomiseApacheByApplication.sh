@@ -68,6 +68,12 @@ then
         /usr/bin/tac /etc/apache2/sites-available/${WEBSITE_NAME} | /bin/sed '0,/<\/VirtualHost>/{/<\/VirtualHost>/d;}' | /usr/bin/tac > /etc/apache2/sites-available/${WEBSITE_NAME}.$$
         /bin/mv /etc/apache2/sites-available/${WEBSITE_NAME}.$$ /etc/apache2/sites-available/${WEBSITE_NAME}
         /bin/echo "    <Directory /var/www/html/administrator>
+                DirectoryIndex index.php
+                LimitRequestBody 512000
+                LimitXMLRequestBody 10485760
+                AllowOverride ALL
+                Options -Includes -ExecCGI -Indexes 
+                Require all granted
                 AuthType Basic
                 AuthName \"Private Property\"
                 AuthUserFile /etc/basicauth/.htpasswd
