@@ -48,17 +48,12 @@ then
     exit
 fi
 
-if ( [ -f /var/www/html/configuration.php ] &&
+if ( ( [ -f /var/www/html/configuration.php ] &&
     [ "${username}" != "" ] && [ "${password}" != "" ] && [ "${database}" != "" ] && [ "${host}" != "" ] &&
     [ "`/bin/grep ${username} /var/www/html/configuration.php`" != "" ] &&
     [ "`/bin/grep ${password} /var/www/html/configuration.php`" != "" ] &&
     [ "`/bin/grep ${database} /var/www/html/configuration.php`" != "" ] &&
-    [ "`/bin/grep ${host} /var/www/html/configuration.php`" != "" ] )
-then
-    exit
-fi
-
-if ( [ -f ${HOME}/runtime/VIRGINCONFIGSET ] && [ -f ${HOME}/runtime/CONFIG_VERIFIED ] )
+    [ "`/bin/grep ${host} /var/www/html/configuration.php`" != "" ] ) &&  ( [ -f ${HOME}/runtime/VIRGINCONFIGSET ] && [ -f ${HOME}/runtime/CONFIG_VERIFIED ] ) )
 then
     exit
 fi
