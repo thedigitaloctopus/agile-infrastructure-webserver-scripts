@@ -98,6 +98,9 @@ fi
 
                 limit_conn_zone \$binary_remote_addr zone=addr:5m;
                 limit_req_zone \$request_uri zone=zone2:10m rate=10r/m;
+                
+                limit_conn_zone \$binary_remote_addr zone=perip:10m;
+                limit_conn_zone \$server_name zone=perserver:10m;
 
                 include /etc/nginx/mime.types;
                 default_type application/octet-stream;
@@ -152,6 +155,9 @@ server
     server_name ${website_url};
     root /var/www/html;
     index index.php index.html index.htm index.pl index.py;
+    
+    limit_conn perip 10;
+    limit_conn perserver 100;
     
     ssl_certificate ${HOME}/ssl/live/${website_url}/fullchain.pem;
     ssl_certificate_key ${HOME}/ssl/live/${website_url}/privkey.pem;
