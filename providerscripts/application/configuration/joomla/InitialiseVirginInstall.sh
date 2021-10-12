@@ -56,12 +56,11 @@ if ( ( [ -f /var/www/html/configuration.php ] &&
     [ "`/bin/grep ${host} /var/www/html/configuration.php`" != "" ] ) &&  ( [ -f ${HOME}/runtime/VIRGINCONFIGSET ] && [ -f ${HOME}/runtime/CONFIG_VERIFIED ] ) )
 then
     exit
+else
+    /bin/rm ${HOME}/runtime/VIRGINCONFIGSET
+    /bin/rm ${HOME}/runtime/CONFIG_VERIFIED
 fi
 
-if ( [ ! -f ${HOME}/config/joomla_configuration.php ] )
-then
-    /bin/rm ${HOME}/runtime/VIRGINCONFIGSET
-fi
 
 if ( [ -f ${HOME}/config/joomla_configuration.php ] &&
     [ "${username}" != "" ] && [ "${password}" != "" ] && [ "${database}" != "" ] && [ "${host}" != "" ] &&
