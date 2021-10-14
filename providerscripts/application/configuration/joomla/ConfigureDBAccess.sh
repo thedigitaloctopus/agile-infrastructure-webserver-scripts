@@ -200,7 +200,7 @@ then
 
     if ( [ "${secret}" = "" ] )
     then
-        secret="`< /dev/urandom tr -dc a-z | head -c${1:-16};echo;`"
+        secret="`/bin/cat /dev/urandom | /usr/bin/tr -dc a-z | /usr/bin/head -c${1:-16};echo;`"
         /bin/touch ${HOME}/config/SECRET:${secret}
     fi
 
