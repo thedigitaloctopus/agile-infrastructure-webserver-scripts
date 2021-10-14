@@ -169,7 +169,7 @@ then
     
     if ( [ "${salt}" = "" ] )
     then
-        salt="`< /dev/urandom tr -dc a-z | head -c${1:-16};echo;`"
+        salt="`/bin/cat /dev/urandom | /usr/bin/tr -dc a-z | /usr/bin/head -c${1:-16};echo;`"
     fi
     /bin/sed -i "/^\$settings\['hash_salt'\]/c\$settings['hash_salt'] = '${salt}';" ${HOME}/runtime/drupal_settings.php
 fi
