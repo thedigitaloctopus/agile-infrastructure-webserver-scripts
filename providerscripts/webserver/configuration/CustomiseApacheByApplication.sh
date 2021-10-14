@@ -73,7 +73,7 @@ then
                 LimitXMLRequestBody 10485760
                 AllowOverride ALL
                 Options -Includes -ExecCGI -Indexes 
-                Require all granted
+               # Require all granted
                 AuthType Basic
                 AuthName \"Private Property\"
                 AuthUserFile /etc/basicauth/.htpasswd
