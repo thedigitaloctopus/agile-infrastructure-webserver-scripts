@@ -20,39 +20,52 @@
 #################################################################################
 #set -x
 
-# You can manually update the configuration file for your application under ${HOME}/config/wordpress_config.php
-# and create an empty file ${HOME}/config/GLOBAL_CONFIG_UPDATE which will indicate that these changes will need 
-#to be pushed to each webserver. In this way, you can update all your webserver configurations
-#if ( [ -f ${HOME}/config/GLOBAL_CONFIG_UPDATE ] && [ ! -f ${HOME}/runtime/GLOBAL_CONFIG_UPDATE_PROCESSED ] )
-#then
-#    /bin/cp ${HOME}/config/wordpress_config.php ${HOME}/runtime/wordpress_config.php
-#    /bin/cp ${HOME}/runtime/wordpress_config.php /var/www/wp-config.php
-#    /bin/touch ${HOME}/runtime/GLOBAL_CONFIG_UPDATE_PROCESSED 
-#    /bin/sleep 300
-#    if ( [ -f ${HOME}/config/GLOBAL_CONFIG_UPDATE ] )
-#    then
-#        /bin/rm ${HOME}/config/GLOBAL_CONFIG_UPDATE 
-#    fi
-#    /bin/rm ${HOME}/runtime/GLOBAL_CONFIG_UPDATE_PROCESSED
-#fi
+runtime_md5="`/usr/bin/md5sum ${HOME}/runtime/wordpress_config.php | /usr/bin/awk '{print $1}'`"
+config_md5="`/usr/bin/md5sum ${HOME}/config/wordpress_config.php | /usr/bin/awk '{print $1}'`"
+main_md5="`/usr/bin/md5sum /var/www/wp-config.php | /usr/bin/awk '{print $1}'`"
 
-#if ( [ -f ${HOME}/runtime/CONFIG_VERIFIED ] && [ ! -f ${HOME}/runtime/CONFIG_UPDATING ] )
-#then
-#    exit
-#fi
+updated="0"
 
-#Note the config file is outside the webroot. This is because wordpress checks one level higher and it's safer to have it there.
-if ( [ -f /var/www/wp-config.php ] && [ -f /var/www/html/wp-config.php ] )
+if ( [ "${runtime_md5}" = "${config_md5}" ] && [ "${config_md5}" = "${main_md5}" ] )
 then
-    /bin/rm /var/www/html/wp-config.php
+    updated="0"
+else
+    updated="1"
 fi
 
-/usr/bin/rsync -au ${HOME}/runtime/wordpress_config.php /var/www/wp-config.php
-/bin/chown www-data.www-data /var/www/wp-config.php
-/bin/chmod 400 /var/www/wp-config.php
+changed=""
 
-/bin/sleep 10
+if ( [ "${updated}" = "1" ] )
+then
+    if ( [ "`/usr/bin/find ${HOME}/runtime/wordpress_config.php -mmin -1`" != "" ] )
+    then
+        changed="runtime"
+    fi
+    if ( [ "`/usr/bin/find ${HOME}/config/wordpress_config.php -mmin -1`" != "" ] )
+    then
+        if ( [ -f ${HOME}/config/GLOBAL_CONFIG_UPDATE ] )
+        then
+            changed="config"
+        fi
+    fi
+    if ( [ "`/usr/bin/find /var/www/wp-config.php -mmin -1`" != "" ] )
+    then
+        changed="main"
+    fi
+fi
 
-/usr/bin/rsync -au /var/www/wp-config.php ${HOME}/config/wordpress_config.php
-/usr/bin/rsync -au /var/www/wp-config.php ${HOME}/runtime/wordpress_config.php
-
+if ( [ "${changed}" = "runtime" ] )
+then
+    /bin/cp ${HOME}/runtime/wordpress_config.php ${HOME}/config/wordpress_config.php
+    /bin/cp ${HOME}/runtime/wordpress_config.php /var/www/wp-config.php
+fi
+if ( [ "${changed}" = "config" ] )
+then
+    /bin/cp ${HOME}/config/wordpress_config.php ${HOME}/runtime/wordpress_config.php
+    /bin/cp ${HOME}/config/wordpress_config.php /var/www/wp-config.php
+fi
+if ( [ "${changed}" = "main" ] )
+then
+    /bin/cp /var/www/wp-config.php ${HOME}/config/wordpress_config.php
+    /bin/cp /var/www/wp-config.php ${HOME}/runtime/wordpress_config.php
+fi
