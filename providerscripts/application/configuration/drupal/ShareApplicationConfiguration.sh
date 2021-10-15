@@ -20,34 +20,52 @@
 #################################################################################
 #set -x
 
-# You can manually update the configuration file for your application under ${HOME}/config/wordpress_config.php
-# and create an empty file ${HOME}/config/GLOBAL_CONFIG_UPDATE which will indicate that these changes will need 
-#to be pushed to each webserver. In this way, you can update all your webserver configurations
-#if ( [ -f ${HOME}/config/GLOBAL_CONFIG_UPDATE ] && [ ! -f ${HOME}/runtime/GLOBAL_CONFIG_UPDATE_PROCESSED ] )
-#then
-#    /bin/cp ${HOME}/config/drupal_settings.php ${HOME}/runtime/drupal_settings.php
-#    /bin/cp ${HOME}/runtime/drupal_settings.php  /var/www/html/sites/default/settings.php
-#    /bin/touch ${HOME}/runtime/GLOBAL_CONFIG_UPDATE_PROCESSED 
-#    /bin/sleep 300
-#    if ( [ -f ${HOME}/config/GLOBAL_CONFIG_UPDATE ] )
-#    then
-#        /bin/rm ${HOME}/config/GLOBAL_CONFIG_UPDATE 
-#    fi
-#    /bin/rm ${HOME}/runtime/GLOBAL_CONFIG_UPDATE_PROCESSED
-#fi
+runtime_md5="`/usr/bin/md5sum ${HOME}/runtime/wordpress_config.php | /usr/bin/awk '{print $1}'`"
+config_md5="`/usr/bin/md5sum ${HOME}/config/wordpress_config.php | /usr/bin/awk '{print $1}'`"
+main_md5="`/usr/bin/md5sum /var/www/wp-config.php | /usr/bin/awk '{print $1}'`"
 
+updated="0"
 
-#if ( [ -f ${HOME}/runtime/CONFIG_VERIFIED ] && [ ! -f ${HOME}/runtime/CONFIG_UPDATING ] )
-#then
-#    exit
-#fi
+if ( [ "${runtime_md5}" = "${config_md5}" ] && [ "${config_md5}" = "${main_md5}" ] )
+then
+    updated="0"
+else
+    updated="1"
+fi
 
-/usr/bin/rsync -au ${HOME}/runtime/drupal_settings.php /var/www/html/sites/default/settings.php
-/bin/chown www-data.www-data /var/www/html/sites/default/settings.php
-/bin/chmod 600 /var/www/html/sites/default/settings.php
+changed=""
 
-/bin/sleep 10
+if ( [ "${updated}" = "1" ] )
+then
+    if ( [ "`/usr/bin/find ${HOME}/runtime/drupal_settings.php -mmin -1`" != "" ] )
+    then
+        changed="runtime"
+    fi
+    if ( [ "`/usr/bin/find ${HOME}/config/drupal_settings.php -mmin -1`" != "" ] )
+    then
+        if ( [ -f ${HOME}/config/GLOBAL_CONFIG_UPDATE ] )
+        then
+            changed="config"
+        fi
+    fi
+    if ( [ "`/usr/bin/find /var/www/html/sites/default/settings.php -mmin -1`" != "" ] )
+    then
+        changed="main"
+    fi
+fi
 
-/usr/bin/rsync -au /var/www/html/sites/default/settings.php ${HOME}/config/drupal_settings.php
-/usr/bin/rsync -au /var/www/html/sites/default/settings.php ${HOME}/runtime/drupal_settings.php
-
+if ( [ "${changed}" = "runtime" ] )
+then
+    /bin/cp ${HOME}/runtime/drupal_settings.php ${HOME}/config/drupal_settings.php
+    /bin/cp ${HOME}/runtime/drupal_settings.php /var/www/html/sites/default/settings.php
+fi
+if ( [ "${changed}" = "config" ] )
+then
+    /bin/cp ${HOME}/config/drupal_settings.php ${HOME}/runtime/drupal_settings.php
+    /bin/cp ${HOME}/config/drupal_settings.php /var/www/html/sites/default/settings.php
+fi
+if ( [ "${changed}" = "main" ] )
+then
+    /bin/cp /var/www/html/sites/default/settings.php ${HOME}/config/drupal_settings.php
+    /bin/cp /var/www/html/sites/default/settings.php ${HOME}/runtime/drupal_settings.php
+fi
