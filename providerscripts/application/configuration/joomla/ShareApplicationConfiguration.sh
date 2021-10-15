@@ -20,34 +20,53 @@
 #################################################################################
 #set -x
 
-# You can manually update the configuration file for your application under ${HOME}/config/wordpress_config.php
-# and create an empty file ${HOME}/config/GLOBAL_CONFIG_UPDATE which will indicate that these changes will need 
-#to be pushed to each webserver. In this way, you can update all your webserver configurations
-#if ( [ -f ${HOME}/config/GLOBAL_CONFIG_UPDATE ] && [ ! -f ${HOME}/runtime/GLOBAL_CONFIG_UPDATE_PROCESSED ] )
-#then
-#    /bin/cp ${HOME}/config/joomla_configuration.php ${HOME}/runtime/joomla_configuration.php
-#    /bin/cp ${HOME}/runtime/joomla_configuration.php /var/www/html/configuration.php
-#    /bin/touch ${HOME}/runtime/GLOBAL_CONFIG_UPDATE_PROCESSED 
-#    /bin/sleep 300
-#    if ( [ -f ${HOME}/config/GLOBAL_CONFIG_UPDATE ] )
-#    then
-#        /bin/rm ${HOME}/config/GLOBAL_CONFIG_UPDATE 
-#    fi
-#    /bin/rm ${HOME}/runtime/GLOBAL_CONFIG_UPDATE_PROCESSED
-#fi#
-#
-#if ( [ -f ${HOME}/runtime/CONFIG_VERIFIED ] && [ ! -f ${HOME}/runtime/CONFIG_UPDATING ] )
-#then
-#    exit
-#fi
+runtime_md5="`/usr/bin/md5sum ${HOME}/runtime/joomla_configuration.php | /usr/bin/awk '{print $1}'`"
+config_md5="`/usr/bin/md5sum ${HOME}/config/joomla_configuration.php | /usr/bin/awk '{print $1}'`"
+main_md5="`/usr/bin/md5sum /var/www/html/configuration.php | /usr/bin/awk '{print $1}'`"
 
+updated="0"
 
-/usr/bin/rsync -au ${HOME}/runtime/joomla_configuration.php /var/www/html/configuration.php
-/bin/chown www-data.www-data /var/www/html/configuration.php
-/bin/chmod 600 /var/www/html/configuration.php
+if ( [ "${runtime_md5}" = "${config_md5}" ] && [ "${config_md5}" = "${main_md5}" ] )
+then
+    updated="0"
+else
+    updated="1"
+fi
 
-/bin/sleep 10
+changed=""
 
-/usr/bin/rsync -au /var/www/html/configuration.php ${HOME}/config/joomla_configuration.php
-/usr/bin/rsync -au /var/www/html/configuration.php ${HOME}/runtime/joomla_configuration.php
+if ( [ "${updated}" = "1" ] )
+then
+    if ( [ "`/usr/bin/find ${HOME}/runtime/joomla_configuration.php -mmin -1`" != "" ] )
+    then
+        changed="runtime"
+    fi
+    if ( [ "`/usr/bin/find ${HOME}/config/joomla_configuration.php -mmin -1`" != "" ] )
+    then
+        if ( [ -f ${HOME}/config/GLOBAL_CONFIG_UPDATE ] )
+        then
+            changed="config"
+        fi
+    fi
+    if ( [ "`/usr/bin/find /var/www/html/configuration.php -mmin -1`" != "" ] )
+    then
+        changed="main"
+    fi
+fi
+
+if ( [ "${changed}" = "runtime" ] )
+then
+    /bin/cp ${HOME}/runtime/joomla_configuration.php ${HOME}/config/joomla_configuration.php
+    /bin/cp ${HOME}/runtime/joomla_configuration.php /var/www/html/configuration.php
+fi
+if ( [ "${changed}" = "config" ] )
+then
+    /bin/cp ${HOME}/config/joomla_configuration.php ${HOME}/runtime/joomla_configuration.php
+    /bin/cp ${HOME}/config/joomla_configuration.php /var/www/html/configuration.php
+fi
+if ( [ "${changed}" = "main" ] )
+then
+    /bin/cp /var/www/html/configuration.php ${HOME}/config/joomla_configuration.php
+    /bin/cp /var/www/html/configuration.php ${HOME}/runtime/joomla_configuration.php
+fi
 
