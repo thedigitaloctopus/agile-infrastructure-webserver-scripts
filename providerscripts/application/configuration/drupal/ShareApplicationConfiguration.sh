@@ -20,6 +20,15 @@
 #################################################################################
 #set -x
 
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh AUTOSCALED`" = "1" ] )
+then
+    if ( [ ! -f ${HOME}/runtime/USED_CONFIG_AS_AUTHORITATIVE ] )
+    then
+        /bin/cp ${HOME}/config/joomla_configuration.php ${HOME}/runtime/joomla_configuration.php
+        /bin/touch ${HOME}/runtime/USED_CONFIG_AS_AUTHORITATIVE
+    fi
+fi
+
 if ( [ ! -f ${HOME}/runtime/drupal_settings.php ] )
 then
     /bin/touch ${HOME}/runtime/drupal_settings.php
