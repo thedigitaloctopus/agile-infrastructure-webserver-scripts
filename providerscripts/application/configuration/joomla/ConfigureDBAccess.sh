@@ -145,7 +145,7 @@ then
 
     /bin/sed -i "/\$secret /c\        public \$secret = \'${secret}\';" ${HOME}/runtime/joomla_configuration.php
     /bin/echo "${0} `/bin/date`: Updating secret" >> ${HOME}/logs/MonitoringLog.dat
-    /bin/cp ${HOME}/runtime/joomla_configuration.php ${HOME}/config/joomla_configuration.php
+   # /bin/cp ${HOME}/runtime/joomla_configuration.php ${HOME}/config/joomla_configuration.php
 fi
 
 #The temp directories for joomla can be set. They should exist already, but why the hell not make sure.
