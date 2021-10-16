@@ -31,17 +31,20 @@ fi
 
 if ( [ ! -f ${HOME}/runtime/joomla_configuration.php ] )
 then
-    /bin/touch ${HOME}/runtime/joomla_configuration.php
+    /bin/cp /var/www/html/configuration.php.default ${HOME}/runtime/joomla_configuration.php
+    #/bin/touch ${HOME}/runtime/joomla_configuration.php
 fi
 
 if ( [ ! -f ${HOME}/config/joomla_configuration.php ] )
 then
-    /bin/touch ${HOME}/config/joomla_configuration.php
+    /bin/cp /var/www/html/configuration.php.default ${HOME}/config/joomla_configuration.php
+   # /bin/touch ${HOME}/config/joomla_configuration.php
 fi
 
 if ( [ ! -f /var/www/html/configuration.php ] )
 then
-    /bin/touch /var/www/html/configuration.php
+    /bin/cp /var/www/html/configuration.php.default /var/www/html/joomla_configuration.php
+   # /bin/touch /var/www/html/configuration.php
 fi
 
 if ( [ -f ${HOME}/config/GLOBAL_CONFIG_UPDATE ] )
