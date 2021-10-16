@@ -20,9 +20,32 @@
 #################################################################################
 #set -x
 
-runtime_md5="`/usr/bin/md5sum ${HOME}/runtime/wordpress_config.php | /usr/bin/awk '{print $1}'`"
-config_md5="`/usr/bin/md5sum ${HOME}/config/wordpress_config.php | /usr/bin/awk '{print $1}'`"
-main_md5="`/usr/bin/md5sum /var/www/wp-config.php | /usr/bin/awk '{print $1}'`"
+if ( [ ! -f ${HOME}/runtime/drupal_settings.php ] )
+then
+    /bin/touch ${HOME}/runtime/drupal_settings.php
+fi
+
+if ( [ ! -f ${HOME}/config/drupal_settings.php ] )
+then
+    /bin/touch ${HOME}/config/drupal_settings.php
+fi
+
+if ( [ ! -f /var/www/html/sites/default/settings.php ] )
+then
+    /bin/touch /var/www/html/sites/default/settings.php
+fi
+
+if ( [ -f ${HOME}/config/GLOBAL_CONFIG_UPDATE ] )
+then
+    /bin/cp ${HOME}/config/drupal_settings.php ${HOME}/runtime/drupal_settings.php
+    /bin/cp ${HOME}/runtime/drupal_settings.php /var/www/html/sites/default/settings.php
+    /bin/sleep 30 
+    /bin/rm ${HOME}/config/GLOBAL_CONFIG_UPDATE 
+fi
+
+runtime_md5="`/usr/bin/md5sum ${HOME}/runtime/drupal_settings.php | /usr/bin/awk '{print $1}'`"
+config_md5="`/usr/bin/md5sum ${HOME}/config/drupal_settings.php | /usr/bin/awk '{print $1}'`"
+main_md5="`/usr/bin/md5sum /var/www/html/sites/default/settings.php | /usr/bin/awk '{print $1}'`"
 
 updated="0"
 
@@ -37,10 +60,6 @@ changed=""
 
 if ( [ "${updated}" = "1" ] )
 then
-    if ( [ "`/usr/bin/find ${HOME}/runtime/drupal_settings.php -mmin -1`" != "" ] )
-    then
-        changed="runtime"
-    fi
     if ( [ "`/usr/bin/find ${HOME}/config/drupal_settings.php -mmin -1`" != "" ] )
     then
         if ( [ -f ${HOME}/config/GLOBAL_CONFIG_UPDATE ] )
@@ -52,13 +71,12 @@ then
     then
         changed="main"
     fi
+    if ( [ "`/usr/bin/find ${HOME}/runtime/drupal_settings.php -mmin -1`" != "" ] )
+    then
+        changed="runtime"
+    fi
 fi
 
-if ( [ "${changed}" = "runtime" ] )
-then
-    /bin/cp ${HOME}/runtime/drupal_settings.php ${HOME}/config/drupal_settings.php
-    /bin/cp ${HOME}/runtime/drupal_settings.php /var/www/html/sites/default/settings.php
-fi
 if ( [ "${changed}" = "config" ] )
 then
     /bin/cp ${HOME}/config/drupal_settings.php ${HOME}/runtime/drupal_settings.php
@@ -68,4 +86,9 @@ if ( [ "${changed}" = "main" ] )
 then
     /bin/cp /var/www/html/sites/default/settings.php ${HOME}/config/drupal_settings.php
     /bin/cp /var/www/html/sites/default/settings.php ${HOME}/runtime/drupal_settings.php
+fi
+if ( [ "${changed}" = "runtime" ] )
+then
+    /bin/cp ${HOME}/runtime/drupal_settings.php ${HOME}/config/drupal_settings.php
+    /bin/cp ${HOME}/runtime/drupal_settings.php /var/www/html/sites/default/settings.php
 fi
