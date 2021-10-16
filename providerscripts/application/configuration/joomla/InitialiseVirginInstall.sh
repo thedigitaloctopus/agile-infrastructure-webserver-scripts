@@ -58,7 +58,6 @@ then
     exit
 else
     /bin/rm ${HOME}/runtime/VIRGINCONFIGSET
-    /bin/rm ${HOME}/runtime/CONFIG_VERIFIED
 fi
 
 
