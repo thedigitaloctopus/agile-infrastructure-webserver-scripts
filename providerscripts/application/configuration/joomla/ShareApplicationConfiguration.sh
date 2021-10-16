@@ -30,6 +30,14 @@ then
     /bin/touch ${HOME}/config/joomla_configuration.php
 fi
 
+if ( [ -f ${HOME}/config/GLOBAL_CONFIG_UPDATE ] )
+then
+    /bin/cp ${HOME}/config/joomla_configuration.php ${HOME}/runtime/joomla_configuration.php
+    /bin/cp ${HOME}/runtime/joomla_configuration.php /var/www/html/configuration.php
+    /bin/sleep 30 
+    /bin/rm ${HOME}/config/GLOBAL_CONFIG_UPDATE 
+fi
+
 if ( [ ! -f /var/www/html/configuration.php ] )
 then
     /bin/touch /var/www/html/configuration.php
