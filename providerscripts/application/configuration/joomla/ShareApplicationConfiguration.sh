@@ -20,6 +20,21 @@
 #################################################################################
 #set -x
 
+if ( [ ! -f ${HOME}/runtime/joomla_configuration.php ] )
+then
+    /bin/touch ${HOME}/runtime/joomla_configuration.php
+fi
+
+if ( [ ! -f ${HOME}/config/joomla_configuration.php ] )
+then
+    /bin/touch ${HOME}/config/joomla_configuration.php
+fi
+
+if ( [ ! -f /var/www/html/configuration.php ] )
+then
+    /bin/touch /var/www/html/configuration.php
+fi
+
 runtime_md5="`/usr/bin/md5sum ${HOME}/runtime/joomla_configuration.php | /usr/bin/awk '{print $1}'`"
 config_md5="`/usr/bin/md5sum ${HOME}/config/joomla_configuration.php | /usr/bin/awk '{print $1}'`"
 main_md5="`/usr/bin/md5sum /var/www/html/configuration.php | /usr/bin/awk '{print $1}'`"
