@@ -77,11 +77,6 @@ then
     fi
 fi
 
-if ( [ "${changed}" = "runtime" ] )
-then
-    /bin/cp ${HOME}/runtime/joomla_configuration.php ${HOME}/config/joomla_configuration.php
-    /bin/cp ${HOME}/runtime/joomla_configuration.php /var/www/html/configuration.php
-fi
 if ( [ "${changed}" = "config" ] )
 then
     /bin/cp ${HOME}/config/joomla_configuration.php ${HOME}/runtime/joomla_configuration.php
@@ -91,5 +86,10 @@ if ( [ "${changed}" = "main" ] )
 then
     /bin/cp /var/www/html/configuration.php ${HOME}/config/joomla_configuration.php
     /bin/cp /var/www/html/configuration.php ${HOME}/runtime/joomla_configuration.php
+fi
+if ( [ "${changed}" = "runtime" ] )
+then
+    /bin/cp ${HOME}/runtime/joomla_configuration.php ${HOME}/config/joomla_configuration.php
+    /bin/cp ${HOME}/runtime/joomla_configuration.php /var/www/html/configuration.php
 fi
 
