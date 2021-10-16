@@ -60,10 +60,6 @@ changed=""
 
 if ( [ "${updated}" = "1" ] )
 then
-    if ( [ "`/usr/bin/find ${HOME}/runtime/joomla_configuration.php -mmin -1`" != "" ] )
-    then
-        changed="runtime"
-    fi
     if ( [ "`/usr/bin/find ${HOME}/config/joomla_configuration.php -mmin -1`" != "" ] )
     then
         if ( [ -f ${HOME}/config/GLOBAL_CONFIG_UPDATE ] )
@@ -74,6 +70,10 @@ then
     if ( [ "`/usr/bin/find /var/www/html/configuration.php -mmin -1`" != "" ] )
     then
         changed="main"
+    fi
+    if ( [ "`/usr/bin/find ${HOME}/runtime/joomla_configuration.php -mmin -1`" != "" ] )
+    then
+        changed="runtime"
     fi
 fi
 
