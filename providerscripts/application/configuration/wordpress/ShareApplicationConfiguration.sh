@@ -20,6 +20,29 @@
 #################################################################################
 #set -x
 
+if ( [ ! -f ${HOME}/runtime/wordpress_config.php  ] )
+then
+    /bin/touch ${HOME}/runtime/wordpress_config.php 
+fi
+
+if ( [ ! -f ${HOME}/config/wordpress_config.php  ] )
+then
+    /bin/touch ${HOME}/config/wordpress_config.php 
+fi
+
+if ( [ ! -f /var/www/wp-config.php ] )
+then
+    /bin/touch /var/www/wp-config.php
+fi
+
+if ( [ -f ${HOME}/config/GLOBAL_CONFIG_UPDATE ] )
+then
+    /bin/cp ${HOME}/config/wordpress_config.php ${HOME}/runtime/wordpress_config.php 
+    /bin/cp ${HOME}/runtime/wordpress_config.php  /var/www/wp-config.php
+    /bin/sleep 30 
+    /bin/rm ${HOME}/config/GLOBAL_CONFIG_UPDATE 
+fi
+
 runtime_md5="`/usr/bin/md5sum ${HOME}/runtime/wordpress_config.php | /usr/bin/awk '{print $1}'`"
 config_md5="`/usr/bin/md5sum ${HOME}/config/wordpress_config.php | /usr/bin/awk '{print $1}'`"
 main_md5="`/usr/bin/md5sum /var/www/wp-config.php | /usr/bin/awk '{print $1}'`"
@@ -37,10 +60,6 @@ changed=""
 
 if ( [ "${updated}" = "1" ] )
 then
-    if ( [ "`/usr/bin/find ${HOME}/runtime/wordpress_config.php -mmin -1`" != "" ] )
-    then
-        changed="runtime"
-    fi
     if ( [ "`/usr/bin/find ${HOME}/config/wordpress_config.php -mmin -1`" != "" ] )
     then
         if ( [ -f ${HOME}/config/GLOBAL_CONFIG_UPDATE ] )
@@ -52,13 +71,12 @@ then
     then
         changed="main"
     fi
+    if ( [ "`/usr/bin/find ${HOME}/runtime/wordpress_config.php -mmin -1`" != "" ] )
+    then
+        changed="runtime"
+    fi
 fi
 
-if ( [ "${changed}" = "runtime" ] )
-then
-    /bin/cp ${HOME}/runtime/wordpress_config.php ${HOME}/config/wordpress_config.php
-    /bin/cp ${HOME}/runtime/wordpress_config.php /var/www/wp-config.php
-fi
 if ( [ "${changed}" = "config" ] )
 then
     /bin/cp ${HOME}/config/wordpress_config.php ${HOME}/runtime/wordpress_config.php
@@ -68,4 +86,9 @@ if ( [ "${changed}" = "main" ] )
 then
     /bin/cp /var/www/wp-config.php ${HOME}/config/wordpress_config.php
     /bin/cp /var/www/wp-config.php ${HOME}/runtime/wordpress_config.php
+fi
+if ( [ "${changed}" = "runtime" ] )
+then
+    /bin/cp ${HOME}/runtime/wordpress_config.php ${HOME}/config/wordpress_config.php
+    /bin/cp ${HOME}/runtime/wordpress_config.php /var/www/wp-config.php
 fi
