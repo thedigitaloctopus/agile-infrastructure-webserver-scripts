@@ -91,6 +91,8 @@ then
     fi
 fi
 
+/bin/sleep 10
+
 if ( [ "${changed}" = "config" ] )
 then
     /bin/cp ${HOME}/config/wordpress_config.php ${HOME}/runtime/wordpress_config.php
