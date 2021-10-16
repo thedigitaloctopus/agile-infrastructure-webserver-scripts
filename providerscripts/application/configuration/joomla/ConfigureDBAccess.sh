@@ -181,4 +181,7 @@ fi
 /bin/sed -i "/\$log_path /c\        public \$log_path = \'/var/www/html/logs\';" ${HOME}/runtime/joomla_configuration.php
 
 
-/usr/bin/php /var/www/html/cli/garbagecron.php
+if ( [ -f /var/www/html/cli/garbagecron.php ] )
+then
+    /usr/bin/php /var/www/html/cli/garbagecron.php
+fi
