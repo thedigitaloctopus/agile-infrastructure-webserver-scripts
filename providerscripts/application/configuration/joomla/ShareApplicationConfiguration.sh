@@ -91,6 +91,8 @@ then
     fi
 fi
 
+/bin/sleep 10
+
 if ( [ "${changed}" = "config" ] )
 then
     /bin/cp ${HOME}/config/joomla_configuration.php ${HOME}/runtime/joomla_configuration.php
