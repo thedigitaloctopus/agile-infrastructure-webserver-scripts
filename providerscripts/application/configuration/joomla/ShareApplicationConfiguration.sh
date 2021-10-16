@@ -71,6 +71,8 @@ if ( [ "${updated}" = "1" ] )
 then
     if ( [ "`/usr/bin/find ${HOME}/config/joomla_configuration.php -mmin -1`" != "" ] )
     then
+        #This check is needed so we don't accidentally update the config file and push it to all our webservers
+        #We have to explicitly create the GLOBAL_CONFIG_UPDATE file to do that. 
         if ( [ -f ${HOME}/config/GLOBAL_CONFIG_UPDATE ] )
         then
             changed="config"
