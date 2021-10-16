@@ -31,17 +31,20 @@ fi
 
 if ( [ ! -f ${HOME}/runtime/wordpress_config.php  ] )
 then
-    /bin/touch ${HOME}/runtime/wordpress_config.php 
+    /bin/cp /var/www/html/wp-config.php.default ${HOME}/runtime/wordpress_config.php
+    #/bin/touch ${HOME}/runtime/wordpress_config.php 
 fi
 
 if ( [ ! -f ${HOME}/config/wordpress_config.php  ] )
 then
-    /bin/touch ${HOME}/config/wordpress_config.php 
+    /bin/cp /var/www/html/wp-config.php.default ${HOME}/config/wordpress_config.php
+   # /bin/touch ${HOME}/config/wordpress_config.php 
 fi
 
 if ( [ ! -f /var/www/wp-config.php ] )
 then
-    /bin/touch /var/www/wp-config.php
+    /bin/cp /var/www/html/wp-config.php.default /var/www/wp-config.php
+   # /bin/touch /var/www/wp-config.php
 fi
 
 if ( [ -f ${HOME}/config/GLOBAL_CONFIG_UPDATE ] )
