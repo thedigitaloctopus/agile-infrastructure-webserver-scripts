@@ -31,6 +31,7 @@ fi
 
 if ( [ ! -f ${HOME}/runtime/wordpress_config.php  ] )
 then
+/bin/cp /var/www/html/wp-config-sample.php /var/www/html/wp-config.php.default
     /bin/cp /var/www/html/wp-config.php.default ${HOME}/runtime/wordpress_config.php
     #/bin/touch ${HOME}/runtime/wordpress_config.php 
 fi
