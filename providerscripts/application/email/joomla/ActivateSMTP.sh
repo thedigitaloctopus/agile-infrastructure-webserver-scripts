@@ -29,7 +29,7 @@ username="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'EMAILUSERNAM
 password="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'EMAILPASSWORD'`"
 emailprovider="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'EMAILPROVIDER'`"
 
-while ( [ ! -f ${HOME}/config/APPLICATION_CONFIGURATION_PREPARED ] )
+while ( [ ! -f ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED ] )
 do
     /bin/sleep 30
 done
