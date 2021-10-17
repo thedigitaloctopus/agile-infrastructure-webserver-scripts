@@ -20,6 +20,12 @@
 #################################################################################
 #set -x
 
+#Check that we have a prefix available, there must be an existing and well known prefix
+if ( [ "`/bin/cat /var/www/html/dpb.dat`" = "" ] )
+then
+    exit
+fi
+
 if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] )
 then
     exit
@@ -113,7 +119,7 @@ WEBSITE_DISPLAY_NAME="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh '
 ${HOME}/providerscripts/application/email/ActivateSMTPByApplication.sh "${WEBSITE_DISPLAY_NAME}" 
 
 dbprefix="`/bin/cat /var/www/html/dpb.dat`"
-if ( [ "${dbprefix}" != "" ] && [ ! -f ${HOME}/config/UPDATEDPREFIX ] )
+if ( [ "${dbprefix}" != "" ] && [ ! -f ${HOME}/config/UPDATEDPREFIX:${dbprefix} ] )
 then
     /bin/sed -i "/\$dbprefix /c\        public \$dbprefix = \'${dbprefix}_\';" ${HOME}/runtime/joomla_configuration.php
     /bin/echo "${0} `/bin/date`: Updating the database prefix" >> ${HOME}/logs/MonitoringLog.dat
