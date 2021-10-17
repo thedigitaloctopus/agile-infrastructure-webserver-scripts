@@ -90,7 +90,7 @@ else
 fi
 
 #If the application configuration arrangements haven't been made, we are not ready, so just exit
-if ( [ ! -f ${HOME}/config/APPLICATION_CONFIGURATION_PREPARED ] )
+if ( [ ! -f ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED ] )
 then
     exit
 fi
