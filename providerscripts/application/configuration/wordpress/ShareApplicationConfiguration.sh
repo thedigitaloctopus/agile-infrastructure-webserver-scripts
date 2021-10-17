@@ -31,21 +31,32 @@ fi
 
 if ( [ ! -f ${HOME}/runtime/wordpress_config.php  ] )
 then
-/bin/cp /var/www/html/wp-config-sample.php /var/www/html/wp-config.php.default
-    /bin/cp /var/www/html/wp-config.php.default ${HOME}/runtime/wordpress_config.php
-    #/bin/touch ${HOME}/runtime/wordpress_config.php 
+    if ( [ -f /var/www/html/wp-config-sample.php ] )
+    then
+        /bin/cp /var/www/html/wp-config-sample.php /var/www/html/wp-config.php.default
+    fi
+    /bin/cp /var/www/html/wp-config.php.default  ${HOME}/runtime/wordpress_config.php
+    /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
 fi
 
 if ( [ ! -f ${HOME}/config/wordpress_config.php  ] )
 then
-    /bin/cp /var/www/html/wp-config.php.default ${HOME}/config/wordpress_config.php
-   # /bin/touch ${HOME}/config/wordpress_config.php 
+    if ( [ -f /var/www/html/wp-config-sample.php ] )
+    then
+        /bin/cp /var/www/html/wp-config-sample.php /var/www/html/wp-config.php.default
+    fi
+    /bin/cp /var/www/html/wp-config.php.default  ${HOME}/config/wordpress_config.php
+    /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
 fi
 
 if ( [ ! -f /var/www/wp-config.php ] )
 then
-    /bin/cp /var/www/html/wp-config.php.default /var/www/wp-config.php
-   # /bin/touch /var/www/wp-config.php
+    if ( [ -f /var/www/html/wp-config-sample.php ] )
+    then
+        /bin/cp /var/www/html/wp-config-sample.php /var/www/html/wp-config.php.default
+    fi
+    /bin/cp /var/www/html/wp-config.php.default  /var/www/wp-config.php
+    /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
 fi
 
 if ( [ -f ${HOME}/config/GLOBAL_CONFIG_UPDATE ] )
