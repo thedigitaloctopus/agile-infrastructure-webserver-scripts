@@ -104,6 +104,16 @@ then
     then
         changed="runtime"
     fi
+    
+    if ( [ "`/usr/bin/find ${HOME}/config/joomla_configuration.php -mmin -1`" != "" ] )
+    then
+        if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh AUTOSCALED`" = "1" ] )
+        then
+            changed="config"
+        fi
+    fi
+fi
+    
 fi
 
 /bin/sleep 10
