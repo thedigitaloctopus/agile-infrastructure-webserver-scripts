@@ -28,7 +28,6 @@ then
     fi
     /bin/cp /var/www/html/configuration.php.default ${HOME}/runtime/joomla_configuration.php
     /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
-    #/bin/touch ${HOME}/runtime/joomla_configuration.php
 fi
 
 if ( [ ! -f ${HOME}/config/joomla_configuration.php ] )
@@ -39,7 +38,6 @@ then
     fi
     /bin/cp /var/www/html/configuration.php.default ${HOME}/config/joomla_configuration.php
     /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
-   # /bin/touch ${HOME}/config/joomla_configuration.php
 fi
 
 if ( [ ! -f /var/www/html/configuration.php ] )
@@ -50,7 +48,6 @@ then
     fi
     /bin/cp /var/www/html/configuration.php.default /var/www/html/configuration.php
     /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
-   # /bin/touch /var/www/html/configuration.php
 fi
 
 if ( [ -f ${HOME}/config/GLOBAL_CONFIG_UPDATE ] )
@@ -103,8 +100,6 @@ then
             changed="config"
         fi
     fi
-fi
-    
 fi
 
 /bin/sleep 10
