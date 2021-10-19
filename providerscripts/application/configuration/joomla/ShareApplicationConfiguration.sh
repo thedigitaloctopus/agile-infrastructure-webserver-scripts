@@ -93,12 +93,10 @@ then
         changed="runtime"
     fi
     
-    if ( [ "`/usr/bin/find ${HOME}/config/joomla_configuration.php -mmin -1`" != "" ] )
+    if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh AUTOSCALED`" = "1" ] && [ ! -f ${HOME}/runtime/PROCESSED_INITIAL_CONFIG ] )
     then
-        if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh AUTOSCALED`" = "1" ] )
-        then
-            changed="config"
-        fi
+        changed="config"
+        /bin/touch ${HOME}/runtime/PROCESSED_INITIAL_CONFIG
     fi
 fi
 
