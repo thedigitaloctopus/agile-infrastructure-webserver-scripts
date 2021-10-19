@@ -25,11 +25,12 @@ APPLICATION="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'APPLICATI
 
 if ( [ "${APPLICATION}" = "joomla" ] )
 then
-    /bin/sed -i '/\/var\/www\/html\/administrator\/cache\//d' ${HOME}/runtime/newandmodfiles.dat
-    /bin/sed -i '/\/var\/www\/html\/administrator\/logs\//d' ${HOME}/runtime/newandmodfiles.dat
-    /bin/sed -i '/\/var\/www\/html\/cache\//d' ${HOME}/runtime/newandmodfiles.dat
-    /bin/sed -i '/\/var\/www\/html\/logs\//d' ${HOME}/runtime/newandmodfiles.dat
-    /bin/sed -i '/\/var\/www\/html\/tmp\//d' ${HOME}/runtime/newandmodfiles.dat
+    /bin/sed -i '/\/var\/www\/html\/administrator\/cache/d' ${HOME}/runtime/newandmodfiles.dat
+    /bin/sed -i '/\/var\/www\/html\/administrator\/logs/d' ${HOME}/runtime/newandmodfiles.dat
+    /bin/sed -i '/\/var\/www\/html\/cache/d' ${HOME}/runtime/newandmodfiles.dat
+    /bin/sed -i '/\/var\/www\/html\/logs/d' ${HOME}/runtime/newandmodfiles.dat
+    /bin/sed -i '/\/var\/www\/html\/tmp/d' ${HOME}/runtime/newandmodfiles.dat
+    /bin/sed -i '/\/var\/www\/html\/configuration.php/d' ${HOME}/runtime/newandmodfiles.dat
 elif ( [ "${APPLICATION}" = "wordpress" ] )
 then
     /bin/sed -i '/\/var\/www\/html\/wp-content\/uploads\/session/d' ${HOME}/runtime/newandmodfiles.dat
@@ -39,13 +40,15 @@ then
 
 elif ( [ "${APPLICATION}" = "moodle" ] )
 then
-    /bin/sed -i '/\/var\/www\/html\/moodledata\/cache\//d' ${HOME}/runtime/newandmodfiles.dat
-    /bin/sed -i '/\/var\/www\/html\/moodledata\/trashdir\//d' ${HOME}/runtime/newandmodfiles.dat
-    /bin/sed -i '/\/var\/www\/html\/moodledata\/temp\//d' ${HOME}/runtime/newandmodfiles.dat
-    /bin/sed -i '/\/var\/www\/html\/moodledata\/localcache\//d' ${HOME}/runtime/newandmodfiles.dat
-
+    /bin/sed -i '/\/var\/www\/html\/moodledata\/cache/d' ${HOME}/runtime/newandmodfiles.dat
+    /bin/sed -i '/\/var\/www\/html\/moodledata\/trashdir/d' ${HOME}/runtime/newandmodfiles.dat
+    /bin/sed -i '/\/var\/www\/html\/moodledata\/temp/d' ${HOME}/runtime/newandmodfiles.dat
+    /bin/sed -i '/\/var\/www\/html\/moodledata\/localcache/d' ${HOME}/runtime/newandmodfiles.dat
+    /bin/sed -i '/\/var\/www\/html\/moodle\/config.php/d' ${HOME}/runtime/newandmodfiles.dat
 elif ( [ "${APPLICATION}" = "drupal" ] )
 then
-    /bin/sed -i '/\/var\/www\/html\/logs\//d' ${HOME}/runtime/newandmodfiles.dat
-    /bin/sed -i '/\/var\/www\/html\/tmp\//d' ${HOME}/runtime/newandmodfiles.dat
+    /bin/sed -i '/\/var\/www\/html\/logs/d' ${HOME}/runtime/newandmodfiles.dat
+    /bin/sed -i '/\/var\/www\/html\/tmp/d' ${HOME}/runtime/newandmodfiles.dat
+    /bin/sed -i '/\/var\/www\/html\/sites\/default\/settings.php/d' ${HOME}/runtime/newandmodfiles.dat
+
 fi
