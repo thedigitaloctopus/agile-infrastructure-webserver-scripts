@@ -48,7 +48,7 @@ then
     then
         /bin/cp /var/www/html/installation/configuration.php-dist /var/www/html/configuration.php.default
     fi
-    /bin/cp /var/www/html/configuration.php.default /var/www/html/joomla_configuration.php
+    /bin/cp /var/www/html/configuration.php.default /var/www/html/configuration.php
     /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
    # /bin/touch /var/www/html/configuration.php
 fi
