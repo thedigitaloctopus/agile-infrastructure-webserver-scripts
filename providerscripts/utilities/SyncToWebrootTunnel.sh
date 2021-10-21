@@ -95,19 +95,17 @@ else
  
     cd /var/www/html
     
-    syncfile="webrootsync.${ip}.tar"
+    if ( [ -f ${HOME}/config/webrootsynctunnel/sync*purge ] )
+    then
+        syncfile="webrootsyncXX.${ip}.tar"
+    else
+        syncfile="webrootsync.${ip}.tar"
+    fi
 
-   # if ( [ -f ${HOME}/config/webrootsynctunnel/sync*purge ] )
-   # then
-   #     syncfile="webrootsyncXX.${ip}.tar"
-   # else
-   #     syncfile="webrootsync.${ip}.tar"
-   # fi
-
-   # if ( [ ! -f ${HOME}/config/webrootsynctunnel/sync*purge ] && [ -f ${HOME}/webrootsync/webrootsyncXX.${ip}.tar ] )
-   # then
-   #     /bin/mv ${HOME}/webrootsync/webrootsyncXX.${ip}.tar  ${HOME}/webrootsync/webrootsync.${ip}.tar  
-   # fi
+    if ( [ ! -f ${HOME}/config/webrootsynctunnel/sync*purge ] && [ -f ${HOME}/webrootsync/webrootsyncXX.${ip}.tar ] )
+    then
+        /bin/mv ${HOME}/webrootsync/webrootsyncXX.${ip}.tar  ${HOME}/webrootsync/webrootsync.${ip}.tar  
+    fi
 
     for file in `/bin/cat ${HOME}/runtime/newandmodfiles.dat`
     do
