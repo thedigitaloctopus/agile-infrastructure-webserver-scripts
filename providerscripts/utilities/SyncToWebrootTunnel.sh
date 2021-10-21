@@ -27,6 +27,8 @@ then
     exit
 fi
 
+/bin/rm ${HOME}/config/webrootsynctunnel/UPDATED.${ip}
+
 if ( [ ! -f ${HOME}/config/INSTALLEDSUCCESSFULLY ] )
 then
     exit
@@ -114,6 +116,7 @@ else
 
     if ( [ "`/usr/bin/cmp --silent ${HOME}/webrootsync/webrootsync.${ip}.tar ${HOME}/config/webrootsynctunnel/webrootsync.${ip}.tar || /bin/echo 'files are different'`" != "" ] || [ ! -f ${HOME}/config/webrootsynctunnel/webrootsync.${ip}.tar ] )
     then
+        /bin/touch ${HOME}/config/webrootsynctunnel/UPDATED.${ip}
         /bin/cp ${HOME}/webrootsync/webrootsync.${ip}.tar ${HOME}/config/webrootsynctunnel
     fi
 fi
