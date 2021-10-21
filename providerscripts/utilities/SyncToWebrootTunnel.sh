@@ -113,8 +113,10 @@ else
         dir="`/bin/echo ${file} | /usr/bin/awk 'BEGIN {FS = "/";OFS = "/";} {$NF=""}1'`"
         /bin/tar auf ${HOME}/webrootsync/${syncfile} ${file} 
     done
+    
+    /bin/touch ${HOME}/webrootsync/webrootsync.${ip}.tar ${HOME}/config/webrootsynctunnel/webrootsync.${ip}.tar
 
-    if ( [ "`/usr/bin/cmp --silent ${HOME}/webrootsync/webrootsync.${ip}.tar ${HOME}/config/webrootsynctunnel/webrootsync.${ip}.tar || /bin/echo 'files are different'`" != "" ] || [ ! -f ${HOME}/config/webrootsynctunnel/webrootsync.${ip}.tar ] )
+    if ( [ "`/usr/bin/cmp --silent ${HOME}/webrootsync/webrootsync.${ip}.tar ${HOME}/config/webrootsynctunnel/webrootsync.${ip}.tar || /bin/echo 'files are different'`" != "" ] )
     then
         /bin/touch ${HOME}/config/webrootsynctunnel/UPDATED.${ip}
         /bin/cp ${HOME}/webrootsync/webrootsync.${ip}.tar ${HOME}/config/webrootsynctunnel
