@@ -27,7 +27,10 @@ then
     exit
 fi
 
-/bin/rm ${HOME}/config/webrootsynctunnel/UPDATED.${ip}
+if ( [ -f ${HOME}/config/webrootsynctunnel/UPDATED.${ip} ] )
+then
+    /bin/rm ${HOME}/config/webrootsynctunnel/UPDATED.${ip}
+fi
 
 if ( [ ! -f ${HOME}/config/INSTALLEDSUCCESSFULLY ] )
 then
