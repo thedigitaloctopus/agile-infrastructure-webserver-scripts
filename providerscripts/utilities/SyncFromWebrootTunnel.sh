@@ -37,6 +37,12 @@ fi
 #    exit
 #fi
 
+if ( [ "`/bin/ls ${HOME}/config/webrootsynctunnel/UPDATED*`" != "" ] )
+then
+    /bin/umount ${HOME}/config
+    ${HOME}/providerscripts/datastore/SetupConfig.sh
+fi
+
 ip="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'MYPUBLICIP'`"
 
 if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] )
