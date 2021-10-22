@@ -26,7 +26,7 @@
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:Maria`" = "1" ] ||  [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:MySQL`" = "1" ] )
 then
-    prefix="`/bin/cat /var/www/html/dpb.dat`"
+    prefix="`/bin/cat /var/www/html/dbp.dat`"
     
    cache_tables="` ${HOME}/providerscripts/utilities/ConnectToRemoteMYSQLDB.sh " select table_schema as database_name, table_name from information_schema.tables where table_type = 'BASE TABLE' and table_name like '%cache%' order by table_schema, table_name;" | /bin/grep -v 'database_' | /bin/grep -v 'table_' | /usr/bin/awk '{print $NF}'`"
 
@@ -53,7 +53,7 @@ fi
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:Postgres`" = "1" ] )
 then
-    prefix="`/bin/cat /var/www/html/dpb.dat`"
+    prefix="`/bin/cat /var/www/html/dbp.dat`"
 
    cache_tables="` ${HOME}/providerscripts/utilities/ConnectToRemotePostgresDB.sh "select table_schema, table_name from information_schema.tables where table_name like '%cache%' and table_schema not in ('information_schema', 'pg_catalog') and table_type = 'BASE TABLE' order by table_name, table_schema;" | sed -n '/cache/s/.*\b\(.*cache\w*\).*/\1/p'`"
 
