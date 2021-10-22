@@ -161,7 +161,7 @@ then
 fi
 if ( [ "`/bin/grep "${prefix}" ${HOME}/runtime/moodle_config.php`" = "" ] )
 then
-    /bin/sed -i "/->prefix /c\    \$CFG->prefix    = \"${prefix}\";" ${HOME}/runtime/moodle_config.php
+    /bin/sed -i "/->prefix /c\    \$CFG->prefix    = \"${prefix}_\";" ${HOME}/runtime/moodle_config.php
 fi
 if ( [ "`/bin/cat ${HOME}/runtime/moodle_config.php | /bin/grep "dbport" | /bin/grep "${DB_PORT}"`" = "" ] )
 then
