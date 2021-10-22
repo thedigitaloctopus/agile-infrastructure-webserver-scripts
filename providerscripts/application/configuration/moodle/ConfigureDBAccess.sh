@@ -75,7 +75,7 @@ fi
 if ( [ ! -d /var/www/html/moodledata ] )
 then
     /bin/mkdir -p /var/www/html/moodledata/filedir
-    /bin/chmod -R 750 /var/www/html/moodledata
+    /bin/chmod -R 755 /var/www/html/moodledata
     /bin/chown -R www-data.www-data /var/www/html/moodledata
 fi
 
