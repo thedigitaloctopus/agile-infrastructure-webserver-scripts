@@ -141,8 +141,9 @@ then
 elif ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:Postgres`" = "1" ] )
 then
     /bin/sed -i "/->dbtype /c\    \$CFG->dbtype    = \"pgsql\";" ${HOME}/runtime/moodle_config.php
+fi
 
-if ( [ "`/bin/grep "${name}" ${HOME}/runtime/moodle_config.php`" = "" ] )
+if ( [ "`/bin/grep "${username}" ${HOME}/runtime/moodle_config.php`" = "" ] )
 then
     /bin/sed -i "/->dbuser /c\    \$CFG->dbuser    = \"${username}\";" ${HOME}/runtime/moodle_config.php
 fi
