@@ -89,7 +89,6 @@ then
 fi
 
 if ( [ -f /var/www/html/moodle/config.php ] &&
-    [ -f ${HOME}/runtime/APPLICATION_DB_CONFIGURED ] &&
     [ "${name}" != "" ] && [ "${database}" != "" ] && [ "${password}" != "" ] && [ "${host}" != "" ] &&
     [ "`/bin/grep "${name}" /var/www/html/moodle/config.php`" != "" ]  &&
     [ "`/bin/grep "${database}" /var/www/html/moodle/config.php`" != "" ] &&
