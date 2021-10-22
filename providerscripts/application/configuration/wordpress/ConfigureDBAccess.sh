@@ -119,6 +119,9 @@ fi
 /bin/sed -i "/DB_NAME/c\ define('DB_NAME', \"${database}\");" ${HOME}/runtime/wordpress_config.php
 /bin/echo "${0} `/bin/date`: Updating the database name" >> ${HOME}/logs/MonitoringLog.dat
 
+/bin/sed -i "/\$table_prefix/c\ \$table_prefix=\"${dbprefix}_\";" ${HOME}/runtime/wordpress_config.php
+/bin/echo "${0} `/bin/date`: Updating the database table prefix" >> ${HOME}/logs/MonitoringLog.dat
+
 WEBSITE_DISPLAY_NAME="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEDISPLAYNAME'`"
 ${HOME}/providerscripts/application/email/ActivateSMTPByApplication.sh "${WEBSITE_DISPLAY_NAME}" 
 
