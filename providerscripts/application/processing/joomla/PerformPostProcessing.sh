@@ -45,13 +45,13 @@ SUDO="/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E"
 
 #Set a prefix for our database tables. Make sure we only ever set one in the case where the script runs more than once
 #and exits for some reason.
-if ( [ "${PREFIX}" = "" ] && [ ! -f /var/www/html/dpb.dat ] )
+if ( [ "${PREFIX}" = "" ] && [ ! -f /var/www/html/dbp.dat ] )
 then
     PREFIX="`/bin/cat /dev/urandom | /usr/bin/tr -dc a-z | /usr/bin/head -c${1:-6};echo;`"
     ${HOME}/providerscripts/utilities/StoreConfigValue.sh "DBPREFIX" "${PREFIX}"
-    /bin/echo "${PREFIX}" > /var/www/html/dpb.dat
+    /bin/echo "${PREFIX}" > /var/www/html/dbp.dat
 else
-    PREFIX="`command="${SUDO} /bin/cat /var/www/html/dpb.dat" && eval ${command}`"
+    PREFIX="`command="${SUDO} /bin/cat /var/www/html/dbp.dat" && eval ${command}`"
 fi
 
 credentials_available=""
