@@ -23,7 +23,7 @@ set -f
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:Maria`" = "1" ] ||  [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:MySQL`" = "1" ] )
 then
-    prefix="`/bin/cat /var/www/html/dpb.dat`"
+    prefix="`/bin/cat /var/www/html/dbp.dat`"
     
     user="`${HOME}/providerscripts/utilities/ConnectToRemoteMYSQLDB.sh "select * from ${prefix}_users_field_data;" "raw" | /bin/grep -v "placeholder-for" | /bin/sed 's/ //g' | /bin/sed '/^$/d' | /usr/bin/wc -l`"
    
@@ -37,7 +37,7 @@ fi
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:Postgres`" = "1" ] )
 then
-   prefix="`/bin/cat /var/www/html/dpb.dat`"
+   prefix="`/bin/cat /var/www/html/dbp.dat`"
    
    user="`${HOME}/providerscripts/utilities/ConnectToRemotePostgresDB.sh "select * from ${prefix}_users_field_data;" "raw" | /bin/grep -v "placeholder-for" | /bin/sed 's/ //g' | /bin/sed '/^$/d' | /usr/bin/wc -l`"
 
