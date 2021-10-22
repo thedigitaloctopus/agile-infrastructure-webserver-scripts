@@ -15,9 +15,9 @@
 #####################################################################################
 #####################################################################################
 
-if ( [ "`/bin/grep ${DB_N} ${HOME}/config/drupal_settings.php`" = "" ] ||
-     [ "`/bin/grep ${DB_P} ${HOME}/config/drupal_settings.php`" = "" ] ||
-     [ "`/bin/grep ${DB_U} ${HOME}/config/drupal_settings.php`" = "" ] )
+if ( [ "`/bin/grep ${DB_N} /var/www/html/sites/default/settings.php`" = "" ] ||
+     [ "`/bin/grep ${DB_P} /var/www/html/sites/default/settings.php`" = "" ] ||
+     [ "`/bin/grep ${DB_U} /var/www/html/sites/default/settings.php`" = "" ] )
 then
     exit
 fi
