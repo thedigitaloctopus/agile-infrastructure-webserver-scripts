@@ -20,6 +20,28 @@
 #####################################################################################
 #set -x
 
+#Check that we have a prefix available, there must be an existing and well known prefix
+dbprefix="`/bin/cat /var/www/html/dpb.dat`"
+if ( [ "${dbprefix}" = "" ] )
+then
+    dbprefix="`/bin/ls ${HOME}/config/UPDATEDPREFIX:* | /usr/bin/awk -F':' '{print $NF}'`"
+fi
+if ( [ "${dbprefix}" = "" ] )
+then
+    exit
+fi
+if ( [ "`/bin/grep ${dbprefix} ${HOME}/runtime/joomla_configuration.php`" = "" ] )
+then
+    /bin/sed -i "/\$dbprefix /c\        public \$dbprefix = \'${dbprefix}_\';" ${HOME}/runtime/joomla_configuration.php
+    /bin/touch ${HOME}/runtime/joomla_configuration.php
+    /bin/echo "${0} `/bin/date`: Updating the database prefix" >> ${HOME}/logs/MonitoringLog.dat
+    if ( [ "`/bin/ls ${HOME}/config/UPDATEDPREFIX:*`" != "" ] )
+    then
+        /bin/rm ${HOME}/config/UPDATEDPREFIX:*
+    fi
+    /bin/touch ${HOME}/config/UPDATEDPREFIX:${dbprefix}
+fi
+
 if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] )
 then
     exit
