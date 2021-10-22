@@ -30,10 +30,10 @@ if ( [ "${dbprefix}" = "" ] )
 then
     exit
 fi
-if ( [ "`/bin/grep ${dbprefix} ${HOME}/runtime/joomla_configuration.php`" = "" ] )
+if ( [ "`/bin/grep ${dbprefix} ${HOME}/runtime/wordpress_config.php`" = "" ] )
 then
-    /bin/sed -i "/\$dbprefix /c\        public \$dbprefix = \'${dbprefix}_\';" ${HOME}/runtime/joomla_configuration.php
-    /bin/touch ${HOME}/runtime/joomla_configuration.php
+    /bin/sed -i "/\$table_prefix/c\ \$table_prefix=\"${dbprefix}_\";" ${HOME}/runtime/wordpress_config.php
+    /bin/touch ${HOME}/runtime/wordpress_config.php
     /bin/echo "${0} `/bin/date`: Updating the database prefix" >> ${HOME}/logs/MonitoringLog.dat
     if ( [ "`/bin/ls ${HOME}/config/UPDATEDPREFIX:*`" != "" ] )
     then
