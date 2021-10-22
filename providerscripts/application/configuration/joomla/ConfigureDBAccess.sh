@@ -73,6 +73,8 @@ if ( [ -f /var/www/html/configuration.php ] &&
 then
     /bin/touch ${HOME}/runtime/APPLICATION_DB_CONFIGURED
     exit
+else
+    /bin/rm ${HOME}/runtime/APPLICATION_DB_CONFIGURED
 fi
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOICE:virgin`" = "1" ] )
