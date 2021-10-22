@@ -32,7 +32,7 @@ then
 fi
 if ( [ "`/bin/grep ${dbprefix} ${HOME}/runtime/moodle_config.php`" = "" ] )
 then
-    /bin/sed -i "/->prefix /c\    \$CFG->prefix    = \"${prefix}_\";" ${HOME}/runtime/moodle_config.php
+    /bin/sed -i "/->prefix /c\    \$CFG->prefix    = \"${dbprefix}_\";" ${HOME}/runtime/moodle_config.php
     /bin/touch ${HOME}/runtime/moodle_config.php
     /bin/echo "${0} `/bin/date`: Updating the database prefix" >> ${HOME}/logs/MonitoringLog.dat
     if ( [ "`/bin/ls ${HOME}/config/UPDATEDPREFIX:*`" != "" ] )
