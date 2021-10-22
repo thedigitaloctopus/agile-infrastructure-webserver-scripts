@@ -60,14 +60,25 @@ fi
 
 cd /var/www/html
 
+updated=0
+
 if ( [ "`/bin/ls -l ${HOME}/webrootsync/incomingupdates/webrootsync*.tar | /usr/bin/wc -l`" -gt "0" ] )
 then
     if ( [ -f ${HOME}/runtime/FIRST_TUNNEL_SYNC ] )
     then
         /bin/cat ${HOME}/webrootsync/incomingupdates/webrootsync*.tar | /bin/tar -xf - -i
         /bin/rm ${HOME}/runtime/FIRST_TUNNEL_SYNC
+        updated=1
     else
         /bin/cat ${HOME}/webrootsync/incomingupdates/webrootsync*.tar | /bin/tar -xf - --keep-newer-files -i
         /bin/rm ${HOME}/webrootsync/incomingupdates/webrootsync*.tar
+        updated=1
     fi
+fi
+if ( [ "${updated}" = "1" ] )
+then
+    /usr/bin/find /var/www/html -type d -print | /usr/bin/xargs chown www-data.www-data
+    /usr/bin/find /var/www/html -type f -print | /usr/bin/xargs chown www-data.www-data
+    /usr/bin/find /var/www/html -type d -print | /usr/bin/xargs chmod 755
+    /usr/bin/find /var/www/html -type f -print | /usr/bin/xargs chmod 644
 fi
