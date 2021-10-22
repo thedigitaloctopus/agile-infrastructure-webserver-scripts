@@ -45,35 +45,17 @@ if ( ( [ -f /var/www/html/sites/default/settings.php ] &&
     [ "`/bin/grep ${username} /var/www/html/sites/default/settings.php`" != "" ] &&
     [ "`/bin/grep ${password} /var/www/html/sites/default/settings.php`" != "" ] &&
     [ "`/bin/grep ${database} /var/www/html/sites/default/settings.php`" != "" ] &&
-    [ "`/bin/grep ${host} /var/www/html/sites/default/settings.php`" != "" ] ) &&  ( [ -f ${HOME}/runtime/VIRGINCONFIGSET ] && [ -f ${HOME}/runtime/CONFIG_VERIFIED ] ) )
+    [ "`/bin/grep ${host} /var/www/html/sites/default/settings.php`" != "" ] ) )
 then
+    /bin/touch ${HOME}/runtime/VIRGINCONFIGSET
     exit
 else
     /bin/rm ${HOME}/runtime/VIRGINCONFIGSET
-    /bin/rm ${HOME}/runtime/CONFIG_VERIFIED
 fi
 
 if ( [ ! -f ${HOME}/config/drupal_settings.php ] )
 then
     /bin/rm ${HOME}/runtime/VIRGINCONFIGSET
-fi
-
-if ( [ -f ${HOME}/config/drupal_settings.php ] &&
-    [ "${username}" != "" ] && [ "${password}" != "" ] && [ "${database}" != "" ] && [ "${host}" != "" ] &&
-    [ "`/bin/grep ${username} ${HOME}/config/drupal_settings.php`" != "" ] &&
-    [ "`/bin/grep ${password} ${HOME}/config/drupal_settings.php`" != "" ] &&
-    [ "`/bin/grep ${database} ${HOME}/config/drupal_settings.php`" != "" ] &&
-    [ "`/bin/grep ${host} ${HOME}/config/drupal_settings.php`" != "" ] )
-then
-    :
-else
-    /bin/rm ${HOME}/runtime/VIRGINCONFIGSET
-fi
-
-#If our configuration is already set, then, we don't need to do diddly
-if ( [ -f ${HOME}/runtime/VIRGINCONFIGSET ] )
-then
-    exit
 fi
 
 DB_PORT="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBPORT'`"
@@ -113,27 +95,6 @@ then
     exit
 fi
 
-if ( [ -f /var/www/html/sites/default/default.settings.php ] )
-then
-    /bin/cp /var/www/html/sites/default/default.settings.php /var/www/html/sites/default/settings.php.default
-fi
-
-if ( [ ! -f ${HOME}/runtime/drupal_settings.php ] )
-then
-    /bin/cp /var/www/html/sites/default/settings.php.default ${HOME}/runtime/drupal_settings.php
-fi
-
-if ( [ -f ${HOME}/config/drupal_settings.php ] &&
-    [ "${username}" != "" ] && [ "${password}" != "" ] && [ "${database}" != "" ] && [ "${host}" != "" ] &&
-    [ "`/bin/grep ${username} ${HOME}/config/drupal_settings.php`" != "" ] &&
-    [ "`/bin/grep ${password} ${HOME}/config/drupal_settings.php`" != "" ] &&
-    [ "`/bin/grep ${database} ${HOME}/config/drupal_settings.php`" != "" ] &&
-    [ "`/bin/grep ${host} ${HOME}/config/drupal_settings.php`" != "" ] )
-then
-    /bin/touch ${HOME}/runtime/VIRGINCONFIGSET
-    exit
-fi
-
 /usr/bin/perl -i -pe 'BEGIN{undef $/;} s/^\$databases.\;/\$databases = [];/smg' ${HOME}/runtime/drupal_settings.php
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:Postgres`" = "1" ] || [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEDBaaSINSTALLATIONTYPE:Postgres`" = "1" ] )
@@ -160,8 +121,6 @@ fi
 
 WEBSITE_DISPLAY_NAME="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEDISPLAYNAME'`"
 ${HOME}/providerscripts/application/email/ActivateSMTPByApplication.sh "${WEBSITE_DISPLAY_NAME}" 
-/bin/cp ${HOME}/runtime/drupal_settings.php ${HOME}/config/drupal_settings.php
-/bin/cp ${HOME}/runtime/drupal_settings.php /var/www/html/sites/default/settings.php
 
 if ( [ ! -d /var/www/html/tmp ] )
 then
@@ -179,26 +138,3 @@ fi
 
 /bin/chown www-data.www-data ${HOME}/config/drupal_settings.php
 /bin/chmod 640 ${HOME}/config/drupal_settings.php
-
-
-if ( [ -f ${HOME}/config/drupal_settings.php ] &&
-    [ "${username}" != "" ] && [ "${password}" != "" ] && [ "${database}" != "" ] && [ "${host}" != "" ] &&
-    [ "`/bin/grep ${username} ${HOME}/config/drupal_settings.php`" != "" ] &&
-    [ "`/bin/grep ${password} ${HOME}/config/drupal_settings.php`" != "" ] &&
-    [ "`/bin/grep ${database} ${HOME}/config/drupal_settings.php`" != "" ] &&
-    [ "`/bin/grep ${host} ${HOME}/config/drupal_settings.php`" != "" ] )
-then
-    /bin/mkdir -p /var/www/html/sites/default/files/pictures
-    /bin/chown -R www-data.www-data /var/www/html/sites/default
-    
-    #We are ready to set up services and switch off twig caching
-    if ( [ -f /var/www/html/sites/default/default.services.yml ] )
-    then
-        /bin/mv /var/www/html/sites/default/default.services.yml /var/www/html/sites/default/services.yml
-        /bin/sed -i "s/cache: true/cache: false/g" /var/www/html/sites/default/services.yml
-    fi
-    /bin/touch ${HOME}/runtime/VIRGINCONFIGSET
-else
-    /bin/cp /var/www/html/sites/default/settings.php.default ${HOME}/runtime/drupal_settings.php
-    /bin/cp ${HOME}/runtime/drupal_settings.php ${HOME}/config/drupal_settings.php
-fi
