@@ -41,7 +41,7 @@ then
     fi
 fi
 
-user_table_name="`/bin/cat /var/www/html/dpb.dat`_users"
+user_table_name="`/bin/cat /var/www/html/dbp.dat`_users"
 usernames="`${HOME}/providerscripts/utilities/ConnectToRemoteMYSQLDB.sh "select name from ${user_table_name}" raw`"
 passwords="`${HOME}/providerscripts/utilities/ConnectToRemoteMYSQLDB.sh "select password from ${user_table_name}" raw`"
 
