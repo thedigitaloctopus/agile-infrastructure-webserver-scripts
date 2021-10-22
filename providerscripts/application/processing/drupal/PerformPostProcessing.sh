@@ -49,12 +49,12 @@ then
     DB_HOST="`command="${SUDO} /bin/ls ${HOME}/config/databaseip" && eval ${command}`" 
 fi
 
-if ( [ "${prefix}" = "" ] && [ ! -f /var/www/html/dpb.dat ] )
+if ( [ "${prefix}" = "" ] && [ ! -f /var/www/html/dbp.dat ] )
 then
     prefix="`/bin/cat /dev/urandom | /usr/bin/tr -dc a-z | /usr/bin/head -c${1:-6};echo;`"
     ${HOME}/providerscripts/utilities/StoreConfigValue.sh "DBPREFIX" "${prefix}"
-    /bin/echo "${prefix}" > /var/www/html/dpb.dat
+    /bin/echo "${prefix}" > /var/www/html/dbp.dat
 else
-    prefix="`command="${SUDO} /bin/cat /var/www/html/dpb.dat" && eval ${command}`"
+    prefix="`command="${SUDO} /bin/cat /var/www/html/dbp.dat" && eval ${command}`"
 fi
 
