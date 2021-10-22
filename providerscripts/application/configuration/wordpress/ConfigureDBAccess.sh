@@ -73,6 +73,8 @@ if ( [ -f /var/www/wp-config.php ] &&
 then
     /bin/touch ${HOME}/runtime/APPLICATION_DB_CONFIGURED
     exit
+else
+    /bin/rm ${HOME}/runtime/APPLICATION_DB_CONFIGURED
 fi
 
 if ( [ ! -f /var/www/html/.htaccess ] )
