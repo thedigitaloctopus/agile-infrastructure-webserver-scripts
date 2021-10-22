@@ -80,13 +80,13 @@ DB_PORT="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBPORT'`"
 
 #Set a prefix for our database tables. Make sure we only ever set one in the case where the script runs more than once
 #and exits for some reason.
-if ( [ ! -f /var/www/html/dpb.dat ] )
+if ( [ ! -f /var/www/html/dbp.dat ] )
 then
     prefix="`/bin/cat /dev/urandom | /usr/bin/tr -dc a-z | /usr/bin/head -c${1:-6};echo;`"
     ${HOME}/providerscripts/utilities/StoreConfigValue.sh "DBPREFIX" "${prefix}"
-    /bin/echo "${prefix}" > /var/www/html/dpb.dat
+    /bin/echo "${prefix}" > /var/www/html/dbp.dat
 else
-    prefix="`/bin/cat /var/www/html/dpb.dat`"
+    prefix="`/bin/cat /var/www/html/dbp.dat`"
 fi
 
 #If the application configuration arrangements haven't been made, we are not ready, so just exit
