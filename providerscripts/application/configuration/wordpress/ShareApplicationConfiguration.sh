@@ -101,6 +101,12 @@ then
     then
         changed="runtime"
     fi
+    
+    if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh AUTOSCALED`" = "1" ] && [ ! -f ${HOME}/runtime/PROCESSED_INITIAL_CONFIG ] )
+    then
+        changed="config"
+        /bin/touch ${HOME}/runtime/PROCESSED_INITIAL_CONFIG
+    fi
 fi
 
 /bin/sleep 10
