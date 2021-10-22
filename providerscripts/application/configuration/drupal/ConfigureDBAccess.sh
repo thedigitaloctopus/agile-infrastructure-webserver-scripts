@@ -150,7 +150,7 @@ fi
 
 if ( [ -f ${HOME}/runtime/drupal_settings.php ] && [ "`/bin/grep "'${name}'" ${HOME}/runtime/drupal_settings.php`" = "" ] || [ "`/bin/grep "'${password}'" ${HOME}/runtime/drupal_settings.php`" = "" ] || [ "`/bin/grep "'${database}'" ${HOME}/runtime/drupal_settings.php`" = "" ] || [ "`/bin/grep "'${name}'" ${HOME}/runtime/drupal_settings.php`" = "" ] )
 then
-    prefix="`/bin/cat /var/www/html/dpb.dat`"
+    prefix="`/bin/cat /var/www/html/dbp.dat`"
 
     /usr/bin/perl -i -pe 'BEGIN{undef $/;} s/^\$databases.\;/\$databases = [];/smg' ${HOME}/runtime/drupal_settings.php
 
