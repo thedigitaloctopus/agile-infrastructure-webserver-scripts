@@ -55,7 +55,10 @@ if ( [ -f /var/www/html/sites/default/settings.php ] &&
     [ "`/bin/grep ${database} /var/www/html/sites/default/settings.php`" != "" ] &&
     [ "`/bin/grep ${host} /var/www/html/sites/default/settings.php`" != "" ] )
 then
+    /bin/touch ${HOME}/runtime/APPLICATION_DB_CONFIGURED
     exit
+else
+    /bin/rm ${HOME}/runtime/APPLICATION_DB_CONFIGURED
 fi
 
 if ( [ -f ${HOME}/runtime/CONFIG_VERIFIED ] )
