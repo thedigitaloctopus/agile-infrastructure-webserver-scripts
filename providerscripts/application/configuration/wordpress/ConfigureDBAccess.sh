@@ -21,7 +21,7 @@
 #set -x
 
 #Check that we have a prefix available, there must be an existing and well known prefix
-dbprefix="`/bin/cat /var/www/html/dpb.dat`"
+dbprefix="`/bin/cat /var/www/html/dbp.dat`"
 if ( [ "${dbprefix}" = "" ] )
 then
     dbprefix="`/bin/ls ${HOME}/config/UPDATEDPREFIX:* | /usr/bin/awk -F':' '{print $NF}'`"
