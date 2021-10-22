@@ -20,15 +20,31 @@
 #######################################################################################################
 #set -x
 
-
-if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOICE:virgin`" = "1" ] )
+#Check that we have a prefix available, there must be an existing and well known prefix
+dbprefix="`/bin/cat /var/www/html/dbp.dat`"
+if ( [ "${dbprefix}" = "" ] )
+then
+    dbprefix="`/bin/ls ${HOME}/config/UPDATEDPREFIX:* | /usr/bin/awk -F':' '{print $NF}'`"
+fi
+if ( [ "${dbprefix}" = "" ] )
 then
     exit
 fi
-
-if ( [ ! -f /var/www/html/moodle/config.php ] )
+if ( [ "`/bin/grep ${dbprefix} ${HOME}/runtime/joomla_configuration.php`" = "" ] )
 then
-    /bin/rm ${HOME}/runtime/APPLICATION_DB_CONFIGURED
+    /bin/sed -i "/\$dbprefix /c\        public \$dbprefix = \'${dbprefix}_\';" ${HOME}/runtime/joomla_configuration.php
+    /bin/touch ${HOME}/runtime/joomla_configuration.php
+    /bin/echo "${0} `/bin/date`: Updating the database prefix" >> ${HOME}/logs/MonitoringLog.dat
+    if ( [ "`/bin/ls ${HOME}/config/UPDATEDPREFIX:*`" != "" ] )
+    then
+        /bin/rm ${HOME}/config/UPDATEDPREFIX:*
+    fi
+    /bin/touch ${HOME}/config/UPDATEDPREFIX:${dbprefix}
+fi
+
+if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] )
+then
+    exit
 fi
 
 #If we the default configuration file hasn't been set yet, then exit. It will be on the shared config directory or the
@@ -38,7 +54,7 @@ then
     exit
 fi
 
-if ( [ -f ${HOME}/runtime/APPLICATION_DB_CONFIGURED ] && [ -f ${HOME}/runtime/CONFIG_VERIFIED ] )
+if ( [ -f ${HOME}/runtime/APPLICATION_DB_CONFIGURED ] )
 then
     exit
 fi
@@ -53,12 +69,9 @@ fi
 websiteurl="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEURL'`"
 DB_PORT="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBPORT'`"
 
-
-if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:DBaaS`" = "1" ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOICE:virgin`" = "1" ] )
 then
-    database="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBaaSDBNAME'`"
-    password="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBaaSPASSWORD'`"
-    name="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBaaSUSERNAME'`"
+    exit
 fi
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:DBaaS`" = "1" ] )
@@ -84,9 +97,12 @@ if ( [ -f /var/www/html/moodle/config.php ] &&
     [ "`/bin/grep "${host}" /var/www/html/moodle/config.php`" != "" ] &&
     [ "`/bin/cat /var/www/html/moodle/config.php | /bin/grep "dbport" | /bin/grep "${DB_PORT}"`" != "" ] &&
     [ "`/bin/cat /var/www/html/moodle/config.php | /bin/grep "dataroot" | /bin/grep "\/var\/www\/html\/moodledata"`" != "" ] &&
-[ "`/bin/cat /var/www/html/moodle/config.php | /bin/grep "wwwroot" | /bin/grep "${websiteurl}"`" != "" ]  )
+    [ "`/bin/cat /var/www/html/moodle/config.php | /bin/grep "wwwroot" | /bin/grep "${websiteurl}"`" != "" ]  )
 then
+    /bin/touch ${HOME}/runtime/APPLICATION_DB_CONFIGURED
     exit
+else
+    /bin/rm ${HOME}/runtime/APPLICATION_DB_CONFIGURED
 fi
 
 #Remember if we are here, we are installing from a backup or a baseline. For moodle, backups and baselines are
@@ -183,17 +199,3 @@ then
     /bin/chown -R www-data.www-data /var/www/html/logs
 fi
 
-
-if ( [ "${name}" != "" ] && [ "${database}" != "" ] && [ "${password}" != "" ] && [ "${host}" != "" ] &&
-    [ "`/bin/grep "${name}" /var/www/html/moodle/config.php`" != "" ]  &&
-    [ "`/bin/grep "${database}" /var/www/html/moodle/config.php`" != "" ] &&
-    [ "`/bin/grep "${password}" /var/www/html/moodle/config.php`" != "" ]  &&
-    [ "`/bin/grep "${host}" /var/www/html/moodle/config.php`" != "" ] &&
-    [ "`/bin/cat /var/www/html/moodle/config.php | /bin/grep "dbport" | /bin/grep "${DB_PORT}"`" != "" ] &&
-    [ "`/bin/cat /var/www/html/moodle/config.php | /bin/grep "dataroot" | /bin/grep "\/var\/www\/html\/moodledata"`" != "" ] &&
-[ "`/bin/cat /var/www/html/moodle/config.php | /bin/grep "wwwroot" | /bin/grep "${websiteurl}"`" != "" ]  )
-then
-    /bin/touch ${HOME}/runtime/APPLICATION_DB_CONFIGURED
-fi
-
-#As each machine has its own local configuration in moodle's case, we don't need to do any more than what we have done already
