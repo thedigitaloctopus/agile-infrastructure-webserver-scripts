@@ -80,5 +80,5 @@ then
     /usr/bin/find /var/www/html -type d -print | /usr/bin/xargs chown www-data.www-data
     /usr/bin/find /var/www/html -type f -print | /usr/bin/xargs chown www-data.www-data
     /usr/bin/find /var/www/html -type d -print | /usr/bin/xargs chmod 755
-    /usr/bin/find /var/www/html -type f -print | /usr/bin/xargs chmod 644
+    /usr/bin/find /var/www/html -type f -print | /usr/bin/xargs chmod 664
 fi
