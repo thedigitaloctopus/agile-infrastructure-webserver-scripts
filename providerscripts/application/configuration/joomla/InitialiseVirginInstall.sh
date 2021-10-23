@@ -6,9 +6,6 @@
 # processing for a joomla install. If you examine the code, you will find that this
 # script is called from the build client over ssh once it considers that the application
 # has been fully installed.
-# I decided not to support postgres with joomla because it's not very well supported itself
-# and also there's some issues according to:
-# https://joomla.stackexchange.com/questions/688/can-i-use-postgresql-with-joomla-3-3
 # Author: Peter Winter
 # Date: 04/01/2017
 #############################################################################################
@@ -60,19 +57,6 @@ then
 else
     /bin/rm ${HOME}/runtime/VIRGINCONFIGSET
 fi
-
-
-#if ( [ -f ${HOME}/config/joomla_configuration.php ] &&
-#    [ "${username}" != "" ] && [ "${password}" != "" ] && [ "${database}" != "" ] && [ "${host}" != "" ] &&
- #   [ "`/bin/grep ${username} ${HOME}/config/joomla_configuration.php`" != "" ] &&
- #   [ "`/bin/grep ${password} ${HOME}/config/joomla_configuration.php`" != "" ] &&
-##    [ "`/bin/grep ${database} ${HOME}/config/joomla_configuration.php`" != "" ] &&
-#    [ "`/bin/grep ${host} ${HOME}/config/joomla_configuration.php`" != "" ] )
-#then
-#    :
-#else
-#    /bin/rm ${HOME}/runtime/VIRGINCONFIGSET
-#fi
 
 #Get the port that the database is running on
 DB_PORT="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBPORT'`"
@@ -135,35 +119,6 @@ then
     /bin/sed -i "s/#__/${prefix}_/g" /var/www/html/installation/sql/postgresql/supports.sql
 fi
 
-#A default joomla download has a sample configuration.php file in its installation directory. What we can do is copy
-#this file to be our main configuration.php file and modify it according to the credentials that have been set later on.
-#These credentials will be modified by the script called ConfigureDBAccess.sh
-#if ( [ -f /var/www/html/installation/configuration.php-dist ] )
-#then
-#    /bin/cp /var/www/html/installation/configuration.php-dist /var/www/html/configuration.php.default
-#fi
-
-#We also make our own default copy, because once the application is live, the configuration.php-dist is no longer about.
-#When we backup our application to a repository, we nuke our configuration.php file for security reasons as it will
-#contain credentials and so on, which could still be active. It's just making doubly sure. We can use our own default copy
-#to generate our configuration.php when we are deploying an application which is no longer virginal and has been modified
-#in a bespoke way
-#if ( [ ! -f ${HOME}/runtime/joomla_configuration.php ] )
-#then
-#    /bin/cp /var/www/html/configuration.php.default ${HOME}/runtime/joomla_configuration.php
-#fi
-
-#if ( [ -f /var/www/html/configuration.php ] &&
-#    [ "${username}" != "" ] && [ "${password}" != "" ] && [ "${database}" != "" ] && [ "${host}" != "" ] &&
-#    [ "`/bin/grep ${username} /var/www/html/configuration.php`" != "" ] &&
-#    [ "`/bin/grep ${password} /var/www/html/configuration.php`" != "" ] &&
-#    [ "`/bin/grep ${database} /var/www/html/configuration.php`" != "" ] &&
-#    [ "`/bin/grep ${host} /var/www/html/configuration.php`" != "" ] )
-#then
-#    /bin/touch ${HOME}/runtime/VIRGINCONFIGSET
-#    exit
-#fi
-
 /bin/sed -i "/\$dbprefix /c\        public \$dbprefix = \'${prefix}_\';" ${HOME}/runtime/joomla_configuration.php
 /bin/sed -i "/\$user /c\        public \$user = \'${username}\';" ${HOME}/runtime/joomla_configuration.php
 /bin/sed -i "/\$password /c\        public \$password = \'${password}\';" ${HOME}/runtime/joomla_configuration.php
@@ -224,49 +179,6 @@ then
     /bin/sed -i "/\$redis_server_host /c\        public \$redis_server_host = \'${cache_host}\';" ${HOME}/runtime/joomla_configuration.php
     /bin/sed -i "/\$redis_server_port /c\        public \$redis_server_port = \'${cache_port}\';" ${HOME}/runtime/joomla_configuration.php
 fi
-
-
-#if ( [ -f ${HOME}/config/joomla_configuration.php ] &&
-#    ( [ "${username}" != "" ] && [ "${password}" != "" ] && [ "${database}" != "" ] && [ "${host}" != "" ] ) &&
-#    ( [ "`/bin/grep ${username} ${HOME}/config/joomla_configuration.php`" = "" ] ||
-#      [ "`/bin/grep ${password} ${HOME}/config/joomla_configuration.php`" = "" ] ||
-#      [ "`/bin/grep ${database} ${HOME}/config/joomla_configuration.php`" = "" ] ||
-#      [ "`/bin/grep ${host} ${HOME}/config/joomla_configuration.php`" = "" ] ) )
-#then
-#    if ( [ -f /var/www/html/configuration.php ] &&
-#    [ "`/usr/bin/diff ${HOME}/config/joomla_configuration.php ${HOME}/runtime/joomla_configuration.php`" != "" ] )
-#    then
-#        /bin/cp ${HOME}/runtime/joomla_configuration.php  ${HOME}/config/joomla_configuration.php
-#        /bin/cp ${HOME}/runtime/joomla_configuration.php /var/www/html/configuration.php
-#    fi
-#    count="0"
-#    while ( [ "${count}" -lt "5" ] && [ "`/usr/bin/diff ${HOME}/config/joomla_configuration.php ${HOME}/runtime/joomla_configuration.php`" != "" ] )
-#    do
-#        /bin/cp ${HOME}/runtime/joomla_configuration.php  ${HOME}/config/joomla_configuration.php
-#        /bin/cp ${HOME}/runtime/joomla_configuration.php /var/www/html/configuration.php
-#        count="`/usr/bin/expr ${count} + 1`"
-#        /bin/sleep 5
-#    done
-#    if ( [ "${count}" = "5" ] )
-#    then
-#        /bin/echo "${0} `/bin/date`: Failed to copy the configuration file successfully" >> ${HOME}/logs/MonitoringLog.dat
-#        exit
-##    fi
-#    /bin/chown www-data.www-data ${HOME}/config/joomla_configuration.php
-#    /bin/chmod 640 ${HOME}/config/joomla_configuration.php
-#fi
-
-#if ( [ -f ${HOME}/config/joomla_configuration.php ] &&
-#    [ "${username}" != "" ] && [ "${password}" != "" ] && [ "${database}" != "" ] && [ "${host}" != "" ] &&
-#    [ "`/bin/grep ${username} ${HOME}/config/joomla_configuration.php`" != "" ] &&
-#    [ "`/bin/grep ${password} ${HOME}/config/joomla_configuration.php`" != "" ] &&
-#    [ "`/bin/grep ${database} ${HOME}/config/joomla_configuration.php`" != "" ] &&
-#    [ "`/bin/grep ${host} ${HOME}/config/joomla_configuration.php`" != "" ] )
-#then
-#    /bin/touch ${HOME}/runtime/VIRGINCONFIGSET
-#else
-#    /bin/cp ${HOME}/runtime/joomla_configuration.php ${HOME}/config/joomla_configuration.php
-#fi
 
 #The temp directories for joomla can be set. They should exist already, but why the hell not make sure.
 if ( [ ! -d /var/www/html/cache ] )
