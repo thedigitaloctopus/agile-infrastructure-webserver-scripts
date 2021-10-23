@@ -20,6 +20,25 @@
 #####################################################################################
 #set -x
 
+#Check that we have a prefix available, there must be an existing and well known prefix
+prefix="`/bin/cat /var/www/html/dbp.dat`"
+if ( [ "${prefix}" = "" ] )
+then
+    prefix="`/bin/ls ${HOME}/config/UPDATEDPREFIX:* | /usr/bin/awk -F':' '{print $NF}'`"
+fi
+if ( [ "${prefix}" = "" ] )
+then
+    exit
+fi
+if ( [ "`/bin/grep ${prefix} ${HOME}/runtime/drupal_settings.php`" = "" ] )
+then
+    if ( [ "`/bin/ls ${HOME}/config/UPDATEDPREFIX:*`" != "" ] )
+    then
+        /bin/rm ${HOME}/config/UPDATEDPREFIX:*
+    fi
+    /bin/touch ${HOME}/config/UPDATEDPREFIX:${prefix}
+fi
+
 directories="`/bin/ls /var/www/html/sites/default/files | /bin/grep "^20"`"
 
 WEBSITE_URL="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEURL'`"
@@ -48,6 +67,16 @@ else
     host="${dbip}"
 fi
 
+if ( [ ! -f ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED ] )
+then
+    exit
+fi
+
+if ( [ -f ${HOME}/runtime/APPLICATION_DB_CONFIGURED ]  )
+then
+    exit
+fi
+
 if ( [ -f /var/www/html/sites/default/settings.php ] &&
     [ "${name}" != "" ] && [ "${password}" != "" ] && [ "${database}" != "" ] && [ "${host}" != "" ] &&
     [ "`/bin/grep ${name} /var/www/html/sites/default/settings.php`" != "" ] &&
@@ -61,46 +90,7 @@ else
     /bin/rm ${HOME}/runtime/APPLICATION_DB_CONFIGURED
 fi
 
-if ( [ -f ${HOME}/runtime/CONFIG_VERIFIED ] )
-then
-    exit
-fi
-
-if ( [ ! -f ${HOME}/config/drupal_settings.php ]  )
-then
-    /bin/rm ${HOME}/config/APPLICATION_DB_CONFIGURED
-fi
-
-if ( [ -f ${HOME}/config/drupal_settings.php ] &&
-    [ "${name}" != "" ] && [ "${password}" != "" ] && [ "${database}" != "" ] && [ "${host}" != "" ] &&
-    [ "`/bin/grep ${name} ${HOME}/config/drupal_settings.php`" != "" ] &&
-    [ "`/bin/grep ${password} ${HOME}/config/drupal_settings.php`" != "" ] &&
-    [ "`/bin/grep ${database} ${HOME}/config/drupal_settings.php`" != "" ] &&
-    [ "`/bin/grep ${host} ${HOME}/config/drupal_settings.php`" != "" ] )
-then
-    :
-else
-    /bin/rm ${HOME}/config/APPLICATION_DB_CONFIGURED
-fi
-
-if ( [ ! -f ${HOME}/runtime/drupal_settings.php ]  )
-then
-    /bin/rm ${HOME}/runtime/APPLICATION_DB_CONFIGURED
-fi
-
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOICE:virgin`" = "1" ] )
-then
-    exit
-fi
-
-#If we the default configuration file hasn't been set yet, then exit. It will be on the shared config directory or the
-#not shared runtime directory on an application by application basis
-if ( [ ! -f ${HOME}/config/APPLICATION_CONFIGURATION_PREPARED ] && [ ! -f ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED ] )
-then
-    exit
-fi
-
-if ( [ -f ${HOME}/config/APPLICATION_DB_CONFIGURED ] || [ -f ${HOME}/runtime/APPLICATION_DB_CONFIGURED ]  )
 then
     exit
 fi
@@ -115,67 +105,25 @@ then
     name="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBaaSUSERNAME'`"
 fi
 
-if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:DBaaS`" = "1" ] )
+/usr/bin/perl -i -pe 'BEGIN{undef $/;} s/^\$databases.\;/\$databases = [];/smg' ${HOME}/runtime/drupal_settings.php
+
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:Postgres`" = "1" ] || [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEDBaaSINSTALLATIONTYPE:Postgres`" = "1" ] )
 then
-    host="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBaaSHOSTNAME'`"
+    credentialstring="\$databases ['default']['default'] =array (\n 'database' => '${database}', \n 'username' => '${name}', \n 'password' => '${password}', \n 'host' => '${host}', \n 'port' => '${DB_PORT}', \n 'driver' => 'pgsql', \n 'prefix' => '${prefix}_', \n 'collation' => 'utf8mb4_general_ci',\n);"
 else
-    host="${dbip}"
+    credentialstring="\$databases ['default']['default'] =array (\n 'database' => '${database}', \n 'username' => '${name}', \n 'password' => '${password}', \n 'host' => '${host}', \n 'port' => '${DB_PORT}', \n 'driver' => 'mysql', \n 'prefix' => '${prefix}_', \n 'collation' => 'utf8mb4_general_ci',\n);"
 fi
 
-if ( [ ! -f ${HOME}/config/drupal_settings.php ] )
-then
-    /bin/rm ${HOME}/config/APPLICATION_DB_CONFIGURED
-fi
-
-if ( [ -f ${HOME}/config/drupal_settings.php ] &&
-    [ -f ${HOME}/config/APPLICATION_DB_CONFIGURED ] &&
-    [ "${name}" != "" ] && [ "${password}" != "" ] && [ "${database}" != "" ] && [ "${host}" != "" ] &&
-    [ "`/bin/grep ${name} ${HOME}/config/drupal_settings.php`" != "" ] &&
-    [ "`/bin/grep ${password} ${HOME}/config/drupal_settings.php`" != "" ] &&
-    [ "`/bin/grep ${database} ${HOME}/config/drupal_settings.php`" != "" ] &&
-    [ "`/bin/grep ${host} ${HOME}/config/drupal_settings.php`" != "" ] )
-then
-    /bin/touch ${HOME}/config/APPLICATION_DB_CONFIGURED
-    if ( [ ! -f /var/www/html/sites/default/settings.php ] )
-    then
-        /bin/cp ${HOME}/config/drupal_settings.php  /var/www/html/sites/default/settings.php
-        exit
-    else
-        exit
-    fi
-else
-    if ( [ -f /var/www/html/sites/default/default.settings.php ] )
-    then
-        /bin/rm ${HOME}/runtime/drupal_settings.php
-        /bin/cp /var/www/html/sites/default/default.settings.php ${HOME}/runtime/drupal_settings.php
-    fi
-fi
-
-if ( [ -f ${HOME}/runtime/drupal_settings.php ] && [ "`/bin/grep "'${name}'" ${HOME}/runtime/drupal_settings.php`" = "" ] || [ "`/bin/grep "'${password}'" ${HOME}/runtime/drupal_settings.php`" = "" ] || [ "`/bin/grep "'${database}'" ${HOME}/runtime/drupal_settings.php`" = "" ] || [ "`/bin/grep "'${name}'" ${HOME}/runtime/drupal_settings.php`" = "" ] )
-then
-    prefix="`/bin/cat /var/www/html/dbp.dat`"
-
-    /usr/bin/perl -i -pe 'BEGIN{undef $/;} s/^\$databases.\;/\$databases = [];/smg' ${HOME}/runtime/drupal_settings.php
-
-    if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:Postgres`" = "1" ] || [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEDBaaSINSTALLATIONTYPE:Postgres`" = "1" ] )
-    then
-        # /bin/sed -i "/^\$databases.*;/c  \$databases['default']['default'] = array ( \\n 'database' => '${database}', \\n 'username' => '${username}', \\n 'password' => '${password}', \\n 'host' => '${host}', \\n 'port' => '${DB_PORT}', \\n 'driver' => 'pgsql', \\n 'prefix' => '${prefix}_', \\n 'collation' => 'utf8mb4_general_ci', \\n );" ${HOME}/runtime/drupal_settings.php
-        credentialstring="\$databases ['default']['default'] =array (\n 'database' => '${database}', \n 'username' => '${name}', \n 'password' => '${password}', \n 'host' => '${host}', \n 'port' => '${DB_PORT}', \n 'driver' => 'pgsql', \n 'prefix' => '${prefix}_', \n 'collation' => 'utf8mb4_general_ci',\n);"
-    else
-        # /bin/sed -i "/^\$databases.*;/c  \$databases['default']['default'] = array ( \\n 'database' => '${database}', \\n 'username' => '${username}', \\n 'password' => '${password}', \\n 'host' => '${host}', \\n 'port' => '${DB_PORT}', \\n 'driver' => 'mysql', \\n 'prefix' => '${prefix}_', \\n 'collation' => 'utf8mb4_general_ci', \\n );" ${HOME}/runtime/drupal_settings.php
-        credentialstring="\$databases ['default']['default'] =array (\n 'database' => '${database}', \n 'username' => '${name}', \n 'password' => '${password}', \n 'host' => '${host}', \n 'port' => '${DB_PORT}', \n 'driver' => 'mysql', \n 'prefix' => '${prefix}_', \n 'collation' => 'utf8mb4_general_ci',\n);"
-    fi
-
-    /bin/sed -i "s/^\$databases = \[\]\;/${credentialstring}/" ${HOME}/runtime/drupal_settings.php
+/bin/sed -i "s/^\$databases = \[\]\;/${credentialstring}/" ${HOME}/runtime/drupal_settings.php
     
-    salt="`/bin/cat /var/www/html/salt`"
+salt="`/bin/cat /var/www/html/salt`"
     
-    if ( [ "${salt}" = "" ] )
-    then
-        salt="`/bin/cat /dev/urandom | /usr/bin/tr -dc a-z | /usr/bin/head -c${1:-16};echo;`"
-    fi
-    /bin/sed -i "/^\$settings\['hash_salt'\]/c\$settings['hash_salt'] = '${salt}';" ${HOME}/runtime/drupal_settings.php
+if ( [ "${salt}" = "" ] )
+then
+    salt="`/bin/cat /dev/urandom | /usr/bin/tr -dc a-z | /usr/bin/head -c${1:-16};echo;`"
 fi
+
+/bin/sed -i "/^\$settings\['hash_salt'\]/c\$settings['hash_salt'] = '${salt}';" ${HOME}/runtime/drupal_settings.php
 
 if ( [ "`/bin/grep 'ADDED BY CONFIG PROCESS' ${HOME}/runtime/drupal_settings.php`" = "" ] )
 then
@@ -203,51 +151,4 @@ then
     /bin/chown -R www-data.www-data /var/www/html/logs
 fi
 
-if ( [ -f ${HOME}/config/drupal_settings.php ] &&
-    ( [ "${name}" != "" ] && [ "${password}" != "" ] && [ "${database}" != "" ] && [ "${host}" != "" ] ) &&
-    ( [ "`/bin/grep ${name} ${HOME}/config/drupal_settings.php`" = "" ] ||
-      [ "`/bin/grep ${password} ${HOME}/config/drupal_settings.php`" = "" ] ||
-      [ "`/bin/grep ${database} ${HOME}/config/drupal_settings.php`" = "" ] ||
-      [ "`/bin/grep ${host} ${HOME}/config/drupal_settings.php`" = "" ] ) )
-then
-
-    if ( [ -f /var/www/html/sites/default/settings.php ] &&
-    [ "`/usr/bin/diff ${HOME}/config/drupal_settings.php  ${HOME}/runtime/drupal_settings.php`" != "" ] )
-    then
-        /bin/cp ${HOME}/runtime/drupal_settings.php  ${HOME}/config/drupal_settings.php
-        /bin/cp ${HOME}/runtime/drupal_settings.php  /var/www/html/sites/default/settings.php
-    fi
-
-    count="0"
-    while ( [ "${count}" -lt "5" ] && [ "`/usr/bin/diff ${HOME}/config/drupal_settings.php  /var/www/html/sites/default/settings.php`" != "" ] )
-    do
-        /bin/cp ${HOME}/runtime/drupal_settings.php  ${HOME}/config/drupal_settings.php
-        count="`/usr/bin/expr ${count} + 1`"
-        /bin/sleep 5
-    done
-
-    if ( [ "${count}" = "5" ] )
-    then
-        /bin/echo "${0} `/bin/date`: Failed to copy the configuration file successfully" >> ${HOME}/logs/MonitoringLog.dat
-        exit
-    fi
-
-    /bin/chown www-data.www-data ${HOME}/config/drupal_settings.php
-    /bin/chmod 640 ${HOME}/config/drupal_settings.php
-fi
-
-if ( [ -f ${HOME}/config/drupal_settings.php ] &&
-    [ "${name}" != "" ] && [ "${password}" != "" ] && [ "${database}" != "" ] && [ "${host}" != "" ] &&
-    [ "`/bin/grep ${name} ${HOME}/config/drupal_settings.php`" != "" ] &&
-    [ "`/bin/grep ${password} ${HOME}/config/drupal_settings.php`" != "" ] &&
-    [ "`/bin/grep ${database} ${HOME}/config/drupal_settings.php`" != "" ] &&
-    [ "`/bin/grep ${host} ${HOME}/config/drupal_settings.php`" != "" ] )
-then
-    /bin/mkdir -p /var/www/html/sites/default/files/pictures
-    /bin/chown -R www-data.www-data /var/www/html/sites/default
-    /bin/touch ${HOME}/config/APPLICATION_DB_CONFIGURED
-else
-    /bin/cp /var/www/html/sites/default/settings.php.default ${HOME}/runtime/drupal_settings.php
-    /bin/cp ${HOME}/runtime/drupal_settings.php ${HOME}/config/drupal_settings.php
-fi
 
