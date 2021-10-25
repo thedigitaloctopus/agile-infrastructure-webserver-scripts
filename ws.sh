@@ -389,23 +389,27 @@ ${HOME}/providerscripts/application/customise/AdjustApplicationInstallationByApp
 #The applications record which database engine they are expecting to be running, postgres or mysql. 
 #It is possible that someone (someone else) stored a postgres database and is deploying a MySQL by mistake, so, check for that and
 #swap engines if we find that there is a mismatch between the engine being used and the engine we expect. 
+
 webroot_database_engine="`/bin/cat /var/www/html/dbe.dat`"
 
-DATABASE_INSTALLATION_TYPE="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DATABASEINSTALLATIONTYPE'`"
-
-if ( [ "${webroot_database_engine}" = "Postgres" ] )
+if ( [ "${webroot_database_engine}" != "" ] )
 then
-    if ( [ "${DATABASE_INSTALLATION_TYPE}" != "Postgres" ] )
+    DATABASE_INSTALLATION_TYPE="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DATABASEINSTALLATIONTYPE'`"
+
+    if ( [ "${webroot_database_engine}" = "Postgres" ] )
     then
-        ${HOME}/providerscripts/utilities/StoreConfigValue.sh "DATABASEINSTALLATIONTYPE" "Postgres"
+        if ( [ "${DATABASE_INSTALLATION_TYPE}" != "Postgres" ] )
+        then
+            ${HOME}/providerscripts/utilities/StoreConfigValue.sh "DATABASEINSTALLATIONTYPE" "Postgres"
+        fi
     fi
-fi
 
-if ( [ "${webroot_database_engine}" = "MySQL" ] )
-then
-    if ( [ "${DATABASE_INSTALLATION_TYPE}" != "MySQL" ] )
+    if ( [ "${webroot_database_engine}" = "MySQL" ] )
     then
-        ${HOME}/providerscripts/utilities/StoreConfigValue.sh "DATABASEINSTALLATIONTYPE" "MySQL"
+        if ( [ "${DATABASE_INSTALLATION_TYPE}" != "MySQL" ] )
+        then
+            ${HOME}/providerscripts/utilities/StoreConfigValue.sh "DATABASEINSTALLATIONTYPE" "MySQL"
+        fi
     fi
 fi
 
