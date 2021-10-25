@@ -385,6 +385,28 @@ ${HOME}/providerscripts/application/customise/AdjustApplicationInstallationByApp
 /usr/bin/find /var/www -type d -exec chmod 755 {} \;
 /usr/bin/find /var/www -type f -exec chmod 644 {} \;
 
+webroot_database_engine="`/bin/cat /var/www/html/dbe.dat`"
+
+DATABASE_INSTALLATION_TYPE="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DATABASEINSTALLATIONTYPE'`"
+
+
+if ( [ "${webroot_database_engine}" = "Postgres" ] )
+then
+    if ( [ "${DATABASE_INSTALLATION_TYPE}" != "Postgres" ] )
+    then
+    fi
+fi
+
+if ( [ "${webroot_database_engine}" = "MySQL" ] )
+then
+    if ( [ "${DATABASE_INSTALLATION_TYPE}" != "MySQL" ] )
+    then
+    fi
+
+fi
+
+
+
 cd ${HOME}
 
 /bin/echo "${0} #######################################################################################" >> ${HOME}/logs/WEBSERVER_BUILD.log
