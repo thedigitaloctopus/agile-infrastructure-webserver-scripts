@@ -71,18 +71,6 @@ then
     /bin/cp ${HOME}/providerscripts/application/configuration/wordpress-htaccess.txt /var/www/html/.htaccess
     /bin/chown www-data.www-data /var/www/html/.htaccess
     /bin/chmod 440 /var/www/html/.htaccess
-    
-    if ( [ -f /var/www/html/wordfence-waf.php ] )
-    then
-        /bin/cat ${HOME}/providerscripts/application/configuration/wordfence.txt >> /var/www/html/.htaccess
-    fi
-fi
-
-if ( [ ! -f /var/www/html/.user.ini ] && [ -f /var/www/html/wordfence-waf.php ] )
-then
-    /bin/cp ${HOME}/providerscripts/application/configuration/wordpress.user.ini /var/www/html/.user.ini
-    /bin/chown www-data.www-data /var/www/html/.user.ini
-    /bin/chmod 440 /var/www/html/.user.ini
 fi
 
 #If the application configuration arrangements haven't been made, we are not ready, so just exit
