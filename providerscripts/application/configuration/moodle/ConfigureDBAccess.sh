@@ -69,6 +69,13 @@ fi
 websiteurl="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEURL'`"
 DB_PORT="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBPORT'`"
 
+if ( [ ! -f /var/www/html/.htaccess ] )
+then
+    /bin/cp ${HOME}/providerscripts/application/configuration/moodle-htaccess.txt /var/www/html/.htaccess
+    /bin/chown www-data.www-data /var/www/html/.htaccess
+    /bin/chmod 440 /var/www/html/.htaccess
+fi
+
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOICE:virgin`" = "1" ] )
 then
     exit
