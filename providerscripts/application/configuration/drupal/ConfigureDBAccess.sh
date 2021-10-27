@@ -90,6 +90,13 @@ else
     /bin/rm ${HOME}/runtime/APPLICATION_DB_CONFIGURED
 fi
 
+if ( [ ! -f /var/www/html/.htaccess ] )
+then
+    /bin/cp ${HOME}/providerscripts/application/configuration/drupal-htaccess.txt /var/www/html/.htaccess
+    /bin/chown www-data.www-data /var/www/html/.htaccess
+    /bin/chmod 440 /var/www/html/.htaccess
+fi
+
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOICE:virgin`" = "1" ] )
 then
     exit
