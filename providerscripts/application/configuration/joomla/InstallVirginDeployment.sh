@@ -39,9 +39,7 @@ then
     /usr/bin/wget https://github.com/joomla/joomla-cms/releases/download/${version}/Joomla_${version}-Beta-Full_Package.zip
     /usr/bin/unzip Joomla_${version}-Beta-Full_Package.zip
     /bin/rm Joomla_${version}-Beta-Full_Package.zip
-    /bin/mv /var/www/html/htaccess.txt /var/www/html/.htaccess
     /bin/chown -R www-data.www-data /var/www/html/*
-    /bin/chmod 440 /var/www/html/.htaccess
     cd /home/${SERVER_USER}
     /bin/echo "1"
 elif ( [ "`/bin/echo ${version} | /bin/grep rc`" != "" ] )
@@ -49,9 +47,7 @@ then
     /usr/bin/wget https://github.com/joomla/joomla-cms/releases/download/${version}/Joomla_${version}-Release_Candidate-Full_Package.zip
     /usr/bin/unzip Joomla_${version}-Release_Candidate-Full_Package.zip
     /bin/rm Joomla_${version}-Release_Candidate-Full_Package.zip
-    /bin/mv /var/www/html/htaccess.txt /var/www/html/.htaccess
     /bin/chown -R www-data.www-data /var/www/html/*
-    /bin/chmod 440 /var/www/html/.htaccess
     cd /home/${SERVER_USER}
     /bin/echo "1"
 
@@ -59,9 +55,7 @@ else
     /usr/bin/wget https://github.com/joomla/joomla-cms/releases/download/${version}/Joomla_${version}-Stable-Full_Package.zip
     /usr/bin/unzip Joomla_${version}-Stable-Full_Package.zip
     /bin/rm Joomla_${version}-Stable-Full_Package.zip
-    /bin/mv /var/www/html/htaccess.txt /var/www/html/.htaccess
     /bin/chown -R www-data.www-data /var/www/html/*
-    /bin/chmod 440 /var/www/html/.htaccess
     cd /home/${SERVER_USER}
     /bin/echo "1"
 fi
