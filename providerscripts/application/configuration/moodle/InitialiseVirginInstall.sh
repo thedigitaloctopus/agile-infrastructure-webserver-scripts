@@ -77,6 +77,13 @@ then
     exit
 fi
 
+if ( [ ! -f /var/www/html/.htaccess ] )
+then
+    /bin/cp ${HOME}/providerscripts/application/configuration/moodle-htaccess.txt /var/www/html/.htaccess
+    /bin/chown www-data.www-data /var/www/html/.htaccess
+    /bin/chmod 440 /var/www/html/.htaccess
+fi
+
 #Once an application is considered to be installed, then, a flag is set which means that on subsequent calls
 #we do nothing. This is because this script is aggressively called from cron until it succeeds and once it is
 #successful, we need to neutralise it. Also, if we are not a virgin, then we can't do this so exit.
