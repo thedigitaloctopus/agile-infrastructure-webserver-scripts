@@ -128,7 +128,11 @@ then
     /bin/echo "${0} `/bin/date`: Skipping hourly backup to repository because hourly backups are disabled to save on data transfer costs" >> ${HOME}/logs/MonitoringLog.dat
 elif ( [ "${period}" = "manual" ] )
 then
-    /bin/mkdir /tmp/backup_archive
+    if ( [ ! -d /tmp/backup_archive ] )
+    then
+        /bin/mkdir /tmp/backup_archive
+    fi
+    /bin/rm -r /tmp/backup_archive/*
     /bin/tar cvfz backup${WEBSITE_SUBDOMAIN}-${WEBSITE_NAME}-webroot-sourcecode-${period}-${BUILD_IDENTIFIER}.tar.gz /tmp/backup/*
     /bin/rm -r /tmp/backup/*
     /bin/mv backup${WEBSITE_SUBDOMAIN}-${WEBSITE_NAME}-webroot-sourcecode-${period}-${BUILD_IDENTIFIER}.tar.gz /tmp/backup_archive
