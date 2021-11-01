@@ -27,7 +27,7 @@ do
     /bin/sleep 10
 done
 
-if ( [ -f ${HOME}/config/credentials/shit ] && [ ! -f ${HOME}/config/APPLICATION_CONFIGURATION_PREPARED ] )
+if ( [ -f ${HOME}/config/credentials/shit ] && [ ! -f ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED ] )
 then
     if ( [ -f /var/www/html/sites/default/settings.php ] && [ ! -f /var/www/html/sites/default/settings.php.default ] )
     then
@@ -35,7 +35,7 @@ then
     fi
     /bin/cp /var/www/html/sites/default/settings.php.default ${HOME}/config/drupal_settings.php
     /bin/chmod 600 ${HOME}/config/drupal_settings.php
-    /bin/touch ${HOME}/config/APPLICATION_CONFIGURATION_PREPARED
+    /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
     /bin/echo "1"
 fi
 
