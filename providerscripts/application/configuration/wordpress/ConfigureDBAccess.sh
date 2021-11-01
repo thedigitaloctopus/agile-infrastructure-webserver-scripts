@@ -113,7 +113,7 @@ fi
 /bin/sed -i "/\$table_prefix/c\ \$table_prefix=\"${dbprefix}_\";" ${HOME}/runtime/wordpress_config.php
 /bin/echo "${0} `/bin/date`: Updating the database table prefix" >> ${HOME}/logs/MonitoringLog.dat
 
-/bin/echo "MySQL" > /var/www/html/dbe.dat
+/bin/echo "For your information, this website uses MySQL or MariaDB" > /var/www/html/dbe.dat
 
 WEBSITE_DISPLAY_NAME="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEDISPLAYNAME'`"
 ${HOME}/providerscripts/application/email/ActivateSMTPByApplication.sh "${WEBSITE_DISPLAY_NAME}" 
