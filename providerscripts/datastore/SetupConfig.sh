@@ -28,13 +28,13 @@ fi
 
 if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" != "" ] )
 then
-    #SERVER_USER="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SERVERUSER'`"
-    #if ( [ "`/bin/ls ${HOME}/config/${SERVER_USER}`" = "" ] )
-    #then
-    #    /bin/rm -r ${HOME}/config/*
-    #    /bin/touch ${HOME}/config/${SERVER_USER}
-    #    /bin/sleep 20
-    #fi
+    SERVER_USER="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SERVERUSER'`"
+    if ( [ "`/bin/ls ${HOME}/config/${SERVER_USER}`" = "" ] )
+    then
+        /bin/rm -r ${HOME}/config/*
+        /bin/touch ${HOME}/config/${SERVER_USER}
+        /bin/sleep 5
+    fi
     #if ( [ -f ${HOME}/config/REFRESH_MOUNT ] )
     #then
     #    /bin/rm -r ${HOME}/config/*
@@ -59,6 +59,12 @@ then
     then
         exit
     fi
+fi
+
+
+if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" != "" ] &&  [ "`/bin/ls ${HOME}/config/${SERVER_USER}`" != "" ] )
+then
+    exit
 fi
 
 if ( [ ! -d ${HOME}/config_cache ] )
