@@ -197,7 +197,7 @@ fi
 if ( [ "${installationstatus}" = "2" ] || [ "${installationstatus}" = "1" ] )
 then
     /bin/echo "The default credentials for your brand new joomla site are set to: Admin name: ${joomla_username}  Admin password: ${SERVER_USER}"
-    /bin/echo "Clearly, it is essential to change these to stop your site being compromised and they are just set as such to bootstrap your site building"
+    /bin/echo "It is recommended to change your password. The password is the same as the username of your webserver account"
     /bin/echo "Press <enter> to acknowledge"
     read x
 fi
