@@ -103,7 +103,7 @@ dbipandport="${host}:${DB_PORT}"
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEDBaaSINSTALLATIONTYPE:Postgres`" = "1" ] || [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:Postgres`" = "1" ] )
 then
     /bin/sed -i "/\$dbtype /c\        public \$dbtype = \'pgsql\';" ${HOME}/runtime/joomla_configuration.php
-    /bin/echo "Postgres" > /var/www/html/dbe.dat
+    /bin/echo "For your information, this website uses Postgres" > /var/www/html/dbe.dat
     /bin/echo "${0} `/bin/date`: Updating the database driver" >> ${HOME}/logs/MonitoringLog.dat
     /bin/sed -i "/\$port /d" ${HOME}/runtime/joomla_configuration.php
     /bin/sed -i "/\$host /c\        public \$host = \'${host}\';" ${HOME}/runtime/joomla_configuration.php
@@ -111,7 +111,7 @@ then
     /bin/echo "${0} `/bin/date`: Updating the database ip" >> ${HOME}/logs/MonitoringLog.dat
 else
     /bin/sed -i "/\$dbtype /c\        public \$dbtype = \'mysqli\';" ${HOME}/runtime/joomla_configuration.php
-    /bin/echo "MySQL" > /var/www/html/dbe.dat
+    /bin/echo "For your information, this website uses MySQL or MariaDB" > /var/www/html/dbe.dat
     /bin/echo "${0} `/bin/date`: Updating the database driver" >> ${HOME}/logs/MonitoringLog.dat
     /bin/sed -i "/\$host = /c\   public \$host = \'${dbipandport}\';" ${HOME}/runtime/joomla_configuration.php
     /bin/echo "${0} `/bin/date`: Updating the database ip" >> ${HOME}/logs/MonitoringLog.dat
