@@ -28,9 +28,9 @@ do
 done
 
 
-if ( [ -f ${HOME}/config/credentials/shit ] && [ ! -f ${HOME}/config/APPLICATION_CONFIGURATION_PREPARED ] )
+if ( [ -f ${HOME}/config/credentials/shit ] && [ ! -f ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED ] )
 then
     /bin/chmod 600 ${HOME}/config/wordpress_config.php
-    /bin/touch ${HOME}/config/APPLICATION_CONFIGURATION_PREPARED
+    /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
     /bin/echo "1"
 fi
