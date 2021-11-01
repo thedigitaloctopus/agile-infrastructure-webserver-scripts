@@ -107,10 +107,10 @@ fi
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:Postgres`" = "1" ] || [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEDBaaSINSTALLATIONTYPE:Postgres`" = "1" ] )
 then
     credentialstring="\$databases ['default']['default'] =array (\n 'database' => '${database}', \n 'username' => '${username}', \n 'password' => '${password}', \n 'host' => '${host}', \n 'port' => '${DB_PORT}', \n 'driver' => 'pgsql', \n 'prefix' => '${prefix}_', \n 'collation' => 'utf8mb4_general_ci',\n);"
-    /bin/echo "Postgres" > /var/www/html/dbe.dat
+    /bin/echo "For your information, this website uses Postgres" > /var/www/html/dbe.dat
 else
     credentialstring="\$databases ['default']['default'] =array (\n 'database' => '${database}', \n 'username' => '${username}', \n 'password' => '${password}', \n 'host' => '${host}', \n 'port' => '${DB_PORT}', \n 'driver' => 'mysql', \n 'prefix' => '${prefix}_', \n 'collation' => 'utf8mb4_general_ci',\n);"
-    /bin/echo "MySQL/MariaDB" > /var/www/html/dbe.dat
+    /bin/echo "For your information, this website uses MySQL or MariaDB" > /var/www/html/dbe.dat
 fi
 
 /bin/sed -i "s/^\$databases = \[\]\;/${credentialstring}/" ${HOME}/runtime/drupal_settings.php
