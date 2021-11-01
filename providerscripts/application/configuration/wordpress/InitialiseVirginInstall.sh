@@ -107,7 +107,7 @@ fi
 /bin/sed -i "/DB_PASSWORD/c\ define('DB_PASSWORD', \"${password}\");" ${HOME}/runtime/wordpress_config.php
 /bin/sed -i "/DB_NAME/c\ define('DB_NAME', \"${database}\");" ${HOME}/runtime/wordpress_config.php
 /bin/sed -i "/\$table_prefix/c\ \$table_prefix=\"${prefix}_\";" ${HOME}/runtime/wordpress_config.php
-/bin/echo "MySQL" > /var/www/html/dbe.dat
+/bin/echo "For your information, this website uses MySQL or MariaDB" > /var/www/html/dbe.dat
 
 
 WEBSITE_DISPLAY_NAME="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEDISPLAYNAME'`"
