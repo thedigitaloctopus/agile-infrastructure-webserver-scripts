@@ -55,15 +55,10 @@ then
     then
         /bin/rm -r ${HOME}/config/*
     fi
-
-    if ( [ "${DIRECTORIESSET}" = "1" ] )
-    then
-        exit
-    fi
 fi
 
 
-if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" != "" ] &&  [ "`/bin/ls ${HOME}/config/${SERVER_USER}`" != "" ] )
+if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" != "" ] &&  [ "`/bin/ls ${HOME}/config/${SERVER_USER}`" != "" ] && [ "${DIRECTORIESSET}" = "1" ] )
 then
     exit
 fi
