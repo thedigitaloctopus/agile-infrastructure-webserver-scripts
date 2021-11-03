@@ -49,7 +49,11 @@ then
         /bin/touch /etc/apache2/BUILT_FROM_SOURCE
     elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:repo'`" = "1" ] )
     then
-        /usr/bin/apt-get -qq -y install apache2
+        if ( [ "`/usr/bin/dpkg --get-selections | /bin/grep apache | /bin/grep utils`" = "" ] )
+        then
+            /usr/bin/apt-get -qq -y install apache2-utils
+        fi        
+        
         if ( [  "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATIONLANGUAGE:PHP`" = "1" ] )
         then
             /usr/bin/apt-get -qq -y install libapache2-mod-php${PHP_VERSION}
@@ -138,7 +142,10 @@ then
         
         if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:repo:modsecurity:modevasive'`" = "1" ] || [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:repo:modevasive'`" = "1" ] )
         then
-            /usr/bin/apt -qq -y install apache2-utils
+            if ( [ "`/usr/bin/dpkg --get-selections | /bin/grep apache | /bin/grep utils`" = "" ] )
+            then
+                /usr/bin/apt-get -qq -y install apache2-utils
+            fi            
             /usr/bin/apt -qq -y install libapache2-mod-evasive
             /usr/bin/ln -s /etc/apache2/mods-available/evasive.conf /etc/apache2/mods-enabled/evasive.conf
             /bin/sed -i 's/#//g' /etc/apache2/mods-available/evasive.conf
