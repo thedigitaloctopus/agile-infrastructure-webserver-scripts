@@ -49,10 +49,7 @@ then
         /bin/touch /etc/apache2/BUILT_FROM_SOURCE
     elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:repo'`" = "1" ] )
     then
-        if ( [ "`/usr/bin/dpkg --get-selections | /bin/grep apache | /bin/grep utils`" = "" ] )
-        then
-            /usr/bin/apt-get -qq -y install apache2-utils
-        fi        
+        /usr/bin/apt-get -qq -y install apache2-utils    
         
         if ( [  "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATIONLANGUAGE:PHP`" = "1" ] )
         then
@@ -82,7 +79,7 @@ then
         if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:repo:modsecurity:modevasive'`" = "1" ] || [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:repo:modevasive'`" = "1" ] )
         then
              /usr/bin/apt -qq -y install apache2-utils
-             /usr/bin/apt -qq -y install libapache2-mod-evasive
+             DEBIAN_FRONTEND=noninteractive /usr/bin/apt -qq -y install libapache2-mod-evasive
              /usr/bin/ln -s /etc/apache2/mods-available/evasive.conf /etc/apache2/mods-enabled/evasive.conf
              /bin/sed -i 's/#//g' /etc/apache2/mods-available/evasive.conf
              notify_email_address="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SYSTEMTOEMAILADDRESS'`"
@@ -142,11 +139,8 @@ then
         
         if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:repo:modsecurity:modevasive'`" = "1" ] || [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:repo:modevasive'`" = "1" ] )
         then
-            if ( [ "`/usr/bin/dpkg --get-selections | /bin/grep apache | /bin/grep utils`" = "" ] )
-            then
-                /usr/bin/apt-get -qq -y install apache2-utils
-            fi            
-            /usr/bin/apt -qq -y install libapache2-mod-evasive
+            /usr/bin/apt-get -qq -y install apache2-utils       
+            DEBIAN_FRONTEND=noninteractive /usr/bin/apt -qq -y install libapache2-mod-evasive
             /usr/bin/ln -s /etc/apache2/mods-available/evasive.conf /etc/apache2/mods-enabled/evasive.conf
             /bin/sed -i 's/#//g' /etc/apache2/mods-available/evasive.conf
             notify_email_address="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SYSTEMTOEMAILADDRESS'`"
