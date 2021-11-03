@@ -155,7 +155,7 @@ fi
 if ( [ "${3}" = "modevasive" ] )
 then                      
     export DEBIAN_FRONTEND=noninteractive && /usr/bin/apt-get -qq -y install apache2-utils
-    /usr/bin/apt-get -qq -y install libapache2-mod-evasive
+    export DEBIAN_FRONTEND=noninteractive && /usr/bin/apt-get -qq -y install libapache2-mod-evasive
             
     /bin/mkdir /var/log/mod_evasive 
     /bin/chown -R www-data:www-data /var/log/mod_evasive
