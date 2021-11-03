@@ -60,6 +60,8 @@ fi
 
 /bin/mv /usr/local/modsecurity-crs/rules/REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf.example /usr/local/modsecurity-crs/rules/REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf
 
+/bin/rm /usr/local/modsecurity-crs/rules/REQUEST-910-IP-REPUTATION.conf
+
 /bin/mkdir -p /etc/modsecurity
 
 /bin/cp /opt/ModSecurity/unicode.mapping /etc/modsecurity
