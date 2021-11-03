@@ -153,9 +153,13 @@ then
 fi
 
 if ( [ "${3}" = "modevasive" ] )
-then                      
-    export DEBIAN_FRONTEND=noninteractive && /usr/bin/apt-get -qq -y install apache2-utils
-    export DEBIAN_FRONTEND=noninteractive && /usr/bin/apt-get -qq -y install libapache2-mod-evasive
+then    
+    if ( [ "`/usr/bin/dpkg --get-selections | /bin/grep apache | /bin/grep utils`" = "" ] )
+    then
+        /usr/bin/apt-get -qq -y install apache2-utils
+    fi
+    
+    /usr/bin/apt-get -qq -y install libapache2-mod-evasive
             
     /bin/mkdir /var/log/mod_evasive 
     /bin/chown -R www-data:www-data /var/log/mod_evasive
