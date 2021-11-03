@@ -30,10 +30,10 @@ then
     then
         /usr/sbin/service php${PHP_VERSION}-fpm restart || . /etc/apache2/conf/envvars && /usr/local/apache2/bin/apachectl -k restart    
     fi
-    if ( [ "`/usr/bin/pgrep apache`" = "" ] )
+    if ( [ "`/usr/bin/pgrep apache2`" = "" ] )
     then
         /usr/sbin/service apache2 restart
-        if ( [ "`/usr/bin/pgrep apache`" = "" ] )
+        if ( [ "`/usr/bin/pgrep apache2`" = "" ] )
         then
             . /etc/apache2/conf/envvars && /usr/local/apache2/bin/apachectl -k restart    
         fi
