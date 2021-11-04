@@ -74,3 +74,21 @@ then
     /bin/touch ${HOME}/runtime/BYPASS_PROCESSED
     /bin/rm /etc/apache2/sites-available/bypass_snippet.dat
 fi
+
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh WEBSERVERCHOICE:LIGHTTPD`" = "1" ] )
+then
+    for ips in "`/bin/ls ${HOME}/config/autoscalerip | /usr/bin/tr '\n' ' '`"
+    do
+        for ip in ${ips}
+        do 
+            /bin/echo "                      ${ip}|" >> /etc/lighttpd/bypass_snippet.dat
+        done
+    done
+    /bin/sed -i "s/|$//g" /etc/lighttpd/bypass_snippet.dat
+    /bin/echo ")\$" >> /etc/lighttpd/bypass_snippet.dat
+    /bin/echo "\$HTTP[\"remoteip\"] !~ \"^(" >> /etc/lighttpd/bypass_snippet.dat
+    
+    /bin/sed -i -e '/####BYPASS####/{r /etc/lighttpd/bypass_snippet.dat' -e 'd}' /etc/apache2/sites-available/${WEBSITE_NAME} 
+
+
+fi
