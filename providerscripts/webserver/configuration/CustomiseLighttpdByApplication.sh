@@ -79,13 +79,15 @@ then
     then
         /bin/echo "auth.backend = \"htpasswd\"
 auth.backend.htpasswd.userfile= \"/etc/basicauth/.htpasswd\"
+####BYPASS####
 auth.require = ( \"/\" => 
     (
     \"method\"  => \"basic\",
     \"realm\"   => \"Private Property\",
     \"require\" => \"valid-user\"
     ),
-)" >> /etc/lighttpd/lighttpd.conf
+)
+####BYPASS1####" >> /etc/lighttpd/lighttpd.conf
     fi
     
     /bin/echo "
