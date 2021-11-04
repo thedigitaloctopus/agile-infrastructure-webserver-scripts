@@ -77,6 +77,8 @@ fi
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh WEBSERVERCHOICE:LIGHTTPD`" = "1" ] )
 then
+    /bin/echo "\$HTTP[\"remoteip\"] !~ \"^(" >> /etc/lighttpd/bypass_snippet.dat
+    
     for ips in "`/bin/ls ${HOME}/config/autoscalerip | /usr/bin/tr '\n' ' '`"
     do
         for ip in ${ips}
@@ -84,13 +86,10 @@ then
             /bin/echo "                      ${ip}|" >> /etc/lighttpd/bypass_snippet.dat
         done
     done
+    
     /bin/sed -i "s/|$//g" /etc/lighttpd/bypass_snippet.dat
-    /bin/echo ")\$" >> /etc/lighttpd/bypass_snippet.dat
-    /bin/echo "\$HTTP[\"remoteip\"] !~ \"^(" >> /etc/lighttpd/bypass_snippet.dat
-    
+    /bin/echo ")\$ \"{" >> /etc/lighttpd/bypass_snippet.dat  
     /bin/sed -i -e '/####BYPASS####/{r /etc/lighttpd/bypass_snippet.dat' -e 'd}' /etc/lighttpd/lighttpd.conf
-    /bin/sed -i '/####BYPASS1####/}/g' /etc/lighttpd/lighttpd.conf
-    
+    /bin/sed -i '/####BYPASS1####/}/g' /etc/lighttpd/lighttpd.conf    
     /bin/rm /etc/lighttpd/bypass_snippet.dat
-
 fi
