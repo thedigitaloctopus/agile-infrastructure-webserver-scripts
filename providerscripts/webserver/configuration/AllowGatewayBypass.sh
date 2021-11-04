@@ -88,7 +88,9 @@ then
     /bin/echo ")\$" >> /etc/lighttpd/bypass_snippet.dat
     /bin/echo "\$HTTP[\"remoteip\"] !~ \"^(" >> /etc/lighttpd/bypass_snippet.dat
     
-    /bin/sed -i -e '/####BYPASS####/{r /etc/lighttpd/bypass_snippet.dat' -e 'd}' /etc/apache2/sites-available/${WEBSITE_NAME} 
-
+    /bin/sed -i -e '/####BYPASS####/{r /etc/lighttpd/bypass_snippet.dat' -e 'd}' /etc/lighttpd/lighttpd.conf
+    /bin/sed -i '/####BYPASS1####/}/g' /etc/lighttpd/lighttpd.conf
+    
+    /bin/rm /etc/lighttpd/bypass_snippet.dat
 
 fi
