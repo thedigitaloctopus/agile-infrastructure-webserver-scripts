@@ -229,7 +229,7 @@ fi
 
 /bin/echo "
    location / {
-        allow all;
+      # allow all;
         #If we discover later on that we want the gateway guardian enabled we can sed out these placeholders
         ####BYPASS####
         ####XXXX#### auth_basic \"Private Property\";
