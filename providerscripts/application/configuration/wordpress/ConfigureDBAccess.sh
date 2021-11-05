@@ -54,12 +54,7 @@ else
     host="${dbip}"
 fi
 
-if ( [ ! -f ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED ] )
-then
-    exit
-fi
-
-if ( [ -f ${HOME}/runtime/APPLICATION_DB_CONFIGURED ]  )
+if ( [ ! -f ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED ] && [ -f ${HOME}/runtime/APPLICATION_DB_CONFIGURED ]  )
 then
     exit
 fi
