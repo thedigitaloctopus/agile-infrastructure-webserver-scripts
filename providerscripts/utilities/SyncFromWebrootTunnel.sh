@@ -66,12 +66,12 @@ if ( [ "`/bin/ls -l ${HOME}/webrootsync/incomingupdates/webrootsync*.tar | /usr/
 then
     if ( [ -f ${HOME}/runtime/FIRST_TUNNEL_SYNC ] )
     then
-        /bin/cat ${HOME}/webrootsync/incomingupdates/webrootsync*.tar | /bin/tar -xf - -i
+        /bin/cat ${HOME}/webrootsync/incomingupdates/webrootsync*.tar | /bin/tar -xf - -i 2>/dev/null
         /bin/rm ${HOME}/runtime/FIRST_TUNNEL_SYNC
         updated=1
     else
-        /bin/cat ${HOME}/webrootsync/incomingupdates/webrootsync*.tar | /bin/tar -xf - --keep-newer-files -i
-        /bin/rm ${HOME}/webrootsync/incomingupdates/webrootsync*.tar
+        /bin/cat ${HOME}/webrootsync/incomingupdates/webrootsync*.tar | /bin/tar -xf - --keep-newer-files -i 2>/dev/null
+        /bin/rm ${HOME}/webrootsync/incomingupdates/webrootsync*.tar 2>/dev/null
         updated=1
     fi
 fi
