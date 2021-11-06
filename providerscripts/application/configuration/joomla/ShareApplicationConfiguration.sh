@@ -106,15 +106,18 @@ if ( [ "${changed}" = "config" ] )
 then
     /bin/cp ${HOME}/config/joomla_configuration.php ${HOME}/runtime/joomla_configuration.php
     /bin/cp ${HOME}/config/joomla_configuration.php /var/www/html/configuration.php
+    /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
 fi
 if ( [ "${changed}" = "main" ] )
 then
     /bin/cp /var/www/html/configuration.php ${HOME}/config/joomla_configuration.php
     /bin/cp /var/www/html/configuration.php ${HOME}/runtime/joomla_configuration.php
+    /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
 fi
 if ( [ "${changed}" = "runtime" ] )
 then
     /bin/cp ${HOME}/runtime/joomla_configuration.php ${HOME}/config/joomla_configuration.php
     /bin/cp ${HOME}/runtime/joomla_configuration.php /var/www/html/configuration.php
+    /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
 fi
 
