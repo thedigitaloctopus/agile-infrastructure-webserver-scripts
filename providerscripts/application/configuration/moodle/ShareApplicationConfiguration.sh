@@ -106,14 +106,17 @@ if ( [ "${changed}" = "config" ] )
 then
     /bin/cp ${HOME}/config/moodle_config.php ${HOME}/runtime/moodle_config.php
     /bin/cp ${HOME}/config/moodle_config.php /var/www/html/moodle/config.php
+    /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
 fi
 if ( [ "${changed}" = "main" ] )
 then
     /bin/cp /var/www/html/moodle/config.php ${HOME}/config/moodle_config.php
     /bin/cp /var/www/html/moodle/config.php ${HOME}/runtime/moodle_config.php
+    /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
 fi
 if ( [ "${changed}" = "runtime" ] )
 then
     /bin/cp ${HOME}/runtime/moodle_config.php ${HOME}/config/moodle_config.php
     /bin/cp ${HOME}/runtime/moodle_config.php /var/www/html/moodle/config.php
+    /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
 fi
