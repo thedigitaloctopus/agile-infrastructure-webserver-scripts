@@ -106,14 +106,17 @@ if ( [ "${changed}" = "config" ] )
 then
     /bin/cp ${HOME}/config/wordpress_config.php ${HOME}/runtime/wordpress_config.php
     /bin/cp ${HOME}/config/wordpress_config.php /var/www/wp-config.php
+    /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
 fi
 if ( [ "${changed}" = "main" ] )
 then
     /bin/cp /var/www/wp-config.php ${HOME}/config/wordpress_config.php
     /bin/cp /var/www/wp-config.php ${HOME}/runtime/wordpress_config.php
+    /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
 fi
 if ( [ "${changed}" = "runtime" ] )
 then
     /bin/cp ${HOME}/runtime/wordpress_config.php ${HOME}/config/wordpress_config.php
     /bin/cp ${HOME}/runtime/wordpress_config.php /var/www/wp-config.php
+    /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
 fi
