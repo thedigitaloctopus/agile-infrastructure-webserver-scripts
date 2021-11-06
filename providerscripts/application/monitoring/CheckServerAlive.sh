@@ -32,7 +32,7 @@ DB_N="`/bin/sed '1q;d' ${HOME}/config/credentials/shit`"
 DB_P="`/bin/sed '2q;d' ${HOME}/config/credentials/shit`"
 DB_U="`/bin/sed '3q;d' ${HOME}/config/credentials/shit`"
 
-if ( [ ! -f ${HOME}/config/APPLICATION_CONFIGURATION_PREPARED ] && [ ! -f ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED ] )
+if ( [ ! -f ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED ] )
 then
     exit
 fi
