@@ -23,18 +23,21 @@
 if ( [ ! -f ${HOME}/runtime/drupal_settings.php ] )
 then
     /bin/cp /var/www/html/sites/default/default.settings.php ${HOME}/runtime/drupal_settings.php
+    /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
     #/bin/touch ${HOME}/runtime/drupal_settings.php
 fi
 
 if ( [ ! -f ${HOME}/config/drupal_settings.php ] )
 then
     /bin/cp /var/www/html/sites/default/default.settings.php ${HOME}/config/drupal_settings.php
+    /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
     #/bin/touch ${HOME}/config/drupal_settings.php
 fi
 
 if ( [ ! -f /var/www/html/sites/default/settings.php ] )
 then
     /bin/cp /var/www/html/sites/default/default.settings.php /var/www/html/sites/default/settings.php
+    /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
     #/bin/touch /var/www/html/sites/default/settings.php
 fi
 
@@ -94,14 +97,17 @@ if ( [ "${changed}" = "config" ] )
 then
     /bin/cp ${HOME}/config/drupal_settings.php ${HOME}/runtime/drupal_settings.php
     /bin/cp ${HOME}/config/drupal_settings.php /var/www/html/sites/default/settings.php
+    /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
 fi
 if ( [ "${changed}" = "main" ] )
 then
     /bin/cp /var/www/html/sites/default/settings.php ${HOME}/config/drupal_settings.php
     /bin/cp /var/www/html/sites/default/settings.php ${HOME}/runtime/drupal_settings.php
+    /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
 fi
 if ( [ "${changed}" = "runtime" ] )
 then
     /bin/cp ${HOME}/runtime/drupal_settings.php ${HOME}/config/drupal_settings.php
     /bin/cp ${HOME}/runtime/drupal_settings.php /var/www/html/sites/default/settings.php
+    /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
 fi
