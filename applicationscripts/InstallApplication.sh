@@ -36,8 +36,8 @@ then
     ${HOME}/providerscripts/email/SendEmail.sh "AN APPLICATION HAS BEEN INSTALLED" "The application sourcecode from repository: ${APPLICATION_BASELINE_SOURCECODE_REPOSITORY} has been installed"
 elif ( [ "${INSTALLED_VIRGIN_APPLICATION}" = "0" ] )
 then
-    APPLICATION_REPOSITORY_NAME="${WEBSITE_SUBDOMAIN}-${WEBSITE_NAME}-webroot-sourcecode-${BUILD_ARCHIVE_CHOICE}-${BUILD_IDENTIFIER}"
-    ${HOME}/providerscripts/git/GitPull.sh ${APPLICATION_REPOSITORY_PROVIDER} ${APPLICATION_REPOSITORY_USERNAME} ${APPLICATION_REPOSITORY_PASSWORD} ${APPLICATION_REPOSITORY_OWNER} ${APPLICATION_REPOSITORY_NAME}
+  #  APPLICATION_REPOSITORY_NAME="${WEBSITE_SUBDOMAIN}-${WEBSITE_NAME}-webroot-sourcecode-${BUILD_ARCHIVE_CHOICE}-${BUILD_IDENTIFIER}"
+  #  ${HOME}/providerscripts/git/GitPull.sh ${APPLICATION_REPOSITORY_PROVIDER} ${APPLICATION_REPOSITORY_USERNAME} ${APPLICATION_REPOSITORY_PASSWORD} ${APPLICATION_REPOSITORY_OWNER} ${APPLICATION_REPOSITORY_NAME}
 
     #If we can't get our sourcecode from the repo try the datastore
     if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh SUPERSAFEWEBROOT:1`" ]  && [ "`/bin/ls -l /var/www/html | /usr/bin/wc -l`" -lt "10" ] )
