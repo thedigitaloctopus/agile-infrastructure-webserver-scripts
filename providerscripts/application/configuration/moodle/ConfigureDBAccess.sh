@@ -102,7 +102,7 @@ if ( [ -f /var/www/html/moodle/config.php ] &&
 then
     if ( [ ! -f ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED ] )
     then
-        /bin/echo " " >> ${HOME}/runtime/drupal_settings.php
+        /bin/echo " " >> ${HOME}/runtime/moodle_config.php 
     fi
     /bin/touch ${HOME}/runtime/APPLICATION_DB_CONFIGURED
     exit
@@ -123,73 +123,73 @@ echo \"hello, you need to surf to ${WEBSITEURL}/moodle \"
 ?>" > /var/www/html/index.php
 
 #Set session handler to be database. May (will) get issues if trying to use filesystem
-/bin/sed -i '/\/\/.*\\core\\session\\database/s/^\/\///' /var/www/html/moodle/config.php
-/bin/sed -i '/\/\/.*session_database_acquire_lock_timeout/s/^\/\///' /var/www/html/moodle/config.php
+/bin/sed -i '/\/\/.*\\core\\session\\database/s/^\/\///' ${HOME}/runtime/moodle_config.php 
+/bin/sed -i '/\/\/.*session_database_acquire_lock_timeout/s/^\/\///' ${HOME}/runtime/moodle_config.php 
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:DBaaS`" = "1" ] )
 then
     if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEDBaaSINSTALLATIONTYPE:Maria`" = "1" ] )
     then
-        /bin/sed -i "/->dbtype /c\    \$CFG->dbtype    = \"mariadb\";" /var/www/html/moodle/config.php
+        /bin/sed -i "/->dbtype /c\    \$CFG->dbtype    = \"mariadb\";" ${HOME}/runtime/moodle_config.php 
         /bin/echo "For your information, this website uses Maria DB" > /var/www/html/dbe.dat
     elif ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEDBaaSINSTALLATIONTYPE:MySQL`" = "1" ] )
     then
-        /bin/sed -i "/->dbtype /c\    \$CFG->dbtype    = \"mysqli\";" /var/www/html/moodle/config.php
+        /bin/sed -i "/->dbtype /c\    \$CFG->dbtype    = \"mysqli\";" ${HOME}/runtime/moodle_config.php 
         /bin/echo "For your information, this website uses MySQL" > /var/www/html/dbe.dat
     elif ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEDBaaSINSTALLATIONTYPE:Postgres`" = "1" ] )
     then
-        /bin/sed -i "/->dbtype /c\    \$CFG->dbtype    = \"pgsql\";" /var/www/html/moodle/config.php
+        /bin/sed -i "/->dbtype /c\    \$CFG->dbtype    = \"pgsql\";" ${HOME}/runtime/moodle_config.php 
         /bin/echo "For your information, this website uses Postgres" > /var/www/html/dbe.dat
     fi
 elif ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:Maria`" = "1" ] )
 then
-    /bin/sed -i "/->dbtype /c\    \$CFG->dbtype    = \"mariadb\";" /var/www/html/moodle/config.php
+    /bin/sed -i "/->dbtype /c\    \$CFG->dbtype    = \"mariadb\";" ${HOME}/runtime/moodle_config.php 
     /bin/echo "For your information, this website uses MariaDB" > /var/www/html/dbe.dat
 elif ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:MySQL`" = "1" ] )
 then
-    /bin/sed -i "/->dbtype /c\    \$CFG->dbtype    = \"mysqli\";" /var/www/html/moodle/config.php 
+    /bin/sed -i "/->dbtype /c\    \$CFG->dbtype    = \"mysqli\";" ${HOME}/runtime/moodle_config.php 
     /bin/echo "For your information, this website uses MySQL" > /var/www/html/dbe.dat
 elif ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:Postgres`" = "1" ] )
 then
-    /bin/sed -i "/->dbtype /c\    \$CFG->dbtype    = \"pgsql\";" /var/www/html/moodle/config.php
+    /bin/sed -i "/->dbtype /c\    \$CFG->dbtype    = \"pgsql\";" ${HOME}/runtime/moodle_config.php 
     /bin/echo "For your information, this website uses Postgres" > /var/www/html/dbe.dat
 fi
 
-if ( [ -f /var/www/html/moodle/config.php ] && [ "`/bin/grep "${name}" /var/www/html/moodle/config.php`" = "" ] )
+if ( [ -f /var/www/html/moodle/config.php ] && [ "`/bin/grep "${name}" ${HOME}/runtime/moodle_config.php`" = "" ] )
 then
-    /bin/sed -i "/->dbuser /c\    \$CFG->dbuser    = \"${name}\";" /var/www/html/moodle/config.php
+    /bin/sed -i "/->dbuser /c\    \$CFG->dbuser    = \"${name}\";" ${HOME}/runtime/moodle_config.php 
 fi
 
-if ( [ -f /var/www/html/moodle/config.php ] && [ "`/bin/grep "${database}" /var/www/html/moodle/config.php`" = "" ] )
+if ( [ -f /var/www/html/moodle/config.php ] && [ "`/bin/grep "${database}" ${HOME}/runtime/moodle_config.php`" = "" ] )
 then
-    /bin/sed -i "/->dbname /c\    \$CFG->dbname    = \"${database}\";" /var/www/html/moodle/config.php
+    /bin/sed -i "/->dbname /c\    \$CFG->dbname    = \"${database}\";" ${HOME}/runtime/moodle_config.php 
 fi
 
-if ( [ -f /var/www/html/moodle/config.php ] && [ "`/bin/grep "${password}" /var/www/html/moodle/config.php`" = "" ] )
+if ( [ -f /var/www/html/moodle/config.php ] && [ "`/bin/grep "${password}" ${HOME}/runtime/moodle_config.php`" = "" ] )
 then
-    /bin/sed -i "/->dbpass /c\    \$CFG->dbpass    = \"${password}\";" /var/www/html/moodle/config.php
+    /bin/sed -i "/->dbpass /c\    \$CFG->dbpass    = \"${password}\";" ${HOME}/runtime/moodle_config.php 
 fi
 
-if ( [ "${host}" = "127.0.0.1" ] || ( [ "`/bin/grep "${host}" /var/www/html/moodle/config.php`" = "" ]  && [ "${host}" != "" ] ) )
+if ( [ "${host}" = "127.0.0.1" ] || ( [ "`/bin/grep "${host}" ${HOME}/runtime/moodle_config.php`" = "" ]  && [ "${host}" != "" ] ) )
 then
-    /bin/sed -i "/->dbhost /c\    \$CFG->dbhost    = \"${host}\";" /var/www/html/moodle/config.php
+    /bin/sed -i "/->dbhost /c\    \$CFG->dbhost    = \"${host}\";" ${HOME}/runtime/moodle_config.php 
 fi
 
-if ( [ -f /var/www/html/moodle/config.php ] && [ "`/bin/cat /var/www/html/moodle/config.php | /bin/grep "dbport" | /bin/grep "${DB_PORT}"`" = "" ] )
+if ( [ -f /var/www/html/moodle/config.php ] && [ "`/bin/cat ${HOME}/runtime/moodle_config.php | /bin/grep "dbport" | /bin/grep "${DB_PORT}"`" = "" ] )
 then
-    /bin/sed -i "/dbport/c\     \'dbport\' => \'${DB_PORT}\'," /var/www/html/moodle/config.php
+    /bin/sed -i "/dbport/c\     \'dbport\' => \'${DB_PORT}\'," ${HOME}/runtime/moodle_config.php 
 fi
 
-if ( [ -f /var/www/html/moodle/config.php ] && [ "`/bin/cat /var/www/html/moodle/config.php | /bin/grep "wwwroot" | /bin/grep "${websiteurl}"`" = "" ] )
+if ( [ -f /var/www/html/moodle/config.php ] && [ "`/bin/cat ${HOME}/runtime/moodle_config.php | /bin/grep "wwwroot" | /bin/grep "${websiteurl}"`" = "" ] )
 then
-    # /bin/sed -i "/\$CFG->wwwroot/c\     \$CFG->wwwroot    = \"https://${websiteurl}/moodle\";" /var/www/html/moodle/config.php
-    /bin/sed -i "0,/\$CFG->wwwroot/ s/\$CFG->wwwroot.*/\$CFG->wwwroot = \"https:\/\/${websiteurl}\/moodle\";/" /var/www/html/moodle/config.php
+    # /bin/sed -i "/\$CFG->wwwroot/c\     \$CFG->wwwroot    = \"https://${websiteurl}/moodle\";" ${HOME}/runtime/moodle_config.php 
+    /bin/sed -i "0,/\$CFG->wwwroot/ s/\$CFG->wwwroot.*/\$CFG->wwwroot = \"https:\/\/${websiteurl}\/moodle\";/" ${HOME}/runtime/moodle_config.php 
 
 fi
 
-if ( [ -f /var/www/html/moodle/config.php ] && [ "`/bin/cat /var/www/html/moodle/config.php | /bin/grep "moodledata" | /bin/grep "dataroot" | /bin/grep "\/var\/www\/html\/moodledata"`" = "" ] )
+if ( [ -f /var/www/html/moodle/config.php ] && [ "`/bin/cat ${HOME}/runtime/moodle_config.php | /bin/grep "moodledata" | /bin/grep "dataroot" | /bin/grep "\/var\/www\/html\/moodledata"`" = "" ] )
 then
-    /bin/sed -i "0,/\$CFG->dataroot/ s/\$CFG->dataroot.*/\$CFG->dataroot = \'\/var\/www\/html\/moodledata\';/" /var/www/html/moodle/config.php
+    /bin/sed -i "0,/\$CFG->dataroot/ s/\$CFG->dataroot.*/\$CFG->dataroot = \'\/var\/www\/html\/moodledata\';/" ${HOME}/runtime/moodle_config.php 
 fi
 
 WEBSITE_DISPLAY_NAME="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEDISPLAYNAME'`"
