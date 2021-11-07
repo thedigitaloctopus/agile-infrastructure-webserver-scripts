@@ -47,13 +47,6 @@ then
     exit
 fi
 
-#If we the default configuration file hasn't been set yet, then exit. It will be on the shared config directory or the
-#not shared runtime directory on an application by application basis
-if ( [ -f ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED ] && [ -f ${HOME}/runtime/APPLICATION_DB_CONFIGURED ] )
-then
-    exit
-fi
-
 if ( [ ! -f /var/www/html/.htaccess ] )
 then
     /bin/cp ${HOME}/providerscripts/application/configuration/moodle-htaccess.txt /var/www/html/.htaccess
@@ -108,6 +101,11 @@ then
     exit
 else
     /bin/rm ${HOME}/runtime/APPLICATION_DB_CONFIGURED
+fi
+
+if ( [ -f ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED ] && [ -f ${HOME}/runtime/APPLICATION_DB_CONFIGURED ] )
+then
+    exit
 fi
 
 #Remember if we are here, we are installing from a backup or a baseline. For moodle, backups and baselines are
