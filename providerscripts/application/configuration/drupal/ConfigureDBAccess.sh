@@ -67,11 +67,6 @@ else
     host="${dbip}"
 fi
 
-if ( [ -f ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED ] &&  [ -f ${HOME}/runtime/APPLICATION_DB_CONFIGURED ] )
-then
-    exit
-fi
-
 if ( [ -f /var/www/html/sites/default/settings.php ] &&
     [ "${name}" != "" ] && [ "${password}" != "" ] && [ "${database}" != "" ] && [ "${host}" != "" ] &&
     [ "`/bin/grep ${name} /var/www/html/sites/default/settings.php`" != "" ] &&
@@ -87,6 +82,11 @@ then
     exit
 else
     /bin/rm ${HOME}/runtime/APPLICATION_DB_CONFIGURED
+fi
+
+if ( [ -f ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED ] &&  [ -f ${HOME}/runtime/APPLICATION_DB_CONFIGURED ] )
+then
+    exit
 fi
 
 if ( [ ! -f /var/www/html/.htaccess ] )
