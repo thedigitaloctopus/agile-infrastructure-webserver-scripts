@@ -54,11 +54,6 @@ else
     host="${dbip}"
 fi
 
-if ( [ -f ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED ] && [ -f ${HOME}/runtime/APPLICATION_DB_CONFIGURED ]  )
-then
-    exit
-fi
-
 if ( [ -f /var/www/wp-config.php ] &&
     [ "${name}" != "" ] && [ "${password}" != "" ] && [ "${database}" != "" ] && [ "${host}" != "" ] &&
     [ "`/bin/grep ${name} /var/www/wp-config.php`" != "" ] &&
@@ -74,6 +69,11 @@ then
     exit
 else
     /bin/rm ${HOME}/runtime/APPLICATION_DB_CONFIGURED
+fi
+
+if ( [ -f ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED ] && [ -f ${HOME}/runtime/APPLICATION_DB_CONFIGURED ]  )
+then
+    exit
 fi
 
 if ( [ ! -f /var/www/html/.htaccess ] )
