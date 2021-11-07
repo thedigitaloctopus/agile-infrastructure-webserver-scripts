@@ -67,7 +67,7 @@ else
     host="${dbip}"
 fi
 
-if ( [ ! -f ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED ] &&  [ -f ${HOME}/runtime/APPLICATION_DB_CONFIGURED ] )
+if ( [ -f ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED ] &&  [ -f ${HOME}/runtime/APPLICATION_DB_CONFIGURED ] )
 then
     exit
 fi
@@ -79,6 +79,10 @@ if ( [ -f /var/www/html/sites/default/settings.php ] &&
     [ "`/bin/grep ${database} /var/www/html/sites/default/settings.php`" != "" ] &&
     [ "`/bin/grep ${host} /var/www/html/sites/default/settings.php`" != "" ] )
 then
+    if ( [ ! -f ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED ] )
+    then
+        /bin/echo " " >> ${HOME}/runtime/drupal_settings.php
+    fi
     /bin/touch ${HOME}/runtime/APPLICATION_DB_CONFIGURED
     exit
 else
