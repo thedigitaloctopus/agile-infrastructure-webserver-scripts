@@ -37,12 +37,13 @@ perl_version="`/usr/bin/perl -v | /bin/egrep -o 'v[0-9]+\.[0-9]+\.[0-9]+' | /bin
 
 #Download the latest versions of the software we will be using
 /usr/bin/wget https://nginx.org/download/nginx-${nginx_latest_version}.tar.gz && /bin/tar zxvf nginx-${nginx_latest_version}.tar.gz
-/usr/bin/wget https://github.com/PhilipHazel/pcre2/releases/download/${pcre_latest_version}/${pcre_latest_version}.tar.gz && /bin/tar zxvf pcre-${pcre_latest_version}.tar.gz
+/usr/bin/wget -qO- https://github.com/PhilipHazel/pcre2/releases/download/${pcre_latest_version}/${pcre_latest_version}.tar.gz | /bin/tar xzf -
 /usr/bin/wget https://www.zlib.net/zlib-${zlib_latest_version}.tar.gz && /bin/tar zxvf zlib-${zlib_latest_version}.tar.gz
 /usr/bin/wget https://www.openssl.org/source/openssl-${openssl_latest_version}.tar.gz && tar xzvf openssl-${openssl_latest_version}.tar.gz
 
+
 #Build PCRE (Perl Compatible Regular Expressions)
-cd pcre-${pcre_latest_version}
+cd ${pcre_latest_version}
 ./configure --prefix=/usr/local/pcre 
 /usr/bin/make
 /usr/bin/make install
