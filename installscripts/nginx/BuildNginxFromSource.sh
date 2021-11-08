@@ -77,7 +77,7 @@ then
 
    # #Prepare and install ModSecurity nginx adapter
    # /usr/bin/git clone https://github.com/SpiderLabs/ModSecurity-nginx
-   ${HOME}/installscripts/nginx/BuildModsecurityForSource.sh
+   . ${HOME}/installscripts/nginx/BuildModsecurityForSource.sh
 fi
 
 /bin/rm *.tar.gz*
