@@ -218,6 +218,7 @@ LoadModule http2_module /usr/local/apache2/modules/mod_http2.so
 LoadModule authn_core_module /usr/local/apache2/modules/mod_authn_core.so
 LoadModule authz_user_module /usr/local/apache2/modules/mod_authz_user.so
 LoadModule authn_file_module /usr/local/apache2/modules/mod_authn_file.so
+LoadModule authz_host_module modules/mod_authz_host.so
 LoadModule auth_basic_module /usr/local/apache2/modules/mod_auth_basic.so" > /etc/apache2/httpd.conf.$$
   
 if ( [ "${2}" = "modsecurity" ] )
