@@ -62,21 +62,22 @@ cd ..
 
 if ( [ "${2}" = "modsecurity" ] )
 then
-    #Prepare and install ModSecurity
-    /usr/bin/git clone https://github.com/SpiderLabs/ModSecurity
-    cd ModSecurity
-    dir=`/usr/bin/pwd`
-    /usr/bin/git checkout v3/master
-    /usr/bin/git submodule init
-    /usr/bin/git submodule update
-    /bin/sh build.sh
-    ./configure --with-pcre=../${pcre_latest_version} --with-maxmind=no
-    /usr/bin/make
-    /usr/bin/make install
-    cd ..
+   # #Prepare and install ModSecurity
+   # /usr/bin/git clone https://github.com/SpiderLabs/ModSecurity
+   # cd ModSecurity
+   # dir=`/usr/bin/pwd`
+   # /usr/bin/git checkout v3/master
+   # /usr/bin/git submodule init
+   # /usr/bin/git submodule update
+   # /bin/sh build.sh
+   # ./configure --with-pcre=../${pcre_latest_version} --with-maxmind=no
+   # /usr/bin/make
+   # /usr/bin/make install
+   # cd ..
 
-    #Prepare and install ModSecurity nginx adapter
-    /usr/bin/git clone https://github.com/SpiderLabs/ModSecurity-nginx
+   # #Prepare and install ModSecurity nginx adapter
+   # /usr/bin/git clone https://github.com/SpiderLabs/ModSecurity-nginx
+   ${HOME}/installscripts/nginx/BuildModsecurityForSource.sh
 fi
 
 /bin/rm *.tar.gz*
