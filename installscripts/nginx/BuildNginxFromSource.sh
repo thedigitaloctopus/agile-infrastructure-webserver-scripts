@@ -166,7 +166,6 @@ Description=nginx - high performance web server
 Documentation=https://nginx.org/en/docs/
 After=network-online.target remote-fs.target nss-lookup.target
 Wants=network-online.target
-
 [Service]
 Type=forking
 PIDFile=/var/run/nginx.pid
@@ -174,7 +173,6 @@ ExecStartPre=/usr/sbin/nginx -t -c /etc/nginx/nginx.conf
 ExecStart=/usr/sbin/nginx -c /etc/nginx/nginx.conf
 ExecReload=/bin/kill -s HUP $MAINPID
 ExecStop=/bin/kill -s TERM $MAINPID
-
 [Install]
 WantedBy=multi-user.target" > /etc/systemd/system/nginx.service
 
@@ -217,15 +215,12 @@ WantedBy=multi-user.target" > /etc/systemd/system/nginx.service
 
 /bin/echo "# regex to split $uri to $fastcgi_script_name and $fastcgi_path
 fastcgi_split_path_info ^(.+?\.php)(/.*)$;
-
 # Check that the PHP script exists before passing it
 try_files $fastcgi_script_name =404;
-
 # Bypass the fact that try_files resets $fastcgi_path_info
 # see: http://trac.nginx.org/nginx/ticket/321
 set $path_info $fastcgi_path_info;
 fastcgi_param PATH_INFO $path_info;
-
 fastcgi_index index.php;
 include fastcgi.conf;" > /etc/nginx/snippets/fastcgi-php.conf
 
