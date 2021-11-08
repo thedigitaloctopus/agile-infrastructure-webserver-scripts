@@ -27,20 +27,20 @@
 
 #Install needed libraries
 /usr/bin/apt-get -qq -y  install libnghttp2-dev  build-essential automake autoconf libtool software-properties-common libtool-bin libgeoip-dev
-
+/usr/bin/apt-get install -y -qq libpcre3-dev
 cd /usr/local/src
 
 #Download and build PCRE
-pcre_latest_version="`/usr/bin/curl 'https://ftp.pcre.org/pub/pcre/' | /bin/egrep -o 'pcre-[0-9]+\.[0-9]+' | /bin/sed 's/pcre-//g' | /usr/bin/sort --version-sort | /usr/bin/uniq | /usr/bin/tail -1`"
-/usr/bin/wget -O- https://ftp.pcre.org/pub/pcre/pcre-${pcre_latest_version}.tar.gz | /bin/tar -zxf -
+#pcre_latest_version="`/usr/bin/curl 'https://ftp.pcre.org/pub/pcre/' | /bin/egrep -o 'pcre-[0-9]+\.[0-9]+' | /bin/sed 's/pcre-//g' | /usr/bin/sort --version-sort | /usr/bin/uniq | /usr/bin/tail -1`"
+#/usr/bin/wget -O- https://ftp.pcre.org/pub/pcre/pcre-${pcre_latest_version}.tar.gz | /bin/tar -zxf -
 #openssl_latest_version="`/usr/bin/wget -q -O - https://www.openssl.org/source | grep openssl-1. | /bin/sed 's/.*openssl-//g' | /bin/sed 's/.tar.*//g'`"
 #/usr/bin/wget https://www.openssl.org/source/openssl-${openssl_latest_version}.tar.gz && tar xzvf openssl-${openssl_latest_version}.tar.gz
 
-cd /usr/local/src/pcre*
+#cd /usr/local/src/pcre*
 
-./configure --prefix=/usr/local/pcre 
-/usr/bin/make
-/usr/bin/make install
+#./configure --prefix=/usr/local/pcre 
+#/usr/bin/make
+#/usr/bin/make install
 
 cd /usr/local/src
 
@@ -86,7 +86,7 @@ cd /usr/local/src/httpd-*/srclib
 
 cd /usr/local/src/httpd-*
     
-options=" --prefix=/usr/local/apache2 --sysconfdir=/etc/apache2 --enable-ssl --enable-so --enable-http2 --enable-rewrite --enable-mods-shared=\"reallyall\" --with-mpm=worker --with-included-apr --with-apxs2=/usr/local/apache2/bin/apxs --with-pcre=/usr/local/pcre --with-expat=/usr/local/expat/ "
+options=" --prefix=/usr/local/apache2 --sysconfdir=/etc/apache2 --enable-ssl --enable-so --enable-http2 --enable-rewrite --enable-mods-shared=\"reallyall\" --with-mpm=worker --with-included-apr --with-apxs2=/usr/local/apache2/bin/apxs --with-pcre --with-expat=/usr/local/expat/ "
 
 ./buildconf 
 
