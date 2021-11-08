@@ -27,27 +27,28 @@ buildtype="${1}"
 
 #Instll the tools needed for complilation
 /usr/bin/apt-get install -qq -y software-properties-common libtool build-essential curl libmaxminddb-dev libgeoip-dev
+/usr/bin/apt-get install -y -qq libpcre3-dev
 
 #Get the latest version numbers of the software that we need
 nginx_latest_version="`/usr/bin/curl 'http://nginx.org/download/' |   /bin/egrep -o 'nginx-[0-9]+\.[0-9]+\.[0-9]+' | /bin/sed 's/nginx-//g' |  /usr/bin/sort --version-sort | /usr/bin/uniq | /usr/bin/tail -1`"
-pcre_latest_version="`/usr/bin/curl https://github.com/PhilipHazel/pcre2/releases | /bin/grep pcre2[-] | /bin/grep '.tar.gz' | /usr/bin/head -1 |  /bin/sed 's/.*\///g' | /bin/sed 's/\.tar\.gz.*//g'`"
+#pcre_latest_version="`/usr/bin/curl https://github.com/PhilipHazel/pcre2/releases | /bin/grep pcre2[-] | /bin/grep '.tar.gz' | /usr/bin/head -1 |  /bin/sed 's/.*\///g' | /bin/sed 's/\.tar\.gz.*//g'`"
 zlib_latest_version="`/usr/bin/curl 'https://www.zlib.net' | /bin/egrep -o 'zlib-[0-9]+\.[0-9]+\.[0-9]+' | /bin/sed 's/zlib-//g' | /usr/bin/sort --version-sort | /usr/bin/uniq | /usr/bin/tail -1`"
 openssl_latest_version="`/usr/bin/wget -q -O - https://www.openssl.org/source | grep openssl-1. | /bin/sed 's/.*openssl-//g' | /bin/sed 's/.tar.*//g'`"
 perl_version="`/usr/bin/perl -v | /bin/egrep -o 'v[0-9]+\.[0-9]+\.[0-9]+' | /bin/sed 's/v//g'`"
 
 #Download the latest versions of the software we will be using
 /usr/bin/wget https://nginx.org/download/nginx-${nginx_latest_version}.tar.gz && /bin/tar zxvf nginx-${nginx_latest_version}.tar.gz
-/usr/bin/wget -qO- https://github.com/PhilipHazel/pcre2/releases/download/${pcre_latest_version}/${pcre_latest_version}.tar.gz | /bin/tar xzf -
+#/usr/bin/wget -qO- https://github.com/PhilipHazel/pcre2/releases/download/${pcre_latest_version}/${pcre_latest_version}.tar.gz | /bin/tar xzf -
 /usr/bin/wget https://www.zlib.net/zlib-${zlib_latest_version}.tar.gz && /bin/tar zxvf zlib-${zlib_latest_version}.tar.gz
 /usr/bin/wget https://www.openssl.org/source/openssl-${openssl_latest_version}.tar.gz && tar xzvf openssl-${openssl_latest_version}.tar.gz
 
 
 #Build PCRE (Perl Compatible Regular Expressions)
-cd ${pcre_latest_version}
-./configure --prefix=/usr/local/pcre 
-/usr/bin/make
-/usr/bin/make install
-cd ..
+#cd ${pcre_latest_version}
+#./configure --prefix=/usr/local/pcre 
+#/usr/bin/make
+#/usr/bin/make install
+#cd ..
 
 /bin/cp -r openssl-${openssl_latest_version} /usr/local/openssl
 
@@ -77,7 +78,23 @@ then
 
    # #Prepare and install ModSecurity nginx adapter
    # /usr/bin/git clone https://github.com/SpiderLabs/ModSecurity-nginx
-   . ${HOME}/installscripts/nginx/BuildModsecurityForSource.sh
+   #. ${HOME}/installscripts/nginx/BuildModsecurityForSource.sh
+   
+   /usr/bin/apt-get -qq -y install bison build-essential ca-certificates curl dh-autoreconf doxygen flex gawk git iputils-ping libcurl4-gnutls-dev libexpat1-dev libgeoip-dev liblmdb-dev libpcre3-dev libpcre++-dev libssl-dev libtool libxml2 libxml2-dev libyajl-dev locales lua5.3-dev pkg-config wget zlib1g-dev zlibc libgd-dev libxslt-dev
+   /usr/bin/apt-get install -y -qq libcurl4-openssl-dev
+   /usr/bin/apt-get install -y -qq libxml2-dev
+   /usr/bin/apt-get install -y -qq libpcre3-dev
+   /usr/bin/git clone https://github.com/SpiderLabs/ModSecurity
+   cd ModSecurity
+   /usr/bin/git submodule init
+   /usr/bin/git submodule update
+   ./build.sh
+   ./configure
+    /usr/bin/make
+    /usr/bin/make install
+    cd ..
+    /usr/bin/git clone --depth 1 https://github.com/SpiderLabs/ModSecurity-nginx.git
+   
 fi
 
 /bin/rm *.tar.gz*
