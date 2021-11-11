@@ -37,7 +37,7 @@ then
         then
             installed="1"
         fi
-        /bin/rm -r ${HOME}/config/*
+        /bin/rm -r ${HOME}/config/* ${HOME}/config_cache/*
         /bin/touch ${HOME}/config/${SERVER_USER}
         if ( [ "${installed}" = "1" ] )
         then
