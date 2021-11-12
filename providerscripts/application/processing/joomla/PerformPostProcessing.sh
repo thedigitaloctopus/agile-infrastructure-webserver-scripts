@@ -93,7 +93,7 @@ then
             installationstatus="1"
             command="${SUDO} /bin/cp /var/www/html/installation/sql/mysql/joomla.sql /tmp/joomla.sql" && eval ${command}
             command="${SUDO} /bin/sed -i \"s/#__/${PREFIX}_/g\" /tmp/joomla.sql" && eval ${command}
-            command="${SUDO} /bin/sed -i \"s/ENGINE=.* /ENGINE=InnoDB /g\" /tmp/joomla.sql" && eval ${command}
+            command="${SUDO} /bin/sed -i \"s/ENGINE=[a-zA-Z0-9]* /ENGINE=InnoDB /g\" /tmp/joomla.sql" && eval ${command}
             command="${SUDO} /bin/sed -i '1s/^/SET SESSION sql_require_primary_key=0;\n/' /tmp/joomla.sql" && eval ${command}
         else
             installationstatus="2"
@@ -106,9 +106,9 @@ then
             command="${SUDO} /bin/sed -i \"s/#__/${PREFIX}_/g\" /tmp/base.sql" && eval ${command}
             command="${SUDO} /bin/sed -i \"s/#__/${PREFIX}_/g\" /tmp/extensions.sql" && eval ${command}
             command="${SUDO} /bin/sed -i \"s/#__/${PREFIX}_/g\" /tmp/supports.sql" && eval ${command}
-            command="${SUDO} /bin/sed -i \"s/ENGINE=.* /ENGINE=InnoDB /g\" /tmp/base.sql" && eval ${command}
-            command="${SUDO} /bin/sed -i \"s/ENGINE=.* /ENGINE=InnoDB /g\" /tmp/extensions.sql" && eval ${command}
-            command="${SUDO} /bin/sed -i \"s/ENGINE=.* /ENGINE=InnoDB /g\" /tmp/supports.sql" && eval ${command}     
+            command="${SUDO} /bin/sed -i \"s/ENGINE=[a-zA-Z0-9]* /ENGINE=InnoDB /g\" /tmp/base.sql" && eval ${command}
+            command="${SUDO} /bin/sed -i \"s/ENGINE=[a-zA-Z0-9]* /ENGINE=InnoDB /g\" /tmp/extensions.sql" && eval ${command}
+            command="${SUDO} /bin/sed -i \"s/ENGINE=[a-zA-Z0-9]* /ENGINE=InnoDB /g\" /tmp/supports.sql" && eval ${command}     
         fi
     else 
         installationstatus="3"
