@@ -32,27 +32,16 @@ if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" != "" ] )
 then
     if ( [ ! -f ${HOME}/config/${SERVER_USER} ] )
     then
-        installed="0"
-        if ( [ -f ${HOME}/config/INSTALLEDSUCCESSFULLY ] )
-        then
-            installed="1"
-        fi
         /bin/rm -r ${HOME}/config/* ${HOME}/config_cache/*
-        /bin/touch ${HOME}/config/${SERVER_USER}
-        if ( [ "${installed}" = "1" ] )
-        then
-            /bin/touch ${HOME}/config/${INSTALLEDSUCCESSFULLY}
-        fi
         /bin/sleep 5
+        /bin/touch ${HOME}/config/${SERVER_USER}
     fi
-    #if ( [ -f ${HOME}/config/REFRESH_MOUNT ] )
-    #then
-    #    /bin/rm -r ${HOME}/config/*
-    #   # /bin/sleep 20
-    #   # /bin/rm ${HOME}/config/REFRESH_MOUNT
-    #    /bin/umount -f ${HOME}/config
-    #    exit
-    #fi
+    
+    if ( [ -f ${HOME}/runtime/INSTALLEDSUCCESSFULLY ] )
+    then
+        /bin/touch ${HOME}/runtime/INSTALLEDSUCCESSFULLY
+    fi
+
     if ( [ ! -d ${HOME}/config/beingbuiltips ] || [ ! -d ${HOME}/config/webserverpublicips ] || [ ! -d ${HOME}/config/webserverips ] || [ ! -d ${HOME}/config/databaseip ] || [ ! -d ${HOME}/config/databasepublicip ] || [ ! -d ${HOME}/config/bootedwebserverips ] || [ ! -d ${HOME}/config/shuttingdownwebserverips ] || [ ! -d ${HOME}/config/autoscalerip ] || [ ! -d ${HOME}/config/autoscalerpublicip ] || [ ! -d ${HOME}/config/buildclientip ] || [ ! -d ${HOME}/config/credentials ] || [ ! -d ${HOME}/config/webrootsynctunnel ] || [ ! -d ${HOME}/config/ssl ] )
     then
         DIRECTORIESSET="0"
