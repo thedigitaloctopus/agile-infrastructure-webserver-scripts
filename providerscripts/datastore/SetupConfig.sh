@@ -119,8 +119,8 @@ then
                  fi
             done
         else
-            /usr/bin/s3cmd mb s3://${configbucket}
             /bin/rm -r ${HOME}/config ${HOME}/config_cache/* ${HOME}/config_cache/.* 2>/dev/null
+            /usr/bin/s3cmd mb s3://${configbucket}
             /usr/bin/s3fs -o nonempty,allow_other,kernel_cache,use_path_request_style,sigv2 -o use_cache=${HOME}/config_cache -ourl=https://${endpoint} ${configbucket} ${HOME}/config
         fi 
     fi
@@ -130,10 +130,10 @@ if ( [ "${DATASTORE_CHOICE}" = "digitalocean" ] )
 then
     export AWSACCESSKEYID=`/bin/grep '^access_key' ~/.s3cfg | /usr/bin/awk '{print $NF}'`
     export AWSSECRETACCESSKEY=`/bin/grep 'secret_key' ~/.s3cfg | /usr/bin/awk '{print $NF}'`
+    /bin/rm -r ${HOME}/config ${HOME}/config_cache/* ${HOME}/config_cache/.* 2>/dev/null
     /usr/bin/s3cmd mb s3://${configbucket}
     if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] )
     then
-        /bin/rm -r ${HOME}/config ${HOME}/config_cache/* ${HOME}/config_cache/.* 2>/dev/null
         /usr/bin/s3fs -o nonempty,allow_other,kernel_cache,use_path_request_style,sigv2 -o use_cache=${HOME}/config_cache -ourl=https://${endpoint} ${configbucket} ${HOME}/config
     fi
 fi
@@ -142,10 +142,10 @@ if ( [ "${DATASTORE_CHOICE}" = "exoscale" ] )
 then
     export AWSACCESSKEYID=`/bin/grep '^access_key' ~/.s3cfg | /usr/bin/awk '{print $NF}'`
     export AWSSECRETACCESSKEY=`/bin/grep 'secret_key' ~/.s3cfg | /usr/bin/awk '{print $NF}'`
+    /bin/rm -r ${HOME}/config ${HOME}/config_cache/* ${HOME}/config_cache/.* 2>/dev/null
     /usr/bin/s3cmd mb s3://${configbucket}
     if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] )
     then
-        /bin/rm -r ${HOME}/config ${HOME}/config_cache/* ${HOME}/config_cache/.* 2>/dev/null
         /usr/bin/s3fs -o nonempty,allow_other,kernel_cache,use_path_request_style,sigv2 -o use_cache=${HOME}/config_cache -ourl=https://${endpoint} ${configbucket} ${HOME}/config
     fi
 fi
@@ -154,10 +154,10 @@ if ( [ "${DATASTORE_CHOICE}" = "linode" ] )
 then
     export AWSACCESSKEYID=`/bin/grep '^access_key' ~/.s3cfg | /usr/bin/awk '{print $NF}'`
     export AWSSECRETACCESSKEY=`/bin/grep 'secret_key' ~/.s3cfg | /usr/bin/awk '{print $NF}'`
+    /bin/rm -r ${HOME}/config ${HOME}/config_cache/* ${HOME}/config_cache/.* 2>/dev/null
     /usr/bin/s3cmd mb s3://${configbucket}
     if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] )
     then
-        /bin/rm -r ${HOME}/config ${HOME}/config_cache/* ${HOME}/config_cache/.* 2>/dev/null
         /usr/bin/s3fs -o nonempty,allow_other,kernel_cache,use_path_request_style -o use_cache=${HOME}/config_cache -ourl=https://${endpoint} ${configbucket} ${HOME}/config
     fi
 fi
@@ -166,16 +166,16 @@ if ( [ "${DATASTORE_CHOICE}" = "vultr" ] )
 then
     export AWSACCESSKEYID=`/bin/grep '^access_key' ~/.s3cfg | /usr/bin/awk '{print $NF}'`
     export AWSSECRETACCESSKEY=`/bin/grep 'secret_key' ~/.s3cfg | /usr/bin/awk '{print $NF}'`
+    /bin/rm -r ${HOME}/config ${HOME}/config_cache/* ${HOME}/config_cache/.* 2>/dev/null
     /usr/bin/s3cmd mb s3://${configbucket}
     if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] )
     then
-        /bin/rm -r ${HOME}/config ${HOME}/config_cache/* ${HOME}/config_cache/.* 2>/dev/null
         /usr/bin/s3fs -o nonempty,allow_other,kernel_cache,use_path_request_style,sigv2 -o use_cache=${HOME}/config_cache -ourl=https://${endpoint} ${configbucket} ${HOME}/config
     fi
 fi
 
 SERVER_USER="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SERVERUSER'`"
-if (  [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] && [ "`/bin/ls ${HOME}/config/${SERVER_USER}`" = "" ] )
+if (  [ "`/bin/mount | /bin/grep ${HOME}/config`" != "" ] && [ "`/bin/ls ${HOME}/config/${SERVER_USER}`" = "" ] )
 then
     /bin/rm -r ${HOME}/config/*
     /bin/touch ${HOME}/config/${SERVER_USER}
