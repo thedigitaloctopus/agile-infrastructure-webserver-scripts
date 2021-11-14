@@ -28,7 +28,7 @@ if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLAT
 then
     prefix="`/bin/cat /var/www/html/dbp.dat`"
     
-   cache_tables="` ${HOME}/providerscripts/utilities/ConnectToRemoteMYSQLDB.sh " select table_schema as database_name, table_name from information_schema.tables where table_type = 'BASE TABLE' and table_name like '%cache%' order by table_schema, table_name;" | /bin/grep -v 'database_' | /bin/grep -v 'table_' | /usr/bin/awk '{print $NF}'`"
+   cache_tables="` ${HOME}/providerscripts/utilities/ConnectToRemoteMYSQLDB.sh " select table_schema as database_name, table_name from information_schema.tables where table_type = 'BASE TABLE' and table_name like '${prefix}%cache%' order by table_schema, table_name;" | /bin/grep -v 'database_' | /bin/grep -v 'table_' | /usr/bin/awk '{print $NF}'`"
 
    success="yes"
 
@@ -43,7 +43,7 @@ then
        
    done
 
-   if ( [ "${success}" = "yes" ] && [ "`${HOME}/providerscripts/utilities/ConnectToRemoteMYSQLDB.sh "select count(*) from ${prefix}_cache_data;" raw 2>/dev/null`" = "0" ] )
+   if ( [ "${success}" = "yes" ] )
    then
        /bin/echo "TRUNCATED"
    else
@@ -55,7 +55,7 @@ if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLAT
 then
     prefix="`/bin/cat /var/www/html/dbp.dat`"
 
-   cache_tables="` ${HOME}/providerscripts/utilities/ConnectToRemotePostgresDB.sh "select table_schema, table_name from information_schema.tables where table_name like '%cache%' and table_schema not in ('information_schema', 'pg_catalog') and table_type = 'BASE TABLE' order by table_name, table_schema;" | sed -n '/cache/s/.*\b\(.*cache\w*\).*/\1/p'`"
+   cache_tables="` ${HOME}/providerscripts/utilities/ConnectToRemotePostgresDB.sh "select table_schema, table_name from information_schema.tables where table_name like 'prefix%cache%' and table_schema not in ('information_schema', 'pg_catalog') and table_type = 'BASE TABLE' order by table_name, table_schema;" | sed -n '/cache/s/.*\b\(.*cache\w*\).*/\1/p'`"
 
    success="yes"
 
@@ -69,7 +69,7 @@ then
        fi
    done
 
-   if ( [ "${success}" = "yes" ] && [ "`${HOME}/providerscripts/utilities/ConnectToRemotePostgresDB.sh "select count(*) from ${prefix}_cache_data;" raw 2>/dev/null | /bin/sed 's/ //g'`" = "0" ] )
+   if ( [ "${success}" = "yes" ] )
    then
        /bin/echo "TRUNCATED"
    else
