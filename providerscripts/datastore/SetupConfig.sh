@@ -39,7 +39,7 @@ then
     
     if ( [ -f ${HOME}/runtime/INSTALLEDSUCCESSFULLY ] )
     then
-        /bin/touch ${HOME}/runtime/INSTALLEDSUCCESSFULLY
+        /bin/touch ${HOME}/config/INSTALLEDSUCCESSFULLY
     fi
 
     if ( [ ! -d ${HOME}/config/beingbuiltips ] || [ ! -d ${HOME}/config/webserverpublicips ] || [ ! -d ${HOME}/config/webserverips ] || [ ! -d ${HOME}/config/databaseip ] || [ ! -d ${HOME}/config/databasepublicip ] || [ ! -d ${HOME}/config/bootedwebserverips ] || [ ! -d ${HOME}/config/shuttingdownwebserverips ] || [ ! -d ${HOME}/config/autoscalerip ] || [ ! -d ${HOME}/config/autoscalerpublicip ] || [ ! -d ${HOME}/config/buildclientip ] || [ ! -d ${HOME}/config/credentials ] || [ ! -d ${HOME}/config/webrootsynctunnel ] || [ ! -d ${HOME}/config/ssl ] )
