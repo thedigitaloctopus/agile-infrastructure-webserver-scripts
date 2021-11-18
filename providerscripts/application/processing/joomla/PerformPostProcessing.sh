@@ -106,9 +106,9 @@ then
             command="${SUDO} /bin/sed -i \"s/#__/${PREFIX}_/g\" /tmp/base.sql" && eval ${command}
             command="${SUDO} /bin/sed -i \"s/#__/${PREFIX}_/g\" /tmp/extensions.sql" && eval ${command}
             command="${SUDO} /bin/sed -i \"s/#__/${PREFIX}_/g\" /tmp/supports.sql" && eval ${command}
-            command="${SUDO} /bin/sed -i \"s/ENGINE=[a-zA-Z0-9]* /ENGINE=InnoDB /g\" /tmp/base.sql" && eval ${command}
-            command="${SUDO} /bin/sed -i \"s/ENGINE=[a-zA-Z0-9]* /ENGINE=InnoDB /g\" /tmp/extensions.sql" && eval ${command}
-            command="${SUDO} /bin/sed -i \"s/ENGINE=[a-zA-Z0-9]* /ENGINE=InnoDB /g\" /tmp/supports.sql" && eval ${command}     
+           # command="${SUDO} /bin/sed -i \"s/ENGINE=[a-zA-Z0-9]* /ENGINE=InnoDB /g\" /tmp/base.sql" && eval ${command}
+           # command="${SUDO} /bin/sed -i \"s/ENGINE=[a-zA-Z0-9]* /ENGINE=InnoDB /g\" /tmp/extensions.sql" && eval ${command}
+           # command="${SUDO} /bin/sed -i \"s/ENGINE=[a-zA-Z0-9]* /ENGINE=InnoDB /g\" /tmp/supports.sql" && eval ${command}     
         fi
     else 
         installationstatus="3"
