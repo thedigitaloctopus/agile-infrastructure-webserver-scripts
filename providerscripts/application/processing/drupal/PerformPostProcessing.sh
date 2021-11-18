@@ -52,8 +52,11 @@ fi
 if ( [ "${prefix}" = "" ] && [ ! -f /var/www/html/dbp.dat ] )
 then
     prefix="`/bin/cat /dev/urandom | /usr/bin/tr -dc a-z | /usr/bin/head -c${1:-6};echo;`"
-    ${HOME}/providerscripts/utilities/StoreConfigValue.sh "DBPREFIX" "${prefix}"
-    /bin/echo "${prefix}" > /var/www/html/dbp.dat
+    if ( [ "${prefix}" != "" ] )
+    then
+        ${HOME}/providerscripts/utilities/StoreConfigValue.sh "DBPREFIX" "${prefix}"
+        /bin/echo "${prefix}" > /var/www/html/dbp.dat
+    fi
 else
     prefix="`command="${SUDO} /bin/cat /var/www/html/dbp.dat" && eval ${command}`"
 fi
