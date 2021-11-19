@@ -120,8 +120,7 @@ then
             command="${SUDO} /bin/sed -i \"s/ENGINE=[a-zA-Z0-9]* /ENGINE=InnoDB /g\" /tmp/extensions.sql" && eval ${command}
             command="${SUDO} /bin/sed -i \"s/ENGINE=[a-zA-Z0-9]* /ENGINE=InnoDB /g\" /tmp/supports.sql" && eval ${command} 
             command="${SUDO} /bin/sed -i \"s/ENGINE=[a-zA-Z0-9]* /ENGINE=InnoDB /g\" /var/www/html/administrator/components/com_finder/sql/install.mysql.sql" && eval ${command} 
-
-           
+            command="${SUDO} /bin/sed -i \"s/MEMORY /InnoDB /g\" /var/www/html/administrator/components/com_finder/src/Indexer/Indexer.php" && eval ${command} 
         fi
     else 
         installationstatus="3"
