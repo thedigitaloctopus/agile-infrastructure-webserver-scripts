@@ -48,6 +48,13 @@ SUDO="/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E"
 if ( [ "${PREFIX}" = "" ] && [ ! -f /var/www/html/dbp.dat ] )
 then
     PREFIX="`/bin/cat /dev/urandom | /usr/bin/tr -dc a-z | /usr/bin/head -c${1:-6};echo;`"
+    
+    while ( [ "${PREFIX}" = "" ] )
+    do
+        PREFIX="`/bin/cat /dev/urandom | /usr/bin/tr -dc a-z | /usr/bin/head -c${1:-6};echo;`"
+        /bin/sleep 5
+    done
+    
     if ( [ "${PREFIX}" != "" ] )
     then
         ${HOME}/providerscripts/utilities/StoreConfigValue.sh "DBPREFIX" "${PREFIX}"
