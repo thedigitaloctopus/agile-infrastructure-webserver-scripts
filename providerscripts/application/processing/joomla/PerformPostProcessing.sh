@@ -47,19 +47,19 @@ SUDO="/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E"
 #and exits for some reason.
 if ( [ "${PREFIX}" = "" ] && [ ! -f /var/www/html/dbp.dat ] )
 then
-    PREFIX="`/bin/cat /dev/urandom | /usr/bin/tr -dc a-z | /usr/bin/head -c${1:-6};echo;`"
+    PREFIX="`/usr/bin/openssl rand -hex 3`"
     
-    while ( [ "${PREFIX}" = "" ] )
-    do
-        PREFIX="`/bin/cat /dev/urandom | /usr/bin/tr -dc a-z | /usr/bin/head -c${1:-6};echo;`"
-        /bin/sleep 5
-    done
+  #  while ( [ "${PREFIX}" = "" ] )
+  #  do
+  #      PREFIX="`/bin/cat /dev/urandom | /usr/bin/tr -dc a-z | /usr/bin/head -c${1:-6};echo;`"
+  #      /bin/sleep 5
+  #  done
     
-    if ( [ "${PREFIX}" != "" ] )
-    then
+  #  if ( [ "${PREFIX}" != "" ] )
+  #  then
         ${HOME}/providerscripts/utilities/StoreConfigValue.sh "DBPREFIX" "${PREFIX}"
         /bin/echo "${PREFIX}" > /var/www/html/dbp.dat
-    fi
+  #  fi
 else
     PREFIX="`command="${SUDO} /bin/cat /var/www/html/dbp.dat" && eval ${command}`"
 fi
