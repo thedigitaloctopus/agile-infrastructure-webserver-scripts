@@ -52,6 +52,13 @@ fi
 if ( [ "${prefix}" = "" ] && [ ! -f /var/www/html/dbp.dat ] )
 then
     prefix="`/bin/cat /dev/urandom | /usr/bin/tr -dc a-z | /usr/bin/head -c${1:-6};echo;`"
+    
+    while ( [ "${prefix}" = "" ] )
+    do
+        prefix="`/bin/cat /dev/urandom | /usr/bin/tr -dc a-z | /usr/bin/head -c${1:-6};echo;`"
+        /bin/sleep 5
+    done
+    
     if ( [ "${prefix}" != "" ] )
     then
         ${HOME}/providerscripts/utilities/StoreConfigValue.sh "DBPREFIX" "${prefix}"
