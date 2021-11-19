@@ -116,10 +116,9 @@ then
             command="${SUDO} /bin/sed -i \"s/#__/${PREFIX}_/g\" /tmp/base.sql" && eval ${command}
             command="${SUDO} /bin/sed -i \"s/#__/${PREFIX}_/g\" /tmp/extensions.sql" && eval ${command}
             command="${SUDO} /bin/sed -i \"s/#__/${PREFIX}_/g\" /tmp/supports.sql" && eval ${command}
-            command="${SUDO} /bin/sed -i \"s/ENGINE=[a-zA-Z0-9]* /ENGINE=InnoDB /g\" /tmp/base.sql" && eval ${command}
-            command="${SUDO} /bin/sed -i \"s/ENGINE=[a-zA-Z0-9]* /ENGINE=InnoDB /g\" /tmp/extensions.sql" && eval ${command}
-            command="${SUDO} /bin/sed -i \"s/ENGINE=[a-zA-Z0-9]* /ENGINE=InnoDB /g\" /tmp/supports.sql" && eval ${command}   
-            command="${SUDO} /bin/sed -i \"s/ENGINE=[a-zA-Z0-9]* /ENGINE=InnoDB /g\" /var/www/html/administrator/components/com_finder/sql/install.mysql.sql" && eval ${command}             
+           # command="${SUDO} /bin/sed -i \"s/ENGINE=[a-zA-Z0-9]* /ENGINE=InnoDB /g\" /tmp/base.sql" && eval ${command}
+           # command="${SUDO} /bin/sed -i \"s/ENGINE=[a-zA-Z0-9]* /ENGINE=InnoDB /g\" /tmp/extensions.sql" && eval ${command}
+           # command="${SUDO} /bin/sed -i \"s/ENGINE=[a-zA-Z0-9]* /ENGINE=InnoDB /g\" /tmp/supports.sql" && eval ${command}   
         fi
     else 
         installationstatus="3"
@@ -128,6 +127,9 @@ then
     then
         /usr/bin/mysql -f -A -u "${username}" -p"${password}" "${database}" --host="${host}" --port="${DB_PORT}" < /tmp/joomla.sql
     else
+        #Joomla 4 wasn't working unless I changed the default storage engine, is that a good idea?
+        /usr/bin/mysql -f -A -u "${username}" -p"${password}" "${database}" --host="${host}" --port="${DB_PORT}" -e "SET default_storage_engine=MEMORY;"
+        
         /usr/bin/mysql -f -A -u "${username}" -p"${password}" "${database}" --host="${host}" --port="${DB_PORT}" < /tmp/base.sql
         /usr/bin/mysql -f -A -u "${username}" -p"${password}" "${database}" --host="${host}" --port="${DB_PORT}" < /tmp/extensions.sql
         /usr/bin/mysql -f -A -u "${username}" -p"${password}" "${database}" --host="${host}" --port="${DB_PORT}" < /tmp/supports.sql
