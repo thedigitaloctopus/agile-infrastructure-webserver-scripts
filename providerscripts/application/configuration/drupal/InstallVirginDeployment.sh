@@ -20,14 +20,25 @@
 #################################################################################
 #set -x
 
-version="`/bin/echo ${APPLICATION} | /usr/bin/awk -F':' '{print $NF}'`"
+#version="`/bin/echo ${APPLICATION} | /usr/bin/awk -F':' '{print $NF}'`"
+version="`/bin/echo ${APPLICATION} | /usr/bin/awk -F':' '{print $2}'`"
+
 cd /var/www/html
-/usr/bin/wget https://ftp.drupal.org/files/projects/drupal-${version}.tar.gz
-/bin/tar xvfx drupal-${version}.tar.gz
-/bin/rm drupal-${version}.tar.gz
-/bin/mv drupal-${version}/* .
-/bin/mv drupal-${version}/.* .
-/bin/rmdir drupal-${version}
+
+if ( [ "`/bin/echo ${APPLICATION} | /usr/bin/awk -F':' '{print $NF}'`" = "social" ] )
+then
+    product="social"
+else
+    product="drupal"
+fi 
+
+cd /var/www/html
+/usr/bin/wget https://ftp.drupal.org/files/projects/${product}-${version}.tar.gz
+/bin/tar xvfx ${product}-${version}.tar.gz
+/bin/rm ${product}-${version}.tar.gz
+/bin/mv ${product}-${version}/* .
+/bin/mv ${product}-${version}/.* .
+/bin/rmdir ${product}-${version}
 /bin/rm -r .git
 /bin/chown -R www-data.www-data /var/www/html/*
 cd /home/${SERVER_USER}
