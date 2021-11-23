@@ -25,12 +25,12 @@ version="`/bin/echo ${APPLICATION} | /usr/bin/awk -F':' '{print $2}'`"
 
 cd /var/www/html
 
-if ( [ "`/bin/echo ${APPLICATION} | /usr/bin/awk -F':' '{print $NF}'`" = "social" ] )
+product="`/bin/echo ${APPLICATION} | /usr/bin/awk -F':' '{print $NF}'`"
+
+if ( [ "`/bin/echo ${product} | /bin/grep '[0-9]'`" != "" ] )
 then
-    product="social"
-else
     product="drupal"
-fi 
+fi
 
 cd /var/www/html
 /usr/bin/wget https://ftp.drupal.org/files/projects/${product}-${version}.tar.gz
