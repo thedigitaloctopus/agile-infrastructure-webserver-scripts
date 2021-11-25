@@ -20,6 +20,8 @@
 #################################################################################
 #set -x
 
+${HOME}/installscripts/InstallComposer.sh debian
+
 #version="`/bin/echo ${APPLICATION} | /usr/bin/awk -F':' '{print $NF}'`"
 version="`/bin/echo ${APPLICATION} | /usr/bin/awk -F':' '{print $2}'`"
 
