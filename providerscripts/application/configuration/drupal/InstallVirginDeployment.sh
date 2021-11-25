@@ -20,7 +20,6 @@
 #################################################################################
 #set -x
 
-${HOME}/installscripts/InstallComposer.sh debian
 
 #version="`/bin/echo ${APPLICATION} | /usr/bin/awk -F':' '{print $NF}'`"
 version="`/bin/echo ${APPLICATION} | /usr/bin/awk -F':' '{print $2}'`"
@@ -51,6 +50,7 @@ then
     /bin/echo "1"
 elif ( [ "${product}" = "social" ] )
 then
+    ${HOME}/installscripts/InstallComposer.sh debian
     /usr/local/bin/composer create-project goalgorilla/social_template:dev-master DIR --no-interaction --ignore-platform-reqs
     /bin/mv DIR/html/* /var/www/html
     /bin/rm -r DIR
