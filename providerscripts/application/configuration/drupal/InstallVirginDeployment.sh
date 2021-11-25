@@ -21,14 +21,11 @@
 #set -x
 
 
-#version="`/bin/echo ${APPLICATION} | /usr/bin/awk -F':' '{print $NF}'`"
-version="`/bin/echo ${APPLICATION} | /usr/bin/awk -F':' '{print $2}'`"
+version="`/bin/echo ${APPLICATION} | /usr/bin/awk -F':' '{print $NF}'`"
 
 cd /var/www/html
 
-product="`/bin/echo ${APPLICATION} | /usr/bin/awk -F':' '{print $NF}'`"
-
-if ( [ "`/bin/echo ${product} | /bin/grep '[0-9]'`" != "" ] )
+if ( [ "`/bin/echo ${APPLICATION} | /bin/grep 'social'`" = "" ] )
 then
     product="drupal"
 else
@@ -60,5 +57,4 @@ then
     /bin/chown -R www-data.www-data /var/www/html/*
     cd /home/${SERVER_USER}
     /bin/echo "1"
-fi    
 fi
