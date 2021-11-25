@@ -50,7 +50,10 @@ then
     /bin/echo "1"
 elif ( [ "${product}" = "social" ] )
 then
-    ${HOME}/installscripts/InstallComposer.sh debian
+    #So, this is here, it doesn't work, it requires php7.4 (not 8), if you can get it to work, I'd like that
+    #You can look up more about it its called opensocial and is a drupal application
+    BUILDOS="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDOS'`"
+    ${HOME}/installscripts/InstallComposer.sh ${BUILDOS}
     /usr/local/bin/composer create-project goalgorilla/social_template:dev-master DIR --no-interaction --ignore-platform-reqs
     /bin/mv DIR/html/* /var/www/html
     /bin/rm -r DIR
