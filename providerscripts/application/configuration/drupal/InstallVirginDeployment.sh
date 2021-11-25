@@ -32,16 +32,30 @@ product="`/bin/echo ${APPLICATION} | /usr/bin/awk -F':' '{print $NF}'`"
 if ( [ "`/bin/echo ${product} | /bin/grep '[0-9]'`" != "" ] )
 then
     product="drupal"
+else
+    product="social"
 fi
 
-cd /var/www/html
-/usr/bin/wget https://ftp.drupal.org/files/projects/${product}-${version}.tar.gz
-/bin/tar xvfx ${product}-${version}.tar.gz
-/bin/rm ${product}-${version}.tar.gz
-/bin/mv ${product}-${version}/* .
-/bin/mv ${product}-${version}/.* .
-/bin/rmdir ${product}-${version}
-/bin/rm -r .git
-/bin/chown -R www-data.www-data /var/www/html/*
-cd /home/${SERVER_USER}
-/bin/echo "1"
+if ( [ "${product}" = "drupal" ] )
+then
+    cd /var/www/html
+    /usr/bin/wget https://ftp.drupal.org/files/projects/${product}-${version}.tar.gz
+    /bin/tar xvfx ${product}-${version}.tar.gz
+    /bin/rm ${product}-${version}.tar.gz
+    /bin/mv ${product}-${version}/* .
+    /bin/mv ${product}-${version}/.* .
+    /bin/rmdir ${product}-${version}
+    /bin/rm -r .git
+    /bin/chown -R www-data.www-data /var/www/html/*
+    cd /home/${SERVER_USER}
+    /bin/echo "1"
+elif ( [ "${product}" = "social" ] )
+then
+    /usr/local/bin/composer create-project goalgorilla/social_template:dev-master DIR --no-interaction --ignore-platform-reqs
+    /bin/mv DIR/html/* /var/www/html
+    /bin/rm -r DIR
+    /bin/chown -R www-data.www-data /var/www/html/*
+    cd /home/${SERVER_USER}
+    /bin/echo "1"
+fi    
+fi
