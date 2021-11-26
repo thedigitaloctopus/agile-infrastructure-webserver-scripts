@@ -56,7 +56,8 @@ cd /tmp/backup
 #Unclean hack to do with opensocial
 if ( [ -d /var/www/vendor ] )
 then
-   /bin/mv /var/www/vendor /var/www/html/vendor.drupal
+   /bin/mkdir /var/www/html/vendor.drupal
+   /bin/cp -r /var/www/vendor/* /var/www/html/vendor.drupal
 fi
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh PERSISTASSETSTOCLOUD:1`" = "1" ] )
