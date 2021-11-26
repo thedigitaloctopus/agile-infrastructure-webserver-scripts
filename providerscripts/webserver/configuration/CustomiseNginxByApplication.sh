@@ -22,8 +22,6 @@
 #################################################################################
 #set -x
 
-
-
 WEBSITE_URL="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEURL'`"
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:moodle`" = "1" ] )
@@ -64,7 +62,7 @@ if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:drupa
 then
     if ( [ -d /var/www/html/vendor.drupal ] )
     then
-        /bin/mv /var/www/html/vendor.drupal /vasr/www/vendor
+        /bin/mv /var/www/html/vendor.drupal /var/www/vendor
     fi
 
     if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh GATEWAYGUARDIAN:1`" = "1" ] )
