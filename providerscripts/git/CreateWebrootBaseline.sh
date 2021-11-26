@@ -61,7 +61,8 @@ cd ${HOME}/backups/${baseline_name}
 #Unclean hack to do with opensocial
 if ( [ -d /var/www/vendor ] )
 then
-   /bin/mv /var/www/vendor /var/www/html/vendor.drupal
+   /bin/mkdir /var/www/html/vendor.drupal
+   /bin/cp -r /var/www/vendor/* /var/www/html/vendor.drupal
 fi
 
 /bin/cp -r /var/www/html/* .
