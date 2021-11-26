@@ -19,15 +19,14 @@
 #######################################################################################
 #######################################################################################
 #set -x
-set -f
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:Maria`" = "1" ] || [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:MySQL`" = "1" ] ||  [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEDBaaSINSTALLATIONTYPE:MySQL`" = "1" ] )
 then
     prefix="`/bin/cat /var/www/html/dbp.dat`"
     
-    user="`${HOME}/providerscripts/utilities/ConnectToRemoteMYSQLDB.sh "select * from ${prefix}_users_field_data;" "raw" | /bin/grep -v "placeholder-for" | /bin/sed 's/ //g' | /bin/sed '/^$/d' | /usr/bin/wc -l`"
+    user="`${HOME}/providerscripts/utilities/ConnectToRemoteMYSQLDB.sh "select * from ${prefix}_users;" "raw" | /bin/grep -v "placeholder-for" | /bin/sed 's/ //g' | /bin/sed '/^$/d' | /usr/bin/wc -l`"
    
-    if ( [ "${user}" = "2" ] && [ "${user}" != "" ] )
+    if ( [ "${user}" -ge "2" ] && [ "${user}" != "" ] )
     then
         /bin/echo "USER ADDED"
     else
@@ -39,9 +38,9 @@ if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLAT
 then
    prefix="`/bin/cat /var/www/html/dbp.dat`"
    
-   user="`${HOME}/providerscripts/utilities/ConnectToRemotePostgresDB.sh "select * from ${prefix}_users_field_data;" "raw" | /bin/grep -v "placeholder-for" | /bin/sed 's/ //g' | /bin/sed '/^$/d' | /usr/bin/wc -l`"
+   user="`${HOME}/providerscripts/utilities/ConnectToRemotePostgresDB.sh "select * from ${prefix}_users;" "raw" | /bin/grep -v "placeholder-for" | /bin/sed 's/ //g' | /bin/sed '/^$/d' | /usr/bin/wc -l`"
 
-   if ( [ "${user}" = "2" ] && [ "${user}" != "" ] )
+   if ( [ "${user}" -ge "2" ] && [ "${user}" != "" ] )
    then
        /bin/echo "USER ADDED"
    else
