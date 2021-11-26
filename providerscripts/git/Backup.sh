@@ -53,6 +53,12 @@ fi
 cd /tmp/backup
 #/bin/rm -r ${HOME}/.git
 
+#Unclean hack to do with opensocial
+if ( [ -d /var/www/vendor ] )
+then
+   /bin/mv /var/www/vendor /var/www/html/vendor.drupal
+fi
+
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh PERSISTASSETSTOCLOUD:1`" = "1" ] )
 then
     #dirstoomit="`/bin/ls ${HOME}/.ssh/DIRECTORIESTOMOUNT:* | /usr/bin/awk -F':' '{$1=""; print $0}' | /bin/sed 's/\./\//g' | /usr/bin/tr '\n' ' ' | /bin/sed 's/  / /g'`"
