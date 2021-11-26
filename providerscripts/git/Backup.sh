@@ -53,7 +53,9 @@ fi
 cd /tmp/backup
 #/bin/rm -r ${HOME}/.git
 
-#Unclean hack to do with opensocial
+########################################
+#Unclean hack to do with open social
+########################################
 if ( [ -d /var/www/vendor ] )
 then
    /bin/mkdir /var/www/html/vendor.drupal
@@ -64,6 +66,7 @@ then
    /bin/mkdir /var/www/html/private.drupal
    /bin/cp -r /var/www/private/* /var/www/html/private.drupal
 fi
+########################################
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh PERSISTASSETSTOCLOUD:1`" = "1" ] )
 then
