@@ -58,12 +58,7 @@ WEBSITE_DISPLAY_NAME_FIRST="`/bin/echo ${WEBSITE_DISPLAY_NAME_LOWER} | /bin/sed 
 /bin/mkdir -p ${HOME}/backups/${baseline_name}
 cd ${HOME}/backups/${baseline_name}
 
-#Unclean hack to do with opensocial
-if ( [ -d /var/www/vendor ] )
-then
-   /bin/mkdir /var/www/html/vendor.drupal
-   /bin/cp -r /var/www/vendor/* /var/www/html/vendor.drupal
-fi
+
 
 /bin/cp -r /var/www/html/* .
 
