@@ -57,7 +57,14 @@ WEBSITE_DISPLAY_NAME_FIRST="`/bin/echo ${WEBSITE_DISPLAY_NAME_LOWER} | /bin/sed 
 
 /bin/mkdir -p ${HOME}/backups/${baseline_name}
 cd ${HOME}/backups/${baseline_name}
-/bin/cp -r /var/www/html/* .
+
+if ( [ "${2}" = "parent" ] )
+then
+    /bin/cp -r /var/www/* .
+else 
+    /bin/cp -r /var/www/html/* .
+fi
+
 /bin/cp ${HOME}/providerscripts/git/gitattributes .gitattributes
 . ${HOME}/applicationscripts/RemoveApplicationBranding.sh
 /bin/rm -r ./.git
