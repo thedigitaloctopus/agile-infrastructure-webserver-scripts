@@ -58,12 +58,13 @@ WEBSITE_DISPLAY_NAME_FIRST="`/bin/echo ${WEBSITE_DISPLAY_NAME_LOWER} | /bin/sed 
 /bin/mkdir -p ${HOME}/backups/${baseline_name}
 cd ${HOME}/backups/${baseline_name}
 
-if ( [ "${2}" = "parent" ] )
+#Unclean hack to do with opensocial
+if ( [ -d /var/www/vendor ] )
 then
-    /bin/cp -r /var/www/* .
-else 
-    /bin/cp -r /var/www/html/* .
+   /bin/mv /var/www/vendor /var/www/html/vendor.drupal
 fi
+
+/bin/cp -r /var/www/html/* .
 
 /bin/cp ${HOME}/providerscripts/git/gitattributes .gitattributes
 . ${HOME}/applicationscripts/RemoveApplicationBranding.sh
