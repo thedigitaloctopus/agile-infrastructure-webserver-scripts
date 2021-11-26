@@ -51,9 +51,13 @@ then
     #You can look up more about it its called opensocial and is a drupal application
     BUILDOS="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDOS'`"
     ${HOME}/installscripts/InstallComposer.sh ${BUILDOS}
-    /usr/local/bin/composer create-project goalgorilla/social_template:dev-master DIR --no-interaction --ignore-platform-reqs
-    /bin/mv DIR/html/* /var/www/html
-    /bin/rm -r DIR
+    /usr/local/bin/composer self-update
+    #/usr/local/bin/composer create-project goalgorilla/social_template:dev-master DIR --no-interaction --ignore-platform-reqs
+    /usr/bin/wget https://raw.githubusercontent.com/goalgorilla/social_template/master/composer.json
+    /usr/bin/wget https://raw.githubusercontent.com/goalgorilla/social_template/master/composer.lock
+
+   # /bin/mv DIR/html/* /var/www/html
+   # /bin/rm -r DIR
     /bin/chown -R www-data.www-data /var/www/html/*
     cd /home/${SERVER_USER}
     /bin/echo "1"
