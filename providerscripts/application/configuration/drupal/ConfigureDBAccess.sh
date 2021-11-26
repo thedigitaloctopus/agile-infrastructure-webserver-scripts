@@ -136,6 +136,10 @@ fi
 if ( [ "`/bin/grep 'ADDED BY CONFIG PROCESS' ${HOME}/runtime/drupal_settings.php`" = "" ] )
 then
     /bin/echo "#====ADDED BY CONFIG PROCESS=====" >> ${HOME}/runtime/drupal_settings.php
+    /bin/mkdir /var/www/private
+    /bin/chown www-data.www-data /var/www/private
+    /bin/chmod 755 /var/www/private
+    /bin/sed -i "s/.*file_private_path.*/ \$settings[\'file_private_path\'] = \'\/var\/www\/private\';/g" ${HOME}/runtime/drupal_settings.php
     /bin/echo "\$settings['trusted_host_patterns'] = [ '.*' ];" >> ${HOME}/runtime/drupal_settings.php
     /bin/echo "\$settings['config_sync_directory'] = '/var/www/html/sites/default';" >> ${HOME}/runtime/drupal_settings.php
     /bin/echo "\$config['system.performance']['css']['preprocess'] = FALSE;" >> ${HOME}/runtime/drupal_settings.php
