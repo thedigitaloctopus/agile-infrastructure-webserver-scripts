@@ -156,7 +156,7 @@ server
     root /var/www/html;
     index index.php index.html index.htm index.pl index.py;
     
-    limit_conn perip 10;
+    limit_conn perip 50;
     limit_conn perserver 100;
     
     ssl_certificate ${HOME}/ssl/live/${website_url}/fullchain.pem;
