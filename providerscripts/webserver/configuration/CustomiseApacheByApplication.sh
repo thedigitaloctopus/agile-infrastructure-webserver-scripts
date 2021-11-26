@@ -29,7 +29,7 @@ then
     #/bin/sed -i 's/<\/VirtualHost>//g' /etc/apache2/sites-available/${WEBSITE_NAME}
     if ( [ -d /var/www/html/vendor.drupal ] )
     then
-        /bin/mv /var/www/html/vendor.drupal /vasr/www/vendor
+        /bin/mv /var/www/html/vendor.drupal /var/www/vendor
     fi
     /usr/bin/tac /etc/apache2/sites-available/${WEBSITE_NAME} | /bin/sed '0,/<\/VirtualHost>/{/<\/VirtualHost>/d;}' | /usr/bin/tac > /etc/apache2/sites-available/${WEBSITE_NAME}.$$
     /bin/mv /etc/apache2/sites-available/${WEBSITE_NAME}.$$ /etc/apache2/sites-available/${WEBSITE_NAME}
