@@ -79,6 +79,11 @@ fi
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:drupal`" = "1" ] )
 then
+    if ( [ -d /var/www/html/vendor.drupal ] )
+    then
+        /bin/mv /var/www/html/vendor.drupal /var/www/vendor
+    fi
+    
     if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh GATEWAYGUARDIAN:1`" = "1" ] )
     then
         /bin/echo "auth.backend = \"htpasswd\"
