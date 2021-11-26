@@ -23,6 +23,7 @@
 WEBSITE_URL="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEURL'`"
 WEBSITE_SUBDOMAIN="`/bin/echo ${WEBSITE_URL} | /usr/bin/awk -F'.' '{print $1}'`"
 
+
 /bin/rm -r /var/www/html/*
 /bin/rm -r /var/www/html/.*
 cd /var/www/html
@@ -53,4 +54,12 @@ then
 
     fi
 fi
+
+#Unclean hack to do with opensocial
+if ( [ -d /var/www/html/vendor.drupal ] )
+then
+    /bin/mv /var/www/html/vendor.drupal /var/www/vendor
+    /bin/chown -R www-data.www-data /var/www/vendor
+fi
+
 /bin/rm -rf /var/www/html/.git
