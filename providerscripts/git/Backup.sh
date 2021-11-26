@@ -59,6 +59,11 @@ then
    /bin/mkdir /var/www/html/vendor.drupal
    /bin/cp -r /var/www/vendor/* /var/www/html/vendor.drupal
 fi
+if ( [ -d /var/www/private ] )
+then
+   /bin/mkdir /var/www/html/private.drupal
+   /bin/cp -r /var/www/private/* /var/www/html/private.drupal
+fi
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh PERSISTASSETSTOCLOUD:1`" = "1" ] )
 then
