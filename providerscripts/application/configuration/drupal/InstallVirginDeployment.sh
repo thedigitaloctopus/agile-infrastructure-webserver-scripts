@@ -34,7 +34,6 @@ fi
 
 if ( [ "${product}" = "drupal" ] )
 then
-    cd /var/www/html
     /usr/bin/wget https://ftp.drupal.org/files/projects/${product}-${version}.tar.gz
     /bin/tar xvfx ${product}-${version}.tar.gz
     /bin/rm ${product}-${version}.tar.gz
