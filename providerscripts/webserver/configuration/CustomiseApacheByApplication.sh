@@ -29,7 +29,11 @@ then
     #/bin/sed -i 's/<\/VirtualHost>//g' /etc/apache2/sites-available/${WEBSITE_NAME}
     /usr/bin/tac /etc/apache2/sites-available/${WEBSITE_NAME} | /bin/sed '0,/<\/VirtualHost>/{/<\/VirtualHost>/d;}' | /usr/bin/tac > /etc/apache2/sites-available/${WEBSITE_NAME}.$$
     /bin/mv /etc/apache2/sites-available/${WEBSITE_NAME}.$$ /etc/apache2/sites-available/${WEBSITE_NAME}
-    /bin/echo "<Directory /var/www/html>
+    /bin/echo "<Directory /var/www/html/sites/default/files/>
+    Options -Includes -ExecCGI -Indexes
+    Require all granted
+    </Directory>
+    <Directory /var/www/html>
     Options Indexes FollowSymLinks
     AllowOverride All
     Require all granted
