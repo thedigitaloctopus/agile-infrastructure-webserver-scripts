@@ -55,7 +55,6 @@ then
     /bin/cp ${HOME}/config/wordpress_config.php ${HOME}/runtime/wordpress_config.php 
     /bin/cp ${HOME}/runtime/wordpress_config.php  /var/www/wp-config.php
     /bin/sleep 30 
-    /bin/rm ${HOME}/config/GLOBAL_CONFIG_UPDATE 
 fi
 
 runtime_md5="`/usr/bin/md5sum ${HOME}/runtime/wordpress_config.php | /usr/bin/awk '{print $1}'`"
@@ -119,4 +118,9 @@ then
     /bin/cp ${HOME}/runtime/wordpress_config.php ${HOME}/config/wordpress_config.php
     /bin/cp ${HOME}/runtime/wordpress_config.php /var/www/wp-config.php
     /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
+fi
+
+if ( [ -f ${HOME}/config/GLOBAL_CONFIG_UPDATE ] )
+then
+    /bin/rm ${HOME}/config/GLOBAL_CONFIG_UPDATE 
 fi
