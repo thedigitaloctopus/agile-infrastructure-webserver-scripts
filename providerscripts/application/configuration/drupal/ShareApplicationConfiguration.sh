@@ -46,7 +46,6 @@ then
     /bin/cp ${HOME}/config/drupal_settings.php ${HOME}/runtime/drupal_settings.php
     /bin/cp ${HOME}/runtime/drupal_settings.php /var/www/html/sites/default/settings.php
     /bin/sleep 30 
-    /bin/rm ${HOME}/config/GLOBAL_CONFIG_UPDATE 
 fi
 
 runtime_md5="`/usr/bin/md5sum ${HOME}/runtime/drupal_settings.php | /usr/bin/awk '{print $1}'`"
@@ -111,3 +110,9 @@ then
     /bin/cp ${HOME}/runtime/drupal_settings.php /var/www/html/sites/default/settings.php
     /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
 fi
+
+if ( [ -f ${HOME}/config/GLOBAL_CONFIG_UPDATE ] )
+then
+    /bin/rm ${HOME}/config/GLOBAL_CONFIG_UPDATE 
+fi
+
