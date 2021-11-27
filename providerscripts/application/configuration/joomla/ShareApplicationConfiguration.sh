@@ -120,6 +120,8 @@ then
     /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
 fi
 
-/bin/rm ${HOME}/config/GLOBAL_CONFIG_UPDATE 
-
+if ( [ -f ${HOME}/config/GLOBAL_CONFIG_UPDATE ] )
+then
+    /bin/rm ${HOME}/config/GLOBAL_CONFIG_UPDATE 
+fi
 
