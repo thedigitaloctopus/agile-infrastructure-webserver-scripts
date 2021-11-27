@@ -26,6 +26,12 @@ then
     exit
 fi
 
+if ( [ ! -f ${HOME}/runtime/${1}.php.new ] )
+then
+    /bin/echo "Need a file called: ${HOME}/runtime/${1}.php.new"
+    exit
+fi
+
 /bin/echo " " >> ${HOME}/runtime/${1}.php.new
 /bin/cp ${HOME}/runtime/${1}.php.new ${HOME}/runtime/${1}.php
 /bin/cp ${HOME}/runtime/${1}.php.new ${HOME}/config/${1}.php
