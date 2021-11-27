@@ -82,8 +82,7 @@ then
     command="`/bin/echo ${command} | /usr/bin/awk '{$NF=""; print $0}'` /var/www/html/* /tmp/backup"
     eval ${command}
 else
-    #/usr/bin/rsync -av /var/www/html/* /tmp/backup
-    /usr/bin/rsync -av /var/www/* /tmp/backup
+    /usr/bin/rsync -av /var/www/html/* /tmp/backup
 fi
 
 #/usr/bin/find -type d -name .git -exec /bin/rm -rf {} \;
