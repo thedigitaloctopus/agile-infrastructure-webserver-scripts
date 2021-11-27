@@ -55,7 +55,6 @@ then
     /bin/cp ${HOME}/config/joomla_configuration.php ${HOME}/runtime/joomla_configuration.php
     /bin/cp ${HOME}/runtime/joomla_configuration.php /var/www/html/configuration.php
     /bin/sleep 30 
-    /bin/rm ${HOME}/config/GLOBAL_CONFIG_UPDATE 
 fi
 
 runtime_md5="`/usr/bin/md5sum ${HOME}/runtime/joomla_configuration.php | /usr/bin/awk '{print $1}'`"
@@ -120,4 +119,7 @@ then
     /bin/cp ${HOME}/runtime/joomla_configuration.php /var/www/html/configuration.php
     /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
 fi
+
+/bin/rm ${HOME}/config/GLOBAL_CONFIG_UPDATE 
+
 
