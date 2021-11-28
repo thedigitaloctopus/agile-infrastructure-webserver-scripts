@@ -127,8 +127,8 @@ then
     /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
 fi
 
-if ( [ -f ${HOME}/config/GLOBAL_CONFIG_UPDATE ] )
+if ( [ -f ${HOME}/config/GLOBAL_CONFIG_UPDATE.${ip} ] )
 then
-    /bin/rm ${HOME}/config/GLOBAL_CONFIG_UPDATE 
+    /bin/rm ${HOME}/config/GLOBAL_CONFIG_UPDATE.${ip} 
 fi
 
