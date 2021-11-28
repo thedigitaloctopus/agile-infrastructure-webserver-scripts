@@ -40,11 +40,17 @@ ip="`${HOME}/providerscripts/utilities/GetIP.sh`"
 /bin/rm ${HOME}/runtime/${1}.php.new
 
 /bin/echo "Processing, please do not interrupt...."
+/bin/echo "Counting down...."
 
 count="0"
 while ( [ "${count}" -lt "10" ] )
 do   
+    /bin/echo "`/usr/bin/expr 10 - ${count}`"
     /bin/touch ${HOME}/config/GLOBAL_CONFIG_UPDATE.${ip}
     /bin/sleep 10
     count="`/usr/bin/expr ${count} + 1`"
 done
+
+/bin/echo "##############################################################################"
+/bin/echo "Your application's new configuration should have been pushed to all webservers"
+/bin/echo "##############################################################################"
