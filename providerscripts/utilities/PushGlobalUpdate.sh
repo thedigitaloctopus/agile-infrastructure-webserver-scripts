@@ -44,4 +44,5 @@ while ( [ "${count}" -lt "10" ] )
 do   
     /bin/touch ${HOME}/config/GLOBAL_CONFIG_UPDATE.${ip}
     /bin/sleep 10
+    count="`/usr/bin/expr ${count} + 1`"
 done
