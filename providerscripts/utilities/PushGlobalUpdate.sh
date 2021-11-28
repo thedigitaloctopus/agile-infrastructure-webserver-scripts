@@ -39,6 +39,8 @@ ip="`${HOME}/providerscripts/utilities/GetIP.sh`"
 /bin/echo " " >> ${HOME}/config/${1}.php
 /bin/rm ${HOME}/runtime/${1}.php.new
 
+/bin/echo "Processing, please do not interrupt...."
+
 count="0"
 while ( [ "${count}" -lt "10" ] )
 do   
