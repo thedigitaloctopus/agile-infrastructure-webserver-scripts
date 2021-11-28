@@ -50,11 +50,18 @@ then
     /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
 fi
 
-if ( [ -f ${HOME}/config/GLOBAL_CONFIG_UPDATE ] )
+ip="`${HOME}/providerscripts/utilities/GetIP.sh`"
+global_config_updated="0"
+
+if ( [ -f ${HOME}/config/GLOBAL_CONFIG_UPDATE.${ip} ] )
 then
     /bin/cp ${HOME}/config/joomla_configuration.php ${HOME}/runtime/joomla_configuration.php
     /bin/cp ${HOME}/runtime/joomla_configuration.php /var/www/html/configuration.php
-    /bin/sleep 30 
+    /bin/sleep 40
+elif ( [ "`/bin/ls ${HOME}/config/GLOBAL_CONFIG_UPDATE.*`" != "" ] )
+then
+    /bin/sleep 20 
+    global_config_updated="1"
 fi
 
 runtime_md5="`/usr/bin/md5sum ${HOME}/runtime/joomla_configuration.php | /usr/bin/awk '{print $1}'`"
@@ -78,7 +85,7 @@ then
     then
         #This check is needed so we don't accidentally update the config file and push it to all our webservers
         #We have to explicitly create the GLOBAL_CONFIG_UPDATE file to do that. 
-        if ( [ -f ${HOME}/config/GLOBAL_CONFIG_UPDATE ] )
+        if ( [ "${global_config_updated}" = "1" ] )
         then
             changed="config"
         fi
