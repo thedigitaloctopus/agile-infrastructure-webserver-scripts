@@ -49,24 +49,32 @@ then
     DB_HOST="`command="${SUDO} /bin/ls ${HOME}/config/databaseip" && eval ${command}`" 
 fi
 
-if ( [ "${prefix}" = "" ] && [ ! -f /var/www/html/dbp.dat ] )
-then
-    prefix="`/usr/bin/openssl rand -hex 3`"
-    
+#if ( [ "${prefix}" = "" ] && [ ! -f /var/www/html/dbp.dat ] )
+#then
+#    prefix="`/usr/bin/openssl rand -hex 3`"
+#    
    # while ( [ "${prefix}" = "" ] )
-   # do
+ #  # do
    #     prefix="`/bin/cat /dev/urandom | /usr/bin/tr -dc a-z | /usr/bin/head -c${1:-6};echo;`"
    #     /bin/sleep 5
    # done
     
    # if ( [ "${prefix}" != "" ] )
    # then
-        ${HOME}/providerscripts/utilities/StoreConfigValue.sh "DBPREFIX" "${prefix}"
-        ${SUDO} /bin/chmod 755 /var/www/html 2>/dev/null
-        ${SUDO} /bin/chown www-data.www-data /var/www/html 2>/dev/null
-        ${SUDO} /bin/echo "${prefix}" > /var/www/html/dbp.dat
-   # fi
-else
+#        ${HOME}/providerscripts/utilities/StoreConfigValue.sh "DBPREFIX" "${prefix}"
+#        ${SUDO} /bin/chmod 755 /var/www/html 2>/dev/null
+#        ${SUDO} /bin/chown www-data.www-data /var/www/html 2>/dev/null
+#        ${SUDO} /bin/echo "${prefix}" > /var/www/html/dbp.dat
+#   # fi
+#else
+#    prefix="`command="${SUDO} /bin/cat /var/www/html/dbp.dat" && eval ${command}`"
+#fi
+
+#Wait for the prefix to be intialised
+prefix="`command="${SUDO} /bin/cat /var/www/html/dbp.dat" && eval ${command}`"
+while ( [ "${prefix}" = "" ] )
+do
+    /bin/sleep 10
     prefix="`command="${SUDO} /bin/cat /var/www/html/dbp.dat" && eval ${command}`"
-fi
+done
 
