@@ -64,17 +64,17 @@ DB_PORT="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBPORT'`"
 
 #Set a prefix for our database tables. Make sure we only ever set one in the case where the script runs more than once
 #and exits for some reason.
-if ( [ ! -f /var/www/html/dbp.dat ] )
-then
-    prefix="`/bin/cat /dev/urandom | /usr/bin/tr -dc a-z | /usr/bin/head -c${1:-6};echo;`"
-    if ( [ "${prefix}" != "" ] )
-    then
-        ${HOME}/providerscripts/utilities/StoreConfigValue.sh "DBPREFIX" "${prefix}"
-        /bin/echo "${prefix}" > /var/www/html/dbp.dat
-    fi
-else
+#if ( [ ! -f /var/www/html/dbp.dat ] )
+#then
+#    prefix="`/bin/cat /dev/urandom | /usr/bin/tr -dc a-z | /usr/bin/head -c${1:-6};echo;`"
+#    if ( [ "${prefix}" != "" ] )
+#    then
+#        ${HOME}/providerscripts/utilities/StoreConfigValue.sh "DBPREFIX" "${prefix}"
+#        /bin/echo "${prefix}" > /var/www/html/dbp.dat
+#    fi
+#else
     prefix="`/bin/cat /var/www/html/dbp.dat`"
-fi
+#fi
 
 #If the application configuration arrangements haven't been made, we are not ready, so just exit
 if ( [ ! -f ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED ] )
@@ -109,25 +109,25 @@ fi
 
 #If we get to here, then we have all we need. This is a new or virgin application, so, we set the prefix for the
 #database tables. This prefix will be used for the lifetime of the application
-if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEDBaaSINSTALLATIONTYPE:Maria`" = "1" ] || [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:Maria`" = "1" ] )
-then
-    #joomla 3 -
-    /bin/sed -i "s/#__/${prefix}_/g" /var/www/html/installation/sql/mysql/joomla.sql
-    #joomla 4 +
-    /bin/sed -i "s/#__/${prefix}_/g" /var/www/html/installation/sql/mysql/base.sql
-    /bin/sed -i "s/#__/${prefix}_/g" /var/www/html/installation/sql/mysql/extensions.sql
-    /bin/sed -i "s/#__/${prefix}_/g" /var/www/html/installation/sql/mysql/supports.sql
-fi
+#if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEDBaaSINSTALLATIONTYPE:Maria`" = "1" ] || [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:Maria`" = "1" ] )
+#then
+#    #joomla 3 -
+#    /bin/sed -i "s/#__/${prefix}_/g" /var/www/html/installation/sql/mysql/joomla.sql
+#    #joomla 4 +
+#    /bin/sed -i "s/#__/${prefix}_/g" /var/www/html/installation/sql/mysql/base.sql
+#    /bin/sed -i "s/#__/${prefix}_/g" /var/www/html/installation/sql/mysql/extensions.sql
+#    /bin/sed -i "s/#__/${prefix}_/g" /var/www/html/installation/sql/mysql/supports.sql
+#fi
 
-if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEDBaaSINSTALLATIONTYPE:Postgres`" = "1" ] || [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:Postgres`" = "1" ] )
-then
-    #joomla 3 -
-    /bin/sed -i "s/#__/${prefix}_/g" /var/www/html/installation/sql/postgresql/joomla.sql
-    #joomla 4 +
-    /bin/sed -i "s/#__/${prefix}_/g" /var/www/html/installation/sql/postgresql/base.sql
-    /bin/sed -i "s/#__/${prefix}_/g" /var/www/html/installation/sql/postgresql/extensions.sql
-    /bin/sed -i "s/#__/${prefix}_/g" /var/www/html/installation/sql/postgresql/supports.sql
-fi
+#if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEDBaaSINSTALLATIONTYPE:Postgres`" = "1" ] || [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:Postgres`" = "1" ] )
+#then
+#    #joomla 3 -
+#    /bin/sed -i "s/#__/${prefix}_/g" /var/www/html/installation/sql/postgresql/joomla.sql
+#    #joomla 4 +
+#    /bin/sed -i "s/#__/${prefix}_/g" /var/www/html/installation/sql/postgresql/base.sql
+#    /bin/sed -i "s/#__/${prefix}_/g" /var/www/html/installation/sql/postgresql/extensions.sql
+#    /bin/sed -i "s/#__/${prefix}_/g" /var/www/html/installation/sql/postgresql/supports.sql
+#fi
 
 /bin/sed -i "/\$dbprefix /c\        public \$dbprefix = \'${prefix}_\';" ${HOME}/runtime/joomla_configuration.php
 /bin/sed -i "/\$user /c\        public \$user = \'${username}\';" ${HOME}/runtime/joomla_configuration.php
