@@ -58,10 +58,10 @@ then
   #  if ( [ "${PREFIX}" != "" ] )
   #  then
         ${HOME}/providerscripts/utilities/StoreConfigValue.sh "DBPREFIX" "${PREFIX}"
-        /bin/sleep 200
-        ${SUDO} /bin/chmod 755 /var/www/html 2>/dev/null
+        ${SUDO} /bin/chmod 775 /var/www/html 2>/dev/null
         ${SUDO} /bin/chown www-data.www-data /var/www/html 2>/dev/null
         ${SUDO} /bin/echo "${PREFIX}" > /var/www/html/dbp.dat
+        ${SUDO} /bin/chmod 755 /var/www/html 2>/dev/null
   #  fi
 else
     PREFIX="`command="${SUDO} /bin/cat /var/www/html/dbp.dat" && eval ${command}`"
