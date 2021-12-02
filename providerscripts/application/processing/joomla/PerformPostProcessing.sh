@@ -58,7 +58,7 @@ then
   #  if ( [ "${PREFIX}" != "" ] )
   #  then
         ${HOME}/providerscripts/utilities/StoreConfigValue.sh "DBPREFIX" "${PREFIX}"
-        /bin/echo "${PREFIX}" > /var/www/html/dbp.dat
+        ${SUDO} /bin/echo "${PREFIX}" > /var/www/html/dbp.dat
   #  fi
 else
     PREFIX="`command="${SUDO} /bin/cat /var/www/html/dbp.dat" && eval ${command}`"
