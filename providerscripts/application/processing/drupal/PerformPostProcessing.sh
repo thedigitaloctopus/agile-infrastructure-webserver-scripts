@@ -62,7 +62,7 @@ then
    # if ( [ "${prefix}" != "" ] )
    # then
         ${HOME}/providerscripts/utilities/StoreConfigValue.sh "DBPREFIX" "${prefix}"
-        /bin/echo "${prefix}" > /var/www/html/dbp.dat
+        ${SUDO} /bin/echo "${prefix}" > /var/www/html/dbp.dat
    # fi
 else
     prefix="`command="${SUDO} /bin/cat /var/www/html/dbp.dat" && eval ${command}`"
