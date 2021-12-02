@@ -58,6 +58,8 @@ then
   #  if ( [ "${PREFIX}" != "" ] )
   #  then
         ${HOME}/providerscripts/utilities/StoreConfigValue.sh "DBPREFIX" "${PREFIX}"
+        /bin/chmod 755 /var/www/html
+        /bin/chown www-data.www-data /var/www/html
         ${SUDO} /bin/echo "${PREFIX}" > /var/www/html/dbp.dat
   #  fi
 else
