@@ -45,28 +45,31 @@ SUDO="/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E"
 
 #Set a prefix for our database tables. Make sure we only ever set one in the case where the script runs more than once
 #and exits for some reason.
-if ( [ "${PREFIX}" = "" ] && [ ! -f /var/www/html/dbp.dat ] )
-then
-    PREFIX="`/usr/bin/openssl rand -hex 3`"
-    
-  #  while ( [ "${PREFIX}" = "" ] )
-  #  do
-  #      PREFIX="`/bin/cat /dev/urandom | /usr/bin/tr -dc a-z | /usr/bin/head -c${1:-6};echo;`"
-  #      /bin/sleep 5
-  #  done
-    
-  #  if ( [ "${PREFIX}" != "" ] )
-  #  then
-        ${HOME}/providerscripts/utilities/StoreConfigValue.sh "DBPREFIX" "${PREFIX}"
-       # ${SUDO} /bin/chmod 775 /var/www/html 2>/dev/null
-       # ${SUDO} /bin/chown www-data.www-data /var/www/html 2>/dev/null
-        /bin/echo "${PREFIX}" > /tmp/dbp.dat 
-        ${SUDO} /bin/mv /tmp/dbp.dat /var/www/html/dbp.dat
-      #  ${SUDO} /bin/chmod 755 /var/www/html 2>/dev/null
-  #  fi
-else
+#if ( [ "${PREFIX}" = "" ] && [ ! -f /var/www/html/dbp.dat ] )
+#then
+#    PREFIX="`/usr/bin/openssl rand -hex 3`"
+#       
+#  #  if ( [ "${PREFIX}" != "" ] )
+#  #  then
+#        ${HOME}/providerscripts/utilities/StoreConfigValue.sh "DBPREFIX" "${PREFIX}"
+#       # ${SUDO} /bin/chmod 775 /var/www/html 2>/dev/null
+#       # ${SUDO} /bin/chown www-data.www-data /var/www/html 2>/dev/null
+#        /bin/echo "${PREFIX}" > /tmp/dbp.dat 
+#        ${SUDO} /bin/mv /tmp/dbp.dat /var/www/html/dbp.dat
+#      #  ${SUDO} /bin/chmod 755 /var/www/html 2>/dev/null
+#  #  fi
+#else
+#    PREFIX="`command="${SUDO} /bin/cat /var/www/html/dbp.dat" && eval ${command}`"
+#fi
+
+#Wait for the prefix to be intialised
+PREFIX="`command="${SUDO} /bin/cat /var/www/html/dbp.dat" && eval ${command}`"
+while ( [ "${PREFIX}" = "" ] )
+do
+    /bin/sleep 10
     PREFIX="`command="${SUDO} /bin/cat /var/www/html/dbp.dat" && eval ${command}`"
-fi
+done
+    
 
 credentials_available=""
 database_available=""
