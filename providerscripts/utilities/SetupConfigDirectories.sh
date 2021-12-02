@@ -20,66 +20,79 @@
 ########################################################################################
 #set -x
 
-if ( [ ! -d ${HOME}/config/beingbuiltips ] )
-then
+#Try repeatedly because I have seen single attempts to create directories fail over S3FS
+while ( [ ! -d ${HOME}/config/beingbuiltips ] )
+do
     /bin/mkdir -p ${HOME}/config/beingbuiltips
     /bin/chmod 700 ${HOME}/config/beingbuiltips
-fi
-if ( [ ! -d ${HOME}/config/webserverpublicips ] )
-then
+    /bin/sleep 5
+done
+while ( [ ! -d ${HOME}/config/webserverpublicips ] )
+do
     /bin/mkdir -p ${HOME}/config/webserverpublicips
     /bin/chmod 700 ${HOME}/config/webserverpublicips
-fi
-if ( [ ! -d ${HOME}/config/webserverips ] )
-then
+    /bin/sleep 5
+done
+while ( [ ! -d ${HOME}/config/webserverips ] )
+do
     /bin/mkdir -p ${HOME}/config/webserverips
     /bin/chmod 700 ${HOME}/config/webserverips
-fi
-if ( [ ! -d ${HOME}/config/databaseip ] )
-then
+    /bin/sleep 5
+done
+while ( [ ! -d ${HOME}/config/databaseip ] )
+do
     /bin/mkdir -p ${HOME}/config/databaseip
     /bin/chmod 700 ${HOME}/config/databaseip
-fi
-if ( [ ! -d ${HOME}/config/databasepublicip ] )
-then
+    /bin/sleep 5
+done
+while ( [ ! -d ${HOME}/config/databasepublicip ] )
+do
     /bin/mkdir -p ${HOME}/config/databasepublicip
     /bin/chmod 700 ${HOME}/config/databasepublicip
-fi
-if ( [ ! -d ${HOME}/config/bootedwebserverips ] )
-then
+    /bin/sleep 5
+done
+while ( [ ! -d ${HOME}/config/bootedwebserverips ] )
+do
     /bin/mkdir -p ${HOME}/config/bootedwebserverips
     /bin/chmod 700 ${HOME}/config/bootedwebserverips
-fi
-if ( [ ! -d ${HOME}/config/shuttingdownwebserverips ] )
-then
+    /bin/sleep 5
+done
+while ( [ ! -d ${HOME}/config/shuttingdownwebserverips ] )
+do
     /bin/mkdir -p ${HOME}/config/shuttingdownwebserverips
     /bin/chmod 700 ${HOME}/config/shuttingdownwebserverips
-fi
-if ( [ ! -d ${HOME}/config/autoscalerip ] )
-then
+    /bin/sleep 5
+done
+while ( [ ! -d ${HOME}/config/autoscalerip ] )
+do
     /bin/mkdir -p ${HOME}/config/autoscalerip
     /bin/chmod 700 ${HOME}/config/autoscalerip
-fi
-if ( [ ! -d ${HOME}/config/autoscalerpublicip ] )
-then
+    /bin/sleep 5
+done
+while ( [ ! -d ${HOME}/config/autoscalerpublicip ] )
+do
     /bin/mkdir -p ${HOME}/config/autoscalerpublicip
     /bin/chmod 700 ${HOME}/config/autoscalerpublicip
-fi
-if ( [ ! -d ${HOME}/config/buildclientip ] )
-then
+    /bin/sleep 5
+done
+while ( [ ! -d ${HOME}/config/buildclientip ] )
+do
     /bin/mkdir -p ${HOME}/config/buildclientip
     /bin/chmod 700 ${HOME}/config/buildclientip
-fi
-if ( [ ! -d ${HOME}/config/credentials ] )
-then
+    /bin/sleep 5
+done
+while ( [ ! -d ${HOME}/config/credentials ] )
+do
     /bin/mkdir -p ${HOME}/config/credentials
     /bin/chmod 700 ${HOME}/config/credentials
-fi
-if ( [ ! -d ${HOME}/config/webrootsynctunnel ] )
-then
+    /bin/sleep 5
+done
+while ( [ ! -d ${HOME}/config/webrootsynctunnel ] )
+do
     /bin/mkdir -p ${HOME}/config/webrootsynctunnel
     /bin/chmod 700 ${HOME}/config/webrootsynctunnel
-fi
+    /bin/sleep 5
+done
 
 if ( [ ! -d ${HOME}/config/ssl ] )
 then
