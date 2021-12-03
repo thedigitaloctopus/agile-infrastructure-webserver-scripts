@@ -27,13 +27,16 @@ SSH_PORT="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SSHPORT'`"
 ALGORITHM="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'ALGORITHM'`"
 ips="`/bin/ls ${HOME}/config/autoscalerip`"
 
-for ip in ${ips}
-do
-    /usr/bin/ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${HOME}/.ssh/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY -p ${SSH_PORT} ${SERVER_USER}@${ip} "${command}"
+if ( [ "${ips}" != "" ] )
+then
+    for ip in ${ips}
+    do
+        /usr/bin/ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${HOME}/.ssh/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY -p ${SSH_PORT} ${SERVER_USER}@${ip} "${command}"
    
-    if ( [ "$?" = "0" ] )
-    then
-        break
-    fi
+        if ( [ "$?" = "0" ] )
+        then
+            break
+        fi
     
-done
+    done
+fi
