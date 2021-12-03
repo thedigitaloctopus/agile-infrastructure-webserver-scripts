@@ -20,7 +20,12 @@
 #####################################################################################
 #set -x
 
-command="$1"
+command="${1}"
+arg="${2}"
+arg1="${3}"
+arg2="${4}"
+arg3="${5}"
+
 
 SERVER_USER="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SERVERUSER'`"
 SSH_PORT="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SSHPORT'`"
@@ -31,7 +36,7 @@ if ( [ "${ips}" != "" ] )
 then
     for ip in ${ips}
     do
-        /usr/bin/ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${HOME}/.ssh/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY -p ${SSH_PORT} ${SERVER_USER}@${ip} "${command}"
+        /usr/bin/ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${HOME}/.ssh/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY -p ${SSH_PORT} ${SERVER_USER}@${ip} "${command}" "${arg}" "${arg1}" "${arg2}" "${arg3}"
    
         if ( [ "$?" = "0" ] )
         then
