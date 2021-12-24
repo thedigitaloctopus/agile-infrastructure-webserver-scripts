@@ -132,7 +132,7 @@ do
 done
 
 
-. ${HOME}/providerscripts/dns/SetupDNSFirewallRules.sh
+. ${HOME}/security/SetupDNSFirewall.sh
 
 /bin/sleep 5
 
