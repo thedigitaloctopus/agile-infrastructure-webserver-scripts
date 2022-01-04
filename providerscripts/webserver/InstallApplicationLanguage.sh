@@ -33,7 +33,8 @@ then
     then
         /usr/bin/wget https://www.dotdeb.org/dotdeb.gpg
         /usr/bin/apt-key add dotdeb.gpg
-        ${HOME}/installscripts/Update.sh ${BUILDOS}
+        #${HOME}/installscripts/Update.sh ${BUILDOS}
+        ${HOME}/installscripts/UpdateAndUpgrade.sh ${BUILDOS}
         ${HOME}/installscripts/InstallPHPBase.sh ${BUILDOS}
     fi
     /bin/echo "${0} `/bin/date`: Adjusting php config" >> ${HOME}/logs/WEBSERVER_BUILD.log
