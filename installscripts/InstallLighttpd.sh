@@ -31,7 +31,9 @@ then
     
     if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'LIGHTTPD:source'`" = "1" ] )
     then
-        ${HOME}/installscripts/Update.sh ${BUILDOS}
+        #${HOME}/installscripts/Update.sh ${BUILDOS}
+        ${HOME}/installscripts/UpdateAndUpgrade.sh ${BUILDOS}
+
         ${HOME}/installscripts/lighttpd/BuildLighttpdFromSource.sh 
         /bin/touch /etc/lighttpd/BUILT_FROM_SOURCE
     elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'LIGHTTPD:repo'`" = "1" ] )
@@ -46,7 +48,9 @@ if ( [ "${BUILDOS}" = "debian" ] )
 then
     if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'LIGHTTPD:source'`" = "1" ] )
     then
-        ${HOME}/installscripts/Update.sh ${BUILDOS}
+        #${HOME}/installscripts/Update.sh ${BUILDOS}
+        ${HOME}/installscripts/UpdateAndUpgrade.sh ${BUILDOS}
+
         ${HOME}/installscripts/lighttpd/BuildLighttpdFromSource.sh 
         /bin/touch /etc/lighttpd/BUILT_FROM_SOURCE
     elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'LIGHTTPD:repo'`" = "1" ] )
