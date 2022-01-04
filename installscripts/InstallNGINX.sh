@@ -32,8 +32,9 @@ then
     /usr/bin/systemctl disable --now apache2
     if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'NGINX:source'`" = "1" ] )
     then
-         ${HOME}/installscripts/Update.sh ${BUILDOS}
-         
+        # ${HOME}/installscripts/Update.sh ${BUILDOS}
+         ${HOME}/installscripts/UpdateAndUpgrade.sh ${BUILDOS}
+
          if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'NGINX:source:modsecurity'`" = "1" ] )
          then
              ${HOME}/installscripts/nginx/BuildNginxFromSource.sh Ubuntu modsecurity
@@ -45,8 +46,9 @@ then
     elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'NGINX:repo'`" = "1" ] )
     then
         /usr/bin/curl http://nginx.org/keys/nginx_signing.key | /usr/bin/apt-key add -
-        ${HOME}/installscripts/Update.sh ${BUILDOS}
-        /usr/bin/apt-get -qq install nginx
+      #  ${HOME}/installscripts/Update.sh ${BUILDOS}
+        ${HOME}/installscripts/UpdateAndUpgrade.sh ${BUILDOS}
+       /usr/bin/apt-get -qq install nginx
         /bin/systemctl unmask nginx.service
         if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'NGINX:repo:modsecurity'`" = "1" ] )
         then
@@ -61,8 +63,8 @@ then
     /usr/bin/systemctl disable --now apache2
     if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'NGINX:source'`" = "1" ] )
     then
-        ${HOME}/installscripts/Update.sh ${BUILDOS}
-        
+       # ${HOME}/installscripts/Update.sh ${BUILDOS}
+        ${HOME}/installscripts/UpdateAndUpgrade.sh ${BUILDOS}
         if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'NGINX:source:modsecurity'`" = "1" ] )
         then
             ${HOME}/installscripts/nginx/BuildNginxFromSource.sh Debian modsecurity
@@ -74,7 +76,8 @@ then
     elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'NGINX:repo'`" = "1" ] )
     then    
         /usr/bin/curl http://nginx.org/keys/nginx_signing.key | /usr/bin/apt-key add -
-        ${HOME}/installscripts/Update.sh ${BUILDOS}
+      #  ${HOME}/installscripts/Update.sh ${BUILDOS}
+        ${HOME}/installscripts/UpdateAndUpgrade.sh ${BUILDOS}
         /usr/bin/apt-get -qq install nginx
         /bin/systemctl unmask nginx.service
         if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'NGINX:repo:modsecurity'`" = "1" ] )
