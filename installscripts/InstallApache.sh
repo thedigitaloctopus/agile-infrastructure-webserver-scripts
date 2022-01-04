@@ -32,7 +32,9 @@ then
 
     if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:source'`" = "1" ] )
     then
-        ${HOME}/installscripts/Update.sh ${BUILDOS}
+        #${HOME}/installscripts/Update.sh ${BUILDOS}
+        ${HOME}/installscripts/UpdateAndUpgrade.sh ${BUILDOS}
+
         
          if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:source:modsecurity'`" = "1" ] )
          then
@@ -95,8 +97,9 @@ then
 
     if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:source'`" = "1" ] )
     then
-        ${HOME}/installscripts/Update.sh ${BUILDOS}
-        
+      #  ${HOME}/installscripts/Update.sh ${BUILDOS}
+         ${HOME}/installscripts/UpdateAndUpgrade.sh ${BUILDOS}
+
          if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:source:modsecurity'`" = "1" ] )
          then
              if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:source:modsecurity:modevasive'`" = "1" ] )
