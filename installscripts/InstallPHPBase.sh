@@ -36,8 +36,9 @@ then
     if ( [ "${BUILDOSVERSION}" = "20.04" ] )
     then
         /usr/bin/add-apt-repository -y ppa:ondrej/php
-        ${HOME}/installscripts/Update.sh ${BUILDOS}
-        
+       # ${HOME}/installscripts/Update.sh ${BUILDOS}
+        ${HOME}/installscripts/UpdateAndUpgrade.sh ${BUILDOS}
+
         installed_php_version="`/usr/bin/php -v | /bin/grep "^PHP" | /usr/bin/awk '{print $2}' | /usr/bin/awk -F'.' '{print $1,$2}' | /bin/sed 's/ /\./g'`"
         if ( [ "${installed_php_version}" != "${PHP_VERSION}" ] )
         then
@@ -69,7 +70,8 @@ then
     /usr/bin/wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
     /bin/sh -c 'echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list'
 
-    ${HOME}/installscripts/Update.sh ${BUILDOS}    
+   # ${HOME}/installscripts/Update.sh ${BUILDOS}    
+    ${HOME}/installscripts/UpdateAndUpgrade.sh ${BUILDOS}
 
     installed_php_version="`/usr/bin/php -v | /bin/grep "^PHP" | /usr/bin/awk '{print $2}' | /usr/bin/awk -F'.' '{print $1,$2}' | /bin/sed 's/ /\./g'`"
       
