@@ -43,7 +43,8 @@ then
     /usr/bin/wget https://dev.mysql.com/get/${mysql_apt_config} 
     DEBIAN_FRONTEND=noninteractive /usr/bin/dpkg -i ${mysql_apt_config}
     /bin/rm ${mysql_apt_config}
-    ${HOME}/installscripts/Update.sh ${BUILDOS}
+    #${HOME}/installscripts/Update.sh ${BUILDOS}
+    ${HOME}/installscripts/UpdateAndUpgrade.sh ${BUILDOS}
     DEBIAN_FRONTEND=noninteractive apt-get -qq -y install mysql-client
 fi
 
@@ -56,6 +57,7 @@ then
     /usr/bin/wget https://dev.mysql.com/get/${mysql_apt_config} 
     DEBIAN_FRONTEND=noninteractive /usr/bin/dpkg -i ${mysql_apt_config}
     /bin/rm ${mysql_apt_config}
-    ${HOME}/installscripts/Update.sh ${BUILDOS}
+   # ${HOME}/installscripts/Update.sh ${BUILDOS}
+    ${HOME}/installscripts/UpdateAndUpgrade.sh ${BUILDOS}
     DEBIAN_FRONTEND=noninteractive apt-get -qq -y install mysql-client
 fi
