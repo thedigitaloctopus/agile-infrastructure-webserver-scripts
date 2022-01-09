@@ -26,8 +26,8 @@
 #set -x
 
 #Install needed libraries
-/usr/bin/apt-get -qq -y  install libnghttp2-dev  build-essential automake autoconf libtool software-properties-common libtool-bin libgeoip-dev
-/usr/bin/apt-get install -y -qq libpcre3-dev
+/usr/bin/apt-get  -o DPkg::Lock::Timeout=-1  -qq -y  install libnghttp2-dev  build-essential automake autoconf libtool software-properties-common libtool-bin libgeoip-dev
+/usr/bin/apt-get install  -o DPkg::Lock::Timeout=-1  -y -qq libpcre3-dev
 cd /usr/local/src
 
 #Download and build PCRE
