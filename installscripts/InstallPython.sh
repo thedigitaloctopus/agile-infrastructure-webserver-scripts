@@ -26,21 +26,21 @@ fi
 
 if ( [ "${BUILDOS}" = "ubuntu" ] )
 then
-    /usr/bin/apt-get install python3.8
-    /usr/bin/apt-get -qq -y install libfcgi fcgiwrap spawn-fcgi
+    /usr/bin/apt-get -o DPkg::Lock::Timeout=-1  -qq -y install python3.8
+    /usr/bin/apt-get -o DPkg::Lock::Timeout=-1  -qq -y install libfcgi fcgiwrap spawn-fcgi
     /usr/bin/ln /usr/bin/python3 /usr/bin/python
 fi
 
 if ( [ "${BUILDOS}" = "debian" ] )
 then
-    /usr/bin/apt-get -qq -y install build-essential
-    /usr/bin/apt-get -qq -y install libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev zlib1g
+    /usr/bin/apt-get -o DPkg::Lock::Timeout=-1  -qq -y install build-essential
+    /usr/bin/apt-get -o DPkg::Lock::Timeout=-1  -qq -y install libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev zlib1g
     /usr/bin/wget https://www.python.org/ftp/python/3.7.2/Python-3.7.2.tgz
     /bin/tar xzf Python-3.7.2.tgz
     cd Python-3.7.2
     ./configure --with-ensurepip=install
     make
     make install
-    /usr/bin/apt-get -qq -y install libfcgi fcgiwrap spawn-fcgi
+    /usr/bin/apt-get -o DPkg::Lock::Timeout=-1  -qq -y install libfcgi fcgiwrap spawn-fcgi
     /usr/bin/ln /usr/bin/python3 /usr/bin/python
 fi
