@@ -26,8 +26,8 @@
 buildtype="${1}"
 
 #Instll the tools needed for complilation
-/usr/bin/apt-get install -qq -y software-properties-common libtool build-essential curl libmaxminddb-dev libgeoip-dev
-/usr/bin/apt-get install -y -qq libpcre3-dev
+/usr/bin/apt-get install  -o DPkg::Lock::Timeout=-1 -qq -y software-properties-common libtool build-essential curl libmaxminddb-dev libgeoip-dev
+/usr/bin/apt-get install  -o DPkg::Lock::Timeout=-1 -y -qq libpcre3-dev
 
 #Get the latest version numbers of the software that we need
 nginx_latest_version="`/usr/bin/curl 'http://nginx.org/download/' |   /bin/egrep -o 'nginx-[0-9]+\.[0-9]+\.[0-9]+' | /bin/sed 's/nginx-//g' |  /usr/bin/sort --version-sort | /usr/bin/uniq | /usr/bin/tail -1`"
