@@ -39,7 +39,7 @@ then
     elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'LIGHTTPD:repo'`" = "1" ] )
     then
         /usr/bin/systemctl disable --now apache2
-        /usr/bin/apt-get -y -qq install lighttpd
+        /usr/bin/apt-get -o DPkg::Lock::Timeout=-1 -y -qq install lighttpd
         /bin/touch /etc/lighttpd/BUILT_FROM_REPO
     fi
 fi
@@ -55,7 +55,7 @@ then
         /bin/touch /etc/lighttpd/BUILT_FROM_SOURCE
     elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'LIGHTTPD:repo'`" = "1" ] )
     then
-        /usr/bin/apt-get -y -qq install lighttpd
+        /usr/bin/apt-get -o DPkg::Lock::Timeout=-1 -y -qq install lighttpd
         /bin/touch /etc/lighttpd/BUILT_FROM_REPO
     fi
 fi
