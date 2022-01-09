@@ -26,12 +26,12 @@ fi
 
 if ( [ "${BUILDOS}" = "ubuntu" ] )
 then
-    /usr/bin/apt-get -qq -y install perl
-    /usr/bin/apt-get -qq -y install libfcgi-perl fcgiwrap spawn-fcgi
+    /usr/bin/apt-get  -o DPkg::Lock::Timeout=-1 -qq -y install perl
+    /usr/bin/apt-get -o DPkg::Lock::Timeout=-1  -qq -y install libfcgi-perl fcgiwrap spawn-fcgi
 fi
 
 if ( [ "${BUILDOS}" = "debian" ] )
 then
-    /usr/bin/apt-get -qq -y install perl
-    /usr/bin/apt-get -qq -y install libfcgi-perl fcgiwrap spawn-fcgi
+    /usr/bin/apt-get -o DPkg::Lock::Timeout=-1  -qq -y install perl
+    /usr/bin/apt-get -o DPkg::Lock::Timeout=-1  -qq -y install libfcgi-perl fcgiwrap spawn-fcgi
 fi
