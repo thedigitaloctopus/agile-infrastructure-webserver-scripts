@@ -45,7 +45,7 @@ then
     /bin/rm ${mysql_apt_config}
     #${HOME}/installscripts/Update.sh ${BUILDOS}
     ${HOME}/installscripts/UpdateAndUpgrade.sh ${BUILDOS}
-    DEBIAN_FRONTEND=noninteractive apt-get -qq -y install mysql-client
+    DEBIAN_FRONTEND=noninteractive apt-get -o DPkg::Lock::Timeout=-1 -qq -y install mysql-client
 fi
 
 if ( [ "${BUILDOS}" = "debian" ] )
@@ -59,5 +59,5 @@ then
     /bin/rm ${mysql_apt_config}
    # ${HOME}/installscripts/Update.sh ${BUILDOS}
     ${HOME}/installscripts/UpdateAndUpgrade.sh ${BUILDOS}
-    DEBIAN_FRONTEND=noninteractive apt-get -qq -y install mysql-client
+    DEBIAN_FRONTEND=noninteractive apt-get -o DPkg::Lock::Timeout=-1 -qq -y install mysql-client
 fi
