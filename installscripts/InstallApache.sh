@@ -51,16 +51,16 @@ then
         /bin/touch /etc/apache2/BUILT_FROM_SOURCE
     elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:repo'`" = "1" ] )
     then
-        /usr/bin/apt-get -qq -y install apache2-utils    
+        /usr/bin/apt-get -o DPkg::Lock::Timeout=-1 -qq -y install apache2-utils    
         
         if ( [  "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATIONLANGUAGE:PHP`" = "1" ] )
         then
-            /usr/bin/apt-get -qq -y install libapache2-mod-php${PHP_VERSION}
+            /usr/bin/apt-get -o DPkg::Lock::Timeout=-1 -qq -y install libapache2-mod-php${PHP_VERSION}
         fi
         
         if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:repo:modsecurity'`" = "1" ] )
         then
-            /usr/bin/apt -y -qq install libapache2-mod-security2 
+            /usr/bin/apt-get -o DPkg::Lock::Timeout=-1 -y -qq install libapache2-mod-security2 
             /usr/sbin/a2enmod headers
             /bin/cp /etc/modsecurity/modsecurity.conf-recommended /etc/modsecurity/modsecurity.conf
             /bin/sed -i 's/SecRuleEngine DetectionOnly/SecRuleEngine On/' /etc/modsecurity/modsecurity.conf
@@ -80,7 +80,7 @@ then
         
         if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:repo:modsecurity:modevasive'`" = "1" ] || [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:repo:modevasive'`" = "1" ] )
         then
-             /usr/bin/apt -qq -y install apache2-utils
+             /usr/bin/apt-get -o DPkg::Lock::Timeout=-1 -qq -y install apache2-utils
              DEBIAN_FRONTEND=noninteractive /usr/bin/apt -qq -y install libapache2-mod-evasive
              /usr/bin/ln -s /etc/apache2/mods-available/evasive.conf /etc/apache2/mods-enabled/evasive.conf
              /bin/sed -i 's/#//g' /etc/apache2/mods-available/evasive.conf
@@ -114,15 +114,15 @@ then
         /bin/touch /etc/apache2/BUILT_FROM_SOURCE
     elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:repo'`" = "1" ] )
     then
-        /usr/bin/apt-get -qq -y install apache2
+        /usr/bin/apt-get -o DPkg::Lock::Timeout=-1 -qq -y install apache2
         if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATIONLANGUAGE:PHP`" = "1" ] )
         then
-            /usr/bin/apt-get -qq -y install libapache2-mod-php${PHP_VERSION}
+            /usr/bin/apt-get -o DPkg::Lock::Timeout=-1  -qq -y install libapache2-mod-php${PHP_VERSION}
         fi
         
         if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:repo:modsecurity'`" = "1" ] )
         then
-            /usr/bin/apt -y -qq install libapache2-mod-security2 
+            /usr/bin/apt-get -o DPkg::Lock::Timeout=-1  -y -qq install libapache2-mod-security2 
             /usr/sbin/a2enmod headers
             /bin/cp /etc/modsecurity/modsecurity.conf-recommended /etc/modsecurity/modsecurity.conf
             /bin/sed -i 's/SecRuleEngine DetectionOnly/SecRuleEngine On/' /etc/modsecurity/modsecurity.conf
@@ -142,8 +142,8 @@ then
         
         if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:repo:modsecurity:modevasive'`" = "1" ] || [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:repo:modevasive'`" = "1" ] )
         then
-            /usr/bin/apt-get -qq -y install apache2-utils       
-            DEBIAN_FRONTEND=noninteractive /usr/bin/apt -qq -y install libapache2-mod-evasive
+            /usr/bin/apt-get -o DPkg::Lock::Timeout=-1 -qq -y install apache2-utils       
+            DEBIAN_FRONTEND=noninteractive /usr/bin/apt-get -o DPkg::Lock::Timeout=-1  -qq -y install libapache2-mod-evasive
             /usr/bin/ln -s /etc/apache2/mods-available/evasive.conf /etc/apache2/mods-enabled/evasive.conf
             /bin/sed -i 's/#//g' /etc/apache2/mods-available/evasive.conf
             notify_email_address="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SYSTEMTOEMAILADDRESS'`"
