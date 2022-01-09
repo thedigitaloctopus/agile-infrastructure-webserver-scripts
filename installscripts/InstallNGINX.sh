@@ -48,7 +48,7 @@ then
         /usr/bin/curl http://nginx.org/keys/nginx_signing.key | /usr/bin/apt-key add -
       #  ${HOME}/installscripts/Update.sh ${BUILDOS}
         ${HOME}/installscripts/UpdateAndUpgrade.sh ${BUILDOS}
-       /usr/bin/apt-get -qq install nginx
+       /usr/bin/apt-get  -o DPkg::Lock::Timeout=-1 -qq install nginx
         /bin/systemctl unmask nginx.service
         if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'NGINX:repo:modsecurity'`" = "1" ] )
         then
@@ -78,7 +78,7 @@ then
         /usr/bin/curl http://nginx.org/keys/nginx_signing.key | /usr/bin/apt-key add -
       #  ${HOME}/installscripts/Update.sh ${BUILDOS}
         ${HOME}/installscripts/UpdateAndUpgrade.sh ${BUILDOS}
-        /usr/bin/apt-get -qq install nginx
+        /usr/bin/apt-get -o DPkg::Lock::Timeout=-1 -qq install nginx
         /bin/systemctl unmask nginx.service
         if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'NGINX:repo:modsecurity'`" = "1" ] )
         then
