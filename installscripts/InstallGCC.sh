@@ -27,11 +27,11 @@ fi
 
 if ( [ "${BUILDOS}" = "ubuntu" ] )
 then
-    /usr/bin/apt-get -y -qq install gcc make autoconf libc-dev pkg-config
+    /usr/bin/apt-get -o DPkg::Lock::Timeout=-1 -y -qq install gcc make autoconf libc-dev pkg-config
 fi
 
 if ( [ "${BUILDOS}" = "debian" ] )
 then
-    /usr/bin/apt-get -y -qq install gcc make autoconf libc-dev pkg-config
+    /usr/bin/apt-get -o DPkg::Lock::Timeout=-1 -y -qq install gcc make autoconf libc-dev pkg-config
 fi
 
