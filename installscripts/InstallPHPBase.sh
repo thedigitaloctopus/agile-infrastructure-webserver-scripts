@@ -54,8 +54,11 @@ then
             /usr/bin/apt-get -o DPkg::Lock::Timeout=-1 -qq -y install php${PHP_VERSION}-${module}
         done
           
-       /usr/bin/apt-get -o DPkg::Lock::Timeout=-1  -qq -y install php${PHP_VERSION}-fpm php${PHP_VERSION}-cli php${PHP_VERSION}-gmp  php${PHP_VERSION}-xmlrpc php${PHP_VERSION}-soap php${PHP_VERSION}-dev php${PHP_VERSION}-mysqli php${PHP_VERSION}-phpdbg php${PHP_VERSION}-mbstring php${PHP_VERSION}-gd php${PHP_VERSION}-imap php${PHP_VERSION}-ldap php${PHP_VERSION}-pgsql php${PHP_VERSION}-pspell php${PHP_VERSION}-tidy php${PHP_VERSION}-intl php${PHP_VERSION}-gd php${PHP_VERSION}-curl php${PHP_VERSION}-zip php${PHP_VERSION}-xml php${PHP_VERSION}-imagick php${PHP_VERSION}-ssh2 php${PHP_VERSION}-sqlite3
+      # /usr/bin/apt-get -o DPkg::Lock::Timeout=-1  -qq -y install php${PHP_VERSION}-fpm php${PHP_VERSION}-cli php${PHP_VERSION}-gmp  php${PHP_VERSION}-xmlrpc php${PHP_VERSION}-soap php${PHP_VERSION}-dev php${PHP_VERSION}-mysqli php${PHP_VERSION}-phpdbg php${PHP_VERSION}-mbstring php${PHP_VERSION}-gd php${PHP_VERSION}-imap php${PHP_VERSION}-ldap php${PHP_VERSION}-pgsql php${PHP_VERSION}-pspell php${PHP_VERSION}-tidy php${PHP_VERSION}-intl php${PHP_VERSION}-gd php${PHP_VERSION}-curl php${PHP_VERSION}-zip php${PHP_VERSION}-xml php${PHP_VERSION}-imagick php${PHP_VERSION}-ssh2 php${PHP_VERSION}-sqlite3
     
+       /bin/rm /usr/bin/php
+       /usr/bin/ln -s /usr/bin/php /usr/bin/php${PHP_VERSION}
+       
        if ( [ "`/bin/echo ${PHP_VERSION} | /bin/grep '7\.'`" != "" ] )
        then
            /usr/bin/apt-get -o DPkg::Lock::Timeout=-1  -qq -y install php${PHP_VERSION}-json
@@ -88,6 +91,9 @@ then
     do
         /usr/bin/apt-get -o DPkg::Lock::Timeout=-1  -qq -y install php${PHP_VERSION}-${module}
     done
+    
+    /bin/rm /usr/bin/php
+    /usr/bin/ln -s /usr/bin/php /usr/bin/php${PHP_VERSION}
 
     #/usr/bin/apt-get -o DPkg::Lock::Timeout=-1  -qq -y install php${PHP_VERSION}-fpm php${PHP_VERSION}-cli php${PHP_VERSION}-gmp php${PHP_VERSION}-xmlrpc php${PHP_VERSION}-soap php${PHP_VERSION}-dev php${PHP_VERSION}-mysqli php${PHP_VERSION}-phpdbg php${PHP_VERSION}-mbstring php${PHP_VERSION}-gd php${PHP_VERSION}-imap php${PHP_VERSION}-ldap php${PHP_VERSION}-pgsql php${PHP_VERSION}-pspell php${PHP_VERSION}-tidy php${PHP_VERSION}-intl php${PHP_VERSION}-gd php${PHP_VERSION}-curl php${PHP_VERSION}-zip php${PHP_VERSION}-xml php${PHP_VERSION}-imagick php${PHP_VERSION}-ssh2 php${PHP_VERSION}-sqlite3
 
