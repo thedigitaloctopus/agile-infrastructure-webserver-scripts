@@ -40,7 +40,7 @@ then
     
     if ( [ ! -L /dev/disk/byuuid/${uuid} ] )
     then
-       /usr/bin/ln -s /dev/disk/byuuid/${uuid} /dev/vda1
+       /usr/bin/ln -s /dev/vda1 /dev/disk/byuuid/${uuid} 
     fi
 
     ip="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'MYIP'`"
