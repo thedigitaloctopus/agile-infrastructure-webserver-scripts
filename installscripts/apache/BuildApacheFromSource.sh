@@ -161,8 +161,11 @@ fi
 
 if ( [ "${3}" = "modevasive" ] )
 then    
-    /usr/bin/apt-get -qq -y install apache2-utils
-    DEBIAN_FRONTEND=noninteractive /usr/bin/apt-get -qq -y install libapache2-mod-evasive
+    if ( [ "${BUILDOS}" = "ubuntu" ] || [ "${BUILDOS}" = "debian" ] )
+    then
+        /usr/bin/apt-get -qq -y install apache2-utils
+        DEBIAN_FRONTEND=noninteractive /usr/bin/apt-get -qq -y install libapache2-mod-evasive
+    fi
             
     /bin/mkdir /var/log/mod_evasive 
     /bin/chown -R www-data:www-data /var/log/mod_evasive
