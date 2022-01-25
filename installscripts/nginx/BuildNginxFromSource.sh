@@ -25,9 +25,15 @@
 #######################################################################################################
 buildtype="${1}"
 
-#Instll the tools needed for complilation
-/usr/bin/apt-get install  -o DPkg::Lock::Timeout=-1 -qq -y software-properties-common libtool build-essential curl libmaxminddb-dev libgeoip-dev
-/usr/bin/apt-get install  -o DPkg::Lock::Timeout=-1 -y -qq libpcre3-dev
+export HOME=`/bin/cat /home/homedir.dat`
+BUILDOS="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDOS'`"
+
+#Install needed libraries
+if ( [ "${BUILDOS}" = "ubuntu" ] || [ "${BUILDOS}" = "debian" ] )
+then
+    /usr/bin/apt-get install  -o DPkg::Lock::Timeout=-1 -qq -y software-properties-common libtool build-essential curl libmaxminddb-dev libgeoip-dev
+    /usr/bin/apt-get install  -o DPkg::Lock::Timeout=-1 -y -qq libpcre3-dev
+fi
 
 #Get the latest version numbers of the software that we need
 nginx_latest_version="`/usr/bin/curl 'http://nginx.org/download/' |   /bin/egrep -o 'nginx-[0-9]+\.[0-9]+\.[0-9]+' | /bin/sed 's/nginx-//g' |  /usr/bin/sort --version-sort | /usr/bin/uniq | /usr/bin/tail -1`"
@@ -52,14 +58,6 @@ perl_version="`/usr/bin/perl -v | /bin/egrep -o 'v[0-9]+\.[0-9]+\.[0-9]+' | /bin
 
 /bin/cp -r openssl-${openssl_latest_version} /usr/local/openssl
 
-#cd openssl-${openssl_latest_version}
-#/usr/bin/apt-get -qq -y remove --auto-remove openssl
-#/usr/bin/apt-get -qq -y purge --auto-remove openssl
-#./config --prefix=/opt/openssl-${openssl_latest_version} --openssldir=/opt/openssl-${openssl_latest_version}
-#/usr/bin/make
-#/usr/bin/make install
-#cd ..
-#/bin/cp /opt/openssl-${openssl_latest_version}/bin/openssl /usr/bin/openssl
 
 if ( [ "${2}" = "modsecurity" ] )
 then
@@ -80,10 +78,14 @@ then
    # /usr/bin/git clone https://github.com/SpiderLabs/ModSecurity-nginx
    #. ${HOME}/installscripts/nginx/BuildModsecurityForSource.sh
    
-   /usr/bin/apt-get -qq -y install bison build-essential ca-certificates curl dh-autoreconf doxygen flex gawk git iputils-ping libcurl4-gnutls-dev libexpat1-dev libgeoip-dev liblmdb-dev libpcre3-dev libpcre++-dev libssl-dev libtool libxml2 libxml2-dev libyajl-dev locales lua5.3-dev pkg-config wget zlib1g-dev zlibc libgd-dev libxslt-dev
-   /usr/bin/apt-get install -y -qq libcurl4-openssl-dev
-   /usr/bin/apt-get install -y -qq libxml2-dev
-   /usr/bin/apt-get install -y -qq libpcre3-dev
+   #Install needed libraries
+   if ( [ "${BUILDOS}" = "ubuntu" ] || [ "${BUILDOS}" = "debian" ] )
+   then
+      /usr/bin/apt-get install -o DPkg::Lock::Timeout=-1 -y -qq bison build-essential ca-certificates curl dh-autoreconf doxygen flex gawk git iputils-ping libcurl4-gnutls-dev libexpat1-dev libgeoip-dev liblmdb-dev libpcre3-dev libpcre++-dev libssl-dev libtool libxml2 libxml2-dev libyajl-dev locales lua5.3-dev pkg-config wget zlib1g-dev zlibc libgd-dev libxslt-dev
+      /usr/bin/apt-get install -o DPkg::Lock::Timeout=-1 -y -qq libcurl4-openssl-dev
+      /usr/bin/apt-get install -o DPkg::Lock::Timeout=-1 -y -qq libxml2-dev
+      /usr/bin/apt-get install -o DPkg::Lock::Timeout=-1 -y -qq libpcre3-dev
+   fi
    /usr/bin/git clone https://github.com/SpiderLabs/ModSecurity
    cd ModSecurity
    /usr/bin/git submodule init
@@ -100,7 +102,10 @@ fi
 /bin/rm *.tar.gz*
 
 #Install additional libraries that we are building NGINX with
-/usr/bin/apt-get install -qq -y perl libperl-dev libgd3 libgd-dev libxml2 libxml2-dev libxslt1.1 libxslt1-dev
+if ( [ "${BUILDOS}" = "ubuntu" ] || [ "${BUILDOS}" = "debian" ] )
+then
+   /usr/bin/apt-get install -qq  -o DPkg::Lock::Timeout=-1 -y perl libperl-dev libgd3 libgd-dev libxml2 libxml2-dev libxslt1.1 libxslt1-dev
+fi
 
 #Setup the manual page
 /bin/cp ~/nginx-${nginx_latest_version}/man/nginx.8 /usr/share/man/man8
