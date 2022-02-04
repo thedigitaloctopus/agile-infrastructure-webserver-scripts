@@ -19,5 +19,10 @@
 # along with The Agile Deployment Toolkit.  If not, see <http://www.gnu.org/licenses/>.
 #######################################################################################
 #######################################################################################
+
+while ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] )
+do
+    /bin/sleep 5
+done
 /bin/rm ${HOME}/config/autoscalerpublicip/*
 /bin/rm ${HOME}/config/autoscalerip/*
