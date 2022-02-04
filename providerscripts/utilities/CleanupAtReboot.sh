@@ -19,4 +19,5 @@
 # along with The Agile Deployment Toolkit.  If not, see <http://www.gnu.org/licenses/>.
 #######################################################################################
 #######################################################################################
-
+/bin/rm ${HOME}/config/autoscalerpublicips/*
+/bin/rm ${HOME}/config/autoscalerips/*
