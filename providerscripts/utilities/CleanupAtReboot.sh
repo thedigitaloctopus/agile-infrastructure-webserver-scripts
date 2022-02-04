@@ -24,5 +24,5 @@ while ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] )
 do
     /bin/sleep 5
 done
-/bin/rm ${HOME}/config/autoscalerpublicip/*
-/bin/rm ${HOME}/config/autoscalerip/*
+/bin/rm ${HOME}/config/webserverpublicips/*
+/bin/rm ${HOME}/config/webserverips/*
