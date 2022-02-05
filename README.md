@@ -4,7 +4,7 @@ The webserver component is able to install Apache, Nginx or Lighttpd.
 
 You can fork the repository and configure Apache, Nginx or Lighttpd in the following files:
 
-** agile-infrastructure-webserver-scripts/providerscripts/webserver/configuration/* **  
+** agile-infrastructure-webserver-scripts/providerscripts/webserver/configuration/\* **  
 
 The webservers have their webroot as **/var/www/html**
 
