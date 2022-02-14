@@ -34,7 +34,7 @@ fi
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:joomla`" = "1" ] )
 then
-    if ( [ "`${HOME}/providerscripts/utilities/ObtainSharedLock.sh GATEWAY_GUARDIAN_UPDATED`" = "1" ] || [ ! -f /etc/basicauth/.htpasswd ] )
+    if ( [ -f ${HOME}/config/GATEWAY_GUARDIAN_UPDATED ] || [ ! -f /etc/basicauth/.htpasswd ] )
     then
         if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOICE:virgin`" = "1" ] && [ ! -f ${HOME}/runtime/VIRGINADJUSTED ] )
         then
