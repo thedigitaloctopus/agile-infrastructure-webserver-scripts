@@ -63,11 +63,11 @@ cd /usr/local/src/libexpat/expat
 cd /usr/local/src
 
 #Download and build apache
-apache_download_link="`/usr/bin/curl http://httpd.apache.org/download.cgi | /bin/grep "Source" | /bin/grep "tar.gz" | /bin/sed 's/.*https/https/g' | /bin/sed 's/".*//g'`"
+apache_download_link="`/usr/bin/wget -O- http://httpd.apache.org/download.cgi | /bin/grep "Source" | /bin/grep "tar.gz" | /bin/sed 's/.*https/https/g' | /bin/sed 's/".*//g'`"
 /usr/bin/wget -O- ${apache_download_link} | /bin/tar -zxf -
 
 #Download about build apr
-apr_latest_version="`/usr/bin/curl http://apr.apache.org/download.cgi | /bin/grep "apr1" | /bin/sed 's/.*APR //g' | /usr/bin/awk '{print $1}'`"
+apr_latest_version="`/usr/bin/wget -O- http://apr.apache.org/download.cgi | /bin/grep "apr1" | /bin/sed 's/.*APR //g' | /usr/bin/awk '{print $1}'`"
 apr_download_link="https://mirrors.ukfast.co.uk/sites/ftp.apache.org/apr/apr-${apr_latest_version}.tar.gz"
 
 /usr/bin/wget -O- ${apr_download_link} | /bin/tar -zxf - -C httpd-*/srclib
@@ -78,7 +78,7 @@ cd /usr/local/src/httpd-*/srclib
 cd /usr/local/src
 
 #Download and build apr-util
-apr_util_download_link="`/usr/bin/curl http://apr.apache.org/download.cgi | /bin/grep 'apr-util' | /bin/grep 'tar.gz\"' | /bin/sed 's/.*https/https/g' | /bin/sed 's/".*//g' | /bin/sed '/^$/d'`"
+apr_util_download_link="`/usr/bin/wget -O- http://apr.apache.org/download.cgi | /bin/grep 'apr-util' | /bin/grep 'tar.gz\"' | /bin/sed 's/.*https/https/g' | /bin/sed 's/".*//g' | /bin/sed '/^$/d'`"
 /usr/bin/wget -O- ${apr_util_download_link} | /bin/tar -zxf - -C httpd-*/srclib
 
 cd /usr/local/src/httpd-*/srclib
