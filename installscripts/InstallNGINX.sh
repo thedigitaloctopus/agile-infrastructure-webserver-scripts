@@ -34,14 +34,7 @@ then
     then
         # ${HOME}/installscripts/Update.sh ${BUILDOS}
          ${HOME}/installscripts/UpdateAndUpgrade.sh ${BUILDOS}
-
-         if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'NGINX:source:modsecurity'`" = "1" ] )
-         then
-             ${HOME}/installscripts/nginx/BuildNginxFromSource.sh Ubuntu modsecurity
-         else
-             ${HOME}/installscripts/nginx/BuildNginxFromSource.sh Ubuntu
-         fi 
-         
+         ${HOME}/installscripts/nginx/BuildNginxFromSource.sh Ubuntu 
          /bin/touch /etc/nginx/BUILT_FROM_SOURCE
     elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'NGINX:repo'`" = "1" ] )
     then
@@ -50,10 +43,6 @@ then
         ${HOME}/installscripts/UpdateAndUpgrade.sh ${BUILDOS}
        /usr/bin/apt-get  -o DPkg::Lock::Timeout=-1 -qq install nginx
         /bin/systemctl unmask nginx.service
-        if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'NGINX:repo:modsecurity'`" = "1" ] )
-        then
-            ${HOME}/installscripts/nginx/BuildModsecurityForRepo.sh
-        fi
         /bin/touch /etc/nginx/BUILT_FROM_REPO
     fi
 fi
@@ -65,25 +54,14 @@ then
     then
        # ${HOME}/installscripts/Update.sh ${BUILDOS}
         ${HOME}/installscripts/UpdateAndUpgrade.sh ${BUILDOS}
-        if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'NGINX:source:modsecurity'`" = "1" ] )
-        then
-            ${HOME}/installscripts/nginx/BuildNginxFromSource.sh Debian modsecurity
-        else
-            ${HOME}/installscripts/nginx/BuildNginxFromSource.sh Debian
-        fi
-        
+        ${HOME}/installscripts/nginx/BuildNginxFromSource.sh Debian        
         /bin/touch /etc/nginx/BUILT_FROM_SOURCE
     elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'NGINX:repo'`" = "1" ] )
     then    
         /usr/bin/curl http://nginx.org/keys/nginx_signing.key | /usr/bin/apt-key add -
-      #  ${HOME}/installscripts/Update.sh ${BUILDOS}
         ${HOME}/installscripts/UpdateAndUpgrade.sh ${BUILDOS}
         /usr/bin/apt-get -o DPkg::Lock::Timeout=-1 -qq install nginx
         /bin/systemctl unmask nginx.service
-        if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'NGINX:repo:modsecurity'`" = "1" ] )
-        then
-            ${HOME}/installscripts/nginx/BuildModsecurityForRepo.sh
-        fi
         /bin/touch /etc/nginx/BUILT_FROM_REPO
     fi
 fi
