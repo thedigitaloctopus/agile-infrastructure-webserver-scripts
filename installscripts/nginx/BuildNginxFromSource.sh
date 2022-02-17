@@ -58,49 +58,6 @@ perl_version="`/usr/bin/perl -v | /bin/egrep -o 'v[0-9]+\.[0-9]+\.[0-9]+' | /bin
 
 /bin/cp -r openssl-${openssl_latest_version} /usr/local/openssl
 
-
-if ( [ "${2}" = "modsecurity" ] )
-then
-   # #Prepare and install ModSecurity
-   # /usr/bin/git clone https://github.com/SpiderLabs/ModSecurity
-   # cd ModSecurity
-   # dir=`/usr/bin/pwd`
-   # /usr/bin/git checkout v3/master
-   # /usr/bin/git submodule init
-   # /usr/bin/git submodule update
-   # /bin/sh build.sh
-   # ./configure --with-pcre=../${pcre_latest_version} --with-maxmind=no
-   # /usr/bin/make
-   # /usr/bin/make install
-   # cd ..
-
-   # #Prepare and install ModSecurity nginx adapter
-   # /usr/bin/git clone https://github.com/SpiderLabs/ModSecurity-nginx
-   #. ${HOME}/installscripts/nginx/BuildModsecurityForSource.sh
-   
-   #Install needed libraries
-   if ( [ "${BUILDOS}" = "ubuntu" ] || [ "${BUILDOS}" = "debian" ] )
-   then
-      /usr/bin/apt-get install -o DPkg::Lock::Timeout=-1 -y -qq bison build-essential ca-certificates curl dh-autoreconf doxygen flex gawk git iputils-ping libcurl4-gnutls-dev libexpat1-dev libgeoip-dev liblmdb-dev libpcre3-dev libpcre++-dev libssl-dev libtool libxml2 libxml2-dev libyajl-dev locales lua5.3-dev pkg-config wget zlib1g-dev zlibc libgd-dev libxslt-dev
-      /usr/bin/apt-get install -o DPkg::Lock::Timeout=-1 -y -qq libcurl4-openssl-dev
-      /usr/bin/apt-get install -o DPkg::Lock::Timeout=-1 -y -qq libxml2-dev
-      /usr/bin/apt-get install -o DPkg::Lock::Timeout=-1 -y -qq libpcre3-dev
-   fi
-   /usr/bin/git clone https://github.com/SpiderLabs/ModSecurity
-   cd ModSecurity
-   /usr/bin/git submodule init
-   /usr/bin/git submodule update
-   ./build.sh
-   ./configure
-    /usr/bin/make
-    /usr/bin/make install
-    cd ..
-    /usr/bin/git clone --depth 1 https://github.com/SpiderLabs/ModSecurity-nginx.git
-   
-fi
-
-/bin/rm *.tar.gz*
-
 #Install additional libraries that we are building NGINX with
 if ( [ "${BUILDOS}" = "ubuntu" ] || [ "${BUILDOS}" = "debian" ] )
 then
@@ -120,40 +77,13 @@ cd nginx*
 
 options=" --prefix=/etc/nginx --sbin-path=/usr/sbin/nginx --modules-path=/usr/lib/nginx/modules --with-openssl=/usr/local/openssl --conf-path=/etc/nginx/nginx.conf --error-log-path=/var/log/nginx/error.log --pid-path=/var/run/nginx.pid --lock-path=/var/run/nginx.lock --user=www-data --group=www-data --build=${buildtype} --builddir=nginx-${nginx_latest_version} --with-select_module --with-poll_module --with-threads --with-file-aio --with-http_ssl_module --with-http_v2_module --with-http_realip_module --with-http_addition_module --with-http_xslt_module=dynamic --with-http_image_filter_module=dynamic --with-http_sub_module --with-http_dav_module --with-http_flv_module --with-http_mp4_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_auth_request_module --with-http_random_index_module --with-http_secure_link_module --with-http_degradation_module --with-http_slice_module --with-http_stub_status_module --with-http_perl_module=dynamic --with-http_geoip_module --with-stream_geoip_module --with-perl_modules_path=/usr/share/perl/${perl_version} --with-perl=/usr/bin/perl --http-log-path=/var/log/nginx/access.log --http-client-body-temp-path=/var/cache/nginx/client_temp --http-proxy-temp-path=/var/cache/nginx/proxy_temp --http-fastcgi-temp-path=/var/cache/nginx/fastcgi_temp --http-uwsgi-temp-path=/var/cache/nginx/uwsgi_temp --http-scgi-temp-path=/var/cache/nginx/scgi_temp --with-mail=dynamic --with-mail_ssl_module --with-stream=dynamic --with-stream_ssl_module --with-stream_realip_module --with-stream_ssl_preread_module --with-compat --with-pcre --with-pcre-jit --with-zlib=../zlib-${zlib_latest_version} --with-openssl-opt=no-nextprotoneg --with-debug --add-dynamic-module=../ngx_http_geoip2_module"
 
-if ( [ "${2}" = "modsecurity" ] )
-then
-    options="${options} --add-dynamic-module=../ModSecurity-nginx"
-fi
-
 ./configure ${options}
             
 /usr/bin/make modules
-#/bin/cp nginx-*/ngx_http_modsecurity_module.so /etc/nginx/modules
-#/bin/cp nginx-*/ngx_http_geoip2_module.so /etc/nginx/modules
 /bin/cp nginx-*/*.so /etc/nginx/modules
 
 /usr/bin/make
 /usr/bin/make install
-
-if ( [ "${2}" = "modsecurity" ] )
-then
-    #Setup the rules for modsecurity
-    /bin/mkdir -p /etc/nginx/modsec
-    cd /etc/nginx/modsec
-    /usr/bin/git clone https://github.com/SpiderLabs/owasp-modsecurity-crs.git
-    /bin/mv /etc/nginx/modsec/owasp-modsecurity-crs/crs-setup.conf.example /etc/nginx/modsec/owasp-modsecurity-crs/crs-setup.conf
-    #/bin/rm /etc/nginx/modsec/owasp-modsecurity-crs/rules/REQUEST-910-IP-REPUTATION.conf #Requires MaxMind
-    cd ${dir}
-    /bin/cp modsecurity.conf-recommended /etc/nginx/modsec/modsecurity.conf
-    /bin/cp unicode.mapping /etc/nginx/modsec
-
-    /bin/echo "
-Include /etc/nginx/modsec/owasp-modsecurity-crs/crs-setup.conf
-Include /etc/nginx/modsec/owasp-modsecurity-crs/rules/*.conf" > /etc/nginx/modsec/main.conf
-    /bin/sed -i 's/DetectionOnly/On/g' /etc/nginx/modsec/modsecurity.conf
-
-    cd ..
-fi
 
 /bin/ln -s /usr/lib/nginx/modules /etc/nginx/modules
 
@@ -237,7 +167,7 @@ include fastcgi.conf;" > /etc/nginx/snippets/fastcgi-php.conf
 
 #Cleanup
 
-/bin/rm -rf nginx-* openssl-* pcre* zlib-* ModSecurity* ngx_http*
+/bin/rm -rf nginx-* openssl-* pcre* zlib-* 
 
 #Start NGINX
 
