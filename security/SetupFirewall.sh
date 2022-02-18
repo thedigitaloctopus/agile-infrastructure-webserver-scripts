@@ -67,15 +67,13 @@ then
    # publicautoscalerip="`/bin/ls ${HOME}/config/autoscalerpublicip`"
     
     for autoscalerip in `/bin/ls ${HOME}/config/autoscalerip`
-    do
-        /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from ${autoscalerip} to any port 443
-        /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from ${autoscalerip} to any port 80
-        
+    do 
         if ( [ "`/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw status | /bin/grep ${autoscalerip} | /bin/grep ALLOW`" = "" ] )
         then
            /bin/sleep 5
            /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from ${autoscalerip}
-
+           /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from ${autoscalerip} to any port 443
+           /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from ${autoscalerip} to any port 80           
            ${HOME}/providerscripts/utilities/ConnectToAutoscaler.sh ${HOME}/providerscripts/server/UpdateNativeFirewall.sh ${autoscalerip}
            if ( [ -f /etc/apache2/mods-available/evasive.conf ] )
            then
@@ -86,13 +84,13 @@ then
     
     for publicautoscalerip in `/bin/ls ${HOME}/config/autoscalerpublicip`
     do
-        /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from ${publicautoscalerip} to any port 443
-        /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from ${publicautoscalerip} to any port 80
+
         if ( [ "`/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw status | /bin/grep ${publicautoscalerip} | /bin/grep ALLOW`" = "" ] )
         then
             /bin/sleep 5
             /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from ${publicautoscalerip}
-
+            /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from ${publicautoscalerip} to any port 443
+            /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from ${publicautoscalerip} to any port 80
             ${HOME}/providerscripts/utilities/ConnectToAutoscaler.sh ${HOME}/providerscripts/server/UpdateNativeFirewall.sh ${publicautoscalerip}
            if ( [ -f /etc/apache2/mods-available/evasive.conf ] )
            then
