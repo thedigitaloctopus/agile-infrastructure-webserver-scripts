@@ -32,7 +32,7 @@ fi
 BUILDOSVERSION="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDOSVERSION'`"
 
 
-DB_P="`/bin/sed '2q;d' ${HOME}/credentials/shit`"
+#DB_P="`/bin/sed '2q;d' ${HOME}/credentials/shit`"
 
 if ( [ "${BUILDOS}" = "ubuntu" ] )
 then
