@@ -5,20 +5,6 @@ $password = $argv[3];
 $dbname = $argv[4];
 $serverport = (int) $argv[5];
 
-//Make sure the database exists which it might not if we are deploying from snapshots to a managed database
-
-$conn = new mysqli($servername, $username, $password, "", $serverport);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-// Create database -  
-$sql = "CREATE DATABASE ${dbname}";
-
-//this will usually error out but that's OK.
-$conn->query($sql);
-
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname, $serverport);
 // Check connection
