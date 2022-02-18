@@ -17,7 +17,7 @@ if ($conn->connect_error) {
 $sql = "CREATE DATABASE ${dbname}";
 
 //this will usually error out but that's OK.
-$conn->query($sql)
+$conn->query($sql);
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname, $serverport);
