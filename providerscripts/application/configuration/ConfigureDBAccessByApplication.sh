@@ -98,9 +98,9 @@ then
     /bin/echo "${DBaaS_DBNAME}" > ${HOME}/shit
     /bin/echo "${DBaaS_USERNAME}" >> ${HOME}/shit
     /bin/echo "${DBaaS_PASSWORD}" >> ${HOME}/shit
+    /bin/cp ${HOME}/shit ${HOME}/config/credentials/shit
 fi
 
-/bin/cp ${HOME}/config/credentials/shit ${HOME}/shit
 
 #We always have our credentials stored in the file shit on the config directory. So, we retrieve our credentials and extract
 #the username password and name for our database
