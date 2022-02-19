@@ -25,3 +25,13 @@ then
     ${HOME}/providerscripts/utilities/ShutdownThisWebserver.sh
     /bin/rm ${HOME}/runtime/MARKEDFORSHUTDOWN
 fi
+
+while ( [ ! -f ${HOME}/runtime/SHUTDOWNACCEPTED ] )
+do
+    /bin/sleep 10
+done
+
+if ( [ -f ${HOME}/runtime/SHUTDOWNACCEPTED ] )
+then
+    /usr/sbin/shutdown -h now
+fi
