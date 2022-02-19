@@ -96,8 +96,8 @@ then
     DBaaS_USERNAME="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBaaSUSERNAME'`"
     DBaaS_PASSWORD="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBaaSPASSWORD'`"
     /bin/echo "${DBaaS_DBNAME}" > ${HOME}/shit
-    /bin/echo "${DBaaS_USERNAME}" >> ${HOME}/shit
     /bin/echo "${DBaaS_PASSWORD}" >> ${HOME}/shit
+    /bin/echo "${DBaaS_USERNAME}" >> ${HOME}/shit
     /bin/cp ${HOME}/shit ${HOME}/config/credentials/shit
 fi
 
