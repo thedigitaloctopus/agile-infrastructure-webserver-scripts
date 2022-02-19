@@ -374,7 +374,6 @@ ClientAliveInterval 200
 ClientAliveCountMax 10" >> /etc/ssh/sshd_config
 fi
 
-
 /usr/sbin/service sshd restart
 
 /bin/sed -i 's/#user_allow_other/user_allow_other/g' /etc/fuse.conf
