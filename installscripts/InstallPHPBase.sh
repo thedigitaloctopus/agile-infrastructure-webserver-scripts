@@ -36,7 +36,6 @@ then
     if ( [ "${BUILDOSVERSION}" = "20.04" ] )
     then
         /usr/bin/add-apt-repository -y ppa:ondrej/php
-       # ${HOME}/installscripts/Update.sh ${BUILDOS}
         ${HOME}/installscripts/UpdateAndUpgrade.sh ${BUILDOS}
 
         installed_php_version="`/usr/bin/php -v | /bin/grep "^PHP" | /usr/bin/awk '{print $2}' | /usr/bin/awk -F'.' '{print $1,$2}' | /bin/sed 's/ /\./g'`"
@@ -53,9 +52,7 @@ then
         do
             /usr/bin/apt-get -o DPkg::Lock::Timeout=-1 -qq -y install php${PHP_VERSION}-${module}
         done
-          
-      # /usr/bin/apt-get -o DPkg::Lock::Timeout=-1  -qq -y install php${PHP_VERSION}-fpm php${PHP_VERSION}-cli php${PHP_VERSION}-gmp  php${PHP_VERSION}-xmlrpc php${PHP_VERSION}-soap php${PHP_VERSION}-dev php${PHP_VERSION}-mysqli php${PHP_VERSION}-phpdbg php${PHP_VERSION}-mbstring php${PHP_VERSION}-gd php${PHP_VERSION}-imap php${PHP_VERSION}-ldap php${PHP_VERSION}-pgsql php${PHP_VERSION}-pspell php${PHP_VERSION}-tidy php${PHP_VERSION}-intl php${PHP_VERSION}-gd php${PHP_VERSION}-curl php${PHP_VERSION}-zip php${PHP_VERSION}-xml php${PHP_VERSION}-imagick php${PHP_VERSION}-ssh2 php${PHP_VERSION}-sqlite3
-    
+             
        /bin/rm /usr/bin/php
        /usr/bin/ln -s /usr/bin/php${PHP_VERSION} /usr/bin/php
        
@@ -73,9 +70,7 @@ then
     /usr/bin/wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
     /bin/sh -c 'echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list'
 
-   # ${HOME}/installscripts/Update.sh ${BUILDOS}    
     ${HOME}/installscripts/UpdateAndUpgrade.sh ${BUILDOS}
-
     installed_php_version="`/usr/bin/php -v | /bin/grep "^PHP" | /usr/bin/awk '{print $2}' | /usr/bin/awk -F'.' '{print $1,$2}' | /bin/sed 's/ /\./g'`"
       
     if ( [ "${installed_php_version}" != "${PHP_VERSION}" ] )
@@ -94,8 +89,6 @@ then
     
     /bin/rm /usr/bin/php
     /usr/bin/ln -s /usr/bin/php${PHP_VERSION} /usr/bin/php
-
-    #/usr/bin/apt-get -o DPkg::Lock::Timeout=-1  -qq -y install php${PHP_VERSION}-fpm php${PHP_VERSION}-cli php${PHP_VERSION}-gmp php${PHP_VERSION}-xmlrpc php${PHP_VERSION}-soap php${PHP_VERSION}-dev php${PHP_VERSION}-mysqli php${PHP_VERSION}-phpdbg php${PHP_VERSION}-mbstring php${PHP_VERSION}-gd php${PHP_VERSION}-imap php${PHP_VERSION}-ldap php${PHP_VERSION}-pgsql php${PHP_VERSION}-pspell php${PHP_VERSION}-tidy php${PHP_VERSION}-intl php${PHP_VERSION}-gd php${PHP_VERSION}-curl php${PHP_VERSION}-zip php${PHP_VERSION}-xml php${PHP_VERSION}-imagick php${PHP_VERSION}-ssh2 php${PHP_VERSION}-sqlite3
 
     if ( [ "`/bin/echo ${PHP_VERSION} | /bin/grep '7\.'`" != "" ] )
     then
