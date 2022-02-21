@@ -57,8 +57,6 @@ then
     then
         /bin/rm -r ${HOME}/config/*
     fi
-else
-    exit
 fi
 
 
