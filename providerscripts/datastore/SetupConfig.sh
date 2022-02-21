@@ -28,12 +28,15 @@ fi
 
 SERVER_USER="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SERVERUSER'`"
 
-if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" != "" ] && [ ! -f ${HOME}/runtime/CONFIG-PRIMED ] )
+if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" != "" ]  )
 then
-    if ( [ ! -f ${HOME}/config/${SERVER_USER} ] )
+    if ( [ ! -f ${HOME}/config/${SERVER_USER} ] || [ ! -f ${HOME}/runtime/CONFIG-PRIMED ] )
     then
-        /bin/rm -r ${HOME}/config/*
-        /bin/sleep 5
+         if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh 'PRODUCTION'`" != "1" ] )
+         then
+            /bin/rm -r ${HOME}/config/*
+            /bin/sleep 5
+        fi
         /bin/touch ${HOME}/config/${SERVER_USER}
         /bin/touch ${HOME}/runtime/CONFIG-PRIMED
     fi
