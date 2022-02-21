@@ -32,7 +32,7 @@ if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" != "" ]  )
 then
     if ( [ ! -f ${HOME}/config/${SERVER_USER} ] || [ ! -f ${HOME}/runtime/CONFIG-PRIMED ] )
     then
-         if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh 'PRODUCTION'`" != "1" ] )
+         if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh 'PRODUCTION:1'`" != "1" ] )
          then
             /bin/rm -r ${HOME}/config/*
             /bin/sleep 5
