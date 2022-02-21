@@ -37,20 +37,6 @@ fi
 
 cd /usr/local/src
 
-#Download and build PCRE
-#pcre_latest_version="`/usr/bin/curl 'https://ftp.pcre.org/pub/pcre/' | /bin/egrep -o 'pcre-[0-9]+\.[0-9]+' | /bin/sed 's/pcre-//g' | /usr/bin/sort --version-sort | /usr/bin/uniq | /usr/bin/tail -1`"
-#/usr/bin/wget -O- https://ftp.pcre.org/pub/pcre/pcre-${pcre_latest_version}.tar.gz | /bin/tar -zxf -
-#openssl_latest_version="`/usr/bin/wget -q -O - https://www.openssl.org/source | grep openssl-1. | /bin/sed 's/.*openssl-//g' | /bin/sed 's/.tar.*//g'`"
-#/usr/bin/wget https://www.openssl.org/source/openssl-${openssl_latest_version}.tar.gz && tar xzvf openssl-${openssl_latest_version}.tar.gz
-
-#cd /usr/local/src/pcre*
-
-#./configure --prefix=/usr/local/pcre 
-#/usr/bin/make
-#/usr/bin/make install
-
-cd /usr/local/src
-
 #Download and build libexpat
 /usr/bin/git clone https://github.com/libexpat/libexpat.git
 
@@ -234,7 +220,6 @@ LoadModule auth_basic_module /usr/local/apache2/modules/mod_auth_basic.so" > /et
 if ( [ "${2}" = "modsecurity" ] )
 then
     /bin/echo "LoadModule security3_module /usr/local/apache2/modules/mod_security3.so" >> /etc/apache2/httpd.conf.$$
-# LoadModule maxminddb_module /usr/local/apache2/modules/mod_maxminddb.so" >> /etc/apache2/httpd.conf.$$
 fi
 
 if ( [ "${3}" = "modevasive" ] )
