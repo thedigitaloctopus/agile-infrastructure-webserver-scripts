@@ -32,16 +32,14 @@ then
     /usr/bin/systemctl disable --now apache2
     if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'NGINX:source'`" = "1" ] )
     then
-        # ${HOME}/installscripts/Update.sh ${BUILDOS}
          ${HOME}/installscripts/UpdateAndUpgrade.sh ${BUILDOS}
          ${HOME}/installscripts/nginx/BuildNginxFromSource.sh Ubuntu 
          /bin/touch /etc/nginx/BUILT_FROM_SOURCE
     elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'NGINX:repo'`" = "1" ] )
     then
         /usr/bin/curl http://nginx.org/keys/nginx_signing.key | /usr/bin/apt-key add -
-      #  ${HOME}/installscripts/Update.sh ${BUILDOS}
         ${HOME}/installscripts/UpdateAndUpgrade.sh ${BUILDOS}
-       /usr/bin/apt-get  -o DPkg::Lock::Timeout=-1 -qq install nginx
+        /usr/bin/apt-get  -o DPkg::Lock::Timeout=-1 -qq install nginx
         /bin/systemctl unmask nginx.service
         /bin/touch /etc/nginx/BUILT_FROM_REPO
     fi
@@ -52,7 +50,6 @@ then
     /usr/bin/systemctl disable --now apache2
     if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'NGINX:source'`" = "1" ] )
     then
-       # ${HOME}/installscripts/Update.sh ${BUILDOS}
         ${HOME}/installscripts/UpdateAndUpgrade.sh ${BUILDOS}
         ${HOME}/installscripts/nginx/BuildNginxFromSource.sh Debian        
         /bin/touch /etc/nginx/BUILT_FROM_SOURCE
