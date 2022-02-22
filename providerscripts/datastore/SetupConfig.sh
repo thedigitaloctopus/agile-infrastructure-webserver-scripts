@@ -152,14 +152,14 @@ then
     fi
 fi
 
-SERVER_USER="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SERVERUSER'`"
-if (  [ "`/bin/mount | /bin/grep ${HOME}/config`" != "" ] && [ "`/bin/ls ${HOME}/config/${SERVER_USER}`" = "" ] )
-then
-    /bin/rm -r ${HOME}/config/*
-    /bin/touch ${HOME}/config/${SERVER_USER}
-    /bin/sleep 20
-fi
+#SERVER_USER="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SERVERUSER'`"
+#if (  [ "`/bin/mount | /bin/grep ${HOME}/config`" != "" ] && [ "`/bin/ls ${HOME}/config/${SERVER_USER}`" = "" ] )
+#then
+#    /bin/rm -r ${HOME}/config/*
+#    /bin/touch ${HOME}/config/${SERVER_USER}
+#    /bin/sleep 20
+#fi
 
 /bin/touch ${HOME}/config/DONT_MESS_WITH_THESE_FILES-SYSTEM_BREAK
 
-${HOME}/providerscripts/utilities/SetupConfigDirectories.sh
+#${HOME}/providerscripts/utilities/SetupConfigDirectories.sh
