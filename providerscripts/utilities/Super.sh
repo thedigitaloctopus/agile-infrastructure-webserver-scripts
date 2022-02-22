@@ -20,7 +20,7 @@
 ########################################################################################
 #set -x
 
-/bin/grep SERVERUSERPASSWORD webserver_configuration_settings.dat | /usr/bin/awk -F':' '{print $NF}' | /usr/bin/sudo -S /bin/echo "Going Super hold on to your hat" 
+/bin/grep -a SERVERUSERPASSWORD webserver_configuration_settings.dat | /usr/bin/awk -F':' '{print $NF}' | /usr/bin/sudo -S /bin/echo "Going Super hold on to your hat" 
 
 /bin/echo
 /bin/echo
