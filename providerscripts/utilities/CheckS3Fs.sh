@@ -23,6 +23,11 @@
 ########################################################################################
 #set -x
 
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh ENABLEEFS:1`" = "1" ] )
+then
+   exit
+fi
+
 count=0
 
 /bin/sleep 10
