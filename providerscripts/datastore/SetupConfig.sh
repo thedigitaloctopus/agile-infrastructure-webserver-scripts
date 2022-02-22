@@ -126,7 +126,7 @@ then
     /usr/bin/s3cmd mb s3://${configbucket}
     if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] )
     then
-        /usr/bin/s3fs -o nonempty,allow_other,use_path_request_style,sigv2 -o use_cache=${HOME}/config_cache -ourl=https://${endpoint} ${configbucket} ${HOME}/config
+        /usr/bin/s3fs -o nonempty,allow_other,use_path_request_style,sigv2 -ourl=https://${endpoint} ${configbucket} ${HOME}/config
     fi
 fi
 
