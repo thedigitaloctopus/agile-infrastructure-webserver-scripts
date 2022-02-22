@@ -60,12 +60,9 @@ then
 fi
 
 
-if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" != "" ] &&  [ "`/bin/ls ${HOME}/config/${SERVER_USER}`" != "" ] && [ "${DIRECTORIESSET}" = "1" ] )
+if ( ( [ "`/bin/mount | /bin/grep ${HOME}/config`" != "" ] &&  [ "`/bin/ls ${HOME}/config/${SERVER_USER}`" != "" ] ) ||  [ "${DIRECTORIESSET}" != "1" ] )
 then
-    if ( [ "${DIRECTORIESSET}" != "1" ] )
-    then
-        ${HOME}/providerscripts/utilities/SetupConfigDirectories.sh
-    fi
+    ${HOME}/providerscripts/utilities/SetupConfigDirectories.sh
     exit
 fi
 
