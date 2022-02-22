@@ -39,6 +39,7 @@ then
         fi
         /bin/touch ${HOME}/config/${SERVER_USER}
         /bin/touch ${HOME}/runtime/CONFIG-PRIMED
+    else
     fi
     
     if ( [ -f ${HOME}/runtime/INSTALLEDSUCCESSFULLY ] )
