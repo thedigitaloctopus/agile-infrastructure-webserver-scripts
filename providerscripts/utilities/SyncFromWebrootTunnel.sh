@@ -37,7 +37,7 @@ fi
 #    exit
 #fi
 
-if ( [ "`/bin/ls ${HOME}/config/webrootsynctunnel/UPDATED*`" != "" ] )
+if ( [ "`/bin/ls ${HOME}/config/webrootsynctunnel/UPDATED* 2>dev/null`" != "" ] )
 then
     /bin/umount ${HOME}/config
     ${HOME}/providerscripts/datastore/SetupConfig.sh
