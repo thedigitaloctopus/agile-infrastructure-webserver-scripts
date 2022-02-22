@@ -1,5 +1,6 @@
 #!/bin/sh
 
+/bin/touch ${HOME}/runtime/PERFORMING_S3FS_CHECK 
 /bin/touch ${HOME}/runtime/MONITOR_S3FS
 
 #If this command times out then it means S3FS is having problems
