@@ -21,8 +21,6 @@
 ####################################################################################
 #set -x
 
-exit
-
 if ( [ "`/bin/ls ${HOME}/config 2>&1 | /bin/grep "Transport endpoint is not connected"`" != "" ] )
 then
     /bin/umount -f ${HOME}/config
