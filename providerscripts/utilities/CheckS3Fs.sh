@@ -28,6 +28,11 @@ then
    exit
 fi
 
+if ( [ "`/usr/bin/awk '{print int(($1%3600)/60)}' /proc/uptime`" -lt "3" ] )
+then
+    exit
+fi
+
 count=0
 
 /bin/sleep 10
