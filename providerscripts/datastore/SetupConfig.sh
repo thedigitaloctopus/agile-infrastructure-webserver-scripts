@@ -30,7 +30,7 @@ fi
 # I check when S3FS is using more than 15% memory and unmount it and remounting it straight away. This will release the memory it was using
 # until the next time its at 15% when this process will be repeated again
 
-if ( [ "`/usr/bin/ps aux --sort=-%mem | /usr/bin/head | /bin/grep s3fs | /bin/grep config$ | /usr/bin/awk '{print $4}'`" -gt "15" ] )
+if ( [ "`/usr/bin/ps aux --sort=-%mem | /usr/bin/head | /bin/grep s3fs | /bin/grep config$ | /usr/bin/awk '{print $4}' | /usr/bin/xargs -n1 printf \"%1.f\n\"`" -eq "15" ] )
 then
     /bin/sleep `/usr/bin/shuf -i 1-60 -n 1`
     /bin/umount -f ${HOME}/config
@@ -75,7 +75,6 @@ then
     ${HOME}/providerscripts/utilities/SetupConfigDirectories.sh
     exit
 fi
-
 
 BUILDOS="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDOS'`"
 DATASTORE_CHOICE="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DATASTORECHOICE'`"
