@@ -77,11 +77,11 @@ do
     # I check when S3FS is using more than 15% memory and unmount it and remounting it straight away. This will release the memory it was using
     # until the next time its at 15% when this process will be repeated again
 
-    if ( [ "`/usr/bin/ps aux --sort=-%mem | /usr/bin/head | /bin/grep s3fs | /bin/grep ${directory_to_mount} | /usr/bin/awk '{print $4}'`" -gt "15" ] )
-    then
-        /bin/sleep `/usr/bin/shuf -i 1-60 -n 1`
-        /bin/umount -f /var/www/html/${directory_to_mount}
-    fi
+   # if ( [ "`/usr/bin/ps aux --sort=-%mem | /usr/bin/head | /bin/grep s3fs | /bin/grep ${directory_to_mount} | /usr/bin/awk '{print $4}'`" -gt "15" ] )
+   # then
+   #     /bin/sleep `/usr/bin/shuf -i 1-60 -n 1`
+   #     /bin/umount -f /var/www/html/${directory_to_mount}
+   # fi
 done
 
 if ( [ -f ${HOME}/runtime/SYNCINGASSETSTODATASTORE ] )
@@ -156,7 +156,7 @@ then
                 /usr/bin/s3cmd --preserve sync /var/www/html/${asset_directory}/* s3://${assetbucket}
                 /bin/chmod 777 /var/www/html/${asset_directory}
                 /bin/chown www-data.www-data /var/www/html/${asset_directory}
-                /usr/bin/s3fs -o umask=0022 -o uid="${s3fs_uid}" -o gid="${s3fs_gid}" -o allow_other,nonempty,kernel_cache,use_path_request_style,sigv2 -ourl=https://${endpoint} ${assetbucket} /var/www/html/${asset_directory}
+                /usr/bin/s3fs -o umask=0022 -o uid="${s3fs_uid}" -o gid="${s3fs_gid}" -o allow_other,nonempty,kernel_cache,use_path_request_style,max_stat_cache_size=10000,stat_cache_expire=20,multireq_max=3 -ourl=https://${endpoint} ${assetbucket} /var/www/html/${asset_directory}
             fi
         fi
         loop="`/usr/bin/expr ${loop} + 1`"
@@ -185,7 +185,7 @@ then
             /bin/mkdir -p /var/www/html/${asset_directory}
             /bin/chmod 777 /var/www/html/${asset_directory}
             /bin/chown www-data.www-data /var/www/html/${asset_directory}
-            /usr/bin/s3fs -o umask=0022 -o uid="${s3fs_uid}" -o gid="${s3fs_gid}" -o allow_other,nonempty,kernel_cache,use_path_request_style,sigv2 -ourl=https://${endpoint} ${assetbucket} /var/www/html/${asset_directory}
+            /usr/bin/s3fs -o umask=0022 -o uid="${s3fs_uid}" -o gid="${s3fs_gid}" -o allow_other,nonempty,kernel_cache,use_path_request_style,max_stat_cache_size=10000,stat_cache_expire=20,multireq_max=3 -ourl=https://${endpoint} ${assetbucket} /var/www/html/${asset_directory}
         fi
         loop="`/usr/bin/expr ${loop} + 1`"
     done
@@ -213,7 +213,7 @@ then
             /bin/mkdir -p /var/www/html/${asset_directory}
             /bin/chmod 777 /var/www/html/${asset_directory}
             /bin/chown www-data.www-data /var/www/html/${asset_directory}
-            /usr/bin/s3fs -o umask=0022 -o uid="${s3fs_uid}" -o gid="${s3fs_gid}" -o allow_other,nonempty,kernel_cache,use_path_request_style,sigv2 -ourl=https://${endpoint} ${assetbucket} /var/www/html/${asset_directory}
+            /usr/bin/s3fs -o umask=0022 -o uid="${s3fs_uid}" -o gid="${s3fs_gid}" -o allow_other,nonempty,kernel_cache,use_path_request_style,max_stat_cache_size=10000,stat_cache_expire=20,multireq_max=3 -ourl=https://${endpoint} ${assetbucket} /var/www/html/${asset_directory}
         fi
         loop="`/usr/bin/expr ${loop} + 1`"
     done
@@ -241,7 +241,7 @@ then
             /bin/mkdir -p /var/www/html/${asset_directory}
             /bin/chmod 777 /var/www/html/${asset_directory}
             /bin/chown www-data.www-data /var/www/html/${asset_directory}
-            /usr/bin/s3fs -o umask=0022 -o uid="${s3fs_uid}" -o gid="${s3fs_gid}" -o allow_other,nonempty,kernel_cache,use_path_request_style -ourl=https://${endpoint} ${assetbucket} /var/www/html/${asset_directory}
+            /usr/bin/s3fs -o umask=0022 -o uid="${s3fs_uid}" -o gid="${s3fs_gid}" -o allow_other,nonempty,kernel_cache,use_path_request_style,max_stat_cache_size=10000,stat_cache_expire=20,multireq_max=3 -ourl=https://${endpoint} ${assetbucket} /var/www/html/${asset_directory}
         fi
         loop="`/usr/bin/expr ${loop} + 1`"
     done
@@ -269,7 +269,7 @@ then
             /bin/mkdir -p /var/www/html/${asset_directory}
             /bin/chmod 777 /var/www/html/${asset_directory}
             /bin/chown www-data.www-data /var/www/html/${asset_directory}
-            /usr/bin/s3fs -o umask=0022 -o uid="${s3fs_uid}" -o gid="${s3fs_gid}" -o allow_other,nonempty,kernel_cache,use_path_request_style,sigv2 -ourl=https://${endpoint} ${assetbucket} /var/www/html/${asset_directory}
+            /usr/bin/s3fs -o umask=0022 -o uid="${s3fs_uid}" -o gid="${s3fs_gid}" -o allow_other,nonempty,kernel_cache,use_path_request_style,max_stat_cache_size=10000,stat_cache_expire=20,multireq_max=3 -ourl=https://${endpoint} ${assetbucket} /var/www/html/${asset_directory}
         fi
         loop="`/usr/bin/expr ${loop} + 1`"
     done
