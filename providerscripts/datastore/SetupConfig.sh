@@ -21,21 +21,25 @@
 ####################################################################################
 #set -x
 
+# Sometimes S3FS freezes, at least, I have seen it happen, so, I put this check in which places a monitoring file which won't get deleted
+# if the attempt to list from s3 - ls ${HOME}/config freezed the last time around. This is an emergency situation, so, we shutdown the webserver
+# so that the S3FS system can recover. The server will be offline for 10s of seconds in this case whilst it reboots. 
+# If anyone knows of a solution for shared directories which would suit this toolkit better, your help would be appreciated. 
+
+if ( [ "`/usr/bin/find ${HOME}/runtime/S3FS-TESTER -type f`" != "" ] )
+then
+    /bin/rm ${HOME}/runtime/S3FS-TESTER
+    /usr/sbin/shutdown -r now
+fi
+
+/bin/touch ${HOME}/runtime/S3FS-TESTER
+/bin/ls ${HOME}/config/
+/bin/rm ${HOME}/runtime/S3FS-TESTER
+
 if ( [ "`/bin/ls ${HOME}/config 2>&1 | /bin/grep "Transport endpoint is not connected"`" != "" ] )
 then
     /bin/umount -f ${HOME}/config
 fi
-
-# I found that S3FS has memory creep meaning that it slowly uses up more and more memory to deal with this in as least hacky was as possible
-# I check when S3FS is using more than 15% memory and unmount it and remounting it straight away. This will release the memory it was using
-# until the next time its at 15% when this process will be repeated again
-
-#if ( [ "`/usr/bin/ps aux --sort=-%mem | /usr/bin/head | /bin/grep s3fs | /bin/grep config$ | /usr/bin/awk '{print $4}' | /usr/bin/xargs -n1 printf \"%1.f\n\"`" -gt "15" ] )
-#then
-#    /bin/sleep `/usr/bin/shuf -i 1-60 -n 1`
-#    /bin/echo "${0} `date` Unmounting config directory because s3fs leaks and has exceeded its memory allowance" >> ${HOME}/logs/S3FSMountsRecord.log
-#    /bin/umount -f ${HOME}/config
-#fi
 
 SERVER_USER="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SERVERUSER'`"
 
