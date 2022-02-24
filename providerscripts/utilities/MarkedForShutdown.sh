@@ -23,6 +23,7 @@
 if ( [ -f ${HOME}/runtime/MARKEDFORSHUTDOWN ] )
 then
     ${HOME}/providerscripts/utilities/ShutdownThisWebserver.sh
+    #Failed to shutdown webserver
     /bin/rm ${HOME}/runtime/MARKEDFORSHUTDOWN
     exit
 fi
