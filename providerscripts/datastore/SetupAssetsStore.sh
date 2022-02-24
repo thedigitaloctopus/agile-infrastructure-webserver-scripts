@@ -76,6 +76,7 @@ do
     if ( [ "`/usr/bin/find ${HOME}/runtime/S3FS-TESTER -type f`" != "" ] )
     then
         /bin/rm ${HOME}/runtime/S3FS-TESTER-${directory_to_mount}
+        /bin/echo "${0} Shutdown initiated due to unresponsive S3FS mount ${directory_to_mount}" >> ${HOME}/logs/MOUNT_RECORD.log
         /usr/sbin/shutdown -r now
     fi
 
