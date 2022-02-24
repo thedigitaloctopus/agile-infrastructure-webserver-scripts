@@ -2,10 +2,12 @@ Use md5 technique to get list of files with checksums
 after 1 minute
 use Md5 to get list of files with checksums
 
-work out what files have been added and what files have been deleted in that time
+work out what files have been added and what files have been deleted in that time by doing a diff of the two files
 
-upload syncdata/${ip}-deleted and delete files from S3
-upload syncdata/${ip}-updated (which includes added new) and upload files to S3
+upload syncdata/${ip}-deleted.10 and delete files from S3
+upload syncdata/${ip}-updated.10 (which includes added new) and upload files to S3
+
+have 10 deleted. and 10 updated. and delete ip-deleted.1 i-updated.1 and move ip-deleted.2 ip-deleted.1 ip-updated.2 ip-updated.1
 
 Run this process every minute to keep the S3 in sync with the machines filesystems
 
@@ -13,4 +15,10 @@ on each machine download an aggregate of all the deleted files and then delete t
 
 on each machine download an aggregate of all the added files and then download them to the local file system from S3
 if there are any failed downloads, store which files failed to download in a file and retry them. 
+retry 5 times in case machine was rebooting. 
+
+when a machine starts up it downloads all of the config from s3 to its config directory
+
+with synctunnel, give it its own bucket (should be quite simple, instead of doing cp the tar arcvive to the config directory copy it to the tunnel bucket in S3)
+
 
