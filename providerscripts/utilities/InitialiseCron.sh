@@ -53,9 +53,6 @@ fi
 #These scripts run every set interval
 /bin/echo "*/5 * * * * export HOME="${HOMEDIR}" && ${HOME}/security/MonitorFirewall.sh" >> /var/spool/cron/crontabs/root
 /bin/echo "*/5 * * * * export HOME="${HOMEDIR}" &&  /bin/sleep 20 && ${HOME}/cron/SyncToWebrootTunnelFromCron.sh && /bin/sleep 60 && ${HOME}/cron/SyncFromWebrootTunnelFromCron.sh" >> /var/spool/cron/crontabs/root
-/bin/echo "*/5 * * * * export HOME="${HOMEDIR}" && ${HOME}/providerscripts/utilities/AuditForLowCPUStates.sh 10" >> /var/spool/cron/crontabs/root
-/bin/echo "*/5 * * * * export HOME="${HOMEDIR}" && ${HOME}/providerscripts/utilities/AuditForLowMemoryStates.sh 90" >> /var/spool/cron/crontabs/root
-/bin/echo "*/5 * * * * export HOME="${HOMEDIR}" && ${HOME}/providerscripts/utilities/AuditForLowDiskStates.sh 100000" >> /var/spool/cron/crontabs/root
 
 #These scripts run at set times these will make a backup of our webroot to git and also to our datastore if super safe
 #Time based backups are not taken for virgin CMS installs. Instead, make a baseline if you want to save a copy of your work and work it out from there once your application is ready
