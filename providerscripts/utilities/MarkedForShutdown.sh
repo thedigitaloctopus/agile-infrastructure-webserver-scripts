@@ -24,6 +24,7 @@ if ( [ -f ${HOME}/runtime/MARKEDFORSHUTDOWN ] )
 then
     ${HOME}/providerscripts/utilities/ShutdownThisWebserver.sh
     /bin/rm ${HOME}/runtime/MARKEDFORSHUTDOWN
+    exit
 fi
 
 while ( [ ! -f ${HOME}/runtime/SHUTDOWNACCEPTED ] )
