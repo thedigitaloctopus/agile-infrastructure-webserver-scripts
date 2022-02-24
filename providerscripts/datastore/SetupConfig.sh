@@ -113,7 +113,9 @@ then
             done
         else
             /usr/bin/s3cmd mb s3://${configbucket}
-            /usr/bin/s3fs -o nonempty,allow_other,use_path_request_style,sigv2,max_stat_cache_size=10000,stat_cache_expire=30,multireq_max=50 -ourl=https://${endpoint} ${configbucket} ${HOME}/config
+           # /usr/bin/s3fs -o nonempty,allow_other,use_path_request_style,sigv2,max_stat_cache_size=10000,stat_cache_expire=30,multireq_max=50 -ourl=https://${endpoint} ${configbucket} ${HOME}/config
+            /usr/bin/s3fs -o nonempty,allow_other,use_path_request_style,max_stat_cache_size=10000,stat_cache_expire=20,multireq_max=3 -ourl=https://${endpoint} ${configbucket} ${HOME}/config
+
         fi 
     fi
 fi
@@ -126,6 +128,7 @@ then
     if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] )
     then
         /usr/bin/s3fs -o nonempty,allow_other,use_path_request_style,sigv2,max_stat_cache_size=10000,stat_cache_expire=30,multireq_max=50 -ourl=https://${endpoint} ${configbucket} ${HOME}/config
+        /usr/bin/s3fs -o nonempty,allow_other,use_path_request_style,max_stat_cache_size=10000,stat_cache_expire=20,multireq_max=3 -ourl=https://${endpoint} ${configbucket} ${HOME}/config
     fi
 fi
 
@@ -136,8 +139,9 @@ then
     /usr/bin/s3cmd mb s3://${configbucket}
     if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] )
     then
-        /usr/bin/s3fs -o nonempty,allow_other,use_path_request_style,sigv2,max_stat_cache_size=10000,stat_cache_expire=30,multireq_max=50 -ourl=https://${endpoint} ${configbucket} ${HOME}/config
-    fi
+       # /usr/bin/s3fs -o nonempty,allow_other,use_path_request_style,sigv2,max_stat_cache_size=10000,stat_cache_expire=30,multireq_max=50 -ourl=https://${endpoint} ${configbucket} ${HOME}/config
+        /usr/bin/s3fs -o nonempty,allow_other,use_path_request_style,max_stat_cache_size=10000,stat_cache_expire=20,multireq_max=3 -ourl=https://${endpoint} ${configbucket} ${HOME}/config
+   fi
 fi
 
 if ( [ "${DATASTORE_CHOICE}" = "linode" ] )
@@ -147,7 +151,8 @@ then
     /usr/bin/s3cmd mb s3://${configbucket}
     if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] )
     then
-        /usr/bin/s3fs -o nonempty,allow_other,use_path_request_style,sigv2,max_stat_cache_size=10000,stat_cache_expire=30,multireq_max=50 -ourl=https://${endpoint} ${configbucket} ${HOME}/config
+      #  /usr/bin/s3fs -o nonempty,allow_other,use_path_request_style,sigv2,max_stat_cache_size=10000,stat_cache_expire=30,multireq_max=50 -ourl=https://${endpoint} ${configbucket} ${HOME}/config
+         /usr/bin/s3fs -o nonempty,allow_other,use_path_request_style,max_stat_cache_size=10000,stat_cache_expire=20,multireq_max=3 -ourl=https://${endpoint} ${configbucket} ${HOME}/config
     fi
 fi
 
@@ -158,7 +163,8 @@ then
     /usr/bin/s3cmd mb s3://${configbucket}
     if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] )
     then
-        /usr/bin/s3fs -o nonempty,allow_other,use_path_request_style,sigv2,max_stat_cache_size=10000,stat_cache_expire=30,multireq_max=50 -ourl=https://${endpoint} ${configbucket} ${HOME}/config
+      #  /usr/bin/s3fs -o nonempty,allow_other,use_path_request_style,sigv2,max_stat_cache_size=10000,stat_cache_expire=30,multireq_max=50 -ourl=https://${endpoint} ${configbucket} ${HOME}/config
+        /usr/bin/s3fs -o nonempty,allow_other,use_path_request_style,max_stat_cache_size=10000,stat_cache_expire=20,multireq_max=3 -ourl=https://${endpoint} ${configbucket} ${HOME}/config
     fi
 fi
 
