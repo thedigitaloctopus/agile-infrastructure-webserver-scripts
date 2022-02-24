@@ -1,7 +1,7 @@
 #!/bin/sh
 ####################################################################################
 # Author: Peter Winter
-# Date :  9/4/2016
+# Date :  24/02/2022
 # Description: This will list a particular value from the configuration datastore
 #######################################################################################
 # License Agreement:
