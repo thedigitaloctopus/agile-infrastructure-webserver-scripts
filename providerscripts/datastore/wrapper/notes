@@ -1,0 +1,16 @@
+Use md5 technique to get list of files with checksums
+after 1 minute
+use Md5 to get list of files with checksums
+
+work out what files have been added and what files have been deleted in that time
+
+upload syncdata/${ip}-deleted and delete files from S3
+upload syncdata/${ip}-updated (which includes added new) and upload files to S3
+
+Run this process every minute to keep the S3 in sync with the machines filesystems
+
+on each machine download an aggregate of all the deleted files and then delete them from the local file system
+
+on each machine download an aggregate of all the added files and then download them to the local file system from S3
+if there are any failed downloads, store which files failed to download in a file and retry them. 
+
