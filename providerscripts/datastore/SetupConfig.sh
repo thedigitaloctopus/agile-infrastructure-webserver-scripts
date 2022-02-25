@@ -50,7 +50,7 @@ then
     then
          if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh 'PRODUCTION:1'`" != "1" ] )
          then
-            /bin/rm -r ${HOME}/config/*
+          #  /bin/rm -r ${HOME}/config/*
             /bin/sleep 5
         fi
         /bin/touch ${HOME}/config/${SERVER_USER}
