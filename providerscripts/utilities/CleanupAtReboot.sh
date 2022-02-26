@@ -24,5 +24,7 @@ while ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] )
 do
     /bin/sleep 5
 done
-/bin/rm ${HOME}/config/webserverpublicips/*
-/bin/rm ${HOME}/config/webserverips/*
+
+${HOME}/providerscripts/datastore/configwrapper/DeleteFromConfigDatastore.sh "webserverpublicips/*"
+${HOME}/providerscripts/datastore/configwrapper/DeleteFromConfigDatastore.sh "webserverips/*"
+
