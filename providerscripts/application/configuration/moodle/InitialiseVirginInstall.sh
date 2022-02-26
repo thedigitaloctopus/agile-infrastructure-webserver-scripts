@@ -25,11 +25,12 @@ if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLAT
 then
     host="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBaaSHOSTNAME'`"
 else
-    if ( [ "`/bin/ls ${HOME}/config/databaseip/`" = "" ] )
+
+    if ( [ "`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh databaseip/*`" = "" ] )
     then
         exit
     fi
-    host="`/bin/ls ${HOME}/config/databaseip`"
+    host="`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh databaseip/*`"
 fi
 
 database="`${HOME}/providerscripts/datastore/configwrapper/GetDBCredential.sh "credentials/shit" 1`"
