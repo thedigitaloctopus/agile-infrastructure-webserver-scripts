@@ -34,7 +34,7 @@ if ( [ "`/bin/grep ${prefix} ${HOME}/runtime/drupal_settings.php`" = "" ] )
 then
     if ( [ "`/bin/ls ${HOME}/config/UPDATEDPREFIX:*`" != "" ] )
     then
-        /bin/rm ${HOME}/config/UPDATEDPREFIX:*
+	${HOME}/providerscripts/datastore/configwrapper/DeleteFromConfigDatastore.sh "UPDATEDPREFIX:*"
     fi
     /bin/touch ${HOME}/config/UPDATEDPREFIX:${prefix}
 fi
