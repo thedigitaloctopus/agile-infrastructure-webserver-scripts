@@ -39,7 +39,7 @@ fi
 #fi
 
 #If our credentials are not available, that's no good to us
-DB_U="`${HOME}/providerscripts/datastore/configwrapper/GetDBCredential.sh "credentials/shit" 1`"
+DB_N="`${HOME}/providerscripts/datastore/configwrapper/GetDBCredential.sh "credentials/shit" 1`"
 
 if ( [ "${DB_N}" = "" ] )
 then
