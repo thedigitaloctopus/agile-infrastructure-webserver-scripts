@@ -24,7 +24,8 @@
 dbprefix="`/bin/cat /var/www/html/dbp.dat`"
 if ( [ "${dbprefix}" = "" ] )
 then
-    dbprefix="`/bin/ls ${HOME}/config/UPDATEDPREFIX:* | /usr/bin/awk -F':' '{print $NF}'`"
+
+    dbprefix="`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh UPDATEDPREFIX:*`"
 fi
 if ( [ "${dbprefix}" = "" ] )
 then
@@ -35,7 +36,7 @@ then
     /bin/sed -i "/->prefix /c\    \$CFG->prefix    = \"${dbprefix}_\";" ${HOME}/runtime/moodle_config.php
     /bin/touch ${HOME}/runtime/moodle_config.php
     /bin/echo "${0} `/bin/date`: Updating the database prefix" >> ${HOME}/logs/MonitoringLog.dat
-    if ( [ "`/bin/ls ${HOME}/config/UPDATEDPREFIX:*`" != "" ] )
+    if ( [ "`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh UPDATEDPREFIX:*`" != "" ] )
     then
         ${HOME}/providerscripts/datastore/configwrapper/DeleteFromConfigDatastore.sh "UPDATEDPREFIX:*"
     fi
