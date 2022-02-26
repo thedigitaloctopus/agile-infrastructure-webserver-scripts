@@ -129,6 +129,6 @@ fi
 
 if ( [ -f ${HOME}/config/GLOBAL_CONFIG_UPDATE.${ip} ] )
 then
-    /bin/rm ${HOME}/config/GLOBAL_CONFIG_UPDATE.${ip} 
+    ${HOME}/providerscripts/datastore/configwrapper/DeleteFromConfigDatastore.sh "GLOBAL_CONFIG_UPDATE.${ip}"
 fi
 
