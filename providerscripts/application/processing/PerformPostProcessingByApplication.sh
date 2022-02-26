@@ -44,14 +44,22 @@ then
     SERVER_USER_PASSWORD="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SERVERUSERPASSWORD'`"
     SUDO="/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E"
 
-    credentials="`command="${SUDO} /bin/ls ${HOME}/config/credentials/shit" && eval ${command}`"
+   # credentials="`command="${SUDO} /bin/ls ${HOME}/config/credentials/shit" && eval ${command}`"
 
+   # while ( [ "${credentials}" = "" ] )
+   # do
+   #     credentials="`command="${SUDO} /bin/ls ${HOME}/config/credentials/shit" && eval ${command}`"
+   #     /bin/sleep 10
+   # done
+   
+    credentials="`command="${SUDO} ${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh credentials/shit" && eval ${command}`"
+   
     while ( [ "${credentials}" = "" ] )
     do
-        credentials="`command="${SUDO} /bin/ls ${HOME}/config/credentials/shit" && eval ${command}`"
+        credentials="`command="${SUDO} ${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh credentials/shit" && eval ${command}`"
         /bin/sleep 10
     done
-
+    
     #If we have placed any tokens in our code base for credential modification between deployments, this will update them
    # DB_U="`command="${SUDO} /bin/sed '3q;d' ${HOME}/config/credentials/shit" && eval ${command}`"
    # DB_P="`command="${SUDO} /bin/sed '2q;d' ${HOME}/config/credentials/shit" && eval ${command}`"
