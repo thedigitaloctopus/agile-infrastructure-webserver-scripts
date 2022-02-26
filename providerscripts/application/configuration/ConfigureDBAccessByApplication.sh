@@ -76,11 +76,11 @@ then
 fi
 
 #Retrieve the database server ip address
-if ( [ "`/bin/ls ${HOME}/config/databaseip`" = "" ] )
+if ( [ "`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh databaseip/*`" = "" ] )
 then
     exit
 fi
-dbip="`/bin/ls ${HOME}/config/databaseip`"
+dbip="`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh databaseip/*`"
 
 #If our credentials are not available, that's no good to us
 DB_N="`${HOME}/providerscripts/datastore/configwrapper/GetDBCredential.sh "credentials/shit" 1`"
