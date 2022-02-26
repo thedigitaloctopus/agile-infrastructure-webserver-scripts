@@ -103,7 +103,8 @@ then
     /bin/echo "${DBaaS_DBNAME}" > ${HOME}/shit
     /bin/echo "${DBaaS_PASSWORD}" >> ${HOME}/shit
     /bin/echo "${DBaaS_USERNAME}" >> ${HOME}/shit
-    /bin/cp ${HOME}/shit ${HOME}/config/credentials/shit
+   # /bin/cp ${HOME}/shit ${HOME}/config/credentials/shit
+    ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh ${HOME}/shit credentials/shit
 fi
 
 
