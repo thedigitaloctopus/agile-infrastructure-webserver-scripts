@@ -32,7 +32,7 @@ done
 while ( [ ! -f ${HOME}/config/webrootsynctunnel/syncpurge ] || [ -f ${HOME}/config/webrootsynctunnel/switchoffscalingpriortosyncpurge ] )
 do
     /bin/touch ${HOME}/config/webrootsynctunnel/syncpurge
-    /bin/rm ${HOME}/config/webrootsynctunnel/switchoffscalingpriortosyncpurge
+    ${HOME}/providerscripts/datastore/configwrapper/DeleteFromConfigDatastore.sh "webrootsynctunnel/switchoffscalingpriortosyncpurge"
     /bin/sleep 10
 done
 
@@ -40,6 +40,6 @@ done
 
 while ( [ -f ${HOME}/config/webrootsynctunnel/syncpurge ] )
 do
-    /bin/rm ${HOME}/config/webrootsynctunnel/syncpurge
+    ${HOME}/providerscripts/datastore/configwrapper/DeleteFromConfigDatastore.sh "webrootsynctunnel/syncpurge"
     /bin/sleep 10
 done
