@@ -80,8 +80,11 @@ do
     /bin/sleep 10
 done
 
-/bin/rm ${HOME}/config/APPLICATION_DB_CONFIGURED
-/bin/rm ${HOME}/config/UPDATE*
-/bin/rm ${HOME}/config/DB*
+#/bin/rm ${HOME}/config/APPLICATION_DB_CONFIGURED
+#/bin/rm ${HOME}/config/UPDATE*
+#/bin/rm ${HOME}/config/DB*
+${HOME}/providerscripts/datastore/configwrapper/DeleteFromConfigDatastore.sh "APPLICATION_DB_CONFIGURED"
+${HOME}/providerscripts/datastore/configwrapper/DeleteFromConfigDatastore.sh "UPDATE*"
+${HOME}/providerscripts/datastore/configwrapper/DeleteFromConfigDatastore.sh "DB*"
 /sbin/shutdown -r now
 
