@@ -20,10 +20,10 @@ then
     exit
 fi
 
-while ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] ) 
-do 
-        /bin/sleep 10 
-done
+#while ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] ) 
+#do 
+#        /bin/sleep 10 
+#done
 
 SERVER_USER_PASSWORD="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SERVERUSERPASSWORD'`"
 SUDO="/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E"
