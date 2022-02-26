@@ -31,9 +31,9 @@ else
     host="`/bin/ls ${HOME}/config/databaseip`"
 fi
 
-username="`/bin/sed '3q;d' ${HOME}/config/credentials/shit`"
-password="`/bin/sed '2q;d' ${HOME}/config/credentials/shit`"
-database="`/bin/sed '1q;d' ${HOME}/config/credentials/shit`"
+database="`${HOME}/providerscripts/datastore/configwrapper/GetDBCredential.sh "credentials/shit" 1`"
+password="`${HOME}/providerscripts/datastore/configwrapper/GetDBCredential.sh "credentials/shit" 2`"
+username="`${HOME}/providerscripts/datastore/configwrapper/GetDBCredential.sh "credentials/shit" 3`"
 
 if ( [ "${username}" = "" ] || [ "${password}" = "" ] || [ "${database}" = "" ] || [ "${host}" = "" ] )
 then
