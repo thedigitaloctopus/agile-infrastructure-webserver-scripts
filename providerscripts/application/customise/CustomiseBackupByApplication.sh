@@ -43,7 +43,7 @@ then
     
     DB_PORT="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBPORT'`"
 
-    DB_HOST="`/bin/ls ${HOME}/config/databaseip`"
+    DB_HOST="`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh databaseip/*`"
 
     if ( [ "`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBaaSHOSTNAME'`" != "" ] )
     then
