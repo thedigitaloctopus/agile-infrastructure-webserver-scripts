@@ -22,7 +22,12 @@
 ####################################################################################
 #set -x
 
-while ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] || [ ! -f ${HOME}/config/credentials/shit ] )
+#while ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] || [ ! -f ${HOME}/config/credentials/shit ] )
+#do
+#    /bin/sleep 10
+#done
+
+while ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "credentials/shit"`" = "0" ] )
 do
     /bin/sleep 10
 done
