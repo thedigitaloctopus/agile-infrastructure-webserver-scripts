@@ -39,9 +39,10 @@ fi
 #fi
 
 #If our credentials are not available, that's no good to us
-if ( [ "`/bin/sed '1q;d' ${HOME}/config/credentials/shit`" = "" ] )
+DB_U="`${HOME}/providerscripts/datastore/configwrapper/GetDBCredential.sh "credentials/shit" 1`"
+
+if ( [ "${DB_N}" = "" ] )
 then
-    /bin/rm ${HOME}/config/credentials/shit
     exit
 fi
 
