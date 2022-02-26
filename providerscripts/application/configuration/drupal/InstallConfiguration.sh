@@ -32,7 +32,7 @@ do
     /bin/sleep 10
 done
 
-if ( [ -f ${HOME}/config/credentials/shit ] && [ ! -f ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED ] )
+if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "credentials/shit"`" = "1" ] && [ ! -f ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED ] )
 then
     if ( [ -f /var/www/html/sites/default/settings.php ] && [ ! -f /var/www/html/sites/default/settings.php.default ] )
     then
