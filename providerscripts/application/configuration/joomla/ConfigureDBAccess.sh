@@ -24,7 +24,7 @@
 dbprefix="`/bin/cat /var/www/html/dbp.dat`"
 if ( [ "${dbprefix}" = "" ] )
 then
-    dbprefix="`/bin/ls ${HOME}/config/UPDATEDPREFIX:* | /usr/bin/awk -F':' '{print $NF}'`"
+    dbprefix="`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh UPDATEDPREFIX:*`"
 fi
 if ( [ "${dbprefix}" = "" ] )
 then
@@ -35,7 +35,7 @@ then
     /bin/sed -i "/\$dbprefix /c\        public \$dbprefix = \'${dbprefix}_\';" ${HOME}/runtime/joomla_configuration.php
     /bin/touch ${HOME}/runtime/joomla_configuration.php
     /bin/echo "${0} `/bin/date`: Updating the database prefix" >> ${HOME}/logs/MonitoringLog.dat
-    if ( [ "`/bin/ls ${HOME}/config/UPDATEDPREFIX:*`" != "" ] )
+    if ( [ "`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh UPDATEDPREFIX:*`" != "" ] )
     then
         ${HOME}/providerscripts/datastore/configwrapper/DeleteFromConfigDatastore.sh "UPDATEDPREFIX:*"
     fi
@@ -165,7 +165,7 @@ fi
 
 if ( [ -f ${HOME}/config/joomla_configuration.php ] )
 then
-    secret="`/bin/ls ${HOME}/config/SECRET:* | /usr/bin/awk -F':' '{print $NF}' 2>/dev/null`"
+    secret="`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh SECRET:*`"
 
     if ( [ "${secret}" = "" ] )
     then
