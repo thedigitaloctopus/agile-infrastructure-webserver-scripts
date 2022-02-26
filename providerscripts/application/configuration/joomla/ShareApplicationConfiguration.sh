@@ -58,7 +58,7 @@ then
     /bin/cp ${HOME}/config/joomla_configuration.php ${HOME}/runtime/joomla_configuration.php
     /bin/cp ${HOME}/runtime/joomla_configuration.php /var/www/html/configuration.php
     /bin/sleep 40
-elif ( [ "`/bin/ls ${HOME}/config/GLOBAL_CONFIG_UPDATE.*`" != "" ] )
+elif ( [ "`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh GLOBAL_CONFIG_UPDATE.*`" != "" ] )
 then
     /bin/sleep 20 
     global_config_updated="1"
