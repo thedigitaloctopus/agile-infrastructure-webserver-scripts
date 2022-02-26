@@ -40,7 +40,7 @@ then
     WEBSITE_URL="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEURL'`"
     WEBSITE_NAME="`/bin/echo ${WEBSITE_URL} | /usr/bin/awk -F'.' '{print $2}'`"
     /bin/echo "                   satisfy any;" >> /etc/nginx/sites-available/bypass_snippet.dat
-    for ips in "`/bin/ls ${HOME}/config/autoscalerip | /usr/bin/tr '\n' ' '`"
+    for ips in "`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh autoscalerip/* | /usr/bin/tr '\n' ' '`"
     do
         for ip in ${ips}
         do 
@@ -48,7 +48,7 @@ then
         done
     done
     
-    for ips in "`/bin/ls ${HOME}/config/autoscalerpublicip | /usr/bin/tr '\n' ' '`"
+    for ips in "`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh autoscalerpublicip/* | /usr/bin/tr '\n' ' '`"
     do
         for ip in ${ips}
         do
@@ -70,7 +70,7 @@ fi
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh WEBSERVERCHOICE:APACHE`" = "1" ] )
 then
     WEBSITE_NAME="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEDISPLAYNAME'`"
-    for ip in "`/bin/ls ${HOME}/config/autoscalerip | /usr/bin/tr '\n' ' '`"
+    for ip in "`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh autoscalerip/* | /usr/bin/tr '\n' ' '`"
     do
         /bin/echo "                 <RequireAny>" >> /etc/apache2/sites-available/bypass_snippet.dat
         /bin/echo "                      Require ip ${ip}" >> /etc/apache2/sites-available/bypass_snippet.dat
@@ -78,7 +78,7 @@ then
         /bin/echo "                 </RequireAny>" >> /etc/apache2/sites-available/bypass_snippet.dat
     done
     
-    for ip in "`/bin/ls ${HOME}/config/autoscalerpublicip | /usr/bin/tr '\n' ' '`"
+    for ip in "`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh autoscalerpublicip/* | /usr/bin/tr '\n' ' '`"
     do
         /bin/echo "                 <RequireAny>" >> /etc/apache2/sites-available/bypass_snippet.dat
         /bin/echo "                      Require ip ${ip}" >> /etc/apache2/sites-available/bypass_snippet.dat
@@ -99,7 +99,15 @@ if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh WEBSERVERCHOICE:L
 then
     /bin/echo "\$HTTP[\"remoteip\"] !~ \"^(" >> /etc/lighttpd/bypass_snippet.dat
     
-    for ips in "`/bin/ls ${HOME}/config/autoscalerip | /usr/bin/tr '\n' ' '`"
+    for ips in "`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh autoscalerip/* | /usr/bin/tr '\n' ' '`"
+    do
+        for ip in ${ips}
+        do 
+            /bin/echo "                      ${ip}|" >> /etc/lighttpd/bypass_snippet.dat
+        done
+    done
+    
+    for ips in "`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh autoscalerpublicip/* | /usr/bin/tr '\n' ' '`"
     do
         for ip in ${ips}
         do 
