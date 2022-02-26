@@ -49,17 +49,17 @@ ip="`${HOME}/providerscripts/utilities/GetIP.sh`"
 
 if ( [ -f ${HOME}/config/bootedwebserverips/${ip} ] )
 then
-    /bin/rm ${HOME}/config/bootedwebserverips/${ip}
+    ${HOME}/providerscripts/datastore/configwrapper/DeleteFromConfigDatastore.sh "bootedwebserverips/${ip}"
 fi
 
 if ( [ -f ${HOME}/config/webserverpublicips/${ip} ] )
 then
-    /bin/rm ${HOME}/config/webserverpublicips/${ip}
+    ${HOME}/providerscripts/datastore/configwrapper/DeleteFromConfigDatastore.sh "webserverpublicips/${ip}"
 fi
 
 if ( [ -f ${HOME}/config/webserverips/${ip} ] )
 then
-    /bin/rm ${HOME}/config/webserverips/${ip}
+    ${HOME}/providerscripts/datastore/configwrapper/DeleteFromConfigDatastore.sh "webserverips/${ip}"
 fi
 
 ${HOME}/providerscripts/email/SendEmail.sh "${period} A Webserver with IP: `${HOME}/providerscripts/utilities/GetIP.sh` has been shutdown" "Webserver has been shut down"
