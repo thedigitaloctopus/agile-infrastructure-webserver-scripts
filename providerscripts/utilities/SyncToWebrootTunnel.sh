@@ -29,7 +29,7 @@ fi
 
 if ( [ -f ${HOME}/config/webrootsynctunnel/UPDATED.${ip} ] )
 then
-    /bin/rm ${HOME}/config/webrootsynctunnel/UPDATED.${ip}
+    ${HOME}/providerscripts/datastore/configwrapper/DeleteFromConfigDatastore.sh "UPDATED.${ip}"
 fi
 
 if ( [ ! -f ${HOME}/config/INSTALLEDSUCCESSFULLY ] )
