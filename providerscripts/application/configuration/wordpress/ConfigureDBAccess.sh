@@ -24,7 +24,7 @@
 dbprefix="`/bin/cat /var/www/html/dbp.dat`"
 if ( [ "${dbprefix}" = "" ] )
 then
-    dbprefix="`/bin/ls ${HOME}/config/UPDATEDPREFIX:* | /usr/bin/awk -F':' '{print $NF}'`"
+    dbprefix="`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh UPDATEDPREFIX:*`"
 fi
 if ( [ "${dbprefix}" = "" ] )
 then
