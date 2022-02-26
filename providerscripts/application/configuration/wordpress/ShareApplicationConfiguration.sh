@@ -122,5 +122,5 @@ fi
 
 if ( [ -f ${HOME}/config/GLOBAL_CONFIG_UPDATE ] )
 then
-    /bin/rm ${HOME}/config/GLOBAL_CONFIG_UPDATE 
+    ${HOME}/providerscripts/datastore/configwrapper/DeleteFromConfigDatastore.sh "GLOBAL_CONFIG_UPDATE"
 fi
