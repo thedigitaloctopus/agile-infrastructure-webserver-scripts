@@ -24,7 +24,7 @@
 prefix="`/bin/cat /var/www/html/dbp.dat`"
 if ( [ "${prefix}" = "" ] )
 then
-    prefix="`/bin/ls ${HOME}/config/UPDATEDPREFIX:* | /usr/bin/awk -F':' '{print $NF}'`"
+    prefix="`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh UPDATEDPREFIX:*`"
 fi
 if ( [ "${prefix}" = "" ] )
 then
@@ -32,7 +32,7 @@ then
 fi
 if ( [ "`/bin/grep ${prefix} ${HOME}/runtime/drupal_settings.php`" = "" ] )
 then
-    if ( [ "`/bin/ls ${HOME}/config/UPDATEDPREFIX:*`" != "" ] )
+    if ( [ "`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh UPDATEDPREFIX:*`" != "" ] )
     then
 	${HOME}/providerscripts/datastore/configwrapper/DeleteFromConfigDatastore.sh "UPDATEDPREFIX:*"
     fi
