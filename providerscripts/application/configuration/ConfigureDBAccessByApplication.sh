@@ -91,8 +91,9 @@ fi
 
 
 cd ${HOME}
-/bin/cp ${HOME}/config/credentials/shit ${HOME}/shit
+#/bin/cp ${HOME}/config/credentials/shit ${HOME}/shit
 
+${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh credentials/shit ${HOME}/shit
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:DBaaS`" = "1" ] )
 then
