@@ -100,7 +100,12 @@ fi
 
 #Check that the config directory mounted successfully and that the credentials are available, if not wait till next time
 #as they might be by then
-if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] || [ ! -f ${HOME}/config/credentials/shit ] )
+#if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] || [ ! -f ${HOME}/config/credentials/shit ] )
+#then
+#    exit
+#fi
+
+if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "credentials/shit"`" = "1" ] )
 then
     exit
 fi
