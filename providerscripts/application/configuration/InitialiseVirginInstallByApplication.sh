@@ -33,10 +33,10 @@ then
 fi
 
 #If the shared credentials are not available, simply exit this time around
-if ( [ ! -f ${HOME}/config/credentials/shit ] )
-then
-    exit
-fi
+#if ( [ ! -f ${HOME}/config/credentials/shit ] )
+#then
+#    exit
+#fi
 
 #If our credentials are not available, that's no good to us
 if ( [ "`/bin/sed '1q;d' ${HOME}/config/credentials/shit`" = "" ] )
