@@ -22,13 +22,14 @@
 #######################################################################################
 #set -x
 
-while ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] || [ ! -f ${HOME}/config/credentials/shit ] )
-do
-    /bin/sleep 10
-done
+#while ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] || [ ! -f ${HOME}/config/credentials/shit ] )
+#do
+#    /bin/sleep 10
+#done
 
 
-if ( [ -d ${HOME}/config/credentials ] && [ ! -f ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED ] )
+
+if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "credentials/shit"`" = "1" ] && [ ! -f ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED ] )
 then
     /bin/cp /var/www/html/moodle/config.php.default /var/www/html/moodle/config.php
     /bin/chown www-data.www-data /var/www/html/moodle/config.php
