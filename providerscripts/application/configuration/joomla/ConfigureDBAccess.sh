@@ -37,7 +37,7 @@ then
     /bin/echo "${0} `/bin/date`: Updating the database prefix" >> ${HOME}/logs/MonitoringLog.dat
     if ( [ "`/bin/ls ${HOME}/config/UPDATEDPREFIX:*`" != "" ] )
     then
-        /bin/rm ${HOME}/config/UPDATEDPREFIX:*
+        ${HOME}/providerscripts/datastore/configwrapper/DeleteFromConfigDatastore.sh "UPDATEDPREFIX:*"
     fi
     /bin/touch ${HOME}/config/UPDATEDPREFIX:${dbprefix}
 fi
