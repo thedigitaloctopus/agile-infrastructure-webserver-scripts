@@ -30,7 +30,8 @@ then
     /bin/touch ${HOME}/runtime/BUILDCOMPLETED
 fi
 
-if ( [ "`/usr/bin/find  ${HOME}/config/credentials -type f -name shit -type f -print`" != "" ] )
+#if ( [ "`/usr/bin/find  ${HOME}/config/credentials -type f -name shit -type f -print`" != "" ] )
+if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "credentials/shit"`" = "1" ] )
 then
     /bin/touch ${HOME}/runtime/BUILDCOMPLETED
 fi
