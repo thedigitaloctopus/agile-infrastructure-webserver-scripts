@@ -30,7 +30,7 @@ then
     /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
 fi
 
-if ( [ ! -f ${HOME}/config/wordpress_config.php  ] )
+if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "wordpress_config.php"`" = "0" ] )
 then
     if ( [ -f /var/www/html/wp-config-sample.php ] )
     then
@@ -50,7 +50,7 @@ then
     /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
 fi
 
-if ( [ -f ${HOME}/config/GLOBAL_CONFIG_UPDATE ] )
+if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "GLOBAL_CONFIG_UPDATE"`" = "1" ] )
 then
     /bin/cp ${HOME}/config/wordpress_config.php ${HOME}/runtime/wordpress_config.php 
     /bin/cp ${HOME}/runtime/wordpress_config.php  /var/www/wp-config.php
@@ -120,7 +120,7 @@ then
     /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
 fi
 
-if ( [ -f ${HOME}/config/GLOBAL_CONFIG_UPDATE ] )
+if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "GLOBAL_CONFIG_UPDATE"`" = "1" ] )
 then
     ${HOME}/providerscripts/datastore/configwrapper/DeleteFromConfigDatastore.sh "GLOBAL_CONFIG_UPDATE"
 fi
