@@ -40,7 +40,7 @@ then
     then
         ${HOME}/providerscripts/datastore/configwrapper/DeleteFromConfigDatastore.sh "UPDATEDPREFIX:*"
     fi
-    /bin/touch ${HOME}/config/UPDATEDPREFIX:${dbprefix}
+    ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh UPDATEDPREFIX:${prefix}    
 fi
 
 if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] )
