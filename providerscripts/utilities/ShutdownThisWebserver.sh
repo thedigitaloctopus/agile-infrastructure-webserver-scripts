@@ -32,7 +32,8 @@
 #make sure a backup isn't running when we shutdown because if it is it would get corrupted
 
 
-if ( [ "$1" = "backup" ] && [ ! -f ${HOME}/config/backuplock.file ] )
+
+if ( [ "$1" = "backup" ] && [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "backuplock.file"`" = "0" ] )
 then
     /bin/echo
     /bin/echo "Making a daily and an emergency shutdown backup of your webserver for safety"
@@ -47,17 +48,19 @@ fi
 
 ip="`${HOME}/providerscripts/utilities/GetIP.sh`"
 
-if ( [ -f ${HOME}/config/bootedwebserverips/${ip} ] )
+
+
+if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "bootedwebserverips/${ip}"`" = "1" ] )
 then
     ${HOME}/providerscripts/datastore/configwrapper/DeleteFromConfigDatastore.sh "bootedwebserverips/${ip}"
 fi
 
-if ( [ -f ${HOME}/config/webserverpublicips/${ip} ] )
+if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "webserverpublicips/${ip}"`" = "1" ] )
 then
     ${HOME}/providerscripts/datastore/configwrapper/DeleteFromConfigDatastore.sh "webserverpublicips/${ip}"
 fi
 
-if ( [ -f ${HOME}/config/webserverips/${ip} ] )
+if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "webserverips/${ip}"`" = "1" ] )
 then
     ${HOME}/providerscripts/datastore/configwrapper/DeleteFromConfigDatastore.sh "webserverips/${ip}"
 fi
