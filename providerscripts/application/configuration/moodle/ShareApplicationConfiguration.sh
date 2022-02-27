@@ -20,7 +20,7 @@
 #################################################################################
 #set -x
 
-if ( [ ! -f ${HOME}/runtime/moodle_config.php ] )
+if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "moodle_config.php"`" = "0" ] )
 then
     if ( [ -f /var/www/html/moodle/config-dist.php ] )
     then
@@ -30,7 +30,7 @@ then
     /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
 fi
 
-if ( [ ! -f ${HOME}/config/moodle_config.php ] )
+if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "moodle_config.php"`" = "0" ] )
 then
     if ( [ -f /var/www/html/moodle/config-dist.php ] )
     then
@@ -120,7 +120,7 @@ then
     /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
 fi
 
-if ( [ -f ${HOME}/config/GLOBAL_CONFIG_UPDATE ] )
+if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "GLOBAL_CONFIG_UPDATE"`" = "1" ] )
 then
     ${HOME}/providerscripts/datastore/configwrapper/DeleteFromConfigDatastore.sh "GLOBAL_CONFIG_UPDATE"
 fi
