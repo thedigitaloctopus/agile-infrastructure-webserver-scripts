@@ -52,7 +52,9 @@ fi
 
 cd /tmp/backup
 
-if ( [ -f ${HOME}/config/.gitignore ] )
+
+
+if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh ".gitignore"`" = "1" ] )
 then
     /bin/cp ${HOME}/config/.gitignore .
     /bin/echo "/tmp" >> /var/www/html/.gitignore
