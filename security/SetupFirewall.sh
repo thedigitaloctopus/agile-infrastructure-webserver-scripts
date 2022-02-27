@@ -66,7 +66,8 @@ then
    # autoscalerip="`/bin/ls ${HOME}/config/autoscalerip`"
    # publicautoscalerip="`/bin/ls ${HOME}/config/autoscalerpublicip`"
     
-    for autoscalerip in `/bin/ls ${HOME}/config/autoscalerip`
+    
+    for autoscalerip in `${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh autoscalerip/*`
     do 
            if ( [ "`/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw status | /bin/grep ${autoscalerip} | /bin/grep ${SSH_PORT} | /bin/grep ALLOW`" = "" ] )
            then
@@ -91,7 +92,7 @@ then
            fi
     done
     
-    for publicautoscalerip in `/bin/ls ${HOME}/config/autoscalerpublicip`
+    for publicautoscalerip in `${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh autoscalerpublicip/*`
     do
 
         if ( [ "`/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw status | /bin/grep ${publicautoscalerip} | /bin/grep ALLOW`" = "" ] )
@@ -121,7 +122,7 @@ then
 fi
 
 
-for ip in `/bin/ls ${HOME}/config/webserverips/`
+for ip in `${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh webserverips/*`
 do
     if ( [ "`/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw status | /bin/grep ${ip} | /bin/grep ALLOW`" = "" ] )
     then
@@ -131,7 +132,7 @@ do
     fi
 done
 
-for ip in `/bin/ls ${HOME}/config/webserverpublicips/`
+for ip in `${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh webserverpublicips/*`
 do
     if ( [ "`/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw status | /bin/grep ${ip} | /bin/grep ALLOW`" = "" ] )
     then
@@ -141,7 +142,7 @@ do
     fi
 done
 
-for ip in `/bin/ls ${HOME}/config/databaseip/`
+for ip in `${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh databaseip/*`
 do
     if ( [ "`/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw status | /bin/grep ${ip} | /bin/grep ALLOW`" = "" ] )
     then
@@ -151,7 +152,7 @@ do
     fi
 done
 
-for ip in `/bin/ls ${HOME}/config/databasepublicip/`
+for ip in `${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh databasepublicip/*`
 do
     if ( [ "`/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw status | /bin/grep ${ip} | /bin/grep ALLOW`" = "" ] )
     then
