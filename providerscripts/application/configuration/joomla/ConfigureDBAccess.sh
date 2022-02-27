@@ -163,7 +163,7 @@ then
     /bin/sed -i "/\$redis_server_port /c\        public \$redis_server_port = \'${cache_port}\';" ${HOME}/runtime/joomla_configuration.php
 fi
 
-if ( [ -f ${HOME}/config/joomla_configuration.php ] )
+if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "joomla_configuration.php"`" = "1" ] )
 then
     secret="`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh SECRET:*`"
 
