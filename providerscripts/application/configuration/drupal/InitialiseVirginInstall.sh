@@ -53,7 +53,7 @@ else
     /bin/rm ${HOME}/runtime/VIRGINCONFIGSET
 fi
 
-if ( [ ! -f ${HOME}/config/drupal_settings.php ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh drupal_settings.php`" = "0" ] )
 then
     /bin/rm ${HOME}/runtime/VIRGINCONFIGSET
 fi
