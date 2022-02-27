@@ -20,14 +20,14 @@
 #################################################################################
 #set -x
 
-if ( [ ! -f ${HOME}/runtime/drupal_settings.php ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh drupal_settings.php`" = "0" ] )
 then
     /bin/cp /var/www/html/sites/default/default.settings.php ${HOME}/runtime/drupal_settings.php
     /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
     #/bin/touch ${HOME}/runtime/drupal_settings.php
 fi
 
-if ( [ ! -f ${HOME}/config/drupal_settings.php ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh drupal_settings.php`" = "0" ] )
 then
     /bin/cp /var/www/html/sites/default/default.settings.php ${HOME}/config/drupal_settings.php
     /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
@@ -41,7 +41,7 @@ then
     #/bin/touch /var/www/html/sites/default/settings.php
 fi
 
-if ( [ -f ${HOME}/config/GLOBAL_CONFIG_UPDATE ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh GLOBAL_CONFIG_UPDATE`" = "1" ] )
 then
     /bin/cp ${HOME}/config/drupal_settings.php ${HOME}/runtime/drupal_settings.php
     /bin/cp ${HOME}/runtime/drupal_settings.php /var/www/html/sites/default/settings.php
@@ -111,7 +111,7 @@ then
     /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
 fi
 
-if ( [ -f ${HOME}/config/GLOBAL_CONFIG_UPDATE ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh GLOBAL_CONFIG_UPDATE`" = "1" ] )
 then
     ${HOME}/providerscripts/datastore/configwrapper/DeleteFromConfigDatastore.sh "GLOBAL_CONFIG_UPDATE"
 fi
