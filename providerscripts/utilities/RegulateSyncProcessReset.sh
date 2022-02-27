@@ -21,7 +21,9 @@
 ############################################################################
 #set -x
 #Switch off scaling for 1 hour prior to sync purge
-while ( [ ! -f ${HOME}/config/webrootsynctunnel/switchoffscalingpriortosyncpurge ] )
+
+
+while ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "webrootsynctunnel/switchoffscalingpriortosyncpurge"`" = "0" ] )
 do
     ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh webrootsynctunnel/switchoffscalingpriortosyncpurge 
     /bin/sleep 10
@@ -29,7 +31,7 @@ done
 
 /bin/sleep 3600
 
-while ( [ ! -f ${HOME}/config/webrootsynctunnel/syncpurge ] || [ -f ${HOME}/config/webrootsynctunnel/switchoffscalingpriortosyncpurge ] )
+while ( [ ! -f ${HOME}/config/webrootsynctunnel/syncpurge ] || [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "webrootsynctunnel/switchoffscalingpriortosyncpurge"`" = "1" ] )
 do
     ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh webrootsynctunnel/syncpurge
     ${HOME}/providerscripts/datastore/configwrapper/DeleteFromConfigDatastore.sh "webrootsynctunnel/switchoffscalingpriortosyncpurge"
@@ -38,7 +40,7 @@ done
 
 /bin/sleep 720 
 
-while ( [ -f ${HOME}/config/webrootsynctunnel/syncpurge ] )
+while ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "webrootsynctunnel/syncpurge"`" = "1" ] )
 do
     ${HOME}/providerscripts/datastore/configwrapper/DeleteFromConfigDatastore.sh "webrootsynctunnel/syncpurge"
     /bin/sleep 10
