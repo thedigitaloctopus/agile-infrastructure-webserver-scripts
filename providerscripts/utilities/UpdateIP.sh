@@ -23,10 +23,11 @@
 if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" != "" ] )
 then
     ip="`${HOME}/providerscripts/utilities/GetIP.sh`"
-
-    /bin/touch ${HOME}/config/webserverips/${ip}
-    /bin/touch ${HOME}/config/bootedwebserverips/${ip}
+    
+    ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh webserverips/${ip}
+    ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh bootedwebserverips/${ip}
 
     public_ip="`${HOME}/providerscripts/utilities/GetPublicIP.sh`"
-    /bin/touch ${HOME}/config/webserverpublicips/${public_ip}
+    ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh webserverpublicips/${public_ip}
+
 fi
