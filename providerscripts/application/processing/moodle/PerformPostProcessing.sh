@@ -142,7 +142,7 @@ then
     /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/bin/php /var/www/html/moodle/admin/cli/mysql_engine.php --engine=InnoDB
 fi
 
-/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /bin/touch /home/${SERVER_USER}/config/APPLICATION_INSTALLED
+/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh APPLICATION_INSTALLED   
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOICE:virgin`" = "0" ] && [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOICE:baseline`" = "0" ] )
 then
