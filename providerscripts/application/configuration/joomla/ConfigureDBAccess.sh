@@ -170,7 +170,7 @@ then
     if ( [ "${secret}" = "" ] )
     then
         secret="`/bin/cat /dev/urandom | /usr/bin/tr -dc a-z | /usr/bin/head -c${1:-16};echo;`"
-        /bin/touch ${HOME}/config/SECRET:${secret}
+        ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh SECRET:${secret}    
     fi
 
     /bin/sed -i "/\$secret /c\        public \$secret = \'${secret}\';" ${HOME}/runtime/joomla_configuration.php
