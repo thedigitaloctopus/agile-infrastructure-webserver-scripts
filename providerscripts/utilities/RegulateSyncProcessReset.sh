@@ -23,7 +23,7 @@
 #Switch off scaling for 1 hour prior to sync purge
 while ( [ ! -f ${HOME}/config/webrootsynctunnel/switchoffscalingpriortosyncpurge ] )
 do
-    /bin/touch ${HOME}/config/webrootsynctunnel/switchoffscalingpriortosyncpurge
+    ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh webrootsynctunnel/switchoffscalingpriortosyncpurge 
     /bin/sleep 10
 done
 
@@ -31,7 +31,7 @@ done
 
 while ( [ ! -f ${HOME}/config/webrootsynctunnel/syncpurge ] || [ -f ${HOME}/config/webrootsynctunnel/switchoffscalingpriortosyncpurge ] )
 do
-    /bin/touch ${HOME}/config/webrootsynctunnel/syncpurge
+    ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh webrootsynctunnel/syncpurge
     ${HOME}/providerscripts/datastore/configwrapper/DeleteFromConfigDatastore.sh "webrootsynctunnel/switchoffscalingpriortosyncpurge"
     /bin/sleep 10
 done
