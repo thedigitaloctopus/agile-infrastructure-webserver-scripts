@@ -70,7 +70,7 @@ then
 
         if ( [ ! -d ${HOME}/.lego/accounts ] )
         then
-            /bin/cp -r ${HOME}/config/ssl/accounts ${HOME}/.lego
+            ${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh ssl/accounts ${HOME}/.lego recursive
         fi
 
         /bin/cp ${HOME}/ssl/live/${WEBSITE_URL}/fullchain.pem ${HOME}/.lego/certificates/${WEBSITE_URL}.crt
