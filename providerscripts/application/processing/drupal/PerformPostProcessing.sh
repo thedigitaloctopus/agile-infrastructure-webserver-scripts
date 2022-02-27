@@ -58,7 +58,7 @@ prefix="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBPREFIX'`"
 
 if ( [ "${DB_HOST}" = "" ] ) 
 then 
-    DB_HOST="`command="${SUDO} /bin/ls ${HOME}/config/databaseip" && eval ${command}`" 
+    DB_HOST="`command="${SUDO} ${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh databaseip/*" && eval ${command}`" 
 fi
 
 #if ( [ "${prefix}" = "" ] && [ ! -f /var/www/html/dbp.dat ] )
