@@ -105,7 +105,7 @@ then
    exit
 fi
 
-if ( [ -f ${HOME}/runtime/wordpress_config.php ] && [ ! -f ${HOME}/config/wordpress_config.php ] )
+if ( [ -f ${HOME}/runtime/wordpress_config.php ] && [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "wordpress_config.php"`" = "0" ] )
 then
     /bin/cp ${HOME}/runtime/wordpress_config.php ${HOME}/config/wordpress_config.php
 fi
