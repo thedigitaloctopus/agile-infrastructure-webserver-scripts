@@ -29,7 +29,7 @@ then
     then
         #If a certificate has been issued already in the past 30 minutes, forget it, it's too soon to even think about
         #generating another one
-        if ( [ -f ${HOME}/config/SSLUPDATED ] )
+        if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "SSLUPDATED"`" = "1" ] )
         then
             exit
         fi
