@@ -46,7 +46,7 @@ count="0"
 while ( [ "${count}" -lt "10" ] )
 do   
     /bin/echo "`/usr/bin/expr 10 - ${count}`"
-    /bin/touch ${HOME}/config/GLOBAL_CONFIG_UPDATE.${ip}
+    ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh GLOBAL_CONFIG_UPDATE.${ip} 
     /bin/sleep 10
     count="`/usr/bin/expr ${count} + 1`"
 done
