@@ -36,32 +36,36 @@ then
 
         if ( [ -f ${HOME}/config/ssl/fullchain.pem ] && [ -f ${HOME}/config/ssl/privkey.pem ] && [ -f ${HOME}/config/ssl/${WEBSITE_URL}.json ] && [ -f ${HOME}/config/SSLUPDATED ] )
         then
-            if ( [ "`/usr/bin/diff ${HOME}/config/ssl/fullchain.pem ${HOME}/ssl/live/${WEBSITE_URL}/fullchain.pem`" != "" ] ||
-                [ "`/usr/bin/diff ${HOME}/config/ssl/privkey.pem ${HOME}/ssl/live/${WEBSITE_URL}/privkey.pem`" != "" ] ||
-            [ "`/usr/bin/diff ${HOME}/config/ssl/${WEBSITE_URL}.json ${HOME}/ssl/live/${WEBSITE_URL}/${WEBSITE_URL}.json`" != "" ] )
+            ${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh ssl/fullchain.pem /tmp/fullchain.pem
+            ${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh ssl/privkey.pem /tmp/privkey.pem
+            ${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh ssl/${WEBSITE_URL}.json /tmp/${WEBSITE_URL}.json
+            
+            if ( [ "`/usr/bin/diff /tmp/fullchain.pem ${HOME}/ssl/live/${WEBSITE_URL}/fullchain.pem`" != "" ] ||
+                 [ "`/usr/bin/diff /tmp/privkey.pem ${HOME}/ssl/live/${WEBSITE_URL}/privkey.pem`" != "" ] ||
+                 [ "`/usr/bin/diff /tmp/${WEBSITE_URL}.json ${HOME}/ssl/live/${WEBSITE_URL}/${WEBSITE_URL}.json`" != "" ] )
             then
                 /bin/mv ${HOME}/.ssh/privkey.pem ${HOME}/.ssh/privkey.pem.previous.`/bin/date | /bin/sed 's/ //g'`
                 /bin/mv ${HOME}/.ssh/fullchain.pem ${HOME}/.ssh/fullchain.pem.previous.`/bin/date | /bin/sed 's/ //g'`
                 /bin/mv ${HOME}/.ssh/${WEBSITE_URL}.json ${HOME}/.ssh/${WEBSITE_URL}.json.previous.`/bin/date | /bin/sed 's/ //g'`
-                /bin/cp ${HOME}/config/ssl/fullchain.pem ${HOME}/.ssh/fullchain.pem
-                /bin/cp ${HOME}/config/ssl/privkey.pem ${HOME}/.ssh/privkey.pem
-                /bin/cp ${HOME}/config/ssl/${WEBSITE_URL}.json ${HOME}/.ssh/${WEBSITE_URL}.json
-                /bin/cp ${HOME}/config/ssl/fullchain.pem ${HOME}/ssl/live/${WEBSITE_URL}/fullchain.pem
-                /bin/cp ${HOME}/config/ssl/privkey.pem ${HOME}/ssl/live/${WEBSITE_URL}/privkey.pem
-                /bin/cp ${HOME}/config/ssl/${WEBSITE_URL}.json ${HOME}/ssl/live/${WEBSITE_URL}/${WEBSITE_URL}.json
+                /bin/cp /tmp/fullchain.pem ${HOME}/.ssh/fullchain.pem
+                /bin/cp /tmp/privkey.pem ${HOME}/.ssh/privkey.pem
+                /bin/cp /tmp/${WEBSITE_URL}.json ${HOME}/.ssh/${WEBSITE_URL}.json
+                /bin/cp /tmp/fullchain.pem ${HOME}/ssl/live/${WEBSITE_URL}/fullchain.pem
+                /bin/cp /tmp/privkey.pem ${HOME}/ssl/live/${WEBSITE_URL}/privkey.pem
+                /bin/cp /tmp/${WEBSITE_URL}.json ${HOME}/ssl/live/${WEBSITE_URL}/${WEBSITE_URL}.json
                 ${HOME}/providerscripts/webserver/ReloadWebserver.sh
             fi
 
-            if ( [ "`/usr/bin/diff ${HOME}/config/ssl/fullchain.pem ${HOME}/.ssh/fullchain.pem`" != "" ] ||
-                [ "`/usr/bin/diff ${HOME}/config/ssl/privkey.pem ${HOME}/.ssh/privkey.pem`" != "" ] ||
-            [ "`/usr/bin/diff ${HOME}/config/ssl/${WEBSITE_URL}.json ${HOME}/.ssh/${WEBSITE_URL}.json`" != "" ] )
+            if ( [ "`/usr/bin/diff /tmp/fullchain.pem ${HOME}/.ssh/fullchain.pem`" != "" ] ||
+                 [ "`/usr/bin/diff /tmp/privkey.pem ${HOME}/.ssh/privkey.pem`" != "" ] ||
+                 [ "`/usr/bin/diff /tmp/${WEBSITE_URL}.json ${HOME}/.ssh/${WEBSITE_URL}.json`" != "" ] )
             then
                 /bin/mv ${HOME}/.ssh/privkey.pem ${HOME}/.ssh/privkey.pem.previous.`/bin/date | /bin/sed 's/ //g'`
                 /bin/mv ${HOME}/.ssh/fullchain.pem ${HOME}/.ssh/fullchain.pem.previous.`/bin/date | /bin/sed 's/ //g'`
                 /bin/mv ${HOME}/.ssh/${WEBSITE_URL}.json ${HOME}/.ssh/${WEBSITE_URL}.json.previous.`/bin/date | /bin/sed 's/ //g'`
-                /bin/cp ${HOME}/config/ssl/fullchain.pem ${HOME}/.ssh/fullchain.pem
-                /bin/cp ${HOME}/config/ssl/privkey.pem ${HOME}/.ssh/privkey.pem
-                /bin/cp ${HOME}/config/ssl/${WEBSITE_URL}.json ${HOME}/.ssh/${WEBSITE_URL}.json
+                /bin/mv /tmp/fullchain.pem ${HOME}/.ssh/fullchain.pem
+                /bin/mv /tmp/privkey.pem ${HOME}/.ssh/privkey.pem
+                /bin/mv /tmp/${WEBSITE_URL}.json ${HOME}/.ssh/${WEBSITE_URL}.json
             fi
         fi
     fi
