@@ -121,7 +121,7 @@ else
 
     if ( [ "`/usr/bin/cmp --silent ${HOME}/webrootsync/webrootsync.${ip}.tar ${HOME}/config/webrootsynctunnel/webrootsync.${ip}.tar || /bin/echo 'files are different'`" != "" ] )
     then
-        /bin/touch ${HOME}/config/webrootsynctunnel/UPDATED.${ip}
+        ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh webrootsynctunnel/UPDATED.${ip}
         /bin/cp ${HOME}/webrootsync/webrootsync.${ip}.tar ${HOME}/config/webrootsynctunnel
     fi
 fi
