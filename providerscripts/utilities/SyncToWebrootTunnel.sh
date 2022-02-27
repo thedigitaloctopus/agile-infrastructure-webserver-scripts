@@ -27,7 +27,7 @@ then
     exit
 fi
 
-if ( [ -f ${HOME}/config/webrootsynctunnel/UPDATED.${ip} ] )
+if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "webrootsynctunnel/UPDATED.${ip}"`" = "1" ] )
 then
     ${HOME}/providerscripts/datastore/configwrapper/DeleteFromConfigDatastore.sh "UPDATED.${ip}"
 fi
@@ -91,21 +91,17 @@ else
         /bin/mkdir ${HOME}/webrootsync 
     fi
 
-    if ( [ ! -d ${HOME}/config/webrootsynctunnel ] )
-    then
-        /bin/mkdir -p ${HOME}/config/webrootsynctunnel
-    fi
  
     cd /var/www/html
     
-    if ( [ -f ${HOME}/config/webrootsynctunnel/sync*purge ] )
+    if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "webrootsynctunnel/syncpurge"`" = "1" ] )
     then
         syncfile="webrootsyncXX.${ip}.tar"
     else
         syncfile="webrootsync.${ip}.tar"
     fi
 
-    if ( [ ! -f ${HOME}/config/webrootsynctunnel/sync*purge ] && [ -f ${HOME}/webrootsync/webrootsyncXX.${ip}.tar ] )
+    if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "webrootsynctunnel/syncpurge"`" = "0" ] && [ -f ${HOME}/webrootsync/webrootsyncXX.${ip}.tar ] )
     then
         /bin/mv ${HOME}/webrootsync/webrootsyncXX.${ip}.tar  ${HOME}/webrootsync/webrootsync.${ip}.tar  
     fi
