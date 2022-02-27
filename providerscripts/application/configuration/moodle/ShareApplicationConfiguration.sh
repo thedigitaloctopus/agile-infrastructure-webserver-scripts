@@ -50,7 +50,7 @@ then
     /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
 fi
 
-if ( [ -f ${HOME}/config/GLOBAL_CONFIG_UPDATE ] )
+if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "GLOBAL_CONFIG_UPDATE"`" = "1" ] )
 then
     /bin/cp ${HOME}/config/moodle_config.php ${HOME}/runtime/moodle_config.php
     /bin/cp ${HOME}/runtime/moodle_config.php /var/www/html/moodle/config.php
