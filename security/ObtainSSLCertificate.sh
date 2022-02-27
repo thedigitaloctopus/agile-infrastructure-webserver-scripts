@@ -160,10 +160,9 @@ then
             /bin/cp ${HOME}/ssl/live/${WEBSITE_URL}/ssl ${HOME}/ssl/live/${WEBSITE_URL}/privkey.pem
             /bin/mv ${HOME}/ssl/live/${WEBSITE_URL}/ssl ${HOME}/ssl/live/${WEBSITE_URL}/fullchain.pem
             /bin/cp ${HOME}/.lego/certificates/${WEBSITE_URL}.json ${HOME}/ssl/live/${WEBSITE_URL}/${WEBSITE_URL}.json
-            /bin/cp ${HOME}/ssl/live/${WEBSITE_URL}/privkey.pem ${HOME}/config/ssl/privkey.pem
-            /bin/cp ${HOME}/ssl/live/${WEBSITE_URL}/fullchain.pem ${HOME}/config/ssl/fullchain.pem
-            /bin/cp ${HOME}/ssl/live/${WEBSITE_URL}/${WEBSITE_URL}.json ${HOME}/config/ssl/${WEBSITE_URL}.json
-            /bin/chmod 700 ${HOME}/config/ssl/fullchain.pem ${HOME}/config/ssl/privkey.pem ${HOME}/config/ssl/${WEBSITE_URL}.json
+            ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh ${HOME}/ssl/live/${WEBSITE_URL}/privkey.pem ssl/privkey.pem
+            ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh ${HOME}/ssl/live/${WEBSITE_URL}/fullchain.pem ssl/fullchain.pem
+            ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh ${HOME}/ssl/live/${WEBSITE_URL}/${WEBSITE_URL}.json ssl/${WEBSITE_URL}.json
             /bin/chmod 700 ${HOME}/ssl/live/${WEBSITE_URL}/${WEBSITE_URL}.json ${HOME}/ssl/live/${WEBSITE_URL}/fullchain.pem ${HOME}/ssl/live/${WEBSITE_URL}/privkey.pem
             ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh SSLUPDATED
 
