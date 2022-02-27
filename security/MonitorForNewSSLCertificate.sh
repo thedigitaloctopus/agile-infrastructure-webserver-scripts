@@ -33,8 +33,8 @@ then
     if ( [ "`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SSLGENERATIONSERVICE'`" = "LETSENCRYPT" ] )
     then
         WEBSITE_URL="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEURL'`"
-
-        if ( [ -f ${HOME}/config/ssl/fullchain.pem ] && [ -f ${HOME}/config/ssl/privkey.pem ] && [ -f ${HOME}/config/ssl/${WEBSITE_URL}.json ] && [ -f ${HOME}/config/SSLUPDATED ] )
+        
+        if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "ssl/fullchain.pem"`" = "1" ] && [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "ssl/privkey.pem"`" = "1" ] && [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "ssl/${WEBSITE_URL}.json"`" = "1" ] && [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "SSLUPDATED"`" = "1" ] )
         then
             ${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh ssl/fullchain.pem /tmp/fullchain.pem
             ${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh ssl/privkey.pem /tmp/privkey.pem
