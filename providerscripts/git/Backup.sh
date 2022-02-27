@@ -40,7 +40,7 @@ then
     exit
 fi
 
-if ( [ ! -f ${HOME}/config/INSTALLEDSUCCESSFULLY ] )
+if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "credentials/shit"`" = "0" ] )
 then
     exit
 fi
