@@ -32,11 +32,13 @@ then
 fi
 if ( [ "`/bin/grep ${prefix} ${HOME}/runtime/drupal_settings.php`" = "" ] )
 then
+
     if ( [ "`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh UPDATEDPREFIX:*`" != "" ] )
     then
 	${HOME}/providerscripts/datastore/configwrapper/DeleteFromConfigDatastore.sh "UPDATEDPREFIX:*"
     fi
-    /bin/touch ${HOME}/config/UPDATEDPREFIX:${prefix}
+    
+    ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh UPDATEDPREFIX:${prefix}    
 fi
 
 directories="`/bin/ls /var/www/html/sites/default/files | /bin/grep "^20"`"
