@@ -30,7 +30,8 @@ then
     /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
 fi
 
-if ( [ ! -f ${HOME}/config/joomla_configuration.php ] )
+
+if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "joomla_configuration.php"`" = "0" ] )
 then
     if ( [ -f /var/www/html/installation/configuration.php-dist ] )
     then
@@ -53,7 +54,9 @@ fi
 ip="`${HOME}/providerscripts/utilities/GetIP.sh`"
 global_config_updated="0"
 
-if ( [ -f ${HOME}/config/GLOBAL_CONFIG_UPDATE.${ip} ] )
+
+
+if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "GLOBAL_CONFIG_UPDATE.${ip}"`" = "1" ] )
 then
     /bin/cp ${HOME}/config/joomla_configuration.php ${HOME}/runtime/joomla_configuration.php
     /bin/cp ${HOME}/runtime/joomla_configuration.php /var/www/html/configuration.php
@@ -127,7 +130,7 @@ then
     /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
 fi
 
-if ( [ -f ${HOME}/config/GLOBAL_CONFIG_UPDATE.${ip} ] )
+if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "GLOBAL_CONFIG_UPDATE.${ip}"`" = "1" ] )
 then
     ${HOME}/providerscripts/datastore/configwrapper/DeleteFromConfigDatastore.sh "GLOBAL_CONFIG_UPDATE.${ip}"
 fi
