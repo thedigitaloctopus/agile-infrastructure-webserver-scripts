@@ -42,10 +42,10 @@ then
     ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh UPDATEDPREFIX:${dbprefix}    
 fi
 
-if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] )
-then
-    exit
-fi
+#if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] )
+#then
+#    exit
+#fi
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:DBaaS`" = "1" ] )
 then
