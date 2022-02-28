@@ -36,7 +36,7 @@ then
     then
         /bin/cp /var/www/html/moodle/config-dist.php /var/www/html/moodle/config.php.default
     fi
-    ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh /var/www/html/moodle/config.php.default ${HOME}/config/moodle_config.php
+    ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh /var/www/html/moodle/config.php.default moodle_config.php
     /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
 fi
 
@@ -110,13 +110,13 @@ then
 fi
 if ( [ "${changed}" = "main" ] )
 then
-    ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh /var/www/html/moodle/config.php ${HOME}/config/moodle_config.php
+    ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh /var/www/html/moodle/config.php moodle_config.php
     /bin/cp /var/www/html/moodle/config.php ${HOME}/runtime/moodle_config.php
     /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
 fi
 if ( [ "${changed}" = "runtime" ] )
 then
-    ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh ${HOME}/runtime/moodle_config.php ${HOME}/config/moodle_config.php
+    ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh ${HOME}/runtime/moodle_config.php moodle_config.php
     /bin/cp ${HOME}/runtime/moodle_config.php /var/www/html/moodle/config.php
     /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
 fi
