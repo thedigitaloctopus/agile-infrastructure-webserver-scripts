@@ -20,8 +20,8 @@
 ###########################################################################################
 #set -x
 
-if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" != "" ] )
-then
+#if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" != "" ] )
+#then
     ip="`${HOME}/providerscripts/utilities/GetIP.sh`"
     
     ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh webserverips/${ip}
@@ -30,4 +30,4 @@ then
     public_ip="`${HOME}/providerscripts/utilities/GetPublicIP.sh`"
     ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh webserverpublicips/${public_ip}
 
-fi
+#fi
