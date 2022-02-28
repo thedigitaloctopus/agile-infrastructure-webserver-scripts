@@ -25,10 +25,10 @@ then
     exit
 fi
 
-if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] )
-then
-   exit
-fi
+#if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] )
+#then
+#   exit
+#fi
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DEVELOPMENT:1`" = "1" ] && [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh PRODUCTION:0`" = "1" ] )
 then
