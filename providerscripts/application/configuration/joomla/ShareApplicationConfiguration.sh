@@ -68,7 +68,8 @@ then
 fi
 
 runtime_md5="`/usr/bin/md5sum ${HOME}/runtime/joomla_configuration.php | /usr/bin/awk '{print $1}'`"
-config_md5="`/usr/bin/md5sum ${HOME}/config/joomla_configuration.php | /usr/bin/awk '{print $1}'`"
+${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh joomla_configuration.php /tmp/joomla_configuration.php
+config_md5="`/usr/bin/md5sum /tmp/joomla_configuration.php | /usr/bin/awk '{print $1}'`"
 main_md5="`/usr/bin/md5sum /var/www/html/configuration.php | /usr/bin/awk '{print $1}'`"
 
 updated="0"
