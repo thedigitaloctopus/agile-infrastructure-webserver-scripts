@@ -107,7 +107,7 @@ fi
 
 if ( [ -f ${HOME}/runtime/wordpress_config.php ] && [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "wordpress_config.php"`" = "0" ] )
 then
-    /bin/cp ${HOME}/runtime/wordpress_config.php ${HOME}/config/wordpress_config.php
+    ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh ${HOME}/runtime/wordpress_config.php ${HOME}/config/wordpress_config.php
 fi
 
 /bin/sed -i "/DB_HOST/c\ define('DB_HOST', \"${host}:${DB_PORT}\");" ${HOME}/runtime/wordpress_config.php
