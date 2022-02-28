@@ -26,7 +26,7 @@ then
     then
         /bin/cp /var/www/html/moodle/config-dist.php /var/www/html/moodle/config.php.default
     fi
-    ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh /var/www/html/moodle/config.php.default ${HOME}/runtime/moodle_config.php
+    /bin/cp /var/www/html/moodle/config.php.default ${HOME}/runtime/moodle_config.php
     /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
 fi
 
