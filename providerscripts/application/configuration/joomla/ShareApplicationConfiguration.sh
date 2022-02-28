@@ -58,7 +58,7 @@ global_config_updated="0"
 
 if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "GLOBAL_CONFIG_UPDATE.${ip}"`" = "1" ] )
 then
-    /bin/cp ${HOME}/config/joomla_configuration.php ${HOME}/runtime/joomla_configuration.php
+    ${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh joomla_configuration.php ${HOME}/runtime/joomla_configuration.php
     /bin/cp ${HOME}/runtime/joomla_configuration.php /var/www/html/configuration.php
     /bin/sleep 40
 elif ( [ "`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh GLOBAL_CONFIG_UPDATE.*`" != "" ] )
@@ -114,8 +114,8 @@ fi
 
 if ( [ "${changed}" = "config" ] )
 then
-    ${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh ${HOME}/config/joomla_configuration.php ${HOME}/runtime/joomla_configuration.php
-    /bin/cp ${HOME}/config/joomla_configuration.php /var/www/html/configuration.php
+    ${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh ${HOME}/config/joomla_configuration.php ${HOME}/runtime/joomla_configuration.php 
+    ${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh joomla_configuration.php /var/www/html/configuration.php
     /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
 fi
 if ( [ "${changed}" = "main" ] )
