@@ -38,11 +38,11 @@ fi
 #fi
 
 ######IS THIS NEEDED???????????
-if ( [ "`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh webrootsynctunnel/UPDATED*`" != "" ] )
-then
-    /bin/umount ${HOME}/config
-    ${HOME}/providerscripts/datastore/SetupConfig.sh
-fi
+#if ( [ "`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh webrootsynctunnel/UPDATED*`" != "" ] )
+#then
+#    /bin/umount ${HOME}/config
+#    ${HOME}/providerscripts/datastore/SetupConfig.sh
+#fi
 
 ip="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'MYPUBLICIP'`"
 
