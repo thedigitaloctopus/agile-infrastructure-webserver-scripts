@@ -24,7 +24,7 @@
 prefix="`/bin/cat /var/www/html/dbp.dat`"
 if ( [ "${prefix}" = "" ] )
 then
-    prefix="`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh UPDATEDPREFIX:*`"
+    prefix="`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh DBPREFIX:*`"
 fi
 if ( [ "${prefix}" = "" ] )
 then
@@ -33,12 +33,12 @@ fi
 if ( [ "`/bin/grep ${prefix} ${HOME}/runtime/drupal_settings.php`" = "" ] )
 then
 
-    if ( [ "`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh UPDATEDPREFIX:*`" != "" ] )
+    if ( [ "`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh DBPREFIX:*`" != "" ] )
     then
-	${HOME}/providerscripts/datastore/configwrapper/DeleteFromConfigDatastore.sh "UPDATEDPREFIX:*"
+	${HOME}/providerscripts/datastore/configwrapper/DeleteFromConfigDatastore.sh "DBPREFIX:*"
     fi
     
-    ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh UPDATEDPREFIX:${prefix}    
+    ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh DBPREFIX:${prefix}    
 fi
 
 directories="`/bin/ls /var/www/html/sites/default/files | /bin/grep "^20"`"
