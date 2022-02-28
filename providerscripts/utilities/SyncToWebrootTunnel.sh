@@ -113,11 +113,12 @@ else
         /bin/tar auf ${HOME}/webrootsync/${syncfile} ${file} 
     done
     
-    /bin/touch ${HOME}/webrootsync/webrootsync.${ip}.tar ${HOME}/config/webrootsynctunnel/webrootsync.${ip}.tar
+    /bin/touch ${HOME}/webrootsync/webrootsync.${ip}.tar ${HOME}/config/webrootsynctunnel/webrootsync.${ip}.tar  
+    ${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh webrootsynctunnel/webrootsync.${ip}.tar /tmp/webrootsync.${ip}.tar
 
-    if ( [ "`/usr/bin/cmp --silent ${HOME}/webrootsync/webrootsync.${ip}.tar ${HOME}/config/webrootsynctunnel/webrootsync.${ip}.tar || /bin/echo 'files are different'`" != "" ] )
+    if ( [ "`/usr/bin/cmp --silent ${HOME}/webrootsync/webrootsync.${ip}.tar /tmp/webrootsync.${ip}.tar || /bin/echo 'files are different'`" != "" ] )
     then
         ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh webrootsynctunnel/UPDATED.${ip}
-        /bin/cp ${HOME}/webrootsync/webrootsync.${ip}.tar ${HOME}/config/webrootsynctunnel
+        ${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh ${HOME}/webrootsync/webrootsync.${ip}.tar webrootsynctunnel
     fi
 fi
