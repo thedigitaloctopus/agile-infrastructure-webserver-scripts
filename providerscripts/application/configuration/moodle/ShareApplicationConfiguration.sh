@@ -58,7 +58,8 @@ then
 fi
 
 runtime_md5="`/usr/bin/md5sum ${HOME}/runtime/moodle_config.php | /usr/bin/awk '{print $1}'`"
-config_md5="`/usr/bin/md5sum ${HOME}/config/moodle_config.php | /usr/bin/awk '{print $1}'`"
+${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh moodle_config.php /tmp/moodle_config.php
+config_md5="`/usr/bin/md5sum /tmp/moodle_config.php | /usr/bin/awk '{print $1}'`"
 main_md5="`/usr/bin/md5sum /var/www/html/moodle/config.php | /usr/bin/awk '{print $1}'`"
 
 updated="0"
