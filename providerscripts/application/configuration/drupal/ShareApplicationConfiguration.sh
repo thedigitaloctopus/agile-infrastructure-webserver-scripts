@@ -49,7 +49,8 @@ then
 fi
 
 runtime_md5="`/usr/bin/md5sum ${HOME}/runtime/drupal_settings.php | /usr/bin/awk '{print $1}'`"
-config_md5="`/usr/bin/md5sum ${HOME}/config/drupal_settings.php | /usr/bin/awk '{print $1}'`"
+${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh drupal_settings.php /tmp/drupal_settings.php
+config_md5="`/usr/bin/md5sum /tmp/drupal_settings.php | /usr/bin/awk '{print $1}'`"
 main_md5="`/usr/bin/md5sum /var/www/html/sites/default/settings.php | /usr/bin/awk '{print $1}'`"
 
 updated="0"
