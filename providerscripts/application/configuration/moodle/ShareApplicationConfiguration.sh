@@ -52,7 +52,7 @@ fi
 
 if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "GLOBAL_CONFIG_UPDATE"`" = "1" ] )
 then
-    /bin/cp ${HOME}/config/moodle_config.php ${HOME}/runtime/moodle_config.php
+    ${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh moodle_config.php ${HOME}/runtime/moodle_config.php
     /bin/cp ${HOME}/runtime/moodle_config.php /var/www/html/moodle/config.php
     /bin/sleep 30 
 fi
@@ -104,8 +104,8 @@ fi
 
 if ( [ "${changed}" = "config" ] )
 then
-    /bin/cp ${HOME}/config/moodle_config.php ${HOME}/runtime/moodle_config.php
-    /bin/cp ${HOME}/config/moodle_config.php /var/www/html/moodle/config.php
+    ${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh moodle_config.php ${HOME}/runtime/moodle_config.php
+    ${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh moodle_config.php /var/www/html/moodle/config.php
     /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
 fi
 if ( [ "${changed}" = "main" ] )
