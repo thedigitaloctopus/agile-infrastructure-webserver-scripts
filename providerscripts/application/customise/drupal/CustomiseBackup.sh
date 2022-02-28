@@ -16,7 +16,8 @@
 #########################################################################################
 #set -x
 
-salt="`/bin/cat ${HOME}/config/drupal_settings.php | /bin/grep '^\$settings' | /bin/grep 'hash_salt' | /usr/bin/head -1 | /usr/bin/awk -F'=' '{print $NF}' | /bin/sed "s/'//g" | /bin/sed 's/;//g' | /bin/sed 's/ //'`"
+${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh drupal_settings.php /tmp/drupal_settings.php
+salt="`/bin/cat /tmp/drupal_settings.php | /bin/grep '^\$settings' | /bin/grep 'hash_salt' | /usr/bin/head -1 | /usr/bin/awk -F'=' '{print $NF}' | /bin/sed "s/'//g" | /bin/sed 's/;//g' | /bin/sed 's/ //'`"
 /bin/echo "${salt}" > /tmp/backup/salt
 /usr/bin/unlink /tmp/backup/sites/default/settings.php
 /bin/rm /tmp/backup/sites/default/settings.php
