@@ -75,10 +75,10 @@ fi
 
 /bin/chown -R www-data.www-data /var/www/html
 
-while ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] )
-do
-    /bin/sleep 10
-done
+#while ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] )
+#do
+#    /bin/sleep 10
+#done
 
 #/bin/rm ${HOME}/config/APPLICATION_DB_CONFIGURED
 #/bin/rm ${HOME}/config/UPDATE*
