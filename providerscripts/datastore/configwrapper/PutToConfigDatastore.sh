@@ -25,6 +25,8 @@ WEBSITE_URL="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEUR
 configbucket="`/bin/echo ${WEBSITE_URL} | /usr/bin/awk -F'.' '{ for(i = 1; i <= NF; i++) { print $i; } }' | /usr/bin/cut -c1-3 | /usr/bin/tr '\n' '-' | /bin/sed 's/-//g'`"
 configbucket="${configbucket}-config"
 
+directory="`/bin/echo ${1} | /usr/bin/awk -F'/' 'NF{NF-=1};1'`"
+
 if ( [ "$3" = "recursive" ] )
 then
     /usr/bin/s3cmd --recursive put $1 s3://${configbucket}/$2
@@ -40,8 +42,9 @@ else
     then
         /usr/bin/s3cmd put /tmp/$1 s3://${configbucket}/$2
     else
-        /bin/touch /tmp/$1
-        /usr/bin/s3cmd put /tmp/$1 s3://${configbucket}/$2
+        /bin/mkdir -p /tmp/${directory}
+        /bin/touch /tmp/${directory}/$1
+        /usr/bin/s3cmd put /tmp/${directory}/$1 s3://${configbucket}/$2
         /bin/rm /tmp/$1
     fi
     /bin/touch ${HOME}/runtime/APP_CONFIG_UPDATED
