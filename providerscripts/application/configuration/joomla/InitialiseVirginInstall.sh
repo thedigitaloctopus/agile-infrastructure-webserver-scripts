@@ -67,7 +67,7 @@ DB_PORT="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBPORT'`"
 #and exits for some reason.
 if ( [ ! -f /var/www/html/dbp.dat ] )
 then
-    prefix="`/bin/cat /dev/urandom | /usr/bin/tr -dc a-z | /usr/bin/head -c${1:-6};echo;`"
+    prefix="`/usr/bin/openssl rand -base64 32 | /usr/bin/tr -cd 'a-zA-Z0-9' | /usr/bin/cut -b 1-6 | /usr/bin/tr '[:upper:]' '[:lower:]'`"
     if ( [ "${prefix}" != "" ] )
     then
         ${HOME}/providerscripts/utilities/StoreConfigValue.sh "DBPREFIX" "${prefix}"
@@ -158,7 +158,7 @@ fi
 secret="`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh SECRET:*`"
 if ( [ "${secret}" = "" ] )
 then
-    secret="`/bin/cat /dev/urandom | /usr/bin/tr -dc a-z | /usr/bin/head -c${1:-16};echo;`"
+    secret="`/usr/bin/openssl rand -base64 32 | /usr/bin/tr -cd 'a-zA-Z0-9' | /usr/bin/cut -b 1-16 | /usr/bin/tr '[:upper:]' '[:lower:]'`"
     ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh SECRET:${secret}
 fi
 
