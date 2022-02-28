@@ -58,7 +58,8 @@ then
 fi
 
 runtime_md5="`/usr/bin/md5sum ${HOME}/runtime/wordpress_config.php | /usr/bin/awk '{print $1}'`"
-config_md5="`/usr/bin/md5sum ${HOME}/config/wordpress_config.php | /usr/bin/awk '{print $1}'`"
+${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh wordpress_config.php /tmp/wordpress_config.php
+config_md5="`/usr/bin/md5sum /tmp/wordpress_config.php | /usr/bin/awk '{print $1}'`"
 main_md5="`/usr/bin/md5sum /var/www/wp-config.php | /usr/bin/awk '{print $1}'`"
 
 updated="0"
