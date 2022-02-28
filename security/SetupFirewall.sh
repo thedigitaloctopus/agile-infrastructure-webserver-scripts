@@ -31,10 +31,10 @@ exec >${HOME}/logs/firewall/FIREWALL_CONFIGURATION.log
 exec 2>&1
 ##################################################################################
 
-if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] )
-then
-    exit
-fi
+#if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] )
+#then
+#    exit
+#fi
 
 . ${HOME}/providerscripts/utilities/SetupInfrastructureIPs.sh
 
