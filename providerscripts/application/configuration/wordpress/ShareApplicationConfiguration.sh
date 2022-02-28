@@ -52,7 +52,7 @@ fi
 
 if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "GLOBAL_CONFIG_UPDATE"`" = "1" ] )
 then
-    /bin/cp ${HOME}/config/wordpress_config.php ${HOME}/runtime/wordpress_config.php 
+    ${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh wordpress_config.php ${HOME}/runtime/wordpress_config.php 
     /bin/cp ${HOME}/runtime/wordpress_config.php  /var/www/wp-config.php
     /bin/sleep 30 
 fi
@@ -104,8 +104,8 @@ fi
 
 if ( [ "${changed}" = "config" ] )
 then
-    /bin/cp ${HOME}/config/wordpress_config.php ${HOME}/runtime/wordpress_config.php
-    /bin/cp ${HOME}/config/wordpress_config.php /var/www/wp-config.php
+    ${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh wordpress_config.php ${HOME}/runtime/wordpress_config.php
+    ${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh wordpress_config.php /var/www/wp-config.php
     /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
 fi
 if ( [ "${changed}" = "main" ] )
