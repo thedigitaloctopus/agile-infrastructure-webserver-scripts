@@ -37,7 +37,7 @@ then
     then
         /bin/cp /var/www/html/installation/configuration.php-dist /var/www/html/configuration.php.default
     fi
-    /bin/cp /var/www/html/configuration.php.default ${HOME}/config/joomla_configuration.php
+    ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh /var/www/html/configuration.php.default ${HOME}/config/joomla_configuration.php
     /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
 fi
 
