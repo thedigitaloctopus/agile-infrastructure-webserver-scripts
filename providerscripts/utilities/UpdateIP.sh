@@ -24,10 +24,10 @@
 #then
     ip="`${HOME}/providerscripts/utilities/GetIP.sh`"
     
-    ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh webserverips/${ip}
-    ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh bootedwebserverips/${ip}
+    ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh webserverips/${ip} webserverips/${ip}
+    ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh bootedwebserverips/${ip} bootedwebserverips/${ip}
 
     public_ip="`${HOME}/providerscripts/utilities/GetPublicIP.sh`"
-    ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh webserverpublicips/${public_ip}
+    ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh webserverpublicips/${public_ip} webserverpublicips/${public_ip}
 
 #fi
