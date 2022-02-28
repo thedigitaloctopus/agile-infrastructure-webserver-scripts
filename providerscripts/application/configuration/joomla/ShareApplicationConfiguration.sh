@@ -85,7 +85,7 @@ changed=""
 
 if ( [ "${updated}" = "1" ] )
 then
-    if ( [ "`/usr/bin/find ${HOME}/config/joomla_configuration.php -mmin -2`" != "" ] )
+    if ( [ "`/usr/bin/find ${HOME}/runtime/APP_CONFIG_UPDATED -mmin -2`" != "" ] )
     then
         #This check is needed so we don't accidentally update the config file and push it to all our webservers
         #We have to explicitly create the GLOBAL_CONFIG_UPDATE file to do that. 
