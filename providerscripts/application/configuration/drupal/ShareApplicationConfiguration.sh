@@ -43,7 +43,7 @@ fi
 
 if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh GLOBAL_CONFIG_UPDATE`" = "1" ] )
 then
-    ${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh ${HOME}/config/drupal_settings.php ${HOME}/runtime/drupal_settings.php
+    ${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh drupal_settings.php ${HOME}/runtime/drupal_settings.php
     /bin/cp ${HOME}/runtime/drupal_settings.php /var/www/html/sites/default/settings.php
     /bin/sleep 30 
 fi
@@ -96,8 +96,8 @@ fi
 
 if ( [ "${changed}" = "config" ] )
 then
-    ${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh ${HOME}/config/drupal_settings.php ${HOME}/runtime/drupal_settings.php
-    ${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh ${HOME}/config/drupal_settings.php /var/www/html/sites/default/settings.php
+    ${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh drupal_settings.php ${HOME}/runtime/drupal_settings.php
+    ${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh drupal_settings.php /var/www/html/sites/default/settings.php
     /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
 fi
 if ( [ "${changed}" = "main" ] )
