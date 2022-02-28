@@ -31,7 +31,7 @@ done
 
 /bin/sleep 3600
 
-while ( [ ! -f ${HOME}/config/webrootsynctunnel/syncpurge ] || [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "webrootsynctunnel/switchoffscalingpriortosyncpurge"`" = "1" ] )
+while ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "webrootsynctunnel/syncpurge"`" = "0" ] || [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "webrootsynctunnel/switchoffscalingpriortosyncpurge"`" = "1" ] )
 do
     ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh webrootsynctunnel/syncpurge
     ${HOME}/providerscripts/datastore/configwrapper/DeleteFromConfigDatastore.sh "webrootsynctunnel/switchoffscalingpriortosyncpurge"
