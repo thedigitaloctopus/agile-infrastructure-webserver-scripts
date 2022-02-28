@@ -40,7 +40,6 @@ fi
 #Clean up any stale locks from the cron process
 /bin/echo "*/1 * * * * export HOME="${HOMEDIR}" && /usr/bin/find ${HOME}/runtime -name *lock* -type f -mmin +35 -delete" >> /var/spool/cron/crontabs/root
 #We have a flag to tell us if one of the webservers has updated the SSL certificate. If so, other webservers don't try.
-/bin/echo "*/1 * * * * export HOME="${HOMEDIR}" && /usr/bin/find ${HOME}/config/SSLUPDATED -type f -mmin +30 -delete" >> /var/spool/cron/crontabs/root
 /bin/echo "*/1 * * * * export HOME="${HOMEDIR}" && ${HOME}/cron/PurgeDodgyMountsCron.sh" >> /var/spool/cron/crontabs/root
 /bin/echo "*/1 * * * * export HOME="${HOMEDIR}" && ${HOME}/providerscripts/application/configuration/ShareApplicationConfiguration.sh" >> /var/spool/cron/crontabs/root
 /bin/echo "*/1 * * * * export HOME="${HOMEDIR}" && ${HOME}/providerscripts/datastore/SetupConfig.sh" >> /var/spool/cron/crontabs/root
@@ -53,6 +52,9 @@ fi
 #These scripts run every set interval
 /bin/echo "*/5 * * * * export HOME="${HOMEDIR}" && ${HOME}/security/MonitorFirewall.sh" >> /var/spool/cron/crontabs/root
 /bin/echo "*/5 * * * * export HOME="${HOMEDIR}" &&  /bin/sleep 20 && ${HOME}/cron/SyncToWebrootTunnelFromCron.sh && /bin/sleep 60 && ${HOME}/cron/SyncFromWebrootTunnelFromCron.sh" >> /var/spool/cron/crontabs/root
+
+#This script runs every 30 minutes
+/bin/echo "*/30 * * * * export HOME="${HOMEDIR}" && ${HOME}/providerscripts/datastore/configwrapper/DeleteFromConfigDatastore.sh SSLUPDATED" >> /var/spool/cron/crontabs/root
 
 #These scripts run at set times these will make a backup of our webroot to git and also to our datastore if super safe
 #Time based backups are not taken for virgin CMS installs. Instead, make a baseline if you want to save a copy of your work and work it out from there once your application is ready
