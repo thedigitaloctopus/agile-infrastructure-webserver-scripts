@@ -39,15 +39,17 @@ delay="`/usr/bin/expr ${delay1} + ${delay2}`"
 
 /bin/sleep ${delay}
 
-lockfile=${HOME}/config/backuplock.file
+#lockfile=${HOME}/config/
 
-/usr/bin/find ${lockfile} -mmin +20 -type f -exec rm -fv {} \;
+#/usr/bin/find ${lockfile} -mmin +20 -type f -exec rm -fv {} \;
 
-if ( [ ! -f ${lockfile} ] )
+if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "backuplock.file"`" = "0" ] )
 then
-    /usr/bin/touch ${lockfile}
+    /usr/bin/touch ${HOME}/runtime/backuplock.file
+    ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh ${HOME}/runtime/backuplock.file 
     ${HOME}/providerscripts/git/Backup.sh "${periodicity}" "${buildidentifier}"
-    /bin/rm ${lockfile}
+    ${HOME}/providerscripts/datastore/configwrapper/DeleteFromConfigDatastore.sh "backuplock.file"
 else
     /bin/echo "script already running"
 fi
+
