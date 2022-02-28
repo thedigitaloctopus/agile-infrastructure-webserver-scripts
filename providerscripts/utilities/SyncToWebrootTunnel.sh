@@ -22,10 +22,10 @@
 
 ip="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'MYPUBLICIP'`"
 
-if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] )
-then
-    exit
-fi
+#if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] )
+#then
+#    exit
+#fi
 
 if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "webrootsynctunnel/UPDATED.${ip}"`" = "1" ] )
 then
