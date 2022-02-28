@@ -29,7 +29,7 @@ fi
 
 if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh drupal_settings.php`" = "0" ] )
 then
-${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh /var/www/html/sites/default/default.settings.php ${HOME}/config/drupal_settings.php
+    ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh /var/www/html/sites/default/default.settings.php ${HOME}/config/drupal_settings.php
     /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
     #/bin/touch ${HOME}/config/drupal_settings.php
 fi
