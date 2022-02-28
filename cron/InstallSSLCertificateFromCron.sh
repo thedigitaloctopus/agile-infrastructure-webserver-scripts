@@ -38,14 +38,14 @@ delay="`/usr/bin/expr ${delay1} + ${delay2}`"
 
 /bin/sleep ${delay}
 
-lockfile=${HOME}/config/sslcertlock.file
-
-if ( [ ! -f ${lockfile} ] )
+if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "sslcertlock.file"`" = "0" ] )
 then
-    /usr/bin/touch ${lockfile}
+    /usr/bin/touch ${HOME}/runtime/sslcertlock.file
+    ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh ${HOME}/runtime/sslcertlock.file 
     ${HOME}/security/InstallSSLCertificate.sh
-    /bin/rm ${lockfile}
+    ${HOME}/providerscripts/datastore/configwrapper/DeleteFromConfigDatastore.sh "sslcertlock.file"
 else
     /bin/echo "script already running"
 fi
+
 
