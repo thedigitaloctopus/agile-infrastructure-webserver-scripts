@@ -35,7 +35,7 @@ fi
 ip="`${HOME}/providerscripts/utilities/GetIP.sh`"
 
 /bin/cp ${HOME}/runtime/${1}.php.new ${HOME}/runtime/${1}.php
-/bin/cp ${HOME}/runtime/${1}.php.new ${HOME}/config/${1}.php
+${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh ${HOME}/runtime/${1}.php.new ${HOME}/config/${1}.php
 /bin/echo " " >> ${HOME}/config/${1}.php
 /bin/rm ${HOME}/runtime/${1}.php.new
 
