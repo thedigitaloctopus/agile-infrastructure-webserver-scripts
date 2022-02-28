@@ -20,10 +20,10 @@
 ############################################################################
 #set -x
 
-while ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] )
-do
-    /bin/sleep 10
-done
+#while ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] )
+#do
+#    /bin/sleep 10
+#done
 /usr/bin/rsync -aruog --chown=www-data:www-data ${HOME}/config/webrootsynctunnel/var/www/html/ /var/www/html/
 #/usr/bin/rsync -rog --chown=www-data:www-data ${HOME}/config/webrootsynctunnel/var/www/html/* /var/www/html
 ${HOME}/providerscripts/utilities/EnforcePermissions.sh
