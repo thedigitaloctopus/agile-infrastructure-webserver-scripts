@@ -36,7 +36,7 @@ then
     then
         /bin/cp /var/www/html/wp-config-sample.php /var/www/html/wp-config.php.default
     fi
-    /bin/cp /var/www/html/wp-config.php.default  ${HOME}/config/wordpress_config.php
+    ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh /var/www/html/wp-config.php.default ${HOME}/config/wordpress_config.php 
     /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
 fi
 
@@ -109,13 +109,13 @@ then
 fi
 if ( [ "${changed}" = "main" ] )
 then
-    /bin/cp /var/www/wp-config.php ${HOME}/config/wordpress_config.php
+    ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh /var/www/wp-config.php ${HOME}/config/wordpress_config.php 
     /bin/cp /var/www/wp-config.php ${HOME}/runtime/wordpress_config.php
     /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
 fi
 if ( [ "${changed}" = "runtime" ] )
 then
-    /bin/cp ${HOME}/runtime/wordpress_config.php ${HOME}/config/wordpress_config.php
+    ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh ${HOME}/runtime/wordpress_config.php ${HOME}/config/wordpress_config.php 
     /bin/cp ${HOME}/runtime/wordpress_config.php /var/www/wp-config.php
     /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
 fi
