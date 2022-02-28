@@ -37,7 +37,7 @@ then
     then
         /bin/cp /var/www/html/installation/configuration.php-dist /var/www/html/configuration.php.default
     fi
-    ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh /var/www/html/configuration.php.default ${HOME}/config/joomla_configuration.php
+    ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh /var/www/html/configuration.php.default joomla_configuration.php
     /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
 fi
 
@@ -120,13 +120,13 @@ then
 fi
 if ( [ "${changed}" = "main" ] )
 then
-    ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh /var/www/html/configuration.php ${HOME}/config/joomla_configuration.php
+    ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh /var/www/html/configuration.php joomla_configuration.php
     /bin/cp /var/www/html/configuration.php ${HOME}/runtime/joomla_configuration.php
     /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
 fi
 if ( [ "${changed}" = "runtime" ] )
 then
-    ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh ${HOME}/runtime/joomla_configuration.php ${HOME}/config/joomla_configuration.php
+    ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh ${HOME}/runtime/joomla_configuration.php joomla_configuration.php
     /bin/cp ${HOME}/runtime/joomla_configuration.php /var/www/html/configuration.php
     /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
 fi
