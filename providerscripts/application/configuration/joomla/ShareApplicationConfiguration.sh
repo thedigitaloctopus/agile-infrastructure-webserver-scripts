@@ -114,7 +114,7 @@ fi
 
 if ( [ "${changed}" = "config" ] )
 then
-    ${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh ${HOME}/config/joomla_configuration.php ${HOME}/runtime/joomla_configuration.php 
+    ${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh joomla_configuration.php ${HOME}/runtime/joomla_configuration.php 
     ${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh joomla_configuration.php /var/www/html/configuration.php
     /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
 fi
