@@ -156,5 +156,5 @@ then
     /bin/chown -R www-data.www-data /var/www/html/logs
 fi
 
-/bin/chown www-data.www-data ${HOME}/config/drupal_settings.php
-/bin/chmod 640 ${HOME}/config/drupal_settings.php
+#/bin/chown www-data.www-data ${HOME}/config/drupal_settings.php
+#/bin/chmod 640 ${HOME}/config/drupal_settings.php
