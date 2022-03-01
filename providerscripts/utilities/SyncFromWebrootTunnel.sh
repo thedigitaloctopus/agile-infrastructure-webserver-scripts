@@ -56,7 +56,8 @@ then
     /bin/mkdir -p ${HOME}/webrootsync/incomingupdates
 fi
 
-/bin/cp ${HOME}/config/webrootsynctunnel/webrootsync*.tar ${HOME}/webrootsync/incomingupdates 2>/dev/null
+${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh webrootsynctunnel/webrootsync*.tar ${HOME}/webrootsync/incomingupdates
+#/bin/cp ${HOME}/config/webrootsynctunnel/webrootsync*.tar ${HOME}/webrootsync/incomingupdates 2>/dev/null
 /bin/rm ${HOME}/webrootsync/incomingupdates/*${ip}* 2>/dev/null
 
 cd /var/www/html
