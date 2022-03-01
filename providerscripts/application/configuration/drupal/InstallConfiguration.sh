@@ -38,7 +38,7 @@ then
     then
         /bin/mv /var/www/html/sites/default/settings.php /var/www/html/sites/default/settings.php.default
     fi
-     ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh /var/www/html/sites/default/settings.php.default ${HOME}/config/drupal_settings.php
+     ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh /var/www/html/sites/default/settings.php.default drupal_settings.php
     /bin/chmod 600 ${HOME}/config/drupal_settings.php
     /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
     /bin/echo "1"
