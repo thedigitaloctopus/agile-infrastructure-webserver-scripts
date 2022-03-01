@@ -67,7 +67,7 @@ DB_PORT="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBPORT'`"
 #and exits for some reason.
 if ( [ ! -f /var/www/html/dbp.dat ] )
 then
-    prefix="`/usr/bin/openssl rand -base64 32 | /usr/bin/tr -cd 'a-zA-Z0-9' | /usr/bin/cut -b 1-6 | /usr/bin/tr '[:upper:]' '[:lower:]'`"
+    prefix="p`/usr/bin/openssl rand -base64 32 | /usr/bin/tr -cd 'a-zA-Z0-9' | /usr/bin/cut -b 1-4 | /usr/bin/tr '[:upper:]' '[:lower:]'`x"
     if ( [ "${prefix}" != "" ] )
     then
         ${HOME}/providerscripts/utilities/StoreConfigValue.sh "DBPREFIX" "${prefix}"
