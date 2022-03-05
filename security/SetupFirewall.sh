@@ -49,7 +49,7 @@ then
     /usr/sbin/ufw default deny incoming
     /usr/sbin/ufw default allow outgoing
     /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from ${BUILD_CLIENT_IP} to any port ${SSH_PORT}
-    ${HOME}/providerscripts/utilities/ConnectToAutoscaler.sh "${HOME}/providerscripts/server/UpdateNativeFirewall.sh" ${BUILD_CLIENT_IP} ${SSH_PORT}
+   # ${HOME}/providerscripts/utilities/ConnectToAutoscaler.sh "${HOME}/providerscripts/server/UpdateNativeFirewall.sh" ${BUILD_CLIENT_IP} ${SSH_PORT}
 fi
 
 #NEW_BUILD_CLIENT_IP="`/bin/ls /tmp/BUILDCLIENTIP/* | /usr/bin/awk -F'/' '{print $NF}'`"
@@ -85,7 +85,7 @@ then
               /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from ${autoscalerip} to any port 80           
            fi
         
-           ${HOME}/providerscripts/utilities/ConnectToAutoscaler.sh "${HOME}/providerscripts/server/UpdateNativeFirewall.sh" ${autoscalerip}
+       #    ${HOME}/providerscripts/utilities/ConnectToAutoscaler.sh "${HOME}/providerscripts/server/UpdateNativeFirewall.sh" ${autoscalerip}
            if ( [ -f /etc/apache2/mods-available/evasive.conf ] )
            then
                /bin/sed -i "/.*\/IfModule.*/i DOSWhitelist ${autoscalerip}" /etc/apache2/mods-available/evasive.conf
@@ -112,7 +112,7 @@ then
               /bin/sleep 2
               /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from ${publicautoscalerip} to any port 80           
            fi
-            ${HOME}/providerscripts/utilities/ConnectToAutoscaler.sh "${HOME}/providerscripts/server/UpdateNativeFirewall.sh" ${publicautoscalerip}
+       #     ${HOME}/providerscripts/utilities/ConnectToAutoscaler.sh "${HOME}/providerscripts/server/UpdateNativeFirewall.sh" ${publicautoscalerip}
            if ( [ -f /etc/apache2/mods-available/evasive.conf ] )
            then
                /bin/sed -i "/.*\/IfModule.*/i DOSWhitelist ${publicautoscalerip}" /etc/apache2/mods-available/evasive.conf
@@ -128,7 +128,7 @@ do
     then
         /bin/sleep 2
         /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from ${ip} to any port ${SSH_PORT}
-        ${HOME}/providerscripts/utilities/ConnectToAutoscaler.sh "${HOME}/providerscripts/server/UpdateNativeFirewall.sh" ${ip} ${SSH_PORT}
+   #     ${HOME}/providerscripts/utilities/ConnectToAutoscaler.sh "${HOME}/providerscripts/server/UpdateNativeFirewall.sh" ${ip} ${SSH_PORT}
     fi
 done
 
@@ -138,7 +138,7 @@ do
     then
         /bin/sleep 2
         /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from ${ip} to any port ${SSH_PORT}
-        ${HOME}/providerscripts/utilities/ConnectToAutoscaler.sh "${HOME}/providerscripts/server/UpdateNativeFirewall.sh" ${ip} ${SSH_PORT}
+   #     ${HOME}/providerscripts/utilities/ConnectToAutoscaler.sh "${HOME}/providerscripts/server/UpdateNativeFirewall.sh" ${ip} ${SSH_PORT}
     fi
 done
 
@@ -148,7 +148,7 @@ do
     then
         /bin/sleep 2
         /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from ${ip} to any port ${SSH_PORT}
-        ${HOME}/providerscripts/utilities/ConnectToAutoscaler.sh "${HOME}/providerscripts/server/UpdateNativeFirewall.sh" ${ip} ${SSH_PORT}
+     #   ${HOME}/providerscripts/utilities/ConnectToAutoscaler.sh "${HOME}/providerscripts/server/UpdateNativeFirewall.sh" ${ip} ${SSH_PORT}
     fi
 done
 
@@ -158,7 +158,7 @@ do
     then
         /bin/sleep 2
         /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from ${ip} to any port ${SSH_PORT}
-        ${HOME}/providerscripts/utilities/ConnectToAutoscaler.sh "${HOME}/providerscripts/server/UpdateNativeFirewall.sh" ${ip} ${SSH_PORT}
+     #   ${HOME}/providerscripts/utilities/ConnectToAutoscaler.sh "${HOME}/providerscripts/server/UpdateNativeFirewall.sh" ${ip} ${SSH_PORT}
     fi
 done
 
