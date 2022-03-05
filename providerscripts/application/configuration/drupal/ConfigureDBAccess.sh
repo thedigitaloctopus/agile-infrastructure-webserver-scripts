@@ -125,7 +125,10 @@ else
     /bin/echo "For your information, this website uses MySQL or MariaDB" > /var/www/html/dbe.dat
 fi
 
-/bin/sed -i "s/^\$databases = \[\]\;/${credentialstring}/" ${HOME}/runtime/drupal_settings.php
+/bin/sed -i "/^\$databases/{:1;/;/!{N;b 1}
+     s/.*/${credentialstring}/g}" ${HOME}/runtime/drupal_settings.php
+
+#/bin/sed -i "s/^\$databases = \[\]\;/${credentialstring}/" ${HOME}/runtime/drupal_settings.php
     
 salt="`/bin/cat /var/www/html/salt`"
     
