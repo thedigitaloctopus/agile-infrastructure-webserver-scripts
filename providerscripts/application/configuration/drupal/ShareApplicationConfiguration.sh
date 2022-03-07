@@ -20,14 +20,14 @@
 #################################################################################
 #set -x
 
-if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh drupal_settings.php`" = "0" ] )
+if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh drupal_settings.php`" = "0" ] && [ ! -f ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED ] )
 then
     /bin/cp /var/www/html/sites/default/default.settings.php ${HOME}/runtime/drupal_settings.php
     /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
     #/bin/touch ${HOME}/runtime/drupal_settings.php
 fi
 
-if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh drupal_settings.php`" = "0" ] )
+if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh drupal_settings.php`" = "0" ] && [ ! -f ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED ] )
 then
     ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh /var/www/html/sites/default/default.settings.php drupal_settings.php
     /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
