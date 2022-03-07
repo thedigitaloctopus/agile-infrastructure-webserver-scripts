@@ -20,7 +20,7 @@
 #################################################################################
 #set -x
 
-if ( [ ! -f ${HOME}/runtime/wordpress_config.php  ] )
+if ( [ ! -f ${HOME}/runtime/wordpress_config.php  ] && [ ! -f ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED ] )
 then
     if ( [ -f /var/www/html/wp-config-sample.php ] )
     then
@@ -30,7 +30,7 @@ then
     /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
 fi
 
-if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "wordpress_config.php"`" = "0" ] )
+if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "wordpress_config.php"`" = "0" ] && [ ! -f ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED ] )
 then
     if ( [ -f /var/www/html/wp-config-sample.php ] )
     then
