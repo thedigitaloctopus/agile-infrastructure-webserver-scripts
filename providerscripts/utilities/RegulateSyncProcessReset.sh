@@ -23,25 +23,25 @@
 #Switch off scaling for 1 hour prior to sync purge
 
 
-while ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "webrootsynctunnel/switchoffscalingpriortosyncpurge"`" = "0" ] )
+while ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "switchoffscalingpriortosyncpurge"`" = "0" ] )
 do
-    ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh webrootsynctunnel/switchoffscalingpriortosyncpurge 
+    ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh switchoffscalingpriortosyncpurge 
     /bin/sleep 10
 done
 
 /bin/sleep 3600
 
-while ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "webrootsynctunnel/syncpurge"`" = "0" ] || [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "webrootsynctunnel/switchoffscalingpriortosyncpurge"`" = "1" ] )
+while ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "syncpurge"`" = "0" ] || [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh switchoffscalingpriortosyncpurge`" = "1" ] )
 do
-    ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh webrootsynctunnel/syncpurge
-    ${HOME}/providerscripts/datastore/configwrapper/DeleteFromConfigDatastore.sh "webrootsynctunnel/switchoffscalingpriortosyncpurge"
+    ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh syncpurge
+    ${HOME}/providerscripts/datastore/configwrapper/DeleteFromConfigDatastore.sh "switchoffscalingpriortosyncpurge"
     /bin/sleep 10
 done
 
 /bin/sleep 720 
 
-while ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "webrootsynctunnel/syncpurge"`" = "1" ] )
+while ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "syncpurge"`" = "1" ] )
 do
-    ${HOME}/providerscripts/datastore/configwrapper/DeleteFromConfigDatastore.sh "webrootsynctunnel/syncpurge"
+    ${HOME}/providerscripts/datastore/configwrapper/DeleteFromConfigDatastore.sh "syncpurge"
     /bin/sleep 10
 done
