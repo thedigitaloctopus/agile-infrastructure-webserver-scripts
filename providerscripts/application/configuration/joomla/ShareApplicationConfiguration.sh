@@ -20,7 +20,7 @@
 #################################################################################
 #set -x
 
-if ( [ ! -f ${HOME}/runtime/joomla_configuration.php ] )
+if ( [ ! -f ${HOME}/runtime/joomla_configuration.php ] && [ ! -f ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED ] )
 then
     if ( [ -f /var/www/html/installation/configuration.php-dist ] )
     then
@@ -31,7 +31,7 @@ then
 fi
 
 
-if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "joomla_configuration.php"`" = "0" ] )
+if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "joomla_configuration.php"`" = "0" ] && [ ! -f ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED ] )
 then
     if ( [ -f /var/www/html/installation/configuration.php-dist ] )
     then
