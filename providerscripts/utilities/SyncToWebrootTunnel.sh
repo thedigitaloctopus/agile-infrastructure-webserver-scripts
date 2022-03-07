@@ -94,14 +94,14 @@ else
  
     cd /var/www/html
     
-    if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "webrootsynctunnel/syncpurge"`" = "1" ] )
+    if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "syncpurge"`" = "1" ] )
     then
         syncfile="webrootsyncXX.${ip}.tar"
     else
         syncfile="webrootsync.${ip}.tar"
     fi
 
-    if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "webrootsynctunnel/syncpurge"`" = "0" ] && [ -f ${HOME}/webrootsync/webrootsyncXX.${ip}.tar ] )
+    if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "syncpurge"`" = "0" ] && [ -f ${HOME}/webrootsync/webrootsyncXX.${ip}.tar ] )
     then
         /bin/mv ${HOME}/webrootsync/webrootsyncXX.${ip}.tar  ${HOME}/webrootsync/webrootsync.${ip}.tar  
     fi
