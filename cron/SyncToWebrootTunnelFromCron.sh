@@ -25,7 +25,8 @@ lockfile=${HOME}/runtime/synclock2.file
 if ( [ ! -f ${lockfile} ] )
 then
     /usr/bin/touch ${lockfile}
-    ${HOME}/providerscripts/utilities/SyncToWebrootTunnel.sh
+   # ${HOME}/providerscripts/utilities/SyncToWebrootTunnel.sh
+    ${HOME}/providerscripts/datastore/configwrapper/SyncToDatastoreTunnel.sh
     /bin/rm ${lockfile}
 else
     echo "script already running"
