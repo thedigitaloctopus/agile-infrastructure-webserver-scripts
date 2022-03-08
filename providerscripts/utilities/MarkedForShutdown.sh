@@ -26,14 +26,14 @@ then
     #Failed to shutdown webserver
     /bin/rm ${HOME}/runtime/MARKEDFORSHUTDOWN
     exit
-fi
+else
+    while ( [ ! -f ${HOME}/runtime/SHUTDOWNACCEPTED ] )
+    do
+        /bin/sleep 10
+    done
 
-while ( [ ! -f ${HOME}/runtime/SHUTDOWNACCEPTED ] )
-do
-    /bin/sleep 10
-done
-
-if ( [ -f ${HOME}/runtime/SHUTDOWNACCEPTED ] )
-then
-    /usr/sbin/shutdown -h now
+    if ( [ -f ${HOME}/runtime/SHUTDOWNACCEPTED ] )
+    then
+        /usr/sbin/shutdown -h now
+    fi
 fi
