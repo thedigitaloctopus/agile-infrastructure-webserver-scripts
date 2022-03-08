@@ -43,11 +43,6 @@ then
     ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh DBPREFIX:${dbprefix}    
 fi
 
-#if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] )
-#then
-#    exit
-#fi
-
 if ( [ ! -f /var/www/html/.htaccess ] )
 then
     /bin/cp ${HOME}/providerscripts/application/configuration/moodle-htaccess.txt /var/www/html/.htaccess
