@@ -62,7 +62,7 @@ else
 
     ${HOME}/applicationscripts/CleanApplicationTunnel.sh 2>/dev/null
 
-    for file in "`/bin/cat ${HOME}/runtime/newandmodfiles.dat`"
+    for file in `/bin/cat ${HOME}/runtime/newandmodfiles.dat`
     do
         destfile="`/bin/echo ${file} | /bin/sed 's/\/var\/www\/html//g'`"
         ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh ${file}  webrootsynctunnel${destfile}
