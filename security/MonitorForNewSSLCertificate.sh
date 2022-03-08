@@ -28,6 +28,12 @@
 ###################################################################################
 #set -x
 
+if ( [ "`/usr/bin/find ${HOME}/runtime/SSLUPDATED -mtime +30`" != "" ] )
+then
+    /bin/rm ${HOME}/runtime/SSLUPDATED
+    ${HOME}//providerscripts/datastore/configwrapper/DeleteFromConfigDatastore.sh "SSLUPDATED"
+fi
+
 if ( [ "`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SSLGENERATIONMETHOD'`" = "AUTOMATIC" ] )
 then
     if ( [ "`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SSLGENERATIONSERVICE'`" = "LETSENCRYPT" ] )
