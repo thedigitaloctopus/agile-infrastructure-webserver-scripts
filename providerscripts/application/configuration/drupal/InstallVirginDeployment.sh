@@ -20,7 +20,6 @@
 #################################################################################
 #set -x
 
-
 version="`/bin/echo ${APPLICATION} | /usr/bin/awk -F':' '{print $NF}'`"
 
 cd /var/www/html
@@ -50,7 +49,6 @@ then
     #You can look up more about it its called opensocial and is a drupal application
     BUILDOS="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDOS'`"
     ${HOME}/installscripts/InstallComposer.sh ${BUILDOS}
-    #/usr/local/bin/composer create-project goalgorilla/social_template:dev-master DIR --no-interaction --ignore-platform-reqs
     /usr/bin/wget https://raw.githubusercontent.com/goalgorilla/social_template/master/composer.json
     /usr/bin/wget https://raw.githubusercontent.com/goalgorilla/social_template/master/composer.lock
     /bin/mv composer* ${HOME}
