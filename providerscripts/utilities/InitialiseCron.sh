@@ -62,7 +62,7 @@ fi
 /bin/echo "*/5 * * * * export HOME="${HOMEDIR}" &&  /bin/sleep 20 && ${HOME}/cron/SyncToWebrootTunnelFromCron.sh && /bin/sleep 60 && ${HOME}/cron/SyncFromWebrootTunnelFromCron.sh" >> /var/spool/cron/crontabs/root
 
 #This script runs every 30 minutes
-/bin/echo "*/30 * * * * export HOME="${HOMEDIR}" && ${HOME}/providerscripts/datastore/configwrapper/DeleteFromConfigDatastore.sh SSLUPDATED" >> /var/spool/cron/crontabs/root
+#/bin/echo "*/30 * * * * export HOME="${HOMEDIR}" && ${HOME}/providerscripts/datastore/configwrapper/DeleteFromConfigDatastore.sh SSLUPDATED" >> /var/spool/cron/crontabs/root
 
 #These scripts run at set times these will make a backup of our webroot to git and also to our datastore if super safe
 #Time based backups are not taken for virgin CMS installs. Instead, make a baseline if you want to save a copy of your work and work it out from there once your application is ready
