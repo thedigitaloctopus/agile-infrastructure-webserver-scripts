@@ -58,18 +58,6 @@ then
     exit
 fi
 
-#Wait for our shared resources to be mounted and available
-#if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] )
-#then
-#    exit
-#fi
-
-#If the shared credentials are not available, simply exit this time around
-#if ( [ ! -f ${HOME}/config/credentials/shit ] )
-#then
-#    exit
-#fi
-
 if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "credentials/shit"`" = "0" ] )
 then
     exit
@@ -91,7 +79,6 @@ fi
 
 
 cd ${HOME}
-#/bin/cp ${HOME}/config/credentials/shit ${HOME}/shit
 
 ${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh credentials/shit ${HOME}/shit
 
@@ -103,7 +90,6 @@ then
     /bin/echo "${DBaaS_DBNAME}" > ${HOME}/shit
     /bin/echo "${DBaaS_PASSWORD}" >> ${HOME}/shit
     /bin/echo "${DBaaS_USERNAME}" >> ${HOME}/shit
-   # /bin/cp ${HOME}/shit ${HOME}/config/credentials/shit
     ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh ${HOME}/shit credentials/shit
 fi
 
