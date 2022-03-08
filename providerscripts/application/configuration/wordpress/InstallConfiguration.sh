@@ -22,15 +22,8 @@
 ##################################################################################
 #set -x
 
-#while ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] || [ ! -f ${HOME}/config/credentials/shit ] )
-#do
-#    /bin/sleep 10
-#done
-
-
 if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "credentials/shit"`" = "1" ] && [ ! -f ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED ] )
 then
-  #  /bin/chmod 600 ${HOME}/config/wordpress_config.php
     /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
     /bin/echo "1"
 fi
