@@ -22,21 +22,10 @@
 ####################################################################################
 #set -x
 
-#if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] )
-#then
-#    exit
-#fi
-
 if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "credentials/shit"`" = "0" ] )
 then
    exit
 fi
-
-#If the shared credentials are not available, simply exit this time around
-#if ( [ ! -f ${HOME}/config/credentials/shit ] )
-#then
-#    exit
-#fi
 
 #If our credentials are not available, that's no good to us
 DB_N="`${HOME}/providerscripts/datastore/configwrapper/GetDBCredential.sh "credentials/shit" 1`"
