@@ -28,7 +28,7 @@
 ###################################################################################
 #set -x
 
-if ( [ "`/usr/bin/find ${HOME}/runtime/SSLUPDATED -mtime +30`" != "" ] )
+if ( [ "`/usr/bin/find ${HOME}/runtime/SSLUPDATED -mmin +30`" != "" ] )
 then
     /bin/rm ${HOME}/runtime/SSLUPDATED
     ${HOME}//providerscripts/datastore/configwrapper/DeleteFromConfigDatastore.sh "SSLUPDATED"
