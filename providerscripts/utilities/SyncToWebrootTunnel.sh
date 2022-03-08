@@ -29,7 +29,7 @@ ip="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'MYPUBLICIP'`"
 
 if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "webrootsynctunnel/UPDATED.${ip}"`" = "1" ] )
 then
-    ${HOME}/providerscripts/datastore/configwrapper/DeleteFromConfigDatastore.sh "UPDATED.${ip}"
+    ${HOME}/providerscripts/datastore/configwrapper/DeleteFromConfigDatastore.sh "webrootsynctunnel/UPDATED.${ip}"
 fi
 
 if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "credentials/shit"`" = "0" ] )
@@ -115,10 +115,15 @@ else
     
     /bin/touch ${HOME}/webrootsync/webrootsync.${ip}.tar ${HOME}/config/webrootsynctunnel/webrootsync.${ip}.tar  
     ${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh webrootsynctunnel/webrootsync.${ip}.tar /tmp/webrootsync.${ip}.tar
+    
+    if ( [ ! -f /tmp/webrootsync.${ip}.tar ] )
+    then
+        /bin/rm /tmp/webrootsync.${ip}.tar
+    fi
 
     if ( [ "`/usr/bin/cmp --silent ${HOME}/webrootsync/webrootsync.${ip}.tar /tmp/webrootsync.${ip}.tar || /bin/echo 'files are different'`" != "" ] )
     then
         ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh webrootsynctunnel/UPDATED.${ip}
-        ${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh ${HOME}/webrootsync/webrootsync.${ip}.tar webrootsynctunnel
+        ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh ${HOME}/webrootsync/webrootsync.${ip}.tar webrootsynctunnel
     fi
 fi
