@@ -99,13 +99,6 @@ then
     exit
 fi
 
-#Check that the config directory mounted successfully and that the credentials are available, if not wait till next time
-#as they might be by then
-#if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] || [ ! -f ${HOME}/config/credentials/shit ] )
-#then
-#    exit
-#fi
-
 if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "credentials/shit"`" = "0" ] )
 then
     exit
@@ -129,8 +122,6 @@ fi
 /bin/echo "<?php
 echo \"hello, you need to surf to ${websiteurl}/moodle \"
 ?>" > /var/www/html/index.php
-
-
 
 #Set session handler to be database. May (will) get issues if trying to use filesystem
 /bin/sed -i '/\/\/.*\\core\\session\\database/s/^\/\///' ${HOME}/runtime/moodle_config.php
