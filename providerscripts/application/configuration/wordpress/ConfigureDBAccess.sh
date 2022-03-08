@@ -42,11 +42,6 @@ then
     ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh DBPREFIX:${dbprefix}    
 fi
 
-#if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] )
-#then
-#    exit
-#fi
-
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:DBaaS`" = "1" ] )
 then
     host="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBaaSHOSTNAME'`"
