@@ -165,7 +165,7 @@ then
             ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh ${HOME}/ssl/live/${WEBSITE_URL}/${WEBSITE_URL}.json ssl/${WEBSITE_URL}.json
             /bin/chmod 700 ${HOME}/ssl/live/${WEBSITE_URL}/${WEBSITE_URL}.json ${HOME}/ssl/live/${WEBSITE_URL}/fullchain.pem ${HOME}/ssl/live/${WEBSITE_URL}/privkey.pem
             ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh SSLUPDATED
-
+            /bin/touch ${HOME}/runtime/SSLUPDATED
         fi
 
         ${HOME}/providerscripts/webserver/ReloadWebserver.sh
