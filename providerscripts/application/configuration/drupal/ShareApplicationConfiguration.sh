@@ -24,21 +24,18 @@ if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh
 then
     /bin/cp /var/www/html/sites/default/default.settings.php ${HOME}/runtime/drupal_settings.php
     /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
-    #/bin/touch ${HOME}/runtime/drupal_settings.php
 fi
 
 if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh drupal_settings.php`" = "0" ] && [ ! -f ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED ] )
 then
     ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh /var/www/html/sites/default/default.settings.php drupal_settings.php
     /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
-    #/bin/touch ${HOME}/config/drupal_settings.php
 fi
 
 if ( [ ! -f /var/www/html/sites/default/settings.php ] )
 then
     /bin/cp /var/www/html/sites/default/default.settings.php /var/www/html/sites/default/settings.php
     /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
-    #/bin/touch /var/www/html/sites/default/settings.php
 fi
 
 if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh GLOBAL_CONFIG_UPDATE`" = "1" ] )
