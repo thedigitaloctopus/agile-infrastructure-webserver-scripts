@@ -54,7 +54,7 @@ do
     applicationassetdir="/var/www/html/${applicationassetdir}"
     directory="`/bin/echo ${applicationassetdir} | /usr/bin/awk -F'/' '{print $NF}'`"
     echo ${applicationassetdir}
-    files="`/usr/bin/find ${applicationassetdir} -type f`"
+    files="`/usr/bin/find ${applicationassetdir}`"
     if ( [ "${files}" != "" ] )
     then
         for file in "`/usr/bin/find ${applicationassetdir} -type f`"
