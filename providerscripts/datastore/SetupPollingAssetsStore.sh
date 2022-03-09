@@ -60,8 +60,13 @@ do
         for file in "`/usr/bin/find ${applicationassetdir} -type f`"
         do
             bucketfile="`/bin/echo ${file} | /bin/sed "s/.*${directory}//g"`"
-            /usr/bin/s3cmd put ${file} s3://${currentbucket}${bucketfile}
-            /bin/rm ${file}
+            /usr/bin/s3cmd put ${file} s3://${currentbucket}${bucketfile}/
+            
+            if ( [ "$?" = "0" ] )
+            then
+                /bin/rm ${file}
+            fi
+            
         done
         count="`/usr/bin/expr ${count} + 1`"
     fi
