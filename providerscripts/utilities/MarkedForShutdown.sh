@@ -22,11 +22,13 @@
 
 if ( [ -f ${HOME}/runtime/MARKEDFORSHUTDOWN ] )
 then
+    /bin/touch ${HOME}/runtime/SHUTDOWNINITIATED
     ${HOME}/providerscripts/utilities/ShutdownThisWebserver.sh
     #Failed to shutdown webserver
     /bin/rm ${HOME}/runtime/MARKEDFORSHUTDOWN
     exit
-else
+elif ( [ -f ${HOME}/runtime/SHUTDOWNINITIATED ] )
+then
     while ( [ ! -f ${HOME}/runtime/SHUTDOWNACCEPTED ] )
     do
         /bin/sleep 10
