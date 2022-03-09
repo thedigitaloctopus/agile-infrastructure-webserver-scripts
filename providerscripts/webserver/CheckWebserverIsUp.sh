@@ -50,6 +50,7 @@ then
         /usr/sbin/service nginx start
     fi
 fi
+
 if ( [ "${webserver_type}" = "LIGHTTPD" ] )
 then
     if ( [ "`/usr/bin/pgrep php`" = "" ] )
@@ -58,6 +59,11 @@ then
     fi
     if ( [ "`/usr/bin/pgrep lighttpd`" = "" ] )
     then
-        /usr/sbin/service lighttpd start
+        if ( [ -f /etc/lighttpd/BUILT_FROM_SOURCE ] )
+        then
+            /bin/sh /etc/rc.local &
+        else
+            /usr/sbin/service lighttpd start
+        fi
     fi
 fi
