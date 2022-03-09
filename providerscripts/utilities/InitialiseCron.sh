@@ -59,7 +59,7 @@ fi
 
 #These scripts run every set interval
 /bin/echo "*/5 * * * * export HOME="${HOMEDIR}" && ${HOME}/security/MonitorFirewall.sh" >> /var/spool/cron/crontabs/root
-/bin/echo "*/5 * * * * export HOME="${HOMEDIR}" &&  /bin/sleep 20 && ${HOME}/cron/SyncToWebrootTunnelFromCron.sh && /bin/sleep 60 && ${HOME}/cron/SyncFromWebrootTunnelFromCron.sh" >> /var/spool/cron/crontabs/root
+/bin/echo "*/2 * * * * export HOME="${HOMEDIR}" &&  /bin/sleep 20 && ${HOME}/cron/SyncToWebrootTunnelFromCron.sh && /bin/sleep 60 && ${HOME}/cron/SyncFromWebrootTunnelFromCron.sh" >> /var/spool/cron/crontabs/root
 
 #This script runs every 30 minutes
 #/bin/echo "*/30 * * * * export HOME="${HOMEDIR}" && ${HOME}/providerscripts/datastore/configwrapper/DeleteFromConfigDatastore.sh SSLUPDATED" >> /var/spool/cron/crontabs/root
