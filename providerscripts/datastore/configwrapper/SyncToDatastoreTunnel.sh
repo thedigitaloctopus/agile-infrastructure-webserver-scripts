@@ -54,7 +54,7 @@ fi
 
 eval ${CMD} > ${HOME}/runtime/checklist.chk.new
 
-if ( [ ! -f ${HOME}/runtime/checklist.chk ] )
+if ( [ ! -f ${HOME}/runtime/checklist.chk ] || [ "`/bin/cat ${HOME}/runtime/checklist.chk`" = "" ] )
 then
    /bin/cp ${HOME}/runtime/checklist.chk.new ${HOME}/runtime/checklist.chk
 else
