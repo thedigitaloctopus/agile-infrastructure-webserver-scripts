@@ -44,24 +44,10 @@ then
     /usr/sbin/ufw default deny incoming
     /usr/sbin/ufw default allow outgoing
     /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from ${BUILD_CLIENT_IP} to any port ${SSH_PORT}
-   # ${HOME}/providerscripts/utilities/ConnectToAutoscaler.sh "${HOME}/providerscripts/server/UpdateNativeFirewall.sh" ${BUILD_CLIENT_IP} ${SSH_PORT}
 fi
-
-#NEW_BUILD_CLIENT_IP="`/bin/ls /tmp/BUILDCLIENTIP/* | /usr/bin/awk -F'/' '{print $NF}'`"
-#if ( [ "`/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw status | /bin/grep ${NEW_BUILD_CLIENT_IP} | /bin/grep ALLOW`" = "" ] )
-#then
-#    /usr/sbin/ufw default deny incoming
-#    /usr/sbin/ufw default allow outgoing
-#    /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from ${NEW_BUILD_CLIENT_IP} to any port ${SSH_PORT}
-#    /bin/sleep 5
-#fi
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh PRODUCTION:1`" = "1" ] )
 then
-   # autoscalerip="`/bin/ls ${HOME}/config/autoscalerip`"
-   # publicautoscalerip="`/bin/ls ${HOME}/config/autoscalerpublicip`"
-    
-    
     for autoscalerip in `${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh autoscalerip/*`
     do 
            if ( [ "`/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw status | /bin/grep ${autoscalerip} | /bin/grep ${SSH_PORT} | /bin/grep ALLOW`" = "" ] )
@@ -80,7 +66,6 @@ then
               /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from ${autoscalerip} to any port 80           
            fi
         
-       #    ${HOME}/providerscripts/utilities/ConnectToAutoscaler.sh "${HOME}/providerscripts/server/UpdateNativeFirewall.sh" ${autoscalerip}
            if ( [ -f /etc/apache2/mods-available/evasive.conf ] )
            then
                /bin/sed -i "/.*\/IfModule.*/i DOSWhitelist ${autoscalerip}" /etc/apache2/mods-available/evasive.conf
@@ -92,22 +77,25 @@ then
 
         if ( [ "`/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw status | /bin/grep ${publicautoscalerip} | /bin/grep ALLOW`" = "" ] )
         then
+        
            if ( [ "`/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw status | /bin/grep ${publicautoscalerip} | /bin/grep ${SSH_PORT} | /bin/grep ALLOW`" = "" ] )
            then
               /bin/sleep 2
               /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from ${publicautoscalerip} to any port ${SSH_PORT}
            fi
+           
            if ( [ "`/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw status | /bin/grep ${publicautoscalerip} | /bin/grep 443 | /bin/grep ALLOW`" = "" ] )
            then
               /bin/sleep 2
               /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from ${publicautoscalerip} to any port 443
            fi   
+           
            if ( [ "`/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw status | /bin/grep ${publicautoscalerip} | /bin/grep 80 | /bin/grep ALLOW`" = "" ] )
            then
               /bin/sleep 2
               /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from ${publicautoscalerip} to any port 80           
            fi
-       #     ${HOME}/providerscripts/utilities/ConnectToAutoscaler.sh "${HOME}/providerscripts/server/UpdateNativeFirewall.sh" ${publicautoscalerip}
+           
            if ( [ -f /etc/apache2/mods-available/evasive.conf ] )
            then
                /bin/sed -i "/.*\/IfModule.*/i DOSWhitelist ${publicautoscalerip}" /etc/apache2/mods-available/evasive.conf
@@ -123,7 +111,6 @@ do
     then
         /bin/sleep 2
         /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from ${ip} to any port ${SSH_PORT}
-   #     ${HOME}/providerscripts/utilities/ConnectToAutoscaler.sh "${HOME}/providerscripts/server/UpdateNativeFirewall.sh" ${ip} ${SSH_PORT}
     fi
 done
 
@@ -133,7 +120,6 @@ do
     then
         /bin/sleep 2
         /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from ${ip} to any port ${SSH_PORT}
-   #     ${HOME}/providerscripts/utilities/ConnectToAutoscaler.sh "${HOME}/providerscripts/server/UpdateNativeFirewall.sh" ${ip} ${SSH_PORT}
     fi
 done
 
@@ -143,7 +129,6 @@ do
     then
         /bin/sleep 2
         /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from ${ip} to any port ${SSH_PORT}
-     #   ${HOME}/providerscripts/utilities/ConnectToAutoscaler.sh "${HOME}/providerscripts/server/UpdateNativeFirewall.sh" ${ip} ${SSH_PORT}
     fi
 done
 
@@ -153,22 +138,11 @@ do
     then
         /bin/sleep 2
         /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from ${ip} to any port ${SSH_PORT}
-     #   ${HOME}/providerscripts/utilities/ConnectToAutoscaler.sh "${HOME}/providerscripts/server/UpdateNativeFirewall.sh" ${ip} ${SSH_PORT}
     fi
 done
-
 
 . ${HOME}/security/SetupDNSFirewall.sh
 
 /bin/sleep 2
-
-#if ( [ "`/bin/cat ${HOME}/logs/FIREWALL_CONFIGURATION.log | /bin/grep 'Chain already exists.'`" != "" ] )
-#then
-#    /sbin/iptables -F
-#    /sbin/iptables -X
-#    /sbin/iptables -Z
-#    /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw --force reset
-#    /bin/cp /dev/null ${HOME}/logs/FIREWALL_CONFIGURATION.log
-#fi
 
 /usr/sbin/ufw -f enable
