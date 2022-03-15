@@ -78,8 +78,6 @@ NameVirtualHost *:80
         SSLCertificateFile ${HOME}/ssl/live/${website_url}/fullchain.pem
         SSLCertificateKeyFile ${HOME}/ssl/live/${website_url}/privkey.pem
         
-       # ProxyPassMatch ^/(.*\.php)$ fcgi://127.0.0.1:9000/var/www/html/\$1
-
         <FilesMatch \"\.(cgi|shtml|phtml|php)\$\">
                         SSLOptions +StdEnvVars
         </FilesMatch>
