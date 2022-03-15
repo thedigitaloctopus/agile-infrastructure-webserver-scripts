@@ -23,19 +23,6 @@
 
 WEBSITE_URL="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEURL'`"
 
-#if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh PERSISTASSETSTOCLOUD:1`" = "1" ] && [ ! -f ${HOME}/runtime/S3BUCKETSET ] )
-#then
-#    domainspecifier="`/bin/echo ${WEBSITE_URL} | /usr/bin/awk -F'.' '{ for(i = 1; i <= NF; i++) { print $i; } }' | /usr/bin/cut -c1-3 | /usr/bin/tr '\n' '-' | /bin/sed 's/-//g'`"
-#    /usr/bin/s3cmd mb s3://${domainspecifier}
-#   # /bin/touch ${HOME}/.ssh/ASSETSBUCKET:${domainspecifier}
-#    ${HOME}/providerscripts/utilities/StoreConfigValue.sh "ASSETSBUCKET" "${domainspecifier}"
-#    /bin/touch ${HOME}/runtime/S3BUCKETSET
-#    exit
-#elif ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh PERSISTASSETSTOCLOUD:0`" = "1" ] )
-#then
-#    exit
-#fi
-
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh PERSISTASSETSTOCLOUD:0`" = "1" ] )
 then
     exit
@@ -49,7 +36,6 @@ cleanup()
     exit
 }
 
-#directories_to_mount="`/bin/ls ${HOME}/.ssh/DIRECTORIESTOMOUNT:* | /bin/sed 's/:config//g'`"
 directories_to_mount="`${HOME}/providerscripts/utilities/ExtractConfigValues.sh 'DIRECTORIESTOMOUNT' 'stripped' | /bin/sed 's/:config//g'`"
 directories=""
 for directory in ${directories_to_mount}
@@ -89,15 +75,6 @@ do
         /bin/umount -f /var/www/html/${directory_to_mount}
     fi
     
-    # I found that S3FS has memory creep meaning that it slowly uses up more and more memory to deal with this in as least hacky was as possible
-    # I check when S3FS is using more than 15% memory and unmount it and remounting it straight away. This will release the memory it was using
-    # until the next time its at 15% when this process will be repeated again
-
-   # if ( [ "`/usr/bin/ps aux --sort=-%mem | /usr/bin/head | /bin/grep s3fs | /bin/grep ${directory_to_mount} | /usr/bin/awk '{print $4}'`" -gt "15" ] )
-   # then
-   #     /bin/sleep `/usr/bin/shuf -i 1-60 -n 1`
-   #     /bin/umount -f /var/www/html/${directory_to_mount}
-   # fi
 done
 
 if ( [ -f ${HOME}/runtime/SYNCINGASSETSTODATASTORE ] )
