@@ -43,7 +43,6 @@ then
         fastcgi_buffers 8 16k;
         fastcgi_buffer_size 32k;
         fastcgi_index index.php;
-     #   fastcgi_pass unix:/var/run/php/php-fpm.sock;
         fastcgi_pass 127.0.0.1:9000;
         include fastcgi_params;
         fastcgi_read_timeout 90;
@@ -78,7 +77,6 @@ then
         fastcgi_param PATH_INFO \$fastcgi_path_info;
         fastcgi_param QUERY_STRING \$query_string;
         fastcgi_intercept_errors on;
-        # PHP 7 socket location.
         #fastcgi_pass unix:/var/run/php/php-fpm.sock;
         fastcgi_pass 127.0.0.1:9000;
     }
