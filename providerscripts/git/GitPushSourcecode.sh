@@ -52,8 +52,6 @@ fi
 
 cd /tmp/backup
 
-
-
 if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh ".gitignore"`" = "1" ] )
 then
     ${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh .gitignore .
