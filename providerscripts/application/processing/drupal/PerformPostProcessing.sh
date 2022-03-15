@@ -20,21 +20,8 @@ then
     exit
 fi
 
-#while ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] ) 
-#do 
-#        /bin/sleep 10 
-#done
-
 SERVER_USER_PASSWORD="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SERVERUSERPASSWORD'`"
 SUDO="/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E"
-
-#credentials="`command="${SUDO} /bin/ls ${HOME}/config/credentials/shit" && eval ${command}`"
-
-#while ( [ "${credentials}" = "" ] ) 
-#do 
-#        credentials="`command="${SUDO} /bin/ls ${HOME}/config/credentials/shit" && eval ${command}`" 
-#        /bin/sleep 10 
-#done
 
 credentials="`command="${SUDO} ${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh credentials/shit" && eval ${command}`"
 
@@ -45,9 +32,6 @@ do
 done
 
 #If we have placed any tokens in our code base for credential modification between deployments, this will update them
-#DB_U="`command="${SUDO} /bin/sed '3q;d' ${HOME}/config/credentials/shit" && eval ${command}`" 
-#DB_P="`command="${SUDO} /bin/sed '2q;d' ${HOME}/config/credentials/shit" && eval ${command}`" 
-#DB_N="`command="${SUDO} /bin/sed '1q;d' ${HOME}/config/credentials/shit" && eval ${command}`" 
 DB_N="`command="${SUDO} ${HOME}/providerscripts/datastore/configwrapper/GetDBCredential.sh credentials/shit 1" && eval ${command}`"
 DB_P="`command="${SUDO} ${HOME}/providerscripts/datastore/configwrapper/GetDBCredential.sh credentials/shit 2" && eval ${command}`"
 DB_U="`command="${SUDO} ${HOME}/providerscripts/datastore/configwrapper/GetDBCredential.sh credentials/shit 3" && eval ${command}`"
@@ -60,27 +44,6 @@ if ( [ "${DB_HOST}" = "" ] )
 then 
     DB_HOST="`command="${SUDO} ${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh databaseip/*" && eval ${command}`" 
 fi
-
-#if ( [ "${prefix}" = "" ] && [ ! -f /var/www/html/dbp.dat ] )
-#then
-#    prefix="`/usr/bin/openssl rand -hex 3`"
-#    
-   # while ( [ "${prefix}" = "" ] )
- #  # do
-   #     prefix="`/bin/cat /dev/urandom | /usr/bin/tr -dc a-z | /usr/bin/head -c${1:-6};echo;`"
-   #     /bin/sleep 5
-   # done
-    
-   # if ( [ "${prefix}" != "" ] )
-   # then
-#        ${HOME}/providerscripts/utilities/StoreConfigValue.sh "DBPREFIX" "${prefix}"
-#        ${SUDO} /bin/chmod 755 /var/www/html 2>/dev/null
-#        ${SUDO} /bin/chown www-data.www-data /var/www/html 2>/dev/null
-#        ${SUDO} /bin/echo "${prefix}" > /var/www/html/dbp.dat
-#   # fi
-#else
-#    prefix="`command="${SUDO} /bin/cat /var/www/html/dbp.dat" && eval ${command}`"
-#fi
 
 #Wait for the prefix to be intialised
 prefix="`command="${SUDO} /bin/cat /var/www/html/dbp.dat" && eval ${command}`"
