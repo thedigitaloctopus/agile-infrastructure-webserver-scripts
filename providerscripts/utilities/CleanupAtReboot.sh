@@ -20,10 +20,6 @@
 #######################################################################################
 #######################################################################################
 
-#while ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] )
-#do
-#    /bin/sleep 5
-#done
 
 ${HOME}/providerscripts/datastore/configwrapper/DeleteFromConfigDatastore.sh "webserverpublicips/*"
 ${HOME}/providerscripts/datastore/configwrapper/DeleteFromConfigDatastore.sh "webserverips/*"
