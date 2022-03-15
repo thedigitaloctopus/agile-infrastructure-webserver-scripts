@@ -26,18 +26,13 @@ then
 fi
 
 IP="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'MYIP'`"
-#if ( [ "`/usr/bin/ip addr | /bin/grep ${IP}`" != "" ] )
-#then
-    /bin/echo ${IP}
-#fi
+/bin/echo ${IP}
 
 BUILDOS="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDOS'`"
 BUILDOSVERSION="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDOSVERSION'`"
 
 if ( [ -f ${HOME}/VULTR ] && [ ! -f ${HOME}/runtime/NETCONFIGURED ] )
 then
-
-
     ip="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'MYIP'`"
     
     if ( [ "${BUILDOS}" = "debian" ] )
