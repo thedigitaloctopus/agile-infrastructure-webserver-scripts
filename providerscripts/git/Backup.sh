@@ -51,7 +51,6 @@ fi
 /bin/rm -r /tmp/backup
 /bin/mkdir /tmp/backup
 cd /tmp/backup
-#/bin/rm -r ${HOME}/.git
 
 ########################################
 #Unclean hack to do with open social
@@ -84,8 +83,6 @@ then
 else
     /usr/bin/rsync -av /var/www/html/* /tmp/backup
 fi
-
-#/usr/bin/find -type d -name .git -exec /bin/rm -rf {} \;
 
 /bin/echo "${0} `/bin/date`: Running a backup" >> ${HOME}/logs/MonitoringLog.dat
 
@@ -131,7 +128,6 @@ fi
 BUILD_IDENTIFIER="$2"
 ip="`${HOME}/providerscripts/utilities/GetIP.sh`"
 
-
 if ( [ -f /tmp/backup/index.php.backup ] )
 then
     /bin/cp /tmp/backup/index.php /tmp/backup/index.php.veteran
@@ -162,7 +158,6 @@ then
     then
         /bin/echo "${0} `/bin/date`: Skipping hourly backup to datastore because hourly backups are disabled to save on data transfer costs" >> ${HOME}/logs/MonitoringLog.dat
     else
-        # /bin/rm -r /tmp/backup/.git
         ${HOME}/providerscripts/datastore/MountDatastore.sh "${DATASTORE_CHOICE}" "`/bin/echo ${WEBSITE_URL} | /bin/sed 's/\./-/g'`-${period}"
         ${HOME}/providerscripts/application/processing/BundleSourcecodeByApplication.sh "/tmp/backup"
         ${HOME}/providerscripts/datastore/DeleteFromDatastore.sh ${DATASTORE_CHOICE} "`/bin/echo ${WEBSITE_URL} | /bin/sed 's/\./-/g'`-${period}/applicationsourcecode.tar.gz.BACKUP"
@@ -174,7 +169,8 @@ fi
 ${HOME}/providerscripts/application/customise/UnCustomiseBackupByApplication.sh
 
 /bin/rm -rf /tmp/backup
+
 #If you want to be notified every time there is a backup, then, uncomment these lines please
 #${HOME}/providerscripts/email/SendEmail.sh "${period} Webroot Backup has been completed" "Webroot backup has completed"
-#bin/echo "${0} `/bin/date`: Notification email sent that a webroot backup has been completed" >> ${HOME}/logs/MonitoringLog.dat
+#/bin/echo "${0} `/bin/date`: Notification email sent that a webroot backup has been completed" >> ${HOME}/logs/MonitoringLog.dat
 
