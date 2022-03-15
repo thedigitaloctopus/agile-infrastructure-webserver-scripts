@@ -37,7 +37,6 @@ done
 
 if ( [ "${emailprovider}" = "1" ] )
 then
-   # /bin/cp ${HOME}/config/joomla_configuration.php ${HOME}/runtime/joomla_configuration.php
     /bin/sed -i "/mailer/c\        public \$mailer = 'smtp';" ${HOME}/runtime/joomla_configuration.php
     /bin/sed -i "/fromname/c\        public \$fromname = '""`/bin/echo ${website_display_name} | /bin/sed 's/_/ /g'`""';" ${HOME}/runtime/joomla_configuration.php
     /bin/sed -i "/mailfrom/c\        public \$mailfrom = '"${fromaddress}"';" ${HOME}/runtime/joomla_configuration.php
@@ -50,7 +49,6 @@ then
 fi
 if ( [ "${emailprovider}" = "2" ] )
 then
-   # /bin/cp ${HOME}/config/joomla_configuration.php ${HOME}/runtime/joomla_configuration.php
     /bin/sed -i "/mailer/c\        public \$mailer = 'smtp';" ${HOME}/runtime/joomla_configuration.php
     /bin/sed -i "/fromname/c\        public \$fromname = '""`/bin/echo ${website_display_name} | /bin/sed 's/_/ /g'`""';" ${HOME}/runtime/joomla_configuration.php
     /bin/sed -i "/mailfrom/c\        public \$mailfrom = '"${fromaddress}"';" ${HOME}/runtime/joomla_configuration.php
@@ -63,7 +61,6 @@ then
 fi
 if ( [ "${emailprovider}" = "3" ] )
 then
-   # /bin/cp ${HOME}/config/joomla_configuration.php ${HOME}/runtime/joomla_configuration.php
     /bin/sed -i "/mailer/c\        public \$mailer = 'smtp';" ${HOME}/runtime/joomla_configuration.php
     /bin/sed -i "/fromname/c\      public \$fromname = '""`/bin/echo ${website_display_name} | /bin/sed 's/_/ /g'`""';" ${HOME}/runtime/joomla_configuration.php
     /bin/sed -i "/mailfrom/c\      public \$mailfrom = '"${fromaddress}"';" ${HOME}/runtime/joomla_configuration.php
