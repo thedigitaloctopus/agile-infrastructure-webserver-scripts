@@ -33,12 +33,10 @@ then
     then
         /usr/bin/wget https://www.dotdeb.org/dotdeb.gpg
         /usr/bin/apt-key add dotdeb.gpg
-        #${HOME}/installscripts/Update.sh ${BUILDOS}
         ${HOME}/installscripts/UpdateAndUpgrade.sh ${BUILDOS}
         ${HOME}/installscripts/InstallPHPBase.sh ${BUILDOS}
     fi
     /bin/echo "${0} `/bin/date`: Adjusting php config" >> ${HOME}/logs/WEBSERVER_BUILD.log
-
 
     php_version="`/usr/bin/php -v | /bin/grep "^PHP" | /usr/bin/awk '{print $2}' | /usr/bin/awk -F'.' '{print $1,$2}' | /bin/sed 's/ /\./g'`"
     php_ini="/etc/php/${php_version}/fpm/php.ini"
