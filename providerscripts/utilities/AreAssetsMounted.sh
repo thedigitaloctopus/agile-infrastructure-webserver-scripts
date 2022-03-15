@@ -23,11 +23,6 @@
 
 mounted="1"
 
-#if ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] )
-#then
-#    mounted="0"
-#fi
-
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh PERSISTASSETSTOCLOUD:0`" = "1" ] && [ "${mounted}" = "1" ] )
 then
     /bin/echo "MOUNTED"
@@ -41,7 +36,6 @@ then
     exit
 fi
 
-#assetsdirectories="`/bin/ls ${HOME}/.ssh/DIRECTORIESTOMOUNT:* | /usr/bin/awk -F':' '{ $1=""; print}' | /bin/sed 's/\./\//g' | /usr/bin/tr '\n' ' ' | /bin/sed 's/  / /g' | /bin/sed 's/config//g'`"
 assetsdirectories="`${HOME}/providerscripts/utilities/ExtractConfigValues.sh 'DIRECTORIESTOMOUNT' 'stripped' | /bin/sed 's/\./\//g' | /usr/bin/tr '\n' ' ' | /bin/sed 's/  / /g' | /bin/sed 's/config//g'`"
 
 for assetsdirectory in ${assetsdirectories}
