@@ -43,25 +43,6 @@ BUILD_IDENTIFIER="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUIL
 
 SUDO="/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E"
 
-#Set a prefix for our database tables. Make sure we only ever set one in the case where the script runs more than once
-#and exits for some reason.
-#if ( [ "${PREFIX}" = "" ] && [ ! -f /var/www/html/dbp.dat ] )
-#then
-#    PREFIX="`/usr/bin/openssl rand -hex 3`"
-#       
-#  #  if ( [ "${PREFIX}" != "" ] )
-#  #  then
-#        ${HOME}/providerscripts/utilities/StoreConfigValue.sh "DBPREFIX" "${PREFIX}"
-#       # ${SUDO} /bin/chmod 775 /var/www/html 2>/dev/null
-#       # ${SUDO} /bin/chown www-data.www-data /var/www/html 2>/dev/null
-#        /bin/echo "${PREFIX}" > /tmp/dbp.dat 
-#        ${SUDO} /bin/mv /tmp/dbp.dat /var/www/html/dbp.dat
-#      #  ${SUDO} /bin/chmod 755 /var/www/html 2>/dev/null
-#  #  fi
-#else
-#    PREFIX="`command="${SUDO} /bin/cat /var/www/html/dbp.dat" && eval ${command}`"
-#fi
-
 #Wait for the prefix to be intialised
 PREFIX="`command="${SUDO} /bin/cat /var/www/html/dbp.dat" && eval ${command}`"
 while ( [ "${PREFIX}" = "" ] )
@@ -70,7 +51,6 @@ do
     PREFIX="`command="${SUDO} /bin/cat /var/www/html/dbp.dat" && eval ${command}`"
 done
     
-
 credentials_available=""
 database_available=""
 configset=""
@@ -153,7 +133,6 @@ then
    
     /usr/bin/mysql -A -u "${username}" -p"${password}" "${database}" --host="${host}" --port="${DB_PORT}" -e "INSERT INTO ${PREFIX}_users (id,name,username,email,password,registerdate,params,requirereset) values (42,'${joomla_username}','${joomla_username}','testxyz@test123.com','${joomla_password}','2020-04-20',1,1);"
     /usr/bin/mysql -A -u "${username}" -p"${password}" "${database}" --host="${host}" --port="${DB_PORT}" -e "INSERT INTO ${PREFIX}_user_usergroup_map values (42,8);"
-   # command="${SUDO} /bin/rm /tmp/joomla.sql /tmp/base.sql /tmp/extensions.sql /tmp/supports.sql 2>/dev/null" && eval ${command}
 fi
 
 
@@ -167,12 +146,8 @@ then
             installationstatus="1"
             command="${SUDO} /bin/cp /var/www/html/installation/sql/postgresql/joomla.sql /tmp/joomla.sql" && eval ${command}
             command="${SUDO} /bin/sed -i \"s/#__/${PREFIX}_/g\" /tmp/joomla.sql" && eval ${command}
-#            command="${SUDO} /bin/sed -i '1s/^/SET SESSION sql_require_primary_key=0;\n/' /tmp/joomla.sql" && eval ${command}
         else
             installationstatus="2"
-#            command="${SUDO} /bin/sed -i '1s/^/SET SESSION sql_require_primary_key=0;\n/' /var/www/html/installation/sql/mysql/base.sql" && eval ${command}
-#            command="${SUDO} /bin/sed -i '1s/^/SET SESSION sql_require_primary_key=0;\n/' /var/www/html/installation/sql/mysql/extensions.sql" && eval ${command}
-#            command="${SUDO} /bin/sed -i '1s/^/SET SESSION sql_require_primary_key=0;\n/' /var/www/html/installation/sql/mysql/supports.sql" && eval ${command}
             command="${SUDO} /bin/cp /var/www/html/installation/sql/postgresql/base.sql /tmp/base.sql" && eval ${command}
             command="${SUDO} /bin/cp /var/www/html/installation/sql/postgresql/extensions.sql /tmp/extensions.sql" && eval ${command}
             command="${SUDO} /bin/cp /var/www/html/installation/sql/postgresql/supports.sql /tmp/supports.sql" && eval ${command}
@@ -188,22 +163,11 @@ then
     command="${SUDO} ${HOME}/providerscripts/utilities/ConnectToRemotePostgresDB.sh < /tmp/extensions.sql" && eval ${command}
     command="${SUDO} ${HOME}/providerscripts/utilities/ConnectToRemotePostgresDB.sh < /tmp/supports.sql" && eval ${command}
     
-   # SERVER_USER="`/bin/ls ${HOME}/.ssh/SERVERUSER:* | /usr/bin/awk -F':' '{print $NF}'`"
-   # BUILD_IDENTIFIER="`/bin/ls ${HOME}/.ssh/BUILDIDENTIFIER:* | /usr/bin/awk -F':' '{print $NF}'`"
-   # username="${BUILD_IDENTIFIER}-webmaster"
-   # password="`/bin/echo ${SERVER_USER} | /usr/bin/openssl enc -base64`"
-   # sqlcommand="INSERT INTO ${PREFIX}_users"
-   # sqlcommand="${sqlcommand}"'(id,"\""name"\"","\""username"\"","\""email"\"","\""password"\"","\""registerDate"\"","\""params"\"","\""requireReset"\"") values (42,'\'''"${username}"''\'','\''webmaster'\'','\''testxyz@test123i4.com'\'','\'''"${password}"''\'','\''1980-01-01'\'',1,1);'
-
     joomla_username="${BUILD_IDENTIFIER}-webmaster"
     joomla_password="`/bin/echo -n "${SERVER_USER}" | /usr/bin/md5sum | /usr/bin/awk '{print $1}'`"  
     sqlcommand="INSERT INTO ${PREFIX}_users"
     sqlcommand="${sqlcommand}"'(id,"\""name"\"","\""username"\"","\""email"\"","\""password"\"","\""registerDate"\"","\""params"\"","\""requireReset"\"") values (42,'\''${joomla_username}'\'','\''${joomla_username}'\'','\''testxyz@test123i4.com'\'','\''${joomla_password}'\'','\''1980-01-01'\'',1,1);'
     command="${SUDO} ${HOME}/providerscripts/utilities/ConnectToRemotePostgresDB.sh \"${sqlcommand}\"" && eval ${command}
-
-#    sqlcommand="INSERT INTO ${PREFIX}_users"
-#    sqlcommand="${sqlcommand}"'(id,"\""name"\"","\""username"\"","\""email"\"","\""password"\"","\""registerDate"\"","\""params"\"","\""requireReset"\"") values (42,'\''webmaster'\'','\''webmaster'\'','\''testxyz@test123i4.com'\'','\''16d7a4fca7442dda3ad93c9a726597e4'\'','\''1980-01-01'\'',1,1);'
-#    command="${SUDO} ${HOME}/providerscripts/utilities/ConnectToRemotePostgresDB.sh \"${sqlcommand}\"" && eval ${command}
 
     sqlcommand="INSERT INTO ${PREFIX}_user_usergroup_map values (42,8);"
     command="${SUDO} ${HOME}/providerscripts/utilities/ConnectToRemotePostgresDB.sh \"${sqlcommand}\"" && eval ${command}
