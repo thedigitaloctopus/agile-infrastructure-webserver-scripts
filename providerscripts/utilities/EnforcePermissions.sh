@@ -21,9 +21,7 @@
 ##########################################################################################
 #set -x
 
-#directoriestomiss="`/bin/ls ${HOME}/.ssh/DIRECTORIESTOMOUNT:* | /bin/sed 's/.*DIRECTORIESTOMOUNT://g' | /bin/sed 's/:/ /g' | /bin/sed 's/\./\//g' | /usr/bin/tr '\n' ' ' | /bin/sed 's/  / /g'`"
 directoriestomiss="`${HOME}/providerscripts/utilities/ExtractConfigValues.sh 'DIRECTORIESTOMOUNT' 'stripped' | /bin/sed 's/\./\//g' | /usr/bin/tr '\n' ' ' | /bin/sed 's/  / /g'`"
-
 
 CMD="/usr/bin/find /var/www/html/ -not -path "
 
@@ -44,8 +42,6 @@ done
 
 CMD1="`/bin/echo ${CMD1} | /bin/sed 's/-not -path$//g'`"
 CMD1="${CMD1} -exec chmod 755 {} \;"
-
-
 CMD2="/usr/bin/find /var/www/html/ -type f -not -path "
 
 for directorytomiss in ${directoriestomiss}
