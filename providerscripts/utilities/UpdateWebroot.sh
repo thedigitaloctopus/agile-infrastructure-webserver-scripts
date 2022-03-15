@@ -20,10 +20,5 @@
 ############################################################################
 #set -x
 
-#while ( [ "`/bin/mount | /bin/grep ${HOME}/config`" = "" ] )
-#do
-#    /bin/sleep 10
-#done
-#/usr/bin/rsync -aruog --chown=www-data:www-data ${HOME}/config/webrootsynctunnel/var/www/html/ /var/www/html/
 ${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh webrootsynctunnel/var/www/html/ /var/www/html/ recursive
 ${HOME}/providerscripts/utilities/EnforcePermissions.sh
