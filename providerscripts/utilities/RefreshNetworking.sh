@@ -36,7 +36,7 @@ if ( [ "${CLOUDHOST}" = "vultr" ] )
 then
     if ( [ "${BUILDOS}" = "ubuntu" ] )
     then
-        if ( [ "${BUILDOSVERSION}" = "20.04" ] )
+        if ( [ "${BUILDOSVERSION}" = "20.04" ] || [ "${BUILDOSVERSION}" = "22.04" ] )
 	then
 	    ip="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'MYIP'`"
 	    #/bin/sed -i "s/addresses.*/addresses: [${ip}\/16]/" /etc/netplan/10-ens7.yaml
