@@ -33,7 +33,7 @@ fi
 
 if ( [ "${BUILDOS}" = "ubuntu" ] )
 then
-    if ( [ "${BUILDOSVERSION}" = "20.04" ] )
+    if ( [ "${BUILDOSVERSION}" = "20.04" ] || [ "${BUILDOSVERSION}" = "22.04" ] )
     then
         /usr/bin/add-apt-repository -y ppa:ondrej/php
         ${HOME}/installscripts/UpdateAndUpgrade.sh ${BUILDOS}
