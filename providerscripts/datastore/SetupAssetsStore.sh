@@ -28,6 +28,11 @@ then
     exit
 fi
 
+if ( [ "`/usr/bin/whereis nfsstat`" = "nfsstat:" ] )
+then
+     ${HOME}/installscripts/InstallNFS.sh
+fi
+
 trap cleanup 0 1 2 3 6 9 14 15
 
 cleanup()
