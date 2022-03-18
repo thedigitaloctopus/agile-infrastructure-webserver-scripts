@@ -28,7 +28,7 @@ then
     exit
 fi
 
-if ( [ "`/usr/bin/whereis nfsstat`" = "nfsstat:" ] && [ "$)
+if ( [ "`/usr/bin/whereis nfsstat`" = "nfsstat:" ] && [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh ENABLEEFS:1`" = "1" ] )
 then
      BUILDOS="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDOS'`"
      ${HOME}/installscripts/InstallNFS.sh ${BUILDOS}
