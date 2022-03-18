@@ -28,9 +28,10 @@ then
     exit
 fi
 
-if ( [ "`/usr/bin/whereis nfsstat`" = "nfsstat:" ] )
+if ( [ "`/usr/bin/whereis nfsstat`" = "nfsstat:" ] && [ "$)
 then
-     ${HOME}/installscripts/InstallNFS.sh
+     BUILDOS="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDOS'`"
+     ${HOME}/installscripts/InstallNFS.sh ${BUILDOS}
 fi
 
 trap cleanup 0 1 2 3 6 9 14 15
