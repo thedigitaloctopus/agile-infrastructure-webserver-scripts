@@ -56,14 +56,14 @@ else
         else
             /bin/echo "ALIVE"
         fi
-    else
-        if ( [ -f /usr/bin/mysql ] )
-        then
-            if ( [ "`/usr/bin/mysql -u ${DB_U} -p${DB_P} -h ${SERVER_NAME} -P ${DB_PORT} ${DB_N} -e "show tables"`" != "" ] )
-            then
-                /bin/echo "ALIVE"
-            fi
-        fi
+   # else
+   #     if ( [ -f /usr/bin/mysql ] )
+   #     then
+   #         if ( [ "`/usr/bin/mysql -u ${DB_U} -p${DB_P} -h ${SERVER_NAME} -P ${DB_PORT} ${DB_N} -e "show tables"`" != "" ] )
+   #         then
+   #             /bin/echo "ALIVE"
+   #         fi
+    #    fi
     fi
 
     if ( [ -f /usr/bin/php ] && ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:Postgres`" = "1" ] || [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEDBaaSINSTALLATIONTYPE:Postgres`" = "1" ] ) )
@@ -79,15 +79,15 @@ else
         else
             /bin/echo "ALIVE"
         fi
-    else
-        if ( [ -f /usr/bin/psql ] )
-        then
-            export PGPASSWORD=${DB_P}
-            if ( [ "`/usr/bin/psql -U ${DB_U} -h ${SERVER_NAME} -p ${DB_PORT} ${DB_N} -c "select exists ( select 1 from information_schema.tables );"` | /bin/grep 'exists'" != "" ] )
-            then
-                /bin/echo "ALIVE"
-            fi
-        fi
+#    else
+#        if ( [ -f /usr/bin/psql ] )
+#        then
+#            export PGPASSWORD=${DB_P}
+ #           if ( [ "`/usr/bin/psql -U ${DB_U} -h ${SERVER_NAME} -p ${DB_PORT} ${DB_N} -c "select exists ( select 1 from information_schema.tables );"` | /bin/grep 'exists'" != "" ] )
+ #           then
+ #               /bin/echo "ALIVE"
+ #           fi
+ #       fi
     fi
 fi
 
