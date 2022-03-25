@@ -121,7 +121,7 @@ then
     /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
 fi
 
-/bin/chown www-data.www-data /var/www/html/configuration.php
+/bin/chown www-data.www-data /var/www/wp-config.php
 
 if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "GLOBAL_CONFIG_UPDATE"`" = "1" ] )
 then
