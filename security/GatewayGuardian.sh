@@ -35,7 +35,7 @@ then
         ${HOME}/providerscripts/datastore/MoveDatastore.sh ${DATASTORE_CHOICE} gatewayguardian-${BUILD_IDENTIFIER}/htpasswd gatewayguardian-${BUILD_IDENTIFIER}/htpasswd.$$ 
         /bin/touch ${HOME}/runtime/VIRGINADJUSTED
     fi
-    /usr/bin/s3cmd get --force s3://gatewayguardian-${BUILD_IDENTIFIER}/htpasswd
+    ${HOME}/providerscripts/datastore/GetFromDatastore.sh "${DATASTORE_CHOICE}" gatewayguardian-${BUILD_IDENTIFIER}/htpasswd
     /bin/mv htpasswd /etc/basicauth/.htpasswd
     /bin/chown www-data.www-data /etc/basicauth/.htpasswd
 fi
@@ -47,7 +47,7 @@ then
         ${HOME}/providerscripts/datastore/MoveDatastore.sh ${DATASTORE_CHOICE} gatewayguardian-${BUILD_IDENTIFIER}/htpasswd gatewayguardian-${BUILD_IDENTIFIER}/htpasswd.$$ 
         /bin/touch ${HOME}/runtime/VIRGINADJUSTED
     fi
-    /usr/bin/s3cmd get --force s3://gatewayguardian-${BUILD_IDENTIFIER}/htpasswd
+    ${HOME}/providerscripts/datastore/GetFromDatastore.sh "${DATASTORE_CHOICE}" gatewayguardian-${BUILD_IDENTIFIER}/htpasswd
     /bin/mv htpasswd /etc/basicauth/.htpasswd
     /bin/chown www-data.www-data /etc/basicauth/.htpasswd
 fi
@@ -59,8 +59,8 @@ then
         ${HOME}/providerscripts/datastore/MoveDatastore.sh ${DATASTORE_CHOICE} gatewayguardian-${BUILD_IDENTIFIER}/htpasswd gatewayguardian-${BUILD_IDENTIFIER}/htpasswd.$$
         /bin/touch ${HOME}/runtime/VIRGINADJUSTED
     fi
-        
-    /usr/bin/s3cmd get --force s3://gatewayguardian-${BUILD_IDENTIFIER}/htpasswd
+
+    ${HOME}/providerscripts/datastore/GetFromDatastore.sh "${DATASTORE_CHOICE}" gatewayguardian-${BUILD_IDENTIFIER}/htpasswd
     /bin/mv htpasswd /etc/basicauth/.htpasswd
     /bin/chown www-data.www-data /etc/basicauth/.htpasswd
 fi
@@ -72,7 +72,8 @@ then
         ${HOME}/providerscripts/datastore/MoveDatastore.sh ${DATASTORE_CHOICE} gatewayguardian-${BUILD_IDENTIFIER}/htpasswd gatewayguardian-${BUILD_IDENTIFIER}/htpasswd.$$
         /bin/touch ${HOME}/runtime/VIRGINADJUSTED
     fi    
-    /usr/bin/s3cmd get --force s3://gatewayguardian-${BUILD_IDENTIFIER}/htpasswd
+
+    ${HOME}/providerscripts/datastore/GetFromDatastore.sh "${DATASTORE_CHOICE}" gatewayguardian-${BUILD_IDENTIFIER}/htpasswd
     /bin/mv htpasswd /etc/basicauth/.htpasswd
     /bin/chown www-data.www-data /etc/basicauth/.htpasswd
 
