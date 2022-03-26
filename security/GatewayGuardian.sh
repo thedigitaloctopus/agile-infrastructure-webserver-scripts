@@ -32,7 +32,7 @@ if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:jooml
 then
     if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOICE:virgin`" = "1" ] && [ ! -f ${HOME}/runtime/VIRGINADJUSTED ] )
     then
-        /usr/bin/s3cmd mv s3://gatewayguardian-${BUILD_IDENTIFIER}/htpasswd s3://gatewayguardian-${BUILD_IDENTIFIER}/htpasswd.$$
+        ${HOME}/providerscripts/datastore/MoveDatastore.sh ${DATASTORE_CHOICE} gatewayguardian-${BUILD_IDENTIFIER}/htpasswd gatewayguardian-${BUILD_IDENTIFIER}/htpasswd.$$ 
         /bin/touch ${HOME}/runtime/VIRGINADJUSTED
     fi
     /usr/bin/s3cmd get --force s3://gatewayguardian-${BUILD_IDENTIFIER}/htpasswd
@@ -44,7 +44,7 @@ if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:wordp
 then
     if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOICE:virgin`" = "1" ] && [ ! -f ${HOME}/runtime/VIRGINADJUSTED ] )
     then
-        /usr/bin/s3cmd mv s3://gatewayguardian-${BUILD_IDENTIFIER}/htpasswd s3://gatewayguardian-${BUILD_IDENTIFIER}/htpasswd.$$
+        ${HOME}/providerscripts/datastore/MoveDatastore.sh ${DATASTORE_CHOICE} gatewayguardian-${BUILD_IDENTIFIER}/htpasswd gatewayguardian-${BUILD_IDENTIFIER}/htpasswd.$$ 
         /bin/touch ${HOME}/runtime/VIRGINADJUSTED
     fi
     /usr/bin/s3cmd get --force s3://gatewayguardian-${BUILD_IDENTIFIER}/htpasswd
@@ -56,7 +56,7 @@ if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:drupa
 then
     if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOICE:virgin`" = "1" ] && [ ! -f ${HOME}/runtime/VIRGINADJUSTED ] )
     then
-        /usr/bin/s3cmd mv s3://gatewayguardian-${BUILD_IDENTIFIER}/htpasswd s3://gatewayguardian-${BUILD_IDENTIFIER}/htpasswd.$$
+        ${HOME}/providerscripts/datastore/MoveDatastore.sh ${DATASTORE_CHOICE} gatewayguardian-${BUILD_IDENTIFIER}/htpasswd gatewayguardian-${BUILD_IDENTIFIER}/htpasswd.$$
         /bin/touch ${HOME}/runtime/VIRGINADJUSTED
     fi
         
@@ -69,7 +69,7 @@ if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:moodl
 then
     if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOICE:virgin`" = "1" ] && [ ! -f ${HOME}/runtime/VIRGINADJUSTED ] )
     then
-        /usr/bin/s3cmd mv s3://gatewayguardian-${BUILD_IDENTIFIER}/htpasswd s3://gatewayguardian-${BUILD_IDENTIFIER}/htpasswd.$$
+        ${HOME}/providerscripts/datastore/MoveDatastore.sh ${DATASTORE_CHOICE} gatewayguardian-${BUILD_IDENTIFIER}/htpasswd gatewayguardian-${BUILD_IDENTIFIER}/htpasswd.$$
         /bin/touch ${HOME}/runtime/VIRGINADJUSTED
     fi    
     /usr/bin/s3cmd get --force s3://gatewayguardian-${BUILD_IDENTIFIER}/htpasswd
