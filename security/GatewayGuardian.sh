@@ -21,6 +21,7 @@
 #set -x
 
 BUILD_IDENTIFIER="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDIDENTIFIER'`"
+DATASTORE_CHOICE="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DATASTORECHOICE'`"
 
 if ( [ ! -d /etc/basicauth ] )
 then
