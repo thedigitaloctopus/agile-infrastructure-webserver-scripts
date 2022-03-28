@@ -160,7 +160,7 @@ fi
 
 if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "joomla_configuration.php"`" = "1" ] )
 then
-    secret="`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh SECRET:*`"
+    secret="`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh SECRET:*  | /usr/bin/awk -F':' '{print $NF}'`"
 
     if ( [ "${secret}" = "" ] )
     then
