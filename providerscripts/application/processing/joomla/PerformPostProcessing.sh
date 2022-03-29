@@ -123,6 +123,7 @@ then
         /usr/bin/mysql -f -A -u "${username}" -p"${password}" "${database}" --host="${host}" --port="${DB_PORT}" < /var/www/html/administrator/components/com_finder/sql/install.mysql.sql
         /usr/bin/mysql -f -A -u "${username}" -p"${password}" "${database}" --host="${host}" --port="${DB_PORT}" < /var/www/html/administrator/components/com_contact/sql/install.mysql.utf8.sql
         /usr/bin/mysql -f -A -u "${username}" -p"${password}" "${database}" --host="${host}" --port="${DB_PORT}" < /var/www/html/administrator/components/com_contact/sql/install.mysql.utf8.sql
+        /usr/bin/mysql -f -A -u "${username}" -p"${password}" "${database}" --host="${host}" --port="${DB_PORT}" < /var/www/html/administrator/components/com_admin/sql/others/mysql/utf8mb4-conversion.sql
         /usr/bin/mysql -f -A -u "${username}" -p"${password}" "${database}" --host="${host}" --port="${DB_PORT}" < /var/www/html/administrator/components/com_admin/sql/others/mysql/utf8mb4-conversion_optional.sql
         /usr/bin/mysql -f -A -u "${username}" -p"${password}" "${database}" --host="${host}" --port="${DB_PORT}" < /var/www/html/administrator/components/com_banners/sql/install.mysql.utf8.sql
         /usr/bin/mysql -f -A -u "${username}" -p"${password}" "${database}" --host="${host}" --port="${DB_PORT}" < /var/www/html/administrator/components/com_newsfeeds/sql/install.mysql.utf8.sql
