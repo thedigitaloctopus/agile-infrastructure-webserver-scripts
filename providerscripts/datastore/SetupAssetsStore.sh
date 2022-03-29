@@ -33,6 +33,11 @@ then
     exit
 fi
 
+if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "INSTALLEDSUCCESSFULLY"`" = "0" ] )
+then
+    exit
+fi
+
 if ( [ "`/usr/bin/whereis nfsstat`" = "nfsstat:" ] && [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh ENABLEEFS:1`" = "1" ] )
 then
      BUILDOS="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDOS'`"
