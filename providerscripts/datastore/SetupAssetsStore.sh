@@ -23,6 +23,11 @@
 
 WEBSITE_URL="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEURL'`"
 
+if ( [ ! -f ${HOME}/.ssh/webserver_configuration_settings.dat ] )
+then
+    exit
+fi
+
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh PERSISTASSETSTOCLOUD:0`" = "1" ] || [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh PERSISTASSETSTOCLOUD:2`" = "1" ] )
 then
     exit
