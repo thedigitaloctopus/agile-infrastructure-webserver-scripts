@@ -28,9 +28,9 @@ then
     exit
 fi
 
-if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh PERSISTASSETSTOCLOUD:1`" != "1" ] && ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh PERSISTASSETSTOCLOUD:0`" != "1" ] || [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh PERSISTASSETSTOCLOUD:2`" != "1" ] ) )
+if ( [ "`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'PERSISTASSETSTOCLOUD'`" != "1" ] )
 then
-    exit
+   exit
 fi
 
 if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "INSTALLEDSUCCESSFULLY"`" = "0" ] )
