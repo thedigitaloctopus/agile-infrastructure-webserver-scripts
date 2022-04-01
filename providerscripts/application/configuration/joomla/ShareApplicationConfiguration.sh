@@ -41,7 +41,7 @@ then
     /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
 fi
 
-if ( [ ! -f /var/www/html/configuration.php ] )
+if ( [ ! -f /var/www/html/configuration.php ] || [ "`/bin/cat /var/www/html/configuration.php`" = "" ] )
 then
     if ( [ -f /var/www/html/installation/configuration.php-dist ] )
     then
