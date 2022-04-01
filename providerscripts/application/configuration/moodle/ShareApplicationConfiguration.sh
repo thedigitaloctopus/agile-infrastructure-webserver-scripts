@@ -40,7 +40,7 @@ then
     /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
 fi
 
-if ( [ ! -f /var/www/html/moodle/config.php ] )
+if ( [ ! -f /var/www/html/moodle/config.php ] || [ "`/bin/cat /var/www/html/moodle/config.php`" = "" ] )
 then
     if ( [ -f /var/www/html/moodle/config-dist.php ] )
     then
