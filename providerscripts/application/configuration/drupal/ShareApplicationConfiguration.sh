@@ -32,7 +32,7 @@ then
     /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
 fi
 
-if ( [ ! -f /var/www/html/sites/default/settings.php ] )
+if ( [ ! -f /var/www/html/sites/default/settings.php ] || [ "`/bin/cat /var/www/html/sites/default/settings.php`" = "" ] )
 then
     /bin/cp /var/www/html/sites/default/default.settings.php /var/www/html/sites/default/settings.php
     /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
