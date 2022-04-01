@@ -40,7 +40,7 @@ then
     /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
 fi
 
-if ( [ ! -f /var/www/wp-config.php ] )
+if ( [ ! -f /var/www/wp-config.php ] || [ "`/bin/cat /var/www/wp-config.php`" = "" ] )
 then
     if ( [ -f /var/www/html/wp-config-sample.php ] )
     then
