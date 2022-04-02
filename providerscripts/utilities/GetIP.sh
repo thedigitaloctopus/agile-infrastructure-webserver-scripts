@@ -22,7 +22,10 @@
 
 if ( [ -f ${HOME}/EXOSCALE ] )
 then
-    /usr/sbin/dhclient 1>/dev/null 2>/dev/null
+    if ( [ "`/usr/bin/ps -ef | /bin/grep dhclient`" = "" ] )
+    then
+        /usr/sbin/dhclient 1>/dev/null 2>/dev/null
+    fi
 fi
 
 IP="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'MYIP'`"
