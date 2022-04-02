@@ -64,8 +64,9 @@ fi
 if ( [ "${LIFE}" -lt "${RENEW}" ] )
 then
     cd ${HOME}
+    /bin/echo "Invalid SSL Certificate found during daily audit - `/usr/bin/date` generating a new certificate"
     . ${HOME}/security/ObtainSSLCertificate.sh
 else
     #If we are here, then the certificate we had was valid and we didn't need to generate a new one this time around
-    /bin/echo "Valid"
+    /bin/echo "Valid SSL Cerificate found during daily audit- `/usr/bin/date`"
 fi
