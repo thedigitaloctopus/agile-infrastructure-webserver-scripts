@@ -22,7 +22,7 @@
 
 if ( [ -f ${HOME}/EXOSCALE ] )
 then
-    if ( [ "`/usr/bin/ps -ef | /bin/grep dhclient`" = "" ] )
+    if ( [ "`/usr/bin/ps -ef | /bin/grep dhclient | /bin/grep -v grep | /usr/bin/wc -l`" -lt "2" ] )
     then
         /usr/sbin/dhclient 1>/dev/null 2>/dev/null
     fi
