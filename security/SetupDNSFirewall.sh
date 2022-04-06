@@ -76,8 +76,6 @@ then
         /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from 108.162.192.0/18 to any port 80
     fi
 
-    /bin/sleep 5
-
     if ( [ "`/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw status | /bin/grep '141.101.64.0/18' | /bin/grep ALLOW`" = "" ] )
     then
         /bin/sleep 2
@@ -148,46 +146,6 @@ then
         /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from 131.0.72.0/22 to any port 443
         /bin/sleep 2
         /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from 131.0.72.0/22 to any port 80
-    fi
-
-    if ( [ "`/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw status | /bin/grep '2400:cb00::/32' | /bin/grep ALLOW`" = "" ] )
-    then
-        /bin/sleep 2
-        /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from 2400:cb00::/32 to any port 443
-        /bin/sleep 2
-        /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from 2400:cb00::/32 to any port 80
-    fi
-
-    if ( [ "`/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw status | /bin/grep '2405:8100::/32' | /bin/grep ALLOW`" = "" ] )
-    then
-        /bin/sleep 2
-        /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from 2405:8100::/32 to any port 443
-        /bin/sleep 2
-        /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from 2405:8100::/32 to any port 80
-    fi
-
-    if ( [ "`/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw status | /bin/grep '2405:b500::/32' | /bin/grep ALLOW`" = "" ] )
-    then
-        /bin/sleep 2
-        /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from 2405:b500::/32 to any port 443
-        /bin/sleep 2
-        /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from 2405:b500::/32 to any port 80
-    fi
-
-    if ( [ "`/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw status | /bin/grep '2606:4700::/32' | /bin/grep ALLOW`" = "" ] )
-    then
-        /bin/sleep 2
-        /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from 2606:4700::/32 to any port 443
-        /bin/sleep 2
-        /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from 2606:4700::/32 to any port 80
-    fi
-
-    if ( [ "`/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw status | /bin/grep '2803:f800::/32' | /bin/grep ALLOW`" = "" ] )
-    then
-        /bin/sleep 2
-        /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from 2803:f800::/32 to any port 443
-        /bin/sleep 2
-        /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from 2803:f800::/32 to any port 80
     fi
 
     if ( [ "`/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw status | /bin/grep '199.27.128.0/21' | /bin/grep ALLOW`" = "" ] )
