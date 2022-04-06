@@ -148,13 +148,13 @@ then
         /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from 131.0.72.0/22 to any port 80
     fi
 
-    if ( [ "`/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw status | /bin/grep '199.27.128.0/21' | /bin/grep ALLOW`" = "" ] )
-    then
-        /bin/sleep 2
-        /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from 199.27.128.0/21 to any port 443
-        /bin/sleep 2
-        /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from 199.27.128.0/21 to any port 80
-    fi
+  #  if ( [ "`/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw status | /bin/grep '199.27.128.0/21' | /bin/grep ALLOW`" = "" ] )
+  #  then
+  #      /bin/sleep 2
+  #      /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from 199.27.128.0/21 to any port 443
+  #      /bin/sleep 2
+  #      /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from 199.27.128.0/21 to any port 80
+  #  fi
 fi
 
 if ( [ "${DNS_CHOICE}" = "digitalocean" ] )
